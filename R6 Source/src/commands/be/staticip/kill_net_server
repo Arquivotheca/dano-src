@@ -1,0 +1,24 @@
+#!/bin/sh
+# warning: hackware *and* demoware!
+# if this is use after the CES demo please question your own sanity.
+# dsandler@be.com
+# ===============
+# added some extra code so that the net_server_script
+# gets killed and the netserver actually dies somewhat
+# cleanly... can't wait for binderized bone!!!!
+# michelangelo@be.com
+
+ls > /tmp/dont_start_the_net_server
+kill 9 net_server
+kill 9 net_server
+kill 9 net_server
+kill 9 net_server
+kill 9 net_server
+kill 9 net_server
+kill 9 net_server
+kill 9 net_server
+sleep 2
+echo "cut off net_server_script and killed all net_server processes."
+rm /tmp/dont_start_the_net_server
+sleep 2
+spawn_net_server

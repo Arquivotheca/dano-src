@@ -1,0 +1,7 @@
+sdwn	enabled	""	netpositive:dl_button_up.gif	netpositive:dl_button_down.gif	netpositive:dl_button_disabled.gif
+home	enabled	""	netpositive:home_up.gif	netpositive:home_down.gif	netpositive:home_disabled.gif
+srch	enabled	""	netpositive:search_up.gif	netpositive:search_down.gif	netpositive:search_disabled.gif
+rlod	enabled	""	netpositive:reload_up.gif	netpositive:reload_down.gif	netpositive:reload_disabled.gif
+stop	disabled	""	netpositive:stop_up.gif	netpositive:stop_down.gif	netpositive:stop_disabled.gif
+gofw	disabled	""	netpositive:forward_up.gif	netpositive:forward_down.gif	netpositive:forward_disabled.gif
+gobk	disabled	""	netpositive:back_up.gif	netpositive:back_down.gif	netpositive:back_disabled.gif

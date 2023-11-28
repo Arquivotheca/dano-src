@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# tell the boot loader that we ran OK
+/bin/bootcomplete
+
+# Sony - All the actions are done in Bootscript.burnin
+# ...on successful completion of validate

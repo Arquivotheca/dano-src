@@ -1,0 +1,132 @@
+
+status/LED driver API
+hplus@be.com
+2001-01-11
+
+
+This driver API describes how devices dealing with simple
+status output (typically found as LEDs hooked up to GPIO
+pins) should behave on BeIA.
+
+
+0) Design points
+
+This design is intended to be easy to use from the command line,
+as well as fully provide for description of available resources
+for use by a higher-level agent (such as a binder plug-in).
+Putting device-specific knowledge in the driver means easier to
+write, maintain and debug high-level code, and faster overall
+development (as the driver should be the ONLY thing that knows
+about device-specific details).
+
+
+1) Publishing
+
+Status drivers publish in /dev/status       [Is this the right place?]
+Status drivers publish as /dev/status/NAME/DIGIT where
+"NAME" is a short name for the specific hardware being driven
+(say "cpq" or "netron") and DIGIT is a numeric index.
+
+
+2) Ioctl hook
+
+A status driver should provide the following control codes with
+specified semantics:
+
+#define STATUS_GET_INFO			0x3530
+struct status_get_info
+{
+	size_t		info_size;		//	provided by caller
+	
+	char		dev_name[16];	//	short name of device
+	int32		dev_version;	//	version of the ioctl() protocol
+
+	int32		name_count;		//	number of shortnames published
+};
+
+#define STATUS_GET_NAME_INFO	0x3531
+enum	//	for flags
+{
+	statusIsWritable = 0x1,
+	statusIsReadable = 0x2
+};
+enum	//	for value_type
+{
+	statusIsNumber,
+	statusIsText
+}
+struct status_get_name_infos
+{
+	size_t		info_size;		//	provided by caller
+
+	int32		name_index;		//	index ("ID") of this name
+
+	uint32		flags;			//	statusIsWritable, statusIsReadable
+	int32		value_type;		//	statusIsNumber, statusIsText
+	int32		min_value;		//	minimum legal value/length
+	int32		max_value;		//	maximum legal value/length
+
+	char		name[16];		//	[Is 15 characters enough? Should be.]
+};
+
+#define STATUS_GET_NAME_VALUE	0x3532
+struct status_name_values
+{
+	size_t		info_size;		//	provided by the caller
+
+	int32		name_index;		//	in: which name
+	int32		value_type;		//	out: actual type
+	int32		io_value;		//	for numbers: the number
+								//	for strings, in: size of buffer
+								//	for strings, out: actual size needed
+	void *		storage;		//	provided by caller
+};
+
+#define STATUS_SET_NAME_VALUE	0x3533
+// uses status_name_value, too, but ignores "value_type".
+
+
+3) Read hook
+
+Calling read()) on the device will return a text description
+of all the values of the status-es driven by the driver, in
+cleartext. An example might be:
+
+$ cat /dev/status/example/1
+email=0
+power=1
+temp=75
+text="Hello, World!"
+
+The data representation is decimal-integer for range-based
+values, and quoted-string for text-based values, where the
+special characters double-quote, newline and slash are output
+as \", \n and \\ respectively.
+
+This set of text is generated anew for each read() request, and
+data is returned from the offset specified onwards. (If the offset
+is greater than or equal to the size of the generated text data,
+0 bytes are returned, signalling end-of-file).
+
+
+4) Write hook
+
+The write hook will scan the input text for lines that contain
+shortname=value pairs, and apply the values input, after clamping
+the supplied values to the proper range for the shortname in
+question.
+
+It is valid to write more than one value in one write() operation.
+
+        [Can we live with removing or restricting this allowance?]
+It is valid, but not recommended, to write only part of a command.
+Commands are parsed when a newline character is detected. Note that
+making newline part of a text value is done through using the \n
+escape, so this is unambiguous.
+
+Writing will return the number of bytes written until an error was
+detected (bad data, or invalid shortname). It will return ENOENT
+for an attempt to write a non-existent shortname, and EINVAL for
+an attempt to write ill-formatted values.
+
+

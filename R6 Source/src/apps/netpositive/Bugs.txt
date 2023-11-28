@@ -1,0 +1,405 @@
+Bookmark features:
+	* Put an icon in a menu if any of its submenus is changed.
+	* Detect 404's on pages.
+	* Don't check sites with a ? in the URL.
+
+
+
+
+
+
+/******************************************************************************/
+/* HTML 4.0 Event Model  													  */
+/******************************************************************************/
+FRAMESET
+	To do:	onLoad, onUnload
+	Done:
+		
+BODY
+	To do:	onUnload,
+			onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:	onLoad
+		
+INPUT
+	To do:	onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:	onFocus, onBlur, onSelect, onChange
+
+SELECT
+	To do:	onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:	onFocus, onBlur, onChange
+
+TEXTAREA
+	To do:	onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:	onFocus, onBlur, onSelect, onChange
+
+BUTTON
+	To do:	onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:	onFocus, onBlur, onClick
+
+FORM
+	To do:	onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:	onSubmit, onReset
+	
+A
+	To do: 	onDblClick, onMouseDown, onMouseUp, onMouseMove, onKeyPress, onKeyDown, onKeyUp
+	Done:	onMouseOver, onMouseOut, onClick
+
+/******************************************************************************/
+
+LABEL
+	To do:	onFocus, onBlur,
+			onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:
+
+OPTGROUP
+	To do:	onFocus, onBlur,
+			onChange, onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver,
+			onMouseMove, onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:
+
+DIV, SPAN, Hn, ADDRESS, EM, STRONG, DFN, CODE, SAMP, KBD, VAR, CITE, ABBR, ACRONYM, BLOCKQUOTE, Q,
+SUP, SUB, P, PRE, INS, DEL, UL, OL, LI, DL, DT, DD, DIR, MENU, TABLE, CAPTION, THEAD, TFOOT, TBODY,
+COLGROUP, COL, TR, TH, TD, LINK, IMG, OBJECT, MAP, AREA, TT, I, B, BIG, SMALL, STRIKE, S, U, HR,
+OPTION, LEGEND
+	To do:	onClick, onDblClick, onMouseDown, onMouseUp, onMouseOver, onMouseMove,
+			onMouseOut, onKeyPress, onKeyDown, onKeyUp
+	Done:
+
+
+/******************************************************************************/
+/* Plug-in API																  */
+/******************************************************************************/
+
+	* Plug-ins have a resource to say what kinds of plug-ins they are.
+	
+	* View plug-ins
+		* Instantiated with a replicant-style instantiation function
+		* Receives a BMessage with the parameters and attributes from the object tag
+		* Has a resource to say what data types it handles.
+		* Communicates with NetPositive through BMessages for everything else.
+		
+	* Bottleneck plug-ins
+		* These plug-ins insert themselves into various points in NetPositive's activities
+		  to do various things.
+		
+		* Plug-ins are allowed to have one preference panel.  This is in HTML and is of any
+		  size.  It may include JavaScript, which is always turned on regardless of preferences.
+		  The preferences are handled by NetPositive, and the HTML goes through the parsing
+		  plug-ins.  Plug-ins are also given read-only copies of the other preferences.  Plug-ins
+		  are notified when their preferences change.
+		
+		* Plug-ins are allowed to have one menu on the menu bar.
+		
+		* Plug-ins may request that NetPositive obtain network or cached resources on their behalf.
+		  They pass in a URL and get a BDataIO back.  Requests pass though the relevant plug-ins.
+		
+			* HTML parsing plug-in
+				* Has BDataIO input and output streams.
+				* Receives the raw HTML from network layer and passes it on to NetPositive's parser
+				* Has the ability to abort a page altogether if it find objectionable content
+				
+			* URL request plug-in
+				* Receives URL's when the user clicks on a link or the page gets an image
+				* Can either accept the url as-is, can change it to something else, or reject it
+
+			* Network IO plug-in
+				* Recieves URL's from the lower layers.  Make the connection and pass a raw
+				  BDataIO for the socket back.
+				* Use this to implment proxies, SSL, etc.
+				
+			* Protocol plug-in
+				* Receives URL's.  Make the connection, handle the protocol on the other end, and
+				  return HTML to the parser.
+				* Connect to Network IO plug-ins and HTML parsing plug-ins if they exist.
+				
+			* Image plug-in (???)
+				* Receives BBitmaps for images that are to be displayed.  It can modify or
+				  reject them.  This plug-in will be called incrementally as the image downloads.
+				
+			* Bookmark/History plug-in (?)
+			
+			* Cache plug-in (?)
+			
+			* Download plug-in (?)
+			
+			* Cookie plug-in
+			
+	* Plug-ins should have access to:
+		* Their own page in the preferences
+		* The menu bar
+		* FolderWatcher
+		* The various context-sensitive popup menus.
+
+
+
+
+/******************************************************************************/
+/* To investigate:                                                            */
+/******************************************************************************/
+	* Don't Run() Protocol threads until their connection is free.
+	* Problems with navigating the "Highway conditions" link from http://www.dot.ca.gov/inmotion.htm
+	  if the page is cached -- a redirection is screwing it up.
+	* Still problems with the border of text form items with B_DRAW_ON_CHILDREN
+	* If you have a page with two vertically aligned frames, each with vertical and horziontal
+	  scrollers, scrolling the bottom frame vertically leaves bit turds from the scrollbar of the
+	  upper frame.  See http://www.datascan.co.uk/2000font/findex.htm
+	* Don't rewrite the prefs file unless it has changed.  Saves flash RAM.
+	* Do you have to quit and re-launch if you enter an incorrect password?
+	* Doesn't draw bottom line of download window.  Not covered by any view.
+	* Deal better with NOBR tag.
+	* When downloading normal pages, have it REJECT files it can't deal with, instead of saving them
+	  to disk and trying to launch them.
+	* Protocol threads can get orphaned.  Let them commit suicide.  Occasionally, Consumer threads
+	  get stranded, too.  Let's create a global watchdog for BLooper subclasses that will ping them
+	  occasionally with keepalive packets and kill them if they hang around too long.
+	* Make UserValues smarter.  Store the form input glyph type and name, and match up.  This will
+	  help prevent bizarre problems with values going into the wrong objects.
+	* In a nested frame document, clicking on a link which takes you out
+	  of all frames doesn't take you all the way to the top.  It only
+	  takes you out of one level of frame nesting.
+	* In a nested frame document, clicking on a link which takes you out
+	  of all frames and then going back doesn't rebuild the correct frameset.
+	* Look at Tracker.cpp to see how to set up meta-MIME information for a new file type.
+	  Write up a request against Peter to have an automated mechanism to do this so I don't have
+	  to write code.  mimeset should be able to suck the appropriate information out of a resource
+	  and do it automatically.
+	* Sometimes it still flashes top of page when using scroll position when going back.
+	* If you resize a BBC bug report carefully, it sometimes clips the right edge of the preformatted text.
+      Is this already written up?
+    * Maybe for certain kinds of files, such as movies and sound files, when clicked on, save to /tmp and
+      launch a helper app instead of asking for a download directory.
+    * Window resizing:
+    	* Threshold for relayout
+    	* Do a synchronous Get Window Size to get the window size right now and layout against that.  This
+    	  will alleviate problems where resize messages stack up.
+    	* Repaint the parts of the background that changed and do a lazy relayout.
+	* Set up your image bitmaps in 15/16 bit color if the monitor is so set.
+	* In FolderWatcher, I'm calling GetEntry on an uninitialized BDirectory;
+	* Problems if you change fonts for Cyrillic encoding.  Start with blank prefs file, go to
+	  http://www.ru/r_index.html, set to KOI8R, change font prefs, reload page.  Not all text
+	  shows up in Cyrillic.  Okay if you quit and relaunch.
+	* Does reload work in frame docs?
+	* start netpositive...go to www.dogpile.com
+	  before dogpile is loaded, open a new window and go to www.hotbot.com
+	* Make sure that passwords don't get saved in user values.
+	* Save as and show HTML re-get page from server.
+	* Problems if you erase the cache from prefs and immediately start browsing.
+
+
+
+
+
+I checked in my changes to BitmapButton.cpp/h. If you change call the call to the inherited BWindow constructor to this:
+     : BWindow(frame, kApplicationName, B_DOCUMENT_WINDOW, B_ASYNCHRONOUS_CONTROLS)
+
+In HTMLWindow.cpp that will get things working asynchronously in N+. Give it a try.
+
+
+
+
+>3. Net+ appears to skip the delay time parameter of the first frame of an 
+>animation, but only on the first time through. If it loops (thank you for 
+>adding loop detection, I reported that several months ago), all frames 
+>have the right delay.
+
+
+
+    
+
+
+/******************************************************************************/
+/* Code cleanup:                                                              */
+/******************************************************************************/
+	* Replace Store and subclasses with BPositionIO subclasses (including BFile)
+	* Get rid of the ring buffer in Protocol
+	* Rearchitect HTMLView Document, and Document's relationship to its parse tree and physical representation.
+	* Inline some stuff.
+	* Should we use the built-in codecs for images?
+	* Look for memory leaks in my new stuff, especially with the reference counting.
+	* Replace usage of char * with CString
+	* Get rid of MIME sniffer
+		The TSniffer class will need to be exposed through BRoster.  It has a MatchMime that is
+		stolen from NetPositive and can easily be used as a substitute.
+	* Make use of abstract classes and get rid of empty functions in base classes
+	* Get rid of BitmapButton.  Look for other built-in classes to use, like BList, String,
+	  etc.
+	* Create a string dictionary class and use it in places instead of lots of string comparisons,
+	  like in Protocol, and when looking at MIME types.
+	* HTMLView has a lot of code to deal with scrolling and scrollbars.  Can you consolidate?
+	* Eventually, eliminate HTMLView::DoWork
+	* Eventually, elminiate Document::Idle
+	* Make use of BStringView
+	* Design a class for a nice general-purpose thread-safe hashed object repository.  Use it instead of all of your
+	  different ones now:  FolderWatchers, Resource Cache, Image Cache, etc.  Plug your broadcaster/listener
+	  mechanism into it, too, and use it manage resources, consumers, documents, etc.
+	* Create a GIF button and use it instead of the BitmapButton.
+	* Take out XPLAT stuff
+	* Take picture resources out of .C code.
+	* Make the resource building part of the build process.
+	* Clean up the Image/ImageHandle mess.  You should probably eliminate ImageHandle and use refcounted
+	  Images instead.
+	* There's a new "Draw on children" flag that you can use to clean up display of radio buttons and
+	  check boxes.
+	* Consolidate unnecessary/unreferenced .h files
+	* Create enumerated types for some the int32's in preferences and elsewhere.
+	* Re-architect and re-write the text selection mechanism.  We can't use BRegions to hold the
+	  selection, as they're not robust enough to handle extremely complicated regions.  We'll need to
+	  build the selection and drawing into the glyphs themselves.
+	* Clean up Protocol.cpp and Protocols.h.  Wow, what a mess.
+	* Look into using functors to pass around state to function calls instead of forwarding
+	  BMessage parameters around.
+	* Use BMallocIO and friends instead of your own buffered IO classes.
+	* Completely re-architect the Protocol/Consumer/Parser/Image/UResource relationship.
+		* Get rid of Store.  Make everything based on a subclass of BPositionIO that blocks.
+		* Each parser/image does its parsing in a separate thread.  When no data is available, it will
+		  block on the read of the stream.
+		* Consumer goes away.
+		* Many of the notifications go away, at least between protocol->resource->consumer.  Instead,
+		  things will simply become unblocked or the streams will close to indicate when data is available
+		  or when things are done.
+		* HTMLWorker will still probably need to get notifications.
+		* If UResource needs to cache its data, it can tee the stream into one stream that goes to the
+		  parser and another that streams to disk.
+		* Replace the entire Protocol mechanism with a protocol stream that takes the network socket on
+		  one end, uses a state machine to decode the HTTP/FTP protocol, and spits out raw data on the
+		  other end.  It blocks on the network socket when no data is available.  When it gets to the
+		  raw data reading phase, can we directly connect the network stream to the consumer to eliminate
+		  the protocol middleman?  It will need to listen in to see when it needs to step back in when the
+	 	  data is done and the connection is to be recycled.  The protocol streams will talk to a connection
+		  manager that will establish and handle the network connections.
+
+
+
+/******************************************************************************/
+/* Features:                                                                  */
+/******************************************************************************/
+	* Pop-up menu for frames:
+		* Remove frame
+	* Add a built-in netpositive:blank.html page that you can set as your home page.
+	* Copy Image context-sensitive menu option.
+	* History palette - show most recently visited ~10 links.  Click to show link.  Drag and drop to create
+	  bookmarks.  Could this be a tear-off history menu?
+	* Drag and drop scrapbook palette with multiple pages.  This could be a separate app.  Possibly a newsletter
+	  article.
+	* Be able to add a bookmark to any level of the hierarchy.  Be able to singly open any folder in the
+	  bookmark hierarchy.  Do both of these both from the normal menus and from the popup menus.
+	* In the bookmark menu, allow users to attach a URL to a folder.  When the folder is selected, open up the
+	  URL attached to the folder.  If there is no URL, open the folder in the Tracker.  Possibly instead,
+	  look at the preferred app of the folder.
+	* Strong encryption hooks for non-US users.
+	* Implement all preferences through HTML.  Use a browser window without location bar, toolbar,
+	  or other adornments.  Add NetPositive-specific tags to do things like vertical lines, combo
+	  boxes, and other needed elements.
+	* Have a minimum-size for page-specified fonts.
+	* Build self-contained web archives like MSIE 4.0 Mac can.  Download all images, etc. and embed
+	  into archive via resources or attributes.
+	* Have a feature to generate your own custom home page.  Be able to add links to it.
+	* Be able to deal with butt-ugly sites.
+		* Make sure that overrides of page's colors work okay.
+		* Maybe have some sort of "panic button" which will revert a page to a normal color scheme
+		  and override its settings
+		* Have a list of sites where this override happens automatically.
+	* Add heuristics to load images in an intelligent order:
+		* Background images first?  Last depending on speed?
+		* Small images first
+		* Images with maps first
+		* Images for buttons and anchors first
+		* Ads last
+		* Change the heuristic based on connection speed
+	* Zoom in/out like Opera
+	* Middle-button drag scrolling like Eddie
+	* More features for replicants:
+		* Have a replicant flag to get rid of location bar, toolbar, and other adornments.
+		* Be able to have the replicant ask for permission before following links.  With every link
+		  it gets, it sends a B_NETPOSITIVE_URL_CLICKED message or some such to its parent.  The parent
+		  must then send back a B_NETPOSITIVE_OPEN_URL if it wants NetPositive to open the link or it
+		  can drop the link on the floor.  You can set up the replicant to work this way when you create it,
+		  but the default behaviour is to always follow links the way it always has.  It can send these
+		  messages back to its parent view, or maybe you can pass in a BMessenger or some such.
+		* Be able to pass in file_refs to open instead of URL's.
+	* ESC = stop loading
+	* Click-to-load.
+	* Replicants:
+		* Build sticky note replicant
+		* Build in OBJECT tag emitter
+		* No NetPositive replicants
+		* Replicant security -- restrict to file:/ URLs?
+		* Archive local replicants in NetCache
+	* Build an HTML->TEXT translator and use it instead of your custom code.
+	* A class to prevent deadlocks with BLockers which controls all lock/unlock sequences and makes
+	  sure the locks are acquired in the right order.
+	* Configurable right-menu-click options:
+		* Find in this page (text selection)
+		* Auto-search in your favourite search engine (text selection)
+		* Send to another program. (URL)
+	* Right-click "Fetch" option for links.  Begins retrieval of page and puts link forward in history.
+	* Pop-up menu when you drag a link to the desktop to either create a bookmark or save the contents there.
+	* Be able to turn filters on/off for individual pages with a menu command.  If filters hose up a page, you
+	  can easily disable them for that page.
+	* Add buttons to the cookie warning alert to always accept or reject cookies for this domain.
+	* In cookie management, allow for cookies that are briefly persistent -- for example, up to the end of
+	  the session.
+	* Do smarter rejection of JavaScript popup windows.  Be able to configure for some sites, and maybe display
+	  a list of popups and allow users to choose which ones to have popped up by clicking in the list.
+	* Make sure it writes out META:url to files that it saves.
+
+
+
+/******************************************************************************/
+/* Performance issues:                                                        */
+/******************************************************************************/
+	* Make sure it doesn't redraw page until first spatial glyph is laid out.
+	* It moves glyphs around too much during layout.  Put a printf in SetTop or SetLeft to see.
+	* Can we BArchive pages and images and store them that way in the cache for speed?
+	* Make the button bitmaps smaller through compression.
+	* Look carefully at our HTTP requests.  Eliminate unnecessary headers, information, and white
+	  space.
+	* Should we disable the Nagle algorithm in our TCP sockets to reduce transmission delays?
+	* Support compression of HTML pages.
+	* Look at the data flow coming from the network and going to the consumer.  Ming says that
+	  NetPositive is much faster when running off CD because it can't cache to disk.  Can we
+	  speed up the pipeline and handle disk caching in a separate thread???  Perhaps the bottleneck
+	  is due to locking the resource imp and contention for the underlying store.  Can we turn this
+	  into a multiple reader/single-writer mechanism?  We'll have to modify Stores to allow multiple
+	  simultaneous readers of data, as they expect only one at a time now.  The ring buffer in Protocol
+	  should be bypassed when reading HTTP response bodies; perhaps we can do away with it for everything
+	  else, too.
+    * Make pipelining work.
+	* Look into using HEAD tag to update cached images.  Also look into doing conditional get of images
+	  At least, make sure the existing code is 1.1-friendly.
+	* Clean up font caching.
+	* Investigate places where you can use multiple-reader/single-writer locks.
+	* I noticed when turning on resource debugging that NetPositive creates 
+	  one BResources object per resource it wants from its resource fork. 
+	  That is bad (performance-wise). Therefore, you might consider using 
+	  the new call BApplication::AppResources() rather than creating your 
+	  own BResources objects.
+	* When doing incremental relayout because of unsized images, instead of relaying out the whole
+	  document, start the relayout beginning with the image.  Drill upward until you reach the
+	  DocumentGlyph, and relayout the image (and parent glyphs of the image, e.g. tables) and all
+	  following glyphs.
+	* When the cache is full and must be cleaned every time something is added to it, it may spend
+	  a lot of time rebuilding the flat index into the cache, because it is invalidated every time
+	  an entry is removed from it.  Can this be sped up?  Does it need to be?
+	* Optimize away synchronous calls to the app_server.  The important ones are:
+
+
+ /******************************************************************************/
+/* Future Preferences:                                                        */
+/******************************************************************************/
+	* No dynamic fonts
+	* Java control
+	* JavaScript control
+	* Security proxies?
+	* Home page: enter location, use current, browse
+	
+	* Toolbar - icons, icons + text, text
+	* MIME handling
+	* Send HTTP Referer?

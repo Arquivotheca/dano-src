@@ -1,0 +1,53 @@
+SECTION .text
+
+%include "cv.i"
+
+Codebook equ 010000000h
+bWidth equ 010000000h
+YStep equ 010000000h
+YDelta equ 010000000h
+YScan0 equ 010000000h
+UScan0 equ 010000000h
+UScan1 equ 010000000h
+VScan0 equ 010000000h
+VScan1 equ 010000000h
+
+	global InitialFixup
+InitialFixup:
+		dd	Codebook
+;		Ref	Codebook
+		dd	YStep
+;		Ref	YStep1
+		dd	YStep*2
+;		Ref	YStep2
+		dd	YStep*3
+;		Ref	YStep3
+		dd	YStep*4
+;		Ref	YStep4
+		dd	YStep*5
+;		Ref	YStep5
+		dd	YStep*6
+;		Ref	YStep6
+		dd	YStep*7
+;		Ref	YStep7
+		dd	YDelta
+;		Ref	YDelta
+		dd	0
+;		Ref	Motion
+		dd	bWidth/4
+;		Ref	Width4
+		dd	bWidth/8
+;		Ref	Width8
+		dd	0
+;		Ref	TEXT32
+		dd	YScan0
+;		Ref	YScan0
+		dd	UScan0
+;		Ref	UScan0
+		dd	UScan1
+;		Ref	UScan1
+		dd	VScan0
+;		Ref	VScan0
+		dd	VScan1
+;		Ref	VScan1
+

@@ -1,0 +1,7 @@
+chapters-incl2 := \
+testopt.c.texi \
+longopt.c.texi \
+argp-ex1.c.texi \
+argp-ex2.c.texi \
+argp-ex3.c.texi \
+argp-ex4.c.texi \

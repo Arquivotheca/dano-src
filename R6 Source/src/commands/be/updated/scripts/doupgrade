@@ -1,0 +1,83 @@
+#!/bin/sh
+#
+# Purpose: Retrieve and install a large system-critical upgrade which requires the user to
+# halt all other activity for the duration of the procedure.
+#
+# UPDATE_SIZE		The size of the memfs in megabytes
+# UPDATE_TARGET		The target directory for unzip
+# UPDATE_PACKAGE	The package name given to the redirector
+# UPDATE_KEY		The public key to use when validating the file
+
+#/*** Set our default exit value to failure ***/
+setenv EXIT_VALUE 1
+
+# Netron-specific (we don't ask the user on netrons, it's first boot stuff)
+binderput service/updater/status/resultcode "in-progress" 
+
+#/*** Test if the user clicked on the second button (OK) ***/
+
+binderput service/updater/status/message "mounting-ramdisk" 
+
+#/*** Mount and allocate memory for a temporary memfs ***/
+if mountmemfs /mfs $UPDATE_SIZE
+
+	binderput service/updater/status/message "getting-location" 
+
+	#/*** Get the URL for the package ***/
+	source /etc/update/update_url
+	
+	binderput service/updater/status/message "downloading"  
+	
+	if wget -t1 -q -c -O/mfs/update.zip $UPDATE_URL
+	
+		binderput service/updater/status/message "verifying" 
+	
+		if dsasig verify /etc/update/keys/params /etc/update/keys/$UPDATE_KEY /mfs/update.zip
+			
+			binderput service/updater/status/message "installing" 
+			
+			#/*** Attempt to extract the "installscript" from the archive and execute it if it exists ***/
+			#/*** The "installscript" removed old files which are no longer needed and performs any other required maintainance ***/
+			rm /etc/update/installscript
+			unzip -o /mfs/update.zip beos/etc/update/installscript -d /boot
+			if exists /etc/update/installscript
+				source /etc/update/installscript
+			fi
+			
+			#/*** Install package in target directory ***/
+			if unzip -o /mfs/update.zip -d $UPDATE_TARGET
+				#/*** Exit immediately on success; loading any binaries at this point may lockup the system ***/
+				#/*** Only 'ush' internal functions may be called. Do not try to use "sndcmd!" ***/
+				binderput service/updater/status/resultcode "succeeded"
+				binderput service/updater/status/message "update-complete"				
+				binderget service/updater/status/@sync NULLVAR
+				exit 0
+			else
+				#/*** Set "install" error msg ***/
+				setenv RESULT_MSG "install-error"
+			fi
+		else
+			#/*** Set "verify" error msg ***/
+			setenv RESULT_MSG "verify-error"
+		fi
+	else
+		#/*** Set "download" error msg ***/
+		setenv RESULT_MSG "download-error"
+	fi
+	
+	#/***  If we were not successful, we need to free the ram disk ***/
+	unmount /mfs
+	rmdir /mfs
+	
+else
+	#/*** Set "no memory" error message ***/
+	setenv RESULT_MSG "memory-error"
+fi
+
+binderput service/updater/status/resultcode "failed"
+binderput service/updater/status/message $RESULT_MSG 
+binderget service/updater/status/@sync NULLVAR
+
+
+
+exit $EXIT_VALUE

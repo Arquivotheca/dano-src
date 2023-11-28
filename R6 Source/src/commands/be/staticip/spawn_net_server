@@ -1,0 +1,14 @@
+#!/bin/sh
+# warning: hackware *and* demoware!
+# if this is use after the CES demo please question your own sanity.
+# dsandler@be.com
+# ===============
+# added some extra code so that the net_server_script
+# gets killed and the netserver actually dies somewhat
+# cleanly... can't wait for binderized bone!!!!
+# michelangelo@be.com
+
+spawn /system/boot/net_server_script
+sleep 1
+spawn ftpd
+spawn telnetd

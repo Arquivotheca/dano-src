@@ -1,0 +1,133 @@
+#!/bin/sh
+# Purpose: Sample updatescript
+# Perform appropriate upgrade based on revision number.
+# Perform minor updates as needed. Change the value of CUR_IDENT to unique value to force update.
+# This script is updated on a periodic basis and executed by the Uber-Update-Script (/etc/update/updt)
+# This script calls the "doupdate" and "doupgrade" scripts to perform the actual download and install.
+
+# UPDT_IDENT		The identifier of the most recently installed update.
+# CUR_IDENT			Current update identifier. Change to unique value to cause an update to occur.
+
+# REVISION			The revision currently installed on this machine.
+# CUR_REVISION		The most up-to-date revision currently available.
+# NEXT_REVISION		The revision we will be upgrading to; this may be less than CUR_REVISION if no direct upgrade path is available.
+
+#/*** The following are parameters passed to the update/upgrade script ***/
+# UPDATE_SIZE		The size of the upgrade in megabytes
+# UPDATE_TARGET		The target directory to unzip to.
+# UPDATE_PACKAGE	The package name given to the redirector.
+# UPDATE_KEY		The public key to use when validating the file
+
+#/*** Set the value of the most up-to-date revision ***/
+setenv CUR_REVISION 8SVSA
+
+#/*** Change this to unique value to force update ***/
+setenv CUR_IDENT 0
+
+#/*** Load the current installed revision number ***/
+if exists /etc/update/revision
+	source /etc/update/revision
+else
+	if exists /boot/beos/system/lib/libsettings.so
+		setenv REVISION 6
+	else
+		setenv REVISION 0
+	fi
+fi
+
+#/*** Load the identifier of the most recent udpate ***/
+if exists /etc/update/updt_ident
+	source /etc/update/updt_ident
+else
+	setenv UPDT_IDENT 0
+fi
+
+#/*** Init retun status to default to success ***/
+setenv UPDT_STATUS 0
+
+#/*** Test if we have the current revision and perform update if false ***/
+if neq REVISION $CUR_REVISION
+
+	#/***
+	# Initialize next revision to current revision.
+	# This will be used later to detect if a incremental upgrade is available.
+	# ***/
+	setenv NEXT_REVISION $REVISION
+	
+	#/***
+	# In this example, we have an explicit upgrade path from revision
+	# 2 - 3 and 3 - 4. Any other revision will use the default upgrade 
+	# path; a full upgrade including all components.
+	# ***/
+	
+	if eq REVISION 6
+		setenv UPDATE_SIZE 5
+		setenv UPDATE_PACKAGE beia6_7
+		setenv UPDATE_TARGET /boot/
+		setenv NEXT_REVISION 7
+		setenv UPDATE_KEY master
+	fi
+	
+	if eq REVISION 7
+		setenv UPDATE_SIZE 6
+		setenv UPDATE_PACKAGE beia7_8svsa
+		setenv UPDATE_TARGET /boot/
+		setenv NEXT_REVISION 8SVSA
+		setenv UPDATE_KEY master
+	fi
+	
+	if eq REVISION 8
+		setenv UPDATE_SIZE 1
+		setenv UPDATE_PACKAGE beia8_8svsa
+		setenv UPDATE_TARGET /boot/
+		setenv NEXT_REVISION 8SVSA
+		setenv UPDATE_KEY master
+	fi
+	
+	#/*** If We did not find an incremental upgrade, default to full upgrade ***/
+	if eq NEXT_REVISION $REVISION
+		setenv UPDATE_SIZE 10
+		setenv UPDATE_PACKAGE beia8
+		setenv UPDATE_TARGET /boot/
+		setenv NEXT_REVISION $CUR_REVISION
+		setenv UPDATE_KEY master
+	fi
+	
+	rm /etc/update/revision.pending
+	filecat /etc/update/revision.pending "setenv REVISION $NEXT_REVISION"
+	#/*** perform the upgrade and set REVISION to NEXT_REVISION on success ***/
+	if sh -c /etc/update/doupgrade
+		#/*** Update Our Revision and flush the disk cache ***/
+		#/*** loading any binaries at this point may lockup the system ***/
+		#/*** Only 'ush' internal functions may be called ***/
+		mv /etc/update/revision.pending /etc/update/revision
+		sync
+		reboot
+		exit 0
+	else
+		setenv UPDT_STATUS 1
+	fi
+	
+	#/*** Exit to avoid one-shot update ***/
+	exit $UPDT_STATUS
+fi
+
+#/*** Perform update if UPDT_IDENT and CUR_IDENT do not match. ***/
+if neq UPDT_IDENT $CUR_IDENT
+	setenv UPDATE_PACKAGE update.zip
+	setenv UPDATE_TARGET /boot/custom/
+	setenv UPDATE_KEY master
+	setenv UPDATE_TMP /etc/update/update.zip
+	if sh -c "/etc/update/doupdate"
+		setenv UPDT_IDENT $CUR_IDENT
+		rm /etc/updt_ident.pending
+		filecat /etc/updt_ident.pending "setenv UPDT_IDENT $UPDT_IDENT"
+		mv /etc/updt_ident.pending /etc/update/updt_ident
+		sync
+	else
+		setenv UPDT_STATUS 1
+	fi
+fi
+
+#/*** Exit with the our success status ***/
+exit $UPDT_STATUS

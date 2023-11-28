@@ -1,0 +1,31 @@
+#!/bin/sh
+if not exists /boot/home/config/settings/kernel/drivers/kernel.release
+	alert "There is no release-mode kernel settings file. Please update your build."
+	exit
+fi
+if not exists /boot/home/Desktop/FactorySettings
+	alert "There is no recovery configuration file. Please update your build."
+	exit
+fi
+
+# make sure we don't get kicked into recovery if user quit out of login quickly
+/bin/bootcomplete
+
+if /boot/test/prepare
+	/bin/bootmode --configure-recovery /boot/home/Desktop/FactorySettings
+	/bin/bootmode --no-boot-keys
+	/bin/bootmode --set validate
+	/bin/beep PowerDown
+	sync
+
+	alert "Image has been prepared for duplication.  Please commence extraction procedure."
+	# WARNING
+	# do not change this shutdown. the machine should not
+	# reboot after a make_release_image, because the vendor
+	# should extract the image for manufacturing.
+	shutdown
+else
+	alert "Errors during preparation caused preparation to fail. Errors logged in file:///boot/test/testresults.html"
+	spawn /system/Tracker
+	spawn /system/Deskbar
+fi

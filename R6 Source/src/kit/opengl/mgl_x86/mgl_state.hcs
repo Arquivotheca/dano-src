@@ -1,0 +1,188 @@
+
+# __mgl_MAX_TMU_COUNT 2
+
+struct 4 __mglStencilState
+	b							1	testEnabled					| R		Stencil test enabled
+	ui							1	writeMask					| R		Stencil write mask
+	i							1	function					| R		Stencil function
+	ui							1	refrence					| R		Stencil refrence value
+	ui							1	functionMask				| R		Stencil function mask
+	i							1	failOp						| R		Stencil Fail Operation
+	i							1	depthFailOp					| R		Stencil depth test fail operation
+	i							1	depthPassOp					| R		Stencil depth test pass operation
+endstruct
+
+struct 4 __mglSurface
+	ui							1	width
+	ui							1	height
+	ui							1	format
+	v							1	*data
+endstruct
+
+
+struct 4 __mglTexture
+	__mglSurface				1	surface
+	ub							1	envMode						| 0=off, 1=replace, 2=modulate, 3=decal, 4=blend
+	ub							1	sWrapMode					| X
+	ub							1	tWrapMode					| Y
+	ub							1	rWrapMode					| Z
+	ub							1	filter
+endstruct
+
+struct 16 __mglState
+	__mglTexture				2	texture
+	__mglStencilState 			1	stencil
+	
+	i							1	alphaTestValue				| R		Float 0.0 to 1.0
+	
+	i							32 	stippleMask
+	ub							1	stippleTestEnabled
+	
+	ub							1	depthTestFunc
+	ub							1	depthWriteEnabled
+	ub							1	alphaTestFunc				| R
+
+	ub							1	colorWriteEnable			| bit 0=B 1=G 2=R 3=A
+	ub							1	colorBlendEnabled			| Color blending enable
+	ub							1	colorBlendSrcFunc			| Color blending source function
+	ub							1	colorBlendDestFunc			| Color blending destination function
+	ub							1	colorLogicOp				| Color buffer logical operation
+	ub							1	colorLogicOpEnabled			| Logical operation enable
+
+	ub							1	fogFunc
+	ub							1	shadeFunc
+	
+endstruct
+
+
+struct 16 __mglShade
+	i							1	b
+	i							1	g
+	i							1	r
+	i							1	a
+	i							1	dbdx
+	i							1	dgdx						|
+	i							1	drdx
+	i							1	dadx
+	i							1	dbdy
+	i							1	dgdy						|
+	i							1	drdy
+	i							1	dady
+	i							1	dbdxdy
+	i							1	dgdxdy						|
+	i							1	drdxdy
+	i							1	dadxdy
+
+	i							1	z
+	i							1	f
+	i							1	dzdx
+	i							1	dfdx
+	i							1	dzdy
+	i							1	dfdy
+	i							1	dzdxdy
+	i							1	dfdxdy
+
+	i							1	tex0_s
+	i							1	tex0_t
+	i							1	tex0_r
+	i							1	tex0_qw
+	i							1	tex0_dsdx
+	i							1	tex0_dtdx
+	i							1	tex0_drdx
+	i							1	tex0_dqwdx
+	i							1	tex0_dsdy
+	i							1	tex0_dtdy
+	i							1	tex0_drdy
+	i							1	tex0_dqwdy
+	i							1	tex0_dsdxdy
+	i							1	tex0_dtdxdy
+	i							1	tex0_drdxdy
+	i							1	tex0_dqwdxdy
+
+	i							1	tex1_s
+	i							1	tex1_t
+	i							1	tex1_r
+	i							1	tex1_qw
+	i							1	tex1_dsdx
+	i							1	tex1_dtdx
+	i							1	tex1_drdx
+	i							1	tex1_dqwdx
+	i							1	tex1_dsdy
+	i							1	tex1_dtdy
+	i							1	tex1_drdy
+	i							1	tex1_dqwdy
+	i							1	tex1_dsdxdy
+	i							1	tex1_dtdxdy
+	i							1	tex1_drdxdy
+	i							1	tex1_dqwdxdy
+
+	i							1	xLeftFixed
+	i							1	xRightFixed
+	i							1	dxdyLeftFixed
+	i							1	dxdyRightFixed
+
+
+	i							1	xLeft
+	i							1	width
+	i							1	yBottom
+	i							1	yTop
+endstruct
+
+struct 16 __mglAsmScratch
+	ui							256 temp
+endstruct
+
+
+struct 4 __mglScanPoints
+	i							8	coords_y1		| fixed. 
+	i							8	coords_y2		| fixed.
+	i							8	coords_x		| fixed
+	i							8	id				| ID of the generating edge segment
+	__mglScanPoints				1	*next
+endstruct
+
+struct 4 __mglScanPointsPool
+	i							1	count
+	__mglScanPoints				1	*pool
+	__mglScanPointsPool			1	*prev
+	__mglScanPointsPool			1	*next
+endstruct
+
+struct 4 __mglPolyMachine
+	__mglScanPoints				1	**points_headers
+	i							1	points_header_count
+	
+	__mglScanPoints				1	*pool_first		| empty pool list
+
+	i							1	region_id
+	i							1	poly_id
+
+	i							1	point_prev_x	| fixed
+	i							1	point_prev_y	| fixed
+	i							1	point_first_x	| fixed
+	i							1	point_first_y	| fixed
+endstruct
+
+struct 16 __mglContext
+	__mglState					1 	state
+	__mglShade					1	shade
+	
+	__mglSurface				1	color
+	__mglSurface				1	depth
+	__mglSurface				1	stencil
+	
+	v							1	*cache
+	v							1	(*go_s) ( __mglContext *)		| Draw a scanline
+	v							1	(*go_t) ( __mglContext *)		| Draw a special Trapazoid
+	
+	v							1	*contextAllocation
+	v							1	*usrVp1
+	v							1	*usrVp2
+	v							1	*usrVp3
+	v							1	*usrVp4
+	
+	__mglPolyMachine			1	poly
+	
+	__mglAsmScratch				1	scratch
+endstruct
+

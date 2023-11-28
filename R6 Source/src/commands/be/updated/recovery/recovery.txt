@@ -1,0 +1,122 @@
+BeIA Recovery Service Specification
+
+1. Overview
+
+While every effort has been made to ensure that the BeIA update/upgrade process
+is robust and safe, there is still a small chance that an upgrade failure may
+render the machine non-bootable.  For example, even though the updates are downloaded
+into a RAMDisk, there is a small window of time while the contents of the RAMDisk
+are being written to permanent storage during which interuption would prove
+catastrophic.
+
+The BeIA recovery service exists to help mitigate such problems which  render the
+device non-bootable.
+
+The recovery service is straightforward.  A small second partition is allocated
+in permanent storage containing a bootable BeIA kernel and recovery software.
+Failed boots are automatically detected;  if the primary partition fails to boot, the
+next time the user boots the machine it will boot into the recovery partition.
+
+When the recovery partiton boots, it presents the user with a text-based UI (which
+is localizable).  The recovery software attemts to load the users dialer settings
+from the primary partiton, and then prompts the user to enter the information needed
+to connect to a recovery server.  Defaults may be provided for this information by
+the vendor.  A new primary partition image is downloaded and saved to permanent storage.
+When that is complete, the next time the user boots they will boot into the primary
+partition, as if they had just received a new device.
+
+Recovery may be done over the modem or over ethernet.
+
+
+2.  Files
+
+The recovery service uses the following vendor-modifyable files on the recovery
+partition:
+
+/boot/beos/system/boot/recovery.script
+	This is the script that drives the recovery process.  It should probably
+	not be modified by vendors, but if there is particular need it can be.  It
+	loads all of the text for its prompts from the recovery.data.english file
+	by default;  the user is given the chance to specify other languages, and if
+	they exist, that file will be used.  For example, if the user enters "french"
+	when prompted for language, the recovery script will attempt to use
+	/boot/beos/system/boot/recovery.data.french as its language file.
+	
+/boot/beos/system/boot/recovery.data.english
+	This file contains the English version of the recovery UI.  It may
+	easily be modified by vendors and/or translated into other languages.
+	This is the default language.
+	
+/etc/update/keys/key
+	This is the public key used by dsasig to verify the digital signature of the
+	recovery image.  If this file does not exist, the image will not be verified.
+	
+/etc/update/keys/params
+	This is the parameter file for dsasig.  It must exist if the key file exists.
+	
+
+3.  Parameters in the recovery.data file
+
+Vendors may set the following parameters in the recovery.data.??? files:
+
+ R_URL 						default URL of recovery image to download
+ R_PHONE 					default phone number 
+ R_MODEM_INIT 				default modem init string
+ R_PASSWD 					default password
+ R_USER 					default username
+
+ R_REBOOT_1   			  	prompts user to enter "recover" or "reboot" 
+ [...]        			  	n case the recovery partition was entered in error
+ R_REBOOT_5
+
+ R_PROMPT1    			  	welcome message and brief instructions
+ [...]
+ R_PROMPT7 
+
+ R_ASK_PHONE 				prompt for phone number
+ R_ASK_URL 					prompt for recovery download location
+ R_ASK_MODEM_INIT			prompt for modem init string to use
+ R_ASK_USER 				prompt for user name
+ R_ASK_PASSWD 				prompt for password
+
+ R_PPP_FAILED 				message when PPP connect fails
+ R_PPP_CONNECTED 			message when PPP is connected
+
+ R_DOWNLOAD_FAILED			message when download of image fails
+ R_SUCCESS 					message when recovery is complete
+ R_FAILURE 					message when recovery fails
+
+ R_TARGET 					default primary partition path
+ R_WHERE 					prompt to change primary partition path
+
+ R_PARTITION_FAILED 		prompt when primary partition cannot be made
+ 
+ R_ETHER 					prompt to use modem or ethernet for recovery
+ R_DEVICEPATH 				path to ethernet nevice driver
+ R_IP						prompt for ip address
+ R_MASK 					prompt for net mask
+ R_GATEWAY 					prompt for gateway
+ R_DNS_SERVER 				prompt for DNS server
+ R_ETHER_FAILED 			message when ifconfig fails for ethernet
+ R_ETHER_UP 				prompt for when ethernet successfully comes up
+ R_ROUTE_FAILED 			prompt for when route failes
+ DEFAULT_IS 				"Default is "
+ R_FINDING_SETTINGS_FILE 	informational message 
+ R_PRIMARY_DIR_NAME 		primary partition boot directory name
+ R_PRIMARY_SETTINGS_FILE 	path to primary partition PPP settings file
+ R_FETCHING_SETTINGS 		informational message
+ R_FLASHING 				notification that the recovery image is being saved
+
+
+4.  Creating the Recovery Image
+
+Be will provide two software images with each software drop.  The first is the
+whole image, oontaining both the primary and recovery partitions.  The second
+(smaller) image is just the primary partition.  This is what is used for recovery.
+
+Vendors may digitally sign this image using dsasig and place it on a web server to
+be used for recovery.  For convenience, they may set the R_URL parameter in the
+recovery.data file to point to the recovery image location.
+
+If the image is to be verified, the vendor must also put the public key to use on the
+recovery partition in the place specified above in the Files section.

@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Purpose: Retrieve and execute a script on demand.
+# 
+# SCRIPT_URL		The URL of the script to download
+
+#/* Load redirector parameters because the script may want them */
+source /boot/home/config/settings/beia-redirect
+
+#/* remove any old scripts */
+rm /etc/update/script
+
+if wget -t3 -c -O/etc/update/script $SCRIPT_URL
+	if dsasig verify /etc/update/keys/params /etc/update/keys/master /etc/update/script
+		chmod 755 /etc/update/script
+		source /etc/update/script
+		exit 0
+	fi
+	rm /etc/update/script
+fi
+	
+exit 1

@@ -1,0 +1,74 @@
+//////////////////////////////////////////////////////////////////////////////
+// Initialization Hooks
+//
+//    This file declares hardware-independent functions used to initialize
+// the graphics card and otherwise perform accelerant initialization-related
+// tasks.
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+// Prototypes ////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Initialize the Accelerant
+//    Initialize all local accelerant variables by communicating with the
+// kernel driver directly through the specified file descriptor.
+//    HACK - We're performing hardware initialization here too. This should
+// be moved to the kernel driver.
+status_t Init(int the_fd);
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Uninitialize the Accelerant
+//    Clean up any local data for this accelerant instance that needs
+// cleaning up before it disappears. Shared data should be de-initialized
+// by the kernel driver.
+
+void UnInit(void);
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Get the Size of Clone Information
+//    This returns the size of the structure containing the information that
+// needs to be passed when cloning an accelerant instance.
+
+ssize_t CloneInfoSize(void);
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Get Clone Information
+//    Extract all information needed from this accelerant instance to allow
+// another instance to control the same graphics card that we are
+// controlling.
+
+void GetCloneInfo(ACCELERANT_INFO *data);
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Initialize a Clone
+//    Initialize the clone's ACCELERANT_INFO structure so that it is able to
+// take over operations for the graphics card that its parent controlled.
+
+status_t InitClone(ACCELERANT_INFO *data);
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Get Accelerant Device Information
+//    This fills the specified structure with information about the card
+// being managed.
+
+status_t GetAccelerantDeviceInfo(accelerant_device_info *adi);
+
+
+//////////////////////////////////////////////////////////////////////////////
+// Accelerant Retrace Semaphore
+//    This returns the semaphore ID of the vertical retrace semaphore.
+
+sem_id AccelerantRetraceSemaphore(void);
+
+
+//////////////////////////////////////////////////////////////////////////////
+// This Is The End Of The File ///////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////

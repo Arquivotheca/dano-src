@@ -1,0 +1,240 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size: 36.0pt; mso-bidi-font-size: 12.0pt; color: blue; text-shadow: auto">Best
+Practices For&nbsp;<br>
+Optimal Printing</span></h1>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note: Documentation
+      and code version numbers are designed to be independent of each other, and
+      may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.<span style="mso-spacerun:
+yes">&nbsp; </span>Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1 align="center">Best Practices for Optimal Printing</h1>
+<h2>&nbsp;</h2>
+<h2><font color="#000080">Introduction</font></h2>
+<p>It is easy to make the mistake of assuming that the image on the screen
+will automatically transfer to the printed page, printing an identical image as
+to what is on the screen. It does not.. This ‘screen shot’ approach
+will not achieve the look and feel that a user expects when holding printed
+output in his/her hand, and comparing that same information to what is on
+the TV screen.</p>
+<p>The main differences between a video display (TV/monitor) and a printout of
+that display, are in image resolution levels and formatting for correct text size and
+color.</p>
+<p>&nbsp;</p>
+<h2><font COLOR="#000080"><a name="Problem">Problem</a>: Image/Text Resolution</font></h2>
+<p>A higher resolution image (more pixels per inch) means a higher quality
+image. Therefore it is not surprising that when image data is compressed (such as
+compressing a multi-megabyte bitmap image down to a 125k JPEG image,) some
+amount of data (i.e. quality) loss occurs in the process. In other words, higher compression
+leads to a greater quality degradation. On the opposite end of the spectrum, low
+resolution compressed images may look fine on a video screen at 72 dpi, but
+will not look very good after they have been scaled back up to the 300 dpi
+requirements of the printer. The images will be blocky – a curved line for
+instance will not be smooth but instead have a stair-step appearance. Text
+appears to suffer more than images because smaller objects rely more on the
+precision of high resolution, and while a low resolution image may simply have
+poor print quality, low resolution text may become unreadable.</p>
+<h2><font COLOR="#000080">Best Practice:</font>&nbsp;</h2>
+<p>Use the highest quality images available when printing. The ability to
+deliver this depends on the capabilities of the host system, but the same image used
+by the display does not have to be the same one used for printing. For example, the
+server for an internet device may compress image data to improve
+download speed. The device itself may receive the image data and ‘down-sample’
+the image even further, essentially throwing away data to fit the 72 dpi screen. In this case, it would be desirable to re-request the
+uncompressed version of this image when formatting for the higher resolution
+printed page. Go back to the original image data and ask that the
+page be re-formatted for printing, rather
+than simply passing off the 72 dpi screen page to the printer driver.&nbsp;</p>
+<p>For text, if the device simply has a set of stored raster fonts optimized for
+screen resolution, the developer should make use of the printer’s
+high-resolution built-in fonts. (Refer to <a href="devicebasedfont.htm">Device
+Based Fonts</a> for more information.) Alternately, if the device has a font
+rendering engine, the text for the printed page should be re-rendered through
+the font engine at the higher resolution when formatting the page for printing.
+Text rendered at 72 dpi screen quality and then passed to the printer driver
+will produce the same poor quality as stored 72 dpi raster fonts. The font engine is
+a powerful tool – take advantage of it!</p>
+<p>&nbsp;</p>
+<h2><font COLOR="#000080">Problem: Formatting and Layout for the Screen vs. the
+Printer</font></h2>
+<p>Reading text on a television screen from across the room or even from an LCD
+screen attached to the phone is different from reading text on the printed
+page. Passing a ‘page’ of data optimized for the phone or television screen
+directly to the printer will produce a printed page which is WYSIWYG (&quot;<u>W</u>hat
+<u>Y</u>ou <u>S</u>ee <u>I</u>s <u>W</u>hat <u>Y</u>ou <u>G</u>et,) <i>but not
+what the user expects</i>. The news article the user prints from his/her
+favorite on-line news service should not be 5 pages of BIG text if that same
+article would have taken one page in the local newspaper.&nbsp;</p>
+<p>&nbsp;</p>
+<h2><font COLOR="#000080">Best Practice:</font>&nbsp;</h2>
+<p>Normal text should be about 10 to 12 points in size and take advantage of the
+full paper size. A system with a 40 character LCD display may now have
+twice that width in which to format the information. A TV/internet browser will
+now have much more text displayed on a page. As such, care must be taken to wrap
+text correctly around images. Actually, smaller text allows more precise placement
+and should wrap more easily around other objects.</p>
+<p>Be sure to take into account page and text colors. The printed
+page by default is <i>white.</i> But light colored text on a black background
+is common for TV based systems as it reduces noise and is generally easier to
+read. Laying down all the black ink on the printed page to reproduce this effect
+will certainly irritate the user who is waiting for all that ink to dry, and who
+must now go out and buy a new ink cartridge after printing relatively few print jobs.
+Take note of the change in background and text when choosing text color. White
+text will obviously not show up on a white background and even yellow text will
+be extremely difficult to read. Choose text colors that will contrast
+appropriately with the background. The system may make it an option to print
+backgrounds, as some web pages are designed such that the background image is an
+integral part of the page. If this option is chosen, we suggest the logic exists
+to not re-map the text color. (Mapping white text to black while printing a dark
+background would lead to the same problem of printing white text on the white
+page.)&nbsp;</p>
+<p> One final word of warning, if the ability to print page backgrounds is
+allowed, it should not be the default. Most backgrounds are extraneous to the
+information the user is printing.</p>
+<p>&nbsp;</p>
+<h2><font COLOR="#000080">Problem: Clipping to the Printed Page</font></h2>
+<p>A web page is usually formatted as one long page with text and graphics
+intermingled as appropriate. The printed page unfortunately has
+physical limits to its width and length. It is entirely possible and probable that while printing
+multi-page documents, text or images could be cut in half between pages.</p>
+<p>&nbsp;</p>
+<h2><font COLOR="#000080">Best Practice:</font>&nbsp;</h2>
+<p>Do the best you can. No easy set of rules exists to solve this problem in all
+scenarios. Be aware of how much space remains on the current page. The printable
+width and height of the page are available via the PrintContext object.&nbsp;</p>
+<p>Here’s a simple calculation to give you the input height (number of your
+rasters) that will fit on a printed page:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+InputHeight = PrintHeight/ (PrintWidth/InputWidth)</p>
+<p>(PrintWidth/InputWidth) gives the scaling factor for the page. This value is then
+divided into the PrintHeight to supply the number of input rows.
+Tracking the number of rasters you’ve imaged to a given location will allow you to
+correspondingly track the amount of space remaining on the page.</p>
+<p>Implement a &quot;look-ahead&quot; region so that text that would normally be clipped is moved to the next page. Images can be treated the same way, though
+certainly some images may have to be clipped in order to maintain proper
+formatting. A very long image for instance, would require clipping, but smaller
+images may be ‘nudged one way or the other to be kept intact. Certainly text is the
+easier and more critical of the objects to not have clipped.</p>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Back to top]</a></span></p>
+
+</body>
+
+</html>

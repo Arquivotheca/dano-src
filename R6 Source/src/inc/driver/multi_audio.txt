@@ -1,0 +1,257 @@
+Multi-channel audio driver API
+Copyright © 1998-2001 Be Incorporated.
+
+This API describes how drivers and user-level code communicate in the BeOS for recording, playing back, and controlling the signal path, using semi-pro and pro-level multi-channel audio cards. In the terminology of this document, "card" may be some subsystem that attaches to the computer using PCI bus, FireWire, or some other available bus. Signals from the "outer world" enter the card over a number of "input busses", from whence they are transformed by the card to buffers of digitized PCM sample data and made available to the driver as "input channels". Buffers of PCM data flowing from the driver go through "output channels" to one (or more) "output busses" which emit the signal into the outer world. There may be additional signal flow in the card not readily fit into this model; those signal flows are represented at "auxillary busses". All busses and channels are mono, but there are provisions in this API for drivers to express, and applictions to query, relationships between individual busses and channels.
+
+The API uses a number of constants and structures, found in <multi_audio.h>.
+
+Quick overview for users:
+
+Typically, an application will not talk to the driver directly; rather it will use the MultiNode which is part of the BeOS media kit, which in turn talks to the driver. 
+
+open() /dev/audio/multi/whatever with O_RDWR.
+
+ioctl() B_MULTI_GET_DESCRIPTION to get a list of what channels are available. The argument is a struct multi_description(), which in turn contains a pointer to an already allocated array of multi_channel_info structs.
+
+ioctl() B_MULTI_SET_ENABLED_CHANNELS to enable the channels you want to use. The argument is a struct multi_mix_info, which points at an allocated array of multi_channel_mix, each of which points at an array of _multi_mix_mux_info.
+
+ioctl() B_MULTI_GET_BUFFERS to get a pointers to the playback buffers, with a multi_buffer_list struct (which should have "playback_buffers" and "record_buffers" allocated) to get the first location for where to put playback data. If the card supports "soft" playback buffers and you prefer to use your own buffers, this step is reversed and is where you point the driver at your buffer space using B_MULTI_SET_BUFFERS. It is OK to call B_MULTI_SET_BUFFERS before B_MULTI_SET_ENABLED_CHANNELS.
+
+To start playing back and/or recording (depending on what channels are enabled) call ioctl() with the B_MULTI_BUFFER_EXCHANGE value. The argument is a multi_buffer_info. The playback data will be played, but the first time record data is undefined (since it hasn't been captured yet). Successive calls using B_MULTI_BUFFER_EXCHANGE will return the data previously recorded, and queue the next set of playback data. Typically, this will sync to the available input/output stream so that one call is allowed through for each buffer of data being played, implementing double-buffering. Note that some cards with very high latency converters may not be able to provide buffers for the second exchange, either. The record cycle return value will be negative until the card starts providing data, after which the driver will return which buffer group contains the last recorded data by putting values >= 0 in this value.
+
+To stop playing, simply stop calling ioctl() with B_MULTI_BUFFER_EXCHANGE and, if this is a more permanent stop (not just a pause), call B_MULTI_BUFFER_FORCE_STOP. Note that you will lose the last buffer of recording data this way; thus you will often want to play one extra set of buffers in order to get access at that data. You should not assume that DMA will cause the buffer to be loaded anyway, as some cards use other means of transferring data into buffers. Some cards will keep playing whatever data is in the playback buffer until you call B_MULTI_BUFFER_FORCE_STOP.
+
+
+Reference (for driver writers)
+
+The driver should publish in /dev/audio/multi. It should not allow more than one opener for each mode (O_RDONLY and O_WRONLY, or one total for O_RDWR). It can allow multiple opens with a mode of MULTI_CONTROL (value 3) for control, but those should not be allowed to record or play back data. 
+Please follow the Be driver naming convention of naming your card card/# where # is a linear count of installed cards, starting at 1. Thus, if you have three "gizmo" cards installed, name them /dev/audio/multi/gizmo/1, /dev/audio/multi/gizmo/2 and /dev/audio/multi/gizmo/3.
+
+Channel numbering deserves special mention. All channels are assigned a unique ID. The first output channel is channel 0, followed by the other output channels, followed by the input channels, followed by output bus channels, followed by input bus channels. Thus, on a card with 8 inputs, 8 outputs, and 2 output bus channels (an automatic monitor mix) the output channels will be channels 0-7, the input channels channels 8-15, and the monitor mix channels 16 and 17.
+NOTE: "input" channels are the DMA streams (or programmed I/O data streams) as seen by the host CPU, embodied in buffers of data. "output" channels are the similar streams going out from buffers of data. The description of many devices may require that the actual jacks on the hardware, where the user can plug in gear, be designated as "busses" as far as the driver API is concerned.
+
+B_MULTI_GET_DESCRIPTION: argument is multi_description *.
+Fill in the provided output struct with information about the capabilities of this driver and the hardware it drives, as follows:
+input_size: sizeof(multi_description); used for future compatibility. Application will set it when it calls the driver; driver need not set it on output but need respect the size provided here and not overwrite more space in the data pointer.
+friendly_name: the name of this device, as a user-readable C string. If you support multiple devices, this string should be unique to each device. "Layla by Echo #1" is acceptable, for instance.
+vendor_info: arbitrary configuration info used by hardware vendor, as C string. "Rev3, 0xfc300000" is acceptable, for instance.
+output_channel_count: the number of actual channels accepting data from the user. "user," in this case meaning the application opening the driver.
+input_channel_count: the number of actual channels providing data to the user.
+output_bus_channel_count: the number of channels that might be input into the device, but which do not provide data to the user.
+input_bus_channel_count: the number of channels which might internally mix or output signals, but which do not accept data from the user.
+aux_bus_channel_count: the number of channels which might internally mix signals, but neither input or output them.
+request_channel_count: provided by the user; describes how many items are in the "channels" array. Do not write information about more channels that this into that array. If this value is "0", it is OK for "channels" to be NULL. You should still return the total number of channels you implement in input_channel_count, output_channel_count, and friends.
+channels: for each channel, starting with the first output channel, then the second, third..., followed by the first input channel, second, third, ..., followed by output bus channels and input bus channels and finally auxillary channels, put information about each channel in this array. Do not write information about more channels than there is space in the array (as indicated by request_channel_count) since the user application allocated the memory for this array.
+output_rates: provide the same information as for input_rates, but for output channels. If output channel rates must be locked to their input counterparts, set the B_SR_SAME_AS_INPUT flag. If all outputs must have the same sample rate, set the B_SR_IS_GLOBAL flag.
+input_rates: provide a bitwise OR of the sampling rates you support for the fixed-rate values, and if you support variable sample rates, indicate by setting the B_SR_CVSR flag. If the sampling rate is required to be the same for all inputs, set the B_SR_IS_GLOBAL flag.
+min_cvsr_rate: the minimum rate, in samples per second, that this device can provide, if it has set the B_SR_CVSR flag.
+max_cvsr_rate: the maximum rate, in samples per second, that this device can provide, if it has set the B_SR_CVSR flag.
+output_formats: a bit mask of all the acceptable formats for output channels. If all output channels have to have the same format, set the B_FMT_IS_GLOBAL bit. If output channels must have the same format as their input counterparts, set the B_FMT_SAME_AS_INPUT bit. Formats are in signed, host-
+endian format, except for the 8 bit unsigned format, which is unsigned with 128 as the middle value, 
+1 as the minimum value and 255 as the maximum value.
+input_formats: a bit mask of all the acceptable formats for input channels. If all input channels have to have the same format, set the B_FMT_IS_GLOBAL bit.
+lock_sources: a bit mask of all possible sample lock sources, such as an internal crystal, an external word clock connector, or a video input connector generating a genlocked sample clock.
+timecode_sources: a bit mask of all possible time code sources (if any), such as MTC from a MIDI input port, VTC from a video input port.
+interface_flags: specific peculiarities about the interface as implemented by this device. Possible bits to set are:
+B_MULTI_INTERFACE_PLAYBACK: interface supports playback of sample data.
+B_MULTI_INTERFACE_RECORD: interface supports recording sample data.
+B_MULTI_INTERFACE_TRANSPORT: interface supports the transport input functions.
+B_MULTI_INTERFACE_TIMECODE: interface supports the time code input functions.
+B_MULTI_INTERFACE_SOFT_PLAY_BUFFERS: interface supports "soft" playback buffers.
+B_MULTI_INTERFACE_SOFT_REC_BUFFERS: interface supports "soft" recording buffers.
+B_MULTI_INTERFACE_CLICKS_WHEN_ENABLING_OUTPUTS: the device may have to stop and re-start the stream of playback or recording when changing enable bits for output channels.
+B_MULTI_INTERFACE_CLICKS_WHEN_ENABLING_INPUTS: the device may have to stop and re-start the stream of playback or recording when changing enable bits for input channels.
+control_panel: the MIME string of the control panel application shipped with this driver. A client can start the application with this MIME string to let the user configure the device. Zero-terminated C string. Set to the empty string (one 0 byte) if no control panel application exists.
+
+Return B_OK on success, else an error value < B_OK.
+
+B_MULTI_GET_EVENT_INFO: argument is a multi_get_event_info *.
+Driver will return the following:
+supported_mask: mask of all events supported by the hardware. If the hardware does not support a particular event, (e.g. transport events) the bit corresponding to that event should be cleared.
+current_mask: the current mask of events which will cause the driver to release the event semaphore.
+queue_size: the  size of the queue (in events) into which events will be stored.
+event_count: the number of events currently in the queue.
+
+B_MULTI_SET_EVENT_INFO: argument is a multi_set_event_info *.
+Driver will prepare for event notifications based on the information found in the multi_set_event_info struct. 
+in_mask: mask of events which will cause the driver to release the event semaphore
+semaphore: the sem_id of the semaphore which the application will wait on. The driver signals the application that an event has occurred by releasing this semaphore.
+event_count: The minimum size of the event queue (in events) used by the driver. The driver may save more if desired. If the new event count differs from the current count, the queue is resized. If the new size is smaller than the original, then only the last event_count items are copied into the new queue. If in_mask is zero, events will not queued and the semaphore will not be released.  If event_count is zero, then the driver will not queue events but will release the sempahore.  Drivers must set a maximum value of event_count so that kernel memory is not wasted. Be suggests that requests for over 128 queue events be refused. Drivers are required to support queue sizes of up to 16 events, but may support requests up to 128 events. 
+
+B_MULTI_GET_EVENT: argument is a multi_get_event*.
+Driver will dequeue the first event in the queue and fill out the structure members based on that event. If there is no event in the queue, driver will return B_MULTI_EVENT_NONE in the event member.
+timestamp: system_time() at which the event took place
+event: which event transpired, B_MULTI_EVENT_..., includes B_MULTI_EVENT_NONE if no events are in the queue.
+Additional structure members are filled in according to the event value. 
+
+How events are handled:
+The queue size, semaphore, and notification events are set with B_MULTI_SET_EVENT_INFO. When an event occurs that has be designated as a notification event, it is entered in the queue and the notification semaphore is released. A call to B_MULTI_GET_EVENT will dequeue the first event in the queue. It is the responsibility of the application to moniter format changes, clock loss, etc...in order to prevent data being rendered incorrectly.
+
+B_MULTI_GET_ENABLED_CHANNELS: argument is a multi_channel_enable *.
+Return in the argument struct the enabled status of each channel. The values of the struct are:
+enable_bits: pointer to enough bytes to receive enable bits for all channels supported by this card (as reported by the last B_MULTI_GET_DESCRIPTION). One bit per channel. Set the bits of all enabled channels to 1, and non-enabled channels to 0. You can use the convenient B_SET_CHANNEL macro, or just generate the same information yourself. The lowest bit of the first byte is channel 0, and it goes up from there.
+lock_source: the sample clock source in effect.
+lock_data: for B_MULTI_LOCK_INPUT_CHANNEL, the channel to which sample clock is locked. Typically, this will be a SPDIF or Lightpipe channel (or some other digital format).
+timecode_source: the time code source(s) in effect.
+
+Return B_OK, or an error < B_OK if something is really wrong (this is unlikely).
+
+Return B_OK after the information is filled in.
+
+B_MULTI_SET_ENABLED_CHANNELS: argument is a multi_channel_enable *.
+Configure the hardware device to enable the channels indicated by the "enable_bits" array, and disable any other channels. Configure the device to derive its sample clock source from the source indicated by lock_source, if any. Configure the device to derive its time code information from timecode_source, if any. 
+Then return B_OK, or an error < B_OK if you cannot do what was requested.
+For CVSR support, it is OK to "snap" your sample rate to the closest you can support (if you are only moderately "continuous"), as long as you return that actual value in a subsequent call to B_MULTI_GET_GLOBAL_FORMAT. This is a good way of adding support for sampling frequencies that are not defined by the fixed-frequency bits.
+
+B_MULTI_GET_GLOBAL_FORMAT: argument is a multi_format_info *.
+Return in the argument the current configuration for all input and all output channels (separately). If the configurations are not uniform, return an error.
+output_latency: the latency of the output channels. This is the time between the buffer swap ioctl() being entered and the earliest time the first sample of the playback buffer returned by that ioctl() starting to play. I e, this is typically the built-in hardware FIFO and DAC latency.
+input_latency: the latency of the input channels. This is how old the last sample in the record buffer must at least be when the buffer swap ioctl() returns it. I e, this is typically the built-in hardware ADC latency.
+timecode_kind: the time code kind detected on input, if any.
+input: the sampling rate and sample format in effect for input channels.
+output: the sampling rate and sample format in effect for input channels.
+
+Return B_OK, or an error < B_OK. Either this call or B_MULTI_GET_CHANNEL_FORMATS must be implemented; it is preferred to always implement this function in addition to B_MULTI_GET_CHANNEL_FORMATS, since the typical use is to always use the same format for input and output across all channels in a multi-track recording environment.
+
+B_MULTI_SET_GLOBAL_FORMAT: argument is a multi_format_info *.
+Configure inputs and outputs to use the format specified by the argument struct:
+output_lantency and input_latency: unused for output. Caller should set it to 0.
+timecode_kind: the time code to accept and/or generate, if any.
+input: the sampling rate and sample format for input channels.
+output: the sampling rate and sample format for input channels.
+
+Return B_OK, or an error < B_OK if the configuration specified is not allowed according to the information returned in B_MULTI_GET_DESCRIPTION. Note that this call has to always be implemented and do its best to set up the format.
+
+B_MULTI_GET_CHANNEL_FORMATS: argument is a multi_channel_formats *.
+Return the configuration for several indivudual channels.
+request_channel_count: how many items in the "channels" array (allocated by the user).
+request_first_channel: the first channel id to return information for.
+returned_channel_count: set to the number of channel infos actually returned. This will be request_channel_count, unless more channels were requested than available.
+channels points to the area where channel configurations are stored. "rate" is the bit for the fixed sample rate in effect, or B_SR_CVSR if a variable sample rate, in which case "cvsr" will contain the sample rate. Format is the bit for the sample format in effect.
+latencies: set to the input or output latency, respectively, for each requested channel. This pointer must point to a bigtime_t array big enough to hold all the returned values.
+
+B_MULTI_SET_CHANNEL_FORMATS: argument is a multi_channel_formats *.
+Configure the channels indicated with the configuration info indicated.
+request_channel_count: how many items in the "channels" array (allocated by the user).
+request_first_channel: the first channel id to return information for.
+returned_channel_count: set to the number of channel infos actually returned. This will be request_channel_count, unless more channels were requested than available.
+latencies: ignored on set; caller should set it to NULL.
+
+B_MULTI_GET_MIX: argument is a multi_mix_value_info *.
+The driver will return in the space provided by the application information about your currently controllable parameters (such as input and output gains).
+The application will fill out the struct as follows before calling MULTI_GET_MIX:
+info_size: sizeof(multi_mix_value_info) for future compatibility.
+item_count: number of multi_mix_value structs available in "values".
+values: pointer to array of multi_mix_value structs.
+at_frame: ignored for getting the mix values.
+The "values" pointer will point to a number of multi_mix_value structs. You should iterate over all of those, and for each control specified by the "id" field of that struct, fill out the current value. The current value is found in the union, depending on what kind of control the requested control is. If the control is currently ramping, return the duration of the ramping operation left in microseconds in "ramp".
+
+B_MULTI_SET_MIX: argument is a multi_mix_value_info *.
+The driver will parse the information provided to set values for various controllable parameters you have (such as input and output gains or muxes). The application will fill out the struct as follows before calling MULTI_SET_MIX:
+info_size: sizeof(multi_mix_value_info) for future compatibility.
+item_count: number of controls to change.
+values: points to an array of multi_mix_value structs, each describing the change requested for an individual control.
+at_frame: a frame count for how many frames into the next buffer the change should take effect. Boards that do not have sample-accurate timing for mixer changes may snap this time to anywhere within the next buffer. If at_time is 0, and no more buffers are arriving from the application or the board is not "started" with a current EXCHANGE_BUFFERS, the board may implement the change immediately. The range of at_frame is between 0 and the number of frames in the next buffer.
+The "values" parameter points to the actual values being set. For each struct in this array, set the values:
+"id" specifies the control ID to change.
+The union specifies the value to change to, depending on the type of the control.
+"ramp" specifies the duration of any ramping between the old and the new value, if this control supports ramping. The duration is in microseconds.
+
+B_MULTI_LIST_MIX_CHANNELS: argument is a multi_mix_channel_info *.
+The driver should return, in the argument, which controls are pertinent to each requested channel. The application will already have filled out the argument as follows:
+info_size: sizeof(multi_mix_channel_info) for future compatibility.
+channel_count: the number of channels for which the application wants to know the pertinent controls. 
+channels: pointer to "channel_count" number of channel_id values for which the list of controls are requested.
+max_count: maximum number of controls that can be returned per requested channel.
+actual_count: driver will return the actual number of controls it needed/would have needed.
+controls: points to array "channel_count" in size of pointers, each of which points to an array "max_count" large of int32, where the driver can return a list of control ids for controls that are pertinent to the requested channel. Note that the channel ID itself should not be returned. If less than "max_count" controls are pertinent to the channel, the rest of the control ID slots should be set to 0. 0 is never the ID of a control, because that is the fixed ID of the first output channel (or, if there are no output channels, the first input channel).
+
+B_MULTI_LIST_MIX_CONTROLS:argument is a multi_mix_control_info *.
+The driver should return, in the argument, information about the controls specified by the application. The fields of the info struct are:
+info_size: sizeof(multi_mix_channel_info).
+control_count: how many controls are requested.
+controls: allocated space by caller for "control_count" number of multi_mix_control structs. The driver should fill out each of these controls with the information about the control in question, ID of which is found in the "id" field of each info struct.
+multi_mix_control has the following members:
+"id" is the id of the control being returned information about; requested by the application.
+"flags" are flags for this control, including the control type (only one type flag can be set) and other flags (such as B_MULTI_MIX_RAMP for ramping-capable controls). A B_MULTI_MIX_JUNCTION is a splitter or collector, like a ball of solder with incoming and outgoing wires on a circuit board. "GAIN" is a stage that can change the level of the signal passing through. "MUX" is a stage that can select between one of many inputs, or send the signal to one of many outputs. "ENABLE" is a stage that can make or break a connection. The application can use the "B_MULTI_MIX_KIND_MASK" mask to separate control flags from the bits reserved for various (possibly defined in the future) control kinds.
+"master" is 0 for controls that take their value directly, or the ID of a control to which this control is slaved. For instance, if there were two channels that have a gain stage where they both must share the same amount of gain, you would make the control affecting the first channel the master, and make the control affecting the second channel slaved to that master. Note that changing any of the slaved controls has the same effect as changing the master control; the driver is responsible for implementing this.
+Depending on what kind of control this is, "gain", "mux" or "enable" might be filled out. Only gain stages have extra information right now: "mix_gain" is the minimum gain imposed by this stage (in dB); "max_gain" is the maximum gain imposed by this stage, and "granularity" is the step size in this change, or 0 for (close-to) continuously variable gain.
+"name", finally, is the user-readable name of this control as a C string, or the empty C string (0 byte) if there is no label for it.
+
+B_MULTI_LIST_MIX_CONNECTIONS: argument is a multi_mix_connection_info *.
+The driver should return in the argument the list of connections between control pairs. This list can be used by the application to deduce signal flow. It is also used in determining the inputs and outputs of a mux stage. The application has filled in the struct as follows:
+"info_size": sizeof(multi_mix_connection_info) for future compatibility.
+"max_count": maximum number of connections there is space for in "connections".
+"actual_count": the driver returns the actual space used/it would use here.
+"connections": the driver should list all connections between the various controls here. Each channel is also a control ID, where the control in question is the "socket" on the card, or the "buffer" that goes to/from the computer. Note that for channels that have many connectors, they are all treated as one "control"; which connector(s) is active is set elsewhere (in multi_channel_enable). For mux controls. the available mux inputs or outputs are deduced from the connections coming in to or going out of the mux. A mux should have multiple inputs and a single output, or a single input and multiple outputs, never multiple both inputs and outputs.
+The driver should not write more than "max_count" connections into the "connections" array, but it should return the total number of connections it has available in "actual_count".
+
+B_MULTI_GET_BUFFERS: argument is a multi_buffer_list *.
+The driver will return, in playback_buffers and record_buffers, a list of all buffers that will be used by the driver to play audio. The caller is responsible for allocating enough memory for these arrays, and telling the driver about the maximum count of channels and buffers. If this count is too small for the driver, the driver returns an error (but still returns the channel and cycle count information).
+The first indirection of playback_buffers and record_buffers defines a buffer "cycle" or "set", and will typically be at least 2 elements long (for double-buffering). The second indirection is information per channel within that set. This set number will later be used in the multi_buffer_info struct to exchange information between the driver and the application about what data to play and where data was recorded.
+It is required that all playback buffers live in the same memory area, and that all record buffers live in the same memory area. It is OK for all playback and memory buffers to live in the same area. You should put as little as possible other information in these areas. The client of the driver may need to clone the buffer area(s). Ideally, your record buffers will live in an area that's separate from your playback buffers.
+Note that the reverse doesn't hold true if you support soft buffers: the user may provide buffers that live anywhere, with no guaranteed area coherency.
+request_*_buffers: how many buffer_desc pointer live after the first indirection of *_buffers. The actual number used (or needed, in the case of an error) will be returned by the driver in return_*_buffers.
+request_*_channels: how many channels live after each second indirection of *_buffers. The actual number of channels used (or needed, in the case of an error) will be returned by the driver in return_*_channels.
+request_*_buffer_size: a hint as for what buffer size to use for the driver. Each buffer returned by the driver will be "close" to this value in size, for some value of "close" that's reasonable to the driver's technical limitations. The actual size used will be returned in return_*_buffer_size. A value of 0 lets the driver pick any size that it feels is a reasonable performance/latency trade-off. The size is measured in frames (individual samples for each specific channel).
+The buffer_desc structure points, for each channel, for each buffer set, to the first byte of the first sample of that buffer, and contains the offset from that sample to the start of the next sample for that channel in the same buffer, in bytes. This is so that a unified interface can be presented no matter what the hardware requires (interleaved channels, individual channel buffers, or some mix thereof are all seen in existing hardware).
+
+B_MULTI_SET_BUFFERS: argument is a multi_buffer_list *.
+For drivers that support soft playback and/or record buffers, this call lets the application set the buffers to use for the driver. The arguments (in) are as described for return values in B_MULTI_GET_BUFFERS. These buffers must be in locked memory, and cannot be deallocated or unlocked until you have called B_MULTI_BUFFER_FORCE_STOP and that call has returned.
+
+B_MULTI_SET_START_TIME: argument is a bigtime_t *.
+This tells the driver to delay any subsequent call to B_MULTI_BUFFER_EXCHANGE to start at the system_time() indicated by the bigtime_t pointed to by argument. If the hardware can do its own timing, that is the preferred way of implementing this feature, else you can program a timer interrupt for the time in question, and set a flag to know that you should queue B_MULTI_BUFFER_EXCHANGE calls rather than start them immediately. In the timer interrupt routine, clear the flag, and release all the queued exchange requests (if any).
+If a B_MULTI_BUFFER_EXCHANGE call happens before B_MULTI_SET_START_TIME has been called, or after the start time has been reached, that B_MULTI_BUFFER_EXCHANGE should start immediately (possibly in sync with other outstanding B_MULTI_BUFFER_EXCHANGE calls, if you can do that). This is intended to be used to sample-lock multiple hardware cards.
+
+B_MULTI_BUFFER_EXCHANGE: argument is a multi_buffer_info *.
+The work-horse of the interface. Recording and playback happens because the user program calls B_MULTI_BUFFER_EXCHANGE. 
+
+If the application has not called B_MULTI_GET_DESCRIPTION and B_MULTI_GET_BUFFERS since the device was opened and/or the mode changed, the driver should return an error (such as EINVAL).
+
+B_MULTI_BUFFER_EXCHANGE will, based on flags set in "flags", return the following values:
+
+B_MULTI_BUFFER_PLAYBACK
+played_real_time: the system_time() at which the last buffer started playing.
+played_frames_count: the linear count of frames having been played at that point in time.
+playback_buffer_cycle: the buffer set (as returned by B_MULTI_GET_BUFFERS) to play. The application should set this to 0 (the first set) the first time B_MULTI_BUFFER_PLAYBACK is called after stopping, and then increase it by one, modulo the number of available buffer sets, for each successive call.
+
+B_MULTI_BUFFER_RECORD
+recorded_real_time: the system_time() at which the buffer being returned started being recorded, or 0 for the first time B_MULTI_BUFFER_EXCHANGE is being called.
+recorded_frames_count: the number of frames having been recorded at the time in question.
+record_buffer_cycle: the buffer set (as returned by B_MULTI_GET_BUFFERS) that was recorded. The application cannot set this value; it will be set by the driver. The first time B_MULTI_BUFFER_EXCHANGE is called, this return value will be set to -1 to indicate an invalid set of buffers; successive calls will return the record buffer set in which data is being returned, cycling from 0 to the available number of buffer sets.
+
+B_MULTI_BUFFER_METERING
+meter_channel_count: number of channels being metered. This may be all input channels, or all input channels plus all output channels.
+meters: for each channel, the value of the loudest sample for the previous buffer period.
+
+B_MULTI_BUFFER_TIMECODE
+hours, minutes, seconds, frames: the time code value last received before the end of the previous buffer period.
+at_frame_delta: the frame (linear sample count) delta from the start of the previous buffer at which this time code was received. It will be positive for time codes received within the duration of the previous buffer, and negative for time codes received before the previous buffer started.
+
+
+B_MULTI_BUFFER_FORCE_STOP: no argument.
+This call will force the hardware to stop the DMA engine (or make pretense thereof) , and return when all transfers have stopped. Calling this when you intend to not send more data for a while, and/or when you want to reset the buffers or cyclic buffer count.
+If you provide your own buffers using B_MULTI_SET_BUFFERS, it is not safe to de-allocate or unlock those buffers until B_MULTI_BUFFER_FORCE_STOP has returned.
+
+
+B_MULTI_LIST_MODES:
+A device can have multiple modes, only one of which can be active at the same time. One example is when there are optical connectors on a card, and they can be used either in ADAT (8-track) or SPDIF (2-track) mode. A card can publish a list of available modes by responding to B_MULTI_LIST_MODES. The argument to this ioctl() are:
+in_request_count: how much space the application has made io_modes point to. You can return information about at most these many modes in the array pointed to by io_modes.
+io_modes: allocated by the application, space for information about up to in_request_count multi_mode_info structs.
+The driver should assign the actual total number of modes available (whether more or less than in_request_count) to out_actual_count, assign the index of the current mode (whether bigger or smaller than in_request_count) to out_current_mode, and put information about each mode (up to the in_request_count first modes) in io_modes as follows:
+mode_id: an arbirary, nonnegative constant assigned by the driver to "name" this mode. No two modes within the driver should have the same mode_id.
+flags: set to 0.
+mode_name: a null-terminated C string, up to 63 characters long, naming the mode in user-readable terms. A client of the driver might put all the mode names in a popup for the user to select.
+input_channel_count: how many actual channels of input (in buffers) the mode will provide the client.
+output_channel_count: how many actual channels of output (in buffers) the mode will provide the client.
+best_frame_rate: the maximum sampling rate supported in this format, or 0 for "unknown" or "determined by outside sources".
+best_sample_format: sample data formats available in this mode.
+
+B_MULTI_GET_MODE: argument is an int32 *
+Assign to the int32 pointed to by argument the mode_id of the current mode.
+
+B_MULTI_SET_MODE: argument is an int32 *
+If the int32 pointed to by the argument is not a valid mode_id, return a negative error code. Else stop any pending requests from the client and have them return an error, and then do whatever it takes to switch your hardware into the mode selected. Then you return B_OK to the client. If, for some reason, the mode cannot be switched, return an error. You should report the mode switch to any client blocking on a B_MULTI_BLOCK_CONFIGURATION call.
+Note that it is an error for a user program to call B_MULTI_BUFFER_EXCHANGE after B_MULTI_SET_MODE until B_MULTI_GET_DESCRIPTION and one of B_MULTI_GET_BUFFERS or B_MULTI_SET_BUFFERS have been called (B_MULTI_SET_BUFFERS only if you support soft buffers).
+
+

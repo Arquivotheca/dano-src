@@ -1,0 +1,29 @@
+0x100000 volume_down done
+0x100001 volume_up done
+0x100002 toggle_mute done
+0x100003 javascript news done
+0x100004 javascript shopping done
+0x100005 javascript email done
+0x100006 javascript bookmarks done
+0x100007 javascript home done
+0x100008 javascript settings done
+0x100009 javascript compaq done
+0x10000a javascript search done
+0x10000b javascript lightbulb done
+0x10000c javascript rocket done
+0x10000d exec 13 done
+0x10000e javascript back done
+0x10000f javascript forward done
+0x100010 exec 16 done
+0x100011 javascript stop done
+0x200001 javascript email done
+0x200002 javascript media done
+0x200003 javascript home done
+0x200004 volume_up done
+0x200005 volume_down done
+0x300000 javascript back done
+0x300001 javascript forward done
+0x300002 javascript up done
+0x300003 javascript down done
+0x300004 javascript settings done
+0x300005 javascript softkeyboard done

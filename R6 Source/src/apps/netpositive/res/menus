@@ -1,0 +1,184 @@
+#
+# NetPositive menu configuration
+#
+# File format:
+#
+# INTERNAL_MENU_NAME "Readable menu name"
+#		INTERNAL_COMMAND_ID		FLAGS		EQUIVALENT	MODIFIERS	"Readable item name"
+#		INTERNAL_COMMAND_ID		FLAGS		EQUIVALENT	MODIFIERS	"Readable item name"
+#		SUBMENU
+#			INTERNAL_COMMAND_ID	FLAGS		EQUIVALENT	MODIFIERS	"Readable item name"
+#		END
+#		...
+# END
+
+# FLAGS (sum all constants which apply)
+#	Enabled							1
+#	Replicant only					2
+#	Non-replicant only				4
+#	Fullscreen DesktopMode only		8
+#	Right-click on images only		16	Note that something can be both an image
+#	Right-click on links only		32	and a link.  There, both of these apply.
+#	Right-click on frames only		64
+
+
+RIGHT_CLICK	""
+	gobk	1	""	0	"Back"
+	gofw	1	""	0	"Forward"
+	adbk	1	""	0	"Add This Page To Bookmarks"
+	book	1	""	0	"Bookmarks"
+	
+# Image right-click items
+	____	16	""	0	"-"
+	hoin	17	""	0	"New Window With This Image"
+	hopi	17	""	0	"Save This Image As..."
+#	hfas	17	""	0	"Filter This Image in All Sites"
+#	hfts	17	""	0	"Filter This Image in This Site"
+	
+# Link right-click items
+	____	32	""	0	"-"
+	hopn	33	""	0	"Open This Link"
+	holn	37	""	0	"New Window With This Link"
+	____	32	""	0	"-"
+	habm	33	""	0	"Add Link To Bookmarks"
+	hsav	33	""	0	"Save This Link As..."
+	hcpy	33	""	0	"Copy Link Location"
+
+# Image/link right-click items
+	____	48	""	0	"-"
+	hoin	49	""	0	"New Window With This Image"
+	hopi	49	""	0	"Save This Image As..."
+#	hfas	49	""	0	"Filter This Image in All Sites"
+#	hfts	49	""	0	"Filter This Image in This Site"
+	____	48	""	0	"-"
+	hopn	49	""	0	"Open This Link"
+	holn	53	""	0	"New Window With This Link"
+	____	48	""	0	"-"
+	habm	49	""	0	"Add Link To Bookmarks"
+	hsav	49	""	0	"Save This Link As..."
+	hcpy	49	""	0	"Copy Link Location"
+	
+# Frame right-click items
+	____	64	""	0	"-"
+	hopn	65	""	0	"Show Only This Frame"
+	save	65	""	0	"Save This Frame As..."
+	ophm	69	""	0	"Show HTML for This Frame"
+	rfrm	69	""	0	"Reload This Frame"
+END
+
+
+# Menus for the browser window
+
+FILE_MENU	"File"
+	onew	1	"N"	2	"New"
+	opnl	1	"L"	2	"Open Location..."
+	opnf	1	"O"	2	"Open File..."
+	____	0	""	0	"-"
+	save	1	"S"	2	"Save As..."
+	clos	1	"W"	2	"Close"
+	____	0	""	0	"-"
+	dpsu	1	"P"	3	"Page Setup..."
+	dpnt	1	"P"	2	"Print..."
+	____	0	""	0	"-"
+	_ABR	1	""	0	"About NetPositive"
+	____	0	""	0	"-"
+	dqit	1	"Q"	2	"Quit"
+END
+
+EDIT_MENU	"Edit"
+	UNDO	1	"Z" 2	"Undo"
+	____	0	""	0	"-"
+	CCUT	1	"X"	2	"Cut"
+	COPY	1	"C"	2	"Copy"
+	PSTE	1	"V"	2	"Paste"
+	cler	1	""	0	"Clear"
+	____	0	""	0	"-"
+	SALL	1	"A"	2	"Select All"
+	____	0	""	0	"-"
+	find	1	"F"	2	"Find"
+	fndg	1	"G"	2	"Find Again"
+	____	0	""	0	"-"
+	Prf!	1	""	0	"Preferences..."
+END
+
+GO_MENU	"Go"
+	gobk	1	"\x1c"	2	"Back"
+	gofw	1	"\x1d"	2	"Forward"
+	home	1	"H"	2	"Home"
+	srch	1	"S"	3	"Search"
+	____	0	""	0	"-"
+END
+
+BOOKMARKS_MENU	"Bookmarks"
+	adbk	1	"B"	2	"Add to Bookmarks"
+	SBkm	1	""	0	"Show Bookmarks
+#	Fupb	1	""	0	"Find Updated Sites in My Bookmarks"
+	____	0	""	0	"-"
+END
+
+VIEW_MENU	"View"
+	fscr	1	""	0	"Full Screen"
+	____	0	""	0	"-"
+	sdwn	1	"D"	3	"Download Window"
+	____	0	""	0	"-"
+	ophm	1	"H"	3	"Show HTML"
+	rlod	1	"R"	2	"Reload Page"
+	limg	0	"I"	2	"Load Images"
+	____	0	""	0	"-"
+	SUBMENU	1	""	0	"Document Encoding"
+		ISO1	1	""	0	"Central European (ISO 8859-2)"
+		ISO5	1	""	0	"Cyrillic (ISO 8859-5)"
+		KOI8	1	""	0	"Cyrillic (KOI8-R)"
+		D866	1	""	0	"Cyrillic (MS-DOS 866)"
+		1251	1	""	0	"Cyrillic (Windows 1251)"
+		ISO7	1	""	0	"Greek (IS 8859-7)"
+		AutJ	1	""	0	"Japanese (Auto Detect)"
+		SJIS	1	""	0	"Japanese (Shift-JIS)"
+		EUC!	1	""	0	"Japanese (EUC)"
+		UNIC	1	""	0	"Unicode"
+		UTF8	1	""	0	"Unicode (UTF-8)"
+		ISO1	1	""	0	"Western (ISO 8859-1)"
+		MacR	1	""	0	"Western (Mac Roman)"
+	END
+END
+
+# Menus for the "Show HTML" and other open-as-text-only windows
+
+TEXT_FILE_MENU	"File"
+	onew	1	"N"	2	"New"
+	____	0	""	0	"-"
+	save	1	"S"	2	"Save As..."
+	clos	1	"W"	2	"Close"
+	____	0	""	0	"-"
+	dpsu	1	"P"	3	"Page Setup..."
+	dpnt	1	"P"	2	"Print..."
+	____	0	""	0	"-"
+	dqit	1	"Q"	2	"Quit"
+END
+
+TEXT_EDIT_MENU	"Edit"
+	CCUT	0	"X"	2	"Cut"
+	COPY	1	"C"	2	"Copy"
+	PSTE	0	"V"	2	"Paste"
+	cler	0	""	0	"Clear"
+	____	0	""	0	"-"
+	SALL	1	"A"	2	"Select All"
+	____	0	""	0	"-"
+	find	1	"F"	2	"Find"
+	fndg	1	"G"	2	"Find Again"
+END
+
+DOWNLOAD_DOWNLOADS_MENU	"Downloads"
+	Atla	1	""	2	"Auto Launch"
+	____	0	""	0	"-"
+	Sall	1	""	2	"Stop All"
+	Drst	1	""	2	"Retry Stopped"
+	DLda	1	""	2	"Delete All"
+END
+
+DOWNLOAD_FILE_MENU	"File"
+	Nbwd	1	"N"	2	"New Browser Window"
+	____	0	""	0	"-"
+	clos	1	"W"	2	"Close"
+	dqit	1	"Q"	2	"Quit"
+END

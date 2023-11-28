@@ -1,0 +1,6 @@
+<map name="service">
+	<object name="surface" code="/system/servers/picasso_gl" remote="false">
+		<object name="root" code="/boot/beos/apps/picasso_test_views" remote="false">
+		</object>
+	</object>
+</map>

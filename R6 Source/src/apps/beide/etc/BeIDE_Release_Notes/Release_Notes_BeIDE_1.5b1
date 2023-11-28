@@ -1,0 +1,82 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	1.5b1 Intel
+Date:		1/18/98
+Authors:	Brian Stern, Fred Peterson,
+			Burton T. E. Miller, Bernie Estavillo 
+=============================================
+
+Howdy Be developers.  This is an update for the Intel BeIDE
+that's on the R3B1 CD.  The update includes new command line tools
+and prefs plugins, as well as the mwbres tools.
+
+This release also includes x86 support that is hosted on ppc.  This 
+includes command line tools and an x86 prefs plugin.  You can
+build projects and executables on BeOS-ppc and move them to BeOS-intel.
+If your executables need resources they need to be created on and
+added to the executable on Intel.
+
+mwccx86 supports #pragma export/import in the same way that the ppc
+tools do.  Please read the compiler release notes that are included
+to see differences from the ppc compiler.  That compiler is at
+release 1.8 and the Intel compiler is at 2.0+ so there are a number
+of new features in the Intel compiler.
+
+Unfortunately parts of the c++ standard library don't compile with the
+new compiler.  We're working with Be to get a new version of the standard
+library working.  You'll find that some parts of STL to compile and work
+fine while others don't.
+
+The current mechanism for getting a dissasembly from the Intel tools is
+incomplete.  Choosing disassemble from the menu in BeIDE generates an
+.asm file that has the assembly listing in it.  The easiest way to open this
+file is to use the open selection window.  You can generate an asm file from
+the command line like:
+
+mwccx86 -machinecodelist -g -c filename.cpp
+
+Make sure you compile your projects with 2-byte alignment.  The BeOS is compiled
+with that alignment and you may see crashes if you compile with other
+alignments.  The default for the compiler is currently 2-byte.  The default when
+you hit Factory Settings is 8-byte, which is incorrect.  The OS alignment will
+probably change to 4-byte alignment before release.
+
+
+============================
+New Features
+============================
+
+*	BaseAddress works in the x86 Project prefs panel.  You will probably have no
+	reason to ever change this.  It affects the base address in the xMAP file.
+
+==========================
+Bugs Fixed
+==========================
+
+Fixed a bug where the last entry in the Settings window was missing sometimes.
+
+Fixed a problem where the drag feedback line wasn't being correctly erased
+while dragging items in project windows. (the same code works fine on ppc, ugh.)
+
+
+==========================
+Known Limitations
+==========================
+
+When creating new projects libbe.so and other ppc libs are added to the project.
+The mechanism for generating new projects is about to change so this problem
+will go away.
+
+There is an appearance problem with scrollbars in some of the prefs panels.
+This is an OS bug.9 
+
+=====================
+Contacting Metrowerks
+=====================
+
+Please send bug reports for this mptp release to mptp-be@metrowerks.com.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

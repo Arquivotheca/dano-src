@@ -1,0 +1,8 @@
+- don't reload image when applying to multiple workspaces (artificial workspace switch)
+-async controls
+-cache loaded images (requires node monitor)
+- 'default' setting for a folder should remove attribute
+- should the changed settings be reloaded at all?
+- node monitor on folders and default folder, to load settings if they change? what to do if changes have been made and settings on disk change?
+- load default folder settings when "default" is selected in normal folders, and show them
+- node monitor for the visible image

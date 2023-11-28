@@ -1,0 +1,20 @@
+#ifndef CFS_IOCTLS_H
+#define CFS_IOCTLS_H
+
+#include <Drivers.h>
+
+enum {
+	B_CFS_GET_FLAGS = B_DEVICE_OP_CODES_END + 1001,
+	B_CFS_SET_FLAGS,
+	B_CFS_CLEAR_FLAGS,
+	B_CFS_GET_DISK_SPACE,
+	B_CFS_READ_RESERVED_BLOCK,
+	B_CFS_WRITE_RESERVED_BLOCK
+};
+
+typedef enum cfs_flags {
+	B_CFS_FLAG_COMPRESS_FILE = 0x00000001
+} cfs_flags;
+
+#endif
+

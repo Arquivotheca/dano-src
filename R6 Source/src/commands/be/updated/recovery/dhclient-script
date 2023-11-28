@@ -1,0 +1,49 @@
+#!/bin/sh
+#
+# dhclient-script for BeOS
+#
+#
+
+if eq reason PREINIT
+	setenv action 0
+fi
+
+if eq reason BOUND
+	setenv action 1
+fi
+if eq reason RENEW
+	setenv action 1
+fi
+if eq reason REBIND
+	setenv action 1
+fi
+if eq reason REBOOT
+	setenv action 1
+fi
+
+if eq reason EXPIRE
+	setenv action 2
+fi
+if eq reason FAIL
+	setenv action 2
+fi
+
+if eq action 0
+  ifconfig $interface inet 0.0.0.0 netmask 0.0.0.0 up > /dev/null
+  route add 255.255.255.255 dev $interface > /dev/null
+  exit 0
+fi
+
+if eq action 1
+	echo New ip $new_ip_address New subnet $new_subnet_mask
+
+    ifconfig $interface $new_ip_address $new_subnet_mask > /dev/null
+	route add default gw $new_routers dev $interface > /dev/null
+
+	echo New domain name $new_domain_name
+	echo New domain name servrs $new_domain_name_servers
+	filecat /etc/resolv.conf $new_domain_name
+  	filecat /etc/resolv.conf $new_domain_name_servers
+
+	exit 0
+fi

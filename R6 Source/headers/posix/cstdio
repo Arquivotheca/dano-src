@@ -1,0 +1,7 @@
+#ifndef _CSTDIO
+
+#define _CSTDIO
+
+#include <stdio.h>
+
+#endif

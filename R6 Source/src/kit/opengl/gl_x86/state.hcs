@@ -1,0 +1,1631 @@
+
+# __GL_NUMBER_OF_TEXTURE_TARGETS 6
+# __GL_TEXTURE_INDEX_1D 0
+# __GL_TEXTURE_INDEX_2D 1
+# __GL_TEXTURE_INDEX_3D 2
+# __GL_PROXY_TEXTURE_INDEX_1D 3
+# __GL_PROXY_TEXTURE_INDEX_2D 4
+# __GL_PROXY_TEXTURE_INDEX_3D 5
+# __GL_MAX_TMU_COUNT 4
+
+# __GL_PERFORM_NOP 0
+# __GL_PERFORM_DESTROY_BUFFERS 1
+# __GL_PERFORM_CREATE_BUFFERS 2
+
+struct 4 __glCoord
+	f							1	X
+	f							1	Y
+	f							1	Z
+	f							1	W
+endstruct
+
+struct 4 __glColor
+	f							1	R
+	f							1	G
+	f							1	B
+	f							1	A
+endstruct 
+
+struct 4 __glMaterialState		| NA
+	__glColor					1	Ambient
+	__glColor					1	Diffuse
+	__glColor					1	Specular
+	__glColor					1	Emissive
+	f							1	SpecExp
+	ub 							256	SpecExpTable
+endstruct
+
+struct 4 __glPerLightState		| NA
+	b							1	Enabled
+	__glColor					1	Ambient
+	__glColor					1	Diffuse
+	__glColor					1	Specular
+	__glCoord					1	Position
+	__glCoord					1	PositionEye
+	__glCoord					1	Direction
+	f							1	Exponent
+	f							1	CutOffAngle
+	f							1	ConstantAttenuation
+	f							1	LinearAttenuation
+	f							1	QuadraticAttenuation
+
+endstruct
+
+struct 4 __glLightState
+	b							1	LightingEnabled				| NA
+	b							1	ColorMaterialEnabled		| NA
+	i							1	ColorMaterialFace			| NA
+	i							1	ColorMaterialParam			| NA
+	i							1	ShadingModel				| R		Flat or smooth triangle shading
+	__glColor					1	AmbientLightColor			| NA
+	b							1	LocalViewerEnabled			| NA
+	b							1	TwoSidedEnabled				| R		If enabled you may see back side triangles
+	__glMaterialState			2	material					| NA	Front & Back
+	__glPerLightState			8	light						| NA
+endstruct
+
+struct 4 __glPolygonState		| NA
+	i							1	FrontFaceDirection			| R		Winding direction for the fron of a triangle.  GL_CW or GL_CCW
+	i							1	FrontMode					| R		Drawing mode for the front of a triangle.  GL_FILL, GL_LINE, GL_POINT
+	i							1	BackMode					| R		Drawing mode for the back of a triangle.  GL_FILL, GL_LINE, GL_POINT
+	i							1	Cull						| R		Culling mode.  GL_FRONT, GL_BACK, GL_FRON_AND_BACK
+	f							1	OffsetFactor				| R		Polygon offset factor
+	f							1	OffsetUnit					| R		Polygon offset unit
+	f							1	OffsetR						| NA
+	b							1	CullFaceEnabled				| R		Culling enable.  Note: culling is done in software and is not necessary in the driver
+	b							1	SmoothEnabled				| R		Polygon anti-aliasing enable
+	b							1	OffsetPointEnabled			| R		Polygon Offset for Point mode enable
+	b							1	OffsetLineEnabled			| R		Polygon Offset for Line mode enable
+	b							1	OffsetFillEnabled			| R		Polygon Offset for Fill mode enable
+	b							1	StippleEnabled				| R		Polygon stipple enable
+endstruct 
+
+struct 4 __glDepthState
+	b							1	TestEnabled					| R		Depth test enable
+	i							1	TestFunction				| R		Depth test function
+	f							1	ClearValue					| R		Depth buffer clear value
+	b							1	WriteEnabled				| R		Depth test write enable
+endstruct
+
+struct 4 __glColorState
+	b							1	RedWriteEnabled				| R		Red Component write enable
+	b							1	GreenWriteEnabled			| R		Green Component write enable
+	b							1	BlueWriteEnabled			| R		Blue Component write enable
+	b 							1	AlphaWriteEnabled			| R		Alpha Component write enable
+	__glColor					1	ClearValue					| R		Color buffer clear value
+	b							1	BlendEnabled				| R		Color blending enable
+	i							1	BlendSrcFunction			| R		Color blending source function
+	i							1	BlendDestFunction			| R		Color blending destination function
+	i							1	LogicOp						| R		Color buffer logical operation
+	b							1	LogicOpEnabled				| R		Logical operation enable
+	b							1	DitherEnabled				| R		Dithering enable
+endstruct
+
+struct 4 __glStencilState
+	b							1	TestEnabled					| R		Stencil test enabled
+	ui							1	ClearValue					| R		Stencil clear value
+	ui							1	WriteMask					| R		Stencil write mask
+	i							1	Function					| R		Stencil function
+	ui							1	Refrence					| R		Stencil refrence value
+	ui							1	FunctionMask				| R		Stencil function mask
+	i							1	FailOp						| R		Stencil Fail Operation
+	i							1	DepthFailOp					| R		Stencil depth test fail operation
+	i							1	DepthPassOp					| R		Stencil depth test pass operation
+endstruct
+
+struct 4 __glTextureCoordState
+	i							1	mode 						| NA	How coordinates are being generated
+	__glCoord 					1	eyePlaneEquation 			| NA	Eye plane equation (used if mode == GL_EYE_LINEAR)
+	__glCoord 					1	objectPlaneEquation 		| NA	Object plane equation (used if mode == GL_OBJECT_LINEAR)
+endstruct
+
+struct 4  __glXformState		| NA, Will be used for T&L
+	b							1	Normalize
+	ui							1	ClipPlanesMask
+	i							1	MatrixMode
+	__glCoord 					6	EyeClipPlanes
+endstruct
+	
+struct 4 __glViewportState		| NA, Will be used for T&L
+	i 							1	X
+	i 							1	Y
+	i 							1	Width
+	i 							1	Height
+	f 							1	ZNear
+	f 							1	ZFar
+endstruct
+
+struct 4 __glScissorState
+	b							1	Enabled						| R		Scissors enable
+	i							1	X							| R		Left of scissor region, inclusive
+	i							1	Y							| R		Bottom of scissor region, inclusive
+	i							1	Width						| R		Width of scissor region
+	i							1	Height						| R		Height of scissor region
+endstruct
+
+struct 4 __glHintState
+	i							1	PerspectiveCorrection		| R
+	i							1	PointSmooth					| R
+	i							1	LineSmooth					| R
+	i							1	PolygonSmooth				| R
+	i							1	Fog							| R
+endstruct
+	
+struct 4 __glAccumState
+	__glColor					1	ClearColor					| R		Accum buffer clear color
+endstruct
+
+struct 4 __glFogState
+	__glColor					1	Color						| R		Fog color
+	b							1 	Enabled						| R		Fogging enabled
+	i							1 	Mode						| R		Fog Mode (linear, exp, exp2)
+	f							1 	Density						| R		Fog density
+	f							1 	Start						| R		Fog start
+	f							1 	End							| R		Fog end
+endstruct
+
+struct 4 __glLineState
+	b							1	SmoothEnabled				| R		Anti-Alaising
+	f							1	RequestedWidth				| R
+	f							1	SmoothWidth					| R
+	i							1	AliasedWidth				| R
+	b							1	StippleEnabled				| R
+	us							1	StippleMask					| R
+	i							1	StippleRepeat				| R
+endstruct
+
+struct 4 __glPointState
+	b							1	SmoothEnabled				| R		Anti-Alaising
+	f							1	SizeRequested				| R
+	f							1	SmoothSize					| R
+	i							1	AliasedSize					| R
+endstruct
+
+struct 4 __glAlphaState
+	b							1	TestEnabled					| R		
+	i							1	TestFunction				| R
+	f							1	TestValue					| R		Float 0.0 to 1.0
+endstruct
+
+struct 4 __glOptimizationState
+	ub							1	UseTempColor				| NA
+	ub							4	UseTempTex					| NA
+	ub							1	UseTempNormal				| NA
+	ub							1	UseTempEdge					| NA
+	ub							4	Tex2						| R		Per TMU, when set all texture coords R=0, W=1
+	ub							4	Tex3						| R		Per TMU, when set all texture coords W=1
+	ub							4	TexIgnoreQW					| Let GL know it can safely ignore QW when texturing
+	ub							1	UseXP						| Flag to enable developmental routines
+endstruct
+
+struct 4 __glCurrentState2		| NA
+	__glCoord					1	Normal
+	__glColor					1	UserColor
+	__glColor					1	Color
+	__glCoord					1	Texture1
+	__glCoord					1	Texture2
+	__glCoord					1	Texture3
+	__glCoord					1	Texture4					|
+	i							1	Edge
+endstruct
+
+struct 4 __glPixelMapHead		| NA
+	i							1	Size
+	v							1	*Map
+endstruct
+
+struct 4 __glPixelTransferMode	| Read Only
+	f							1	ScaleR
+	f							1	ScaleG
+	f							1	ScaleB
+	f							1	ScaleA
+	f							1	ScaleD
+	f							1	BiasR
+	f							1	BiasG
+	f							1	BiasB
+	f							1	BiasA
+	f							1	BiasD
+	f							1	ZoomX
+	f							1	ZoomY
+	i							1	IndexShift
+	i							1	IndexOffset
+	b							1	MapColor
+	b							1	MapStencil
+endstruct
+
+struct 4 __glPixelPackMode		| Read Only
+	b							1	SwapEndian					|
+	b							1	LsbFirst
+	ui							1	LineLength
+	ui							1	SkipLines
+	ui							1	SkipPixels
+	ui							1	Alignment
+endstruct
+
+struct 4 __glPixelUnpackMode	| Read Only
+	b							1	SwapEndian					|
+	b							1	LsbFirst
+	ui							1	LineLength
+	ui							1	SkipLines
+	ui							1	SkipPixels
+	ui							1	Alignment
+endstruct
+
+struct 4 __glPixel
+	i							1	Format						|
+	f							1	R
+	f							1	G
+	f							1	B
+	f							1	A
+	f							1	D
+	i							1	Index
+	i							1	Fraction
+endstruct
+
+struct 4 __glPixelState			| R		This structure contains the state needed for the driver to handle packing and unpacking of user pixel data.  Only needed if the driver is doing its own texture management.
+	__glPixelTransferMode		1	transferMode				| R		
+	__glPixelPackMode			1	packModes 					| R
+	__glPixelUnpackMode			1	unpackModes 				| R
+	__glPixelMapHead			10	pixelMap 					| R		__GL_N_PIXEL_MAPS
+	i							1	ReadBuffer					| R
+	i							1	ReadBufferReturn			| R
+endstruct	
+
+struct 4 __glEvaluatorGrid		| NA
+	f							1	Start						|
+	f							1	Finish
+	i							1	N
+endstruct
+
+struct 4 __glEvaluatorState		| NA
+    __glEvaluatorGrid			1	u1
+    __glEvaluatorGrid			1	u2
+    __glEvaluatorGrid			1	v2
+	b							9	Map1Enabled					| __GL_MAP_RANGE_COUNT
+	b							9	Map2Enabled					| __GL_MAP_RANGE_COUNT
+	b							1	AutonormalEnabled
+endstruct
+
+struct 4 __glListState			| NA
+	ui							1	ListBase
+endstruct
+
+struct 4 __glVertArrayState		| NA
+	i							1	SelectedTextureUnit
+
+	cb							1	*VertexPtr					|
+	i							1	VertexSize
+	i							1	VertexType
+	i							1	VertexStride
+	
+	cb							1	*NormalPtr
+	i							1	NormalType
+	i							1	NormalStride
+	
+	cb							1	*ColorPtr
+	i							1	ColorSize
+	i							1	ColorType
+	i							1	ColorStride
+	
+	cb							1	*IndexPtr
+	i							1	IndexType
+	i							1	IndexStride					|
+	
+	cb							4	*TexCoordPtr
+	i							4	TexCoordSize
+	i							4	TexCoordType
+	i							4	TexCoordStride
+	
+	cb							1	*EdgeFlagPtr
+	i							1	EdgeFlagStride
+
+	b							1	VertexArrayEnabled
+	b							1	NormalArrayEnabled
+	b							1	ColorArrayEnabled
+	b							1	IndexArrayEnabled
+	b							4	TexCoordArrayEnabled
+	b							1	EdgeFlagArrayEnabled		|
+endstruct
+
+struct 4 __glBufferSurface
+	ui							1	*ScanlineFB					| NA	Scanline buffer, holds a color scanline to be written to the HW buffer. 
+	ui							1	*ScanlineFBIN				| NA	Scanline buffer, holds a color scanline read from the HW buffer. 
+	__glColor					1 	*ScanlineA					| NA	Scanline buffer, holds a accumulation buffer scanline read from or to be written to HW.
+	f							1	*ScanlineZ					| NA	Scanline buffer, holds a depth buffer scanline read from or to be written to HW
+	ub							1	*ScanlineS					| NA	Scanline buffer, holds a stencil buffer scanline read from or to be written to HW.
+	ub							1	*ScanlineV					| NA	Scanline Valid buffer, contains 1s for pixels to be written and 0s for not.
+	i							1	ScanlineY					| R		Scanline buffer, The Y coordinate for the current scanline.
+	i							1	Height						| R		Height of the front buffer in pixels
+	i							1	Width						| R		Width of the front buffer in pixels
+	v							1	*ColorFront					| R		Pointer to the softawre front color buffer if pressent.
+	v							1	*ColorBack					| R		Pointer to the softawre back color buffer if pressent.
+	v							1	*Depth						| R		Pointer to the softawre depth buffer if pressent.
+	v							1	*Accum						| R		Pointer to the softawre accumulation buffer if pressent.
+	v							1	*Stencil					| R		Pointer to the softawre stencil buffer if pressent.
+	ui							1	ColorFrontHardware			| RW	Front buffer	1=HW  0=Fallback
+	ui							1	ColorBackEnabled			| R
+	ui							1	ColorBackHardware			| RW	Back buffer	1=HW  0=Fallback
+	ui							1	DepthEnabled				| R
+	ui							1	DepthHardware				| RW	1=HW  0=Fallback
+	ui							1	AccumEnabled 				| R
+	ui							1	AccumHardware				| RW	1=HW  0=Fallback
+	ui							1	StencilEnabled				| R		Flag to indicate if the user specified a stencil buffer be created.
+	ui							1	StencilHardware				| RW	1=HW  0=Fallback
+	__glColor					1	ColorScale					| RW	Range for colors, 0 to N
+	i							1	bitsRed						| RW	Set the bit count in AcceleratorInit
+	i							1	bitsGreen					| RW	Set the bit count in AcceleratorInit
+	i							1	bitsBlue					| RW	Set the bit count in AcceleratorInit
+	i							1	bitsAlpha					| RW	Set the bit count in AcceleratorInit
+	i							1	bitsDepth					| RW	Set the bit count in AcceleratorInit
+	i							1	bitsStencil					| RW	Set the bit count in AcceleratorInit
+	i							1	bitsAccumRed				| RW	Set the bit count in AcceleratorInit
+	i							1	bitsAccumGreen				| RW	Set the bit count in AcceleratorInit
+	i							1	bitsAccumBlue				| RW	Set the bit count in AcceleratorInit
+	i							1	bitsAccumAlpha				| RW	Set the bit count in AcceleratorInit
+
+	ui							1	UserColor					| R
+	ui							1	UserDepth					| R
+	ui							1	UserStencil					| R
+	ui							1	UserAccum					| R
+	
+	ui							1	id
+endstruct
+
+struct 4 __glTextureLevel
+	__glBufferSurface			1	*surface					| R		The rendering surface is present, NULL=normal texture
+	i							1	requestedFormat				| R		The format requested by the user.
+	i							1	border						| R		Border size
+	ub							1	*data						| R		Pointer to the raw data. NULL if the driver took control.
+	i							1	width						| R		Image dimensions, including border.
+	i							1	height						| R		Image dimensions, including border.
+	i							1	width2						| R		Image dimensions, excluding border.
+	i							1	height2						| R		Image dimensions, excluding border.
+	i							1	baseFormat					| R		Base internal format.  GL_ALPHA, GL_RGB, ...  Without bit count.
+	i							1	internalFormat				| RW	Internal format (count and ordering of components).
+	i							1	internalType				| RW	Internal type.  GL 1.2 types.
+	ui							1	allocationSize				| R
+	i							1	bytesPerTexel				| RW
+	i							1	sizeR;						| RW	Bits of Red per component
+	i							1	sizeG;						| RW	Bits of Green per component
+	i							1	sizeB;						| RW	Bits of Blue per component
+	i							1	sizeA;						| RW	Bits of Alpha per component
+	i							1	sizeL;						| RW	Bits of Luminance per component
+	i							1	sizeI;						| RW	Bits of Intensity per component
+	v							1	*usr_vp1					| RW	User defined pointer, used by driver to store any special info.
+	v							1	*usr_vp2					| RW	User defined pointer, used by driver to store any special info.
+	ui							1	usr_i1						| RW	User defined int, used by driver to store any special info.
+	ui							1	usr_i2						| RW	User defined int, used by driver to store any special info.
+endstruct
+
+struct 4 __glTexture
+	__glColor 1	borderColor
+	i							1	sWrapMode					| R		X
+	i							1	tWrapMode					| R		Y
+	i							1	rWrapMode					| R		Z
+	i							1	minFilter					| R		The filter for texture minification.
+	i							1	magFilter					| R		The filter for texture magnification.
+	ui							1	name						| R		The texture object name
+	f							1	priority					| R		Float 0.0 to 1.0
+	b							1	hasMipmaps					| R
+	b							1	isValid						| R		Is it in a valid state
+	__glTextureLevel 			11	level						| 		RAS_MAX_MIPMAP_LEVEL, The individual mipmaps.
+	i							1	activeLevels				| R
+	i							1	dim							| R		Dimension of this texture (1, 2, or 3)
+	v							1	(*textureFunc)(__glContext *, __glFragment *, GLfloat s, ... )	| NA
+	v							1	*usr_vp1					| RW	User defined pointer, used by driver to store any special info
+	v							1	*usr_vp2					| RW	User defined pointer, used by driver to store any special info
+	ui							1	usr_i1						| RW	User defined int, used by driver to store any special info
+	ui							1	usr_i2						| RW	User defined int, used by driver to store any special info
+endstruct
+
+struct 4 __glTextureState2
+	__glTexture					4,6	*Bound						| R		__GL_NUMBER_OF_TEXTURE_TARGETS * TextureUnits]
+	__glTextureCoordState 		4	s							| R		Texture Gen state per TMU
+	__glTextureCoordState 		4	t							| R		Texture Gen state per TMU
+	__glTextureCoordState 		4	r							| R		Texture Gen state per TMU
+	__glTextureCoordState 		4	q							| R		Texture Gen state per TMU
+	ui 							1	SelectedUnit				| R		Currently selected texture unit
+	b 							4	Enabled1D					| R		Texture 1D Enable state per TMU
+	b 							4	Enabled2D					| R		Texture 2D Enable state per TMU
+	b 							4	Enabled3D					| R		Texture 3D Enable state per TMU
+	i 							4	EnvMode						| R
+	__glColor 					4	EnvColor					| R
+	b 							4,4	GenEnabled					| NA	Texture GenEnable[tmu][coord]
+endstruct
+
+struct 16 rasState
+	__glPolygonState 			1	poly						|
+	__glLightState 				1	light
+	__glDepthState 				1	depth
+	__glColorState 				1	color
+	__glStencilState 			1	stencil
+	__glTextureState2	 		1	texture
+	__glXformState 				1	xform
+	__glViewportState	 		1	viewport
+	__glScissorState 			1	scissor
+	__glHintState 				1	hint
+	__glAccumState 				1	accum
+	__glFogState 				1	fog
+	__glLineState 				1	line
+	__glPointState 				1	point
+	__glAlphaState 				1	alpha
+	__glCurrentState2	 		1	current
+	__glPixelState 				1	pixel
+	__glEvaluatorState 			1	evaluator
+	__glListState 				1	list
+	__glVertArrayState	 		1	vertexArray					|
+	__glOptimizationState		1	opt
+
+	b							128	polyStippleMask				| R		Poloygon stipple mask
+	i							1	drawBuffer					| R		Current drawing buffer
+	i							1	drawBufferReturn			| NA
+	i							1	transformClipY0
+	i							1	transformClipY1
+	i							1	transformClipX0
+	i							1	transformClipX1				|
+endstruct
+
+
+struct 16 __glViewportMachine
+	f							4	ScaleX						| R		Scale factor applied after perspective divide.  All four contain same data on PIII otherwize only [0] is valid
+	f							4	ScaleY						| R		Scale factor applied after perspective divide.  All four contain same data on PIII otherwize only [0] is valid
+	f							4	ScaleZ						| R		Scale factor applied after perspective divide.  All four contain same data on PIII otherwize only [0] is valid
+	f							4	CenterX						| R		Offset factor applied after perspective divide.  All four contain same data on PIII otherwize only [0] is valid
+	f							4	CenterY						| R		Offset factor applied after perspective divide.  All four contain same data on PIII otherwize only [0] is valid
+	f							4	CenterZ						| R		Offset factor applied after perspective divide.  All four contain same data on PIII otherwize only [0] is valid
+	f							1	BoundsX1					| R		Screenspace lower X bound, inclusive
+	f							1	BoundsX2					| R		Screenspace upper X bound, exclusive
+	f							1	BoundsY1					| R		Screenspace lower Y bound, inclusive
+	f							1	BoundsY2					| R		Screenspace upper Y bound, exclusive
+endstruct
+
+struct 4 matrix4x4 | Currently not used by the driver, Will be used for T&L cards latter
+	f							1	M00							|
+	f							1	M01
+	f							1	M02
+	f							1	M03
+	f							1	M10
+	f							1	M11
+	f							1	M12
+	f							1	M13
+	f							1	M20
+	f							1	M21
+	f							1	M22
+	f							1	M23
+	f							1	M30
+	f							1	M31
+	f							1	M32
+	f							1	M33							|
+endstruct
+
+struct 16 __glMatrixSIMD | Currently not used by the driver, Will be used for T&L cards latter
+	f							4	M00							|
+	f							4	M01
+	f							4	M02
+	f							4	M03
+	f							4	M10
+	f							4	M11
+	f							4	M12
+	f							4	M13
+	f							4	M20
+	f							4	M21
+	f							4	M22
+	f							4	M23
+	f							4	M30
+	f							4	M31
+	f							4	M32
+	f							4	M33							|
+endstruct
+
+struct 16 __glLightSourceMachine | Currently not used by the driver, Will be used for T&L cards latter
+	f							4	AmbientR
+	f							4	AmbientG					|
+	f							4	AmbientB
+	f							4	SpecularR
+	f							4	SpecularG
+	f							4	SpecularB
+	f							4	DiffuseR
+	f							4	DiffuseG
+	f							4	DiffuseB
+	f							4	HatX
+	f							4	HatY
+	f							4	HatZ
+	f							4	PpliHatX
+	f							4	PpliHatY
+	f							4	PpliHatZ
+		
+	f							1	ConstantAttenuation
+	f							1	LinearAttenuation
+	f							1	QuadraticAttenuation		|
+	f							1	SpotLightExponent
+	
+	__glCoord					1	Position
+	__glCoord					1	Direction
+	f							1	CosCutOffAngle
+	f							1	Attenuation
+	i							1	List
+	b							1	NoSpot						|
+endstruct
+
+struct 4 __glMaterialMachine	| Currently not used by the driver, Will be used for T&L cards latter
+	f							1	SceneColorR
+	f							1	SceneColorG
+	f							1	SceneColorB
+	f							1	SceneColorA					|
+endstruct
+
+struct 16 __glLightMachine		| Currently not used by the driver, Will be used for T&L cards latter
+	__glLightSourceMachine		8	source 						| __GL_NUMBER_OF_LIGHTS
+	__glMaterialMachine			2	material
+	__glLightSourceMachine		1	*sources
+	i							8	List
+	i							1	NumberActive
+	i							1	UseSlow
+endstruct
+
+
+; Note these are roughly in the order of table 6.11 from the 1.2.1 spec
+struct 4 __glDriverProcs		| The proc table used for communication between GL and the driver.  The driver can set these procs at any time within a call to it.  If a drawing proc is nulled then the driver should call callback_ProcChange afterwards.
+	v							1	(*triangleFillFront)( __glContext *gc )
+	v							1	(*triangleFillFrontOdd3)( __glContext *gc )
+	v							1	(*triangleFillFrontOdd1)( __glContext *gc )
+	v							1	(*triangleFillFrontEven3)( __glContext *gc )
+	v							1	(*triangleFillFrontEven1)( __glContext *gc )
+	v							1	(*triangleFillFrontFan3)( __glContext *gc )
+	v							1	(*triangleFillFrontFan1)( __glContext *gc )
+	v							1	(*triangleFillFrontUnordered)( __glContext *gc, GLuint a, GLuint b, GLuint c )
+
+	v							1	(*triangleFillBack)( __glContext *gc )
+	v							1	(*triangleFillBackOdd3)( __glContext *gc )
+	v							1	(*triangleFillBackOdd1)( __glContext *gc )
+	v							1	(*triangleFillBackEven3)( __glContext *gc )
+	v							1	(*triangleFillBackEven1)( __glContext *gc )
+	v							1	(*triangleFillBackFan3)( __glContext *gc )
+	v							1	(*triangleFillBackFan1)( __glContext *gc )
+	v							1	(*triangleFillBackUnordered)( __glContext *gc, GLuint a, GLuint b, GLuint c )
+
+	v							1	(*triangleLineFront)( __glContext *gc )
+	v							1	(*triangleLineFrontOdd3)( __glContext *gc )
+	v							1	(*triangleLineFrontOdd1)( __glContext *gc )
+	v							1	(*triangleLineFrontEven3)( __glContext *gc )
+	v							1	(*triangleLineFrontEven1)( __glContext *gc )
+	v							1	(*triangleLineFrontFan3)( __glContext *gc )
+	v							1	(*triangleLineFrontFan1)( __glContext *gc )
+	v							1	(*triangleLineFrontUnordered)( __glContext *gc, GLuint a, GLuint b, GLuint c )
+
+	v							1	(*triangleLineBack)( __glContext *gc )
+	v							1	(*triangleLineBackOdd3)( __glContext *gc )
+	v							1	(*triangleLineBackOdd1)( __glContext *gc )
+	v							1	(*triangleLineBackEven3)( __glContext *gc )
+	v							1	(*triangleLineBackEven1)( __glContext *gc )
+	v							1	(*triangleLineBackFan3)( __glContext *gc )
+	v							1	(*triangleLineBackFan1)( __glContext *gc )
+	v							1	(*triangleLineBackUnordered)( __glContext *gc, GLuint a, GLuint b, GLuint c )
+
+	v							1	(*trianglePointFront)( __glContext *gc )
+	v							1	(*trianglePointFrontOdd3)( __glContext *gc )
+	v							1	(*trianglePointFrontOdd1)( __glContext *gc )
+	v							1	(*trianglePointFrontEven3)( __glContext *gc )
+	v							1	(*trianglePointFrontEven1)( __glContext *gc )
+	v							1	(*trianglePointFrontFan3)( __glContext *gc )
+	v							1	(*trianglePointFrontFan1)( __glContext *gc )
+	v							1	(*trianglePointFrontUnordered)( __glContext *gc, GLuint a, GLuint b, GLuint c )
+	
+	v							1	(*trianglePointBack)( __glContext *gc )
+	v							1	(*trianglePointBackOdd3)( __glContext *gc )
+	v							1	(*trianglePointBackOdd1)( __glContext *gc )
+	v							1	(*trianglePointBackEven3)( __glContext *gc )
+	v							1	(*trianglePointBackEven1)( __glContext *gc )
+	v							1	(*trianglePointBackFan3)( __glContext *gc )
+	v							1	(*trianglePointBackFan1)( __glContext *gc )
+	v							1	(*trianglePointBackUnordered)( __glContext *gc, GLuint a, GLuint b, GLuint c )
+	
+	v							1	(*line)( __glContext *gc )
+	v							1	(*lineLoop)( __glContext *gc )
+	v							1	(*lineUnordered)( __glContext *gc, GLuint a, GLuint b )
+	v							1	(*point)( __glContext *gc )
+	v							1	(*pointUnordered)( __glContext *gc, GLuint a )
+	
+	v							1	(*accumClearColor)( __glContext *gc )
+	v							1	(*accum)( __glContext *gc, GLuint op, GLfloat value )
+	
+	v							1	(*imgColorSubTable)( __glContext *gc, GLint start, GLint count )
+	v							1	(*imgColorTable)( __glContext *gc )
+	v							1	(*imgColorTableEnable)( __glContext *gc )
+	v							1	(*imgColorTableParameter)( __glContext *gc, GLenum pname )
+	v							1	(*imgConvolutionFilter1D)( __glContext *gc )
+	v							1	(*imgConvolutionFilter2D)( __glContext *gc )
+	v							1	(*imgConvolution1DEnable)( __glContext *gc )
+	v							1	(*imgConvolution2DEnable)( __glContext *gc )
+	v							1	(*imgConvolutionParam)( __glContext *gc, GLenum pname )
+	v							1	(*imgCopyColorSubTable)( __glContext *gc, GLint start, GLint x, GLint y, GLint width )
+	v							1	(*imgCopyColorTable)( __glContext *gc, GLenum format, GLint x, GLint y, GLint width )
+	v							1	(*imgCopyConvolutionFilter1D)( __glContext *gc, GLenum internalFormat, GLint x, GLint y, GLint width )
+	v							1	(*imgCopyConvolutionFilter2D)( __glContext *gc, GLenum internalFormat, GLint x, GLint y, GLint width )
+	v							1	(*imgCopyPixels)( __glContext *gc, GLint x, GLint y, GLint w, GLint h, GLenum type )
+	v							1	(*imgDrawPixels)( __glContext *gc, GLint w, GLint h, GLenum format, GLenum type, const void *pixels )
+	v							1	(*imgPixelMap)( __glContext *gc, GLenum map )
+	v							1	(*imgPixelStore)( __glContext *gc, GLenum pname )
+	v							1	(*imgPixelTransfer)( __glContext *gc, GLenum param )
+	v							1	(*imgPixelZoom)( __glContext *gc, GLenum param )
+	v							1	(*imgSeparableFilter2D)(__glContext *gc )
+	
+	v							1	(*setFogState )( __glContext *gc )
+	v							1	(*fogEnable)( __glContext *gc )
+	v							1	(*fogColor)( __glContext *gc )
+
+	v							1	(*setLightState)( __glContext *gc )
+	v							1	(*lightShadeMode)(__glContext *gc )
+	v							1	(*lightEnable)(__glContext *gc )
+	v							1	(*lightColorMaterialEnable)(__glContext *gc)
+	v							1	(*lightColorMaterial)(__glContext *gc)
+	v							1	(*lightMaterialAmbient)(__glContext *gc, GLenum side)
+	v							1	(*lightMaterialDiffuse)(__glContext *gc, GLenum side)
+	v							1	(*lightMaterialSpecular)(__glContext *gc, GLenum side)
+	v							1	(*lightMaterialEmissive)(__glContext *gc, GLenum side)
+	v							1	(*lightMaterialSpecExp)(__glContext *gc, GLenum side)
+	v							1	(*lightModelAmbient)(__glContext *gc)
+	v							1	(*lightModelLocalViewer)(__glContext *gc)
+	v							1	(*lightModelTwoSide)(__glContext *gc)
+	v							1	(*lightModelColorControl)(__glContext *gc)
+	v							1	(*lightLightAmbient)(__glContext *gc, GLenum num)
+	v							1	(*lightLightDiffuse)(__glContext *gc, GLenum num)
+	v							1	(*lightLightSpecular)(__glContext *gc, GLenum num)
+	v							1	(*lightLightVector)(__glContext *gc, GLenum num)
+	v							1	(*lightLightConstantAtten)(__glContext *gc, GLenum num)
+	v							1	(*lightLightLinearAtten)(__glContext *gc, GLenum num)
+	v							1	(*lightLightQuadraticAtten)(__glContext *gc, GLenum num)
+	v							1	(*lightLightSpotVector)(__glContext *gc, GLenum num)
+	v							1	(*lightLightSpotExp)(__glContext *gc, GLenum num)
+	v							1	(*lightLightSpotCutoff)(__glContext *gc, GLenum num)
+	v							1	(*lightLightEnable)(__glContext *gc, GLenum num)
+
+	v							1	(*lightLightValid)(__glContext *gc, GLenum num)	| Called after the derived light data is valid
+	v							1	(*lightMaterialSceneColorValid)(__glContext *gc)	| Called after the derived scene color is valid
+
+	v							1	(*setPointState)(__glContext *gc )
+	v							1	(*pointSize)(__glContext *gc )
+	v							1	(*pointSmoothEnable)(__glContext *gc )
+	
+	v							1	(*setLineState)( __glContext *gc )
+	v							1	(*lineWidth)( __glContext *gc )
+	v							1	(*lineSmoothEnable)( __glContext *gc )
+	v							1	(*lineStipple)( __glContext *gc )
+	v							1	(*lineStippleEnable)( __glContext *gc )
+
+	v							1	(*setPolyState)( __glContext *gc )
+	v							1	(*polyCullFaceEnable)( __glContext *gc )
+	v							1	(*polyCullFace)( __glContext *gc )
+	v							1	(*polyFrontFace)( __glContext *gc )
+	v							1	(*polySmoothEnable)( __glContext *gc)
+	v							1	(*polyMode)( __glContext *gc )
+	v							1	(*polyOffset)( __glContext *gc)
+	v							1	(*polyOffsetPointEnable)( __glContext *gc)
+	v							1	(*polyOffsetLineEnable)( __glContext *gc)
+	v							1	(*polyOffsetFillEnable)( __glContext *gc)
+	v							1	(*polyStippleEnable)( __glContext *gc )
+	
+	v							1	(*polygonStipple)( __glContext *gc )
+	
+	v							1	(*setTextureState)( __glContext *gc )
+	v							1	(*textureEnable)( __glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureSelect)( __glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureBorderColor)( __glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureMinFilter)( __glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureMagFilter)( __glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureSWrapMode)( __glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureTWrapMode)( __glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureRWrapMode)( __glContext *gc, struct __glTextureRec *tex )
+	i							1	(*textureIsResident)(__glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureReloadMinLevels)(__glContext *gc, struct __glTextureRec *tex )
+	v							1	(*textureEnvMode)( __glContext *gc )
+	v							1	(*textureEnvColor)( __glContext *gc )
+	v							1	(*textureGenEnable)(__glContext *gc, GLenum coord )
+	v							1	(*textureGen)( __glContext *gc, GLenum coord, GLenum pname )
+	
+	v							1	(*textureUnit)( __glContext *gc )
+	v							1	(*textureDelete)( __glContext *gc, struct __glTextureRec *tex )
+	i							1	(*textureProxyGetType1D)( __glContext *gc, struct __glTextureRec *tex, __glTextureLevel *level )
+	i							1	(*textureProxyGetType2D)( __glContext *gc, struct __glTextureRec *tex, __glTextureLevel *level )
+	i							1	(*textureProxyGetType3D)( __glContext *gc, struct __glTextureRec *tex, __glTextureLevel *level )
+	i							1	(*textureGetType1D)( __glContext *gc, struct __glTextureRec *tex, __glTextureLevel *level )
+	i							1	(*textureGetType2D)( __glContext *gc, struct __glTextureRec *tex, __glTextureLevel *level )
+	i							1	(*textureGetType3D)( __glContext *gc, struct __glTextureRec *tex, __glTextureLevel *level )
+	v							1	(*textureImage1D)( __glContext *gc, struct __glTextureRec *tex, GLint level, const void *data )
+	v							1	(*textureImage2D)( __glContext *gc, struct __glTextureRec *tex, GLint level, const void *data )
+	v							1	(*textureImage3D)( __glContext *gc, struct __glTextureRec *tex, GLint level, const void *data )
+	v							1	(*textureSubImage1D) (__glContext *gc, struct __glTextureRec *tex, GLint level, GLint xoffset, GLsizei w, const void *data)
+	v							1	(*textureSubImage2D) (__glContext *gc, struct __glTextureRec *tex, GLint level, GLint xoffset, GLint yoffset, GLsizei w, GLsizei h, const void *data)
+	v							1	(*textureSubImage3D) (__glContext *gc, struct __glTextureRec *tex, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei w, GLsizei h, GLsizei d, const void *data)
+	v							1	(*textureExtractPixel1D) (__glContext *gc, struct __glTextureRec *tex, GLint level, GLint s, __glPixel *p )
+	v							1	(*textureExtractPixel2D) (__glContext *gc, struct __glTextureRec *tex, GLint level, GLint s, GLint t, __glPixel *p )
+	v							1	(*textureExtractPixel3D) (__glContext *gc, struct __glTextureRec *tex, GLint level, GLint s, GLint t, GLint r, __glPixel *p )
+	v							1	(*textureCopyImage1D)( __glContext *gc, struct __glTextureRec *tex, GLint level, GLenum internalFormat, GLint x, GLint y, GLint w, GLint border )
+	v							1	(*textureCopyImage2D)( __glContext *gc, struct __glTextureRec *tex, GLint level, GLenum internalFormat, GLint x, GLint y, GLint w, GLint h, GLint border )
+	v							1	(*textureCopySubImage1D)( __glContext *gc, struct __glTextureRec *tex, GLint level, GLint xoff, GLint x, GLint y, GLint w )
+	v							1	(*textureCopySubImage2D)( __glContext *gc, struct __glTextureRec *tex, GLint level, GLint xoff, GLint yoff, GLint x, GLint y, GLint w, GLint h )
+	v							1	(*textureCopySubImage3D)( __glContext *gc, struct __glTextureRec *tex, GLint level, GLint xoff, GLint yoff, GLint zoff, GLint x, GLint y, GLint w, GLint h )
+	
+	v							1	(*setScissorState)( __glContext *gc )
+	v							1	(*scissorTestEnable)( __glContext *gc )
+	v							1	(*scissorRect)( __glContext *gc )
+	
+	v							1	(*setColorState)( __glContext *gc)
+	v							1	(*colorAlphaTestEnable)( __glContext *gc )
+	v							1	(*colorAlphaFunc)( __glContext *gc )
+	v							1	(*colorBlendEnable)( __glContext *gc)
+	v							1	(*colorBlendColor)( __glContext *gc)
+	v							1	(*colorBlendFunc)( __glContext *gc)
+	v							1	(*colorBlendEqu)( __glContext *gc)
+	v							1	(*colorDitherEnable)( __glContext *gc)
+	v							1	(*colorLogicOpEnable)( __glContext *gc)
+	v							1	(*colorLogicOp)( __glContext *gc)
+	v							1	(*colorDrawBuffer)( __glContext *gc)
+	v							1	(*colorMask)( __glContext *gc )	
+	v							1	(*colorClear)( __glContext *gc)
+	
+	v							1	(*setStencilState)( __glContext *gc )
+	v							1	(*stencilTestEnable)( __glContext *gc)
+	v							1	(*stencilMask)( __glContext *gc)
+	v							1	(*stencilFunc)( __glContext *gc)
+	v							1	(*stencilOp)( __glContext *gc)
+	v							1	(*stencilClear)( __glContext *gc)
+
+	v							1	(*setDepthState)( __glContext *gc )
+	v							1	(*depthTestEnable)( __glContext *gc)
+	v							1	(*depthClear)( __glContext *gc)
+	v							1	(*depthFunc)( __glContext *gc)
+	v							1	(*depthMask)( __glContext *gc)
+
+	v							1	(*bufferCreate)( __glContext *gc )
+	v							1	(*bufferDestroy)( __glContext *gc )
+	v							1	(*bufferClear)( __glContext *gc, GLuint bits)
+	v							1	(*bufferSwap)( __glContext *gc )
+	v							1	(*bufferVSyncEnable)( __glContext *gc )
+	v							1	(*bufferLock)( __glContext *gc )
+	v							1	(*bufferUnlock)( __glContext *gc )
+	v							1	(*bufferLoadScanline)( __glContext *gc, GLuint bits, GLint x1, GLint x2 )
+	v							1	(*bufferStoreScanline)( __glContext *gc, GLuint bits, GLint x1, GLint x2 )
+	i							1	(*bufferVerifyMode)(__glContext *gc, GLint width, GLint height )
+	
+	v							1	(*setXformState)(__glContext *gc)
+	v							1	(*xformNormalizationEnable)(__glContext *gc);
+	v							1	(*xformNormalRescaleEnable)(__glContext *gc);
+	v							1	(*xformClipPlaneEnable)( __glContext *gc, GLenum plane )
+	v							1	(*xformClipPlane)( __glContext *gc, GLenum plane )
+	
+	v							1	(*matrixModel)(__glContext *gc);
+	v							1	(*matrixProj)(__glContext *gc);
+	v							1	(*matrixMVP)(__glContext *gc);
+	
+	v							1	(*viewport)(__glContext *gc);
+
+	v							1	(*shutdown)( __glContext *gc )
+
+	v							1	(*tlvBegin)();
+
+	v							1	(*flush)( __glContext *gc)
+	v							1	(*finish)( __glContext *gc)
+	
+	v							1	(*resetRasterProcs)( __glContext *gc )
+	f							1	(*roundZValue)( __glContext *gc, GLfloat Z )
+	v							1	(*lockClipList)( __glContext *gc)
+	v							1	(*unlockClipList)( __glContext *gc)
+	v							1	(*processThreadEvent)(__glContext *gc)		| Called as a result of releasing the thread sem.  Can potentially be called more often.
+	
+	i							1	(*callback_isInBegin)(__glContext *gc);			| return 1 between glBegin & glEnd, 0 otherwise
+	v							1	(*callback_tvl)(__glContext *gc);			| Callback to signal T&L proc change
+	v							1	(*callback_8bppDither)(__glContext *gc)
+	v							1	(*callback_StoreFrontScanline) (__glContext *gc, GLint x1, GLint x2) | R	Callback for storing the front scanline if the driver cannot copy the front buffer to the frame buffer for some reason.
+	v							1	(*callback_ProcChange)(__glContext *gc)	| R		Callback for the driver to notify GL that one or more of the drawing procs 
+	f							1	(*callback_GetOffsetBias)(__glContext *gc, GLuint a, GLuint b, GLuint c )	| R Callback to calculate the offset for a triangle.  Figured for 32bit float Z buffer using range 0 to 1
+	v							1	(*callback_Perform)(__glContext *gc, GLuint command, void *data )	| R Callback to cause libGL2 to perform one or more tasks.  See the defines.
+endstruct
+
+struct 4 __glClipRect
+	i							1	Left						|
+	i							1	Top
+	i							1	Right
+	i							1	Bottom
+endstruct
+
+struct 4 __glClipInfoStruct		| Clone of the DirectWindow structure.  Treat as Read-Only. Simplified for ASM.
+	i							1	LocX						| R		Location of the left edge of the front buffer (in Be Screen coordinates)
+	i							1	LocY						| R		Location of the top edge of the front buffer (in Be Screen coordinates)
+	b							1	connected					| R		Flag indicating if the front buffer is currently enabled for HW acceleration
+	b							1	bDirectFormat				| R
+	ub							1	*frameBuffer				| R
+	i							1	bytes_per_row				| R
+	i							1	bits_per_pixel				| R
+	i							1	width						| R
+	i							1	height						| R
+	ui							1	clip_count					| R		Number of clip rects
+	ui							1	clips_allocated				| NA	
+	ui							1	pixel_format				| NA
+	__glClipRect				1	crl							| R		Clip rect list.  Note this is overallocated beyond the end of the structure as necessary.
+endstruct
+
+struct 4 __glHashMapBucket
+	v							6	*ptrs						| __GL_BUCKET_SIZE
+	ui							6	keys						| __GL_BUCKET_SIZE
+	__glHashMapBucket			1	*previous
+	__glHashMapBucket			1	*next
+endstruct
+
+struct 4 __glHashMap
+	__glHashMapBucket			300	baseBuckets					| __GL_BUCKET_COUNT
+endstruct
+
+struct 4 __glFragment
+	__glColor					1	color
+	i							1	x
+	i							1	y
+	f							1	z
+	f							1	s
+	f							1	t
+	f							1	qw
+	f							1	f							|
+endstruct
+
+struct 4 __glBitmap
+	i							1	width
+	i							1	height
+	f							1	Xbo
+	f							1	Ybo
+	f							1	Xbi
+	f							1	Ybi							|
+endstruct
+
+struct 16 __glShade
+	f							1	xLeft
+	f							1	xRight
+	
+	i							1	xLeftFixed					|
+	i							1	xRightFixed
+	f							1	dxdyLeft
+	f							1	dxdyRight
+	f							1	yBottom
+	f							1	yTop
+	f							1	dy
+	i							1	iyBottom
+	i							1	iyTop
+
+	f							1	area
+	f							1	dxAC						|
+	f							1	dxBC
+	f							1	dyAC
+	f							1	dyBC
+
+	i							1	dxdyLeftFixed
+	i							1	dxdyRightFixed
+
+	f							1	r0
+	f							1	g0
+	f							1	b0
+	f							1	a0
+	f							1	drdx
+	f							1	dgdx						|
+	f							1	dbdx
+	f							1	dadx
+	f							1	drdy
+	f							1	dgdy
+	f							1	dbdy
+	f							1	dady
+	f							1	drdxdy
+	f							1	dgdxdy
+	f							1	dbdxdy
+	f							1	dadxdy						|
+
+	f							1	z0
+	f							1	dzdy
+	f							1	dzdx
+	f							1	dzdxdy
+
+	f							1	s0
+	f							1	t0
+	f							1	qw0
+	f							1	dsdx
+	f							1	dtdx
+	f							1	dqwdx
+	f							1	dsdy
+	f							1	dtdy
+	f							1	dqwdy
+	f							1	dsdxdy
+	f							1	dtdxdy
+	f							1	dqwdxdy						|	
+
+	f							1	f0
+	f							1	dfdy
+	f							1	dfdx
+	f							1	dfdxdy						|
+
+	b							1	ccw
+endstruct
+
+struct 4 __glMethods
+	v							1	(*ec1)(__glContext *gc, GLfloat u)
+	v							1	(*ec2)(__glContext *gc, GLfloat u, GLfloat v)
+	v							1	(*matValidate)(__glContext *gc)
+	v							1	(*bitmap)(__glContext *gc, GLint width, GLint height, GLfloat xOrig, GLfloat yOrig, GLfloat xMove, GLfloat yMove, const GLubyte bits[])
+	v							1	(*renderBitmap)(__glContext *gc, __glBitmap *bitmap, GLubyte *bits)
+	v							1	(*lineClipParam)()
+	v							1	(*readPixels)(__glContext *gc, GLint x, GLint y, GLint width, GLint height, GLenum format, GLenum type, GLubyte pixels[])
+	v							1	(*fogPoint)(__glContext *gc, __glFragment *frag, GLfloat eyeZ)
+	v							1	(*error)(__glContext *gc, GLenum code)
+endstruct
+
+struct 4 __glAttribute
+	ui							1	mask						|
+	rasState					1	state						|
+endstruct
+
+struct 4 __glClientAttribute
+	ui							1	mask
+	__glPixelState				1	pixel
+	__glVertArrayState			1	vertexArray					|
+endstruct
+
+struct 4 __glAttributeMachine
+	__glAttribute				16	*stack 						| __GL_ATTRIB_STACK_DEPTH
+	__glClientAttribute			16	*clientStack 				| __GL_CLIENT_ATTRIB_STACK_DEPTH
+	__glAttribute				1	**stackPointer
+	__glClientAttribute			1	**clientStackPointer
+endstruct
+
+struct 4 __glVertexMachine
+	ui							1	MaterialNeeds
+	v							1	(*TransformGroupCurrent)( __glContext *gc )
+	v							2	(*TransformGroup)( __glContext *gc )
+	ui							16	TransformerCacheAge 		| VAPI_CACHE_SIZE
+	ui							16	TransformerCacheCode 		| VAPI_CACHE_SIZE
+	v							16	*TransformerCacheGroup 		| VAPI_CACHE_SIZE, Transform code. For glEnd.
+	ui							1	VapiNeeds
+	ui							1	XformNeeds
+	v							1	*CacheAllocation			|
+endstruct
+
+struct 4 __glEvaluator1
+	i							1	k
+	i							1	order
+	f							1	u1
+	f							1	u2							|
+endstruct
+
+struct 4 __glEvaluator2
+	i							1	k
+	i							1	majorOrder
+	i							1	minorOrder
+	f							1	u1
+	f							1	u2
+	f							1	v1
+	f							1	v2							|
+endstruct
+
+struct 4 __glEvaluatorMachine
+    __glEvaluator1 				9	eval1						| __GL_MAP_RANGE_COUNT
+    __glEvaluator2 				9	eval2						| __GL_MAP_RANGE_COUNT
+    f							9	*eval1Data					| __GL_MAP_RANGE_COUNT
+    f							9	*eval2Data					| __GL_MAP_RANGE_COUNT
+endstruct
+
+struct 4 __glMatrix
+	f							16	matrix
+endstruct
+
+struct 4 __glTransform
+	__glMatrix					1	matrix						|
+	__glMatrix					1	inverseTranspose
+	__glMatrix					1	mvp
+	ui							1	sequence
+endstruct
+
+struct 4 __glTransformMachine
+	i							1	maxWindowDimension
+	__glTransform				32	modelViewStack				| __GL_MODELVIEW_STACK_DEPTH
+	__glTransform				1	*modelView
+	__glTransform				10	projectionStack				| __GL_PROJECTION_STACK_DEPTH
+	__glTransform				1	*projection
+	ui							1	projectionSequence
+	__glTransform				10	textureStack				| __GL_TEXTURE_STACK_DEPTH
+	__glTransform				1	*texture
+	b							1	matrixIsIdent
+endstruct
+
+
+struct 4 __glListAllocation
+	__glListAllocation 			1	*next
+	ui							1	start
+	i							1	number						|
+endstruct
+
+struct 4 __glListItem
+	i							1	size
+	i							1	space
+	i							2	data						|
+endstruct
+
+struct 4 __glList
+	ui							1	index
+	__glList 					1	*next
+	__glListItem 				1	*listdata					|
+endstruct
+
+struct 4 __glListMachineShared
+	__glList					1	**hashBuckets
+	__glListAllocation			1	*allocated
+	i							1	refcount					|
+endstruct
+
+struct 4 __glListMachine
+	__glListMachineShared		1	*shared
+	__glList					1	*openList
+	b							1	*pc
+	i							1	mode
+	i							1	nesting						|
+endstruct
+
+struct 4 __glFeedbackMachine
+	b							1	overFlowed
+	f							1	*resultBase
+	f							1	*result
+	i							1	resultLength
+	i							1	type						|
+endstruct
+
+struct 4 __glLineMachine
+	i							1	stipplePosition
+	i							1	repeat
+endstruct
+
+struct 4 __glProcTable
+	v							1	 (*Color3bv)(__glContext *, const GLbyte *)
+	v							1	 (*Color3dv)(__glContext *, const GLdouble *)
+	v							1	 (*Color3fv)(__glContext *, const GLfloat *)
+	v							1	 (*Color3iv)(__glContext *, const GLint *)
+	v							1	 (*Color3sv)(__glContext *, const GLshort *)
+	v							1	 (*Color3ubv)(__glContext *, const GLubyte *)
+	v							1	 (*Color3uiv)(__glContext *, const GLuint *)
+	v							1	 (*Color3usv)(__glContext *, const GLushort *)
+	v							1	 (*Color4bv)(__glContext *, const GLbyte *)
+	v							1	 (*Color4dv)(__glContext *, const GLdouble *)
+	v							1	 (*Color4fv)(__glContext *, const GLfloat *)
+	v							1	 (*Color4iv)(__glContext *, const GLint *)
+	v							1	 (*Color4sv)(__glContext *, const GLshort *)
+	v							1	 (*Color4ubv)(__glContext *, const GLubyte *)
+	v							1	 (*Color4uiv)(__glContext *, const GLuint *)
+	v							1	 (*Color4usv)(__glContext *, const GLushort *)
+	v							1	 (*Normal3fv)(const GLfloat *)
+	v							1	 (*TexCoord1fv)(const GLfloat *)
+	v							1	 (*TexCoord2fv)(const GLfloat *)
+	v							1	 (*TexCoord3fv)(const GLfloat *)
+	v							1	 (*TexCoord4fv)(const GLfloat *)
+	v							1	 (*Vertex2fv)(const GLfloat *)
+	v							1	 (*Vertex3fv)(const GLfloat *)
+	v							1	 (*Vertex4fv)(const GLfloat *)
+	v							1	 (*Begin)(GLenum)
+	v							1	 (*End)()
+
+	v							1	 (*CallList)( __glContext *, GLuint)
+	v							1	 (*CallLists)( __glContext *, GLsizei, GLenum, const void *)
+	v							1	 (*ListBase)( __glContext *, GLuint)
+	v							1	 (*Bitmap)( __glContext *, GLsizei, GLsizei, GLfloat, GLfloat, GLfloat, GLfloat, const GLubyte *)
+	v							1	 (*EdgeFlag)( __glContext *, GLboolean)
+	v							1	 (*EdgeFlagv)( __glContext *, const GLboolean *)
+	v							1	 (*Indexd)( __glContext *, GLdouble)
+	v							1	 (*Indexdv)( __glContext *, const GLdouble *)
+	v							1	 (*Indexf)( __glContext *, GLfloat)
+	v							1	 (*Indexfv)( __glContext *, const GLfloat *)
+	v							1	 (*Indexi)( __glContext *, GLint)
+	v							1	 (*Indexiv)( __glContext *, const GLint *)
+	v							1	 (*Indexs)( __glContext *, GLshort)
+	v							1	 (*Indexsv)( __glContext *, const GLshort *)
+	v							1	 (*Indexub)( __glContext *, GLubyte)
+	v							1	 (*Indexubv)( __glContext *, const GLubyte *)
+	v							1	 (*RasterPos2d)( __glContext *, GLdouble, GLdouble)
+	v							1	 (*RasterPos2dv)( __glContext *, const GLdouble *)
+	v							1	 (*RasterPos2f)( __glContext *, GLfloat, GLfloat)
+	v							1	 (*RasterPos2fv)( __glContext *, const GLfloat *)
+	v							1	 (*RasterPos2i)( __glContext *, GLint, GLint)
+	v							1	 (*RasterPos2iv)( __glContext *, const GLint *)
+	v							1	 (*RasterPos2s)( __glContext *, GLshort, GLshort)
+	v							1	 (*RasterPos2sv)( __glContext *, const GLshort *)
+	v							1	 (*RasterPos3d)( __glContext *, GLdouble, GLdouble, GLdouble)
+	v							1	 (*RasterPos3dv)( __glContext *, const GLdouble *)
+	v							1	 (*RasterPos3f)( __glContext *, GLfloat, GLfloat, GLfloat)
+	v							1	 (*RasterPos3fv)( __glContext *, const GLfloat *)
+	v							1	 (*RasterPos3i)( __glContext *, GLint, GLint, GLint)
+	v							1	 (*RasterPos3iv)( __glContext *, const GLint *)
+	v							1	 (*RasterPos3s)( __glContext *, GLshort, GLshort, GLshort)
+	v							1	 (*RasterPos3sv)( __glContext *, const GLshort *)
+	v							1	 (*RasterPos4d)( __glContext *, GLdouble, GLdouble, GLdouble, GLdouble)
+	v							1	 (*RasterPos4dv)( __glContext *, const GLdouble *)
+	v							1	 (*RasterPos4f)( __glContext *, GLfloat, GLfloat, GLfloat, GLfloat)
+	v							1	 (*RasterPos4fv)( __glContext *, const GLfloat *)
+	v							1	 (*RasterPos4i)( __glContext *, GLint, GLint, GLint, GLint)
+	v							1	 (*RasterPos4iv)( __glContext *, const GLint *)
+	v							1	 (*RasterPos4s)( __glContext *, GLshort, GLshort, GLshort, GLshort)
+	v							1	 (*RasterPos4sv)( __glContext *, const GLshort *)
+	v							1	 (*Rectd)( __glContext *, GLdouble, GLdouble, GLdouble, GLdouble)
+	v							1	 (*Rectdv)( __glContext *, const GLdouble *, const GLdouble *)
+	v							1	 (*Rectf)( __glContext *, GLfloat, GLfloat, GLfloat, GLfloat)
+	v							1	 (*Rectfv)( __glContext *, const GLfloat *, const GLfloat *)
+	v							1	 (*Recti)( __glContext *, GLint, GLint, GLint, GLint)
+	v							1	 (*Rectiv)( __glContext *, const GLint *, const GLint *)
+	v							1	 (*Rects)( __glContext *, GLshort, GLshort, GLshort, GLshort)
+	v							1	 (*Rectsv)( __glContext *, const GLshort *, const GLshort *)
+	v							1	 (*ClipPlane)( __glContext *, GLenum, const GLdouble *)
+	v							1	 (*ColorMaterial)( __glContext *, GLenum, GLenum)
+	v							1	 (*CullFace)( __glContext *, GLenum)
+	v							1	 (*Fogf)( __glContext *, GLenum, GLfloat)
+	v							1	 (*Fogfv)( __glContext *, GLenum, const GLfloat *)
+	v							1	 (*Fogi)( __glContext *, GLenum, GLint)
+	v							1	 (*Fogiv)( __glContext *, GLenum, const GLint *)
+	v							1	 (*FrontFace)( __glContext *, GLenum)
+	v							1	 (*Hint)( __glContext *, GLenum, GLenum)
+	v							1	 (*Lightf)( __glContext *, GLenum, GLenum, GLfloat)
+	v							1	 (*Lightfv)( __glContext *, GLenum, GLenum, const GLfloat *)
+	v							1	 (*Lighti)( __glContext *, GLenum, GLenum, GLint)
+	v							1	 (*Lightiv)( __glContext *, GLenum, GLenum, const GLint *)
+	v							1	 (*LightModelf)( __glContext *, GLenum, GLfloat)
+	v							1	 (*LightModelfv)( __glContext *, GLenum, const GLfloat *)
+	v							1	 (*LightModeli)( __glContext *, GLenum, GLint)
+	v							1	 (*LightModeliv)( __glContext *, GLenum, const GLint *)
+	v							1	 (*LineStipple)( __glContext *, GLint, GLushort)
+	v							1	 (*LineWidth)( __glContext *, GLfloat)
+	v							1	 (*Materialf)( __glContext *, GLenum, GLenum, GLfloat)
+	v							1	 (*Materialfv)( __glContext *, GLenum, GLenum, const GLfloat *)
+	v							1	 (*Materiali)( __glContext *, GLenum, GLenum, GLint)
+	v							1	 (*Materialiv)( __glContext *, GLenum, GLenum, const GLint *)
+	v							1	 (*PointSize)( __glContext *, GLfloat)
+	v							1	 (*PolygonMode)( __glContext *, GLenum, GLenum)
+	v							1	 (*PolygonStipple)( __glContext *, const GLubyte *)
+	v							1	 (*Scissor)( __glContext *, GLint, GLint, GLsizei, GLsizei)
+	v							1	 (*ShadeModel)( __glContext *, GLenum)
+	v							1	 (*TexParameterf)( __glContext *, GLenum, GLenum, GLfloat)
+	v							1	 (*TexParameterfv)( __glContext *, GLenum, GLenum, const GLfloat *)
+	v							1	 (*TexParameteri)( __glContext *, GLenum, GLenum, GLint)
+	v							1	 (*TexParameteriv)( __glContext *, GLenum, GLenum, const GLint *)
+	v							1	 (*TexImage1D)( __glContext *, GLenum, GLint, GLint, GLsizei, GLint, GLenum, GLenum, const void *)
+	v							1	 (*TexImage2D)( __glContext *, GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const void *)
+	v							1	 (*TexEnvf)( __glContext *, GLenum, GLenum, GLfloat)
+	v							1	 (*TexEnvfv)( __glContext *, GLenum, GLenum, const GLfloat *)
+	v							1	 (*TexEnvi)( __glContext *, GLenum, GLenum, GLint)
+	v							1	 (*TexEnviv)( __glContext *, GLenum, GLenum, const GLint *)
+	v							1	 (*TexGend)( __glContext *, GLenum, GLenum, GLdouble)
+	v							1	 (*TexGendv)( __glContext *, GLenum, GLenum, const GLdouble *)
+	v							1	 (*TexGenf)( __glContext *, GLenum, GLenum, GLfloat)
+	v							1	 (*TexGenfv)( __glContext *, GLenum, GLenum, const GLfloat *)
+	v							1	 (*TexGeni)( __glContext *, GLenum, GLenum, GLint)
+	v							1	 (*TexGeniv)( __glContext *, GLenum, GLenum, const GLint *)
+	v							1	 (*InitNames)( __glContext * )
+	v							1	 (*LoadName)( __glContext *, GLuint)
+	v							1	 (*PassThrough)( __glContext *, GLfloat)
+	v							1	 (*PopName)( __glContext * )
+	v							1	 (*PushName)( __glContext *, GLuint)
+	v							1	 (*DrawBuffer)( __glContext *, GLenum)
+	v							1	 (*Clear)( __glContext *, GLbitfield)
+	v							1	 (*ClearAccum)( __glContext *, GLfloat, GLfloat, GLfloat, GLfloat)
+	v							1	 (*ClearIndex)( __glContext *, GLfloat)
+	v							1	 (*ClearColor)( __glContext *, GLclampf, GLclampf, GLclampf, GLclampf)
+	v							1	 (*ClearStencil)( __glContext *, GLint)
+	v							1	 (*ClearDepth)( __glContext *, GLclampd)
+	v							1	 (*StencilMask)( __glContext *, GLuint)
+	v							1	 (*ColorMask)( __glContext *, GLboolean, GLboolean, GLboolean, GLboolean)
+	v							1	 (*DepthMask)( __glContext *, GLboolean)
+	v							1	 (*IndexMask)( __glContext *, GLuint)
+	v							1	 (*Accum)( __glContext *, GLenum, GLfloat)
+	v							1	 (*Disable)( __glContext *, GLenum)
+	v							1	 (*Enable)( __glContext *, GLenum)
+	v							1	 (*PopAttrib)( __glContext * )
+	v							1	 (*PushAttrib)( __glContext *, GLbitfield)
+	v							1	 (*Map1d)( __glContext *, GLenum, GLdouble, GLdouble, GLint, GLint, const GLdouble *)
+	v							1	 (*Map1f)( __glContext *, GLenum, GLfloat, GLfloat, GLint, GLint, const GLfloat *)
+	v							1	 (*Map2d)( __glContext *, GLenum, GLdouble, GLdouble, GLint, GLint, GLdouble, GLdouble, GLint, GLint, const GLdouble *)
+	v							1	 (*Map2f)( __glContext *, GLenum, GLfloat, GLfloat, GLint, GLint, GLfloat, GLfloat, GLint, GLint, const GLfloat *)
+	v							1	 (*MapGrid1d)( __glContext *, GLint, GLdouble, GLdouble)
+	v							1	 (*MapGrid1f)( __glContext *, GLint, GLfloat, GLfloat)
+	v							1	 (*MapGrid2d)( __glContext *, GLint, GLdouble, GLdouble, GLint, GLdouble, GLdouble)
+	v							1	 (*MapGrid2f)( __glContext *, GLint, GLfloat, GLfloat, GLint, GLfloat, GLfloat)
+	v							1	 (*EvalCoord1d)( __glContext *, GLdouble)
+	v							1	 (*EvalCoord1dv)( __glContext *, const GLdouble *)
+	v							1	 (*EvalCoord1f)( __glContext *, GLfloat)
+	v							1	 (*EvalCoord1fv)( __glContext *, const GLfloat *)
+	v							1	 (*EvalCoord2d)( __glContext *, GLdouble, GLdouble)
+	v							1	 (*EvalCoord2dv)( __glContext *, const GLdouble *)
+	v							1	 (*EvalCoord2f)( __glContext *, GLfloat, GLfloat)
+	v							1	 (*EvalCoord2fv)( __glContext *, const GLfloat *)
+	v							1	 (*EvalMesh1)( __glContext *, GLenum, GLint, GLint)
+	v							1	 (*EvalPoint1)( __glContext *, GLint)
+	v							1	 (*EvalMesh2)( __glContext *, GLenum, GLint, GLint, GLint, GLint)
+	v							1	 (*EvalPoint2)( __glContext *, GLint, GLint)
+	v							1	 (*AlphaFunc)( __glContext *, GLenum, GLclampf)
+	v							1	 (*BlendFunc)( __glContext *, GLenum, GLenum)
+	v							1	 (*LogicOp)( __glContext *, GLenum)
+	v							1	 (*StencilFunc)( __glContext *, GLenum, GLint, GLuint)
+	v							1	 (*StencilOp)( __glContext *, GLenum, GLenum, GLenum)
+	v							1	 (*DepthFunc)( __glContext *, GLenum)
+	v							1	 (*PixelZoom)( __glContext *, GLfloat, GLfloat)
+	v							1	 (*PixelTransferf)( __glContext *, GLenum, GLfloat)
+	v							1	 (*PixelTransferi)( __glContext *, GLenum, GLint)
+	v							1	 (*PixelMapfv)( __glContext *, GLenum, GLsizei, const GLfloat *)
+	v							1	 (*PixelMapuiv)( __glContext *, GLenum, GLsizei, const GLuint *)
+	v							1	 (*PixelMapusv)( __glContext *, GLenum, GLsizei, const GLushort *)
+	v							1	 (*ReadBuffer)( __glContext *, GLenum)
+	v							1	 (*CopyPixels)( __glContext *, GLint, GLint, GLsizei, GLsizei, GLenum)
+	v							1	 (*DrawPixels)( __glContext *, GLsizei, GLsizei, GLenum, GLenum, const void *)
+	v							1	 (*DepthRange)( __glContext *, GLclampd, GLclampd)
+	v							1	 (*Frustum)( __glContext *, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble)
+	v							1	 (*LoadIdentity)( __glContext * )
+	v							1	 (*LoadMatrixf)( __glContext *, const GLfloat *)
+	v							1	 (*LoadMatrixd)( __glContext *, const GLdouble *)
+	v							1	 (*MatrixMode)( __glContext *, GLenum)
+	v							1	 (*MultMatrixf)( __glContext *, const GLfloat *)
+	v							1	 (*MultMatrixd)( __glContext *, const GLdouble *)
+	v							1	 (*Ortho)( __glContext *, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble, GLdouble)
+	v							1	 (*PopMatrix)( __glContext * )
+	v							1	 (*PushMatrix)( __glContext * )
+	v							1	 (*Rotated)( __glContext *, GLdouble, GLdouble, GLdouble, GLdouble)
+	v							1	 (*Rotatef)( __glContext *, GLfloat, GLfloat, GLfloat, GLfloat)
+	v							1	 (*Scaled)( __glContext *, GLdouble, GLdouble, GLdouble)
+	v							1	 (*Scalef)( __glContext *, GLfloat, GLfloat, GLfloat)
+	v							1	 (*Translated)( __glContext *, GLdouble, GLdouble, GLdouble)
+	v							1	 (*Translatef)( __glContext *, GLfloat, GLfloat, GLfloat)
+	v							1	 (*Viewport)( __glContext *, GLint, GLint, GLsizei, GLsizei)
+	v							1	 (*PolygonOffset)( __glContext *, GLfloat, GLfloat)
+	v							1	 (*ArrayElement)( __glContext *, GLint)
+	v							1	 (*DrawArrays)( __glContext *, GLenum, GLint, GLsizei)
+	v							1	 (*DrawElements)( __glContext *, GLenum, GLsizei, GLenum, const void *)
+	v							1	 (*TexSubImage1D)( __glContext *, GLenum, GLint, GLint, GLsizei, GLenum, GLenum, const void *)
+	v							1	 (*TexSubImage2D)( __glContext *, GLenum, GLint, GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, const void *)
+	v							1	 (*CopyTexImage1D)( __glContext *, GLenum, GLint, GLenum, GLint, GLint, GLsizei, GLint)
+	v							1	 (*CopyTexImage2D)( __glContext *, GLenum, GLint, GLenum, GLint, GLint, GLsizei, GLsizei, GLint)
+	v							1	 (*CopyTexSubImage1D)( __glContext *, GLenum, GLint, GLint, GLint, GLint, GLsizei)
+	v							1	 (*CopyTexSubImage2D)( __glContext *, GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei)
+	v							1	 (*BindTexture)( __glContext *, GLenum, GLuint)
+	v							1	 (*PrioritizeTextures)( __glContext *, GLsizei, const GLuint *, const GLclampf *)
+	v							1	(*MultiTexCoord1fvARB)( __glContext *, GLenum, const float * )
+	v							1	(*MultiTexCoord2fvARB)( __glContext *, GLenum, const float * )
+	v							1	(*MultiTexCoord3fvARB)( __glContext *, GLenum, const float * )
+	v							1	(*MultiTexCoord4fvARB)( __glContext *, GLenum, const float * )
+	v							1	(*ActiveTextureARB)( __glContext *, GLenum )
+endstruct
+
+struct 4 __glSelectMachine
+	b							1	hit
+	ul							128	stack						| __GL_NAME_STACK_DEPTH
+	ul							1	*sp
+	b							1	overFlowed
+	ul							1	*resultBase
+	ul							1	*result
+	l							1	resultLength
+	l							1	hits
+	ul							1	*z							|
+endstruct
+
+struct 4 __glVertexArrayMachine
+	v							1	(*vertexCall)(const char *)
+	v							1	(*normalCall)(const char *)
+	v							1	(*colorCall)(const char *)
+	v							1	(*indexCall)(const char *)
+	v							1	(*texCoordCall)(const char *)
+	v							1	(*edgeFlagCall)(const char *)
+	i							1	vertexSkip
+	i							1	normalSkip
+	i							1	colorSkip
+	i							1	indexSkip
+	i							4	texCoordSkip
+	i							1	edgeFlagSkip				|
+	ub							8	*drawElementCodeCache		| [4096 * 8]
+	ui							8	drawElementNeeds
+	ui							8	drawElementAge
+	ui							1	drawElementCurrentNeeds
+endstruct
+
+struct 16 __glSoftwareScanlineProcs
+	__glShade					1	shade
+	
+	v							1	(*scanlineDepth)( GLubyte *valid, GLfloat *zbuf, GLfloat z1, GLfloat dz, GLint w )
+	ui							1	loadBits
+	ui							1	storeBits
+	b							1	valid
+	b							1	maskEnabled
+	b							1	colorWriteEnabled
+	b							1	fastScanline
+
+	v							1	*fillSubFuncData
+	v							1	(*fillSubProc) ( __glContext *)
+	ui							1	fillSubNeeds
+endstruct
+
+struct 4 __glValidMachine
+	ui							1	All
+	ui							1	ModelMatrix
+	ui							1	ProjectionMatrix
+	ui							1	VertexProcs
+	ui							1	LightData
+	ui							1	PrimProcessor
+	ui							1	VapiProcessor
+	ui							1	ModelMatrixType
+	ui							1	ProjectionMatrixType
+	ui							1	MVPMatrixType				|
+endstruct
+
+struct 4 __glBufferMachine
+	ui							1	FullScreen					| R		Flag to indicate if the application has exclusive access to the screen.
+	ui							1	RefreshRate					| R		Refresh rate for fullscreen mode
+	f							1	gammaRed					| R
+	f							1	gammaGreen					| R
+	f							1	gammaBlue					| R
+	b							1	VSyncEnabled				| R
+	
+	__glBufferSurface			1	*visible
+	__glBufferSurface			1	*current
+	__glHashMap					1	Objects						| NA
+	v							1	*Keys
+endstruct
+
+struct 4 __glSoftwareMachine
+	b							1	ProcsCurrent
+	b							1	PathColorEnable
+	b							1	PathDisable
+endstruct
+
+struct 4 __glPrimitiveMachine									| The data used for geomitry processing of primitives.
+	i		1		Count										| Records the next primitive vertex to be processed.
+	v		1		(*GroupProcessor) ( __glContext *gc )		| Processor for the beginning or middle of primitive processing.
+	v		1		(*End) ( __glContext *gc )					| Processor for the end of primitive groups that can handle partial SIMD groups.
+	ui		1		CacheCurrentNeeds							| The current needs for primitive processing.
+	v		10		*CacheProcess								| The current GroupProcessors for the various primitives. NULL means they need to be looked up or generated.
+	v		10		*CacheEnd									| The current Ends for the various primitives. NULL means they need to be looked up or generated.
+	ui		32		CacheCode									| PRIM_CACHE_SIZE, Needs code for cache entry
+	ui		32		CacheAge									| PRIM_CACHE_SIZE, Age of cache entry
+	v		32		*CacheProcessPtrs							| PRIM_CACHE_SIZE, Pointer to processing routine past SIMD prefix.
+	v		1		*CacheAllocation							| Pointer to the allocation of memory for the cache.
+	v		1		(*ClippedPolyProcFront) (__glContext *)		| The current unordered triangle proc for front facing triangles.
+	v		1		(*ClippedPolyProcBack) (__glContext *)		| The current unordered triangle proc for back facing triangles.
+	i		1		EdgeTag										| The current edge tag.  1=Draw edge,  0=Do not draw edge
+	ub		1		CullAndMask									| 0x00 = disabled,  0xff=enabled
+	ub		1		CullXorMask									| 0x01 = GL_BACK, 0x00=GL_FRONT, 0x10=GL_FRONT_AND_BACK
+	ub		1		CullCurrentFacing
+	ub		1		FacingXorMask								| 0x00 = GL_CCW,  0x01=GL_CW
+	ui		1		Provoking									| The provoking vertex for flat shading.  Use to select color.
+	ui		1		CallSize									| The current call point for SIMD vertex processors.
+	i		1		FirstVertexInGroup
+	i		1		CurrentGroupCount
+	i		1		CurrentVertex								| The vertex that the next call to glVertexNXX will use.
+	i		1		StripFlag
+endstruct
+
+	__glColor					1	ColorScale					| Range for colors, 0 to N
+
+struct 16 __glSIMDVertex
+	f							4	ObjX
+	f							4	ObjY
+	f							4	ObjZ
+	f							4	ObjW
+	f							4	ClipX
+	f							4	ClipY
+	f							4	ClipZ
+	f							4	ClipW
+	f							4	Texture1X
+	f							4	Texture1Y
+	f							4	Texture1Z					|
+	f							4	Texture1W
+	f							4	ColorFrontR
+	f							4	ColorFrontG
+	f							4	ColorFrontB
+	f							4	ColorFrontA
+	f							4	NormalX
+	f							4	NormalY
+	f							4	NormalZ
+	f							4	WindowX
+	f							4	WindowY
+	f							4	WindowZ
+	f							4	WindowW						|
+	f							4	EyeX
+	f							4	EyeY
+	f							4	EyeZ
+	f							4	EyeW
+	f							4	ColorBackR
+	f							4	ColorBackG
+	f							4	ColorBackB
+	f							4	ColorBackA
+	f							4	Texture2X
+	f							4	Texture2Y
+	f							4	Texture2Z
+	f							4	Texture2W					|
+	f							4	Texture3X
+	f							4	Texture3Y
+	f							4	Texture3Z
+	f							4	Texture3W
+	f							4	Texture4X
+	f							4	Texture4Y
+	f							4	Texture4Z
+	f							4	Texture4W
+	ui 							4	ClipCode
+	i 							4	vertexBoundaryEdge			|
+	i 							4	Has
+endstruct
+
+struct 4 __glTextureMachine
+	ui							1	ActiveUnits					| RW	Texture units available in hardware.  Please initialize in accelerate_init
+	b							4	Enabled						| R		Per texture unit enabled.  Factors in current state such as current texture and texture enables
+	v							4	(*GenProc)( __glContext *gc, GLuint v )
+	ui							1	lastName					| NA
+	__glHashMap					1	Objects						| NA
+	__glTexture					6	Defaults					| R		__GL_NUMBER_OF_TEXTURE_TARGETS]
+	__glTexture					4	*Active						| R		Number of texture units
+endstruct
+
+struct 16 __glVerticesMachine
+	f							36	ObjX						|
+	f							36	ObjY
+	f							36	ObjZ
+	f							36	ObjW
+	f							36	ClipX
+	f							36	ClipY
+	f							36	ClipZ
+	f							36	ClipW
+	f							36	TextureX
+	f							36	TextureY
+	f							36	TextureZ
+	f							36	TextureW
+	f							36	FrontColorR
+	f							36	FrontColorG
+	f							36	FrontColorB
+	f							36	FrontColorA					|
+	f							36	NormalX
+	f							36	NormalY
+	f							36	NormalZ
+	f							36	WindowX
+	f							36	WindowY
+	f							36	WindowZ
+	f							36	WindowW
+	f							36	EyeX
+	f							36	EyeY
+	f							36	EyeZ
+	f							36	EyeW
+	f							36	BackColorR
+	f							36	BackColorG
+	f							36	BackColorB					|
+	f							36	BackColorA
+	f							36	Texture2X
+	f							36	Texture2Y
+	f							36	Texture2Z
+	f							36	Texture2W
+	f							36	Texture3X
+	f							36	Texture3Y
+	f							36	Texture3Z
+	f							36	Texture3W
+	f							36	Texture4X
+	f							36	Texture4Y
+	f							36	Texture4Z
+	f							36	Texture4W					|
+	ui							36	ClipCode
+	i							36	Edge
+	i							36	Has
+	
+	f							36	FrontAmbientR
+	f							36	FrontAmbientG
+	f							36	FrontAmbientB
+	f							36	FrontAmbientA
+	f							36	FrontDiffuseR
+	f							36	FrontDiffuseG
+	f							36	FrontDiffuseB
+	f							36	FrontDiffuseA
+	f							36	FrontSpecularR
+	f							36	FrontSpecularG
+	f							36	FrontSpecularB
+	f							36	FrontSpecularA
+	f							36	FrontSceneR
+	f							36	FrontSceneG
+	f							36	FrontSceneB
+	f							36	FrontSceneA
+	f							36	FrontSpecExp
+
+	f							36	BackAmbientR
+	f							36	BackAmbientG
+	f							36	BackAmbientB
+	f							36	BackAmbientA
+	f							36	BackDiffuseR
+	f							36	BackDiffuseG
+	f							36	BackDiffuseB
+	f							36	BackDiffuseA
+	f							36	BackSpecularR
+	f							36	BackSpecularG
+	f							36	BackSpecularB
+	f							36	BackSpecularA
+	f							36	BackSceneR
+	f							36	BackSceneG
+	f							36	BackSceneB
+	f							36	BackSceneA
+	f							36	BackSpecExp
+endstruct
+
+struct 4 __glInfo
+	ui							1	state_h_version				| R
+	ui							1	textureMaxS					| RW
+	ui							1	textureMaxT					| RW
+	ui							1	textureMaxR					| RW
+	b							1	*vendor						| R 
+	b							1	*renderer					| R
+	b							1	*version					| R
+	b							1	*extensions					| R
+	b							1	*hwRenderer					| RW Defaults to null, set string to name of HW renderer if present
+	b							1	*hwGeometry					| RW Defaults to null, set string to name of HW geometry if present
+	b							3	*comboStrings				| R  The three strings that are possible for GL_RENDERER
+	ub							1	debugLock					| R
+	ub							1	debugDevices				| R
+	ub							1	debugDriver					| R
+	ub							1	debugModes					| R
+	ub							1	debugOther					| R
+	ub							1	debugDisableDCLock			| R
+	ub							1	debugDisableTL				| R
+endstruct
+
+struct 4 __glWindowState	| Container for window related state.
+	i							1	UtilThreadSem;				| R sem_id that triggers the util thread.  Releasing it will trigger a call to processThreadEvent.
+	v							1	*DirectWindow				| NA
+endstruct
+
+
+struct 16 __glContext
+	__glProcTable				1	*procTable
+
+	__glVerticesMachine			1	vertices
+	__glMatrixSIMD				1	mvp
+	__glMatrixSIMD				1	model
+	__glMatrixSIMD				1	invModel					|
+	
+
+	i							1	isRendering 				| 1 for immediate mode, 0 for building display list.
+	
+	v 							1	(*polyClipParam) () 		| All args in regs
+	ui							1	nextClipTemp
+
+	v							1	(*asmProc_Light)()
+	v							1	(*asmProc_EWNT_Front)()		|
+	v							1	(*asmProc_EWNT_Back)()
+
+	i							1	renderMode
+	i 							1	error
+	i							1	auxBuffers
+	i							1	stencilBufferBits			|
+
+
+	rasState					1 	state
+	__glTextureMachine			1	texture
+	__glViewportMachine			1	viewport
+	__glDriverProcs				1	procs
+	__glPrimitiveMachine		1	primitive
+	__glClipInfoStruct			1	*clipInfo					|
+	__glSoftwareMachine			1	software
+	__glBufferMachine			1	buffer
+	__glValidMachine			1	valid
+    __glMethods					1	methods
+    __glAttributeMachine		1	attributes
+    __glVertexMachine			1	vertex
+	__glTransformMachine		1	transform
+	__glListMachine				1	list
+	__glEvaluatorMachine		1	evaluator
+	__glFeedbackMachine			1	feedback
+	__glLineMachine				1	line
+	__glSelectMachine			1	select
+	__glLightMachine			1	light
+	__glVertexArrayMachine		1	vertexArray
+	__glSoftwareScanlineProcs	1	softScanProcs				|
+	__glInfo					1	info
+	__glWindowState				1	window
+
+	__glProcTable				1	immedTable
+	
+	v							1	*flingerContext
+	i							1	flingerCurrent
+	i							1	flingerLOD
+	
+	v							1	*usrVp1
+	v							1	*usrVp2
+	v							1	*usrVp3
+	v							1	*usrVp4
+endstruct
+

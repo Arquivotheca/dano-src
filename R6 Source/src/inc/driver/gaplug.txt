@@ -1,0 +1,379 @@
+
+<H1>Description of the GAPlug Kernel-Level Audio Device Interface for BeOS and BeIA&br;
+<DATE>2000-10-02</DATE>&br;
+<EMAIL>media2000@be.com</EMAIL>
+
+<H2>Introduction
+
+<P>This document describes how to write a audio device module for the "gamedriver" kernel sound device interface. If you wish to add support to BeOS or BeIA for a hardware sound input, output or mixer device, this document is intended for you.
+
+<P>Previously, implementing a sound device driver for BeOS or BeIA involved dealing with the entire life cycle of a device driver; opening and closing; cleaning up; buffer management; etc. As the user-level device model becomes more complex to support advanced features such as extended mixer capabilities, or multi-channel in-hardware sound, continuing this model would cause undue stress on device driver writers, and cause a variety of implementations of the driver specification, all subtly different from each other.
+
+<P>Instead, the operating system will now provide the "device driver" as known by the kernel. This "device driver" is referred to as "gamedriver". Gamedriver will scan the available busses for devices and load a plug-in to handle releavant devices. The interface to the plug-in (implemented as a kernel-level module) is radically different from the normal interface to a kernel device driver, and is specifically geared towards implementing sound functionality. As gamedriver can take care of a lot of the drudgery of a device drive (parameter validation, buffer management, etc) this should simplify the task for anyone wishing to support new sound hardware in BeOS and BeIA.
+
+<P>Care is taken to assume as little as possible about how the hardware works internally; care is also taken to provide a sufficient number of hooks in the interface to allow the plug-in writer to tailor the workings of his device to his needs. While this approach may cause additional cognitive overload in order to determine which hooks actually should be over-ridden, we hope that the benefits of the approach outweigh the disadvantages.
+
+<P>Currently, the playback (and recording) model is very simple. For each stream, there is one buffer "set" on the stream. The stream, when running, will play data out of this buffer in a looping manner (start to finish, then all over again). It will periodically (i e several times for each pass through the buffer) call back into the gamedriver framework to let the framework update clients on where in the buffer the hardware has last completed playing.
+
+<P>You may wish to refer to GameAudio.html and its corresponding header file &lt;game_audio.h&gt; to familiarize yourself with the context in which these calls will be made, and the contents of some of the informational structures being passed to you or requested from you. This is especially important for mixer functionality.
+
+<H2>Anatomy of a GAPlug
+
+<LH>The functionality of a plug-in can loosely be grouped in four groups:
+
+<LI ITEM="Life and Death">Loading the plug-in, recognizing and intializing the hardware, and un-loading the plug-in and cleaning up once it's no longer needed.
+
+<LI ITEM="Codecs and Configuration">Configuring the input and output codecs of the hardware; such things as hardware sampling rate and precision (loosely translated into interrupt frequency).
+
+<LI ITEM="Stream and Buffer Operations">The mechanics of actually transferring sound to/from user space, as well as recording or playing it back.
+
+<LI ITEM="Mixer">A general interface for the various kinds of end-user controls that are typically available for the hardware, such as "CD Volume" and "Record Select".
+
+<P>Each of these groups of functionality is served with a set of function pointers ("hooks") returned by the plug-in, and used by gamedriver. Some of these hooks are required for any plug-in, but most of them are optional. For the optional hooks, it's OK to not implement them (leave them NULL) unless you need the specific functionality provided by the specific hook.
+
+<P>Some of the hooks are very similar to some functions specified in the GameAudio.html user-level driver API. Others have seemingly no direct relation. In any case, you should not make any assumptions about undocumented context in which these hooks may be called. Later versions of gamedriver may get creative in how it calls these hooks in order to remain backwards compatible. As long as you only rely on (and provide) documented behaviour, your chances for compatibility are excellent.
+
+<H1>GAPlug Creation Cookbook
+
+<H2>Discovery
+
+<P>Your plug-in is implemented as a kernel module. You need to include at a minimum KernelExport.h and PCI.h (assuming you're using PCI hardware).
+
+<P>Your "modules" array should contain a module of type plug_pci_info, which appart from the standard module functions has one user-defined function, accept_pci(). (More on that later). The name of the module is constructed from the PCI ID of the device you want to serve as follows:
+
+<P>sprintf(name, "media/gamedriver/pci/%04x_%04x/v1", vendor_id, device_id);
+
+<P>This is for a device which is uniquely identified using the master vendor and device ID only. If you need to add subvendor and subdevice IDs, add "_%04x_%04x" to the ID string, before the "/v1" part. You can actually use anything from 1 to 4 of these hexadecimal codes; when gamedriver looks for a suitable plug-in, it starts with all four codes (vendor, device, subvendor, subdevice) and then lops off one code at a time, re-trying, until it finds a plug-in which matches, or runs out of codes (in which case the hardware is not recognized).
+
+<P>The module is installed in .../config/add-ons/kernel/media/gamedriver/pci with the device ID codes (exactly as specified in the module name) as the name of the executable.
+
+<P>Once gamedriver has found and loaded your module, it will call the accept_pci() hook. The job of this hook is to determine whether the hardware referred to by the pci_info data passed in is actually hardware that you know how to deal with, and if so, return a plug_api structure for the hardware. This plug_api structure is actually what we refer to when we say "plug-in", rather than the (very simple) kernel module used to manufacture it.
+
+<P>accept_pci also gives you a pointer to the PCI bus manager module. You can stash this pointer in a global, rather than have to call get_module() yourself. Last, it also gets a pointer to a struct containing some useful utility functions that you can also save away  for later use. Both these pointers are guaranteed to be valid as long as you are loaded.
+
+<P>Note that accept_pci() is not the best place to do lengthy initialization tasks such as waiting for codecs to become ready, or download device firmware. Please defer such initialization to the first call of init_codecs(), or possibly the first call of open_stream() or another function which needs such initialization to  have happened. Following this rule will speed up re-scan operations for the /dev/audio/game directory.
+
+<H2>The plug-in
+
+<P>Your plug-in will typically need to allocate its own data to refer to and manage the hardware being managed. For this purpose, the plug_api struct has a "void * cookie" member that is reserved for use by you, the plug-in writer. Typically, you will make this a pointer to some data structure that you allocate. However, if you support multiple instances of your hardware (and you should!) you will have to allocate multiple copies of plug_api to return different cookies; a useful trick is to make your hardware structure contain a plug_api as the last member, and make the "cookie" point to the beginning of the entire hardware structure. You then return the address of the plug_api member at the end of your structure, and recover the actual pointer to the structure by casting the "cookie" whenever you are called. Putting plug_api at the end of this structure may have benefits for future compatibility. Last, for version control, there is a size element at the beginning of plug_api, where you tell gamedriver which version of the struct you are using (the assumption being that future versions will use larger structs).
+
+<LH>Your plug_api has some required functions and members.
+
+<LI ITEM="info_size">Set this to sizeof(plug_api). Your module will not be loaded and used if you don't.
+
+<LI ITEM="cookie">Not strictly required, this member is available for your own use, and will typically point to some hardware-specific data structure allocated and managed by you.
+
+<LI ITEM="short_name">This name will be used when publishing your device in /dev/audio/game. The maximum length allowed is 18 characters, but we prefer that you keep it at or below 12, in all lowercase and using underscore for separation if necessary. Typical names include "xpress", "sv", and "mvp4". Note that this field can point to a string constant just fine; it need (and should) not be cloned or duplicated.
+
+<LI ITEM="vendor_name">This is a slightly more verbose description of the vendor providing the plug-in and/or hardware (i e, you). The maximum length is 31 characters, plus the terminating zero byte. Note that this field can point to a string constant just fine; it need (and should) not be cloned or duplicated.
+
+<LI ITEM="uninit()">Once the gamedriver is done with you, either because it got the information it needed, or because the user has closed the device, your plug-in will be unloaded. Before it is unloaded, all instances of plug_api will be destroyed by calling uninit() on them. It is your responsibility to deallocate any memory or other resources allocated inside accept_pci() here. This includes the data structure allocated for the "cookie" member of the plug_api struct.
+
+<LI ITEM="init_codecs()">This function is called by the gamedriver to ask you about available codecs. Return in *o_adcs, *o_dacs and *o_mixers the number of ADC codecs, DAC codecs, and mixers your hardware has. If you return a mixer count greater than 0, you should also implement the four mixer-related hooks marked as semi-optional.
+
+<LI ITEM="get_codec_infos()">This function is called by the gamedriver to have you fill out information about your ADC and DAC codecs. Fill out the structs in the arrays provided (they are appropriately sized based on what you previously returned from init_codecs()).
+
+<LI ITEM="init_stream()">When the user tries to open a stream on one of your codecs, the gamedriver uses this call to have you commit the necessary resources. If you already allocated all the streams you can on the codec in question, return ENOSYS. Else, allocate the stream, and return a token for this stream in *o_stream_cookie. This stream cookie, not to be confused with a plug_api cookie, will be passed to you as part of any request dealing with the stream.
+
+<LI ITEM="run_streams()">When the user starts or stops a stream, this hook is called to make it happen. The i_request structure contains the information you need, such as which stream it is, its stream cookie, and what buffer is set on the stream (in the case of a start-stream request). You should return when you've made all the arrangements to set the stream running, and it will start without further interaction (or has already started).
+
+<H2>Mixers
+...
+
+<H2>That's it!
+
+<P>Look in the exhaustive reference below for detailed information on what the arguments to these functions are, and the specific requirements for each hook. Also, if you have specific buffer management needs (say, contiguous buffers) or support configurable codec data formats (as opposed to stream formats) you can implement the appropriate optional hooks.
+
+<P>To debug your plug-in, you probably want to hook up serial debugging. The gamedriver will do some argument validation and print useful diagnostics in pretty colours on the serial port; more so if you increase debug level by setting the "debug" variable to 1 or 2 in the "game_audio" driver settings file.
+
+<P>There are some tools named "gameaudioplay" and "gameaudiomix" which may be useful to use while developing. You should also know that you need to completely close all applications using gamedriver, then rescan gamedriver, for a new version of your plug-in to be recognized.
+
+
+<H1>Exhaustive API Reference
+
+<NOTE>When an argument is "supplied by the user", it may be supplied by a user-level application making a request to gamedriver, or by gamedriver itself acting on behalf of some previous or anticipated future request. Also, where there is both a set of information as provided by gamedriver, and a reference to the original request as made by the user, the information provided by gamedriver takes precedence, as this information has been sanitized and range checked by gamedriver; the original "user" request is provided only for completeness and you should not normally have to refer to it.</NOTE>
+
+<NOTE>Members marked "reserved" should not be looked at, used, or touched by your plug-in. They are reserved for future expansion.</NOTE>
+
+<H2>plug_api Members and Hooks
+
+<P>gamedriver will serialize requests to your plug-in so that no more than one request (hook function) is being made for the same instance of plug_api at the same time. If you support multiple instances of your hardware, these separate instances may be called at the same time (either on dual-CPU systems, or through pre-emption within the kernel).
+<NOTE>If the user has turned on the SMP Interrupts setting, your interrupt handler may be re-entered, should you support more than one instance of your hardware. This is nothing special compared to any other BeOS/BeIA device driver, but deserves sepcific mention nevertheless.</NOTE>
+
+<LH>info_size
+<LI>size_t
+<P>Return sizeof(plug_api). Used for future backwards compatibility.
+
+<LH>cookie
+<LI>void *
+<P>Return a cookie value you use to reference your hardware. This cookie will be passed back to you by gamedriver when it calls the hook functions defined as members of the plug_api struct.
+
+<LH>short_name
+<LI>const char *
+<P>Return a short "tag" using all lowercase letters and possibly digits and the underscore character. The maximum length is 18 characters plus a terminating zero byte; recommended maximum length is 12 characters.
+<P>This field can point to static data; it need not be cloned/copied.
+
+<LH>vendor_name
+<LI>const char *
+<P>Return a descriptive name for the vendor of the hardware or author of the plug-in. The maximum length is 31 characters plus the terminating zero byte.
+<P>This field can point to static data; it need not be cloned/copied.
+
+<LH>uninit()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<P>De-allocate the plug_api structure and/or cookie and/or other resources used to manage this particular instance of hardware. When you return, you will no longer use any resources (such as memory, semaphores etc) or generate any interrupts, and will be ready to be unloaded.
+
+<LH>open()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="path">The device name being opened.
+<LI ITEM="flags">The mode (permission) with which the device is being opened.
+<LI ITEM="opaque">A gamedriver specific cookie which refers to the instance of the device being opened.
+<P>Override this hook if you need to do something special when the user is physically opening the device that refers to your instance of hardware. If you return less-than-0, the open request will be terminated with the return value as error code.
+
+<LH>close()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="opaque">A gamedriver specific cookie which refers to the device being closed.
+<P>Override this hook if you need to do something special when the user is physically closing the device that refers to your instance of hardware.
+
+<LH>free()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="opaque">A gamedriver specific cookie which refers to the device being freed.
+<P>Override this hook if you need to do something special when the system has completed physically closing the device that refers to your instance of hardware. This is NOT the same thing as uninit().
+
+<LH>control()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="i_code">The control code as supplied by the user to a call to ioctl().
+<LI ITEM="io_date">The data pointer as supplied by the user to a call to ioctl().
+<LI ITEM="opaque">A gamedriver specific cookie which refers to the device being controlled.
+<P>If you want to completely override some functionality of gamedriver, you can override the control() hook and take care of handling the request yourself for the requests you're interested in. If you want gamedriver to handle a request, return B_DEV_INVALID_IOCTL. All other return codes (successful or not) cause gamedriver to not process the request, and return your return code to the user.
+<NOTE>Only use this override capability if you really need it, as it will decrease the likelyhood of you staying compatible in the future.</NOTE>
+
+<LH>get_info()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="o_info">A pointer to a game_get_info struct which will be returned to the user. The struct is already filled out with sufficient information for correct operation, but if you want to elaborate on things such as the descriptive text field, here's the place to do it. See GameAudio.html for more information.
+
+<LH>set_codec_format()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_format">A pointer to a game_codec_format struct describing what the format of the codec should be.
+<P>This hook is called to re-configure a specific codec. The supplied format has already passed a test against the possible formats as previously published by you in get_codec_infos(), but if there are certain format combinations that you cannot do (such as variable sample rate with multi-channel output) you must still do some sanity checking here. Assign in io_format a format that you will be able to accept if you fail with a bad format.
+<P>Note that the chunk_frame_count is of high importance, as it contains a measurement of the user's expectation for precision in timing information. Basically, any "page" or "chunk" used in any buffer set on any stream allocated on the codec in question will "work" as long as it is of the same duration as chunk_frame_count or longer. If you only support one output stream with no sample rate conversion in the stream, or stream-based interrupts, then this value is mostly unimportant. If you only support interrupts based on the output sampling rate, rather than the stream sampling rate, you may wish to program an interrupt at twice the rate of the indicated chunk_frame_count, to ensure that an interrupt will fire during the first half of each "page" being played of a buffer. If your hardware has no suitable interrupt mechanism, or you support a large number of buffers, it may be better to program a timer interrupt to fire at a rate approximately twice that of (frame_rate/chunk_frame_count) per second, and check all the streams each time the interrupt fires. <P>For more information on this topic, see the int_done() and update_timing() callbacks.
+<NOTE>Most plug-ins override this hook, even though it is optional.</NOTE>
+
+<LH>open_stream_buffer()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_buffer">A pointer to a gaplug_open_stream_buffer struct containing information about a buffer open request by the user.
+<P>If your buffers need some non-default attributes, such as being readable or writable by your driver (as opposed to DMA) or being physically contiguous, you can override this hook to set up the size, protection and flags being used in the call to create_area() to create the buffer by gamedriver.
+<P>You can also override this hook to return information about a buffer area which you have created. In that case, fill out the "area", "base", "offset" and "size" fields of the io_buffer member with valid values. The gamedriver will assign this buffer a buffer ID after you return your area reference.
+
+<LH>bind_stream_buffer()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="i_buffer">A pointer to information about the buffer that was just created.
+<LI ITEM="id">The ID assigned to this buffer.
+<P>If you override bind_stream_buffer(), you will be told about the ID assigned to a buffer once it has been created. This is especially useful if you create the buffer yourself in open_stream_buffer().
+
+<LH>close_stream_buffer()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_buffer">A pointer to information about the buffer being closed.
+<P>When the user closes a stream buffer, or closes a stream with a buffer bound to it, this hook will get called if implemented. If you do your own allocation of buffers in open_stream_buffer(), you should override close_stream_buffer() to deallocate the buffer you previously allocated, and return an error less than 0. If you return 0 or greater, gamedriver will call delete_area() on the area used by the buffer.
+
+<LH>remove_stream()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="i_stream">A pointer to stream information for the stream being closed.
+<LI ITEM="i_stream_cookie">The stream cookie, allocated by you, representing the stream being closed.
+<P>When the user closes a stream previously allocated through init_stream(), this hook will get called (if implemented). You are responsible for de-allocating any resources associated with the stream, mark the stream for availability for future allocation, and other clean-up tasks associated with closing down a previously open stream.
+<P>If you only support a single stream per codec, this call need not be implemented, as the gamedriver will keep a count of open streams, and fail successive stream open requests if one stream is already open on the codec. This is done through the stream_count field of the game_codec_info you return initially.
+
+<LH>set_stream_buffer()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="i_buf">A pointer to information about the buffer being set and which stream it is being set on.
+<P>When the user sets a specific buffer on a stream, gamedriver will call this hook if implemented. You can fail the set operation by returning a negative error.
+<P>It may be easier to not implement this function, and just grab the data you need out of the buffer info handed to your run_streams() hook.
+
+<LH>set_stream_controls()
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_request">A pointer to the request as supplied by the user.
+<LI ITEM="stream_cookies">An array of stream cookie pointers, one for each stream being affected.
+<LI ITEM="stream_infos">An array of stream information pointers, one for each stream being affected.
+<P>You can use the in_request_count field of io_request to count the number of streams being affected. Note that some stream_infos and corresponding stream_cookies may be 0, if the user identified invalid streams for control requests.
+
+<LH>get_mixer_description()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="index">Which mixer to return information about.
+<LI ITEM="o_mixers">A pointer to storage into which to assign information about the requested mixer.
+<P>This function is currently only called once after you've been loaded, and the information cached by gamedriver. If you say you have more than zero mixers, the gamedriver will ask you for information about each mixer. Return, in o_mixers, information about the mixer requested by index. The gamedriver will then ask for information about controls belonging to each of the mixers using get_mixer_controls().
+
+<LH>get_mixer_controls()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_controls">Pointer to information about this control requests, which in turn points to where to return information about the controls that go with the mixer indicated.
+<P>This function is currently only called once after you've been loaded, and the information cached by gamedriver. Refer to GameAudio.html and the description of gaplug_get_mixer_controls for more information on what particular information to return.
+
+<LH>get_mixer_control_values()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_request">A pointer to a structure containing information about which controls for which to return values.
+<P>This function is called whenever the user wants to read the values of mixer controls. You should read the current value of the controls indicated. See struct gaplug_mixer_control_values for description of how to return the values in question.
+<NOTE>It is important to make this call run relatively quickly, as the serialization enforced by gamedriver will block out other calls (such as GAME_GET_STREAM_TIMING) while this call is being processed.</NOTE>
+
+<LH>set_mixer_control_values()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_request">A pointer to a structure containing information about which controls for which to apply new values.
+<P>This function is called whenever the user wants to change the values of mixer controls. You should update the current value of the controls indicated. See struct gaplug_mixer_control_values for description of how to return the values in question.
+<NOTE>It is important to make this call run relatively quickly, as the serialization enforced by gamedriver will block out other calls (such as GAME_GET_STREAM_TIMING) while this call is being processed.</NOTE>
+
+<LH>init_codecs()
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="o_adcs">Return in *o_adcs a count of the number of ADC codecs your hardware implements.
+<LI ITEM="o_dacs">Return in *o_dacs a count of the number of DAC codecs your hardware implemented.
+<LI ITEM="o_mixers">Return in *o_mixers a count of the number of mixers your hardware implements. Typically, this will be 2, one for "input mixer" containing recording-related controls, and one for "output mixer" containing playback-related controls.
+<NOTE>A "codec" is a logical function, rather than a physical chip. Thus a typical AC97 codec chip would implement one ADC codec and one DAC codec, although it's just one "codec chip".</NOTE>
+<NOTE>This is a required hook.</NOTE>
+
+<LH>get_codec_infos
+<LI>void
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="o_adcs">A pointer to a number of game_codec_info structs, one for each ADC codec you claimed to implement in init_codecs(). Fill out these structures to accurately reflect the capabilities of each codec, and the streams allocateable thereon.
+<LI ITEM="o_dacs">A pointer to a number of game_codec_info structs, one for each DAC codec you claimed to implement in init_codecs(). Fill out these structures to accurately reflect the capabilities of each codec, and the streams allocateable thereon.
+<P>Note that the structures will come pre-filled with some very minimal default information, so for bring-up purposes, you can do nothing in this function. The function still has to be implemented, though.
+<NOTE>This is a required hook.</NOTE>
+
+<LH>init_stream
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="io_request">A pointer to the stream open request as supplied by the user. You can deduce which codec the stream is being opened on by checking GAME_IS_DAC() or GAME_IS_ADC() and then use GAME_DAC_ORDINAL() or GAME_ADC_ORDINAL() on the codec ID.
+<LI ITEM="i_data">A pointer to the callback functions and cookie to use for this stream when it's playing, to update gamedriver's notion of where the stream play pointer is.
+<LI ITEM="o_stream_cookie">A pointer to storage where you assign a stream cookie that you create to represent the stream just opened.
+<P>A stream is being opened on a codec. The io_request argument points at the request as made by the user. This request has already passed sanity checking, such as whether more than the maximum number of open streams are attempted to be opened.
+<P>The stream "data" is a set of callbacks and a cookie to use to communicate back to gamedriver when the stream is running. For more information, see the description of ga_stream_data.
+<P>You may wish to override remove_stream() to de-allocate the stream cookie when the stream is no longer needed.
+<NOTE>This is a required hook.</NOTE>
+
+<LH>run_streams
+<LI>status_t
+<LI ITEM="i_info">A pointer to a plug_api previously returned by you.
+<LI ITEM="i_request">A pointer to information about the request, including which stream(s) to change state of, and which state to change the streams to (running or stopped).
+<P>The data passed to you has all been validated already, so all the streams are valid streams, although you may be asked to run a stream that is already running, or stop a stream that is already stopped.
+<P>You are passed a list of streams to change stat of. You should try to, if possible, atomically change the state of all the streams at the same time. If that's impossible because of hardware limitations, at least try to group stream starts as closely as possible in time, to avoid or minimize phase problems between simultaneously running streams.
+<NOTE>This is a required hook.</NOTE>
+
+<H2>Structures
+
+<LH>gaplug_open_stream_buffer
+<LI ITEM="io_request">This member points to the request as issued by the user. See GameAudio.html for more information. If you do your own buffer management, you should fill out this request with proper return values. Gamedriver will look at the "area" member of io_request and if it is bigger than 0, it will not allocate its own area for the buffer.
+<LI ITEM="in_codec">This member points to a codec owning the stream to which the user has requested the buffer be bound. If the user did not request buffer binding, this member will be NULL.
+<LI ITEM="in_stream">This member points to a stream to which the user has requested the buffer be bound. If the user did not request buffer binding, this member will be NULL.
+<LI ITEM="in_stream_cookie">This is the stream cookie for the stream to which the buffer is to be bound, or NULL.
+<LI ITEM="io_size">This is the size of area which will be allocated. This will be the size of the buffer requested by the user, rounded up to some larger multiple of B_PAGE_SIZE.
+<LI ITEM="io_lock">If gamedriver creates the area, it will create it with this lock attributes set. The default is B_FULL_LOCK.
+<LI ITEM="io_protection">If gamedriver creates the area, it will create it with these protection setting. The default is to allow neither reading nor writing, because the user will clone the area to put data into it, and you will play the data using DMA, which bypasses the MMU protection.
+
+<LH>gaplug_set_buffer
+<LI ITEM="io_request">This member points to the request as supplied by the user. See GameAudio.html for more information.
+<LI ITEM="in_stream">This member points to the stream on which the buffer is being set.
+<LI ITEM="in_stream_cookie">This member contains the stream cookie for the stream on which the buffer is being set.
+<LI ITEM="in_area">This member contains the area_id of the are containing the buffer being set on the stream, or -1 if "no buffer" is being set.
+<LI ITEM="in_base">This member contains the virtual base address of the area containing the buffer, or NULL if "no buffer" is being set.
+<LI ITEM="in_offset">This member contains the offset, in bytes, of the buffer beginning from the base of the area.
+<LI ITEM="in_size">This member contains the size of the buffer being set, in bytes.
+<P>Currently, un-bound buffers are illegal, and there will always be a valid codec/stream associated with the buffer.
+
+<LH>gaplug_looping_buffer_info
+<LI ITEM="address">The virtual base address of the buffer being played.
+<LI ITEM="frame_count">The size of the buffer, in frames. If page_frame_count is greater than 0, frame_count equals N*page_frame_count for some positive integer N.
+<LI ITEM="page_frame_count">The size of each "page" of the buffer, at the end of which the user has requested that gamedriver takes some action. This may be 0 if the user has not specified a page size.
+<LI ITEM="buffer">The buffer ID, as allocated by gamedriver and possibly previously provided to you through the bind_buffer() hook, for the buffer being played.
+
+<LH>gaplug_run_stream_info
+<LI ITEM="request">A pointer to the request as issued by the user.
+<LI ITEM="stream">A pointer to the stream being run (or stopped).
+<LI ITEM="stream_cookie">The stream cookie you allocated for the stream being run (or stopped).
+<LI ITEM="looping">Information about the buffer set on the stream if the stream is being run. See gaplug_looping_buffer_info.
+
+<LH>gaplug_run_streams
+<LI ITEM="total_slots">A count of how many streams are being started/stopped in this one operation.
+<LI ITEM="io_request">A vector of gaplug_run_stream_info structs, containing information about each stream being started/stopped as part of this request.
+<LI ITEM="info">The request as issued by the user.
+
+<LH>gaplug_control_info
+<LI ITEM="other">Reserved for future use.
+<LI ITEM="mux">A pointer to game_get_mixer_mux_info information about a mux control.
+<LI ITEM="level">A pointer to game_get_mixer_level_info information about a level control.
+<LI ITEM="enable">A pointer to game_get_mixer_enable_info information about a enable control.
+
+<LH>gaplug_get_mixer_controls
+<LI ITEM="i_mixer">A pointer to a copy of information you previously returned about the mixer for which controls are being gotten.
+<LI ITEM="o_controls">Pointer to storage into which you should copy your control information.
+<LI ITEM="o_infos">Pointer to storage into which you should assign pointers to data structures owned by you that describe each control in detail. Note that you typically don't have to dynamically allocate that memory; static structures should do OK.
+<LI ITEM="o_cookies">Pointer to storage into which you should assign a cooke value. You can choose to have a different cookie for each control. Each cookie will be passed back to you when requests concerning that control are made.
+
+<LH>gaplug_mixer_control_value
+<LI ITEM="i_cookie">The cookie for the control being set or get.
+<LI ITEM="i_info">The pointer to control info previously returned by you for this control.
+<LI ITEM="io_value">A pointer to the value for the control being set, or where to assign the current value of the control being gotten.
+
+<LH>gaplug_mixer_control_values
+<LI ITEM="i_count">The number of controls being affected.
+<LI ITEM="i_values">Information about each control being affected.
+
+<H2>Callbacks to gamedriver
+
+<H3>ga_stream_data
+
+<LH>cookie
+<LI>A cookie provided by gamedriver, which you should pass back as an argument to each call to other ga_stream_data members.
+
+<LH>int_done()
+<LI ITEM="cookie">Pass the cookie provided in the ga_stream_data for the stream in question.
+<LI>This function returns an appropriate status to return from an interrupt handler, such as B_HANDLED_INTERRUPT or B_INVOKE_SCHEDULER.
+<P>This function is safe to call from interrupt time, but you should have released all spinlocks related to your hardware before calling it. Typically, you'll call this for all streams after calling update_timing() for all streams.
+
+<LH>update_timing()
+<LI ITEM="cookie">Pass the cookie provided in the ga_stream_data for the stream in question.
+<LI ITEM="frames_played">Pass how many frames have been played out of the stream buffer since last you called update_timing() for this stream, or since the stream started, whichever came later.
+<LI ITEM="at_time">Pass the system_time() at which the frames_played count was taken. Good accuracy in this number is desirable, and it should under no circumstances be more than 100 microseconds off.
+<P>Call this function periodically to update gamedriver's notion of where you are in the buffer for playing streams. Typically, you will call this function from an interrupt handler once for each stream being run.
+
+<H3>ga_utility_funcs
+
+<LH>func_size
+<LI>The size of the utility funcs struct; used for future backwards compatibility.
+
+<LH>find_sample_size()
+<LI ITEM="formatCode">The format code (B_FMT_16BIT etc) for which the size of a sample is sought. Note that the size of a frame is the size of a sample, times the number of channels.
+
+<LH>find_frame_rate()
+<LI ITEM="rateCode">The rate code (such as B_SR_44100) for which to find the actual sampling rate in Hz.
+<P>Given a frame rate code, return the corresponding sampling rate in Hz. Not valid for B_SR_CVSR.
+
+<LH>find_frame_rate_code()
+<LI ITEM="rate">The frame rate in Hz for which to find a rate code.
+<LI ITEM="deviation">The maximum allowable deviation in the match with an "absolute" code. This value is an absolute value in Hz.
+<P>Given a sampling rate and allowable deviation, try to find a frame rate code. If no close enough code is found, return B_SR_CVSR.
+
+<H2>Some Corollaries
+
+<P>The chunk_frame_count of a codec, together with its sample rate, determines the maximum "slop" in timing information. One interpretation of this guarantee is that your codec will generate an interrupt every chunk_frame_count frames played, and service any running streams at that time, by checking how far they've played and calling into update_timing() and int_done(). Another interpretation is that this is just an upper bound, and some other mechanism will actually be used to provide timing information, such as an interrupt based on page_frame_count for the running stream. In the case where you only have one stream for a codec, basing the interrupts on page_frame_count for the stream leads to best accuracy; when page_frame_count is 0 you can instead base interrupts on chunk_frame_count for the codec the stream is allocated on, or a timer interrupt.
+<NOTE>If you support many running streams, the second approach is not sustainable, as you will have too many interrupts firing if you have something like 16 or 32 streams running at the same time.
+
+<P>When page_frame_count is non-0 in the set_stream_buffer() or run_streams() hooks, but it's smaller than some minimum value you wish to enforce, you can fail the request with a B_BAD_VALUE error code. We recommend to allow page_frame_count values of 64 and above (although this translates to 1.3 milliseconds between each interrupt, if you take interrupts on page_frame_count boundaries; that rate is only sustainable on fairly fast hardware as of this writing). If you decide to reject a request, we strongly encourage you to also dprintf() a message stating why the request was rejected. Leave this dprintf() in the released version of the driver, as it will only happen on bad requests, and being able to look the failure reason up in syslog or on serial output is very valuable to application developers.
+
+<P>If page_frame_count is 0, you will have to use chunk_frame_count as a guide for how often to take interrupts. One implementation strategy is to not let the hardware generate interrupts at all; instead opting for programming a timer interrupt every codec.chunk_frame_count/codec.sample_rate seconds. The reason there is a division between chunk_frame_count and page_frame_count is that a stream may run at a different sampling rate than the codec; for example, many cheap motherboards install fixed-rate 48-kHz AC97 codecs, and have the sound hardware do sample rate conversion from 44.1 kHz (or whatever). This might be described by the plug-in as a codec which is fixed at 48 kHz, and a stream which can do 44.1 kHz sample rate.
+
+<P>Technically, there is no guarantee that you will have gotten an open() hook called at a time when the gamedriver starts calling upon you to perform tasks. If you need to initialize hardware or install interrupt handlers, a better place to do it is in init_codecs(), with successive uninstall in uninit(), rather than overriding close() or free().
+
+<P>Some hardware will not allow buffers that are larger than 64 kByte in size. Plug-ins servicing such hardware should override the open_stream_buffer() hook and fail the request should it be for a too large buffer.

@@ -1,0 +1,246 @@
+#!/bin/sh
+
+setenv GOT_LANG "0"
+while neq GOT_LANG "1"
+	echo "language? (default is english)"
+	read LANG
+
+	if empty LANG
+		setenv LANG "english"
+	fi
+
+	if exists /boot/beos/system/boot/recovery.data.$LANG
+		source /boot/beos/system/boot/recovery.data.$LANG
+		setenv GOT_LANG "1"
+	else
+		echo "language file not found for " $LANG
+		source /boot/beos/system/boot/recovery.data.english	
+	fi
+wend
+
+setenv REBOOT "blah"
+setenv GET_SETTINGS "yes"
+echo $R_REBOOT_1
+echo $R_REBOOT_2
+echo $R_REBOOT_3
+echo $R_REBOOT_4
+
+while neq REBOOT "recover"
+	echo $R_REBOOT_5
+	read REBOOT
+	if eq REBOOT "reboot"
+		reboot
+	fi
+	if eq REBOOT "nosettings"
+		setenv GET_SETTINGS "no"
+		echo "Will not load user settings."
+		setenv REBOOT "recover"
+	fi
+wend
+
+addfirstpartition
+
+if eq GET_SETTINGS "yes"
+	echo $R_FINDING_SETTINGS_FILE
+	if mountcfs $R_PRIMARY_DIR_NAME $OTHERPARTITION
+		echo $R_FETCHING_SETTINGS
+		source $R_PRIMARY_SETTINGS_FILE
+		unmount $R_PRIMARY_DIR_NAME
+	fi
+fi
+
+
+setenv GOT_DEVICE "0"
+while neq GOT_DEVICE "1"
+	echo $R_ETHER
+	read DEVICE
+	if empty DEVICE
+	else
+		if eq DEVICE "modem"
+			setenv GOT_DEVICE "1"
+		fi
+		if eq DEVICE "ethernet"
+			setenv GOT_DEVICE "1"
+		fi
+	fi
+wend
+
+
+echo $R_PROMPT1
+echo $R_PROMPT2
+echo $R_PROMPT3
+echo $R_PROMPT4
+echo $R_PROMPT5
+echo $R_PROMPT6
+echo $R_PROMPT7
+
+
+
+if eq DEVICE "modem"
+	
+	setenv PPPSTATUS -1
+	
+	if empty username
+	else
+		setenv R_USER $username
+	fi
+	
+	if empty password
+	else
+		setenv R_PASSWD $password
+	fi
+
+	if empty phonenumber
+	else
+		setenv R_PHONE $phonenumber
+	fi
+
+	if empty modeminit
+	else
+		setenv R_MODEM_INIT $modeminit
+	fi
+	
+	while neq PPPSTATUS 0
+	
+		echo $R_ASK_PHONE
+		echo $DEFAULT_IS $R_PHONE
+		read PHONE
+		echo $R_ASK_USER
+		echo $DEFAULT_IS $R_USER
+		read USER
+		echo $R_ASK_PASSWD
+		echo $DEFAULT_IS $R_PASSWD
+		read PASSWD
+		
+		
+
+		echo $R_ASK_MODEM_INIT
+		read MODEM_INIT
+		
+		
+		if empty PHONE 
+			setenv PHONE $R_PHONE
+		fi
+		
+		if empty USER 
+			setenv USER $R_USER
+		fi
+		
+		if empty PASSWD 
+			setenv PASSWD $R_PASSWD
+		fi
+		
+		if empty URL 
+			setenv URL $R_URL
+		fi
+		
+		if empty MODEM_INIT 
+			setenv MODEM_INIT $R_MODEM_INIT
+		fi
+		
+		rm -q /boot/beos/etc/ppp/*
+		rm -q /boot/beos/etc/eznet/*
+		/boot/beos/bin/eznet add service=recover user="$USER" password="$PASSWD" phone="$PHONE" init0="$MODEM_INIT"
+		/boot/beos/bin/eznet up recover
+		setenv PPPSTATUS $?
+		if neq PPPSTATUS 0
+			echo $R_PPP_FAILED $PPPSTATUS
+		fi
+	wend
+	
+	echo $R_PPP_CONNECTED
+fi
+
+if eq DEVICE "ethernet"
+	/bin/ifconfig
+	setenv ETHERSTATUS -1
+	while neq ETHERSTATUS 0
+		echo $R_IP
+		read IP
+		echo $R_MASK
+		read MASK
+		/bin/ifconfig $R_DEVICEPATH $IP $MASK up
+		setenv ETHERSTATUS $?
+		if neq ETHERSTATUS 0
+			echo $R_ETHER_FAILED $ETHERSTATUS
+		fi
+	wend
+
+	setenv ETHERSTATUS -1
+	while neq ETHERSTATUS 0
+		echo $R_GATEWAY
+		read GATEWAY
+		route add default gw $GATEWAY dev $R_DEVICEPATH
+		setenv ETHERSTATUS $?
+		if neq ETHERSTATUS 0
+			echo $R_ROUTE_FAILED $ETHERSTATUS
+		fi
+
+	wend
+	
+	echo $R_DNS_SERVER
+	read DNS
+	filecat /etc/resolv.conf "nameserver "
+	filecat /etc/resolv.conf $DNS
+	filecat /etc/resolv.conf "\n"
+fi
+
+#/*** Setup and mount RAM Disk ***/
+#/*** need to add failure messages!!! ***/
+
+if setvolumesize /dev/disk/virtual/ram/0 16
+	if mkcfs --blocksize=512 /dev/disk/virtual/ram/0 ramdisk
+		if mkdir /ramdisk
+			if mount -t cfs /dev/disk/virtual/ram/0 /ramdisk
+		
+				setenv WGETSTATUS -1
+				while neq WGETSTATUS 0
+					echo $R_ASK_URL
+					read URL
+					
+					if empty URL
+						setenv URL $R_URL
+					fi
+
+					wget -S -t 3 -O /ramdisk/recovery $URL
+					setenv WGETSTATUS $?
+					if neq WGETSTATUS 0
+						echo $R_DOWNLOAD_FAILED
+					else
+						echo $R_VERIFY_IMG
+						if chkcfs --silent /ramdisk/recovery
+						else
+							setenv WGETSTATUS -1
+							echo $R_BAD_IMAGE
+						fi
+					fi
+				wend
+				
+				#/*** if a key exists, verify it with DSASIG ***/
+				if exists /etc/update/keys/master.pub
+					if dsasig verify /etc/update/keys/params /etc/update/keys/master /ramdisk/recovery
+						echo $R_FLASHING
+						if dd if=/ramdisk/recovery of=$OTHERPARTITION bs=4096 count=3600
+							sync
+							echo $R_SUCCESS
+							exit 0
+						fi
+					fi
+				else
+					echo $R_FLASHING
+					if dd if=/ramdisk/recovery of=$OTHERPARTITION bs=4096 count=3600
+						sync
+						echo $R_SUCCESS
+						exit 0
+					fi
+				fi
+			fi
+		fi
+	fi
+fi
+
+echo $R_FAILURE
+
+exit 1
+
+

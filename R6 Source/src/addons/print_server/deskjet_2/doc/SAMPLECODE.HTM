@@ -1,0 +1,852 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center"><span style="font-size: 36.0pt; mso-bidi-font-size: 12.0pt; color: blue; text-shadow: auto">Sample
+Code</span></h1>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note:
+      Documentation and code version numbers are designed to be independent of
+      each other, and may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.<span style="mso-spacerun:
+yes">&nbsp; </span>Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1 align="center">Sample Code</h1>
+<h2>&nbsp;</h2>
+<h2><a name="top">Introduction</a></h2>
+<p class="pgph1" style="margin-bottom:0in;margin-bottom:.0001pt">The Hewlett-Packard
+Appliance Printing Software Development Kit
+(SDK)
+presupposes a bi-directional connection with the printer and the use of defaults
+for all optional settings. It also presupposes that the graphical data is
+available at 300 d.p.i, and that rendering of text is done by the host. With
+these assumptions in place, the following are examples of API calls in <span style="font-size: 12.0pt; font-family: Times New Roman; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">sample code</span>.</p>
+<blockquote>
+<p class="pgph1" style="margin-bottom: -16"><a href="#minsequence">Minimal
+Sequence</a></p>
+<p class="pgph1" style="margin-bottom: -16"><a href="#asciitext">Using
+ASCII <span style="mso-bookmark:_Hlt476042979">T</span>ext</a></p>
+<p class="pgph1" style="margin-bottom: -16"><a href="#User-Interface Calling Code Samples">User-Interface
+Calling Code Samples</a></p>
+<p class="pgph1" style="margin-bottom:0in;margin-bottom:.0001pt"><a href="#Additional Information">Additional Information</a></p>
+</blockquote>
+<p class="MsoNormal"><span style="mso-bidi-font-family: Times New Roman">&nbsp;<o:p>
+</o:p>
+</span></p>
+<h2><a name="minsequence">Minimal </a>Sequence</h2>
+<p class="pgph1">The following minimal sequence set of sample code presupposes a bi-directional connection with the printer and
+the use of defaults for all optional settings. It also presupposes that the
+graphical data is available at 300 d.p.i, and that rendering of text is done by
+the host system.</p>
+<p class="pgph1">This minimal sequence is presented in the form of a routine
+that handles one print job, and returns an error-code to the caller. The number
+of pages and page height are given, as well as the graphical data. (For
+demonstration purposes, this is imagined as a giant array.) The commented
+numbers on the right correspond to notes about the code at the end of the code
+sequence.</p>
+<p class="code" style="margin-bottom: -14"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DRIVER_ERROR PrintJob(unsigned int NumPages,</font></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: 207.0pt; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>unsigned int PageHeight, <span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>// 1<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: 207.0pt; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>unsigned int PageWidth,<span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>// 2<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: 1.0in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp; </span>BYTE JobArray[NumPages][PageHeight][PageWidth*3] )<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>// 3<o:p>
+</o:p>
+</span></p>
+<p class="code" style="tab-stops: .5in; margin-bottom: -14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{</p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>PlatformServices* pSys = new PlatformServices();<span style="mso-tab-count:3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>// 4<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>if (pSys==NULL)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>return SYSTEM_ERROR;<span style="mso-tab-count:5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; </span>// 5<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>DRIVER_ERROR err = pSys-&gt;constructor_error;<span style="mso-tab-count:3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp; </span>// 6<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>if (err != NO_ERROR)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>return err;&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PrintContext*
+</span>pPC = new PrintContext(pSys, PageWidth);<span style="mso-tab-count:4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp; </span>// 7<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>if (pPC == NULL)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>{<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>delete
+pSys;<span style="mso-tab-count:
+7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; </span>// 8<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp; </span>return SYSTEM_ERROR;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>}<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>err = pPC-&gt;constructor_error;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>if (err != NO_ERROR)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>{<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>delete
+pSys;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: 1.25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-spacerun: yes">&nbsp; </span>return
+err;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: .5in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">}</span><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: .5in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">Job*
+pJob = new Job(pPC);<span style="mso-tab-count:5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>// 9<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>if (pJob == NULL)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>{<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>delete pPC;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: .5in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>delete pSys;<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;
+</span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: .5in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>return SYSTEM_ERROR;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">}<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>err = pJob-&gt;constructor_error;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>if (err != NO_ERROR)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>{<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>delete
+pPC;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>delete
+pSys;<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: .5in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>return SYSTEM_ERROR;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">}</span><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">// <i style="mso-bidi-font-style:normal">JOB LOOP</i><o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>for (int i=0; i &lt; NumPages; i++)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: .5in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">{<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">// <i style="mso-bidi-font-style:normal">PAGE LOOP</i><o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>for (int j=0; j &lt; PageHeight; j++)<span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>{<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>err = pJob-&gt;SendRasters( JobArray[i][j] );<span style="mso-tab-count:3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>// 10<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>if (err != NO_ERROR)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>{<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;
+</span>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>delete pJob;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>delete pPC;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>delete pSys;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>return err;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>}<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">}</span><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>err=pJob-&gt;NewPage();<span style="mso-tab-count:6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; </span>// 11<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">if
+(err != NO_ERROR)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .5in; margin-left: .5in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-spacerun:
+yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>return err;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .75in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">}&nbsp;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>delete pJob;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>delete pPC;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><span style="mso-tab-count:
+3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>delete pSys;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>return NO_ERROR;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="text-indent: .25in; margin-left: .25in; margin-bottom: -14"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">}<o:p>
+</o:p>
+</span></p>
+<h3 style="margin-left:.5in"><span style="font-size:8.0pt;mso-bidi-font-size:
+12.0pt;color:maroon;font-weight:normal;font-style:normal"><a href="#top">[Back
+to top]</a><o:p>
+</o:p>
+</span></h3>
+<h3><span style="font-weight:normal;mso-bidi-font-weight:bold;font-style:normal;
+mso-bidi-font-style:italic">&nbsp;<o:p>
+</o:p>
+</span></h3>
+<h3>Notes on Minimal Sequence</h3>
+<ol>
+  <li>
+    <p style="margin-bottom: 6"><b>PageHeight</b>
+is given in pixel-rows. For a default page with a vertical printable area of 10
+inches and effective resolution of 300 d.p.i., this value would be 3000.</li>
+  <li>
+    <p style="margin-bottom: 6"><b>PageWidth</b>
+is given in pixels per row. Note that this value is constant across the Job; it
+must not exceed the maximum width for the target paper-size. (In this example
+using defaults, this would be assumed to be 2400 for LETTER size paper with 8
+printable inches at 300 d.p.i.) All rows of data must be padded with white space
+(RGB value 0xFFFFFF).</li>
+  <li>
+    <p style="margin-bottom: 6">The size of a row in the byte-array is given as PageWidth*3,
+because each pixel is represented as 3 bytes in the required RGB24 format.</li>
+  <li>
+    <p style="margin-bottom: 6">Creation of a <b>SystemServices</b> object is the first time communication with
+the printer is attempted, and entry points required by the core code are mapped.
+The class SystemServices
+is abstract, so reference is made here to the derived class containing the
+implementation for this platform.</li>
+  <li>
+    <p style="margin-bottom: 6">Check that <b>operator new</b> succeeded.</li>
+  <li>
+    <p style="margin-bottom: 6">The code set presumes no throw/catch capability in the local compiler, so
+all errors in constructors are signaled by the value of constructor_error,
+which the caller must check.</li>
+  <li>
+    <p style="margin-bottom: 6">The second step involves setting up the <b>PrintContext</b>
+for the job, which contains all the information about the print modes, paper
+type and size, etc. The constructor sets defaults for all necessary options, and
+defines the printer model being used based on information gathered by SystemServices
+constructor.</li>
+  <li>
+    <p style="margin-bottom: 6">When exiting due to an error, this step cleans up all previously
+allocated objects.</li>
+  <li>
+    <p style="margin-bottom: 6">The <b>Job</b>
+object handles one continuous sequence of rasters on successive pages. Data will
+be sent through this object.</li>
+  <li>
+    <p style="margin-bottom: 6">All the data is sent here. Errors may include conditions such as printer
+out of paper, offline, etc.</li>
+  <li>
+    <p style="margin-bottom: 6">This function causes the page to be ejected, and resets various internal
+counters.</li>
+  <li>This step cleans up all allocated objects.</li>
+</ol>
+<p class="Numbered" style="mso-list:none;tab-stops:.5in"><span style="font-size:
+8.0pt;mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+t<span style="mso-bookmark:_Hlt476042978">o</span> top]</a><o:p>
+</o:p>
+</span></p>
+<p class="Numbered" style="mso-list:none;tab-stops:.5in">&nbsp;<o:p>
+</o:p>
+</p>
+<h2><a name="asciitext">Using ASCII Text</a></h2>
+<p><span style="font-size: 12.0pt; mso-fareast-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA">The availability of font types varies by printer
+model and print mode. Up to four font types are contained in the SDK code set:
+Courier, </span><font SIZE="3">LetterGothic</font>, <font SIZE="3">
+  CGTimes</font>, and <font SIZE="3">
+  Univers</font>. Once
+the printer model has been selected (implicitly or explicitly), and a print mode
+decided upon, use the PrintContext method PrinterFontsAvailable to
+determine whether ASCII support is available at all. If it is, use the method EnumFonts to
+iterate through the set of ReferenceFonts, querying each for desired properties such as
+fixed-pitch vs. proportional. Then obtain a Font object for use in TextOut
+calls, by means of the method RealizeFont. See the <a href="api.htm">API</a> document for details on
+the above methods.</p>
+<p class="pgph1" style="margin-bottom:0in;margin-bottom:.0001pt">The following
+example shows a minimal sequence in which default settings are used for all the
+properties including color, bold, underline, and italics. The first step is to determine
+whether printer fonts are available on the current printer, using the currently
+selected mode. (This example assumes nothing has been done about setting PrintModes
+yet.)</p>
+<p class="pgph1" style="text-indent: 0in; mso-list: l3 level1 lfo13; tab-stops: list 1.0in">1)<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Fetch the mode that has been automatically set:</p>
+<p class="code" style="tab-stops: .5in; margin-left: 1.5in; margin-top: -10; margin-bottom: 30"><font size="2">int ModeIndex = pPC-&gt;CurrentPrintMode();</font></p>
+<p class="MsoNormal"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">&nbsp;</span>2)<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>Then query for font support:</p>
+<p class="MsoNormal" style="margin-left: 1.5in; margin-top: -10; margin-bottom: 30"><span style="mso-bidi-font-size: 12.0pt"><font size="2">BOOL fontsOK = pPC-&gt;PrinterFontsAvailable(ModeIndex);<o:p>
+ </font>
+</span><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">
+</o:p>
+</span></p>
+<p class="MsoNormal"><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">&nbsp;</span>3)<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>If fontsOK is FALSE, cause the system to render the fonts into the
+graphics buffer. Otherwise, create a Font object to use for sending ASCII text.</p>
+<p class="MsoNormal" style="margin-left: 1.5in; margin-bottom: -16"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">// create Courier font at 12-point size<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: 1.5in; margin-bottom: -16"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">pFont = pPC-&gt;RealizeFont( COURIER_INDEX, 12);<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: 1.5in; margin-bottom: -16"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">err = pFont-&gt;constructor_error;<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: 1.5in; margin-bottom: -16"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt">if (err != NO_ERROR)<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal" style="margin-left: 1.5in; margin-bottom: 30"><span style="font-size:10.0pt;
+mso-bidi-font-size:12.0pt"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>// try again with different parameters, or bail out<o:p>
+</o:p>
+</span></p>
+<p class="MsoNormal">Multiple
+fonts may of course be created for use on different portions of the text; it is
+up to the caller’s layout code, however, to determine sizes and locations on
+the page. Other Font<b style="mso-bidi-font-weight:normal"> </b>methods such as GetTextExtent<b style="mso-bidi-font-weight:normal">
+</b>may also be used in the layout code. The text may be sent at any time while
+processing a page. Each string of characters using the same font and running
+continuously across a row should be sent in one call to Job:</p>
+<p class="code" style="tab-stops: .5in; margin-left: 1.0in; margin-top: -10"><font size="2">err = pJob-&gt;TextOut(
+“Hello World”, strlen(“Hello World”), *pFont, x,y);</font></p>
+<p>Errors
+may result from sending text that would run off the page, in addition to error
+conditions in the printer.</p>
+<p><span style="font-size:
+8.0pt;mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Back to top]</a><o:p>
+&nbsp;
+</span></p>
+<p>&nbsp;</p>
+<b>
+<h2><a name="User-Interface Calling Code Samples">User-Interface Calling Code
+Samples</a></h2>
+</b>
+<p>The following functions demonstrate how to relay information to the user
+about actual and potential printer models connected to the system, and about
+available print modes.</p>
+<p>The three examples are presented as independent functions, and therefore each
+has the overhead of creating and deleting the SystemServices and PrintContext
+objects. In your code, these objects may already exist at the time this
+information is needed.</p>
+<p><b>Note on strings: </b>although basically in English, the strings used by
+these functions have been formulated so as to present minimal translation
+difficulties. Printer model names have the word &quot;DeskJet&quot; followed by
+numbers; print-mode names are things like &quot;Best&quot; and
+&quot;Normal&quot;, which would ideally be translated, but probably are
+intelligible to most non-English-speaking computer users.</p>
+<h3>Example 1: Show User What Printer Models Are Supported In The Current Build</h3>
+<p>This example is a function to return the number of supported model families
+and an array of their names. This functionality is only required when the
+connected printer cannot be identified directly through hardware, and thus the
+user must tell the system which model to target. This could occur because of a
+faulty printer cable, or in systems that direct output across a network or
+spooling system.</p>
+<blockquote>
+  <p><font size="2">DRIVER_ERROR AvailableModels(char* modelarray[],&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;
+  // 1</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  unsigned int&amp; count)</font></p>
+  <p style="margin-top: -16"><font size="2">{</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; count=0;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; PlatformServices*
+  pSys = new PlatformServices();</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; if (pSys==NULL)</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  return SYSTEM_ERROR;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; DRIVER_ERROR err=pSys-&gt;constructor_error;</font></p>
+  <blockquote>
+    <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    if (err!=NO_ERROR)</font></p>
+  </blockquote>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  return err;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; PrintContext *pPC
+  = new PrintContext(pSys);</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; if (pPC==NULL)</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  return SYSTEM_ERROR;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; err=pPC-&gt;constructor_error;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; if (err!=NO_ERROR)</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  return err;</font></p>
+  <font FACE="Arial">
+  <p style="margin-top: -16">&nbsp;</p>
+  </font>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; unsigned int
+  index=0;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; PRINTER_TYPE p =
+  pPC-&gt;EnumDevices(index);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  // 2</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; while (p !=
+  UNSUPPORTED)</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; {</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  modelarray[count++] = (char*)pPC-&gt;PrintertypeToString(p);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  // 3</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  p = pPC-&gt;EnumDevices(index);</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; }</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; delete pPC;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; delete pSys;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp; return NO_ERROR;</font></p>
+  <p style="margin-top: -16"><font size="2">}</font></p>
+</blockquote>
+<b>
+<h3>Notes on Available Models example</h3>
+</b>
+<p>(For the &quot;boilerplate&quot; of SystemServices and PrintContext creation
+and deletion, see notes to <b>PrintJob</b> example.)</p>
+<ol>
+  <li>
+    <p style="margin-bottom: 6">The caller of this routine will have allocated an array of size <b>MAX_PRINTER_TYPE+1</b>.
+    MAX_PRINTER_TYPE is the index of the highest PRINTER_TYPE enum in a
+    zero-based count.</li>
+  <li>
+    <p style="margin-bottom: 6"><b>EnumDevices</b> is an iterative mechanism for listing each supported
+    model in the build. It returns an enum representing the printer model
+    family.</li>
+  <li><b>PrintertypeToString</b> converts the enum to a string suitable for
+    display to user.</li>
+</ol>
+<font FACE="Arial">
+<p>&nbsp;</p>
+</font>
+<h3>Example 2: Show User The Print-Mode Options Available For The Selected
+Printer</h3>
+<p>This function takes an enum representing a printer model, and returns the
+number and names of the print-modes available for the printer.</p>
+<p>(Here again the &quot;boilerplate&quot; may be superfluous, since some work
+must already have been done to identify the target printer model, either
+implicitly or explicitly.)</p>
+<p>&nbsp;&nbsp;&nbsp; DRIVER_ERROR ModeInfo(PRINTER_TYPE pt, unsigned int&amp;
+count,</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+char
+names[6][12])&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 1</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp; {</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PlatformServices* pSys = new PlatformServices();</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (pSys==NULL)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return SYSTEM_ERROR;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DRIVER_ERROR err=pSys-&gt;constructor_error;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (err!=NO_ERROR)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return err;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PrintContext *pPC = new PrintContext(pSys);</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (pPC==NULL)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return SYSTEM_ERROR;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; err=pPC-&gt;constructor_error;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (err!=NO_ERROR)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return err;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; err=pPC-&gt;SelectDevice(pt);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // 2</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (err!=NO_ERROR)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete pPC;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete pSys;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return SYSTEM_ERROR;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<font FACE="Arial">
+<p style="margin-top: -16">&nbsp;</p>
+</font>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; count =
+pPC-&gt;GetModeCount();</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for (int i=0;
+i&lt;count; i++)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+err = pPC-&gt;SelectPrintMode(i);</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (err &gt;
+0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 3</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return err;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+strcpy(names[i], pPC-&gt;GetModeName()
+);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;
+// 4</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</p>
+<font FACE="Arial">
+<p style="margin-top: -16">&nbsp;</p>
+</font>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete pPC;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete
+pSys;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp; return NO_ERROR;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp; }</p>
+<b>
+<h3>Notes on ModeInfo example</h3>
+</b>
+<ol>
+  <li>
+    <p style="margin-bottom: 6">See previous note (1).&nbsp;</li>
+  <li>
+    <p style="margin-bottom: 6">The device is selected explicitly here; as with the rest of the
+    &quot;boilerplate&quot;, this work may have already been done by the time
+    this functionality is needed.&nbsp;</li>
+  <li>
+    <p style="margin-bottom: 6">The test (err &gt; 0) ignores warnings, whose values are less than zero.
+    These can be generated by a mismatch between mode and hardware configuration
+    (e.g. the engagement of a photo-tray, or the presence of a special type of
+    ink cartridge), indicating that the result will be sub-optimal.&nbsp;</li>
+  <li>Copy the name stored with the print-mode, for relay to user.&nbsp;</li>
+</ol>
+<h3>&nbsp;</h3>
+<h3>Example 3: Show user the specific model name of the connected printer</h3>
+<p>The model names and enums used in Example (1) above refer to printer-model <b>families</b>.
+These families share all important firmware and are treated as a single type
+from the perspective of the SDK code. But further differences are found within
+these families. For example the family that includes the 690 models has members
+with particular designations such as 692. This detailed information, matching
+the designation on the customer’s device and packaging, exists in the device
+memory, and can be obtained through the following method.</p>
+<p>&nbsp;&nbsp;&nbsp; DRIVER_ERROR GetConnectedModel(PRINTER_TYPE&amp; pt, const
+char* ModelID)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp; {</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PlatformServices* pSys = new PlatformServices();</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (pSys==NULL)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return SYSTEM_ERROR;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DRIVER_ERROR err=pSys-&gt;constructor_error;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if (err!=NO_ERROR)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return err;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+PrintContext *pPC = new PrintContext(pSys);</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (pPC==NULL)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return SYSTEM_ERROR;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; err=pPC-&gt;constructor_error;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if (err!=NO_ERROR)</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+return err;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+pt = pPC-&gt;SelectedDevice();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 1</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ModelID = pPC-&gt;PrinterModel();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+// 2</p>
+<font FACE="Arial">
+<p style="margin-top: -16">&nbsp;</p>
+</font>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete pPC;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+delete pSys;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+NO_ERROR;</p>
+<p style="margin-top: -16">&nbsp;&nbsp;&nbsp; }</p>
+<b>
+<h3>Notes on GetConnectedMode example</h3>
+</b>
+<ol>
+  <li>
+    <p style="margin-bottom: 6">See previous note (2)</li>
+  <li>Fetches the string from printer memory.</li>
+</ol>
+<p class="MsoNormal">&nbsp;</p>
+<h2><a name="Additional Information">Additional Information</a></h2>
+<p class="MsoNormal">For more information on ASCII text, refer to the <font size="3"><a href="devicebasedfont.htm">Device-Based
+Fonts</a> document.</font></p>
+<p class="pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Back to top]</a></span></p>
+<p class="MsoNormal">&nbsp;</p>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+
+include $(call INCLUDE_IF_AVAILABLE, \
+	3d_mixer \
+	aclock \
+	bdb \
+	beide \
+	bemail \
+	bterm \
+	burner \
+	camera \
+	cd_player \
+	codycam \
+	connect \
+	diskprobe \
+	expander \
+	input_recorder \
+	installer \
+	magnify \
+	mediaplayer \
+	memusage \
+	midi_player \
+	netpositive \
+	netrondisplayconfig \
+	package_builder \
+	pb_installer_stub \
+	people \
+	poorman \
+	pulse \
+	quickres \
+	scsiprobe \
+	showimage \
+	softkeyboard \
+	software_valet \
+	soundrecorder \
+	stylededit \
+	terminal \
+	tv \
+	validate \
+	wagner \
+, src/apps)
+

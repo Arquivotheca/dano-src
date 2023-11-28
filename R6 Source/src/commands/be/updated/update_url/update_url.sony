@@ -1,0 +1,9 @@
+#!/bin/sh
+# UPDATE_PACKAGE	In: The package identifier
+# UPDATE_URL		Out: The URL of the package
+#
+# This is the generic script for retrieving the URL for a specified update package.
+# It is "sourced" from the scripts "doupdate" and "doupgrade."
+# This script should be modified to be vendor specific before shipping.
+
+setenv UPDATE_URL http://update.be.com/sony/$UPDATE_PACKAGE.zip

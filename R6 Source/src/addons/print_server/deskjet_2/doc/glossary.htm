@@ -1,0 +1,503 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Glossary of Terms<o:p>
+</o:p>
+</span></h1>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note:
+      Documentation and code version numbers are designed to be independent of
+      each other, and may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.<span style="mso-spacerun:
+yes">&nbsp; </span>Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<div style="mso-element:footnote-list">
+  <p class="MsoNormal">&nbsp;<o:p>
+  </o:p>
+  </p>
+  <h1 align="center"><a name="top">Glossary</a> of Terms</h1>
+  <p class="MsoNormal">&nbsp;<o:p>
+  </o:p>
+  </p>
+  <p class="pgph1">This glossary consists of terms found throughout the
+  Hewlett-Packard Appliance Printing Software Development Kit. This is a living document, and new definitions will continue to be
+  added. If you have terms that you believe should be defined or added to this document,
+  log on to the <a href="http://www.hp-developer-solutions.com/">SPP
+website</a>   (http://www.hp-developer-solutions.com/) using your assigned login
+name and password, and send an email titled &quot;Glossary Terms&quot;. Be sure to include
+  the term, the location in the documentation, and your name, email and phone number in
+the email, should Hewlett-Packard need to contact you directly.</p>
+  <p class="pgph1">The following letters correspond directly with
+  the glossary. Note: Not all letters have definitions at this
+  time.&nbsp;</p>
+  <p class="pgph1">&nbsp;<o:p>
+  </o:p>
+  </p>
+  <p class="pgph1" style="margin-right:-.05in"><a href="#a">A</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#b">B</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#c">C</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#d">D</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#e">E</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#f">F</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#g"><span style="mso-bookmark:_Hlt476372607">G</span></a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#h">H</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#i">I</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#j">J</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#k">K</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#l"><span style="mso-bookmark:_Hlt476372604">L</span></a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#m">M</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#n">N</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#o">O</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#p">P</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#q">Q</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#r">R</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#s">S</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#t">T</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#u">U</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#v">V</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#w">W</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#x">X</a><span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span><a href="#y">Y</a><span style="mso-spacerun: yes">&nbsp;&nbsp; </span><a href="#z">Z</a></p>
+  <h2><a name="a">A</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Application
+  Programming Interface (API)</b>  - The set of function calls by means of which
+  a software library is accessed, (i.e.,<span style="mso-spacerun: yes">&nbsp; </span>PrintContext.)</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <h2><a name="b">B</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Bit </b>– A
+  binary digit that is 0 or 1.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Bool - </b><span style="mso-spacerun: yes">&nbsp;</span>A
+  data type of <i>true</i> or <i>false</i>, denoted by an integer,
+  typically 1 or 2.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Byte </b>– A
+  sequence of 8 bits used to encode data.</p>
+  <p class="definitions">&nbsp;</p>
+  <h2><a name="c">C</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Consistency </b>– An
+  IQ attribute that refers to the degree to which quality attributes and defects
+  are uniform throughout a print job.</p>
+  <h2><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bookmark: d">[Ba<span style="mso-bookmark:
+_Hlt476018363">c</span>k to top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; color: maroon; mso-bookmark: d"><o:p>
+  </o:p>
+  </span></h2>
+  <p class="MsoNormal"><span style="mso-bookmark:d">&nbsp;<o:p>
+  </o:p>
+  </span></p>
+  <h2><span style="mso-bookmark:d"><a name="d">D</a></span></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Data Member (of
+  a class or an object) - </b><span style="layout-grid-mode:line">a variable (or
+  constant) that belongs to the public interface of that class/object.<o:p>
+  See also, <a href="#m">Method</a> (of a class or an object).</o:p>
+  </span></p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><a name="downsample">Downsample</a> –</b><b>
+  </b>To select a subset of a given image's pixels (say every Nth pixel) of
+  dimensions [X x Y], so as to produce a smaller version of the same image with
+  dimensions [X/N x Y/N]. (See also, <a href="#Upsample">Upsample</a>.)</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><a name="downsample">Dots
+  Per Inch (d.p.i)</a> –</b><b>
+  </b>The number of dots of color in a square inch. Refers to the device dot
+  placement addressability.</p>
+  <p class="definitions">&nbsp;</p>
+  <h2><a name="e">E</a></h2>
+  <p><b style="mso-bidi-font-weight: normal">ECP (Extended Capabilities Port) </b><b style="mso-bidi-font-weight:normal">-</b>
+  A term used in IEEE Specifications that refers to a mode that supports bi-directional
+  communication. The SDK code <i>only </i>supports ECP forward mode. (See also, <a href="#r">RLE</a>.)</p>
+  <h2>&nbsp;</h2>
+  <h2><a name="f">F</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Function - </b><span style="layout-grid-mode:line">any
+  callable code that returns a value as its result.</span><b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <h2><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bookmark: g">[Back
+  t<span style="mso-bookmark:_Hlt476372608">o</span> top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; color: maroon; mso-bookmark: g"><o:p>
+  </o:p>
+  </span></h2>
+  <p class="MsoNormal"><span style="mso-bookmark:g">&nbsp;<o:p>
+  </o:p>
+  </span></p>
+  <h2><span style="mso-bookmark:g"><a name="g">G</a></span></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Glyph</b> - A
+  picture of a character.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Graphic User
+  Interface (GUI) </b>- Program commands (code) in the form of buttons, dialog
+  boxes, menus, or icons that make interaction between the user and the program
+  easier.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <h2><a name="h">H</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Hook</b>  –
+  Another word for interface or the API.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Host System - </b>The
+  system, i.e. the operating system together with relevant services (I/O,
+  user-interface, etc.) and relevant applications (browser or other applications
+  that print), in which the driver is embedded, and on which it depends.<b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <h2><a name="i">I</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Integration
+  Testing</b> - Testing to find failures in interfaces between subsystems,
+  modules, and programs. This test type is needed primarily when a new module or
+  subsystem is being added in. The most productive testing usually starts with a
+  technical knowledge of the interfaces between the modules. Some regression
+  testing of the module may be included.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Interface</b> -
+  A collection of related methods or functions working together to provide some
+  functionality.<b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">IQ </b>– The
+  abbreviation for image quality. The clarity of the writing device's output.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">I/O </b>–
+  Input/Output. For this SDK, I/O refers to the calling and retrieving of
+  low-level information (such as printer type and specs) between the printer
+  driver and the host system.</p>
+  <h2><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bookmark: j">[Back
+  to top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; color: maroon; mso-bookmark: j"><o:p>
+  </o:p>
+  </span></h2>
+  <p class="MsoNormal"><span style="mso-bookmark:j">&nbsp;<o:p>
+  </o:p>
+  </span></p>
+  <h2><span style="mso-bookmark:j"><a name="j">J</a></span></h2>
+  <p>&nbsp;</p>
+  <h2><a name="k">K</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">KCMY</b> -
+  Abbreviation for Blac<u>k</u>, <u>C</u>yan, <u>M</u>agenta, and <u>Y</u>ellow.
+  (See also <a href="#RGB">RGB</a>, <a href="#sRGB">sRGB</a>.)</p>
+  <p class="definitions">&nbsp;</p>
+  <h2><a name="l">L</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Landscape
+  Orientation</b> - The orientation of physical page rotation, either 90 or 270 degrees.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Logical Page</b>
+  - The actual page as defined by the application. The Printer Control
+  Language's logical page (or addressable area) defines the area in which the
+  cursor can be positioned. Logical page size may be changed by PCL commands. It
+  can be larger than the printable area, which is determined by the technology
+  of the printing device.</p>
+  <h2><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bookmark: m">[Back
+  to<span style="mso-bookmark:_Hlt476372605"> </span>top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; color: maroon; mso-bookmark: m"><o:p>
+  </o:p>
+  </span></h2>
+  <p class="MsoNormal"><span style="mso-bookmark:m">&nbsp;<o:p>
+  </o:p>
+  </span></p>
+  <h2><span style="mso-bookmark:m"><a name="m">M</a></span></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Media </b>–
+  The substrate that is printed upon, such as paper, glossy paper, photo paper,
+  envelopes, or transparency film. Not all medias are accepted by this SDK.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Media Axis </b>–
+  The axis along which the media moves..</p>
+  <p class="definitions"><b>Media Size </b>- See Paper Size.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Media Source - </b>The
+  location, or <i>source</i> of the print media. &quot;Where is the print media
+  being pulled from?&quot; This is usually expressed as Tray1, Tray2, Manual
+  feed, or Manual Envelope.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Method (of a
+  class or an object) -</b><span style="layout-grid-mode:line"> A function that
+  belongs to the public interface of that class/object. See also, <a href="#d">Data
+  Membe</a>r (of a class or an object).</span></p>
+  <p class="definitions"><b style="mso-bidi-font-weight:
+normal"><o:p>
+  </o:p>
+  </b></p>
+  <h2><a name="n">N</a></h2>
+  <p>&nbsp;</p>
+  <h2><a name="o">O</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Orientation</b>
+  - Either portrait or landscape, often defined in degrees of rotation (0, 90,
+  180, or 270).</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Operating System
+  (OS)</b>  - Example: Windows, Unix, Linux, or Macintosh.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><span style="background-repeat: repeat; background-attachment: scroll; mso-highlight: yellow; background-position: 0%">Overloading
+  – </span></b>Two methods within a class with the same name, even though
+  different outputs can occur. Parameter lists determine which is to be used
+  (i.e., Font).</p>
+  <h2><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bookmark: p">[Back
+  to top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; color: maroon; mso-bookmark: p"><o:p>
+  </o:p>
+  </span></h2>
+  <p class="MsoNormal"><span style="mso-bookmark:p">&nbsp;<o:p>
+  </o:p>
+  </span></p>
+  <h2><span style="mso-bookmark:p"><a name="p">P</a></span></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Page Description
+  Language (PDL)</b> - Proprietary language containing the DDI commands that
+  describe the contents of a logical page.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Paper, Plain </b>–
+  The term loosely used to refer to standard office papers such as bond and
+  copier paper. In reality, there is no such thing as plain paper since every
+  paper is designed for some specific use.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Paper Size – </b>The
+  size of the media being printed on. Example, Letter, Legal, A4, or Envelope.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Paper, Special </b>–
+  Paper or other media (such as Hewlett-Packard Premium Glossy Paper) which has
+  been specifically formulated or processed for optimal use with a&nbsp;
+  particular printing or writing system or in a particular print mode.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Paper Type</b> -
+  The type of media being printed on. Example: plain paper, bond, special,
+  glossy or transparencies. See also, <a href="#m">Media</a>.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Pen </b>– A
+  print cartridge. Within the inkjet industry, print cartridges are typically
+  called pens. However, consumers known them as print cartridges. The two terms
+  are synonymous.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Peripheral </b>– Any
+  item connected to the host system. Example: mouse, keyboard, scanner, or
+  printer.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Physical Page</b>
+  - The actual sheet of paper or media - what the user thinks of as a
+  &quot;page&quot;. Physical page size is determined by the size of the media
+  inserted in the printer.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Pitch - </b>A
+  measurement defined in terms of ‘characters per inch’. A pitch of 10 (or
+  10-pitch) means that 10 characters (at the specified point size) will cover 1
+  inch across the page.<b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Pixel </b>–
+  In this document, one or more logically addressed dots. Examples are: multiple
+  black dots to achieve grayscale, or one or more color dots in the same
+  location to achieve a desired color.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Pixel-rows –</b>
+  A row of pixels. Each pixel is input to the SDK code set as 24-bit RGB value. The number
+  of pixels on one row is set by the client in the PrintContext API.<span style="background:yellow;mso-highlight:yellow"><b style="mso-bidi-font-weight:normal"></o:p>
+  </b></span></p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Point size - </b>Only
+  used in relation to fonts, the point size of a font corresponds to the amount
+  of vertical space required to store the tallest character in the font set. One
+  point is technically 1/72&quot;<font SIZE="2" COLOR="#0000ff">.</font><b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Portrait
+  Orientation</b> - The orientation of physical page rotation, either 0 or 180 degrees.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Print Mode </b>–
+  An imaging algorithm that specifies dot resolution, carriage velocity, and
+  other printing specifications in order to optimize image quality, throughput,
+  and media compatibility. Best, Normal, and EconoFast are examples of print
+  modes.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Print Quality - </b>A
+  user-specified setting for the quality of the printed output, usually
+  expressed in terms of Printmodes: EconoFast,
+  Normal or Best.<b style="mso-bidi-font-weight:normal"><o:p>
+  </o:p>
+  </b></p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Printable Page</b>
+  – See <a href="#Printable Region">Printable Region</a>.<span style="background-repeat: repeat; background-attachment: scroll; mso-highlight: yellow; background-position: 0%"><o:p>
+  </span><span style="background:yellow;mso-highlight:yellow">
+  </o:p>
+  </span></p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><a name="Printable Region">Printable Region</a></b>
+  – Refers to the area of the printable page in which printable output may
+  occur.<span style="background-repeat: repeat; background-attachment: scroll; mso-highlight: yellow; background-position: 0%"><o:p>
+  For example: the default printable region on standard letter size paper (8.5 x
+  11&quot;) is 8 x 10&quot;. This allows 0.25&quot; left and right margins,
+  respectively, as well as a 0.33&quot; top margin and 0.67&quot; bottom margin.</span><span style="background:yellow;mso-highlight:yellow"></o:p>
+  </span></p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Printer Driver</b>
+  - A part of the printing system that interfaces with the operating system, and
+  generates printer ready data.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Printer Ready
+  Data (PRD)</b> - Pre-formatted data in the language of the target printer,
+  which needs no processing before being sent to printer.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Printer Ready
+  Data</b> - Data stream that is consumable by the printer device to generate a
+  physical page.</p>
+  <p class="definitions">&nbsp;</p>
+  <h2><a name="q">Q</a></h2>
+  <p>&nbsp;</p>
+  <h2><a name="r">R</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Raster Data </b>-
+  Raw data for a print head, detailing print information made up of dots in a
+  horizontal row, or dots which are arranged in rows and columns, ending when
+  the print head completes a carriage return.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Raster Row </b>–
+  One line of consecutive pixels in the scan (x-axis) direction..</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><a name="RGB">RGB</a> -</b> 
+  A 24-bit value representing a color for one pixel (or the format for
+  representing a pixel), with 8 bits each for <u>R</u>ed, <u>G</u>reen and <u>B</u>lue.
+  (See <a href="#sRGB">sRGB</a>.)</p>
+  <p><b style="mso-bidi-font-weight:normal">RLE (Run Length Encoding) -</b> A
+  term used in IEEE Specifications that refers to a compression mode that may
+  exist in ECP transfers. This protocol is <i>not</i> supported by the SDK code.
+  (See also, <a href="#e">ECP</a>.)</p>
+  <h2><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bookmark: s">[Back
+  to top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; color: maroon; mso-bookmark: s"><o:p>
+  </o:p>
+  </span></h2>
+  <p class="MsoNormal"><span style="mso-bookmark:s">&nbsp;<o:p>
+  </o:p>
+  </span></p>
+  <h2><a name="s">S</a><span style="background-repeat: repeat; background-attachment: scroll; mso-highlight: yellow; background-position: 0%"><o:p>
+  </span><span style="background:yellow;mso-highlight:yellow">
+  </o:p>
+  </span></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Sharpness </b>–
+  An IQ attribute that refers to the distinctness of the edge transition at an
+  object's boundary.</p>
+  <p class="definitions"><b><a NAME="srgb">sRGB </a>-</b> An industry standard
+  color space that enables different color-capable devices (e.g. displays,
+  printers, etc.) to exchange color information in a way that helps maintain
+  color accuracy. This enables the colors that the user sees on the screen to
+  more closely match the colors that are printed.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">System Testing</b>
+  - System testing looks for defects that belong to the system as a whole.</p>
+  <p class="definitions">&nbsp;</p>
+  <h2><a name="t">T</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Transient Data:<span style="font-size:16.0pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Arial Narrow&quot;"> </span></b>Data that exists only
+  during the processing of a print job. The majority of this data is generated
+  by user settings for the print job, and information that is generated as part
+  of processing the print job.</p>
+  <p class="definitions">&nbsp;</p>
+  <h2><a name="u">U</a></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal"><a name="Upsample">Upsample</a> – </b>When
+  an image is given at a lower resolution than that of the printer, it must be
+  expanded or scaled up by interpolating between neighboring pixels to produce
+  enough pixels to fill the target region. The interpolation may be
+  &quot;dumb&quot;, i.e. a simple averaging of neighboring pixel values, or it
+  may be &quot;smart&quot;, as in Hewlett-Packard's proprietary SmartFocus technology. (See
+  Scaler object in the <a HREF="api.htm">API</a>.) (See also, <a href="#downsample">Downsample</a>.)</p>
+  <h2><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bookmark: v">[Back
+  to top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; color: maroon; mso-bookmark: v"><o:p>
+  </o:p>
+  </span></h2>
+  <p class="MsoNormal"><span style="mso-bookmark:v">&nbsp;<o:p>
+  </o:p>
+  </span></p>
+  <h2><span style="mso-bookmark:v"><a name="v">V</a></span></h2>
+  <p class="definitions"><b style="mso-bidi-font-weight:normal">Variable Member
+  (of a class object) -</b> a variable that belongs to the
+  interface of that class/object.</p>
+  <p class="definitions"><b style="mso-bidi-font-weight: normal">Visual Comfort </b>–
+  An IQ attribute that refers to the degree to which an image does not cause a
+  viewer visual fatigue or distress.</p>
+  <p class="definitions">&nbsp;</p>
+  <h2><a name="w"><span style="layout-grid-mode:line">W</span></a></h2>
+  <h2><span style="layout-grid-mode:line"><o:p>
+  </o:p>
+  </span></h2>
+  <h2><a name="x"><span style="layout-grid-mode:line">X</span></a></h2>
+  <h2><span style="layout-grid-mode:line"><o:p>
+  </o:p>
+  </span></h2>
+  <h2><a name="y"><span style="layout-grid-mode:line">Y</span></a></h2>
+  <h2><span style="layout-grid-mode:line"><o:p>
+  </o:p>
+  </span></h2>
+  <h2><a name="z"><span style="layout-grid-mode:line">Z</span></a><span style="layout-grid-mode:line"><o:p>
+  </o:p>
+  </span></h2>
+  <h2><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Bac<span style="mso-bookmark:_Hlt476040349">k</span>
+  to top]</a><o:p>
+  </span></h2>
+</div>
+
+</body>
+
+</html>

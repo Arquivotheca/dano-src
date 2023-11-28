@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Purpose: The Uber-Update-Script
+# This script downloads the script which will do the actual update and executes it.
+
+#/*** non-netron code commented out ***/
+
+#/*** Don't do update script when sleeping! ***/
+# if not /boot/beos/bin/nut check
+# 	exit 0
+# fi
+	
+# if eq RELOAD true
+	setenv UPDATE_PACKAGE updatescript
+	setenv UPDATE_TARGET /etc/update/
+	setenv UPDATE_KEY master
+	setenv UPDATE_TEMP /etc/update/updatescript.zip
+	sh -c "/etc/update/doupdate"
+# fi
+
+if exists /etc/update/updatescript
+	source /etc/update/updatescript
+fi
+
+exit 0

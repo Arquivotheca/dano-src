@@ -1,0 +1,100 @@
+
+Microsoft (R) Program Maintenance Utility   Version 1.50
+Copyright (c) Microsoft Corp 1988-94. All rights reserved.
+
+	ml -c -W3 -DWIN32 -I. -Cp -nologo bigcopy.asm
+ Assembling: bigcopy.asm
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. dibtoyuv.c
+dibtoyuv.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. diffdetc.c
+diffdetc.c
+	ml -c -W3 -DWIN32 -I. -Cp -nologo dyuvfrag.asm
+ Assembling: dyuvfrag.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo math64.asm
+ Assembling: math64.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo splitasm.asm
+ Assembling: splitasm.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo drawcljr.asm
+ Assembling: drawcljr.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo drawcpla.asm
+ Assembling: drawcpla.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expacljr.asm
+ Assembling: expacljr.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expacpla.asm
+ Assembling: expacpla.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expauyvy.asm
+ Assembling: expauyvy.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expayuy2.asm
+ Assembling: expayuy2.asm
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. converge.c
+converge.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. cvcompre.c
+cvcompre.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. cvdecomp.c
+cvdecomp.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. dibtovec.c
+dibtovec.c
+	ml -c -W3 -DWIN32 -I. -Cp -nologo diffdet.asm
+ Assembling: diffdet.asm
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. drvproc.c
+drvproc.c
+	ml -c -W3 -DWIN32 -I. -Cp -nologo draw8.asm
+ Assembling: draw8.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo draw8d.asm
+ Assembling: draw8d.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo draw15.asm
+ Assembling: draw15.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo draw24.asm
+ Assembling: draw24.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo draw32.asm
+ Assembling: draw32.asm
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. endingco.c
+endingco.c
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expand8.asm
+ Assembling: expand8.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expand8d.asm
+ Assembling: expand8d.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expand15.asm
+ Assembling: expand15.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expand16.asm
+ Assembling: expand16.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expand24.asm
+ Assembling: expand24.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo expand32.asm
+ Assembling: expand32.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo generate.asm
+ Assembling: generate.asm
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. iccv.c
+iccv.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. intercod.c
+intercod.c
+intercod.c(355) : warning C4761: integral size mismatch in argument; conversion supplied
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. keycodeb.c
+keycodeb.c
+	ml -c -W3 -DWIN32 -I. -Cp -nologo makeneig.asm
+ Assembling: makeneig.asm
+	ml -c -W3 -DWIN32 -I. -Cp -nologo match.asm
+ Assembling: match.asm
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. matchand.c
+matchand.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. rate.c
+rate.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. splitcod.c
+splitcod.c
+	cl -c -W3 -Dtry=__try -Dexcept=__except -Dleave=__leave -Dfinally=__finally -DCRTAPI1=_cdecl -DCRTAPI2=_cdecl -nologo -D_X86_=1 -DWINVER=0x0400 -DWINCPK -nologo -DDIBS=31 -DWIN32  -D_WIN32 -D_MT -Ox -Zp1 -I. writetil.c
+writetil.c
+	link -lib -nologo	    -machine:i386            -def:iccv.dnt            bigcopy.obj  dibtoyuv.obj  diffdetc.obj  dyuvfrag.obj  math64.obj  splitasm.obj  drawcljr.obj  drawcpla.obj  expacljr.obj  expacpla.obj  expauyvy.obj  expayuy2.obj  converge.obj  cvcompre.obj  cvdecomp.obj  dibtovec.obj  diffdet.obj  drvproc.obj  draw8.obj  draw8d.obj  draw15.obj  draw24.obj  draw32.obj  endingco.obj  expand8.obj  expand8d.obj  expand15.obj  expand16.obj  expand24.obj  expand32.obj  generate.obj  iccv.obj  intercod.obj  keycodeb.obj  makeneig.obj  match.obj  matchand.obj  rate.obj  splitcod.obj  writetil.obj                     -name:iccvid.dll       -out:iccv.lib
+   Creating library iccv.lib and object iccv.exp ...
+	rm -f iccv.ver
+	awk -f version.awk iccv.rcv > iccv.ver
+	attrib -r iccv.ver
+	rc -DWIN32 -D_WIN32  -DWINVER=0x0400 -I. -fo iccv.res iccv.rc
+	cvtres -i386 -o iccv.rbj iccv.res
+	link -nologo  -base:0x1C000000            -debug:none         -debugtype:cv     -dll                        -entry:DllInstanceInit@12   -out:iccvid.dll	     -map:iccvid.map	     -merge:.rdata=.text	     -merge:.bss=.data           iccv.exp iccv.rbj		     bigcopy.obj  dibtoyuv.obj  diffdetc.obj  dyuvfrag.obj  math64.obj  splitasm.obj  drawcljr.obj  drawcpla.obj  expacljr.obj  expacpla.obj  expauyvy.obj  expayuy2.obj  converge.obj  cvcompre.obj  cvdecomp.obj  dibtovec.obj  diffdet.obj  drvproc.obj  draw8.obj  draw8d.obj  draw15.obj  draw24.obj  draw32.obj  endingco.obj  expand8.obj  expand8d.obj  expand15.obj  expand16.obj  expand24.obj  expand32.obj  generate.obj  iccv.obj  intercod.obj  keycodeb.obj  makeneig.obj  match.obj  matchand.obj  rate.obj  splitcod.obj  writetil.obj winmm.lib libcmt.lib oldnames.lib kernel32.lib  advapi32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib version.lib
+	mapsym -n iccvid.map
+Microsoft (R) Symbol File Generator  Version 5.11
+Copyright (C) Microsoft Corp 1984 - 1993.  All rights reserved.
+Line number records omitted from output file
+
+Program entry point at 0001:6810
+***** finished making iccvid.dll for Win32 *****

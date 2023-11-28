@@ -1,0 +1,1 @@
+/* RKnheap.c */int _RkInitializeHeap(int size);void _RkFinalizeHeap(void);unsigned char *_RkNewHeap(unsigned n);void _RkFreeHeap(unsigned char *p);void _RkShowHeap(void);

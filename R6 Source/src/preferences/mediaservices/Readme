@@ -1,0 +1,10 @@
+
+This program will display a dialog that allows you to configure whether your 
+system uses the new or old media services when it boots.  Changes made here 
+will be applied to your bootscripts, and will take effect the next time you 
+boot your system.
+
+In general, it is best to use the new media services.  However, if you are
+having problems some older programs, reverting to the old media services may
+fix them.  Note that you can always switch back to the previous configuration 
+by re-running this program.

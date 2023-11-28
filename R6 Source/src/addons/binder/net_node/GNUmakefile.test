@@ -1,0 +1,32 @@
+
+TARGET_NAME:=net_node
+
+SRC_DIR:=src/addons/binder/net_node
+
+SRCS := NetNode.cpp
+
+MY_CFLAGS := -DBUILD_AS_APP
+
+MY_INCLUDES:= \
+	-I$(BUILDHOME)/src/inc/os_p \
+#	-I.
+
+SYSTEM_LIBS:= libroot.so libbe.so libsocket.so libnetconfig.so 
+
+PARENT_IMAGE:=
+
+HAS_MAIN:=
+
+MY_INSTALL_DIR:=.
+
+LINK_DIRS:=
+
+SIGNATURE:=
+
+RESOURCES:=
+
+ATTRIBUTES:=
+
+MY_OPTIMIZER:=-O0 -g
+include $(SDIR_TEMPLATES)/AppTemplate.mk
+

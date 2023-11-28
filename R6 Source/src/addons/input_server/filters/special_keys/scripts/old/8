@@ -1,0 +1,4 @@
+#!/bin/sh
+# Login Button
+
+TellBrowser -goto file://$RESOURCES/index.html

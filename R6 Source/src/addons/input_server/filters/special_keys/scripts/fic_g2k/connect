@@ -1,0 +1,65 @@
+#!/bin/sh
+# connect/disconnect IP
+# hacked from the sleep/wake script
+
+
+# don't honor the connect/disconnect key until the UI is booted
+if not /boot/beos/bin/bootcomplete --test
+	exit
+fi
+
+if /boot/beos/bin/nut check
+
+# Currently awake
+
+	# put networking pre-emption when awake here
+	# Give the update daemon one last chance to perform update if it has been defered.
+	/bin/sndcmd "application/x-vnd.Be-UPDT" retry
+fi
+
+
+if /boot/beos/bin/nut toggle
+
+# Sleepy time.
+	# Disable autodial
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pa0!"
+	
+	# Bring PPP Down
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pdn!"
+	
+	# Make a kooky sound
+	/bin/beep PowerDown
+
+	# Wait for sound
+	sleep 1
+
+	# Hangup connection
+	sleep 5
+	/bin/netcontrol hangup
+
+else
+
+# Wake up!
+
+	# Sound
+	/bin/beep PowerUp	
+
+	# Enable autodial
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pa1!"
+	
+	# force update
+	/bin/sndcmd "application/x-vnd.Be-UPDT" update
+
+  	# dial
+	if exists $SETTINGS/beia-ppp
+  	 source $SETTINGS/beia-ppp
+	   if empty phonenumber
+           else
+	     /boot/beos/bin/netcontrol ppp
+	     sleep 5			
+             /boot/beos/bin/netcontrol dial
+           fi
+	fi  
+
+
+fi

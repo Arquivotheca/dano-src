@@ -1,0 +1,1255 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Software Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto"><font face="Times New Roman">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</font>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt"><font face="Times New Roman">&nbsp;<o:p>
+</o:p>
+</font>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto"> <font face="Times New Roman"> Printing&nbsp;</font>
+</span></h1>
+<p class="MsoNormal"><font face="Times New Roman">&nbsp;<o:p>
+</o:p>
+</font>
+</p>
+<h1><font face="Times New Roman"><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</font>
+</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note:
+      Documentation and code version numbers are designed to be independent of
+      each other, and may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal"><font face="Times New Roman">Notice<o:p>
+</o:p>
+</font>
+</b></p>
+<p class="MsoNormal"><font face="Times New Roman">The information contained in this document is subject to
+change without notice.</font></p>
+<p class="MsoNormal"><font face="Times New Roman">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.<span style="mso-spacerun:
+yes">&nbsp; </span>Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</font></p>
+<p class="MsoNormal"><font face="Times New Roman">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</font></p>
+<p><font SIZE="3" face="Times New Roman">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3" face="Times New Roman">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3" face="Times New Roman">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3" face="Times New Roman">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3" face="Times New Roman">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal"><font face="Times New Roman">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</font></p>
+<p class="MsoNormal" style="margin-bottom: -16"><font face="Times New Roman">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</font></p>
+<p class="MsoNormal" style="margin-bottom: -16"><font face="Times New Roman">Hewlett-Packard Company.</font></p>
+<p class="MsoNormal"><font face="Times New Roman">All rights reserved.</font></p>
+<p class="MsoNormal"><font face="Times New Roman">&nbsp;<o:p>
+</o:p>
+</font>
+</p>
+<h1 align="center"><font face="Times New Roman">Printing</font></h1>
+<h2>&nbsp;</h2>
+<h2><a name="top"><font face="Times New Roman">Introduction</font></a></h2>
+<p class="Pgph1"><font face="Times New Roman">The Hewlett-Packard Appliance Printing Software Development Kit (SDK)
+is designed to offer basic printing support for
+“thin client” environments. As such, the breadth of available features is
+secondary to supplying optimal speed and print qualities over several printer
+families, while maintaining a small code-space/ run-time footprint.</font></p>
+<p class="Pgph1" style="margin-bottom: -8"><font face="Times New Roman">The following topics discuss printing
+and the SDK in greater detail:</font></p>
+<blockquote>
+<p class="Pgph1" style="margin-bottom: -16"><a href="#printerfeatures"><font face="Times New Roman">Printers and Features Supported</font></a></p>
+<p class="Pgph1" style="margin-bottom: -16"><a href="#minfunctionality"><font face="Times New Roman">Minimum Functi<span style="mso-bookmark:_Hlt476042436">o</span>nality</font></a></p>
+<p class="Pgph1" style="margin-bottom: -16"><a href="#printmodes"><font face="Times New Roman">Prin<span style="mso-bookmark:_Hlt476042442">t</span>
+Modes</font></a></p>
+<p class="Pgph1" style="margin-bottom: 0"><a href="#scalingres"><font face="Times New Roman"> Resolution
+and Scali<span style="mso-bookmark:_Hlt476042455">n</span>g</font></a></p>
+<p class="Pgph1" style="margin-bottom: 0">&nbsp;</p>
+</blockquote>
+<h2><a name="printerfeatures"><font face="Times New Roman">Printers and Features Supported</font></a></h2>
+<p class="Pgph1"><font face="Times New Roman">The following features are supported by the SDK and apply to all printer families and family
+members:</font></p>
+<ul>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;mso-list:l2 level1 lfo6;
+tab-stops:list 1.25in"><font face="Times New Roman">24-bit RGB input</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;mso-list:l2 level1 lfo6;
+tab-stops:list 1.25in"><font face="Times New Roman"><span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7.0pt">&nbsp;</span>Multiple Paper Sizes (Letter, A4, Legal)</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;mso-list:l2 level1 lfo6;
+tab-stops:list 1.25in"><font face="Times New Roman">Grayscale (Black-Only) Mode</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;mso-list:l2 level1 lfo6;
+tab-stops:list 1.25in"><font face="Times New Roman">Comprehensive Error Handling &amp; Notification</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;mso-list:l2 level1 lfo6;
+tab-stops:list 1.25in"><font face="Times New Roman">Online HTML-Based Help System</font></li>
+</ul>
+<p class="Pgph1"><font face="Times New Roman">Currently supported printer families, their family members, and
+particular features available are listed in the following
+table. Printer family derivatives are available on the market and should be
+considered to have similar feature functionality as other members of their family type.
+<span style="mso-bidi-font-size: 12.0pt"><font size="3"><b style="mso-bidi-font-weight: normal; mso-bidi-font-size: 12.0pt">(</b><b style="mso-bidi-font-weight:normal">8xx Series Only -
+</b>The scope of this Series does NOT include the older 850C, 855C, 870C or
+890C printers.)</font> </span></font></p>
+<h2 align="left" style="margin-top: 10; margin-bottom: 20"><span style="color:blue"><font face="Times New Roman">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="Printer Family / Functionality Table">
+Printer
+Family / Functionality Table</a><o:p>
+</o:p>
+</font>
+</span></h2>
+<table border="0" cellspacing="0" cellpadding="0" style="margin-left:37.5pt;
+ border-collapse:collapse;mso-table-layout-alt:fixed;mso-padding-alt:0in 1.5pt 0in 1.5pt">
+  <tr height="0">
+    <td width="86" style="border:none">
+      <p ALIGN="CENTER">&nbsp;<center>
+      <table BORDER="1" CELLSPACING="3" BORDERCOLOR="#0000ff" CELLPADDING="2" WIDTH="765" height="746">
+        <tr>
+          <td WIDTH="11%" VALIGN="middle" HEIGHT="64" rowspan="2"><b>
+            <p ALIGN="CENTER"><font face="Times New Roman">Printer<br>
+            Family</font></b></td>
+          <td WIDTH="18%" VALIGN="middle" HEIGHT="64" rowspan="2"><b>
+            <p ALIGN="CENTER"><font face="Times New Roman">Model</font></b> <font face="Times New Roman"><b>
+            Number</b></font></td>
+          <td WIDTH="426%" VALIGN="TOP" COLSPAN="11" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font face="Times New Roman">Functionality</font></b></td>
+        </tr>
+        <tr>
+          <td WIDTH="9%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            Photo<br>
+            Cartridge</font></b></td>
+          <td WIDTH="9%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            Photo<br>
+            Loading<br>
+            Tray</font></b></td>
+          <td WIDTH="9%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            Duplexer<br>
+            Module</font></b></td>
+          <td WIDTH="9%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            Banner<br>
+            Paper</font></b></td>
+          <td WIDTH="10%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            Photo<br>
+            Quality<br>
+            Mode</font></b></td>
+          <td WIDTH="11%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            Grayscale</font></b></td>
+          <td WIDTH="7%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            Device Text</font></b></td>
+          <td WIDTH="7%" VALIGN="TOP" HEIGHT="45"><b>
+            <p ALIGN="CENTER"><font SIZE="2" face="Times New Roman">
+            USB</font></b></td>
+          <td WIDTH="7%" VALIGN="TOP" HEIGHT="45" align="center"><b><font size="2" face="Times New Roman">Pages<br>
+            Per<br>
+            Minute</font></b></td>
+          <td WIDTH="7%" VALIGN="TOP" HEIGHT="45" align="center"><b><font size="2" face="Times New Roman">Dots<br>
+            Per<br>
+            Inch</font></b></td>
+          <td WIDTH="7%" VALIGN="TOP" HEIGHT="45" align="center"><b><font size="2" face="Times New Roman">Connectivity</font></b></td>
+        </tr>
+      </center>
+        <tr>
+          <td WIDTH="121%" VALIGN="MIDDLE" HEIGHT="30" colspan="13"><b>
+            <p ALIGN="left"><font SIZE="2" face="Times New Roman">
+            &nbsp;600 Series</font></b></td>
+        </tr>
+      <center>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="28">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="28">
+            <p><font SIZE="2" face="Times New Roman">
+            600</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="28">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="28">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="28">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="28">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="28"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#ff0000" face="Times New Roman">
+            No</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="28"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000">
+            Yes</font></b><font FACE="Arial" SIZE="1"> (with
+            pen change)</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28" align="center">
+            <font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28" align="center">
+            <font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28" align="center">
+            <font size="1" face="Times New Roman">IEEE 1284</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="42">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="42">
+            <p><font SIZE="2" face="Times New Roman">
+            610C 612C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42" bgcolor="#FFFFFF">
+            <b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b>
+          </td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42" bgcolor="#FFFFFF">
+            <p align="center"><font SIZE="1" face="Times New Roman">
+            N/A</font></p>
+          </td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="42" bgcolor="#FFFFFF">
+            <p align="center"><font face="Times New Roman"><b><font SIZE="1" COLOR="#008000">Yes</font></b><font FACE="Arial" SIZE="1"> (with
+            photo pen)</font></font></p>
+          </td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42" align="center">
+            <font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="42">
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="42">
+            <p><font SIZE="2" face="Times New Roman">
+            640C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font face="Times New Roman"><b><font SIZE="1" COLOR="#008000">Yes</font></b><font FACE="Arial" SIZE="1"> (with
+            photo
+            pen)</font></font></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42" align="center">
+            <font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="42">
+            <p><font SIZE="2" face="Times New Roman">
+            648C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="42">
+            <p ALIGN="CENTER"><font face="Times New Roman"><b><font SIZE="1" COLOR="#008000">Yes</font></b><font FACE="Arial" SIZE="1"> (with
+            photo
+            pen)</font></font></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42" align="center">
+            <font size="1" face="Times New Roman">6</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            660C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#ff0000" face="Times New Roman">
+            No</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="42" align="center">
+            <font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="30">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="30">
+            <p><font SIZE="2" face="Times New Roman">
+            670C 670TV</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="30">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="30">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="30">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="30">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="30"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#ff0000" face="Times New Roman">
+            No</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="30"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="30"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="30">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28" align="center">
+            <font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28" align="center">
+            <font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="28" align="center">
+            <font size="1" face="Times New Roman">IEEE 1284</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            680C 682C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#ff0000" face="Times New Roman">
+            No</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+            <font size="1" face="Times New Roman">5</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+            <font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+            <font size="1" face="Times New Roman">IEEE 1284</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="60">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="60">
+            <p><font SIZE="2" face="Times New Roman">
+            690C 692C 693C<br>
+            694C 695C 697C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="60"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="60">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="60">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="60"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="60"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000">
+            Yes</font></b><font FACE="Arial" SIZE="1"> (with
+            photo pen)</font></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="60"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="60"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="60">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+            <font size="1" face="Times New Roman">5</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+            <font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+            <font size="1" face="Times New Roman">IEEE 1284</font></td>
+        </tr>
+      </center>
+        <tr>
+          <td WIDTH="121%" VALIGN="MIDDLE" HEIGHT="30" colspan="13"><b>
+            <p ALIGN="left"><font SIZE="2" face="Times New Roman">
+            &nbsp; 800 Series</font></b></td>
+        </tr>
+      <center>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            810C 812C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font SIZE="1" COLOR="#008000">
+            Yes</font></b><font FACE="Arial" SIZE="1">  </font><font face="Times New Roman" SIZE="1"> (except
+            in photo mode)</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">6.5</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            830C 832C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font SIZE="1" COLOR="#008000">
+            Yes</font></b><font FACE="Arial" SIZE="1">  </font><font face="Times New Roman" SIZE="1"> (except
+            in photo mode)</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b><p ALIGN="CENTER"><font face="Times New Roman" size="1" color="#FF0000">No</font><font COLOR="#0000ff">
+            </font></b><font face="Times New Roman" size="1">status support</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">8</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            840C 842C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font SIZE="1" COLOR="#008000">
+            Yes</font></b><font FACE="Arial" SIZE="1">  </font><font face="Times New Roman" SIZE="1"> (except
+            in photo mode)</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">8</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600
+            x 1200</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            880C 882C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font SIZE="1" COLOR="#008000">
+            Yes</font></b><font FACE="Arial" SIZE="1">  </font><font face="Times New Roman" SIZE="1"> (except
+            in photo mode)</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font face="Times New Roman" size="1" color="#FF0000">No</font><font COLOR="#0000ff">
+            </font></b><font face="Times New Roman" size="1">status support</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">9</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            895C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font SIZE="1" COLOR="#008000">
+            Yes</font></b><font FACE="Arial" SIZE="1">  </font><font face="Times New Roman" SIZE="1"> (except
+            in photo mode)</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font face="Times New Roman" size="1" color="#FF0000">No</font><font COLOR="#0000ff">
+            </font></b><font face="Times New Roman" size="1">status support</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">11</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+      </center>
+        <tr>
+          <td WIDTH="121%" VALIGN="MIDDLE" HEIGHT="30" colspan="13"><b>
+            <p ALIGN="left"><font SIZE="2" face="Times New Roman">
+            &nbsp;900 Series</font></b></td>
+        </tr>
+      <center>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            930C 932C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19" bgcolor="#FFFFFF">
+            <p ALIGN="CENTER">
+            <font SIZE="1" face="Times New Roman">
+            N/A</font>
+          </td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19" bgcolor="#FFFFFF">
+            <b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b>
+          </td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">9</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600,
+            2400 x 1200</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            950C 952C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19" bgcolor="#FFFFFF">
+            <b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b>
+          </td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">11</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600,
+            2400 x 1200</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+            <p></p>
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            970C</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19" bgcolor="#FFFFFF">
+            <p ALIGN="CENTER">
+            <font SIZE="1" face="Times New Roman">
+            N/A</font>
+          </td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19" bgcolor="#FFFFFF">
+            <b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b>
+          </td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">12</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600,
+            2400 x 1200</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <p><font SIZE="2" face="Times New Roman">
+            990</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19" bgcolor="#FFFFFF">
+            <p ALIGN="CENTER">
+            <font SIZE="1" face="Times New Roman">
+            N/A</font>
+          </td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19" bgcolor="#FFFFFF">
+            <b>
+            <p ALIGN="CENTER"><font SIZE="1" color="#FF00FF" face="Times New Roman">
+            NS</font></b>
+          </td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font><font FACE="Arial" SIZE="1"><br>
+            </font></b><font FACE="Arial" SIZE="1">(with
+            photo paper)</font></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">17</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600,
+            2400 x 1200</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB, IR</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="121%" VALIGN="MIDDLE" HEIGHT="19" align="left" colspan="13">
+            <b><font size="2" face="Times New Roman">&nbsp;2000 Series</font></b>
+          </td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <font face="Times New Roman" size="2">2100 2150</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="30">
+            <p ALIGN="CENTER"><b>
+            <font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font><font FACE="Arial" SIZE="1"><br>
+            </font></b><font FACE="Arial" SIZE="1"> (with
+            photo pen)</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b>
+            <font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font><font FACE="Arial" SIZE="1"><br>
+            </font></b><font FACE="Arial" SIZE="1"> (with black pen)</font></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b>
+            <font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">&nbsp;USB</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19" align="center">
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <font face="Times New Roman" size="2">2200 2250</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b>
+            <font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font><font FACE="Arial" SIZE="1"><br>
+            </font></b><font FACE="Arial" SIZE="1"> (with
+            photo pen)</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b>
+            <font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font><font FACE="Arial" SIZE="1"><br>
+            </font></b><font FACE="Arial" SIZE="1"> (with black pen)</font></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284</font></td>
+        </tr>
+        <tr>
+          <td WIDTH="121%" VALIGN="MIDDLE" HEIGHT="19" align="left" colspan="13">
+            <b><font size="2" face="Times New Roman">e-Series</font></b>
+          </td>
+        </tr>
+        <tr>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19">
+          </td>
+          <td WIDTH="18%" VALIGN="MIDDLE" HEIGHT="19">
+            <font face="Times New Roman" size="2">e-20</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="9%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><font SIZE="1" face="Times New Roman">
+            N/A</font></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b><font face="Times New Roman" size="1" color="#FF0000">No</font><font COLOR="#0000ff">
+            </font></b></td>
+          <td WIDTH="10%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="11%" VALIGN="MIDDLE" HEIGHT="19"><b>
+            <p ALIGN="CENTER"><font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19">
+            <p ALIGN="CENTER"><b>
+            <font SIZE="1" COLOR="#008000" face="Times New Roman">
+            Yes</font></b></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">4</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">600</font></td>
+          <td WIDTH="7%" VALIGN="MIDDLE" HEIGHT="19" align="center"><font size="1" face="Times New Roman">IEEE
+            1284, USB</font></td>
+        </tr>
+      </table>
+      </center>
+      <p>&nbsp;</td>
+    <td width="133" style="border:none"></td>
+    <td width="72" style="border:none"></td>
+    <td width="70" style="border:none"></td>
+    <td width="72" style="border:none"></td>
+    <td width="67" style="border:none"></td>
+    <td width="74" style="border:none"></td>
+    <td width="84" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="52" style="border:none"></td>
+    <td width="0" style="border:none"></td>
+  </tr>
+</table>
+<blockquote>
+<p class="MsoNormal" style="margin-top: -20; margin-bottom: -10"><font face="Times New Roman"><span style="mso-char-type: symbol; mso-symbol-font-family: Wingdings 2; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; color: #FF6600; layout-grid-mode: line"><b style="mso-bidi-font-weight: normal; mso-char-type: symbol; mso-symbol-font-family: Wingdings 2; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; color: #FF6600; layout-grid-mode: line">&nbsp;
+</b></span><span style="mso-bidi-font-weight: normal; mso-char-type: symbol; mso-symbol-font-family: Wingdings 2; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; color: #FF6600; layout-grid-mode: line">&nbsp;
+</span><b><font size="2" color="#FF00FF"><span style="mso-bidi-font-weight: normal; mso-char-type: symbol; mso-symbol-font-family: Wingdings 2; mso-ascii-font-family: Arial; mso-hansi-font-family: Arial; layout-grid-mode: line">NS</span></font></b><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt;color:black;layout-grid-mode:
+line">  - No Support. This feature will be ignored or actively return an error.<o:p>
+</o:p>
+</span>
+</font>
+</p>
+<p class="Pgph1" style="margin-bottom:0in;margin-bottom:.0001pt"><font face="Times New Roman"><span style="font-size:10.0pt;mso-bidi-font-size:
+12.0pt;color:black;layout-grid-mode:line"><b style="mso-bidi-font-weight: normal; font-size: 10.0pt; mso-bidi-font-size: 12.0pt; color: black; layout-grid-mode: line">&nbsp;&nbsp;&nbsp;
+</b><b style="mso-bidi-font-weight:normal">N/A </b> </span><span style="font-size:10.0pt;mso-bidi-font-size:12.0pt">-
+This feature does not come with this printer.<o:p>
+&nbsp;
+</span></font></p>
+</blockquote>
+<p class="Pgph1" style="margin-bottom:0in;margin-bottom:.0001pt">&nbsp;</p>
+<p class="Pgph1" style="margin-bottom:0in;margin-bottom:.0001pt"><font face="Times New Roman">The following
+Hewlett-Packard DeskJet printers are <i>not</i> supported by this SDK:</font></p>
+<ul>
+  <li>
+    <p class="Pgph1" style="margin-top: -10; margin-bottom: .0001pt"><font face="Times New Roman">400 series</font></li>
+  <li>
+    <p class="Pgph1" style="margin-bottom:0in;margin-bottom:.0001pt"><font face="Times New Roman">700 series</font></li>
+  <li>
+    <p class="Pgph1" style="margin-bottom:0in;margin-bottom:.0001pt">
+<span style="mso-bidi-font-size: 12.0pt"><font size="3" face="Times New Roman"> 850C, 855C, 870C or
+890C</font> </span></li>
+</ul>
+<p class="Pgph1" style="margin-bottom:0in;margin-bottom:.0001pt"><font size="3" face="Times New Roman"><span style="mso-bidi-font-size: 12.0pt">Any
+non-Hewlett-Packard printers, or Hewlett-Packard non-DeskJet printers (including
+OfficeJet LaserJet and PhotoSmart printers) are also <i>not</i> supported by
+this SDK.</span></font>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><font face="Times New Roman"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+t<span style="mso-bookmark:_Hlt476042441">o</span> top]</a><o:p>
+&nbsp;</font>
+</span></p>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon">
+<font face="Times New Roman">
+</o:p>
+</font>
+</span></p>
+<h2><a name="minfunctionality"><font face="Times New Roman">Minimum Functionality</font></a></h2>
+<h3><font face="Times New Roman">Print Quality</font></h3>
+<p class="pgph3" style="page-break-after:avoid"><font face="Times New Roman">The quality of printed output
+can vary widely in the thin-client environment, due to host limitations.
+Some factors that can affect quality are:</font></p>
+<ul>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;page-break-after:avoid;
+mso-list:l5 level1 lfo4;tab-stops:list 1.0in"><font face="Times New Roman"><span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7.0pt">&nbsp;</span>The presence of a scalable font engine in the thin client host.</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;page-break-after:avoid;
+mso-list:l5 level1 lfo4;tab-stops:list 1.0in"><font face="Times New Roman">The use of internal printer fonts where possible.</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;page-break-after:avoid;
+mso-list:l5 level1 lfo4;tab-stops:list 1.0in"><font face="Times New Roman">Composite black printing on single pen printers (DJ400, DJ600).</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;page-break-after:avoid;
+mso-list:l5 level1 lfo4;tab-stops:list 1.0in"><font face="Times New Roman"><span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7.0pt">&nbsp;</span>The quality of document to be printed.</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;mso-list:l5 level1 lfo4;
+tab-stops:list 1.0in"><font face="Times New Roman"><span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7.0pt">&nbsp;</span>The quality, scaling, and compression of document images.</font></li>
+  <li>
+    <p class="Pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:3.0pt;
+margin-left:1.25in;text-indent:-.25in;line-height:normal;mso-list:l5 level1 lfo4;
+tab-stops:list 1.0in"><font face="Times New Roman">Anti-aliasing and other algorithms designed to make text look good
+on a TV screen.</font></li>
+</ul>
+<p class="Pgph1" style="margin-bottom:3.0pt;line-height:normal"><font face="Times New Roman">During
+testing, it is important to keep these limitations in mind. Print quality
+problems should still be reported though, even when they can be attributed to
+the limitations listed above. This data will help Hewlett-Packard identify areas of the thin client host where print quality can be improved the most.</font></p>
+<p class="Pgph1" style="margin-bottom:3.0pt;line-height:normal"><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 12.0pt; mso-bidi-font-family: Times New Roman"><font face="Times New Roman">[Back t<span style="mso-bookmark:_Hlt476042454">o</span>
+top]</font></span></a></p>
+<p class="MsoNormal"><font face="Times New Roman">&nbsp;<o:p>
+</o:p>
+</font>
+</p>
+<h2><a name="printmodes"><font face="Times New Roman">Print Modes</font></a></h2>
+<p><font face="Times New Roman">The firmware in most DeskJet printers is written to accept
+various kinds of tradeoffs between speed and print quality, and to optimize
+output for different types of paper and ink cartridges (pens). The differences
+involve a complicated variety of parameters including resolution, number of
+inks, and special printer commands; for each printer model, only a small handful
+of such combinations are allowable. The SDK packages these
+combinations inside a structure called a Print Mode. The Print Mode hides technical details
+and presents the packaged combinations in such a way that they can be
+concisely related to the conditions for which they were designed.</font></p>
+<p><font face="Times New Roman">The number of print modes for each printer type is given by the GetModeCount function in PrintContext.
+Typically, there is a default color mode and a grayscale mode; other modes with
+special properties such as high-resolution photo quality are available for
+certain printer models. In some cases, the developer must choose between
+features such as device-based text and photo quality. This is accomplished by
+selecting the mode (Print Context member SelectPrintMode,)
+and then querying with PrinterFontsAvailable. Every
+mode has a string identifier (for potential use in a user interface) given by GetModeName.</font></p>
+<p><font face="Times New Roman">When bi-directional communication with the printer is
+available, the PrintContext constructor selects a default
+mode based on the installed pen. (The default mode is the “lowest” or
+fastest mode still compatible with the pen.) In order to override this setting,
+(possibly due to selected user preferences or unavailable bi-directional communication,)
+the SelectPrintMode
+method is provided in PrintContext.</font></p>
+<p> SelectPrintMode takes a zero-based index. By convention, index 0 always refers to the Grayscale
+mode GRAYMODE_INDEX=0).
+ Index 1
+DEFAULTMODE_INDEX
+refers to the &quot;normal&quot; color mode; other values up to &lt;GetModeCount-1&gt;
+refer to specialized modes.
+If the selected Print Mode parameter requested is incompatible with the
+installed pen, SelectPrintMode returns a WARNING. Because
+it is a warning and not an error, it is possible to proceed using the requested
+mode even under the incompatible conditions. Examples of incompatibilities
+include using GRAYMODE when the pen has colored ink. The results
+are a gray-looking output that was wastefully produced by combining
+colored inks. Another incompatibility, using DEFAULT MODE
+when a &quot;photo-pen” is installed, results in “normal” pen output
+quality instead of output the more expensive photo-pen was intended to
+deliver. Some incompatibilities may even result in no useful output whatsoever.</p>
+<p><font face="Times New Roman">Changing the Print Mode may also change the Effective
+Resolution; therefore, resolution should be queried again after changing the Print Mode.
+(In general the “normal” modes under release 1.0 will all use an Effective
+Resolution of 300 d.p.i., while certain “special” modes may use 600 d.p.i.)
+For older printer models, the Print Mode may also determine whether printer
+fonts are allowed or not.</font></p>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><font face="Times New Roman"><a href="#top">[Back to top]</a><o:p>
+&nbsp;</font>
+</span></p>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon">
+<font face="Times New Roman">
+</o:p>
+</font>
+</span></p>
+<h2 style="margin-bottom: 30"><a name="scalingres"> <font face="Times New Roman"> Resolution &amp; Scaling</font></a></h2>
+<h3><font face="Times New Roman">Resolution</font></h3>
+<p><font face="Times New Roman">Effective graphical output resolution depends on the PrintMode selected for the attached Printer model. For version 1.0 of the SDK, only two
+resolutions can be selected: 300 d.p.i. (<u>d</u>ots <u>p</u>er <u>i</u>nch,) or 600 d.p.i., (the
+latter being used only for various “Photo/Best” modes.)</font></p>
+<p><font face="Times New Roman">To determine the acceptable resolution for the currently
+selected printer and mode, call the PrintContext function, EffectiveResolution. Remember that the
+calls must be in the appropriate order, or the results will not be valid. For
+example, if SelectDevice
+and/or SelectPrintMode are called after EffectiveResolution,
+the result of the EffectiveResolution
+call will no longer be valid.</font></p>
+<h3 style="margin-top: 30"><font face="Times New Roman">Scaling</font></h3>
+<p>When the graphical source data exists at resolutions lower than
+EffectiveResolution, the data must be scaled up to reach the desired resolution.
+The SDK code does this automatically, based on the relation between the two
+values InputPixelsPerRow and OutputPixelsPerRow - the two parameters to the
+PrintContext's constructor or SetPixelsPerRow function.</p>
+<p>When the graphical source data exists at resolutions higher than
+EffectiveResolution, the host must sub-sample in order to reach the desired
+input resolution. The SDK code provides no assistance in this regard - in other
+words it is illegal to set InputPixelsPerRow greater than OutputPixelsPerRow.</p>
+<p>Also, note it is always preferable to obtain original data at a higher
+resolution and sub-sample the data, rather than to take previously sub-sampled
+data and scale it up.</p>
+<p><font face="Times New Roman">For more information, refer to the Best Practices for Optimal Printing, <a href="bestpractices.htm#Problem">Image/Test
+Resolution Problem</a>.</font></p>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top"><font face="Times New Roman">[Back to top]</font></a></span></p>
+
+</body>
+
+</html>

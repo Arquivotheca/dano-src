@@ -1,0 +1,49 @@
+//*****************************************************************************
+//
+//	File:		 Dominos ReadMe
+//
+//	Description: About the domino sample application using the GameKit.
+//
+//	Copyright 1996, Be Incorporated
+//
+//*****************************************************************************
+
+1 - About Domino :
+
+Domino rules :
+- You put dominos on the board, one by one, always having identical neighboor
+  figures. You need to be in contact with at least one of the previously put
+  dominos.
+- The board is 100x100 squares big, with a one square line reserved on the border.
+- 7 horizontal bands and 7 vertical bands, 2 squares width, divide the board in 64
+  areas. To put a domino on a band, you need to use only the figure associated
+  with the band (1, 2, 3, 4, 5, 6 and Be from left to right and top to bottom).
+- At the end, you can complete the board by putting any possible domino in any
+  possible place.
+
+In the demo, the computer is playing alone, and usually put approximatly 2600
+dominos in 6 or 7 minuts. After that, you can use the keypad (2, 4 6, and 8) to
+move through the board and look at the result.
+
+You can switch to another workspace at any time (Domino is a full-screen app
+using the GameKit), or quit by Alt-Q. If you switch to another workspace, the
+demo will continue to put dominos at the same speed, without displaying anything.
+
+A counter in the right bottom corner allows you to know how many dominos have
+been put.
+
+Thanks to Guillaume Desmaret for all the textures and the icon.
+
+
+2 - About the GameKit :
+
+The current version of the GameKit doesn't provide any specific support for input
+device. You have to use View->GetKeys() to read the keyboard, and the standard
+stuff to read the joystick. The mouse is not usable at all just now (except by some
+nasty hack). That will be improve in future release.
+
+If a game crash using the screen, there is usually no way to get the control of
+the screen back (the switch is cooperative). In that case you can use the graphic
+safety shortcut (LEFT ctrl-shift-alt + F12) to kill the current owner of the screen,
+and get back to the app_server. It's not perfect, but it's really helpful.
+				   

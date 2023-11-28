@@ -1,0 +1,77 @@
+#ifndef _AIFF_WRITER_H
+#define _AIFF_WRITER_H	1
+
+#include <OS.h>
+#include <SupportDefs.h>
+#include <Locker.h>
+#include <MediaDefs.h>
+#include <FileWriter.h>
+
+#if defined (__POWERPC__)
+#define _EXPORT __declspec(dllexport)
+#else
+#define _EXPORT
+#endif
+
+class BFile;
+
+namespace BPrivate {
+	class _EXPORT AIFFWriter;
+}
+
+
+namespace BPrivate {
+
+// AIFFWriter is the base virtual class that must be subclassed to implement
+// specific encapsulation format. Each flavour lives in its own add-on.
+
+class AIFFWriter : public MediaWriter {
+public:
+	struct AudioHeader {
+		FileWriter*		writer;
+		float		rate;
+		uint16		channel_count;
+		uint16		bit_per_sample;
+		uint32		frame_count;
+		int32		offset_total_length;
+		int32		offset_data_length;
+		int32		offset_frame_count;
+		uint32		data_length;
+		uint32		total_length;
+		char		*copyright;
+		uint8		mode;
+		char		_reserved_[3];
+	};
+
+				AIFFWriter();
+	virtual		~AIFFWriter();
+
+	status_t	SetSource(BDataIO *source);
+	
+	status_t	AddTrack(BMediaTrack *track);
+	status_t	AddCopyright(const char *data);
+	status_t	AddTrackInfo(int32 track, uint32 code, const char *data,size_t sz);
+	status_t	AddChunk(int32 type, const char *data, size_t size);
+	status_t	CommitHeader(void);
+
+	status_t	WriteData(int32 			tracknum,
+						  media_type 		type,
+						  const void 		*data,
+						  size_t 			size,
+						  media_encode_info	*info);
+
+	status_t	CloseFile(void);
+
+
+private:
+	void		ConvertFloatTo80Bits(float f, int16 *exp, uint32 *m0, uint32 *m1);
+
+	BMediaTrack 	*fTrack;		  // we only support 1 audio track
+	AudioHeader		fHeader;
+	bool			fHeaderCommitted;
+};
+
+}	//	namespace
+
+
+#endif

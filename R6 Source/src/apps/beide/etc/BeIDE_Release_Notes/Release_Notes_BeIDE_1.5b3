@@ -1,0 +1,72 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	1.5b3
+Date:		2/4/98
+Authors:	Brian Stern, Fred Peterson,
+			Burton T. E. Miller, Bernie Estavillo,
+			Ed Swartz
+=============================================
+
+Howdy Be developers.  This is an update for the BeIDE,
+mwcc, mwld, plugins and mwbres.
+
+The updated compiler has significant improvements in C++
+language support.  Be sure to read all the release notes for
+the compiler.  
+
+There is an incompatibility with this compiler
+and some of the headers from the standard C++ library that
+ships on PR2.  Some of those headers won't compile with this new
+compiler.  To fix this requires an update to MSL, and this
+will come later.  For the moment, if you are using those headers
+and they won't compile you are out of luck and need to stick with
+the existing 1.8 compiler.
+
+============================
+New Features
+============================
+
+1.5b3
+*	Right click on a file in the project window brings up a context-sensitive
+	menu that allows compiling the file, viewing the file's path, and other
+	useful things.
+
+1.5b2
+*	Stationery files.  Choosing New Project brings up a window that allows you
+	to choose from several stationery projects.  You then can choose the name
+	for and where the new project will be installed.  The template stationery
+	projects live in the 'stationery' folder.  When you create a new project
+	in this way the entire contents of the chosen stationery project's folder
+	is copied to the new folder, including subfolders and links.  You can
+	easily add new stationery projects to this folder.
+	
+1.5b1
+
+*	BaseAddress works in the x86 Project prefs panel.  You will probably have no
+	reason to ever change this.  It affects the base address in the xMAP file.
+
+==========================
+Bugs Fixed
+==========================
+
+1.5b1
+
+Fixed a bug where the last entry in the Settings window was missing sometimes.
+
+
+==========================
+Known Limitations
+==========================
+
+
+
+=====================
+Contacting Metrowerks
+=====================
+
+Please send bug reports for this mptp release to mptp-be@metrowerks.com.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

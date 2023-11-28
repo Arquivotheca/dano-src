@@ -1,0 +1,72 @@
+resource-file:
+		comment resource-file
+	|	resource-declaration resource-file
+	|	illegal-token resource-file
+	|	<EOF>
+
+comment:
+		"/*" <anything> "*/"
+	|	"//" <anything> "\n"
+
+resource-declaration:
+		"resource" "(" resource-type "," resource-id optional-name ")" "{" resource-data "}"
+
+illegal-token:
+		<anything>
+
+resource-type:
+		<char>
+
+resource-id:
+		<integer>
+
+optional-name:
+		"," <string>
+	|	<empty>
+
+resource-data:
+		data-item
+	|	resource-data "," data-item
+
+data-item:
+		<char>
+	|	<integer>
+	|	<string>
+	|	<float>
+	|	read-statement
+	|	import-statement
+	|	pad-statement
+	|	"{" resource-data "}"
+
+read-statement:
+		"read" "(" file-name optional-length-and-offset ")"
+
+file-name:
+		<string>
+
+optional-length-and-offset:
+		<empty>
+	|	"," length optional-offset
+
+length:
+		<integer>
+
+optional-offset:
+		<empty>
+	|	"," offset
+
+offset:
+		<integer>
+
+import-statement:
+		"import" "(" file-name "," resource-type "," resource-id-or-name ")"
+
+resource-id-or-name:
+		resource-id
+	|	resource-name
+
+resource-name:
+		<string>
+
+pad-statement:
+		"pad" "(" <integer> ")"

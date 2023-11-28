@@ -1,0 +1,636 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center"><span style="font-size: 36.0pt; mso-bidi-font-size: 10.0pt; color: blue; text-shadow: auto; mso-bookmark: top">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center">&nbsp;</h1>
+<h1 align="center"><span style="font-size: 36.0pt; mso-bidi-font-size: 10.0pt; mso-bookmark: top"><font color="#0000FF">Introduction&nbsp;</font><o:p>
+&nbsp;</span></h1>
+<h1 align="center">&nbsp;</h1>
+<h1 align="center"><span style="font-size: 36.0pt; mso-bidi-font-size: 10.0pt; mso-bookmark: top">
+</o:p>
+</span></h1>
+<h1 align="center"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+ left:0;text-align:left;margin-left:-10.8pt;margin-top:30.6pt;width:248.4pt;
+ height:186.35pt;z-index:2;mso-position-horizontal-relative:text;
+ mso-position-vertical-relative:text' o:allowincell="f">
+ <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+</v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+ ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+ ObjectID="_1013326106">
+</o:OLEObject>
+<![endif]><![endif]-->
+</h1>
+<h1 align="center">&nbsp;
+<span style="mso-ignore: vglayout; position: absolute; z-index: 0; left: 34; width: 331px; height: 248px; top: 306; margin-left: -14px; margin-top: 41px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><span style="font-size: 36.0pt; mso-bidi-font-size: 10.0pt; color: blue; text-shadow: auto; mso-bookmark: top"></o:p>
+</span></h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<b style="mso-bidi-font-weight:normal"><span style="font-size: 18.0pt; mso-bidi-font-size: 10.0pt; mso-fareast-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-font-kerning: 14.0pt; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA"><br clear="all" style="page-break-before:always">
+</span></b>
+<h1 align="left" style="text-align:left"><!--[if gte vml 1]><o:wrapblock><v:shape
+  id="_x0000_s1026" type="#_x0000_t75" style='position:absolute;margin-left:18pt;
+  margin-top:34.1pt;width:400.5pt;height:75.75pt;z-index:1;
+  mso-position-horizontal-relative:text;mso-position-vertical-relative:text'
+  o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>
+<span style="mso-bookmark:top">
+</o:p>
+</span>
+</p>
+<p>
+&nbsp;
+</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="25%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="25%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="25%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="25%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="25%" bordercolor="#0000FF" bordercolordark="#0000FF">10.02.00</td>
+    <td width="25%" bordercolor="#0000FF" bordercolordark="#0000FF">Second Release</td>
+  </tr>
+</table>
+<p>
+&nbsp;
+</p>
+<p>
+&nbsp;
+</p>
+<p>
+&nbsp;
+</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.<span style="mso-spacerun:
+yes">&nbsp; </span>Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<h1 align="left" style="text-align:left"><span style="mso-bookmark:top">&nbsp;</span><b style="mso-bidi-font-weight:normal"><span style="font-size:18.0pt;
+mso-bidi-font-size:10.0pt;font-family:Arial;mso-fareast-font-family:&quot;Times New Roman&quot;;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:14.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:EN-US;mso-bidi-language:AR-SA"><br clear="all" style="page-break-before:always">
+</span></b></h1>
+<h1 align="center"><span style="mso-bookmark:top"><a name="top">Introduction</a></span></h1>
+<p>Welcome to the Hewlett-Packard Appliance Printing Software Development
+Kit (SDK). This kit contains everything you need to begin developing a
+Hewlett-Packard DeskJet printer driver for your host system. The SDK is comprised
+of documentation, sample test and HTML help files, tools to aid the developer in
+integrating and testing their printer driver, and most importantly, driver
+source code written in C++.</p>
+<p>The SDK contains code that, although not a printer driver by
+itself, will be the basis for creating a very small yet
+functional printer driver.
+This code contains space-optimized versions of many of the same core
+imaging technologies used in full-featured Hewlett-Packard Windows drivers, as
+well as basic print mode support and built-in printer text support. Most of the recent DeskJet models are supported by this
+version of the SDK. Future versions will provide additional support for new
+DeskJet models and potentially other Hewlett-Packard products as well.</p>
+<p>The SDK does not assume that developers have any direct
+knowledge of printer drivers; It does assume that programmers have a working
+knowledge of C and C++ , including the principles and vocabulary of object
+oriented design. The developer must be familiar with all aspects of their own host system,
+which is needed to render and format data in a manner suitable for the
+printed page.</p>
+<p style="margin-bottom: -10">Hyperlinks have been inserted throughout the
+documentation to create shortcuts. Hyperlinks are indicated with <font color="#0000FF"><u>blue, underlined</u></font>
+text.</p>
+<blockquote>
+<p class="pgph1" style="margin-bottom: -16"><a href="#overview">Overview of the SDK</a></p>
+<p class="pgph1" style="margin-bottom: -16"><a href="#design_objectives">SDK Design Objectives</a></p>
+<p class="pgph1" style="margin-bottom: -16"><a href="#limitations">Limitations</a></p>
+  <p class="pgph1" style="margin-bottom: -16"><a href="#minsysreqs">Minimum Host S<span style="mso-bookmark:
+_Hlt476017215">y</span>stem Requirements</a></p>
+  <p class="pgph1" style="margin-bottom: -16"><a href="#hppddk_toc">SDK<span style="mso-bookmark:_Hlt476017243">
+</span>Table of Contents</a></p>
+</blockquote>
+<p class="pgph1" style="margin-bottom: -16">&nbsp;<o:p>
+</o:p>
+</p>
+<p class="Pgph10" style="page-break-after:auto"><span style="font-size:8.0pt;
+mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Back to top]</a><o:p>
+</o:p>
+</span></p>
+<p class="pgph1">&nbsp;<o:p>
+</o:p>
+</p>
+<h2><a name="overview">Overview </a>of the SDK</h2>
+<p>The SDK final product is designed to accept
+pre-formatted, 24-bit sRGB raster data and/or ASCII text, convert it to a
+high-quality, printer-ready data stream, and send it to an Hewlett-Packard
+DeskJet printer via a
+host-implemented I/O mechanism. The SDK also helps to provide the necessary
+structure and controls for a given print job, and enables the system (through an
+API) to perform various printer maintenance activities, (e.g. cleaning the
+pens).</p>
+<p style="mso-pagination:none">The SDK is primarily responsible for converting device-independent data into a device-dependent,
+printer-optimized stream of bytes. Because the conversion process for color
+inkjet printers is quite complicated, it is important to not change device-independent portions of the
+SDK code. The color science involved is relatively
+complex and requires a thorough understanding of Hewlett-Packard’s inkjet technology.</p>
+<p style="mso-pagination:none">The SDK code also interprets
+status information from the printer and relays it to the system for presentation
+to the user. Note that the SDK code itself does not attempt to notify or directly
+interact with the user. Instead user interfaces for initiating or configuring a print
+job and visual presentation of printing status information are left to creation
+by the developer. This provides flexibility for the operating systems
+to maintain a consistent look and feel. Ultimately, this should help insulate
+developers from most of the details encountered with printing, and instead allow them to focus on other areas.</p>
+<p>The developer must realize that the creation of a printer driver
+is only one piece of the entire printing solution. If the target platform
+already has existing print architecture, the effort to create and integrate the
+new driver may be minimal. However, if there is no pre-existing print
+functionality, or if the functionality is substantially different from what the
+SDK assumes about the host environments, then additional work will be required.&nbsp;</p>
+<p>
+Additional efforts might include modifying the application
+software on the target platform to support printing, or adding necessary
+infrastructure support for optional background printing or spooling. Other documents within this kit will discuss some of these options in
+greater detail and guide the developer towards a more complete printing solution
+to satisfy the end customer.</p>
+<p class="pgph1">&nbsp;<span style="font-size:8.0pt;
+mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Back to top]</a><o:p>
+</o:p>
+</span></p>
+<p class="pgph1">&nbsp;<o:p>
+</o:p>
+</p>
+<h2><a name="design_objectives">SDK </a>Design Objectives</h2>
+<p style="page-break-after:avoid">This SDK has been developed
+primarily to meet the demand for Hewlett-Packard DeskJet connectivity in the non-PC markets. Due to the
+varying nature and diversity of devices that have or
+might desire printing capabilities, the SDK core code has been created with several
+key objectives:</p>
+<blockquote>
+<ul>
+  <li>
+    <p class="bullets" style="page-break-after: avoid; margin-top: 0; margin-bottom: 0">Small driver size - to meet the needs of small memory footprint
+devices.</li>
+  <li>
+    <p class="bullets" style="page-break-after: avoid; margin-top: 0; margin-bottom: 0">Portability – to enable quick deployment on all kinds of
+devices.</li>
+  <li>
+    <p class="bullets" style="page-break-after: avoid; margin-top: 0; margin-bottom: 0">Extensibility – to allow for future enhancements.</li>
+  <li>
+    <p class="bullets" style="margin-top: 0; margin-bottom: 0">Features &amp; Performance – to provide the proper balance of
+print quality, speed and feature support, given the current size and portability
+constraints.</li>
+</ul>
+</blockquote>
+<p style="mso-pagination:none">Many of these supported features
+are implemented in such a way that they are both modular and optional. If a given
+device will not use an available feature, it is okay to be left out. However,
+the developer is strongly encouraged to communicate the level of
+support (features, performance, etc.) offered, with their customers. (For example, developers should state for their customers
+that banners and duplex printing are
+not supported, regardless of the fact that the printers have the functional
+capability.) This should be made clear on any appropriate Web pages, on-line
+help pages, in manuals, etc., in order to help the user establish the proper expectations before
+purchasing a printer for a specific device or environment, or trying to print in
+an unsupported manner.</p>
+<p class="pgph1" style="mso-pagination:none">&nbsp;<o:p>
+</o:p>
+</p>
+<h2><a name="limitations">Limitations</a></h2>
+<p class="pgph1" style="mso-pagination:none"><span style="mso-bookmark:_Toc390742405">In
+order to achieve each of the SDK design objectives (small driver size, portability,
+etc.,) the finished printer driver will not, and can not be as full featured as Hewlett-Packard’s
+corresponding Windows driver. Size and portability are the main restrictions
+that limit the features provided in this kind of driver. For a complete list of
+features supported by printer model, refer to the <a href="printing.htm"> Printing</a> document's
+Printers
+and Features Supported
+table.&nbsp; </span></p>
+<p class="Pgph10" style="page-break-after:auto"><span style="font-size:8.0pt;
+mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Back to top]</a><o:p>
+</o:p>
+</span></p>
+<p class="pgph1" style="mso-pagination:none">&nbsp;<o:p>
+</o:p>
+</p>
+<h2><a name="minsysreqs">Minimum </a>Host System Requirements</h2>
+<p class="pgph1" style="page-break-after:avoid">The minimum host system
+requirements necessary to operate a printer driver fall into the following basic
+categories:</p>
+<p class="pgph1" style="margin-left:.5in"><b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal">Development
+Requirements:</i></b></p>
+<ul>
+  <li>
+    <p class="pgph1" style="margin-left: .5in; margin-top: -10">C++ Compiler. (Developers can create the appropriate binary printer driver by
+using compilers and tools of their own choosing (such as GNU, etc.))</li>
+</ul>
+<p class="pgph1" style="margin-left:.5in"><b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal">Physical
+Connectivity:</i></b></p>
+<ul>
+  <li>
+    <p class="pgph1" style="margin-left: .5in; margin-top: -10">The only physical connectivity requirement is a supported I/O port
+on the device (USB, parallel/IEEE-1284, etc.).</li>
+</ul>
+<p class="pgph1" style="margin-left:.5in"><b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal">CPU
+Bandwidth:</i></b></p>
+<ul>
+  <li>
+    <p class="pgph1" style="margin-left: .5in; margin-top: -10">CPU Bandwidth needs depend on the type of printing support
+required as well as what other operations are occurring in the system at print
+time.</li>
+</ul>
+<p class="pgph1" style="margin-left: 1.5in; margin-top: -10"><b style="mso-bidi-font-weight:normal">For
+graphics support:<o:p>
+</o:p></b></p>
+<ul>
+  <li>
+    <p class="pgph1" style="margin-left: 1.5in; margin-top: -10">A 100 MHz Pentium class processor.</li>
+</ul>
+<p class="pgph1" style="margin-left:1.5in"><b style="mso-bidi-font-weight:normal">For
+simple, ASCII-only text support: <o:p>
+</o:p></b></p>
+<ul>
+  <li>
+    <p class="pgph1" style="margin-left: 1.5in; margin-top: -10.">A low-end processor.</li>
+</ul>
+<h3 style="line-height: 150%; margin-left: .5in; margin-right: 0in"><span style="font-size:11.0pt;
+mso-bidi-font-size:10.0pt"><i>Available Memory: </i> <o:p>
+</o:p>
+</span></h3>
+<ul>
+  <li>
+    <p class="Pgph10" style="text-indent: -.25in; mso-list: l11 level1 lfo14; tab-stops: list 1.25in; margin-left: 1.25in; margin-top: -16; margin-bottom: 0">Code &amp; static tables (50 – 120K).</li>
+  <li>
+    <p class="Pgph10" style="text-indent: -.25in; mso-list: l11 level1 lfo14; tab-stops: list 1.25in; margin-left: 1.25in; margin-right: 0in; margin-top: 0; margin-bottom: 0">Run-time buffer space (25 – 60K,&nbsp; possibly 120K for high-res 6
+color).</li>
+</ul>
+<p class="pgph1" style="margin-left:1.0in">Code size and run-time RAM usage
+depend on several variables including the compiler, the printer type selected, the
+level of print functionality required (such as the optional<span style="mso-spacerun: yes">&nbsp;
+</span>ASCII text support or image scaling module), and the type and number of
+DeskJet models supported. As with anything else, compiled code size is also
+dependent on the targeted processor type.</p>
+<p class="pgph1">Be sure to leave extra room for future driver growth as well,
+in order to support new printer models and/or printer features as they become
+available in the future, and make implementation of future SDK versions much easier!</p>
+<p class="pgph1">&nbsp;<o:p>
+ <span style="font-size:8.0pt;
+mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Back to top]</a><o:p>
+ &nbsp;
+</span>
+</p>
+<p class="pgph1">
+</o:p>
+</p>
+<h2>Creating Custom Printer Drivers With The SDK</h2>
+<p style="page-break-after:avoid;tab-stops:.5in">While it is
+expected that the developer will have to write some O/S or device-specific code
+in order to implement a printer driver on to their host system, the SDK has been
+structured in such a way that most new code incorporated by the developer should
+be isolated from the core code. As such, most of the required changes
+to the core code should be limited to the object or module responsible for creating
+an O/S (Operating System) and hardware abstraction layer for the rest of the driver. This is called the 
+SystemServices object. Once this abstraction layer has been
+created,
+new versions of the SDK can easily be dropped into the existing driver
+framework.</p>
+<p style="mso-pagination:none">Hewlett-Packard strongly
+discourages altering parts of the SDK that are device-independent. Although Hewlett-Packard has made the
+SDK code visible, the purpose of this was to allow the developer flexibility to build and test their own printer driver, not
+to change the behavior of the device-independent code. If the SDK code is
+altered at the device-independent level, developers will most likely experience
+difficulty when integrating future SDK versions, as well as encounter
+unsupported problems with the current SDK version.</p>
+<p style="mso-pagination:none">If the developer discovers a major
+defect in the device-independent portion of the SDK code, they are encouraged
+to fix the problem in their own driver, and immediately notify
+Hewlett-Packard of the problem/recommended solution so that it can be
+considered for inclusion in future versions of the SDK. This will help to
+minimize future integration efforts by other developers.</p>
+<p>Upon completion of the printer driver, Hewlett-Packard highly recommends that
+developers test their printer drivers using the test documents included with the
+SDK, or accessible via the SPP website. These documents have been chosen for their ability to test virtually all
+aspects of the driver. Developers are then strongly encouraged to email the printer driver
+output in the form of script files back to Hewlett-Packard for print quality review.&nbsp;
+Hewlett-Packard can then work with the developer to identify print quality
+issues and correct them.&nbsp; For more information on submitting the script files,
+refer to the <a href="testing.htm#finalvalidation">Final Validation</a> section
+in Testing.</p>
+<p class="Pgph10" style="page-break-after:auto"><span style="font-size:8.0pt;
+mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Back to top]</a><o:p>
+</o:p>
+</span></p>
+<p class="pgph1">&nbsp;<o:p>
+</o:p>
+</p>
+<h2><a name="hppddk_toc">SDK </a>Contents<o:p>
+</o:p>
+</h2>
+<p class="MsoNormal">The SDK kit includes the following
+downloadable files:</p>
+<p class="pgph1" style="margin-bottom:6.0pt;line-height:normal"><b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal">DOCUMENTS:<o:p>
+</o:p>
+</i></b></p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:63.0pt;text-indent:-27.0pt;line-height:normal"><a href="api.htm">API</a>
+- Gives a brief description of the four public classes used to run the driver,
+their class members, and an appendix of enums, data types, and error codes.</p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:63.0pt;text-indent:-27.0pt;line-height:normal"><a href="bestpractices.htm">Best Practices
+For Optimal Printing </a>-&nbsp;Gives suggestions for printing the &quot;optimal
+page&quot;,
+including how to avoid common pitfalls such as printing light text on dark
+backgrounds, and paginating around graphics. Includes the following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0"> Image/Text Resolution</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0"> Formatting and Layout for the Screen vs. the
+Printer</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Clipping to the Printed Page</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:99.0pt;text-indent:-63.0pt;line-height:normal"><a href="debugging.htm">Debugging</a>
+- Gives instructions on producing a record of SDK code usage, to be used by Hewlett-Packard
+in analyzing implementation. Includes the following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0">Debugging
+      A Driver With Scripts</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Recording
+      A Script</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:63.0pt;text-indent:-27.0pt;line-height:normal"><a href="devicebasedfont.htm">Device-Based
+Fonts</a>
+-
+Explains device-based text as well as print quality and performance tips and
+tricks. Includes the following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0">Overview</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Enumerating Available Fonts</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Realizing
+      the Desired Font</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Page
+      Formatting and GetTextExtent</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">TextOut</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">The
+      X Coordinate</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">The
+      Y Coordinate</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Additional
+      Information / See Also</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:99.0pt;text-indent:-63.0pt;line-height:normal"><a href="gettingstarted.htm">Getting
+Started</a> - Covers downloading instructions, minimum system requirements, and
+installation instructions. Includes the following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0">Minimum
+      System Requirements</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Building
+      Your Driver</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:1.0in;text-indent:-.5in;line-height:normal"><a href="glossary.htm">Glossary</a>
+- Definitions of frequently used (and not always understood) words.&nbsp;</p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:99.0pt;text-indent:-63.0pt;line-height:normal"><a href="hostsysteminterface.htm">Host
+System Interface</a> - Describes the host system interface including message
+codes, warnings and errors, and the HTML Help system.&nbsp;Includes the
+following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0">User
+      Interfaces &amp; Guidelines
+      <ul type="disc">
+        <li>
+          <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Warnings
+      and Errors</li>
+        <li>
+          <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">DisplayPrinterStatus</li>
+        <li>
+          <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">HTML
+      Help System</li>
+      </ul>
+    </li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Memory
+      Requirements</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Abstract
+      Class &quot;System Services&quot; To Be Implemented By Host System
+      Interface
+      <ul type="disc">
+        <li>
+          <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">1284
+          Versus USB</li>
+      </ul>
+    </li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Plug
+      &amp; Play Versus Uni-Directional</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:1.0in;text-indent:-.5in;line-height:normal"><a href="lowlevel_io.htm">Low-Level
+I/O Support</a>
+- Provides information to begin understanding low-level I/O support and the SDK.
+Topics include:</p>
+<blockquote>
+  <blockquote>
+    <ul>
+      <li>
+        <p class="pgph1" style="margin-top: -16">Low-Level I/O Support</li>
+      <li>
+        <p class="pgph1" style="margin-top: 0">Adding Parallel or USB Hardware</li>
+      <li>
+        <p class="pgph1" style="margin-top: 0">USB Documentation Sources</li>
+      <li>
+        <p class="pgph1" style="margin-top: 0">Parallel / IEEE 1284
+        Documentation</li>
+    </ul>
+  </blockquote>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:99.0pt;text-indent:-63.0pt;line-height:normal"><a href="printing.htm">Printing</a>
+- Lists the printers and features supported, print modes, minimum functionality,
+and scaling and resolution. Includes the following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0">Printers
+      and Features Supported</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Minimum
+      Functionality</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Print
+      Modes</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Scaling
+      and Resolution</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:99.0pt;text-indent:-63.0pt;line-height:normal"><a href="SAMPLECODE.HTM">Sample
+Code</a>
+- Gives examples of a calling sequence for a minimum driver, and a host
+environment requiring scaling. Includes the following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0">Minimal
+      Sequence</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Using
+      ASCII Text</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">User
+      Interface Calling Code Sample</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Additional
+      Information</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:99.0pt;text-indent:-63.0pt;line-height:normal"><a href="testing.htm">Testing</a>
+- Describes compatibility, print quality, exception and performance testing, and
+final validation. Includes the following sections:</p>
+<blockquote>
+  <ul>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: -16; margin-bottom: 0">Compatibility</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Error
+      Handling</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Print
+      Quality</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Performance</li>
+    <li>
+      <p class="pgph1" style="text-indent: -27.0pt; line-height: normal; margin-left: 63.0pt; margin-right: 0in; margin-top: 0in; margin-bottom: 0">Final
+      Validation</li>
+  </ul>
+</blockquote>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.75in;text-indent:-.5in;line-height:normal"><b style="mso-bidi-font-weight:
+normal">&nbsp;<o:p>
+</o:p>
+</b></p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.75in;text-indent:-.5in;line-height:normal"><b style="mso-bidi-font-weight:
+normal"><i style="mso-bidi-font-style:normal">SOURCE CODE:<o:p>
+</o:p>
+</i></b></p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.5in;line-height:normal">Tools</p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.5in;line-height:normal">Benchmark Print Samples</p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.5in;line-height:normal">Test Files</p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.5in;line-height:normal">PCL Files</p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.5in;line-height:normal">Sample HTML Files</p>
+<p class="pgph1" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:.5in;line-height:normal">Tools<o:p>
+</o:p>
+</p>
+<p class="Pgph10" style="page-break-after:auto"><span style="font-size:8.0pt;
+mso-bidi-font-size:12.0pt;color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+</o:p>
+</span><o:p>
+</p>
+
+</body>
+
+</html>

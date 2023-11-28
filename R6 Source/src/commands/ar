@@ -1,0 +1,12 @@
+#!/bin/sh
+shift
+OUTPUT=$1
+shift
+if [ -f $OUTPUT ]
+then
+    mv $OUTPUT $OUTPUT.tmp
+    $BE_LINKER -xml -o $OUTPUT $* $OUTPUT.tmp
+    rm -f $OUTPUT.tmp
+else
+    exec $BE_LINKER -xml -o $OUTPUT $*
+fi

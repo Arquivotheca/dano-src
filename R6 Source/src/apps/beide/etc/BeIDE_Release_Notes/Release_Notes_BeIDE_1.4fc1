@@ -1,0 +1,231 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	1.4fc1
+Date:		10/31/97
+Authors:	Brian Stern, Jon Watte, Fred Peterson,
+			Burton T. E. Miller, Bernie Estavillo 
+=============================================
+
+Howdy Be developers.  This is an update to BeIDE in
+preparation for a netborne update that will appear 
+soon.  This version is feature complete for the
+netborne release.
+
+This update contains the latest plugins, mwbres, and
+profiling library.
+
+Note:  When you receive PR2 you will find that all of the Be
+system libs now have version and type resources and attributes.
+These may conflict with similar resources in your projects and 
+you will see duplicate resource warnings at link time.  To fix this
+you should remove the has resources flag in the Targets prefs panel for
+application/x-be-executable and for files that end in .so.  Hitting
+the factory settings button in that panel will change the settings
+in this way.
+
+
+============================
+New Features
+============================
+
+*	The buttons for the header popup and friends have changed.  There is
+	now a button that indicates the locked/unlocked/read only state
+	of text files.  The locked icon indicates that the file is locked
+	by the unix file permissions, unlocked indicates unlocked by
+	the unix file permissions, and the broken pencil indicates that
+	the file is on a read-only volume.  Locking or unlocking the file
+	simply changes the unix file permissions for the file.
+
+*	Sped up the code for redraws when turning the triangles in project
+	windows.
+
+1.4b4
+
+*	Multiple undo is implemented.  This includes undo for editor add-ons.
+
+*	Several new editor actions have been implemented including:
+	
+	move subword left, move subword right, select next subword, 
+	select previous subword, delete to end of line and delete
+	to end of file.  There was a change in some of the default keybindings
+	to accomodate the subword bindings (which use the control key as their
+	meta key). 	
+
+*	The editor colors prefs panel has been renamed Editor Settings.  A couple
+	of items from the Editor prefs panel have been moved to the Editor
+	Settings panel.  There are also two new options: Sort function popup and
+	relaxed C popup parsing.  Sort function popup causes the functions listed 
+	in the function popup to be sorted.  As always, holding down the option or
+	control key when clicking on the function popup will cause the opposite
+	action (sorted if 'Sort function popup' isn't chosen and unsorted if
+	it is chosen).  'relaxed C popup parsing' affects the heuristics
+	used to detect functions in the presence of preprocessor macros.  In 
+	some cases preprocessor macros interfere with the function popup.  
+	If you have that problem unchechecking the 'relaxed C popup parsing' 
+	checkbox may make the function popup work better.  For most code
+	this box should be checked.
+	
+	
+1.4b3
+
+*	Editor colors prefs panel.  This panel lets you set the hilite color and
+	window background color for text windows.  The hilite_color prefs file is
+	no longer used.
+
+*	You can now use non-modifier editor commands more completely in
+	text windows of locked source files.
+
+*	All of the color controls in the prefs window accept drags containing an
+	rgb_color from the rocolor prefs app.
+
+
+1.4b2
+*	The prefs panels in the Settings window are now only shown if they work with
+	the currently chosen target (linker).  So you won't see the Java prefs panels
+	when the target is C/C++ and the reverse.
+	
+*	The Project prefs panel now only applies to C/C++ projects and won't be visible
+	for Java projects.  There is a new Java Project prefs panel that will apply
+	to Java projects.
+
+*	You can now launch Java applets from the IDE (without hassle).
+
+*	The concurrent compiles popup has moved from the Project prefs panel
+	to a new 'Build extras' panel.
+
+
+1.4b1
+*	Text selection with and RGB color.  You may now specify any RGB color
+	to be used as the hilite color.  The UI for setting this color is, um,
+	primitive at the moment.  When you run this version of BeIDE for the
+	first time it will create a file called /boot/home/config/settings/hilite_color.
+	This file contains an ascii text rgb color used as the hilite color.
+	You may edit the color in any text editor.  The file is read once when BeIDE
+	starts up.  You may wish to use the palette in IconWorld to determine
+	a hilite color that you like.  The hilite_color file can have more than one
+	color in it or other text; only the first color is read.  Following is what my
+	file looks like:
+	
+51,203,255,0		//light blue
+217,217,217,0		// default grey
+
+
+*	Configurable Key bindings - You can now set the key bindings for
+all menu items and editor commands.  
+
+To do this open the Settings window
+and go to the KeyBindings pane.  Inspect the list for the menu item or
+editor command you are interested in.  Double-click the line of interest and
+the change bindings window will appear.  You may enter up to two bindings for
+each command, choose between them by clicking on the primary or alternate
+box.  Hold down the new key binding, hit the Apply button, and hit the save
+button in the Settings window.
+
+For example say you would like the Settings window to appear when you
+hit F7.  Open the Change key bindings window for the Settings menu command.
+Enter F7 as the primary binding.  Hit Apply, and save the changes in the
+Settings window.
+
+You may have multi-key bindings by use of prefix keys.  Open the Change Binding
+window for one of the prefix keys.  Enter a keybinding, say control-X, and hit apply.
+You may then enter key combinations like 'control-X, control-S' in the change binding
+window for menu commands.  The prefix timeout field is the time in 60ths of a second
+beyond which a prefix key combo is no longer valid.  For example the default
+prefix timeout is 120 (2 seconds).  If you hit control-X, pause three seconds, then
+hit control-S, the prefix key will not be valid for that keydown.  If control-S is a valic
+key binding then it will be used.  If the pause was less than 2 seconds the control-X, 
+control-S key binding would be accepted.
+
+The quote key makes the subsequent key combination be ignored.  For example the 
+key combination option-G generates the UTF-8 character for the copyright symbol, ©.
+If you wanted to use option-G as a key binding in and wanted to type the copyright
+symbol into a text window you would use the quote key.  If the quote key binding
+is control-`, you would enter control-`, option-G, and the copyright symbol
+will be correctly entered.  The prefix key timeout also applies for the quote key.
+
+The editor commands only apply in text windows.  So changing the key binding for
+move to previous line to something else than the default up arrow won't affect
+the use of up arrow in the project window or message window or Settings window.
+
+BTW, a handful of the menu commands can change their text depending on which modifier
+keys are held down (like save and save all with the option key and shift changes all
+the search menu items).  Unfortunately you need to have the modifier key down
+before the menu is chosen.  So hold down shift and look at the Search menu or hold
+down option and look at the File menu.
+
+
+Limitations -
+
+Can't set key bindings for the Add-ons menu yet.
+
+Certain key bindings won't display correctly in the menu.  Especially
+those that use special keys like F1, pageup etc.  Also, prefix key bindings
+won't display correctly in the menu.  These key bindings should all work though.
+
+Certain key bindings can't be entered in the Change Bindings window.  These are
+primarily bindings with many modifier keys.
+
+Several of the key bindings listed in the settings window aren't implemented.  These
+include all the editor commands related to sub-words and the Redo menu item.  Redo
+uses the same key binding as Undo for now.
+
+*	Support for file permissions for text documents.  If you open a text document that
+	has its unix file permissions set to read-only BeIDE won't let you edit this file.
+
+*	Added a checkbox for Generate Profiling Info to the PPC Processor prefs panel.
+	Use this to tell the compiler that you are profiling this application.  You also
+	need to add libprof.a to the project and call PROFILE_INIT() and PROFILE_DUMP()
+	in your app.
+
+
+==========================
+Bugs Fixed
+==========================
+
+Fixed a problem with multiple undo of shift left/right operations.
+
+Fixed a crashing bug for compiler errors that happened at the very
+end of the file.
+
+1.4b3
+
+Fixed a problem with the keypad.
+
+1.4b2
+
+Fixed a problem that made it difficult to enter new key bindings into
+the change bindings window.
+Fixed a problem where removing a key binding didn't remove it from
+open windows.
+Fixed a problem where you could add a duplicate key binding if it
+was the alternate key binding.
+
+If you continue to see any problems with the key bindings please report
+them, even if you already reported them.
+
+
+1.4b1
+Fixed a crashing bug when printing.
+
+Fixed a problem when updating dr8 project files.
+
+Fixed a crashing bug that appeared after opening a certain number
+of project files.
+
+
+==========================
+Known Limitations
+==========================
+
+
+
+=====================
+Contacting Metrowerks
+=====================
+
+Please send bug reports for this mptp release to mptp-be@metrowerks.com.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

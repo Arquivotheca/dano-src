@@ -1,0 +1,465 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size: 36.0pt; mso-bidi-font-size: 12.0pt; color: blue; text-shadow: auto">Testing
+</span><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">the Printer Driver<o:p>
+</o:p>
+</span></h1>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note:
+      Documentation and code version numbers are designed to be independent of
+      each other, and may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose. Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1 align="center">Testing the Printer Driver</h1>
+<p>&nbsp;</p>
+<h2><a name="top">Introduction</a></h2>
+<p class="pgph1" style="margin-bottom: -8">Hewlett-Packard
+has tested the Hewlett-Packard Appliance Printing Software Development Kit (SDK)
+code prior to its release. As such, the
+developer does not need to test the SDK code, but rather their implementation
+of the printer driver using the SDK code set. Hewlett-Packard suggests using 3
+printer models to thoroughly test the printer driver: the 640, the 840, and one
+printer from the 900 family series. The suggested testing can be
+broken into the following testing categories:</p>
+<blockquote>
+  <p class="bullets" style="margin-bottom: -16"><a href="#compatibility">Compatibility</a></p>
+  <p class="bullets" style="margin-bottom: -16"><a href="#errorhandling">Error Handling</a></p>
+  <p class="bullets" style="margin-bottom: -16"><span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;</span><a href="#printquality">Prin<span style="mso-bookmark:
+_Hlt476042621">t</span> Quality</a></p>
+  <p class="bullets" style="margin-bottom: -16"><a href="#performance">Perform<span style="mso-bookmark:
+_Hlt476042627">a</span>nce</a></p>
+  <p class="bullets"><a href="#finalvalidation">Final <span style="mso-bookmark:_Hlt476042648">V</span>alidation</a></p>
+</blockquote>
+<p class="bullets" style="mso-list:none;tab-stops:.5in">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><a name="compatibility">Compatibility </a>Testing</h1>
+<p class="pgph1" style="margin-bottom:0in;margin-bottom:.0001pt">During the
+development cycle, developers are responsible for testing their
+implementation of the printer driver for compatibility with their host systems. In
+situations where it makes sense, the testing should include:</p>
+<ul>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Setup – Connecting the printer to the
+    host system, making sure it
+is recognized, and can be printed to.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Output correctness - Formatting, page-break handling, text/graphics
+    overlay.</li>
+  <li>
+    <p class="bullets" style="mso-list: l25 level1 lfo27; tab-stops: list 1.25in; margin-left: 1.25in; margin-bottom: 8">Printscreen –
+    This may be optional. In addition to the normal
+prints, it is important to do a printscreen if the device supports it.<span style="font-size:8.0pt;mso-bidi-font-size:10.0pt"><o:p>
+</o:p>
+</span></li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Supported paper sizes - Letter, A4,
+    Legal, Photo.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Printing configurations -
+    Exercising available UI controls for printing.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Help system – Ensure Help is accessible; all links take
+the user to the proper help page, help content is correct, etc.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">UI Controls – Verify all UI controls are working properly; i.e. Print
+Mode sets the proper output mode, warnings and errors are communicated properly,
+etc..</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Memory resources – Confirm
+    that memory is being cleaned up after print jobs
+complete, print jobs are canceled, etc..</li>
+</ul>
+<p class="Pgph10" style="page-break-after:auto">&nbsp;<span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><a href="#top">[<span style="mso-bookmark:_Hlt476042620">B</span>a<span style="mso-bookmark:_Hlt476018363">c</span>k
+to t<span style="mso-bookmark:
+_Hlt476042656">o</span>p]</a></span></p>
+<p class="pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><o:p>
+</o:p>
+</span></p>
+<h1><a name="errorhandling">Error Handling Testing</a></h1>
+<p class="pgph1" style="margin-bottom:0in;margin-bottom:.0001pt">Error Handling testing checks the driver’s response to unexpected external events. Testing
+should include the following user scenarios, of which there are two possible
+user responses: the user cancels the job when an error dialog appears, or the
+user rectifies the error condition and presses the printer power button to
+resume printing:</p>
+<ul>
+  <li>
+    <p class="bullets" style="margin-bottom: 8"><span style="font-style: normal; font-variant: normal; font-weight: normal">&nbsp;</span>Printer not connected at print time.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Printer not powered on at print time.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Printer powered off during a print operation via printer power
+button.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Printer powered off during a print operation via power source.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Printer cable disconnected during a print operation.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Cover open at start of print operation.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">User lifts cover during a print operation.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Missing ink cartridge. Test both cartridges for two-pen products,
+and make sure that the correct pen is reported as missing.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Canceling print jobs. Make sure resources are cleaned
+    up and the user can start a new print job without problems, etc. (Testing should include
+canceling a job both before and after printing begins. For printers that have an
+on-printer cancel button, this should also be tested both before and after
+printing begins.)</li>
+  <li>
+    <p class="bullets" style="tab-stops: list .25in; margin-bottom: 8">Out of paper. Test condition where printer is out of paper before
+print job starts and where printer runs out of paper during multi-page print
+job.</li>
+  <li>
+    <p class="bullets" style="tab-stops: list .25in; margin-bottom: 8">Paper jam in mechanism. Simulate by using banner paper, (taping
+four sheets of 8.5&quot; X 11&quot; paper together works as well) and printing
+    a multi-page document.</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8"><span style="background-repeat: repeat; background-attachment: scroll; mso-highlight: red; background-position: 0%">Photo tray detected for printers that support
+it.</span></li>
+</ul>
+<p class="Pgph10" style="page-break-after:auto">&nbsp;<span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><a href="#top">[Back to <span style="mso-bookmark:_Hlt476042625">t</span>op]</a></span></p>
+<p class="pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><o:p>
+</o:p>
+</span></p>
+<h1><a name="printquality">Print Quality </a>Testing</h1>
+<p style="margin-bottom:0in;margin-bottom:.0001pt">Print
+quality testing ensures that the driver is producing appropriate printed output.
+Testing should include at least the following types of documents:</p>
+<ul>
+  <li>
+    <p style="margin-bottom: 8">Satisfactory output printing of text documents, mixed text &amp;
+graphics documents, and graphics documents.</li>
+  <li>
+    <p style="margin-bottom: 8">Both single and multi-page documents.</li>
+  <li>
+    <p style="margin-bottom: 8">Satisfactory output printing in the different modes - grayscale,
+normal and photo.</li>
+  <li>
+    <p style="margin-bottom: 8">No artifacts should be present in the printed output. Artifacts
+    may include:
+    <ul>
+      <li>
+        <p style="margin-bottom: 8">Clipping</li>
+      <li>
+        <p style="margin-bottom: 8">Missing lines, graphics</li>
+      <li>
+        <p style="margin-bottom: 8">Unexpected objects</li>
+      <li>
+        <p style="margin-bottom: 8">Significant color shifts from original document source</li>
+    </ul>
+  </li>
+</ul>
+<p class="Pgph10" style="page-break-after:auto">&nbsp;<span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><a href="#top">[Back to top]</a></span></p>
+<p class="pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><o:p>
+</o:p>
+</span></p>
+<h1><a name="performance">Performance </a>Testing</h1>
+<p>Performance testing ensures that the driver is delivering the printed output
+in an acceptable time. Hewlett-Packard has provided HTML documents for
+the Performance tests, which can also be used for Final Validation testing.
+Performance tests should be run with a <i>non</i>-debug driver. If there is a significant deviation in print times from the
+average time provided in the following table, developers are strongly
+recommended to generate a script file as described in the Final Validation
+section and send it to Hewlett-Packard for analysis. (See <a href="#finalvalidation">Final
+Validation</a> for emailing instructions.)</p>
+<p>The following table gives the name of each file and the average time it
+should take to print on each printer series. Times are measured from the moment
+the print process is initiated until the paper drops into the output tray.&nbsp;</p>
+<h3 align="center"><font color="#006666">Printer Performance Testing Table</font></h3>
+<table border="1" width="100%" height="174">
+  <tr>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">
+      <div align="center">
+        <b>File Name</b>
+      </div>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">
+      <div align="center">
+        <b>600 Series</b>
+      </div>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">
+      <div align="center">
+        <b>800 Series</b>
+      </div>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">
+      <div align="center">
+        <b>900 Series</b>
+      </div>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">
+      <p align="center"><b>File Size</b></td>
+  </tr>
+  <tr>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">text.html</td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">
+      <p align="center"><i><font color="#009999">tbd</font></i></p>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">9KB</td>
+  </tr>
+  <tr>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="18">textgraphics.html</td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="18">
+      <p align="center"><i><font color="#009999">tbd</font></i></p>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="18"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="18"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="18"><i><font color="#009999">tbd</font></i></td>
+  </tr>
+  <tr>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">biztest.jpg</td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">
+      <p align="center"><i><font color="#009999">tbd</font></i></p>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">560KB</td>
+  </tr>
+  <tr>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">hikey.jpg</td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">
+      <p align="center"><i><font color="#009999">tbd</font></i></p>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">1.48MB</td>
+  </tr>
+  <tr>
+    <td bordercolorlight="#009999" bordercolordark="#006666" height="19">imagetest.jpg</td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">
+      <p align="center"><i><font color="#009999">tbd</font></i></p>
+    </td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19"><i><font color="#009999">tbd</font></i></td>
+    <td bordercolorlight="#009999" bordercolordark="#006666" align="center" height="19">1.69MB</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p class="pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><a href="#top">[Back t<span style="mso-bookmark:_Hlt476042650">o</span>
+top]</a></span></p>
+<p class="pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><o:p>
+</o:p>
+</span></p>
+<h2><a name="finalvalidation"><span style="font-family:Tahoma;mso-bidi-font-family:
+&quot;Times New Roman&quot;">Final Validation</span></a><span style="font-family:Tahoma;
+mso-bidi-font-family:&quot;Times New Roman&quot;"><o:p>
+</o:p>
+</span></h2>
+<p>The Final Validation testing step verifies the final printer driver product by using a document set that exercises
+different parts of the CALLING code (browser, formatting, etc.). For final validation testing, developers should utilize the same
+HTML test documents used in <a href="#performance">Performance Testing</a>, and
+should run the tests with a <i>debug</i> driver.&nbsp;</p>
+<p>The SDK code has code built
+into it for Final Validation testing and script generation. Instrumented
+so that when a debug flag (build define “CAPTURE”) is set, all API calls
+along with their data are recorded in what is called a script. From this script,
+a large class of problems can be found that would otherwise potentially take a
+very long time to debug.&nbsp;</p>
+<p>Hewlett-Packard strongly encourages developers to email the printer driver
+output (script files) back to Hewlett-Packard for print quality review and
+recommendations based on the results; this service is offered at no charge. Hewlett-Packard can then work with the developer to identify print quality
+issues and correct them.&nbsp;</p>
+<p>In an effort to control costs associated with this program, Hewlett-Packard
+may not be able to test or debug every script file submitted for review.
+(Hewlett`-Packard charges no fees for the SDK or associated costs such as script
+file review, in an effort to keep this product available to as many developers
+and platforms as possible.) Developers are still strongly encouraged to submit
+their script files, and Hewlett-Packard will make every effort to review them.
+Developers will be notified within five (5) business days as to whether or not
+Hewlett-Packard will be able to review and return their script files.&nbsp;</p>
+<p> To submit the script files, log on to the <a href="http://www.hp-developer-solutions.com/">SPP
+website</a> (http://www.hp-developer-solutions.com/) using your assigned login
+name and password, and send an email titled &quot;Script Files&quot;, with the
+attached script files. Be sure to include your name, email and phone number in
+the email, should Hewlett-Packard need to make direct contact. Hewlett-Packard
+may verify the
+correctness of the printing sequence, paying particular attention to the following:</p>
+<ul>
+  <li>
+    <p class="bullets" style="margin-top: -10; margin-bottom: 8">Valid API calls</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Correctness of the calling sequence</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Any significant print quality issues</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 8">Artifacts</li>
+  <li>
+    <p class="bullets" style="margin-bottom: 30">Output correctness<o:p>
+    &nbsp;
+  </li>
+</ul>
+<p><span style="font-size:8.0pt;mso-bidi-font-size:10.0pt;
+color:maroon"><a href="#top">[Back t<span style="mso-bookmark:_Hlt476042650">o</span>
+top]</a></span></p>
+<p>&nbsp;</p>
+<h3><b>Recording a Script</b></h3>
+<p>The first step in producing a script is to decide on the mechanism for
+storing it, and the format to be used. The easiest way to produce a script is to
+write the data to a file on local storage using standard “fopen/fwrite”
+commands. If such storage is available, the code included in the SDK will be
+sufficient. The data can be written in either binary or ASCII form; the binary
+form will produce smaller files and run faster.&nbsp;</p>
+<p>Hewlett-Packard has encountered some systems where a storage disk is not
+available and the only means of capturing data is to use printf commands that
+are sent to a terminal window. In this case the base-class scripting code has to
+be overridden (in the derivative SystemServices class); the code can be copied
+as is from the base-class routines, replacing every file-writing call (fwrite,
+fputc, etc.) with a display call (printf), and avoiding the fopen/fclose calls
+in the methods OpenDebugStreamR and CloseDebugStreamR.&nbsp;</p>
+<p>In order to capture the data from the terminal window, the ASCII format must
+be used (and in fact this is why we have provided the ASCII option). Thus the
+code that needs to be overridden is in the AsciiScripter subclass of Scripter,
+found in the file script.cpp. The second step needed is for the calling code to
+invoke the SystemServices methods InitScript and EndScript. InitScript, as
+usual, should be called after the SystemServices object is constructed and
+before any other API calls are made. InitScript takes two parameters: the name
+of the script file to be created on disk (ignored in the diskless
+implementation), and a flag that is TRUE if ASCII format is to be used.
+EndScript should be called after everything else has finished and been cleaned
+up, except of course for destruction of the SystemServices object. Both these
+calls should be conditionally compiled into the calling code, so that they only
+occur in debug builds (see next paragraph).&nbsp;</p>
+<p>The final step is to compile all the code with the symbol CAPTURE defined,
+and with the files in the “debug” subdirectory included in the build. Note
+that CAPTURE should not be defined in any production builds, as performance will
+be severely degraded. Run the test print-job and send the resulting file (one
+per job – managing the files as you see fit through passing in different
+filenames, or copying the result to a different filename after each run,) to
+Hewlett-Packard via the email instructions in the <a href="#finalvalidation">Final
+Validation</a> section.</p>
+<p class="bullets" style="mso-list:none;tab-stops:.5in">&nbsp;<span style="font-size:
+8.0pt;mso-bidi-font-size:10.0pt;color:maroon"><a href="#top">[Back to <span style="mso-bookmark:_Hlt476042646">t</span>op]</a></span></p>
+<p class="MsoNormal">&nbsp;</p>
+
+</body>
+
+</html>

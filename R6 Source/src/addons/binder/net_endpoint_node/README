@@ -1,0 +1,17 @@
+** Using the net_endpoint_node and httpd.js with the chromatic UI **
+   2001-06-21 dsandler
+
+This node is not in the build by default, and not referenced
+in the binder by default either.  It is required for httpd.js
+(the JavaScript web server in the chromatic UI).
+
+Add the following to your boot/home/config/settings/binder/root
+beneath the /service level:
+
+	<object name="net_endpoint" handler="net_endpoint_node"/>
+	
+Also, add the net_endpoint_node (built from this directory) to
+/system/add-ons/binder/.
+
+Try it out!  httpd.js should auto-sense that the net_endpoint_node
+is available, and start a server on port 81.

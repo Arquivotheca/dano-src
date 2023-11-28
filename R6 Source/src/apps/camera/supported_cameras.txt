@@ -1,0 +1,36 @@
+Camera status (as reported to me)
+
+Yes
+--------------------------------------
+Nikon Coolpix 900 (this is mine - I know it works)
+Olympus D320-L (Greg Vanore <gav3a@virginia.edu>) - somewhat flaky though (probably fixed)
+Olympus D340-L (Peter Gee <petergee@earthlink.net>)
+Olympus Camedia C-400 (Sylvain Tertois <Sylvain.Tertois@supelec.fr>) - "delete all" doesn't work
+Olympus Camedia C-340L, C-840L (Howard Gray <howard@japan.co.jp>)
+Polaroid PDC640 (James Sievers <sievers@bellatlantic.net>)
+
+// Added by Switkin
+
+Nikon Coolpix 950 (I own this)
+Nikon Coolpix 700 (same chipset and CCD as 950)
+Olympus D340-R (used by Adam and Baron)
+
+// Added by Travis Geiselbrecht (geist)
+// Only work if using JPEG internal format
+
+Kodak DC265 (tested)
+Kodak DC260 (tested)
+Kodak DC220 (Should work)
+Kodak DC290 (Probably)
+Some evidence that a Minolta Diamage EX 1500 may work,
+	uses same OS as the above Kodaks
+
+No
+--------------------------------------
+Fuji MX-700 (Marc Lebas <mlebas@pobox.com>)
+Olympus D-320L (Eide-Goodman <eidegoo@geocities.com>)
+Kodak DC200 (Dan <dan@onyxmedia.com>)
+Kodak DC120 (Fred Newhouse <fouse@micron.net>)
+HP C20 (Steve Grobe <sgrobe@bitstream.net>)
+Minolta DImage V (Brian Bek Jensen <bbj@itplus.dk>)
+Epson PhotoPC 500 (Daniel Switkin <djs13@cornell.edu>) - thumbnails OK, fullsize get written but are unviewable (probably fixed)

@@ -1,0 +1,474 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=euc-jp">
+   <TITLE>Soft Agency / 実践MySQL</TITLE>
+</HEAD>
+
+<BODY BODY BACKGROUND="../image/back.png" BGCOLOR="beige" TEXT="#000000" LINK="#0000FF" ALINK="red" VLINK="6699FF"
+ MARGINWIDTH="20" MARGINHEIGHT="0" LEFTMARGIN="20" TOPMARGIN="0">
+
+
+<TABLE BORDER="0">
+<TR>
+<TD><IMG SRC="../../image/logo.png" WIDTH="160" HEIGHT="45" ALT="SoftAgency "></TD>
+<TD ALIGN="RIGHT">
+<A HREF="../../index.html"><IMG SRC="../../image/indextitle.png" BORDER="0" ALT="Index "></A><A HREF="../../new.html"><IMG SRC="../../image/newtitle.png" BORDER="0" ALT="NEW "></A><A HREF="../../mysql/"><IMG SRC="../../image/sqltitle.png" BORDER="0" ALT="MySQL "></A><A HREF="../../company.html"><IMG SRC="../../image/companytitle.png" BORDER="0" ALT="Company "></A><A HREF="../../press/press.html"><IMG SRC="../../image/prestitle.png" BORDER="0" ALT="PressRelease "></A><A HREF="../../links1.html"><IMG SRC="../../image/linktitle.png" BORDER="0" ALT="Link "></A>
+</TD></TR>
+</TABLE>
+
+<TABLE BORDER="0" WIDTH="610" CELLPADDING="3">
+<TR><TD>
+<IMG SRC="title.png"><BR><BR>
+<IMG SRC="jissentitle.png" WIDTH="610" HEIGHT="40"><BR><BR>
+</TD></TR></TABLE>
+
+<TABLE BORDER="0" WIDTH="610">
+<TR><TD>
+<H2><FONT COLOR="#CC0099">なにから手をつければよいのかしら？</FONT></H2>
+</TD></TR>
+<TR><TD>
+<B>目次</B>
+</TD></TR>
+<TR><TD>
+<OL TYPE="I">
+<LI>Install
+     <OL TYPE="1">
+     <LI><A HREF="#pub">ソースのダウンロード先とファイル名</A>
+     <LI><A HREF="#normal">ソースからのコンパイルとインストール</A>
+     <LI><A HREF="#binaries">バイナリからのインストール</A>
+     
+            <OL TYPE="a">
+            <LI><A HREF="#deb">Debian であるならこちら</A>
+            <LI><A HREF="#rpm">RPM であるならこちら</A>
+            <LI><A HREF="#slack">Slackware であるならこちら</A>
+            <LI><A HREF="#freebsd">FreeBSD ならこちら</A>
+            <LI><A HREF="#normal">それ以外はこちら</A>
+            </OL></OL>
+<LI>Installのあと
+     <OL TYPE="1">
+     <LI><A HREF="#mysql">インストールは終って動いてますが、そのあとは？</A>
+     <LI><A HREF="#mysqladmin">MySQLを管理するには？</A>
+     <LI><A HREF="#about_db">データベースっていわれても?</A>
+     <LI><A HREF="#create_db">Databse を新しく作成するには？</A>
+     <LI><A HREF="#about_user">MySQL のユーザーっていわれても???</A>
+     <LI><A HREF="#new_user">MySQL にアクセスするユーザーを追加するには？</A>
+     </OL>
+<LI>参考資料、情報源
+     <OL TYPE="1">
+     <LI><A HREF="../Manual/">日本語マニュアルはこちら</A>
+     <LI><A HREF="http://www.database.ne.jp/">日本語 Mailing List はこちら</A>
+     </OL>
+</OL></TD></TR>
+
+<!------------------------------------->
+<TR><TD>
+<BR><BR>
+<HR NOSHADE SIZE="2"><BR>
+<FONT SIZE="4"><B>��I. Install</B></FONT><A NAME="pub"></A>
+　<DL>
+　<DT><FONT SIZE="4"><B>　1.ダウンロード先とファイル名</B></FONT><BR>
+　
+<DD>MySQL のソースは以下にあります。<BR>
+<A HREF="ftp://ftp.softagency.co.jp/mysql/tcx/Downloads/">ftp://ftp.softagency.co.jp/mysql/tcx/Downloads/</A><BR>
+directory は、バージョン名が付いています。<BR>
+例えば、3.22.25 のソースが欲しいなら<BR>
+<TT>ftp://ftp.softagency.co.jp/mysql/tcx/Downloads/MySQL-3.22/mysql-3.22.25.tar.gz</TT><BR>
+<BR>
+どのバージョンのファイルを選ぶか？<BR>
+安定版の一番最近の物を選びます。<BR>
+どのバージョンが安定版(正式リリース)かは、<A HREF="../index.html">こちら</A>に書いてあります<BR>
+
+
+  <A NAME="normal"></A><BR><BR>
+　<DT><FONT SIZE="4"><B>　2.ソースからコンパイル＆インストール</B></FONT><BR>
+
+  <DL>
+　<DT><B>必須条件</B><BR>
+GNU gcc, autoconf, flex, bison, gzip, tar が必要です。<BR>
+MySQL コンパイル前に インストールしておきましょう。<BR>
+
+　<DT><B>取得</B><BR>
+<DD><A HREF="ftp://ftp.softagency.co.jp/mysql/tcx/Downloads/">・ソース Download 先</A><BR>
+directory は、バージョン名が付いています。<BR>
+例えば、3.22.25 が欲しいなら<BR>
+<TT>ftp://ftp.softagency.co.jp/mysql/tcx/Downloads/MySQL-3.22/mysql-3.22.25.tar.gz</TT><BR><BR>
+<BR>
+どのバージョンのファイルを選ぶか？<BR>
+安定版の一番最近の物を選びます。<BR>
+どのバージョンが安定版(正式リリース)かは、<A HREF="../index.html">こちら</A>に書いてあります<BR>
+<BR>
+
+<DT><B>展開＆compile,install ； MySQL-3.22 以下</B><BR>
+<DD><PRE>
+    gzip -dc mysql-3.22.25.tar.gz | tar -xvf -
+    cd  mysql-3.22.25
+    ./configure --with-charset=ujis
+    make
+    make install
+</PRE>
+MySQL を EUC 漢字に対応させたいなら、<PRE>
+--with-charset=ujis</PRE>
+とし、SJIS 漢字に対応させたいなら、<PRE>
+--with-charset=sjis</PRE>
+を、<TT>./configure </TT> のオプションに指定します。<BR>
+<BR>
+注意： バージョン 3.23.15 以上の MySQL では、<PRE>
+--with-extra-charsets=all </PRE>
+を指定すると、同時に他の文字にも対応させる事が可能です。<BR>
+<BR>
+参考:<BR>
+<A HREF="jp.html">・MySQL の日本語対応に付いての TIPS</A><BR>
+<A HREF="compile.html">・コンパイルに付いての TIPS</A><BR>
+<BR>
+<DT><B>展開＆compile,install ； MySQL-3.23</B><BR>
+<DD><PRE>
+  groupadd mysql
+  useradd mysql
+  gzip -dc mysql-3.23.24-beta.tar.gz | tar -xvf -
+  cd  mysql-3.23.24-beta
+  ./configure --with-charset=ujis --with-extra-charsets=all --with-mysqld-user=mysql
+  make
+  make install
+</PRE>
+</DL>
+<BR>
+
+
+<DT><B>　3.DataBaseの初期化</B><BR>
+<DD>データを保存する directory を作成しなくてはなりません。<BR>
+これは、MySQL をはじめてインストールした時に、一度だけ、行えばよいことです<BR>
+既にマシン上にデータ directory が存在する場合は、この作業は必要ありません。<BR>
+<BR>
+データ directory を作成するには、<BR>
+<TT> /usr/local/bin/mysql_install_db </TT><BR>
+コマンドを実行します<BR>
+<BR>
+3.23 以上の MySQL では、<BR>
+<TT> useradd mysql </TT><BR>
+<TT> /usr/local/bin/mysql_install_db --user=mysql </TT><BR>
+
+<BR>
+<DT><B>　4.実行</B><BR>
+<DD><TT> /usr/local/bin/safe_mysqld & </TT><BR>
+3.23 以上の MySQL では、<BR>
+<TT> /usr/local/bin/safe_mysqld --user=mysql & </TT><BR>
+
+<BR>
+<DT><B>　5.データのファイルはどこに？</B><BR>
+<DD><TT>/usr/local/var/</TT>
+
+</DL>
+
+</TD></TR>
+
+<!------------------------>
+<TR><TD>
+<HR><BR>
+<A NAME="binaries"></A>
+<FONT SIZE="4"><B>binary packages</B></FONT><BR>
+<A NAME="deb"></A>
+<FONT SIZE="4"><B>a.Debian</B></FONT><BR>
+　<DL>
+　<DT><FONT SIZE="4"><B>　Debian 2.2 potato (glibc2.1), Debian 1.3 bo (libc5)</B></FONT><BR>
+　<DD><A HREF="../bin/index.html">こちら</A><BR>
+　<DD>Debian に既に MySQL が入っています。<BR>
+         ただし、英語バージョンです。<BR>
+         日本語を使用したい場合は、<BR>
+<PRE>
+1. Debian のミラーサイトからソースを持って来て
+   --with-charset=ujis (もしくは sjis)で作り直す。
+か、
+2. <A HREF="../bin/index.html">こちらの日本語対応パッケージ</A>を利用する。
+   ただし、正式の Debian パッケージには添っていません。
+</PRE>
+<DT><FONT SIZE="4"><B>　Debian 2.0 hamm, 2.1 slink</B></FONT><BR>
+<DD>ありません。<BR>
+hamm, slink は使用しないように。potato 以上を推奨します。 <BR>
+</DL></TD></TR>
+<TR><TD><A NAME="rpm"></A>
+<HR><BR>
+<FONT SIZE="4"><B>b.RPM</B></FONT><BR>
+<DL>
+　<DT><FONT SIZE="4"><B>　丸井氏作、MySQL-3.22 rpm</B></FONT><BR>
+　<DD>こちらは MySQL-3.22 の日本語。てっとりばやくインストールするならこちら。<BR>
+<A HREF="ftp://ftp.softagency.co.jp/mysql/japan/rpm/MARUI/">ftp://ftp.softagency.co.jp/mysql/japan/rpm/MARUI/</A><BR>
+<BR>
+ujis がついているのは EUC japanese 用サーバー<BR>
+sjis は Shift JIS 用サーバー<BR>
+<BR>
+ファイル名の命名規則は、下の TCX のバイナリに準拠してます。<BR>
+
+<BR><B>0_README ファイルをかならず読みます</B><BR><BR>
+
+<DT><FONT SIZE="4"><B>　TCX binaries</B></FONT><BR>
+　<DD>TCX は rpm パッケージを提供しています。ただし MySQL-3.22 は英語です。(3.23 以上では、起動時のオプションで日本語文字に対応します。)<BR>
+<BR>
+したがって、MySQL-3.22 の場合は、src パッケージを取得して --with-charset=ujis でパッケージ作り直しです。<BR>
+<A HREF="ftp://ftp.softagency.co.jp/mysql/tcx/Downloads/">ソース Download 先</A><BR>
+directory は、バージョン名が付いています。<BR>
+例えば、3.22.25 が欲しいなら<BR>
+<TT>ftp://ftp.softagency.co.jp/mysql/tcx/Downloads/MySQL-3.22/</TT><BR>
+<BR>
+MySQL-3.23 の場合には、TcX のバイナリがそのまま使用できます。<BR>
+ただし起動時にオプション<PRE>
+--default-charset=ujis
+</PRE> を与えるか、<TT> /etc/my.cnf </TT> ファイルに、<PRE>
+default-charset=ujis
+</PRE> と記述する事で、日本語に対応します。<BR>
+<BR>
+RPM のファイル名の規則は：
+</TD></TR></TABLE>
+<TABLE BORDER="1" CELLPADDING="3">
+<TR><TD>MySQL-%{version}-%{release}.i386.rpm</TD><TD>MySQLサーバー 必須</TD></TR>
+<TR><TD>MySQL-client-%{version}-%{release}.i386.rpm</TD><TD>MySQL client 必須</TD></TR>
+<TR><TD>MySQL-devel-%{version}-%{release}.i386.rpm</TD><TD>MySQL 開発用 推奨</TD></TR>
+<TR><TD>MySQL-bench-%{version}-%{release}.i386.rpm</TD><TD>bench mark test. いらない</TD></TR></TABLE>
+
+<TR><TD><A NAME="slack"></A>
+<HR><BR>
+<FONT SIZE="4"><B>c.ハマ氏作、Slackware MySQL-3.21 package</B></FONT><BR>
+<DL>
+　<DT>こちらです<BR>
+　<DD><A HREF="ftp://ftp.softagency.co.jp/mysql/japan/slackware/HAMA/">ftp://ftp.softagency.co.jp/mysql/japan/slackware/HAMA/</A>
+</DL>
+</TD></TR>
+<TR><TD><A NAME="freebsd"></A>
+<HR><BR>
+<FONT SIZE="4"><B>d.FreeBSD</B></FONT><BR><BR>
+<A HREF="../Downloads/freebsd/">一部のバージョン用のバイナリはこちら</A><BR>
+もしバイナリパッケージのない バージョンの場合、ports があるのでそちらをつかいましょう。<BR>
+<TT>--with-charset=ujis か --with-charset=sjis</TT> を ports の Makefile に付けます。<BR>
+<BR>
+ports が分からなければ、<A HREF="#normal">普通のやり方</A>で<BR>
+ただし gcc, gmake を使用します。
+</TD></TR>
+
+<!------------------------------------->
+<TR><TD><BR><BR>
+<HR NOSHADE SIZE="2"><BR>
+<FONT SIZE="4"><B>��II. Installのあと</B></FONT><BR><A NAME="mysql"></A>
+　<DL>
+　<DT><FONT SIZE="4"><B>　1.インストールは終わって動いていますが、そのあとは？</B></FONT><BR>
+<DD><PRE>
+shell # mysql
+</PRE>
+とやってみましょう。ちゃんと接続できれば、
+<PRE>Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3325 to server version: 3.22.25
+
+Type 'help' for help.
+
+mysql> </PRE></TD>
+と表示されます。<BR>
+このあと、試しにtestデータベースに接続してみます<BR>
+<PRE>mysql> use test;
+mysql> show tables;
+mysql> create table t1 (a char(10));
+mysql> insert into t1 values ('aaa');
+mysql> insert into t1 values ('あ');
+mysql> select * from t1;
+</PRE>
+<BR>
+
+日本語がはいらない場合は？<BR>
+その場合は kterm(rxvt) の文字コード(EUC とか) と MySQL の文字コードが(--with-charset=ujis) 同じか確認しましょう。<BR>
+(端末が EUC なら MySQL の --with-charset は ujis.
+端末が SJIS なら MySQL の --with-charset は sjis.)<BR>
+<BR>
+良く分からなければ、以下のようにして、文を書いたファイルを実行することができます。<BR>
+
+<TABLE BORDER="1" CELLPADDING="5">
+<TD BGCOLOR="BEIGE"><PRE>shell # mysql test < a.euc
+
+ここで a.euc は EUC コードのファイルで、その中身は
+
+insert into t1 values ('あ');
+</PRE>
+</TD>
+</TABLE>
+<BR>
+
+<A NAME="mysqladmin"></A>
+<DT><FONT SIZE="4"><B>　2.MySQLを管理するには？</B></FONT><BR>
+<DD>mysqladmin コマンドを使用します。
+<PRE>
+shell # mysqladmin --help
+</PRE>
+とすれば、たくさん、コマンドが表示されます。<BR>
+たとえば、MySQL をとめてしまうには、
+<PRE>
+shell # mysqladmin shutdown
+</PRE>
+ユーザーがどうのと文句を言われる場合は？<BR>
+その場合は、
+<PRE>
+shell # mysqladmin -uroot shutdown
+</PRE>
+とやってみましょう。
+<BR><BR>
+
+<!------------------------------>
+<A NAME="about_db"></A>
+　<DT><FONT SIZE="4"><B>　3.MySQLがもつ`データベース'？</B></FONT><BR><BR>
+<DD>MySQL のマニュアルや、あるいはこの Web page では、<BR>
+「MySQL の xx というデータベースに...」 という言葉を使う場合、<BR>
+データベースの理論、概念を指すのではなく、<BR>
+現実に MySQL サーバー内に作成された、データを保持する物を指します。<BR>
+これは実際には directory です。<BR>
+このdirectory はデータベースと同じ名前で作成されます。<BR>
+この中に、"テーブル" が作成され、そのテーブルの中に、データが入ります。<BR>
+テーブルは、テーブル名と同じ名前のファイルが作成されます。<BR>
+
+<TABLE BORDER="1" CELLPADDING="5">
+<TD BGCOLOR="BEIGE"><PRE>
+(windows や Macintosh では、等幅フォントで見てください)
+
+イメージ図
+
+  +-- MySQL Server -----------------------------------------+
+  |  +- mysql データベース -+      +- test データベース -+  |
+  |  |  user テーブル       |      |  a テーブル         |  |
+  |  |  db テーブル         |      |                     |  |
+  |  |  host テーブル       |      |                     |  |
+  |  |  tables_priv テーブル|      |                     |  |
+  |  |  column_priv テーブル|      |                     |  |
+  |  +----------------------+      +---------------------+  |
+  +---------------------------------------------------------+
+</PRE></TD>
+</TABLE>
+<BR>
+データベースを納める directory は、ソースからインストールした場合には、<BR>
+(<TT>./configure</TT> 時に特別な値を与えていない場合)<BR>
+<TT>/usr/local/var/</TT> になります。<BR>
+この下に、データベースと同名の directory が作成されます。<BR><BR>
+
+<!----------------------->
+<A NAME="create_db"></A>
+　<DT><FONT SIZE="4"><B>　4.Databaseを新しく作るには？</B></FONT><BR><BR>
+<DD>mysqladmin コマンドを使用します。<BR>
+<PRE>
+shell # mysqladmin create db_name
+</PRE>
+とすれば、"db_name" というデータベースが新規に作成されます。<BR>
+<BR>
+ユーザーがどうの、パスワードがどうだ、とコマンドに文句を言われる場合は？<BR>
+その場合は
+<PRE>
+shell # mysqladmin -uroot create db_name
+</PRE>
+とやってみましょう。
+
+<!----------------------->
+<A NAME="about_user"></A>
+　<DT><FONT SIZE="4"><B>　5.MySQLのユーザー？</B></FONT><BR><BR>
+<DD>
+MySQL は、MySQL に対してアクセスするユーザーを、<BR>
+MySQL 自身が, "mysql" データベース内に, 保持しています。<BR>
+このユーザーは、OS 自身が管理しているユーザーとは無関係、独立したものです。<BR>
+<BR>
+この情報をもとにして、client からの接続を拒否したりします。<BR>
+<BR>
+
+<TABLE BORDER="1" CELLPADDING="5"><TD BGCOLOR="BEIGE"><PRE>
+(windows や Macintosh では、等幅フォントで見てください)
+イメージ図
+
+  +-- MySQL Server ---------------------+
+  |  +- mysql データベース ----------+  |
+  |  |  [ login ID: user1            |  |
+  |  |    Password: pika             |  |
+  |  |    user1 のアクセス制限情報 ] |  |
+  |  +-------------------------------+  |
+  +-------------------------------------+
+            ^
+            | [ login ID: user1 ; Password: pika で接続を試みる ]
+         client1
+
+  この例では、MySQL には、 user1 (パスワードは pika) が登録されている
+  ある人が、あるマシン(client1) から, user1, パスワード pika で MySQL に接続を試みる
+</PRE>
+</TD></TABLE>
+
+なお、インストールしたばかりの MySQL には、<PRE>
+  login ID : root
+  Password : なし
+  実行できるコマンドの制限: なし
+  MySQL サーバーに接続できる client の IP address : 127.0.0.1  (localhost)
+</PRE>
+のユーザーが登録されています。<BR>
+<BR>
+これは、MySQL サーバーが実行されているマシン上で,<BR>
+<TT> shell# mysql -uroot </TT><BR>
+と行うだけで、全ての操作ができるという事です。
+<BR>
+
+<!----------------------->
+<A NAME="new_user"></A>
+　<DT><FONT SIZE="4"><B>　6.MySQLにアクセスするユーザーを追加するには？</B></FONT><BR><BR>
+<DD><PRE>
+shell # mysql -uroot mysql
+
+mysql>
+</PRE>
+と、"mysql" データベースにアクセスします。<BR>
+<BR>
+ここで、"god" というユーザーを追加してみましょう。<BR>
+このユーザーは全てのマシンから、全ての databse にアクセスできるようにしてみます。<BR>
+パスワードは "speed" です。<BR>
+さらにこの人は全てのデータベースに対して全ての操作をできるようにしてみます。<BR>
+<PRE>
+mysql> GRANT ALL PRIVILEGES ON *.* TO god IDENTIFIED BY 'speed';
+mysql> GRANT ALL PRIVILEGES ON *.* TO god@localhost IDENTIFIED BY 'speed';
+</PRE>
+(注意：あまりこういう god さんのようなユーザーは作らないほうがいいです。慣れたら、制限しましょう。)<BR>
+<BR>
+次に、"lupin" というユーザーを追加してみましょう。<BR>
+ただし、"lupin" さんは、少々悪戯心があるので、以下の制限を加えることにしましょう。<BR>
+<BR>
+<OL>
+<LI> ホスト '192.168.1.100' からしか, MySQL にアクセスできない<BR>
+<LI> "jigen" データベースの中の、"goemon" というテーブルしかアクセスできない
+<LI> しかも SELECT 文だけしか実行できない<BR>
+<LI> パスワードは 'fujiko-chan'<BR>
+</OL>
+<PRE>
+mysql> GRANT SELECT ON jigen.goemon TO lupin@192.168.1.100 IDENTIFIED BY 'fujiko-chan';
+</PRE>
+<BR>
+ユーザーを登録、変更した後は、<PRE>
+mysql> FLUSH PRIVILEGES ;
+</PRE>
+を行います。あるいは shell から <PRE>
+shell# mysqladmin reload
+</PRE>
+とします。<BR>
+<BR>
+ユーザー追加変更後のこれらのコマンドを癖にしておくと安全です。<BR>
+(注意： GRANT コマンドが使用できるのは、GRANT 権限をもつユーザーだけです<BR>
+この例では、root です)<BR>
+<BR>
+
+
+</DL>
+
+<BR>
+ユーザーに付いてのさらなる 情報は、<BR>
+<LI><A HREF="permission.html">MySQL のユーザー許可登録？</A>
+<LI><A HREF="grant.html">MySQL の新 GRANT の導入 (3.22.11以上)</A>
+<LI><A HREF="permission_t.html">ユーザー許可登録が思い通りに動かない場合</A>
+</TD></TR>
+<TR><TD><BR><BR>
+<A HREF="index.html">TIPSトップに戻る</A><BR>
+<A HREF="../index.html">MySQLのページ</A><BR>
+</TD></TR>
+</TABLE>
+
+<TABLE BORDER="0">
+<TR><TD COLSPAN="2"><IMG SRC="../../image/LIN1.png" WIDTH="615"></TD></TR>
+<TR><TH COLSPAN="2" HEIGHT="50">
+<FONT COLOR="#666666" SIZE="2"><I>Copyright (c) 1997-2000 SoftAgency Co., Ltd. All rights reserved.</I></FONT>
+</TH></TR>
+</TABLE>
+
+</BODY>
+</HTML>

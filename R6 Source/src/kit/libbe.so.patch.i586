@@ -1,0 +1,7 @@
+# New BDragger::DragBitmap() virtual
+_ReservedDragger1__8BDragger	DragBitmap__8BDraggerP6BPointP12drawing_mode
+# New virtuals in BSlider: SetOrientation(orientation), SetBarThickness(float),
+#   SetFont(const BFont*, uint32)
+_ReservedSlider1__7BSlider	SetOrientation__7BSlider11orientation
+_ReservedSlider2__7BSlider	SetBarThickness__7BSliderf
+_ReservedSlider3__7BSlider	SetFont__7BSliderPC5BFontUl

@@ -1,0 +1,12 @@
+. SAMBA
+. per panel save/revert?
+. add jumpered panel
+. map interfaces to addons, remove addons if interface is removed, recycle existing InterfaceSettings
+. encrypt password
+. revert should bring back deleted cards
+. ip addr sanity checking
+. textcontrol modification messages
+
+issues
+. default buttons
+. shortcuts

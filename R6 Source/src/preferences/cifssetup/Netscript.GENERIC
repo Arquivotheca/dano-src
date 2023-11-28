@@ -1,0 +1,44 @@
+#
+#
+# This file is the network startup file.
+#
+#
+
+start()
+{
+	if [ -f /fd/$1 ]; then
+		echo Launching /fd/$1 $2
+		/fd/$1 $2 &
+	elif [ -f /boot/$1 ]; then
+		echo Launching /boot/$1 $2
+		/boot/$1 $2 &
+	else
+		echo There is no $1
+	fi
+}
+
+#
+# Synchronous start
+#
+startsync()
+{
+	if [ -f /fd/$1 ]; then
+		echo Launching /fd/$1 $2
+		/fd/$1 $2 
+	elif [ -f /boot/$1 ]; then
+		echo Launching /boot/$1 $2
+		/boot/$1 $2 
+	else
+		echo There is no $1
+	fi
+}
+
+start beos/system/servers/net_server
+startsync beos/system/servers/net_server -waitstart
+start beos/bin/dhcp_client -E		
+start beos/bin/ftpd -E
+start beos/bin/telnetd -E
+start beos/system/servers/mail_daemon -E
+start beos/preferences/DialUpNetworking -E
+
+

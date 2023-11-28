@@ -1,0 +1,555 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size: 36.0pt; mso-bidi-font-size: 12.0pt; color: blue; text-shadow: auto">De</span><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">vice-Based Fonts
+</span></h1>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note: Documentation
+      and code version numbers are designed to be independent of each other, and
+      may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal">&nbsp;</p>
+<h1 align="center"><b><font size="6">Device-Based Fonts</font></b></h1>
+<p class="MsoNormal" align="center">&nbsp;</p>
+  <b>
+  <h2><a name="top"><font SIZE="5">
+  Introduction
+  </font></a></h2>
+  <blockquote>
+  </b>
+  <p><font SIZE="3">This document provides the information needed to understand
+  the relationship between Device-based
+  text and the Hewlett-Packard Appliance Printing Software Development Kit (SDK).
+  Device-based text is simply font types that are built into the printer. The
+  availability of built-in
+  fonts depends on the printer model and print mode. (In some modes, no fonts are
+  available.)</font></p>
+  <p><font SIZE="3">
+  Rather than rendering text on the host system, text can be sent as a stream
+  of ASCII codes, to be rendered by the printer firmware using one of its
+  built-in fonts. Device-based text can often result in much sharper output
+  depending on the host system facilities for rendering text at high resolutions
+  and merging with graphics. Learn more about device-based fonts by reviewing the following topics.</font></p>
+  <blockquote>
+  <blockquote>
+    <p style="margin-top: -16">&nbsp;</p>
+    <p style="margin-top: -16"><a HREF="#overview"><font SIZE="3">Overview</font></a></p>
+  <font FACE="Arial" SIZE="3">
+  <p style="margin-top: -16"></font><a HREF="#enumerating"><font SIZE="3">Enumerating
+  the Available Fonts</font></a></p>
+  <font FACE="Arial" SIZE="3">
+  <p style="margin-top: -16"></font><a HREF="#realizingdesiredfont"><font SIZE="3">Realizing
+  the Desired Font</font></a></p>
+  <font FACE="Arial" SIZE="3">
+  <p style="margin-top: -16"></font><a HREF="#pageformatting"><font SIZE="3">Page
+  Formatting and GetTextExtent</font></a></p>
+  <font FACE="Arial" SIZE="3">
+  <p style="margin-top: -16"></font><a HREF="#textout"><font SIZE="3">TextOut</font></a></p>
+  <font FACE="Arial" SIZE="3">
+  <p style="margin-top: -16"></font><a HREF="#theXcoordinate"><font SIZE="3">The
+  X Coordinate</font></a></p>
+  <font FACE="Arial" SIZE="3">
+  <p style="margin-top: -16"></font><a HREF="#theYcoordinate"><font SIZE="3">The
+  Y Coordinate</font></a></p>
+  <font FACE="Arial" SIZE="3">
+  <p style="margin-top: -16"></font><a HREF="#additionalinfo"><font SIZE="3">Additional
+  Information / See Also</font></a></p>
+  <p>&nbsp;</p>
+  </blockquote>
+  </blockquote>
+  <b>
+  <h2><a NAME="overview"><font SIZE="5">
+  Overview
+  </font></a></h2>
+  <blockquote>
+  </b>
+  <p><font SIZE="3">
+  Device-based
+  are accessed by an assortment of functions that allow page positioning
+  of textual strings, and access to certain font treatments such as fixed vs.
+  proportional spacing, text size, and bold, italic or underline.
+ </font></p>
+  <p><font SIZE="3">
+  The advantages of using device-based text depend on the font
+  rendering capabilities of the host system. In other words, device-based text
+  is more advantageous for host environments that do not have a font
+  rendering engine and instead rely on a set of pre-rendered bitmap fonts stored
+  in memory. These pre-rendered fonts are typically stored at screen resolution
+  (72 dpi,) and print relatively poorly. Use of the device-based fonts offers a
+  dramatic increase in print quality.
+ </font></p>
+  <p><font SIZE="3">Another advantage of using device text is speed - especially in cases where
+  the print document is text-only. Compared to raster data, the printer driver has very little processing
+  to perform on device text. Since device text is sent
+  in ASCII format, the amount of data sent to the printer is much smaller and
+  therefore can be sent more quickly. The printer is also able to store more
+  text in ASCII format in its buffers and process the text more quickly.</font></p>
+  <p><font SIZE="3">The disadvantages of using device text are found in flexibility and
+  formatting. Some calculations must be performed by the host system for page layout
+  including scaling device text to the right size, and properly lining up device
+  text and image graphics data. In addition, only a limited range of text sizes
+  are available. Depending on the printer model, these are usually in the 6 to 14 point range, making ideal page formatting
+  potentially a little more difficult. However, larger
+  text can be achieved by sending it as part of the image data while the smaller text
+  remains device-based.
+  For readability, it is more important that smaller text be of higher quality.
+ </font></p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top"><font SIZE="3">
+  [Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</font></a><font SIZE="3"><o:p>
+  &nbsp;</font>
+</span></p>
+  <font FACE="Arial" SIZE="3">
+  <p>&nbsp;</p>
+  </blockquote>
+ </font><b><i>
+  <h2>Supported Device Fonts</h2>
+  </i></b>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The following device fonts are
+  supported by Hewlett-Packard DeskJet printers:</p>
+  <b>
+  <blockquote>
+  </b>
+  <blockquote>
+  <ul>
+    <li>
+      <p style="margin-top: -10; margin-bottom: 0"><font SIZE="3">
+  Courier (Fixed Pitch/ Serif) – 6, 12, 24 pitch
+  </font></li>
+    <li>
+      <p style="margin-bottom: 0"><font SIZE="3">
+  LetterGothic (Fixed Pitch/ Sans-Serif) – 6, 12, 24 pitch
+  </font></li>
+    <li>
+      <p style="margin-bottom: 0"><font SIZE="3">
+  CGTimes (Proportional/ Serif) – 6, 8, 10, 12, 14 point
+  </font></li>
+    <li>
+      <p style="margin-bottom: 0"><font SIZE="3">
+  Univers (Proportional/ Sans-Serif) – 6, 10, 12, point
+  </font></li>
+  </ul>
+  </blockquote>
+  <font SIZE="3">
+  <b>&nbsp;&nbsp;&nbsp; Treatments available for these fonts:</b>
+  </font>
+  <blockquote>
+  <ul>
+    <li>
+      <p style="margin-top: -15"><font SIZE="3">
+  Bold, Italic, Underline
+  </font></li>
+  </ul>
+  </blockquote>
+  <p style="line-height: 150%"><font SIZE="3">
+  Using device-based fonts entails using some or
+  all of the following API functions:
+  </font></p>
+  <div align="center">
+    <center>
+    <table border="0" width="50">
+      <tr>
+        <td width="75">PrintContext::EnumFont&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;</td>
+        <td width="75">
+  PrintContext::RealizeFont</td>
+      </tr>
+      <tr>
+        <td width="75"> Font::GetName</td>
+        <td width="75">
+  Font::IsBoldAllowed</td>
+      </tr>
+      <tr>
+        <td width="75"> Font::IsItalicAllowed</td>
+        <td width="75">
+  Font::IsUnderlineAllowed</td>
+      </tr>
+      <tr>
+        <td width="75"> Font::IsColorAllowed</td>
+        <td width="75">
+  Font::IsProportional</td>
+      </tr>
+      <tr>
+        <td width="75">Font::HasSerif&nbsp;&nbsp;</td>
+        <td width="75">
+  Font::GetPitch</td>
+      </tr>
+      <tr>
+        <td width="75"> Font::GetTextExtent&nbsp;</td>
+        <td width="75">Job::TextOut</td>
+      </tr>
+    </table>
+    </center>
+  </div>
+  <p style="margin-top: -12">&nbsp;</p>
+  <p style="margin-top: -12">For more information on these and other API
+  functions, refer to the <a href="api.htm">API</a> document.</p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+  &nbsp;
+</span></p>
+  <font FACE="Arial">
+  <p>&nbsp;</p>
+  </blockquote>
+  </font><b>
+  <h1><a NAME="enumerating"><font SIZE="5">
+  Enumerating Available Fonts
+  </font></a></h1>
+  <blockquote>
+  </b>
+  <p>
+  A typical usage scenario might be to first find the fonts available (if any), by
+  implementing an EnumFont
+  <i>while</i> loop and querying the reference font for its properties.
+  The pass-by reference iCurrIdx
+  will be returned to 0 after a full cycle of the available fonts. Note ‘thePC’
+  is a pointer to a previously instantiated PrintContext
+  object. The following code sample looks for proportionally spaced font and a
+  fixed pitch font that are sans-serif:</p>
+  <blockquote>
+  <font FACE="Courier New">
+  <p style="margin-top: -16">&nbsp;</p>
+  </font>
+  <p style="margin-top: -16"><font size="2">int PropSerifIdx = 0;</font></p>
+  <p style="margin-top: -16"><font size="2">int FixedSerifIdx = 0;</font></p>
+  <p style="margin-top: -16"><font size="2">int iCurrIdx = 0;</font></p>
+  <p style="margin-top: -16"><font size="2">ReferenceFont* currFont = NULL;</font></p>
+  <p style="margin-top: -16">&nbsp;</p>
+  <p style="margin-top: -16"><font size="2">while( currFont = thePC-&gt;EnumFont(
+  iCurrIdx)) != NULL )</font></p>
+  <p style="margin-top: -16"><font size="2">{</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  if ( (currFont-&gt;IsProportional()
+  == TRUE) &amp;&amp;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;
+  (currFont-&gt;HasSerif()
+  == FALSE) )</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {</font></p>
+  <p style="margin-top: -16">&nbsp;&nbsp;&nbsp;<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  PropSerifIdx = iCurrIdx;</font></p>
+  <p style="margin-top: -16">&nbsp;&nbsp;&nbsp;<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  break;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  }</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  if ( (currFont-&gt;IsProportional()
+  == FALSE) &amp;&amp;</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  (currFont-&gt;HasSerif()
+  == FALSE) )</font></p>
+  <p style="margin-top: -16"><font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {</font></p>
+  <p style="margin-top: -16">&nbsp;&nbsp;&nbsp;<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  FixedSerifIdx = iCurrIdx;</font></p>
+  <p style="margin-top: -16">&nbsp;&nbsp;&nbsp;<font size="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  break;</font></p>
+  <p style="margin-top: -16">&nbsp;&nbsp;&nbsp;<font size="2">&nbsp;&nbsp;&nbsp;
+  }</font></p>
+  <p style="margin-top: -16"><font size="2">}</font></p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+  &nbsp;
+</span></p>
+  <font FACE="Arial">
+  <p>&nbsp;</p>
+  </blockquote>
+  </blockquote>
+  </font><b>
+  <h1><a NAME="realizingdesiredfont"><font SIZE="5">
+  Realizing the Desired Font
+  </font></a></h1>
+  <blockquote>
+  </b>
+  <p><font SIZE="3">
+  Once the type of font is found that has the desired attributes, its index
+  value (in this example, </font>PropSerifIdx<font SIZE="3">),
+  is used to ‘realize’ an actual font object as shown in the following code
+  fragment. Refer to the </font>RealizeFont<font SIZE="3">
+  API reference for the complete function.
+  </font></p>
+  <blockquote>
+  <p>Font* fntPropSerif = thePC-&gt;RealizeFont( PropSerifIdx, … )</p>
+  <font FACE="Arial">
+  </blockquote>
+  </font>
+  <p><font SIZE="3">Multiple fonts may be instantiated at one time via this
+  mechanism creating some flexibility in implementation; developers may
+  choose to realize only a few font styles such as a proportional font and a fixed pitch font, and change treatments (i.e. bold
+  on/off,) on the fly by manipulating public variables in the font class (fntPropSerif-&gt;bBold = TRUE).&nbsp;</font></p>
+  <p><font size="3">Developers may also choose to realize font objects [font style &amp; treatment]
+  for each or several of the text objects on the page ahead of time. Creation of
+  this font list or array would allow walking down the page and simply sending
+  the correct font where applicable. This is more applicable when a set
+  number of fonts/treatments are expected, as system resources may prohibit
+  having too many font objects instantiated at one time. These implementation
+  decisions are of course on a system by system basis.</font></p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+  &nbsp;
+</span></p>
+  <p>&nbsp;</p>
+  </blockquote>
+  <b>
+  <h1><a NAME="pageformatting"><font SIZE="5">
+  Page formatting and GetTextExtent
+  </font></a></h1>
+  <blockquote>
+  </b>
+  <p>
+  Proper page formatting requires the host to know how much space the
+  text string takes up. This is necessary in order to find out if the text will fit on
+  one line or if it will overlap a graphic object on the
+  page. For this purpose, GetTextExtent
+  will accept a text string and return its length and height, (the number of printer pixels from the
+  baseline to the top of the tallest character of this string based on the font
+  and size on a 300 dpi grid). Tracking this length and height is vital to correct
+  placement of text on the page. Each TextOut
+  call will require page placement coordinates.</p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+  &nbsp;
+</span></p>
+  <p>&nbsp;</p>
+  </blockquote>
+  <b>
+  <h1><a NAME="textout"><font SIZE="5">
+  TextOut
+  </font></a></h1>
+  <blockquote>
+  </b>
+  <p><font size="3">TextOut is THE function for sending a device text string to the printed page.
+  TextOut is conceptually quite simple, taking as parameters the text
+  string, number of characters in the string, font, and x &amp; y coordinates. The coordinates x &amp; y specify the
+  text currently being sent to the printer. The baseline is the invisible line
+  upon which the line of text rests; the descender of a character (like y or g)
+  hangs below this baseline. The x &amp; y coordinates are of course critical to the correct
+  layout of a page.</font></p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+  &nbsp;
+</span></p>
+  <p>&nbsp;</p>
+  </blockquote>
+  <b>
+  <h1><a NAME="theXcoordinate"><font SIZE="5">
+  The X Coordinate
+  </font></a></h1>
+  <blockquote>
+  </b>
+  <p><font size="3">The x coordinate is used for text placement across the <i> width</i> of the page and
+  is extremely relevant when text is being placed next to a graphic, or if multiple
+  text strings are placed on the same line. Because text may have
+  different attributes (such as a word in the middle of a line being <b>Bold</b>,)
+  it may require several </font>TextOut<font SIZE="3">
+  calls to compose this line. </font>Example:&nbsp;</p>
+  <blockquote>
+  <p> This is a sample line of text with <b>a Bold text string</b> in
+  the middle.</p>
+  </blockquote>
+  <p><font SIZE="3">
+  I</font>n this example, the first part of the line is sent via TextOut
+  at the left margin (x = 0). Next is a call to TextOut
+  for the Bold text string for which the x coordinate is based off the length of
+  the first text string. The final text string is again normal text and its x
+  coordinate is based off the length of the two previous TextOut
+  calls. The length of these strings is made available by first calling GetTextExtent
+  with each of these strings, as described previously in <a href="#pageformatting">GetTextExtent</a>.</p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+  &nbsp;
+</span></p>
+  <p>&nbsp;</p>
+  </blockquote>
+  <b>
+  <h1><a NAME="theYcoordinate"><font SIZE="5">
+  The Y Coordinate
+  </font></a></h1>
+  <blockquote>
+  </b>
+  <p><font size="3">The y coordinate is used for text placement along the <i> height</i> of the page. Two
+  important factors exist for the Y placement of text; both relate to
+  remembering that the Y coordinate is at the baseline (not the top) of a piece
+  of text.</font></p>
+  <p><font SIZE="3">
+  First, recall that </font>GetTextExtent<font SIZE="3">
+  returned a height value. This is the number of printer pixels from the
+  baseline to the top of the tallest character for the string, based on the font
+  and size. For proper placement of consecutive lines of text, the Y coordinate used
+  must allow for the height of the string and a few
+  pixels of spacing (<i>or leading</i>) between the lines of text. If this
+  calculation is not performed correctly, the consecutive lines of text will
+  appear <i>scrunched</i> together or may overlap.</font></p>
+  <p><font SIZE="3">
+  As a result of the Y coordinate (baseline) being at the bottom
+  of the text string, it is important that the text be sent early enough for the printer
+  to factor this in before printing the top portion of the text. The printer’s memory buffer is capable
+  of storing an entire page of text, so if the host’s page formatting code
+  allows all of the device text to be sent ahead of time, this may be a
+  preferable option.&nbsp;</font></p>
+  <p>
+ In other systems, the page formatter may only look at one
+  band of data at a time in order to format a mixed device-text and
+  raster-graphics print job. In such cases it is a common error to send the text
+  &quot;too late&quot;. Each row of raster data sent to the printer (SendRaster)
+  will increment the printer mechanism in order to print the row. As mentioned,
+  if the TextOut
+  call is not made soon enough to compensate for the height of the text, the top
+  portion of the text may be clipped and the printer will print only the lower
+  section of text as determined by the current position of the mechanism on
+  the page.</p>
+  <p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+  &nbsp;
+</span></p>
+  <p>&nbsp;</p>
+  </blockquote>
+  <b>
+  <h1><a NAME="additionalinfo"><font SIZE="5">
+  Additional Info/ See Also
+  </font></a></h1>
+  <blockquote>
+  </b><p><font SIZE="3">
+  For a more in-depth description of the individual API functions and specific
+  usage info, please refer to th</font>e <a HREF="api.htm">API</a> <font size="3">
+  document.</font></p>
+  <p><font size="3">For more information on Device-Based Fonts within the code,
+  refer to the <a href="SAMPLECODE.HTM">Sample Code</a> document.</font></p>
+  </blockquote>
+  </blockquote>
+<p class="MsoNormal">&nbsp;</p>
+
+<p><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a>
+</span></p>
+
+<p class="MsoNormal">&nbsp;</p>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+daemon features:
+. the node watching mechanism will fail if the settings directory is removed
+
+panel features:
+. default, revert settings buttons
+. make SettingsChanged work
+. FadeView::LoadState won't completely initialize/configure stuff if called after startup
+. panel should watch the settings file and reload it if necessary,
+  because a module that runs might change its settings
+. "replace existing module" when copying
+. do something when a valid module entry_ref is received (BAlert to test/install/cancel)
+. screen saver open panel: "test", "done", "install"
+. shouldn't let user unselect modules (so the panel doesn't get blank -- ugly)
+. register handler for application/x-vnd.Be.screensavermodule and make icon;
+. turn the 'locking', 'locked', 'unlocking', 'unlocked' flags into a state
+. fade audio output when screen saving
+
+module features:
+. set type to application/x-vnd.Be.screensavermodule
+. should move Wrapper class to sample code (or maybe I should release it on BeWare)
+. define metadata format/contents
+. random module

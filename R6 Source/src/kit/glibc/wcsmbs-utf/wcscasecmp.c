@@ -1,0 +1,1 @@
+#include <wcsmbs/wcscasecmp.c>

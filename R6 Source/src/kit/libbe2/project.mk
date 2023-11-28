@@ -1,0 +1,11 @@
+include $(BUILDHOME)/src/drivers/binder3/GNUmakefile
+include $(BUILDHOME)/src/kit/binder_addon_glue/GNUmakefile
+include $(BUILDHOME)/src/kit/media2/GNUmakefile
+include $(BUILDHOME)/src/kit/libbe2/GNUmakefile
+include $(BUILDHOME)/src/kit/xml2/GNUmakefile
+include $(BUILDHOME)/src/kit/font2/GNUmakefile
+include $(BUILDHOME)/src/servers/picasso_gl/GNUmakefile
+include $(BUILDHOME)/src/servers/smoove2/GNUmakefile
+include $(BUILDHOME)/src/apps/stella/GNUmakefile
+include $(BUILDHOME)/src/apps/picasso_test/GNUmakefile
+include $(BUILDHOME)/src/apps/picasso_test_views/GNUmakefile

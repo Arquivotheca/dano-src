@@ -1,0 +1,4 @@
+#!/bin/sh
+# Help button
+
+TellBrowser -goto file://$RESOURCES/Tutorial/index.html 

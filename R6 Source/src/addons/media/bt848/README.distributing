@@ -1,0 +1,6 @@
+The bt848 add-on can be distributed outside of Be, the driver cannot!
+To make an archive that will build outside of Be, copy the entire bt848 add-on
+folder somewhere, remove this file from the copy, rename the three makefile_dev
+to makefile, and copy the SettingsHandler.h and TrackerSettings.h files from
+src/inc/tracker_p into the bt848 add-on folder copy (or instruct the recipient
+of the sourcecode to obtain these files from OpenTracker).

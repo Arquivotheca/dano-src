@@ -1,0 +1,21 @@
+
+CFLAGS := -O1 -fno-pic -fomit-frame-pointer -Ilame
+
+LAMEOBJ := $(shell ls -1 lame/*.c | sed -e 's@c$$@o@g')
+OBJS := $(shell ls -1 obj.i586/*.o)
+
+mp3.encoder:	$(OBJS) $(LAMEOBJ)
+	cc -o mp3.encoder $(OBJS) $(LAMEOBJ) -nostart -lroot -lbe -lmedia
+	chmod +x mp3.encoder
+	@echo "###  WARNING  ###"
+	@echo "Be, Incorporated does not guarantee future compatibility"
+	@echo "with the API as used by the supplied binary .o files."
+	@echo "Planned changes to the API used by these files is the"
+	@echo "main reason we cannot release source for the CPP files"
+	@echo "that generate the .o files. Use at your own risk."
+
+lame/%.o:	lame/%.c
+	cc -c $< -o $@ $(CFLAGS)
+
+clean:
+	rm -f $(LAMEOBJ) mp3.encoder

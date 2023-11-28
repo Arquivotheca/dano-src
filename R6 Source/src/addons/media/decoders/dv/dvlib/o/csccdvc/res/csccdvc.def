@@ -1,0 +1,6 @@
+
+
+EXPORTS	DriverProc
+	SoftCodecDecodeDV
+	SoftCodecEncodeDV
+

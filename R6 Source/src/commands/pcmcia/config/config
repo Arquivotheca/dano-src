@@ -1,0 +1,40 @@
+device "dummy_cs"
+  class "dummy" module "dummy"
+
+device "serial_cs"
+  class "serial" module "serial"
+
+device "ne2000_cs"
+  class "net" module "etherpcmcia"
+
+card "Cirrus Logic 14.4K Fax Modem"
+  version "CIRRUS LOGIC", "FAX MODEM"
+  bind "serial_cs"
+
+card "TDK Data-Fax Modem"
+  version "TDK", "DF5600 Data-Fax Modem", "TDK Systems", "V0.0"
+  bind "serial_cs"
+
+card "Gold Card FaxModem"
+  version "Psion Dacom", "Gold Card Global 56K+Fax", "56K+Fax", "V8.041"
+  bind "serial_cs"
+
+card "D-Link DE-660 Ethernet Card"
+  version "D-Link", "DE-660"
+  bind "ne2000_cs"
+
+card "Lynksys EtherCard - discontinued"
+  version "LINKSYS", "E-CARD", "Ver 02.00"
+  bind "ne2000_cs"
+
+card "Lynksys EtherCard"
+  version "Linksys", "Combo PCMCIA EthernetCard (EC2T)", "2.0"
+  bind "ne2000_cs"
+
+card "Kingston EtherRx"
+  version "Kingston", "KNE-PC2"
+  bind "ne2000_cs"
+ 
+include port 0x300-0x9ff, memory 0xc0000-0xfffff
+include memory 0xa0000000-0xa0ffffff     
+

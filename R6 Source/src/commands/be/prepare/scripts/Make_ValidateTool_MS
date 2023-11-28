@@ -1,0 +1,32 @@
+#!/bin/sh
+
+#
+# Copy all the validation test tools and useful tools to the memory stick
+#
+
+alert "Insert a MemoryStick and click 'OK' when it is shown mounted on the desktop."
+
+# Sorry, any previous contents are destroyed (otherwise the cp -r doesn't work)
+rm -rf /disk/test
+rm -rf /disk/beos
+
+mkdir /disk/beos
+
+cp -r /boot/test /disk
+cp -r /boot/beos/apps /disk/beos
+cp -r /boot/beos/bin /disk/beos
+
+# Now get tracker and deskbar
+mkdir /disk/beos/system
+mkdir /disk/beos/system/add-ons
+mkdir /disk/beos/system/lib
+cp /boot/beos/system/Deskbar /disk/beos/system
+cp /boot/beos/system/Tracker /disk/beos/system
+cp -r /boot/beos/system/add-ons/Tracker /disk/beos/system/add-ons
+cp /boot/beos/system/lib/libtranslation.so /disk/beos/system/lib
+cp /boot/beos/system/lib/libtracker.so /disk/beos/system/lib
+if exists /disk/beos/system/lib/libtracker.so
+	alert "Validation tests and tools successfully copied to MemoryStick." "Done"
+else
+	alert "Problems copying tests and tools. Make sure the MemoryStick is inserted and has enough space (about 2mb)."
+fi

@@ -1,0 +1,6 @@
+#ifndef _CWCTYPE
+#define _CWCTYPE
+
+#include <wctype.h>
+
+#endif

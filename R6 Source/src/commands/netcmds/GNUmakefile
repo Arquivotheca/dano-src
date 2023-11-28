@@ -1,0 +1,11 @@
+
+#include $(BUILDHOME)/src/commands/netcmds/dhcp/$(MAKEFILE_LEAFNAME)
+#include $(BUILDHOME)/src/commands/netcmds/finger/$(MAKEFILE_LEAFNAME)
+#include $(BUILDHOME)/src/commands/netcmds/ftp/$(MAKEFILE_LEAFNAME)
+#include $(BUILDHOME)/src/commands/netcmds/ftpd/$(MAKEFILE_LEAFNAME)
+include $(BUILDHOME)/src/commands/netcmds/getty/$(MAKEFILE_LEAFNAME)
+include $(BUILDHOME)/src/commands/netcmds/login/$(MAKEFILE_LEAFNAME)
+#include $(BUILDHOME)/src/commands/netcmds/netstat/$(MAKEFILE_LEAFNAME)
+#include $(BUILDHOME)/src/commands/netcmds/ping/$(MAKEFILE_LEAFNAME)
+#include $(BUILDHOME)/src/commands/netcmds/telnet/$(MAKEFILE_LEAFNAME)
+#include $(BUILDHOME)/src/commands/netcmds/telnetd/$(MAKEFILE_LEAFNAME)

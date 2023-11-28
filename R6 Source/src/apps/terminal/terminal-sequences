@@ -1,0 +1,158 @@
+
+
+                                                        Jan 5, 2000
+
+INPUT RECOGNIZED BY BeOS TERMINAL
+=================================
+
+ASCII Backspace		'\b'
+	Nondestructive.
+
+ASCII Tab		'\t'
+	Nondestructive.
+	Set to fixed distance by GUI.
+	No Tab Set/Clear (yet).
+
+ASCII Line Feed		'\n'
+
+ASCII Carriage Return	'\r'
+
+ASCII Bell		'\a'
+
+Move Cursor Up		ESC '[' P1 'A'
+	Move vertically up by P1 lines.
+
+Move Cursor Down	ESC '[' P1 'B'
+	Move vertically down by P1 lines.
+
+Move Cursor Right	ESC '[' P1 'C'
+	Move P1 columns to the right.
+
+Move Cursor Left	ESC '[' P1 'D'
+	Move P1 columns to the left.
+
+Move Cursor		ESC '[' P1 ';' P2 'H'
+	Set line to P1, set column to P2.
+
+Clear Line		ESC '[' P1 'K'
+	If P1 is 0, clear from cursor to right margin.
+	If P1 is 1, clear from left margin to cursor.
+	If P1 is 2, clear entire line.
+
+Clear Display		ESC '[' P1 'J'
+	If P1 is 0, clear from cursor to End.
+	If P1 is 1, clear from Home to cursor.
+	If P1 is 2, clear entire screen.
+
+Change Char Attribute	ESC '[' P1 'm'
+	The character attribute is modified by P1.  See Table A.
+
+Report Cursor Position	ESC '[' 6 'n'
+	Terminal sends an escape sequence to the program, reporting the
+	cursor position.  The form is  ESC [ P1 ';' P2 'R'  where P1 is
+	the line and P2 is the column.
+
+Insert Lines		ESC '[' P1 'L'
+	P1 blank lines are inserted before the cursor position.
+
+Delete Lines		ESC '[' P1 'M'
+	P1 lines are deleted at the cursor position.
+
+Insert Chars		ESC '[' P1 '@'
+	P1 spaces are inserted before the cursor position.
+
+Delete Chars		ESC '[' P1 'P'
+	P1 chars are deleted at the cursor position.
+
+Shift Text Up		ESC '[' P1 'S'
+	All text on the screen is shifted up by P1 lines.
+	Cursor position is unchanged.
+
+Shift Text Down		ESC '[' P1 'T'
+	All text on the screen is shifted down by P1 lines.
+	Cursor position is unchanged.
+
+Set Insert Mode		ESC '[' 4 'h'
+	Chars will be inserted at the cursor position, rather than overwrite.
+
+Set Application Mode	ESC '[' '?' 4 'h'
+	Alters the escape sequences sent by the keypad.  'Nuf said.
+
+Reset Insert Mode	ESC '[' 4 'l'
+
+Reset Application Mode	ESC '[' '?' 4 'l'
+
+Set Scrolling Region	ESC '[' P1 ';' P2 'r'
+	Region is bounded by lines P1 and P2.  If P2 is missing, assume End.
+	If P1 is missing, assume Home.
+
+Set Cursor Line		ESC '[' P1 'd'
+	Cursor moves to line P1.  Column is unchanged.
+
+Set Cursor Column	ESC '[' P1 'G'
+	Cursor moves to column P1.  Line is unchanged.
+
+Clear Columns		ESC '[' P1 'X'
+	Clear P1 chars from cursor position.
+
+Index			ESC 'D'
+	Cursor moves vertically down one line, scrolling if needed.
+
+Reverse Index		ESC 'M'
+	Cursor moves vertically up one line, scrolling if needed.
+
+Save Stuff		ESC '7'
+	Save cursor position & character attributes.
+
+Restore Stuff		ESC '8'
+	Restore previously saved cursor position & character attributes.
+
+Set Window Title	ESC ']' string '\a'
+	_string_ is any sequence of printable chars.
+
+Set Cursor Blink Rate	ESC '{' P1 'b'
+	BeOS special.
+	P1 indicates 1/10 seconds; 0 means disable blinking.
+
+Set Cursor Colors	ESC '{' P1 ';' P2 ';' P3 ';' P4 ';' P5 ';' P6 'c'
+	BeOS special.
+	P1/P2/P3 is foreground R/G/B, P4/P5/P6 is background.
+
+Set Selection Colors	ESC '{' P1 ';' P2 ';' P3 ';' P4 ';' P5 ';' P6 's'
+	BeOS special.
+	P1/P2/P3 is foreground R/G/B, P4/P5/P6 is background.
+
+Set Default Colors	ESC '{' P1 ';' P2 ';' P3 ';' P4 ';' P5 ';' P6 'd'
+	BeOS special.
+	P1/P2/P3 is foreground R/G/B, P4/P5/P6 is background.
+	The default colors apply if the character is not under the cursor,
+	is not selected, and does not have a specific color attribute
+	(see table A).
+
+
+Table A: Character Attributes
+=============================
+
+     Value	Effect
+     -----	------
+	 0	Reset all attributes, set default colors.
+	 1	Set bold attribute.
+	 4	Set underline attribute.
+	 7	Set reversed-video attribute.
+	24	Reset underline attribute.
+	30	Set foreground black.
+	31	Set foreground red.
+	32	Set foreground green.
+	33	Set foreground yellow.
+	34	Set foreground blue.
+	35	Set foreground magenta.
+	36	Set foreground cyan.
+	37	Set foreground white.
+	40	Set background black.
+	41	Set background red.
+	42	Set background green.
+	43	Set background yellow.
+	44	Set background blue.
+	45	Set background magenta.
+	46	Set background cyan.
+	47	Set background white.

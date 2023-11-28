@@ -1,0 +1,27 @@
+
+include $(BUILDHOME)/buildprefs/make.pre
+
+TARGET := libblade.a
+
+OFILES := $(shell ls -1 blade/*.c | sed -e 's@c$$@o@g')
+
+ifeq ("$(COMPILER)", "gcc")
+ifeq ("$(USER_DEBUG_C_FLAGS)", "")
+	BLADEFLAGS := -pipe -O1 -fomit-frame-pointer -fno-pic # -funroll-all-loops
+else
+	BLADEFLAGS := -pipe -O0 -g
+endif
+else
+	BLADEFLAGS := -O3
+endif
+
+$(TARGET):	$(OFILES)
+	$(AR) $(ARFLAGS) $(TARGET) $(OFILES)
+	# Give the library better karma
+	#$(RANLIB) $(TARGET)
+
+blade/%.o:	blade/%.c
+	$(CC) $< -o $@ -c $(BLADEFLAGS) -Iblade
+
+clean:
+	rm -f libblade.a blade/*.o

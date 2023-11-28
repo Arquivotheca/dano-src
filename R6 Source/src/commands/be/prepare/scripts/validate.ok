@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# tell the boot loader that we ran OK
+/bin/bootcomplete
+
+# disable the kernel debugger keys
+mv /boot/home/config/settings/kernel/drivers/kernel.release /boot/home/config/settings/kernel/drivers/kernel
+
+# remove all the test tools
+rm -rf /boot/test
+
+# switch to the user-visible mode
+if eq ISPMODE true
+	bootmode --set ispmode
+else
+	bootmode --set firstboot
+endif

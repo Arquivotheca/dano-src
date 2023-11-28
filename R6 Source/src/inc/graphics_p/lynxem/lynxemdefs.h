@@ -1,0 +1,1446 @@
+/* :ts=8 bk=0
+ *
+ * lynxemdefs.h:	Bit and structure definitions for the LynxEM.
+ *
+ * Leo L. Schwab					2000.07.06
+ *
+ * Copyright 1999 Be Incorporated.
+ */
+#ifndef	__LYNXEMDEFS_H
+#define	__LYNXEMDEFS_H
+
+#ifndef	__BITTWIDDLE_H
+#include "bittwiddle.h"
+#endif
+
+
+/*
+ * The stupid-ass VGA "standard" decided to place the same register at
+ * different offsets depending on whether you were reading or writing it.
+ * These two structures define the correct offsets for reads and writes.
+ * Then just specify the correct union when reading or writing, and you'll
+ * get the right offset.  Poof!
+ */
+struct vgaregs_read {
+	vuint8	__reserved0[0x03b4];	/*	0x0000 - 0x03B3		*/
+	vuint8	VGAMono_CR_Idx;		/*  0x03B4			*/
+	vuint8	VGAMono_CR_Val;		/*  0x03B5			*/
+	vuint8	__reserved1[0x0004];	/*	0x03B6 - 0x03B9		*/
+	vuint8	VGAMono_ST01;		/*  0x03BA			*/
+	vuint8	__reserved2[0x0005];	/*	0x03BB - 0x03BF		*/
+	vuint8	VGA_AR_IdxValW;		/*  0x03C0			*/
+	vuint8	VGA_AR_ValR;		/*  0x03C1			*/
+	vuint8	VGA_ST00;		/*  0x03C2			*/
+	vuint8	VGA_Lock;		/*  0x03C3			*/
+	vuint8	VGA_SR_Idx;		/*  0x03C4			*/
+	vuint8	VGA_SR_Val;		/*  0x03C5			*/
+	vuint8	VGA_DACMask;		/*  0x03C6			*/
+	vuint8	VGA_DACState;		/*  0x03C7			*/
+	vuint8	VGA_DACWIdx;		/*  0x03C8			*/
+	vuint8	VGA_DACVal;		/*  0x03C9			*/
+	vuint8	VGA_FCR;		/*  0x03CA			*/
+	vuint8	__reserved3;		/*	0x03CB			*/
+	vuint8	VGA_Misc;		/*  0x03CC			*/
+	vuint8	__reserved4;		/*	0x03CD			*/
+	vuint8	VGA_GR_Idx;		/*  0x03CE			*/
+	vuint8	VGA_GR_Val;		/*  0x03CF			*/
+	vuint8	__reserved5[0x0004];	/*	0x03D0 - 0x03D3		*/
+	vuint8	VGA_CR_Idx;		/*  0x03D4			*/
+	vuint8	VGA_CR_Val;		/*  0x03D5			*/
+	vuint8	__reserved6[0x0004];	/*	0x03D6 - 0x03D9		*/
+	vuint8	VGA_ST01;		/*  0x03DA			*/
+	vuint8	__reserved7[0x0c25];	/*	0x03DB - 0x0FFF		*/
+};
+
+struct vgaregs_write {
+	vuint8	__reserved0[0x03b4];	/*	0x0000 - 0x03B3		*/
+	vuint8	VGAMono_CR_Idx;		/*  0x03B4			*/
+	vuint8	VGAMono_CR_Val;		/*  0x03B5			*/
+	vuint8	__reserved1[0x0004];	/*	0x03B6 - 0x03B9		*/
+	vuint8	VGAMono_FCR;		/*  0x03BA			*/
+	vuint8	__reserved2[0x0005];	/*	0x03BB - 0x03BF		*/
+	vuint8	VGA_AR_IdxValW;		/*  0x03C0			*/
+	vuint8	__reserved3;		/*	0x03C1			*/
+	vuint8	VGA_Misc;		/*  0x03C2			*/
+	vuint8	VGA_Lock;		/*  0x03C3			*/
+	vuint8	VGA_SR_Idx;		/*  0x03C4			*/
+	vuint8	VGA_SR_Val;		/*  0x03C5			*/
+	vuint8	VGA_DACMask;		/*  0x03C6			*/
+	vuint8	VGA_DACRIdx;		/*  0x03C7			*/
+	vuint8	VGA_DACWIdx;		/*  0x03C8			*/
+	vuint8	VGA_DACVal;		/*  0x03C9			*/
+	vuint8	__reserved4;		/*	0x03CA			*/
+	vuint8	__reserved5;		/*	0x03CB			*/
+	vuint8	__reserved6;		/*	0x03CC			*/
+	vuint8	__reserved7;		/*	0x03CD			*/
+	vuint8	VGA_GR_Idx;		/*  0x03CE			*/
+	vuint8	VGA_GR_Val;		/*  0x03CF			*/
+	vuint8	__reserved8[0x0004];	/*	0x03D0 - 0x03D3		*/
+	vuint8	VGA_CR_Idx;		/*  0x03D4			*/
+	vuint8	VGA_CR_Val;		/*  0x03D5			*/
+	vuint8	__reserved9[0x0004];	/*	0x03D6 - 0x03D9		*/
+	vuint8	VGA_FCR;		/*  0x03DA			*/
+	vuint8	__reserved10[0x0c25];	/*	0x03DB - 0x0FFF		*/
+};
+#define	VGA_AR_Idx	VGA_AR_IdxValW
+#define	VGA_AR_ValW	VGA_AR_IdxValW
+
+
+/*
+ * Use this union to access the registers based on whether you're reading
+ * or writing them.
+ */
+typedef union vgaregs {
+	struct vgaregs_read	r;
+	struct vgaregs_write	w;
+} vgaregs;
+
+
+/*
+ * Drawing Processor registers (memory-mapped)
+ */
+typedef struct DPRegs {
+	vuint32	SrcXY;				/*  0x00000 - 0x00003	*/
+	vuint32	DestXY;				/*  0x00004 - 0x00007	*/
+	vuint32	Size;				/*  0x00008 - 0x0000B	*/
+	vuint32	DrawCtl;			/*  0x0000C - 0x0000F	*/
+	vuint32	Pitches;			/*  0x00010 - 0x00013	*/
+	vuint32	FGColor;			/*  0x00014 - 0x00017	*/
+	vuint32	BGColor;			/*  0x00018 - 0x0001B	*/
+	vuint32	DataFmt;			/*  0x0001C - 0x0001F	*/
+	vuint32	CmpColor;			/*  0x00020 - 0x00023	*/
+	vuint32	CmpMask;			/*  0x00024 - 0x00027	*/
+	vuint32	MaskEnable;			/*  0x00028 - 0x0002B	*/
+	vuint32	ScisTopLeftCtl;			/*  0x0002C - 0x0002F	*/
+	vuint32	ScisBotRight;			/*  0x00030 - 0x00033	*/
+	vuint32	MonoPat[2];			/*  0x00034 - 0x0003B	*/
+	vuint32	WinWidth;			/*  0x0003C - 0x0003F	*/
+	vuint32	SrcAddr;			/*  0x00040 - 0x00043	*/
+	vuint32	DestAddr;			/*  0x00044 - 0x00047	*/
+} DPRegs;
+
+
+/*
+ * Video Processor (overlay) registers (memory-mapped)
+ */
+typedef struct VPRegs {
+	vuint32	GrVidCtl;			/*  0x00000 - 0x00003	*/
+	vuint32	ColorKey;			/*  0x00004 - 0x00007	*/
+	vuint32	ColorMask;			/*  0x00008 - 0x0000B	*/
+	vuint32	FBBase;				/*  0x0000C - 0x0000F	*/
+	vuint32	FBWidthPitch;			/*  0x00010 - 0x00013	*/
+	struct {
+		vuint32	TopLeft;	/*  0x00000 - 0x00003	*/
+		vuint32	BottomRight;	/*  0x00004 - 0x00007	*/
+		vuint32	SrcAddr;	/*  0x00008 - 0x0000B	*/
+		vuint32	SrcWidthPitch;	/*  0x0000C - 0x0000F	*/
+		vuint32	ScaleLo;	/*  0x00010 - 0x00013	*/
+	} WinCfg[2];				/*  0x00014 - 0x0003B	*/
+	vuint32	GrVidCtl2;			/*  0x0003C - 0x0003F	*/
+	vuint32	ScaleFactor;			/*  0x00040 - 0x00043	*/
+	vuint32	__reserved[4];			/*  0x00044 - 0x00053	*/
+	vuint32	FIFOPri;			/*  0x00054 - 0x00057	*/
+	vuint32	FIFOReq;			/*  0x00058 - 0x0005B	*/
+	vuint32	YUV2RGBConst;			/*  0x0005C - 0x0005F	*/
+	vuint32	CurScanLine;			/*  0x00060 - 0x00063	*/
+	vuint32	SigAnalyzer;			/*  0x00064 - 0x00067	*/
+	vuint32	Win1Scale;			/*  0x00068 - 0x0006B	*/
+	vuint32	Win2Scale;			/*  0x0006C - 0x0006F	*/
+} VPRegs;
+
+
+/*
+ * Capture Processor registers (memory-mapped)
+ */
+typedef struct CPRegs {
+	vuint32	Ctl;				/*  0x00000 - 0x00003	*/
+	vuint32	SrcClip;			/*  0x00004 - 0x00007	*/
+	vuint32	SrcSize;			/*  0x00008 - 0x0000B	*/
+	vuint32	Buf1Addr;			/*  0x0000C - 0x0000F	*/
+	vuint32	Buf2Addr;			/*  0x00010 - 0x00013	*/
+	vuint32	PortSrcAddr;			/*  0x00014 - 0x00017	*/
+	vuint32	FIFOReq;			/*  0x00018 - 0x0001B	*/
+} CPRegs;
+
+
+/*
+ * The LynxEM is a graphics chip with embedded framebuffer RAM.  The common
+ * trick on such chips is to declare only one PCI aperture, place the
+ * framebuffer RAM at offset zero, and the control registers at offset N,
+ * where N varies from chip to chip.  In the case of the LynxEM, the memory
+ * map is as follows:
+ *
+ *	+---------------+ 0x000000 (0M)
+ *	|  Framebuffer  | (Actual end of usable RAM may be earlier.)
+ *	|    Memory     |
+ *	+---------------+ 0x400000 (4M)
+ *	|    Drawing    |
+ *	| Processor Data|
+ *	+---------------+ 0x408000 (4M + 32K)
+ *	|    Drawing    |
+ *	| Processor Regs|
+ *	+---------------+ 0x40C000 (4M + 48K)
+ *	|     Video     |
+ *	| Processor Regs|
+ *	+---------------+ 0x40E000 (4M + 56K)
+ *	|    Capture    |
+ *	| Processor Regs|
+ *	+---------------+ 0x410000 (4M + 64K)
+ *	|    <unused>   |
+ *	+---------------+ 0x500000 (5M)
+ *	|   Additional  |
+ *	|  DP Data Port |
+ *	+---------------+ 0x700000 (7M)
+ *	| Memory-mapped |
+ *	|   I/O Ports   |
+ *	+---------------+ 0x800000 (8M)
+ */
+typedef struct LynxEMAddrMap {
+	vuint8	lam_FrameBuffer[0x400000];	/*  4M		*/
+	vuint8	lam_DrawData[0x08000];		/*  32K		*/
+	vuint8	lam_DrawRegs[0x04000];		/*  16K		*/
+	vuint8	lam_VideoRegs[0x02000];		/*  8K		*/
+	vuint8	lam_CaptureRegs[0x02000];	/*  8K		*/
+	vuint8	__reserved[0x0F0000];		/*  1M - 64K	*/
+	vuint8	lam_DrawDataAlias[0x200000];	/*  2M		*/
+	vuint8	lam_IOAlias[0x100000];		/*  1M		*/
+} LynxEMAddrMap;
+
+
+/*****************************************************************************
+ * "Standard" VGA register indices and bit definitions.
+ ****
+ * Sequencer bit and index definitions
+ * I've decided to use the XFree86/NVidia bit definition form, even though
+ * it makes the use of ctags difficult.
+ */
+#define	SR_RESET				0x00
+#define	SR_RESET_SYNC				1:1
+#define	SR_RESET_SYNC_ENABLE			0
+#define	SR_RESET_SYNC_DISABLE			1
+#define	SR_RESET_ASYNC				0:0
+#define	SR_RESET_ASYNC_ENABLE			0
+#define	SR_RESET_ASYNC_DISABLE			1
+
+#define	SR_CLOCK				0x01
+#define	SR_CLOCK_VIDDISABLE			5:5
+#define	SR_CLOCK_SHIFTLOAD4			4:4
+#define	SR_CLOCK_SHIFTLOAD4_1			0
+#define	SR_CLOCK_SHIFTLOAD4_4			1
+#define	SR_CLOCK_CLKDIV				3:3
+#define	SR_CLOCK_CLKDIV_DIV1			0
+#define	SR_CLOCK_CLKDIV_DIV2			1
+#define	SR_CLOCK_SHIFTLOAD2			2:2
+#define	SR_CLOCK_SHIFTLOAD2_1			0
+#define	SR_CLOCK_SHIFTLOAD2_2			1
+#define	SR_CLOCK_TXCELLWIDTH			0:0
+#define	SR_CLOCK_TXCELLWIDTH_9			0	/*  Backwards from  */
+#define	SR_CLOCK_TXCELLWIDTH_8			1	/* other VGA cores  */
+
+#define	SR_PLANES				0x02
+#define	SR_PLANES_MASK				3:0
+
+#define	SR_FONTBASE				0x03
+#define	SR_FONTBASE_SETB_OFFLO			5:5
+#define	SR_FONTBASE_SETB_OFFLO_0K		0
+#define	SR_FONTBASE_SETB_OFFLO_8K		1
+#define	SR_FONTBASE_SETA_OFFLO			4:4
+#define	SR_FONTBASE_SETA_OFFLO_0K		0
+#define	SR_FONTBASE_SETA_OFFLO_8K		1
+#define	SR_FONTBASE_SETB_OFFHI			3:2
+#define	SR_FONTBASE_SETB_OFFHI_0K		0
+#define	SR_FONTBASE_SETB_OFFHI_16K		1
+#define	SR_FONTBASE_SETB_OFFHI_32K		2
+#define	SR_FONTBASE_SETB_OFFHI_48K		3
+#define	SR_FONTBASE_SETA_OFFHI			1:0
+#define	SR_FONTBASE_SETA_OFFHI_0K		0
+#define	SR_FONTBASE_SETA_OFFHI_16K		1
+#define	SR_FONTBASE_SETA_OFFHI_32K		2
+#define	SR_FONTBASE_SETA_OFFHI_48K		3
+
+#define	SR_MODE					0x04
+#define	SR_MODE_CHAIN4				3:3
+#define	SR_MODE_ODDEVEN				2:2
+#define	SR_MODE_ODDEVEN_ALTERNATE		0
+#define	SR_MODE_ODDEVEN_SEQUENTIAL		1
+#define	SR_MODE_EXTMEM				1:1
+#define	SR_MODE_EXTMEM_DISABLE			0
+#define	SR_MODE_EXTMEM_ENABLE			1
+
+#define	SR_HCOUNTRESET				0x07
+
+
+/*  LynxEM-specific.  */
+#define	SR_PCIMASTERADDR			0x10
+#define	SR_PCIMASTERADDR_7_1			7:1
+#define	SR_PCIMASTERADDR_ENDIAN			0:0
+#define	SR_PCIMASTERADDR_ENDIAN_NORMAL		0
+#define	SR_PCIMASTERADDR_ENDIAN_BIENDIAN	1
+
+#define	SR_PCIMASTERADDR_15_8			0x11
+#define	SR_PCIMASTERADDR_23_16			0x12
+#define	SR_PCIMASTERADDR_31_24			0x13
+
+#define	SR_PCIMISCCTL				0x15
+#define	SR_PCIMISCCTL_BURSTREADENABLE		7:7
+#define	SR_PCIMISCCTL_SWDRAWABORTENABLE		5:5
+#define	SR_PCIMISCCTL_DRAWABORTENABLE		4:4
+#define	SR_PCIMISCCTL_LOCKSUBSYSID		3:3
+#define	SR_PCIMISCCTL_DEVSEL			0:0
+#define	SR_PCIMISCCTL_DEVSEL_SM810		0
+#define	SR_PCIMISCCTL_DEVSEL_SM811		1
+
+#define	SR_DEVPSTAT				0x16
+#define	SR_DEVPSTAT_GFXSTAT			7:7
+#define	SR_DEVPSTAT_GFXSTAT_USINGCURRENT	0
+#define	SR_DEVPSTAT_GFXSTAT_STALE		1
+#define	SR_DEVPSTAT_OVL1STAT			6:6
+#define	SR_DEVPSTAT_OVL1STAT_USINGCURRENT	0
+#define	SR_DEVPSTAT_OVL1STAT_STALE		1
+#define	SR_DEVPSTAT_OVL2STAT			5:5
+#define	SR_DEVPSTAT_OVL2STAT_USINGCURRENT	0
+#define	SR_DEVPSTAT_OVL2STAT_STALE		1
+#define	SR_DEVPSTAT_DRAWFIFO			4:4
+#define	SR_DEVPSTAT_DRAWFIFO_EMPTY		0
+#define	SR_DEVPSTAT_DRAWFIFO_DRAINING		1
+#define	SR_DEVPSTAT_DRAWBUSY			3:3
+#define	SR_DEVPSTAT_FIFOFREESPACE		2:0
+
+#define	SR_GFXCMD1				0x17
+#define	SR_GFXCMD1_BLOCKCPUONDRAW		7:7
+#define	SR_GFXCMD1_PCIBURSTRWENABLE		5:5
+#define	SR_GFXCMD1_ENDIANSWAP			4:4
+#define	SR_GFXCMD1_ENDIANSWAP_BYTEWISE		0
+#define	SR_GFXCMD1_ENDIANSWAP_WORDWISE		1
+#define	SR_GFXCMD1_ZBUFMODE			3:2
+#define	SR_GFXCMD1_ZBUFMODE_LOWWORD		1
+#define	SR_GFXCMD1_ZBUFMODE_HIGHWORD		2
+#define	SR_GFXCMD1_ZBUFMODE_NORMAL		3
+#define	SR_GFXCMD1_MEMMAP			1:1
+#define	SR_GFXCMD1_MEMMAP_BANKED		0
+#define	SR_GFXCMD1_MEMMAP_NORMAL		1
+#define	SR_GFXCMD1_LATENCYTIMER			0:0
+#define	SR_GFXCMD1_LATENCYTIMER_ENABLED		0
+#define	SR_GFXCMD1_LATENCYTIMER_DISABLED	1
+
+#define	SR_GFXCMD2				0x18
+#define	SR_GFXCMD2_PIN161			7:7
+#define	SR_GFXCMD2_PIN161_CLKRUN_IN		0
+#define	SR_GFXCMD2_PIN161_ACTIVITY_OUT		1	/*  WTF??  */
+#define	SR_GFXCMD2_CLKRUNENABLE			6:6
+#define	SR_GFXCMD2_MEMAPERTURE			5:5
+#define	SR_GFXCMD2_MEMAPERTURE_DUAL		0
+#define	SR_GFXCMD2_MEMAPERTURE_LINEARONLY	1
+#define	SR_GFXCMD2_DISPMODE			4:3
+#define	SR_GFXCMD2_DISPMODE_VGA			0
+#define	SR_GFXCMD2_DISPMODE_VESA		1
+#define	SR_GFXCMD2_DISPMODE_MODERN		2
+#define	SR_GFXCMD2_CPUPATH			2:2
+#define	SR_GFXCMD2_CPUPATH_VGAAPERTURE		0
+#define	SR_GFXCMD2_CPUPATH_DIRECT		1
+#define	SR_GFXCMD2_ROTATIONBLITENABLE		1:1
+#define	SR_GFXCMD2_LINEARMODEENABLE		0:0
+
+#define	SR_IRQ1					0x19
+#define	SR_IRQ1_EN_PCIMASTER			6:6
+#define	SR_IRQ1_EN_ZOOMVIDEO			5:5
+#define	SR_IRQ1_EN_DRAWENGINE			4:4
+#define	SR_IRQ1_MASK_PCIMASTER			2:2
+#define	SR_IRQ1_MASK_ZOOMVIDEO			1:1
+#define	SR_IRQ1_MASK_DRAWENGINE			0:0
+
+#define	SR_IRQSTAT				0x1A
+#define	SR_IRQSTAT_VGA				4:4
+#define	SR_IRQSTAT_PCIMASTER			2:2
+#define	SR_IRQSTAT_ZOOMVIDEO			1:1
+#define	SR_IRQSTAT_DRAWENGINE			0:0
+
+#define	SR_USRIRQSTAT				0x1C
+#define	SR_USRIRQSTAT_USR3			3:3
+#define	SR_USRIRQSTAT_USR2			2:2
+#define	SR_USRIRQSTAT_USR1			1:1
+#define	SR_USRIRQSTAT_USR0			0:0
+
+#define	SR_USRIRQ				0x1F
+#define	SR_USRIRQ_EN_USR3			7:7
+#define	SR_USRIRQ_EN_USR2			6:6
+#define	SR_USRIRQ_EN_USR1			5:5
+#define	SR_USRIRQ_EN_USR0			4:4
+#define	SR_USRIRQ_MASK_USR3			7:7
+#define	SR_USRIRQ_MASK_USR2			6:6
+#define	SR_USRIRQ_MASK_USR1			5:5
+#define	SR_USRIRQ_MASK_USR0			4:4
+
+#define	SR_PWRDNCTL				0x20
+#define	SR_PWRDNCTL_MODE			7:7
+#define	SR_PWRDNCTL_MODE_STANDBY		0
+#define	SR_PWRDNCTL_MODE_SLEEP			1
+#define	SR_PWRDNCTL_MEMREFRESH			6:6
+#define	SR_PWRDNCTL_MEMREFRESH_AUTO		0
+#define	SR_PWRDNCTL_MEMREFRESH_SELF		1
+#define	SR_PWRDNCTL_CLKDIV			5:4
+#define	SR_PWRDNCTL_CLKDIV_NONE			0
+#define	SR_PWRDNCTL_CLKDIV_DIV4			1
+#define	SR_PWRDNCTL_CLKDIV_DIV8			2
+#define	SR_PWRDNCTL_CLKDIV_DIV16		3
+#define	SR_PWRDNCTL_LVDSCLK			3:3
+#define	SR_PWRDNCTL_LVDSCLK_ENABLE		0
+#define	SR_PWRDNCTL_LVDSCLK_TRISTATE		1
+#define	SR_PWRDNCTL_VIDEOOUT			2:2
+#define	SR_PWRDNCTL_VIDEOOUT_ENABLE		0
+#define	SR_PWRDNCTL_VIDEOOUT_TRISTATE		1
+#define	SR_PWRDNCTL_LCDOUTPUT			1:1
+#define	SR_PWRDNCTL_LCDOUTPUT_ENABLE		0
+#define	SR_PWRDNCTL_LCDOUTPUT_TRISTATE		1
+#define	SR_PWRDNCTL_DISPMEM			0:0
+#define	SR_PWRDNCTL_DISPMEM_ENABLE		0
+#define	SR_PWRDNCTL_DISPMEM_TRISTATE		1
+
+#define	SR_DISABLES				0x21	/*  1 == disable  */
+#define	SR_DISABLES_RAMDAC			7:7
+#define	SR_DISABLES_PLLS			6:6
+#define	SR_DISABLES_LCDWRITE			5:5
+#define	SR_DISABLES_LCDREAD			4:4
+#define	SR_DISABLES_PALETTE			3:3
+#define	SR_DISABLES_ZOOMVIDEO			2:2
+#define	SR_DISABLES_DRAWENGINE			1:1
+#define	SR_DISABLES_VIDEO			0:0
+
+#define	SR_LCDCTL				0x22
+#define	SR_LCDCTL_DPMS				5:4
+#define	SR_LCDCTL_DPMS_NORMAL			0
+#define	SR_LCDCTL_DPMS_STANDBY			1
+#define	SR_LCDCTL_DPMS_SUSPEND			2
+#define	SR_LCDCTL_DPMS_OFF			3
+#define	SR_LCDCTL_FPENABLE			3:3
+#define	SR_LCDCTL_VBIASENABLE			2:2
+#define	SR_LCDCTL_DISABLESIGNALS		1:1
+#define	SR_LCDCTL_FPVDDENABLE			0:0
+
+#define	SR_ACTIVITY				0x23
+#define	SR_ACTIVITY_CHIPENABLE			7:7
+#define	SR_ACTIVITY_INTSTANDBYENABLE		6:6
+#define	SR_ACTIVITY_ACTIVITYPIN			5:5
+#define	SR_ACTIVITY_WRITES			4:3
+#define	SR_ACTIVITY_WRITES_NONE			0
+#define	SR_ACTIVITY_WRITES_HOSTMEM		1
+#define	SR_ACTIVITY_WRITES_IO			2
+#define	SR_ACTIVITY_WRITES_BOTH			3
+#define	SR_ACTIVITY_TIMERLOGN			2:0	/*  Minutes  */
+
+#define	SR_PWRDNSEL				0x24
+#define	SR_PWRDNSEL_MODE			0:0
+#define	SR_PWRDNSEL_MODE_VESA			0
+#define	SR_PWRDNSEL_MODE_PCI			1
+
+#define	SR_LCDTYPE				0x30
+#define	SR_LCDTYPE_DSTNIF			7:7
+#define	SR_LCDTYPE_DSTNIF_16BIT			0
+#define	SR_LCDTYPE_DSTNIF_24BIT			1
+#define	SR_LCDTYPE_TFTIF			6:4
+#define	SR_LCDTYPE_TFTIF_9BIT			0
+#define	SR_LCDTYPE_TFTIF_12BIT			1
+#define	SR_LCDTYPE_TFTIF_18BIT			2
+#define	SR_LCDTYPE_TFTIF_24BIT			3
+#define	SR_LCDTYPE_TFTIF_12BITDOUBLE		4
+#define	SR_LCDTYPE_TFTIF_ANALOG			5
+#define	SR_LCDTYPE_TFTIF_18BITDOUBLE		6
+#define	SR_LCDTYPE_SIZE				3:2
+#define	SR_LCDTYPE_SIZE_640x480			0
+#define	SR_LCDTYPE_SIZE_800x600			1
+#define	SR_LCDTYPE_SIZE_1024x768		2
+#define	SR_LCDTYPE_SIZE_1280x1024		3
+#define	SR_LCDTYPE_TFTCLKPHASE			1:1
+#define	SR_LCDTYPE_TFTCLKPHASE_NORMAL		0
+#define	SR_LCDTYPE_TFTCLKPHASE_INVERTED		1
+#define	SR_LCDTYPE_PANELTYPE			0:0
+#define	SR_LCDTYPE_PANELTYPE_TFT		0
+#define	SR_LCDTYPE_PANELTYPE_DSTN		1
+
+#define	SR_VIRTREFRESH				0x31
+#define	SR_VIRTREFRESH_VRENABLE			7:7
+#define	SR_VIRTREFRESH_ENCODESEL		6:6
+#define	SR_VIRTREFRESH_ENCODESEL_RGB332		0
+#define	SR_VIRTREFRESH_ENCODESEL_RGB565		1
+#define	SR_VIRTREFRESH_AUTOSHUTDOWNFRAMES	5:4
+#define	SR_VIRTREFRESH_AUTOSHUTDOWNFRAMES_8	0
+#define	SR_VIRTREFRESH_AUTOSHUTDOWNFRAMES_16	1
+#define	SR_VIRTREFRESH_AUTOSHUTDOWNFRAMES_32	2
+#define	SR_VIRTREFRESH_AUTOSHUTDOWNFRAMES_64	3
+#define	SR_VIRTREFRESH_AUTOSHUTDOWNENABLE	3:3
+#define	SR_VIRTREFRESH_DISPEN_TV		2:2	/* TV and VGA can't */
+#define	SR_VIRTREFRESH_DISPEN_VGA		1:1	/*  be on at once.  */
+#define	SR_VIRTREFRESH_DISPEN_LCD		0:0
+
+#define	SR_LCDVISCTL				0x32
+#define	SR_LCDVISCTL_TFTDITHER			7:6
+#define	SR_LCDVISCTL_TFTDITHER_NONE		0
+#define	SR_LCDVISCTL_TFTDITHER_4GRAY		1
+#define	SR_LCDVISCTL_TFTDITHER_8GRAY		2
+#define	SR_LCDVISCTL_DSTNDITHER			5:5
+#define	SR_LCDVISCTL_DSTNDITHER_64GRAY		0
+#define	SR_LCDVISCTL_DSTNDITHER_256GRAY		1
+#define	SR_LCDVISCTL_VSYNCPOL			4:4
+#define	SR_LCDVISCTL_HSYNCPOL			3:3
+#define	SR_LCDVISCTL_CENTERINGENABLE		2:2
+#define	SR_LCDVISCTL_VSCALEENABLE		1:1
+#define	SR_LCDVISCTL_HSCALEENABLE		0:0
+
+#define	SR_LCDPOWERCTL				0x33
+#define	SR_LCDPOWERCTL_LOCKVGATOLCD		5:5
+#define	SR_LCDPOWERCTL_ONOFFTIMINGFRAMES	3:2
+#define	SR_LCDPOWERCTL_ONOFFTIMINGFRAMES_1	0
+#define	SR_LCDPOWERCTL_ONOFFTIMINGFRAMES_2	1
+#define	SR_LCDPOWERCTL_ONOFFTIMINGFRAMES_4	2
+#define	SR_LCDPOWERCTL_ONOFFTIMINGFRAMES_8	3
+#define	SR_LCDPOWERCTL_BLINKFRAMES		1:0
+#define	SR_LCDPOWERCTL_BLINKFRAMES_16		0
+#define	SR_LCDPOWERCTL_BLINKFRAMES_32		1
+#define	SR_LCDPOWERCTL_BLINKFRAMES_64		2
+
+#define	SR_LCDONOFFCTL				0x34
+#define	SR_LCDONOFFCTL_SEQMODE			7:7
+#define	SR_LCDONOFFCTL_SEQMODE_SOFTWARE		0
+#define	SR_LCDONOFFCTL_SEQMODE_HARDWARE		1
+#define	SR_LCDONOFFCTL_PULSEWIDTH		6:6
+#define	SR_LCDONOFFCTL_PULSEWIDTH_16CLKS	0
+#define	SR_LCDONOFFCTL_PULSEWIDTH_32CLKS	1
+#define	SR_LCDONOFFCTL_EXTRAPULSESODD		5:4
+#define	SR_LCDONOFFCTL_EXTRAPULSESEVEN		3:0
+
+#define	SR_DSTNHEIGHTHI				0x3E
+#define	SR_DSTNHEIGHTHI_PIN81			7:7
+#define	SR_DSTNHEIGHTHI_PIN81_DISPEN		0
+#define	SR_DSTNHEIGHTHI_PIN81_M			1	/*  WTF??  */
+#define	SR_DSTNHEIGHTHI_GFXFIFOFLIP		5:5
+#define	SR_DSTNHEIGHTHI_OVLFIFOFLIP		4:4
+#define	SR_DSTNHEIGHTHI_FPD			3:3
+#define	SR_DSTNHEIGHTHI_FREERUNNINGLPENABLE	2:2
+#define	SR_DSTNHEIGHTHI_HEIGHT_9_8		1:0
+
+#define	SR_DSTNHEIGHT_7_0			0x3F
+
+#define	SR_LCD1_RDBASEADDR_7_0			0x40
+#define	SR_LCD1_RDBASEADDR_15_8			0x41
+#define	SR_LCD2_RDBASEADDR_7_0			0x42
+#define	SR_LCD2_RDBASEADDR_15_8			0x43
+#define	SR_LCD1_RDPITCH_10_3			0x44
+
+#define	SR_RDADDRPITCH				0x45
+#define	SR_RDADDRPITCH_LCD1PITCH_12_11		7:6
+#define	SR_RDADDRPITCH_LCD1BASE_18_16		5:3
+#define	SR_RDADDRPITCH_LCD2BASE_18_16		2:0
+
+#define	SR_WRBASEADDR_7_0			0x46
+#define	SR_WRBASEADDR_15_8			0x47
+#define	SR_WRPITCH_10_3				0x48
+
+#define	SR_WRADDRPITCH				0x49
+#define	SR_WRADDRPITCH_BASEADDR_18_16		4:2
+#define	SR_WRADDRPITCH_PITCH_12_11		1:0
+
+#define	SR_LCDFIFOREQ				0x4A
+#define	SR_LCDFIFOREQ_RDFIFO2			7:6
+#define	SR_LCDFIFOREQ_RDFIFO2_4			0
+#define	SR_LCDFIFOREQ_RDFIFO2_8			1
+#define	SR_LCDFIFOREQ_RDFIFO2_12		2
+#define	SR_LCDFIFOREQ_RDFIFO1			5:4
+#define	SR_LCDFIFOREQ_RDFIFO1_4			0
+#define	SR_LCDFIFOREQ_RDFIFO1_8			1
+#define	SR_LCDFIFOREQ_RDFIFO1_12		2
+#define	SR_LCDFIFOREQ_WRFIFO			1:0
+#define	SR_LCDFIFOREQ_WRFIFO_4			0
+#define	SR_LCDFIFOREQ_WRFIFO_8			1
+#define	SR_LCDFIFOREQ_WRFIFO_12			2
+
+#define	SR_LCD2_RDPITCH_10_3			0x4B
+
+#define	SR_LCD2_RDPITCHHI			0x4C
+#define	SR_LCD2_RDPITCHHI_12_11			7:6
+
+#define	SR_VREXTRA1				0x50
+#define	SR_VREXTRA1_VTOTAL_10_8			3:1
+#define	SR_VREXTRA1_HSYNCSTART_8		0:0
+
+#define	SR_VREXTRA2				0x51
+#define	SR_VREXTRA2_VSYNCSTART_10_8		7:5
+#define	SR_VREXTRA2_VDISPEND_10_8		4:2
+#define	SR_VREXTRA2_HDISPEND_8			1:1
+#define	SR_VREXTRA2_HTOTAL_8			0:0
+
+#define	SR_VRHTOTAL_7_0				0x52
+#define	SR_VRHDISPEND_7_0			0x53
+#define	SR_VRHSYNCSTART_7_0			0x54
+#define	SR_VRVTOTAL_7_0				0x55
+#define	SR_VRVDISPEND_7_0			0x56
+#define	SR_VRVSYNCSTART_7_0			0x57
+
+#define	SR_EMICTL				0x58
+#define	SR_EMICTL_EMIREDUCTIONENABLE		3:3
+#define	SR_EMICTL_LCDDRIVECURRENT		2:2
+#define	SR_EMICTL_LCDDRIVECURRENT_8mA		0
+#define	SR_EMICTL_LCDDRIVECURRENT_6mA		1
+#define	SR_EMICTL_FPSCLKDELAY			1:0	/*  # of clocks  */
+
+#define	SR_MSIGCTL				0x59
+#define	SR_MSIGCTL_CLKSRC			7:7
+#define	SR_MSIGCTL_CLKSRC_FRAME			0
+#define	SR_MSIGCTL_CLKSRC_LINE			1
+#define	SR_MSIGCTL_MODULATIONCOUNT		6:0
+
+#define	SR_SYNCADJUST				0x5A
+#define	SR_SYNCADJUST_HSYNC			7:3
+#define	SR_SYNCADJUST_VSYNC			2:0
+
+#define	SR_MEMCTL				0x60
+#define	SR_MEMCTL_RAMDACPULSEWIDTH		5:5
+#define	SR_MEMCTL_RAMDACPULSEWIDTH_4H12L	0
+#define	SR_MEMCTL_RAMDACPULSEWIDTH_8H24L	1
+#define	SR_MEMCTL_VGABURSTWRITEDISABLE		4:4
+#define	SR_MEMCTL_VGAFIFOREQ			3:3
+#define	SR_MEMCTL_VGAFIFOREQ_2			0
+#define	SR_MEMCTL_VGAFIFOREQ_4			1
+#define	SR_MEMCTL_DRAMREFRESHDISABLE		1:1
+#define	SR_MEMCTL_DRAMREFRESH			0:0
+#define	SR_MEMCTL_DRAMREFRESH_NORMAL		0
+#define	SR_MEMCTL_DRAMREFRESH_PERSCANLINE	1
+
+#define	SR_BANKSEL_15_8				0x61
+#define	SR_MEMTYPETIMING			0x62
+
+#define	SR_TVCTL				0x65
+#define	SR_TVCTL_INDEXEDSRC			3:3
+#define	SR_TVCTL_INDEXEDSRC_VGA			0
+#define	SR_TVCTL_INDEXEDSRC_LCD			1
+#define	SR_TVCTL_SUBCARRIERSEL			2:2
+#define	SR_TVCTL_SUBCARRIERSEL_ALTPERFIELD	0
+#define	SR_TVCTL_SUBCARRIERSEL_FREERUNNING	1
+#define	SR_TVCTL_TVCLKSRC			1:1
+#define	SR_TVCTL_TVCLKSRC_CLKIN			0
+#define	SR_TVCTL_TVCLKSRC_REFCLK		1
+#define	SR_TVCTL_HSYNCOUTSEL			0:0
+#define	SR_TVCTL_HSYNCOUTSEL_HSYNC		0
+#define	SR_TVCTL_HSYNCOUTSEL_COMPOSITESYNC	1
+
+#define	SR_CLKCTL1				0x68
+#define	SR_CLKCTL1_VCLKSRC			7:6
+#define	SR_CLKCTL1_VCLKSRC_3C2REG		0
+#define	SR_CLKCTL1_VCLKSRC_VCLKREG		1
+#define	SR_CLKCTL1_VCLKSRC_NTSCFREQ		2
+#define	SR_CLKCTL1_VCLKSRC_PALFREQ		3
+#define	SR_CLKCTL1_VGABASEFREQ			5:5
+#define	SR_CLKCTL1_VGABASEFREQ_LEGACY		0	/*  25.175 MHz  */
+#define	SR_CLKCTL1_VGABASEFREQ_ISO		1	/*  31.5 MHz  */
+#define	SR_CLKCTL1_VGACLKDIVDISABLE		4:4
+#define	SR_CLKCTL1_VCLKADJUST			3:2
+#define	SR_CLKCTL1_VCLKADJUST_NONE		0
+#define	SR_CLKCTL1_VCLKADJUST_MINUS1		1
+#define	SR_CLKCTL1_VCLKADJUST_PLUS1		2
+#define	SR_CLKCTL1_VCLKADJUST_PLUS2		3
+#define	SR_CLKCTL1_MCLKADJUST			1:0
+#define	SR_CLKCTL1_MCLKADJUST_NONE		0
+#define	SR_CLKCTL1_MCLKADJUST_MINUS1		1
+#define	SR_CLKCTL1_MCLKADJUST_PLUS1		2
+#define	SR_CLKCTL1_MCLKADJUST_PLUS2		3
+
+#define	SR_CLKCTL2				0x69
+#define	SR_CLKCTL2_TVCLK			7:7
+#define	SR_CLKCTL2_TVCLK_BLANK			0
+#define	SR_CLKCTL2_TVCLK_NORMAL			1
+#define	SR_CLKCTL2_TESTDATASRC			6:6
+#define	SR_CLKCTL2_LVDSCLK			5:4
+#define	SR_CLKCTL2_LVDSCLK_VRCLK		0
+#define	SR_CLKCTL2_LVDSCLK_VRCLK_INVERT		1
+#define	SR_CLKCTL2_LVDSCLK_HALFVRCLK		2
+#define	SR_CLKCTL2_LVDSCLK_HALFVRCLK_INVERT	3
+#define	SR_CLKCTL2_REFRESHSRC			3:3
+#define	SR_CLKCTL2_REFRESHSRC_EXTERNAL		0
+#define	SR_CLKCTL2_REFRESHSRC_INTERNAL		1
+#define	SR_CLKCTL2_HSYNCSLEEPMODE		2:2
+#define	SR_CLKCTL2_VRCLK			1:0
+#define	SR_CLKCTL2_VRCLK_VCLK2			0
+#define	SR_CLKCTL2_VRCLK_HALFMCLK		1
+#define	SR_CLKCTL2_VRCLK_MCLK			2
+#define	SR_CLKCTL2_VRCLK_VCLK			3
+
+#define	SR_MCLK_NUM_7_0				0x6A
+#define	SR_MCLK_DENOM_5_0			0x6B
+#define	SR_VCLK_NUM_7_0				0x6C
+
+#define	SR_VCLK_DENOM				0x6D
+#define	SR_VCLK_DENOM_PDIV			7:6
+#define	SR_VCLK_DENOM_DENOM			5:0
+
+#define	SR_VCLK2_NUM_7_0			0x6E
+#define	SR_VCLK2_DENOM_5_0			0x6F
+
+#define	SR_SCRATCH1				0x70
+
+#define	SR_BIOSDATA				0x71
+#define	SR_BIOSDATA_MEMSIZE			7:6	/* dep. on chip type */
+#define	SR_BIOSDATA_LCDIMAGE			2:2
+#define	SR_BIOSDATA_LCDIMAGE_CENTER		0
+#define	SR_BIOSDATA_LCDIMAGE_SCALE		1
+#define	SR_BIOSDATA_CRTREFRESH			1:0
+#define	SR_BIOSDATA_CRTREFRESH_INTERLACE	0
+#define	SR_BIOSDATA_CRTREFRESH_60Hz		1
+#define	SR_BIOSDATA_CRTREFRESH_75Hz		2
+
+#define	SR_USRPINCTL1				0x72
+#define	SR_USRPINCTL2				0x73
+#define	SR_SCRATCH3				0x74
+#define	SR_SCRATCH4				0x75
+
+#define	SR_CURSBASEADDR_7_0			0x80
+
+#define	SR_CURSENABLE				0x81
+#define	SR_CURSENABLE_CURSENABLE		7:7
+#define	SR_CURSENABLE_BASEADDR_10_8		2:0
+
+#define	SR_CURSCTL				0x82
+#define	SR_CURSCTL_ICONENABLE			7:7
+#define	SR_CURSCTL_ICONMAGNIFY			6:6
+#define	SR_CURSCTL_ICONMAGNIFY_1x		0
+#define	SR_CURSCTL_ICONMAGNIFY_2x		1
+
+#define	SR_ICONCOLOR1				0x84
+#define	SR_ICONCOLOR2				0x85
+#define	SR_ICONCOLOR3				0x86
+#define	SR_CURSXPOS_7_0				0x88
+
+#define	SR_CURSXPOS				0x89
+#define	SR_CURSXPOS_SIGN			3:3
+#define	SR_CURSXPOS_XPOS_10_8			2:0
+
+#define	SR_CURSYPOS_7_0				0x8A
+
+#define	SR_CURSYPOS				0x8B
+#define	SR_CURSYPOS_SIGN			3:3
+#define	SR_CURSYPOS_YPOS_10_8			2:0
+
+#define	SR_CURSFGCOLOR				0x8C
+#define	SR_CURSBGCOLOR				0x8D
+
+#define	SR_ICONXPOS_7_0				0x90
+#define	SR_ICONXPOS_10_8			0x91
+#define	SR_ICONYPOS_7_0				0x92
+#define	SR_ICONYPOS_10_8			0x93
+
+#define	SR_LCDOVLCTL				0xA0
+#define	SR_LCDOVLCTL_VIDEOENABLE		7:7
+#define	SR_LCDOVLCTL_HDOUBLEENABLE		6:6
+#define	SR_LCDOVLCTL_COLORKEYENABLE		5:5
+#define	SR_LCDOVLCTL_FORMAT			4:4
+#define	SR_LCDOVLCTL_FORMAT_YUV			0
+#define	SR_LCDOVLCTL_FORMAT_RGB			1
+#define	SR_LCDOVLCTL_FULLSCREENENABLE		3:3
+#define	SR_LCDOVLCTL_INDEXEDCOLORENABLE		2:2
+
+#define	SR_LCDOVLCOLORKEY_7_0			0xA1
+#define	SR_LCDOVLCOLORKEY_15_8			0xA2
+#define	SR_LCDOVLCOLORMASK_7_0			0xA3
+#define	SR_LCDOVLCOLORMASK_15_8			0xA4
+#define	SR_LCDOVLCONST_RED			0xA5
+#define	SR_LCDOVLCONST_GREEN			0xA6
+#define	SR_LCDOVLCONST_BLUE			0xA7
+#define	SR_LCDOVL_TOP_7_0			0xA8
+#define	SR_LCDOVL_LEFT_7_0			0xA9
+#define	SR_LCDOVL_BOTTOM_7_0			0xAA
+#define	SR_LCDOVL_RIGHT_7_0			0xAB
+
+#define	SR_LCDOVLEXTRA1				0xAC
+#define	SR_LCDOVLEXTRA1_LEFT_10_8		7:5
+#define	SR_LCDOVLEXTRA1_TOP_10_8		2:0
+
+#define	SR_LCDOVLEXTRA2				0xAD
+#define	SR_LCDOVLEXTRA2_RIGHT_10_8		7:5
+#define	SR_LCDOVLEXTRA2_BOTTOM_10_8		2:0
+
+#define	SR_LCDOVLVSTRETCH_7_0			0xAE
+#define	SR_LCDOVLHSTRETCH_7_0			0xAF
+
+
+/*****************************************************************************
+ * Graphics controller register indices.
+ */
+#define	GR_SETRESET				0x00
+#define	GR_SETRESET_PLANEMASK			3:0
+
+#define	GR_SETRESETENABLE			0x01
+#define	GR_SETRESETENABLE_PLANEENABLEMASK	3:0
+
+#define	GR_COLORCMP				0x02
+#define	GR_COLORCMP_PLANEMASK			3:0
+
+#define	GR_ROTATE				0x03
+#define	GR_ROTATE_WRITEFUNC			4:3
+#define	GR_ROTATE_WRITEFUNC_COPY		0
+#define	GR_ROTATE_WRITEFUNC_AND			1
+#define	GR_ROTATE_WRITEFUNC_OR			2
+#define	GR_ROTATE_WRITEFUNC_XOR			3
+#define	GR_ROTATE_COUNT				2:0
+
+#define	GR_READPLANE				0x04
+#define	GR_READPLANE_PLANE			1:0
+#define	GR_READPLANE_PLANE_0			0
+#define	GR_READPLANE_PLANE_1			1
+#define	GR_READPLANE_PLANE_2			2
+#define	GR_READPLANE_PLANE_3			3
+
+#define	GR_MODE					0x05
+#define	GR_MODE_SHIFTCTL			6:5
+#define	GR_MODE_SHIFTCTL_16COLOR		0
+#define	GR_MODE_SHIFTCTL_4COLOR			1
+#define	GR_MODE_SHIFTCTL_256COLOR		2
+#define	GR_MODE_ODDEVEN				4:4
+#define	GR_MODE_ODDEVEN_SEQUENTIAL		0
+#define	GR_MODE_ODDEVEN_ALTERNATE		1
+#define	GR_MODE_READMODE			3:3
+#define	GR_MODE_READMODE_NORMAL			0
+#define	GR_MODE_READMODE_COMPARE		1
+#define	GR_MODE_WRITEMODE			1:0
+
+#define	GR_MISC					0x06
+#define	GR_MISC_MEMMAP				3:2
+#define	GR_MISC_MEMMAP_A0_BF			0
+#define	GR_MISC_MEMMAP_A0_AF			1
+#define	GR_MISC_MEMMAP_B0_B7			2
+#define	GR_MISC_MEMMAP_B8_BF			3
+#define	GR_MISC_CHAINODDEVEN			1:1
+#define	GR_MISC_CHAINODDEVEN_NORMAL		0
+#define	GR_MISC_CHAINODDEVEN_ALTERNATE		1
+#define	GR_MISC_DISPMODE			0:0
+#define	GR_MISC_DISPMODE_TEXT			0
+#define	GR_MISC_DISPMODE_GRAPHICS		1
+
+#define	GR_COLORNC				0x07
+#define	GR_COLORNC_PLANEMASK			3:0
+
+#define	GR_LATCHMASK				0x08
+
+/*  LynxEM-specific  */
+
+
+/*****************************************************************************
+ * Attribute register indices and bit definitions.
+ */
+#define	AR_IDX_ACCESS				5:5
+#define	AR_IDX_ACCESS_UNLOCK			0
+#define	AR_IDX_ACCESS_LOCK			1
+#define	AR_IDX_IDX				4:0
+
+#define	AR_PALIDX0				0x00
+#define	AR_PALIDX1				0x01
+#define	AR_PALIDX2				0x02
+#define	AR_PALIDX3				0x03
+#define	AR_PALIDX4				0x04
+#define	AR_PALIDX5				0x05
+#define	AR_PALIDX6				0x06
+#define	AR_PALIDX7				0x07
+#define	AR_PALIDX8				0x08
+#define	AR_PALIDX9				0x09
+#define	AR_PALIDX10				0x0a
+#define	AR_PALIDX11				0x0b
+#define	AR_PALIDX12				0x0c
+#define	AR_PALIDX13				0x0d
+#define	AR_PALIDX14				0x0e
+#define	AR_PALIDX15				0x0f
+
+#define	AR_MODE					0x10
+#define	AR_MODE_PAL54SRC			7:7
+#define	AR_MODE_PAL54SRC_PALETTE		0
+#define	AR_MODE_PAL54SRC_COLORSEL		1
+#define	AR_MODE_PIXWIDTH			6:6
+#define	AR_MODE_PIXWIDTH_4			0
+#define	AR_MODE_PIXWIDTH_8			1
+#define	AR_MODE_PANSEL				5:5
+#define	AR_MODE_PANSEL_BOTH			0
+#define	AR_MODE_PANSEL_UPPER			1
+#define	AR_MODE_BLINK				3:3
+#define	AR_MODE_BLINK_DISABLE			0
+#define	AR_MODE_BLINK_ENABLE			1
+#define	AR_MODE_LINEGR				2:2
+#define	AR_MODE_LINEGR_DISABLE			0
+#define	AR_MODE_LINEGR_ENABLE			1
+#define	AR_MODE_DISPTYPE			1:1
+#define	AR_MODE_DISPTYPE_COLOR			0
+#define	AR_MODE_DISPTYPE_MONO			1
+#define	AR_MODE_DISPMODE			0:0
+#define	AR_MODE_DISPMODE_TEXT			0
+#define	AR_MODE_DISPMODE_GRAPHICS		1
+
+#define	AR_OSCANCOLOR				0x11
+
+#define	AR_PLANEENABLE				0x12
+#define	AR_PLANEENABLE_PLANEMASK		3:0
+
+#define	AR_HPAN					0x13
+#define	AR_HPAN_PANVAL				3:0
+
+#define	AR_COLORSEL				0x14
+#define	AR_COLORSEL_PALIDX_7_6			3:2
+#define	AR_COLORSEL_ALTPAL_5_4			1:0
+
+
+/*****************************************************************************
+ * CRT controller register indices and bit definitions.
+ */
+#define	CR_HTOTAL_7_0				0x00
+#define	CR_HDISPEND_7_0				0x01
+#define	CR_HBLANKSTART_7_0			0x02
+
+#define	CR_HBLANKEND				0x03
+#define	CR_HBLANKEND_SETTOONE			7:7
+#define	CR_HBLANKEND_DISPDELAY			6:5
+#define	CR_HBLANKEND_HBLANKEND_4_0		4:0
+
+#define	CR_HSYNCSTART_7_0			0x04
+
+#define	CR_HSYNCEND				0x05
+#define	CR_HSYNCEND_HBLANKEND_5			7:7
+#define	CR_HSYNCEND_SYNCDELAY			6:5
+#define	CR_HSYNCEND_HSYNCEND_4_0		4:0
+
+#define	CR_VTOTAL_7_0				0x06
+
+#define	CR_OVERFLOW				0x07
+#define	CR_OVERFLOW_VSYNCSTART_9		7:7
+#define	CR_OVERFLOW_VDISPEND_9			6:6
+#define	CR_OVERFLOW_VTOTAL_9			5:5
+#define	CR_OVERFLOW_LINECMP_8			4:4
+#define	CR_OVERFLOW_VBLANKSTART_8		3:3
+#define	CR_OVERFLOW_VSYNCSTART_8		2:2
+#define	CR_OVERFLOW_VDISPEND_8			1:1
+#define	CR_OVERFLOW_VTOTAL_8			0:0
+
+#define	CR_FONTROLL				0x08
+#define	CR_FONTROLL_BYTEPAN			6:5
+#define	CR_FONTROLL_STARTROW			4:0
+
+#define	CR_FONTHEIGHT				0x09
+#define	CR_FONTHEIGHT_SCANDOUBLE		7:7
+#define	CR_FONTHEIGHT_LINECMP_9			6:6
+#define	CR_FONTHEIGHT_VBLANKSTART_9		5:5
+#define	CR_FONTHEIGHT_FONTHEIGHT		4:0
+
+#define	CR_TXCURSTOP				0x0a
+#define	CR_TXCURSTOP_CURSENABLE			5:5
+#define	CR_TXCURSTOP_TOP			4:0
+
+#define	CR_TXCURSBOT				0x0b
+#define	CR_TXCURSBOT_CURSDELAY			6:5
+#define	CR_TXCURSBOT_BOT			4:0
+
+#define	CR_FBBASE_17_10				0x0c
+#define	CR_FBBASE_9_2				0x0d
+#define	CR_TXCURSLOC_15_8			0x0e
+#define	CR_TXCURSLOC_7_0			0x0f
+#define	CR_VSYNCSTART_7_0			0x10
+
+#define	CR_VSYNCEND				0x11
+#define	CR_VSYNCEND_PROTECT			7:7
+#define	CR_VSYNCEND_VBLDISABLE			5:5
+#define	CR_VSYNCEND_CLEARVBL			4:4
+#define	CR_VSYNCEND_VSYNCEND_3_0		3:0
+
+#define	CR_VDISPEND_7_0				0x12
+#define	CR_PITCH_7_0				0x13
+
+#define	CR_ULLOC				0x14
+#define	CR_ULLOC_FETCH32			6:6
+#define	CR_ULLOC_COUNT4				5:5
+#define	CR_ULLOC_ULLOC				4:0
+
+#define	CR_VBLANKSTART_7_0			0x15
+#define	CR_VBLANKEND_7_0			0x16
+
+#define	CR_MODE					0x17
+#define	CR_MODE_NOTRESET			7:7
+#define	CR_MODE_FETCH8				6:6
+#define	CR_MODE_WRAP16K				5:5
+#define	CR_MODE_COUNT2				3:3
+#define	CR_MODE_TWICEHIGH			2:2
+#define	CR_MODE_SELECTROWSCAN			1:1
+#define	CR_MODE_COMPAT				0:0
+
+#define	CR_LINECMP_7_0				0x18
+#define	CR_READLATCH				0x22
+
+#define	CR_ARTOGGLE				0x24
+#define	CR_ARTOGGLE_STATE			7:7
+#define	CR_ARTOGGLE_STATE_IDX			0
+#define	CR_ARTOGGLE_STATE_DATA			1
+
+
+/*  LynxEM-specific  */
+#define	CR_EXTRAS				0x30
+#define	CR_EXTRAS_INTERLACEENABLE		7:7
+#define	CR_EXTRAS_FBBASE_20_18			6:4
+#define	CR_EXTRAS_VTOTAL_10			3:3
+#define	CR_EXTRAS_VDISPEND_10			2:2
+#define	CR_EXTRAS_VBLANKSTART_10		1:1
+#define	CR_EXTRAS_VSYNCSTART_10			0:0
+
+#define	CR_INTERLACERETRACE			0x31
+#define	CR_TVVDISPSTART_7_0			0x32
+
+#define	CR_TVVDISPEND				0x33
+#define	CR_TVVDISPEND_LACETIMINGENABLE		7:7
+#define	CR_TVVDISPEND_HBLANKEND_7_6		6:5
+#define	CR_TVVDISPEND_VBLANKEND_9_8		4:3
+#define	CR_TVVDISPEND_TVVDISPEND_10_8		2:0
+
+#define	CR_TVVDISPEND_7_0			0x34
+#define	CR_VGAVSTRETCH_7_0			0x35
+#define	CR_VGAVSTRETCH_9_8			0x36
+
+#define	CR_TVEQPULSE				0x38
+#define	CR_TVEQPULSE_CSYNCSRC			7:7
+#define	CR_TVEQPULSE_CSYNCSRC_HVSYNC		0
+#define	CR_TVEQPULSE_CSYNCSRC_EQUALIZER		1
+#define	CR_TVEQPULSE_PULSEWIDTH			5:0
+
+#define	CR_TVSERRPULSE				0x39
+
+#define	CR_HSYNCTUNE				0x3A
+#define	CR_HSYNCTUNE_PIXCLKDELAY		5:3
+#define	CR_HSYNCTUNE_CHARCLKWIDTH		2:0
+
+#define	CR_HWTEST2				0x3B
+#define	CR_HWTEST3				0x3C
+#define	CR_SCRATCH1				0x3D
+#define	CR_SCRATCH2				0x3E
+#define	CR_SCRATCH3				0x3F
+
+#define	CR_SHADO_HTOTAL_7_0			0x40
+#define	CR_SHADO_HBLANKSTART_7_0		0x41
+
+#define	CR_SHADO_HBLANKEND			0x42
+#define	CR_SHADO_HBLANKEND_DISPSKEW		6:5
+#define	CR_SHADO_HBLANKEND_HBLANKEND_4_0	4:0
+
+#define	CR_SHADO_HSYNCSTART_7_0			0x43
+
+#define	CR_SHADO_HSYNCEND			0x44
+#define	CR_SHADO_HSYNCEND_HBLANKEND_5		7:7
+#define	CR_SHADO_HSYNCEND_HSYNCDELAY		6:5
+#define	CR_SHADO_HSYNCEND_HSYNCEND_4_0		4:0
+
+#define	CR_SHADO_VTOTAL_7_0			0x45
+#define	CR_SHADO_VBLANKSTART_7_0		0x46
+#define	CR_SHADO_VBLANKEND_7_0			0x47
+#define	CR_SHADO_VSYNCSTART_7_0			0x48
+#define	CR_SHADO_VSYNCEND_3_0			0x49
+
+#define	CR_SHADO_VEXTRA				0x4A
+#define	CR_SHADO_VEXTRA_VSYNCSTART_9		7:7
+#define	CR_SHADO_VEXTRA_VDISPEND_9		6:6
+#define	CR_SHADO_VEXTRA_VTOTAL_9		5:5
+#define	CR_SHADO_VEXTRA_VBLANKSTART_8		3:3
+#define	CR_SHADO_VEXTRA_VSYNCSTART_8		2:2
+#define	CR_SHADO_VEXTRA_VDISPEND_8		1:1
+#define	CR_SHADO_VEXTRA_VTOTAL_8		0:0
+
+#define	CR_SHADO_VEXTRA2			0x4B
+#define	CR_SHADO_VEXTRA2_VSYNCPOL		7:7
+#define	CR_SHADO_VEXTRA2_VSYNCPOL_POSITIVE	0
+#define	CR_SHADO_VEXTRA2_VSYNCPOL_NEGATIVE	1
+#define	CR_SHADO_VEXTRA2_HSYNCPOL		6:6
+#define	CR_SHADO_VEXTRA2_HSYNCPOL_POSITIVE	0
+#define	CR_SHADO_VEXTRA2_HSYNCPOL_NEGATIVE	1
+#define	CR_SHADO_VEXTRA2_VBLANKSTART_9		5:5
+
+#define	CR_SHADO_HDISPEND_7_0			0x4C
+#define	CR_SHADO_VDISPEND_7_0			0x4D
+
+#define	CR_EXPANCENTER2				0x9E
+#define	CR_EXPANCENTER2_FONTEXPAND		7:7
+#define	CR_EXPANCENTER2_FONTEXPAND_REPEAT	0
+#define	CR_EXPANCENTER2_FONTEXPAND_INSERT	1
+#define	CR_EXPANCENTER2_VGASHADOWSEL		6:6
+#define	CR_EXPANCENTER2_RWSHADOWSEL		5:5
+#define	CR_EXPANCENTER2_VSTRETCHSEL		4:4
+#define	CR_EXPANCENTER2_VSTRETCHSEL_35_36	0
+#define	CR_EXPANCENTER2_VSTRETCHSEL_90_91	1
+#define	CR_EXPANCENTER2_VCENTERSEL		3:3
+#define	CR_EXPANCENTER2_VCENTERSEL_A6		0
+#define	CR_EXPANCENTER2_VCENTERSEL_INTERNAL	1
+#define	CR_EXPANCENTER2_VSTRETCHENABLE		2:2
+#define	CR_EXPANCENTER2_VCENTERENABLE		1:1
+#define	CR_EXPANCENTER2_HCENTERENABLE		0:0
+
+#define	CR_EXPANCENTER1				0x9F
+#define	CR_EXPANCENTER1_12DOTEXPAND		1:1
+#define	CR_EXPANCENTER1_10DOTEXPAND		0:0
+
+/*  Values mirrored in 0x92,0x93,0xA1/0x94,0x95,0xA2/.../0x9A,0x9B,0xA5  */
+#define	CR_VEXPANCENTERTBL1			0x90
+#define	CR_VEXPANCENTERTBL1_DISPENDCMP_5_0	7:2
+#define	CR_VEXPANCENTERTBL1_DDAVAL_9_8		1:0
+#define	CR_VEXPANCENTERTBL2			0x91
+#define	CR_VEXPANCENTERTBL2_DDAVAL_7_0		7:0
+#define	CR_VEXPANCENTERTBL3			0xA0
+#define	CR_VEXPANCENTERTBL3_CENTERVAL_7_2	5:0
+
+#define	CR_VCENTER				0xA6
+#define	CR_HCENTER				0xA7
+
+
+/*****************************************************************************
+ * Other register bit definitions.
+ */
+/*  Status Register 0  */
+#define	ST00_VBLPENDING				7:7
+#define	ST00_MONITORTYPE			4:4
+#define	ST00_MONITORTYPE_MONO			0
+#define	ST00_MONITORTYPE_COLOR			1
+
+/*  Status Register 1  */
+#define	ST01_FEEBACKBITS			5:4
+#define	ST01_VBLACTIVE				3:3
+#define	ST01_NOTDISPSCANNING			0:0
+
+/*  Feature Control Register  */
+#define	FCR_VSYNCCTL				3:3
+#define	FCR_VSYNCCTL_NORMAL			0
+#define	FCR_VSYNCCTL_VSYNC_OR_DISPENABLE	1
+
+/*  Miscellaneous Output Register  */
+#define	MISC_VSYNCPOL				7:7
+#define	MISC_VSYNCPOL_POSITIVE			0
+#define	MISC_VSYNCPOL_NEGATIVE			1
+#define	MISC_HSYNCPOL				6:6
+#define	MISC_HSYNCPOL_POSITIVE			0
+#define	MISC_HSYNCPOL_NEGATIVE			1
+#define	MISC_ODDEVENPAGESEL			5:5
+#define	MISC_ODDEVENPAGESEL_0K			0
+#define	MISC_ODDEVENPAGESEL_64K			1
+#define	MISC_CLKSEL				3:2
+#define	MISC_CLKSEL_25MHZ			0
+#define	MISC_CLKSEL_28MHZ			1
+#define	MISC_CLKSEL_EXTRA			2
+#define	MISC_0xA0000WINDOW			1:1
+#define	MISC_0xA0000WINDOW_DISABLE		0
+#define	MISC_0xA0000WINDOW_ENABLE		1
+#define	MISC_IOADDR				0:0
+#define	MISC_IOADDR_3Bx				0
+#define	MISC_IOADDR_3Dx				1
+
+
+/*  Lynx-specific register: Lock  */
+#define	LOCK_PROTECT				7:5
+#define	LOCK_PROTECT_ENABLE			0
+#define	LOCK_PROTECT_DISABLE			2
+
+
+/*****************************************************************************
+ * Drawing processor register bit definitions.
+ * These registers are documented as 16 bits wide, but the XFree86 code
+ * accesses them as 32 bit quantities.  These bit definitions reflect the
+ * 32 bit arrangement.
+ */
+#define	DP_SRCDESTXY_X				27:16
+#define	DP_SRCDESTXY_Y				13:0
+
+#define	DP_SIZE_WIDTH				27:16
+#define	DP_SIZE_HEIGHT				11:0
+
+#define	DP_DRAWCTL_START			31:31
+#define	DP_DRAWCTL_PATTERNSEL			30:30
+#define	DP_DRAWCTL_PATTERNSEL_MONO		0
+#define	DP_DRAWCTL_PATTERNSEL_COLOR		1
+#define	DP_DRAWCTL_DESTXUPDATEENABLE		29:29
+#define	DP_DRAWCTL_QUICKSTARTENABLE		28:28
+#define	DP_DRAWCTL_BLTDIR			27:27
+#define	DP_DRAWCTL_BLTDIR_XINC			0
+#define	DP_DRAWCTL_BLTDIR_XDEC			1
+#define	DP_DRAWCTL_SHORTSTROKEDIR		27:27	/*  Overload  */
+#define	DP_DRAWCTL_SHORTSTROKEDIR_NOTHORIZ	0
+#define	DP_DRAWCTL_SHORTSTROKEDIR_HORIZ		1
+#define	DP_DRAWCTL_LINEMAJORAXIS		26:26
+#define	DP_DRAWCTL_LINEMAJORAXIS_X		0
+#define	DP_DRAWCTL_LINEMAJORAXIS_Y		1
+#define	DP_DRAWCTL_LINEXYSTEP			25:24
+#define	DP_DRAWCTL_LINEXYSTEP_CCW90		0
+#define	DP_DRAWCTL_LINEXYSTEP_CW90		1
+#define	DP_DRAWCTL_LINEXYSTEP_FLIPRTLB		2	/*  ???  */
+#define	DP_DRAWCTL_LINEXYSTEP_FLIPLTRB		3	/*  ???  */
+#define	DP_DRAWCTL_YSTRETCHENABLE		23:23
+#define	DP_DRAWCTL_SRCSEL			22:22
+#define	DP_DRAWCTL_SRCSEL_COLOR			0
+#define	DP_DRAWCTL_SRCSEL_MONO			1
+#define	DP_DRAWCTL_LINESTRIKELASTPIXELENABLE	21:21
+#define	DP_DRAWCTL_CAPTUREENABLE		20:20
+#define	DP_DRAWCTL_CMD				19:16
+#define	DP_DRAWCTL_CMD_BLT			0
+#define	DP_DRAWCTL_CMD_RECTFILL			1
+#define	DP_DRAWCTL_CMD_TRAPEZOIDFILL		3
+#define	DP_DRAWCTL_CMD_RLESTRIP			5
+#define	DP_DRAWCTL_CMD_SHORTSTROKE		6
+#define	DP_DRAWCTL_CMD_LINEDRAW			7
+#define	DP_DRAWCTL_CMD_HOSTBLTWRITE		8
+#define	DP_DRAWCTL_CMD_HOSTBLTREAD		9
+#define	DP_DRAWCTL_CMD_HOSTBLTWRITEFROMLB	10
+#define	DP_DRAWCTL_CMD_ROTATEDBLT		11
+#define	DP_DRAWCTL_ROPTYPE			15:15
+#define	DP_DRAWCTL_ROPTYPE_ROP3			0
+#define	DP_DRAWCTL_ROPTYPE_ROP2			1
+#define	DP_DRAWCTL_ROP2SRCISPATTERN		14:14
+#define	DP_DRAWCTL_MONOSRCALIGN			13:12
+#define	DP_DRAWCTL_MONOSRCALIGN_NONE		0
+#define	DP_DRAWCTL_MONOSRCALIGN_8BIT		1
+#define	DP_DRAWCTL_MONOSRCALIGN_16BIT		2
+#define	DP_DRAWCTL_MONOSRCALIGN_32BIT		3
+#define	DP_DRAWCTL_ROTATIONREPEATENABLE		11:11
+#define	DP_DRAWCTL_MATCHINGPIXEL		10:10
+#define	DP_DRAWCTL_MATCHINGPIXEL_OPAQUE		0
+#define	DP_DRAWCTL_MATCHINGPIXEL_TRANSPARENT	1
+#define	DP_DRAWCTL_TRANSPARENTCTL		9:9
+#define	DP_DRAWCTL_TRANSPARENTCTL_SRC		0
+#define	DP_DRAWCTL_TRANSPARENTCTL_DEST		1
+#define	DP_DRAWCTL_TRANSPARENTENABLE		8:8
+#define	DP_DRAWCTL_ROP				7:0
+
+#define	DP_PITCHES_DEST				27:16
+#define	DP_PITCHES_SRC				11:0
+
+#define	DP_DATAFMT_PATXYOVERWRITESEL		30:30
+#define	DP_DATAFMT_PATXYOVERWRITESEL_NORMAL	0
+#define	DP_DATAFMT_PATXYOVERWRITESEL_OVERWRITE	1
+#define	DP_DATAFMT_PATSTARTY			29:27
+#define	DP_DATAFMT_PATSTARTX			26:24
+#define	DP_DATAFMT_FORMAT			21:20
+#define	DP_DATAFMT_FORMAT_8BPP			0
+#define	DP_DATAFMT_FORMAT_16BPP			1
+#define	DP_DATAFMT_FORMAT_32BPP			2
+#define	DP_DATAFMT_FORMAT_24BPP			3
+#define	DP_DATAFMT_ENGINEMODE			19:16
+#define	DP_DATAFMT_ENGINEMODE_XY		0
+#define	DP_DATAFMT_ENGINEMODE_LINEAR		15
+#define	DP_DATAFMT_STRETCHBLTSRCHEIGHT		11:0
+
+#define	DP_MASKENABLE_BYTELANEENABLE		23:16
+#define	DP_MASKENABLE_BITMASK			15:0
+
+#define	DP_SCISTOPLEFTCTL_TOP			27:16
+#define	DP_SCISTOPLEFTCTL_ENABLE		13:13
+#define	DP_SCISTOPLEFTCTL_DISABLEWRITES		12:12
+#define	DP_SCISTOPLEFTCTL_DISABLEWRITES_OUTSIDE	0
+#define	DP_SCISTOPLEFTCTL_DISABLEWRITES_INSIDE	1
+#define	DP_SCISTOPLEFTCTL_LEFT			11:0
+
+#define	DP_SCISBOTRIGHT_BOT			27:16
+#define	DP_SCISBOTRIGHT_RIGHT			11:0
+
+#define	DP_WINWIDTH_DEST			27:16
+#define	DP_WINWIDTH_SRC				11:0
+
+
+/*****************************************************************************
+ * Video/Display control register bit definitions.
+ */
+#define	VP_GRVIDCTL_COLORKEY2ENABLE		27:27
+#define	VP_GRVIDCTL_SEPARATEDATAENABLE		26:26
+#define	VP_GRVIDCTL_WIN0FETCHLCDBKEND		25:25
+#define	VP_GRVIDCTL_CAPTUREISWIN1SRCADDR	24:24
+#define	VP_GRVIDCTL_FIXEDVINTERPENABLE		23:23	/*  == 0x80  */
+#define	VP_GRVIDCTL_TVFLICKERREDUCTIONENABLE	22:22
+#define	VP_GRVIDCTL_VINTERPENABLE		21:21
+#define	VP_GRVIDCTL_WIN1COLORKEYENABLE		20:20
+#define	VP_GRVIDCTL_WINPRIORITY			19:19
+#define	VP_GRVIDCTL_WINPRIORITY_WIN1		0
+#define	VP_GRVIDCTL_WINPRIORITY_WIN2		1
+#define	VP_GRVIDCTL_GFXFORMAT			18:16	/*  FBFORMAT_*  */
+#define	VP_GRVIDCTL_WIN2DOUBLINGENABLE		14:14
+#define	VP_GRVIDCTL_WIN2EXPANDMODE		13:13
+#define	VP_GRVIDCTL_WIN2EXPANDMODE_LINEAR	0
+#define	VP_GRVIDCTL_WIN2EXPANDMODE_NEAREST	1
+#define	VP_GRVIDCTL_WIN2YUVAVERAGEENABLE	12:12
+#define	VP_GRVIDCTL_WIN2ENABLE			11:11
+#define	VP_GRVIDCTL_WIN2FORMAT			10:8	/*  FBFORMAT_*  */
+#define	VP_GRVIDCTL_WIN1DOUBLINGENABLE		6:6
+#define	VP_GRVIDCTL_WIN1EXPANDMODE		5:5
+#define	VP_GRVIDCTL_WIN1EXPANDMODE_LINEAR	0
+#define	VP_GRVIDCTL_WIN1EXPANDMODE_NEAREST	1
+#define	VP_GRVIDCTL_WIN1YUVAVERAGEENABLE	4:4
+#define	VP_GRVIDCTL_WIN1ENABLE			3:3
+#define	VP_GRVIDCTL_WIN1FORMAT			2:0	/*  FBFORMAT_*  */
+#define	FBFORMAT_CMAP8				0
+#define	FBFORMAT_RGB555				1
+#define	FBFORMAT_RGB565				2
+#define	FBFORMAT_xRGB8888			3
+#define	FBFORMAT_RGB888				4
+#define	FBFORMAT_RGB332				5
+#define	FBFORMAT_YUV422				6
+
+
+#define	VP_COLORKEY_WIN2			31:16
+#define	VP_COLORKEY_WIN1			15:0
+
+#define	VP_COLORMASK_WIN2			31:16
+#define	VP_COLORMASK_WIN1			15:0
+
+#define	VP_FBBASE_STATUS			19:19
+#define	VP_FBBASE_STATUS_NORMAL			0
+#define	VP_FBBASE_STATUS_UPDATEPENDING		1
+#define	VP_FBBASE_BASEADDR			18:0	/*  uint64 addr  */
+
+#define	VP_FBWIDTHPITCH_WIDTH			25:16	/*  uint64 count  */
+#define	VP_FBWIDTHPITCH_PITCH			9:0	/*  uint64 count  */
+
+#define	VP_WINxTOPLEFT_TOP			26:16
+#define	VP_WINxTOPLEFT_LEFT			10:0
+
+#define	VP_WINxBOTTOMRIGHT_BOTTOM		26:16
+#define	VP_WINxBOTTOMRIGHT_RIGHT		10:0
+
+#define	VP_WINxSRCADDR_STATUS			19:19
+#define	VP_WINxSRCADDR_STATUS_NORMAL		0
+#define	VP_WINxSRCADDR_STATUS_UPDATEPENDING	1
+#define	VP_WINxSRCADDR_BASEADDR			18:0	/*  uint64 addr  */
+
+#define	VP_WINxSRCWIDTHPITCH_WIDTH		25:16	/*  uint64 count  */
+#define	VP_WINxSRCWIDTHPITCH_PITCH		9:0	/*  uint64 count  */
+
+#define	VP_WINxSCALELO_INITIALODD		31:24
+#define	VP_WINxSCALELO_INITIALEVEN		23:16
+#define	VP_WINxSCALELO_HSCALE_7_0		15:8
+#define	VP_WINxSCALELO_VSCALE_7_0		7:0
+
+#define	VP_GRVIDCTL2_GFXSHRINKENABLE		14:14
+#define	VP_GRVIDCTL2_GFXVSHRINKENABLE		12:12
+#define	VP_GRVIDCTL2_GFXFIXEDVSCALEENABLE	11:11	/*  == 0x80  */
+#define	VP_GRVIDCTL2_GFXHSCALEENABLE		10:10
+#define	VP_GRVIDCTL2_GFXVINTERPENABLE		9:9
+
+#define	VP_xSCALE_INITIALODD			31:24
+#define	VP_xSCALE_INITIALEVEN			23:16
+#define	VP_xSCALE_HSCALE			15:8
+#define	VP_xSCALE_VSCALE			7:0
+
+/*  0 == off, 1 == highest, 7 == lowest.  Defaults listed adjacent.  */
+#define	VP_FIFOPRI_LCDREAD2			26:24	/*  7  */
+#define	VP_FIFOPRI_CAPTURE			22:20	/*  2  */
+#define	VP_FIFOPRI_LCDWRITE			18:16	/*  1  */
+#define	VP_FIFOPRI_WIN2				14:12	/*  6  */
+#define	VP_FIFOPRI_WIN1				10:8	/*  5  */
+#define	VP_FIFOPRI_LCDREAD1			6:4	/*  4  */
+#define	VP_FIFOPRI_GFX				2:0	/*  3  */
+
+#define	VP_FIFOREQ_WIN2				10:8
+#define	VP_FIFOREQ_WIN1				6:4
+#define	VP_FIFOREQ_GFX				2:0
+#define FIFOREQ_2				0
+#define FIFOREQ_3				1
+#define FIFOREQ_4				2
+#define FIFOREQ_5				3
+#define FIFOREQ_6				4
+#define FIFOREQ_8				5
+#define FIFOREQ_10				6
+#define FIFOREQ_12				7
+
+#define	VP_YUV2RGBCONST_RED			23:16
+#define	VP_YUV2RGBCONST_GREEN			15:8
+#define	VP_YUV2RGBCONST_BLUE			7:0
+
+#define	VP_CURSCANLINE_SCANLINE			10:0
+
+#define	VP_WINxSCALEHI_INITIALODD		31:24
+#define	VP_WINxSCALEHI_INITIALEVEN		23:16
+#define	VP_WINxSCALEHI_HSCALE_15_8		15:8
+#define	VP_WINxSCALEHI_VSCALE_15_8		7:0
+
+
+/*****************************************************************************
+ * Interrupt and Control register bit definitions.
+ */
+
+
+/*****************************************************************************
+ * Blitter register bit definitions.
+ */
+
+
+/*****************************************************************************
+ * PCI configuration offsets.
+ */
+
+
+/*****************************************************************************
+ * ROP/MinTerm definitions.
+ */
+/*
+ * Windoze ROP codes are *exactly* analogous to Amiga blitter MinTerms, except
+ * that the three sources for ROP codes have fixed definitions:  "Pattern,"
+ * Source, and Destination (before write).  Leave it to MS to make ROP codes
+ * as difficult as possible to understand what with that Reverse Polish
+ * notation in all their books, so read this and be enlightened:
+ * 
+ * The MinTerm value/ROP code directly specifies the output of three binary
+ * inputs (in the Windoze case, Pattern, Source, and Destination).  For three
+ * binary sources, there are a total of eight possible input states.  Each of
+ * the bits in the MinTerm value itself defines the result of each possible
+ * state.  The MinTerm bits are defined as follows:
+ *
+ *      7       6       5       4       3       2       1       0
+ *    P S D   P S D   P S D   P S D   P S D   P S D   P S D   P S D
+ *    1 1 1   1 1 0   1 0 1   1 0 0   0 1 1   0 1 0   0 0 1   0 0 0
+ *
+ * Note that the bit position numbers exactly match the combination of the
+ * three input state values.  When the state of the three inputs matches a
+ * particular bit position, the value of that bit position in the MinTerm
+ * is used as the output value.  So, for a value of 0xCC (the ever-popular
+ * ROP_COPY), we get the following truth table:
+ *
+ * MinTerm value  State
+ * bit position   (PSD)   Output
+ *        0       (000):  0
+ *        1       (001):  0
+ *        2       (010):  1
+ *        3       (011):  1
+ *        4       (100):  0
+ *        5       (101):  0
+ *        6       (110):  1
+ *        7       (111):  1
+ *
+ * So if, for example, the value of P is one, S is zero, and D is zero (state
+ * 4), the output will be the bit in position 4 of the MinTerm, which is zero.
+ *
+ * The concept that was hardest for me to grasp was the setting of bits that I
+ * "don't care" about.  For example, state 3 (PSD = 011) is set to 1.  This
+ * means that the Destination (in addition to the source) must be one for the
+ * output to be one.  "But I don't care about the Destination value.  Why am I
+ * selecting it?"  You have to remember that the bits are not source
+ * selection bits, they are truth table outputs.  Note that state 2
+ * (PSD = 010) is also set to 1.  This means that the Destination must be
+ * zero for the output to be one.  Taken together with state 3, it means that
+ * the output will be 1 *no matter what* the value of the Destination is,
+ * which is what we want.  The same trick is pulled with the Pattern source
+ * (state 2 (PSD = 010) and 6 (PSD = 110)); the output is one regardless of
+ * the Pattern value.  So forming a MinTerm value from scratch requires you to
+ * consider *all* of the sources, whether you care about them or not.
+ *
+ * For multi-bit (color) pixel values, each bit position is considered
+ * independently of the others.  Apply the MinTerm truth table to each bit
+ * position in the source values to generate an output for it.
+ *
+ * This mechanism is deceptively powerful when implemented properly (unlike
+ * in the Windoze universe), and can be used to do all kinds of non-obvious
+ * logical and mathematical operations on large groups of numbers.
+ */
+#define	MT_PSD		(1<<7)
+#define	MT_PSND		(1<<6)
+#define	MT_PNSD		(1<<5)
+#define	MT_PNSND	(1<<4)
+#define	MT_NPSD		(1<<3)
+#define	MT_NPSND	(1<<2)
+#define	MT_NPNSD	(1<<1)
+#define	MT_NPNSND	(1<<0)
+
+#define	MINTERM_PATCOPY		(MT_PSD | MT_PSND | MT_PNSD | MT_PNSND)
+#define	MINTERM_SRCCOPY		(MT_PSD | MT_PSND | MT_NPSD | MT_NPSND)
+#define	MINTERM_DESTCOPY	(MT_PSD | MT_PNSD | MT_NPSD | MT_NPNSD)
+
+
+
+#endif	/*  __LYNXEMDEFS_H  */

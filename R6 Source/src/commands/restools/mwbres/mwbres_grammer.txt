@@ -1,0 +1,91 @@
+This document describes the expanded grammar of version 2.0 
+of the mwbres resource data compiler.
+
+The version 2 grammar is fully backwards compatible with 
+version 1, but adds enough smarts to interact reasonably 
+well with C/C++ header files designed for use both with 
+mwbres and C. However, there are some differences in how 
+the preprocessor directives are treated, and mwbres only 
+implements a small subset of the C language and 
+preprocessor.
+
+New features are: #define, #undef, #ifdef, #else, #endif 
+and the enum declarator. These all work on symbols and 
+values, where symbols are C-style identifiers, and values 
+are either integer, floating point or C string values. 
+Note that the mwbres #define symbols do NOT result in 
+text expansion; they are bound to values much like enums 
+are.
+
+There are several subtle differences in how directives 
+are treated by mwbres and the C preprocessor. You will 
+have to design #include files that are shared between C/C++ 
+and mwbres carefully so that they do the right thing in 
+both cases. Generally, simple-minded, direct C header 
+files with minimal frills can be made to work with mwbres 
+with a minimum of work, whereas heavy reliance on the C 
+preprocessor specifics, macro substitution, or language 
+features not supported by mwbres will cause trouble. The 
+language of mwbres may over time migrate to more closely 
+resemble C/C++; thus, to be forward compatible, your code 
+should work equally well when compiled with mwcc as when 
+compiled with mwbres.
+
+
+#define IDENTIFIER [ VALUE ]
+Bind the known value (integer, floating point or string 
+constant) VALUE to the identifier IDENTIFIER. This 
+supersedes any previous definition of IDENTIFIER. VALUE 
+can be omitted, and will then get the integer value 0.
+
+#undef IDENTIFIER
+The binding of IDENTIFIER to a value, previously 
+made by a #define on IDENTIFIER, is removed. 
+If there was another #define, or enum, of IDENTIFIER, 
+prior to the last IDENTIFIER, that value will now be the 
+value of the identifier, else the identifier will no 
+longer be valid, and a syntax error will be generated if 
+the identifier is used. Note that this "popping" of value 
+is different from the normal C semantics of #undef.
+
+enum [ IDENTIFIER ] { IDENTIFIER [ = VALUE ] [ , ... ] } ;
+For each IDENTIFIER within the brackets, that IDENTIFIER 
+will be bound to the value assigned to it, or, if the 
+assignment is omitted, one higher than the value assigned 
+to the previously declared identifier within the braces. 
+If the first identifier does not have an explicit value, 
+it will be assigned the value 0. Enum only accepts integer 
+values. A previous or subsequent #define for the same 
+identifier will always override the value assigned by an 
+enum, but if that value is later #undef-ed, the enum value 
+will be reinstated.
+
+#ifdef IDENTIFIER    - or -    #if defined ( IDENTIFIER )
+#else
+#endif
+These two forms are synonymous. If the symbol IDENTIFIER 
+has been bound to a value using #define, the source to the 
+matching #endif or #else (whichever comes first) will have 
+effect. Else, that text will still be checked for syntax, 
+but any definitions or declarations in the text will not 
+be executed. Note that this is different from the C notion 
+of #ifdef, which simply ignores the text to the matching 
+#else or #endif. If the IDENTIFIER is not associated with 
+a value through #define, the text after the matching 
+#else, if any, will be effective; however, both sides of 
+the #else will always be checked for syntactic 
+correctness. Also note that anything after IDENTIFIER on 
+the line will be treated as source, as will anything 
+before the hash sign (#) - this is also different from the 
+semantics of the C preprocessor.
+
+#include < filename >    - or -    #include " filename "
+This directive instructs the parser to insert the text of 
+the file specified by filename after the line on which the 
+include statement is found. Note that #include does not 
+have to be alone on a line; anything previous to the hash 
+sign on the line will be parsed before the text is 
+included; anything between the file name and the end of 
+the line will ALSO be parsed before the new file text is 
+seen(!).
+

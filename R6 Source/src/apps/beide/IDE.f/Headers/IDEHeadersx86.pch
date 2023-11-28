@@ -1,0 +1,12 @@
+//========================================================================
+//	IDEHeaders.pch
+//	Copyright 1995 Metrowerks Corporation, All Rights Reserved.
+//========================================================================	
+
+#pragma once
+
+#pragma precompile_target "IDEHeaders"
+
+#define DEBUG 1
+
+#include "IDEHeadersCommon.h"

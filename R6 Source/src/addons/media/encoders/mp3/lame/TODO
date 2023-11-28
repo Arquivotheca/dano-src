@@ -1,0 +1,49 @@
+0.   ./configure script
+
+things to check for:  
+
+   -lncurses
+   -llibsndfile      (allow user to enable)
+   -lvorbis          (allow user to disable)
+   -lGTK             (allow user to disable)
+   architecture depending optimization(like assembler code)
+   make depend option for CC
+
+
+
+
+1.
+Does stdin work when LAME is compiled to use libsndfile? 
+(new version of libsndfile will support this - try this out)
+
+
+2. 
+LAME has problems with pure DC input.  i.e. a square wave with
+a frequency well below 20Hz.  Not very important, but it should
+be fixed.
+
+3. 
+Replace internal representation of PCM data to floating point
+(instead of short int).  This will help filtering (which
+has to convert back and forth) and allow lame to handle
+other than 16 bit input.   Also, modify mpglib to output
+floating point and have finaly quantization step a
+easy-to-change module so it can output other than 16bit.
+
+
+
+998.
+Merge GOGO's fast assembler routines.
+
+999.
+It would be nice to save some information whilst encoding
+a: wave -> mp3
+	a RIFF/wave can contain LIST chunks with information
+	about author, title, etc. 
+	==> could go into TAG fields of resulting mp3
+b: mp3 -> mp3
+	==> we could copy the TAG directly
+c: mp3 <-> ogg
+	==> copy TAG info into oggs info field and vice versa
+d: mp3 -> wave
+	==> copy TAG into LIST chunk

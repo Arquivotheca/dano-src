@@ -1,0 +1,22 @@
+# app makefile
+TARGET_NAME:= beep
+SRC_DIR := src/commands/be/$(TARGET_NAME)
+
+RESOURCE_FORK:=
+
+MY_INSTALL_DIR:=$(INSTALL_BIN)
+
+SRCS := $(TARGET_NAME).cpp
+
+MY_CFLAGS:=
+
+MY_INCLUDES	:= \
+		-I$(BUILDHOME)/src/inc/ \
+		-I$(BUILDHOME)/src/inc/os_p
+
+SYSTEM_LIBS:= libbe.so libmedia.so libroot.so
+
+LINK_DIRS:=
+
+
+include $(SDIR_TEMPLATES)/AppTemplate.mk

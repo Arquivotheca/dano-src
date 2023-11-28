@@ -1,0 +1,6 @@
+#ifndef _CISO646
+#define _CISO646
+
+#include <iso646.h>
+
+#endif

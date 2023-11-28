@@ -1,0 +1,208 @@
+
+% Useful definitions
+
+/d	{ def } bind def
+/bd { bind def } bind d
+/xd { exch def } bd
+/_cl 0 d
+
+% Variables init
+
+/_fs 32 d
+/_fn /Courier_New d
+/_fh 0. d
+/_fsh 90. d
+/_fr 0. d
+
+% shortcuts for postscript operators
+
+/p {newpath} bd
+/gs {gsave} bd
+/gr {grestore} bd
+/cp {closepath} bd
+/m {moveto} bd
+/l {lineto} bd
+/s {currentpoint stroke m} bd
+/sp {currentpoint strokepath m} bd
+/f {currentpoint fill m} bd
+/w {setlinewidth} bd
+/c {setrgbcolor} bd
+/g {setgray} bd
+/t {translate} bd
+/r {rotate} bd
+/sc {scale} bd
+
+% Set font name
+/fn {exch {findfont scalefont setfont}} bd
+
+% Set font size
+/fs {	/_fs xd
+		90 _fsh sub 45. div _fs mul/_fh xd
+} bd
+
+% Set font rotation
+/fr {/_fr xd } bd
+
+% Set font shear
+/fh {/_fh xd } bd
+
+% Draw String
+/sh_dict 4 dict d
+sh_dict /mtrx matrix put
+/sh {
+		sh_dict begin
+		
+		
+		/_req xd
+		dup stringwidth pop /_got xd
+		
+		_got _req mul 0 ne {
+			/savematrix mtrx currentmatrix d
+			currentpoint translate				% 0,0 is origin
+			_fr rotate							% rotate
+			_req _got div 1. scale				% scale to get exact string length
+			_cl 0 eq { 
+				show							% draw string which is on the stack
+			} {
+				true charpath					% obtain path for clipping
+			} ifelse
+			savematrix setmatrix
+		} if
+
+		end		
+} bd
+
+% definition of patterning for alternate patterns modes
+%
+/PaintPat {
+	0 0 moveto	
+	0 1 lineto
+	1 1 lineto
+	1 0 lineto
+	closepath
+	fill
+} bd
+
+/CreatePattern {
+		/PatternImage xd
+		20 dict begin	
+		/PaintType 2 d
+		/PatternType 1 d
+		/TilingType 1 d
+		/BBox [0 0 8 8] d
+		/XStep 8 d
+		/YStep 8 d
+		/PaintProc {
+			pop
+			/_y 0 d
+			/_index 0 d	
+			8 {  
+				/_x 0 d
+			8 	{	gs
+				 	_x _y translate PatternImage _index get 1 eq {PaintPat} if 
+					gr
+				 	_index 1 add /_index xd
+				 	_x 1 add /_x xd
+				} repeat 
+				_y 1 add /_y xd
+			} repeat
+		} d
+		currentdict end
+		matrix
+		makepattern
+		/CurPattern xd
+} bd
+
+
+% Common rectangle : left top right bottom r_po
+/r_po {
+	0 begin
+	/_b xd
+	/_r xd
+	/_t xd
+	/_l xd 
+
+	_l _t m
+	_r _t lineto
+	_r _b lineto
+	_l _b lineto
+	cp
+	end
+} bd
+/r_po load 0 4 dict put
+
+% Create an arc inside rect defined by left top width height
+
+/a_po_dict 8 dict d
+a_po_dict /mtrx matrix put
+
+/a_po {
+	a_po_dict begin
+	/endangle xd
+	/startangle xd
+	/yrad xd
+	/xrad xd
+	/y xd
+	/x xd
+	
+	/savematrix mtrx currentmatrix d
+	x y t
+	xrad yrad sc
+	startangle r
+	1 0 m
+	0 0 1 0 endangle startangle sub arc
+	savematrix setmatrix
+
+	end
+} bd
+
+% Create an rounded rect defined by xRadius yRadius width height left top 
+
+/rr_po_dict 6 dict d
+rr_po_dict /mtrx matrix put
+/rr_po {
+	rr_po_dict begin
+
+	/savematrix mtrx currentmatrix d
+
+	t	% use left / top
+	
+	dup /_h xd
+	exch dup /_w xd
+	exch
+	
+	sc			% use width / height
+
+	_h div neg /_yRadius xd
+	_w div /_xRadius xd
+
+	/_fl 2. d
+	
+	0. 							_yRadius 	 			m
+	0. 							1. _yRadius sub 		lineto
+	0.							1. _yRadius _fl div sub
+	_xRadius _fl div			1.
+	_xRadius 					1. 						curveto
+	1. _xRadius sub 			1. 						lineto
+	1. _xRadius _fl div sub 	1.	
+	1. 							1. _yRadius _fl div sub	
+	1. 							1. _yRadius sub 		curveto
+	1. 							_yRadius 				lineto
+	1. 							_yRadius _fl div
+	1. _xRadius _fl div sub 	0. 	
+	1. _xRadius sub 			0. 						curveto
+	_xRadius 					0. 						lineto
+	_xRadius _fl div 			0. 
+	0. 							_yRadius _fl div
+	0. 							_yRadius 	 			curveto
+
+	cp
+	
+	savematrix setmatrix
+	
+	end
+} bd
+
+
+% End of procset
+

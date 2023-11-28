@@ -1,0 +1,16 @@
+#!/bin/sh
+
+ENC=$1
+INFILE=$2
+OLDMIDFILE=Old$1ToUtf8.txt
+OLDBACKFILE=OldUtf8To$1.txt
+NUMIDFILE=Nu$1ToUtf8.txt
+NUBACKFILE=NuUtf8To$1.txt
+
+BINDIR=/source/iad/src/kit/nutextencoding/tests/regress
+
+$($BINDIR/nuconversion $INFILE $NUMIDFILE $ENC to > /dev/null)
+$($BINDIR/nuconversion $NUMIDFILE $NUBACKFILE $ENC from > /dev/null)
+$($BINDIR/oldconversion $INFILE $OLDMIDFILE $ENC to > /dev/null)
+$($BINDIR/oldconversion $OLDMIDFILE $OLDBACKFILE $ENC from > /dev/null)
+

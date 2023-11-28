@@ -1,0 +1,72 @@
+#!/bin/sh
+# This script gets run when sleeping/awaking
+
+# don't honor the sleep key until the UI is booted
+if not /boot/beos/bin/bootcomplete --test
+	exit
+fi
+
+if /boot/beos/bin/nut check
+
+# Currently awake
+
+	# put networking pre-emption when awake here
+	# Give the update daemon one last chance to perform update if it has been defered.
+	/bin/sndcmd "application/x-vnd.Be-UPDT" retry
+
+fi
+
+
+if /boot/beos/bin/nut toggle
+
+# Sleepy time.
+	# Disable autodial
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pa0!"
+	
+	# Bring PPP Down
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pdn!"
+	
+	# turn off screen
+	/boot/beos/bin/nut sleep /dev/graphics
+
+	# Make a kooky sound
+	/bin/beep PowerDown
+
+	# Turn off LED
+	cpq_led -sleep -on
+
+	# Wait for sound
+	sleep 1
+
+	# turn off/on sound
+	/boot/beos/bin/nut port -6 be:snd_server
+
+	TellBrowser -rewind
+	if exists $SETTINGS/beia-security
+		source $SETTINGS/beia-security
+		if empty password
+		else
+			# goto the password panel so that it's there when we wake up
+			TellBrowser -gototop file://\$RESOURCES/login.html
+		fi
+	fi
+
+else
+
+# Wake up!
+
+	cpq_led -sleep -off
+
+	# turn on screen
+	/boot/beos/bin/nut wakeup /dev/graphics
+
+	# turn off/on sound
+	/boot/beos/bin/nut port -7 be:snd_server
+	/bin/beep PowerUp
+
+	# Enable autodial
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pa1!"
+	
+	# force update
+	/bin/sndcmd "application/x-vnd.Be-UPDT" update
+fi

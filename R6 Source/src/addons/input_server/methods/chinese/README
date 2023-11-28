@@ -1,0 +1,25 @@
+
+This directory contains a Chinese input method.  The initial code
+for this was licensed from FIC.  FIC's code did not support in-line
+input, and wasn't very polished, so this version is drastically
+modified.
+
+Two different input methods are supported by the code and the
+dictionaries here: Cangjie and zhuyin.  More information about
+these types of input methods can be found in the book "CJKV
+Information Processing" by Ken Lunde, published by O'Reilly.
+
+To install this input method you need to install the "chinese" add-on
+in the /boot/home/config/add-ons/input_server/methods/ directory.
+
+You will also need to install the cjdict, phdict, pydict, and
+chinese.cfg files in /boot/home/config/settings/chinese-input/, and
+you will need a font installed that contains the Chinese character
+glyphs.
+
+The file named chinese.cfg in this directory is the configuration
+file for Traditional Chinese input.  Copying the file
+chinese.cfg.simplified to
+/boot/home/config/settings/chinese-input/chinese.cfg will configure
+the input method for Simplified Chinese.
+

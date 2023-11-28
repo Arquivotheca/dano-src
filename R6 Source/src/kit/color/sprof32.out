@@ -1,0 +1,104 @@
+/*********************************************************************/
+/*
+	Contains:	This module contains the required DLL entry points.
+
+				Created by lsh, September 14, 1993
+
+	Written by:	The Kodak CMS MS Windows Team
+
+	Copyright:	(C) 1993-1998 by Eastman Kodak Company, all rights reserved.
+
+	Macintosh
+	Change History (most recent first):
+
+	Windows Revision Level:
+		$Workfile:   SPROF32.C  $
+		$Logfile:   O:\pc_src\dll\stdprof\sprof32.c_v  $
+		$Revision:   2.2  $
+		$Date:   07 Apr 1994 13:24:18  $
+		$Author:   lsh  $
+
+	SCCS Revision:
+		@(#)sprof32.c	1.4 8/19/96
+
+	To Do:
+*/
+/*********************************************************************/
+
+
+/**********************************************************************
+ **********************************************************************
+ **********************************************************************
+ *** PROPRIETARY NOTICE:     The  software  information   contained ***
+ *** herein is the  sole property of  Eastman Kodak Company  and is ***
+ *** provided to Eastman Kodak users under license for use on their ***
+ *** designated  equipment  only.  Reproduction of  this matter  in ***
+ *** whole  or in part  is forbidden  without the  express  written ***
+ *** consent of Eastman Kodak Company.                              ***
+ ***                                                                ***
+ *** COPYRIGHT (c) Eastman Kodak Company, 1993-1996                 ***
+ *** As  an unpublished  work pursuant to Title 17 of the United    ***
+ *** States Code.  All rights reserved.                             ***
+ **********************************************************************
+ **********************************************************************
+ **********************************************************************/
+
+#include "sprof-pr.h"
+
+void KpMemInit();
+
+/* Global handle to save the ProfileAPI's Instance */
+HANDLE	SpHInst;
+
+/* Macro for debug strings */
+#if defined(_DEBUG)
+#define SP_DEBUG_STRING(dbgstr) OutputDebugString (dbgstr)
+#else
+#define SP_DEBUG_STRING(dbgstr) 
+#endif
+
+/****************************************************************************
+ * Function: DllMain (HINSTANCE, WORD, LPVOID)
+ *
+ * Purpose:  Entry point to DLL.
+ *
+ * Parameters: None
+ *          hInstance == Handle to this instance
+ *       reasonCalled == Situation when DllMain is called
+ *
+ * Comments:
+ *
+ * History:  Date       Author        Reason
+ *           8/5/93		P. Tracy      Created
+ ****************************************************************************/
+INT APIENTRY DllMain (HINSTANCE hInstance, DWORD reasonCalled, LPVOID lpNot)
+{
+	lpNot = lpNot;
+	hInstance = hInstance;
+
+	SP_DEBUG_STRING ("sprofile ");
+	switch (reasonCalled) {
+	case DLL_PROCESS_ATTACH:
+		SP_DEBUG_STRING ("Process Attach");
+		KpMemInit();
+		SpHInst = hInstance;
+		break;
+
+	case DLL_PROCESS_DETACH:
+		SP_DEBUG_STRING ("Process Detach");
+		SpHInst = NULL;
+		break;
+
+	case DLL_THREAD_ATTACH:
+		SP_DEBUG_STRING ("Thread Attach");
+		break;
+
+	case DLL_THREAD_DETACH:
+		SP_DEBUG_STRING ("Thread Detach");
+		break;
+	}
+	SP_DEBUG_STRING ("\n");
+
+    return TRUE;
+}
+

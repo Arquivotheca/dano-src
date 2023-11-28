@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>QuickRes Quick and Dirty Documentation</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<font face=HELVETICA>
+<h1>QuickRes Resource Editor</h1>
+
+<p>QuickRes is an application for editing BeOS resource files.
+It allows direct editing of data in standard binary resources
+(BResources), attributes, and a new resource source file format.</p>
+
+<h2>Main Features</H3>
+
+<ul>
+<li> Save and load files in both binary (.rsrc) and source
+     (.rdef) format.
+<li> A new resource definition format that natively understands
+     common Be data types, including BMessage.
+<li> Edit both attributes and resources.
+<li> In-place viewing and editing of resource data, as well as
+     full-window editors.
+<li> Add-on architecture for resource editors (a toolkit for
+     implementing your own add-ons is included).
+<li> Currently includes editors for:
+     <ul>
+     <li> Raw data (hex editor)
+     <li> Integers and floating point numbers.
+     <li> BRect
+     <li> BPoint
+     <li> rgb_color
+     <li> Application flags
+     <li> Strings
+     <li> Bitmaps
+     <li> Icons
+     <li> Cursors
+     </ul>
+</ul>
+
+<h2>Getting Started</h2>
+
+<p>You can start viewing resources right away -- just start up QuickRes,
+select "Open..." and select the "Binary.rsrc" example file.  You will
+immediately see a list of all resources (and attributes) in the file.
+The columns tell you, in order:</p>
+
+<ol>
+<li> Bullet if an individual item has changed from what was last saved.
+<li> Type: The type code of this resource item.  Standard type codes will
+     be shown if you pull down the "New" list.
+<li> ID: The resource ID of the item.  If the item is not an actual
+     resource, this column will be (attr) for an attribute or (data)
+     for the body of the a file.
+<li> Name: The name of this resource item.
+<li> Data: If available, an in-place editor and viewer for this item's
+     actual data.
+<li> Size: The number of bytes in this item's data.
+</ol>
+
+<p>To edit a resource item, you have two choices.  Some data types can
+be edited in-place -- for example, click on one of the resources of
+type MIMS to select it, and select the Edit/Edit In Place menu.
+You will see rectangles appear around the type, ID, name, and data fields,
+allowing you to edit them right in the list.</p>
+
+<p>All editors support out-of-line editing.  To use this, select the
+desired item and then the Edit/Edit In Window menu.  A window will pop
+up with a full editor for the item.  The exact editor will depend on
+the type of data you have selected -- there are currently editors for
+bitmap images, strings, basic data types, and a hex editor for all other
+types.</p>
+
+<h2>Creating Your Own Resources</h2>
+
+<p>To create your own resource file, select File/New.  A blank resource
+list will appear, into which you can start adding resources.  New resources
+can be created in a number of ways:</p>
+
+<ul>
+<li> Select the Edit/New Item menu, and start selecting types and adding
+     resources through the window that appears.
+<li> Click on the "New" popup menu in the top-left corner of the main
+     window, and select the type you would like to have.  If a resource
+     is currently selected, the newly created resource will have an ID
+     after the selected resource.
+<li> Drop files on to the resource list.  QuickRes will create a new
+     resource with the data from that file.  You may need to then set
+     the new resource's type to see and edit it.  For example, if you
+     drop a text file on the list, you will need to change its type
+     to CSTR.  (But note, however, that doing this will cause a \0
+     terminator to be appended to the end of the resource data.)
+</ul>
+
+<h2>Resource File Formats</h2>
+
+<p>In addition to the traditional binary resource format, QuickRes supports
+a new resource source file format.  When you create a new resource list,
+it will be stored by default in binary form -- you can change the format
+when you save the file by checking the desired format in the "Format"
+menu is the save dialog.</p>
+
+<p><strong>NOTE: For now, it is recommended that you stay with the binary
+file format.  The source format's syntax may change.</strong>  See a
+description of the <a href="Grammar.html">Resource Definition Language</a>
+for more information.</p>
+
+<p>A third format offered by QuickRes is for attributes.  This is used for editing
+the attributes of a file that is not a resource binary or definition file.  In
+this mode, you can also edit the file's main data as if it were a single resource
+item.  For example, you can open an existing PNG image into QuickRes and edit
+the image using QuickRes' bitmap editor.</p>
+
+<h2>Important Limitations</h2>
+
+<ul>
+<li> QuickRes is designed to edit individual resources items of
+     moderate size -- if you have a 650KB picture in your resources,
+     editing this in the bitmap editor will be painful at best.  For
+     these kinds of resources, it is best to edit them in some other
+     editor and drop the final result into your resource file.
+<li> While the bitmap editor allows you to edit bitmaps of any format
+     for which there is a translator, many of these do not behave as
+     well as one would like.  Your best bet is to stick to archived
+     bitmaps and PNG images when you want to edit an image with the
+     bitmap editor.  Any format works fine for simple viewing, however.
+<li> When editing attributes, nothing is done to make sure that you don't
+     have attributes with the same name.  Be sure to avoid duplicate names,
+     or you will lose those attributes when they are saved.
+</ul>
+</font>
+
+</body>
+</html>

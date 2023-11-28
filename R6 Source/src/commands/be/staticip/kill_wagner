@@ -1,0 +1,6 @@
+#!/bin/sh
+# demo/hackware
+# dsandler@be.com
+
+kill 9 Wagner
+echo "done"

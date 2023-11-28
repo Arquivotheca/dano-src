@@ -1,0 +1,43 @@
+//****************************************************************************************
+//
+//	File:		PulseView.h
+//
+//	Written by:	David Ramsey and Daniel Switkin
+//
+//	Copyright 1999, Be Incorporated
+//
+//****************************************************************************************
+
+#ifndef PULSEVIEW_H
+#define PULSEVIEW_H
+
+#include <interface/View.h>
+#include <interface/PopUpMenu.h>
+#include <interface/MenuItem.h>
+
+extern "C" int  _kget_cpu_state_(int cpu);
+extern "C" int  _kset_cpu_state_(int cpu, int enabled);
+
+class PulseView : public BView {
+	public:
+		PulseView(BRect rect, const char *name);
+		PulseView(BMessage *message);
+		~PulseView();
+		virtual void MouseDown(BPoint point);
+		void ChangeCPUState(BMessage *message);
+		
+	protected:
+		void Init();
+		bool Update(int32 accuracy=1<<30);
+		
+		BPopUpMenu *popupmenu;
+		BMenuItem *mode1, *mode2, *preferences, *about;
+		BMenuItem **cpu_menu_items;
+		
+		int32 cpu_count;
+		double cpu_times[B_MAX_CPU_COUNT];
+		bigtime_t prev_active[B_MAX_CPU_COUNT];
+		bigtime_t prev_time;
+};
+
+#endif

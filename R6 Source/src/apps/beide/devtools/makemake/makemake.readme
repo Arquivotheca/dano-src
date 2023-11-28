@@ -1,0 +1,66 @@
+====================================================================
+	What:		'makemake' release notes
+	Date:		970507
+	Engineers:	Jon Watte, Brian Stern
+	Copyright © 1997 Metrowerks Corporation. All rights reserved.
+
+	Updated for r4.1 using the BeOS Generic Makefile.
+	Portions Copyright © 1999 Be Incorporated. All rights reserved.
+====================================================================
+
+What is this?
+
+It's a simple program that uses the BeIDE's scripting capabilities
+to create a make file that will build more or less the same 
+program as the currently open project file will build.
+
+The make file built is in the form used by the 
+BeOS Generic Makefile engine. (See /boot/develop/etc/makefile and 
+/boot/develop/etc/makefile-engine).  The makefile consists
+of variable definitions that are used by the makefile-engine.
+The makefile is applicable to both Intel and PPC platforms.
+
+Usage:
+
+0) Install the "makemake" program somewhere in your execution path.
+   (On PPC move it to the /boot/develop/BeIDE/tools folder.)
+   (On x86 move it to the /boot/home/config/bin.)
+1) Open the project you want to create a make file for in BeIDE.
+2) Make sure that no access paths have spaces in them, and that 
+   no source or library files have spaces in their names.
+3) Reset File Paths in the Project menu.
+4) Remove Objects in the Project menu.
+5) Make the project.
+6) Open a Terminal window.
+7) "cd" to the folder where your project file lives.
+8) Type "makemake". This will create a file named "makefile" in the 
+   folder where you are in Terminal, overwriting any previous such 
+   file.
+
+If you would like to run makemake as part of the normal build,
+you can use the ShellPlugin to run makemake.  See
+BuildMakeFile.sh for an example.
+
+Issues:
+
+The make file uses what paths are actually used for files to find 
+header files, it ignores whatever access paths are set in settings 
+for the project. This may also cause some need for tweaking.
+
+The output file is, by default, named whatever your project file is 
+named, minus the name extension - you can change this using the 
+NAME variable in the make file.
+
+The make file sets the TYPE of the application built to APP.
+If you are building a library, add-on, or driver, you will
+want to change this variable setting before using the makefile.
+
+Some variables are left undefined and so their default settings
+are used.  You might want to scan the makefile and see what
+variables you would like to set for your application.
+
+Note:
+
+While makemake shows an example of the current BeIDE scripting
+capabilities, BeIDE scripting will be changing in the
+future.

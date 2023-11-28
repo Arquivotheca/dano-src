@@ -1,0 +1,16 @@
+const char *gAboutText =
+"Camera - An application to retrieve pictures from a digital camera.\n"
+"\n"
+"Supported cameras:\n"
+"	Nikon Coolpix 950\n"
+"	Nikon Coolpix 700\n"
+"	Nikon Coolpix 900\n"
+"	Olympus D320-L\n"
+"	Olympus D340-L and D340-R\n"
+"	Olympus Camedia C-400\n"
+"	Olympus Camedia C-340L, C-840L\n"
+"	Polaroid PDC640\n"
+"	Kodak DC220\n"
+"	Kodak DC260\n"
+"	Kodak DC265\n"
+"	Kodak DC290\n";

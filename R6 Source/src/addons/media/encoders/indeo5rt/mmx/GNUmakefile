@@ -1,0 +1,58 @@
+SRC_DIR:=src/addons/media/encoders/indeo5rt
+MY_OBJ_OFFSET := indeo5rtmmx.encoder.f
+SRCS :=  \
+	Indeo5RTEncoder.cpp
+#
+TYPE := SHARED
+
+MY_DFLAGS := -D__NO_WINDOWS__
+
+# MY_INCLUDES - Additional headers (as might be appended to CFLAGS)
+MY_INCLUDES := -I$(call FULL_SRC_DIR, src/addons/media/encoders/indeo5rt/mmx) \
+	-I$(BUILDHOME)/src/addons/media/decoders/indeo5/include \
+	-I$(call FULL_SRC_DIR, src/addons/media/encoders/indeo5rt)/rtinclude \
+	-I$(BUILDHOME)/src/inc/media_p
+#
+
+include $(SDIR_TEMPLATES)/CompileObjectsTemplate.mk
+MORE_OBJS := $(OBJS_OUT)
+
+
+# Makefile using AddonTemplate.mk
+# Copyright (c) 2000-2001; Be, Inc. All Rights Reserved.
+
+# TARGET_NAME - the name of the addon. (can not be empty)
+TARGET_NAME:=indeo5rtmmx.encoder
+
+MY_DFLAGS := $(MY_DFLAGS_IN)
+MY_INCLUDES := $(MY_INCLUDES_IN)
+
+# SRC_DIR - the path of the root of your application source tree. (Preferably
+#           relative to your source tree's base.) (can not be empty)
+SRC_DIR:=src/addons/media/encoders/indeo5rt/mmx
+
+# SRCS - the list of source files relative to $(SRC_DIR). (can not be empty)
+SRCS := mmx.cpp
+
+# SYSTEM_LIBS - the list of system libraries (ie located in $(BELIBRARIES))
+#               that your addon links against.
+SYSTEM_LIBS:= libroot.so libbe.so \
+	libmedia.so libindeo_enc_mmx.a
+#
+
+MY_OPTIMIZER := -O4 --no-pic -fomit-frame-pointer \
+	-frerun-cse-after-loop -fexpensive-optimizations \
+	-mpentiumpro
+
+# MY_INSTALL_DIR - the full path of the directory you want
+#				   your app to be installed in. (can not be empty)
+# You should use of the globally define INSTALL_* variables defined in
+#   InstallTree.mk. 
+# Note: if you need MY_INSTALL_DIR to be empty, you don't need this template
+MY_INSTALL_DIR := $(INSTALL_ADD_ONS)/media/encoders
+
+# MY_DEBUG_FLAGS - additional flags to set when DEBUG_BUILD is used.
+# MY_DEBUG_FLAGS :=
+
+include $(SDIR_TEMPLATES)/AddonTemplate.mk
+

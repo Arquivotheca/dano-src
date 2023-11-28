@@ -1,0 +1,58 @@
+# ++++++++++
+#	FILE:	x
+#	REVS:	$Revision: 1.1 $
+#	NAME:	herold
+#	DATE:	Mon Mar 10 17:37:43 PST 1997
+#	Copyright (c) 1996-97 by Be Incorporated.  All Rights Reserved.
+# +++++
+
+SHELL		:= /bin/sh
+
+#######
+include $(BUILDHOME)/buildprefs/make.pre
+#######
+
+DRVRNAME	:= sis6326.accelerant
+SIGNATURE	:= "application/x-vnd.Be-SiS.accelerant"
+SETTYPE		:= settype
+SRCS		:= accelerant.c bena4.c sisCRTC.c sisBlit.c sisOverlay.c
+#SRCS		+= sisClock.c sisCursor.c
+OBJ_DIR		:= obj.i586.sis6326
+FTP_DIR		:= obj.i586 
+OBJS		:= $(SRCS_LIST_TO_OBJS)
+CFLAGS		+= -DOBJ_SIS6326=1
+INCLUDES	:= -I./ $(INCLUDES)
+INCLUDES 	+= -I$(BUILDHOME)/src/kit/surface/include
+INCLUDES 	+= -I$(BUILDHOME)/src/inc/graphics_p
+
+LIBRARIES_TO_USE := $(BELIBRARIES)/libroot.so
+TARGET		:= $(OBJ_DIR)/$(DRVRNAME)
+CFLAGS		:= $(CFLAGS) -DDEBUG=1 -DCOMPILING_ACCELERANT
+CFLAGS		+= -Wimplicit-function-dec -Wimplicit-int
+
+MY_INSTALL_DIR = $(INSTALL_ADD_ONS)/accelerants
+
+$(TARGET):	$(MY_INSTALL_DIR) $(OBJ_DIR) $(OBJS)
+		$(LD) -o $@ $(OBJS) $(LDFLAGS)
+		$(SETTYPE) -s $(SIGNATURE) $@
+		$(SETVERSION) $@ $(SYSTEM_VERSION) $(APP_VERSION)
+
+$(MY_INSTALL_DIR):
+	-@[ -d $(MY_INSTALL_DIR) ] || mkdir -p $(MY_INSTALL_DIR)
+
+floppy:		$(TARGET)
+		-bf mkdir system	
+		-bf mkdir system/add-ons
+		-bf mkdir system/add-ons/accelerants
+		-bf copy dos:$(TARGET) system/add-ons/accelerants/$(DRVRNAME)
+
+dump:		$(TARGET)
+		-rm -f list
+		pefdump -b 0x20000000 $(TARGET) > list
+
+clean::
+		-rm -f list
+
+#######
+include $(BUILDHOME)/buildprefs/make.post
+#######

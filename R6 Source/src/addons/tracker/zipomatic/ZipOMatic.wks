@@ -1,0 +1,16 @@
+# @Eddie Workset@
+AddWorkset "ZipOMatic.wks" "/boot/develop/be/exp/src/addons/tracker/zipomatic/ZipOMatic.wks"
+AddFileGroup "zipomatic" "/boot/develop/be/exp/src/addons/tracker/zipomatic"
+AddFile "ZipOEngine.cpp" "/boot/develop/be/exp/src/addons/tracker/zipomatic/ZipOEngine.cpp"
+AddFile "ZipOMatic.cpp" "/boot/develop/be/exp/src/addons/tracker/zipomatic/ZipOMatic.cpp"
+AddFile "ZipOWindow.cpp" "/boot/develop/be/exp/src/addons/tracker/zipomatic/ZipOWindow.cpp"
+AddFile "makefile" "/boot/develop/be/exp/src/addons/tracker/zipomatic/makefile"
+AddFile "Bitmaps.cpp" "/boot/develop/be/exp/src/addons/tracker/zipomatic/Bitmaps.cpp"
+AddFile "BarberPoleView.cpp" "/boot/develop/be/exp/src/addons/tracker/zipomatic/BarberPoleView.cpp"
+EndFileGroup "zipomatic"
+AddFileGroup "resources"
+AddFile "ZipOMatic.rsrc" "/boot/develop/be/exp/src/addons/tracker/zipomatic/ZipOMatic.rsrc"
+EndFileGroup "resources"
+AddFileGroup "expander" "/boot/develop/be/exp/src/apps/expander" -nomake
+AddFile "XpandoMatic.cpp" "/boot/develop/be/exp/src/apps/expander/XpandoMatic.cpp"
+EndFileGroup "expander"

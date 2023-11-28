@@ -1,0 +1,74 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	1.3.1
+Date:		5/19/97
+Authors:	Brian Stern, Jon Watte, Mark Anderson
+			Burton T. E. Miller, Bernie Estavillo 
+=============================================
+
+Greetings Be developers.  This is an update of the BeIDE release
+versions found on the DR3 CodeWarrior for Be CD and the AA BEOS CD.
+It has few new features.  It does have a number of bug 
+fixes and performance improvements over the releases on
+our CD and the BeOS CD.
+
+
+============================
+New Features
+============================
+
+*	Faster opening and saving of projects.
+
+*	Faster searching for files.
+		  
+*	Includes MWBResPlugin, which didn't make it onto the CD.
+
+*	Stampsound plays in the about box.
+
+
+==========================
+Bugs Fixed
+==========================
+
+Some deadlocks on the windowlist semaphore have been fixed.  This problem
+was noticed mostly on PowerMac and PowerComputing machines (i.e., uniprocessor
+machines).  If you see this again please let us know and send a ps.
+
+Fixed a problem with use of command-arrow keys in text windows.
+
+Fixed a typo with the default paths {beide}/headers/libraries -> {beide}/libraries.
+
+Fixed a bug where changes in the Linker prefs panels were ignored until the project
+was closed and reopened.
+
+Fixed a bug that caused 'duplicate code' link warnings for .h files in a project.
+
+Fixed a crash seen after adding about a hundred files to a project.
+
+Improved the mechanism for setting the icons for executables.  You should just
+need to add a rsrc file to your project that has the correct resources built
+by IconWorld and FileTypes.  If you change the contents of any of these resources
+(icons, supported types, etc.) you should delete the executable and rebuild it 
+from scratch.
+
+==========================
+Known Limitations
+==========================
+
+The Printing menu items have been disabled.
+
+Recursive searching doesn't work correctly if there are circular links in recursive
+access paths.
+
+=====================
+Contacting Metrowerks
+=====================
+
+For bug reports, technical questions and suggestions, please send them to 
+devsupport@be.com for problems with the limited BeIDE, and 
+support@metrowerks.com for problems with the full version.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

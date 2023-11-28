@@ -1,0 +1,32 @@
+###############################################################################
+## BeOS Generic Driver Skeleton
+##
+##    This file contains a list of objects that need to be built for the
+## generic accelerant.
+##
+###############################################################################
+
+
+###############################################################################
+## Sources ####################################################################
+###############################################################################
+
+## Note on use: You need to reference this in a manner that adds the
+##   appropriate prefix.
+
+## List of generic accelerant objects.
+
+GDS_ACC_SRCS = accel_util.c         \
+               entrypoint.c         \
+               globals.c            \
+               hooks_cursor.c       \
+               hooks_dpms.c         \
+               hooks_init.c         \
+               hooks_mode.c         \
+               hooks_sync.c         \
+               standard_modes.c
+
+
+###############################################################################
+## This Is The End Of The File ################################################
+###############################################################################

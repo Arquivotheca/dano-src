@@ -1,0 +1,21 @@
+// --------------------------------------------------------------
+// NASM BeIDE add-on
+// --------------------------------------------------------------
+
+nasmPlugin supports use of The Netwide Assembler (NASM)
+in a BeIDE project.
+To use assembly in your project you need to do the following:
+
+1. Install NASM (see http://www.web-sites.co.uk/nasm/)
+2. Copy nasmPlugin to /boot/develop/BeIDE/plugins/Prefs_add_ons/
+3. Create a link in /boot/develop/BeIDE/tools to your nasm tool.
+   (Case is important, the link should be called "nasm".)
+4. Create a new target in Project Settings.
+	Extension:	asm
+	Flags:		compile stage
+	Tool Name:	nasm
+5. Add your .asm file to your project.  NASM will be used to assemble
+the file during the compile stage.
+
+You can also use Project/Preprocess to preprocess the file or
+Project/Disassemble to create a listing file.

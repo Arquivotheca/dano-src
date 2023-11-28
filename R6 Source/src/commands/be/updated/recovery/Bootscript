@@ -1,0 +1,5 @@
+
+
+/boot/beos/bin/console /boot/beos/bin/sh /boot/beos/system/boot/recovery.script
+
+/boot/beos/bin/console /boot/beos/bin/sh

@@ -1,0 +1,37 @@
+<html>
+
+<script language="JavaScript">
+
+//beos.dprintf('update script started');
+beos.sendMessage("application/x-vnd.Be-UPDT", 'Udss');
+var update_status;
+update_status = "update not performed";
+
+</script>
+
+<script language="JavaScript">
+
+document.write('<script language="JavaScript" src="',
+	beos.binder.service.updater.url.valueOf(),
+	'?machineid=',
+	beos.binder.service.system.device_id.valueOf(),
+	'&version=',
+	beos.binder.service.system.version.valueOf(),
+	'"></script>');
+
+</script>
+
+<script language="JavaScript">
+
+if(update_status) {
+	beos.dprintf(update_status);
+	beos.sendMessage("application/x-vnd.Be-UPDT", 'Udsf');
+}
+else {
+	//beos.dprintf('update script done');
+	beos.sendMessage("application/x-vnd.Be-UPDT", 'Udsd');
+}
+
+</script>
+
+</html>

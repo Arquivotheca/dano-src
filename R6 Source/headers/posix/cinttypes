@@ -1,0 +1,6 @@
+#ifndef _CINTTYPES
+#define _CINTTYPES
+
+#include <inttypes.h>
+
+#endif

@@ -1,0 +1,20 @@
+# lines beginning with '#' are comments
+# resolution	1024	768	16
+
+palette							art/palette.raw
+
+#Product Name Banner
+background		372	86	31	28	art/beos.raw
+#background 		265	91	82	32	art/maui.raw
+
+#Inactive Icon Strip
+background		438	54	157	103	art/inactive.raw
+
+#Release version graphic
+background		256	49	352	160	art/release.raw
+
+#Be Logo
+background		94	38	276	436	art/be.raw
+
+#Active icon strip
+on			438	54	157	103	art/active.raw

@@ -1,0 +1,5 @@
+#!/bin/sh
+# Favorites button (bookmarks)
+
+TellBrowser -goto file://$RESOURCES/index.html
+

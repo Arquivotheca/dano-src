@@ -1,0 +1,261 @@
+1998-06-15  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile: Add more dependecies for running tests.
+	Reported by HJ Lu.
+
+1998-06-14  Andreas Schwab  <schwab@issan.informatik.uni-dortmund.de>
+
+	* locales/sk_SK: Add repertoiremap.
+
+1998-05-12  Andreas Schwab  <schwab@issan.informatik.uni-dortmund.de>
+
+	* locales/ru_SU: Add repertoiremap.
+
+1998-05-01  Ulrich Drepper  <drepper@cygnus.com>
+
+	* locales/ru_SU: New file.
+	* SUPPORTED: Add ru_SU with KOI8-R.
+
+1998-04-30  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile: Install repertoire maps.
+	* mnemonic.ds: Moved into repertoiremaps subdir.
+	* repertoiremaps/charids.894: New file.
+	* repertoiremaps/mnemonic.ds: New file.
+
+	* sort-test.sh: Adapt for most recent changes in localedef.
+	* tst-fmon.sh: Likewise.
+	* tst-locale.sh: Likewise.
+
+	* locales/POSIX: Add repertoiremap definition.
+	* locales/cs_CZ: Likewise.
+	* locales/da_DK: Likewise.
+	* locales/de_AT: Likewise.
+	* locales/de_BE: Likewise.
+	* locales/de_CH: Likewise.
+	* locales/de_DE: Likewise.
+	* locales/de_LU: Likewise.
+	* locales/en_AU: Likewise.
+	* locales/en_CA: Likewise.
+	* locales/en_CA,2.5: Likewise.
+	* locales/en_DK: Likewise.
+	* locales/en_DK.com: Likewise.
+	* locales/en_GB: Likewise.
+	* locales/en_IE: Likewise.
+	* locales/en_NZ: Likewise.
+	* locales/en_US: Likewise.
+	* locales/es_AR: Likewise.
+	* locales/es_BO: Likewise.
+	* locales/es_CL: Likewise.
+	* locales/es_CO: Likewise.
+	* locales/es_DO: Likewise.
+	* locales/es_EC: Likewise.
+	* locales/es_ES: Likewise.
+	* locales/es_GT: Likewise.
+	* locales/es_HN: Likewise.
+	* locales/es_MX: Likewise.
+	* locales/es_PA: Likewise.
+	* locales/es_PE: Likewise.
+	* locales/es_PY: Likewise.
+	* locales/es_SV: Likewise.
+	* locales/es_US: Likewise.
+	* locales/es_UY: Likewise.
+	* locales/es_VE: Likewise.
+	* locales/et_EE: Likewise.
+	* locales/eu_ES: Likewise.
+	* locales/fi_FI: Likewise.
+	* locales/fo_FO: Likewise.
+	* locales/fr_BE: Likewise.
+	* locales/fr_CA: Likewise.
+	* locales/fr_CA,2.13: Likewise.
+	* locales/fr_CH: Likewise.
+	* locales/fr_FR: Likewise.
+	* locales/fr_LU: Likewise.
+	* locales/ga_IE: Likewise.
+	* locales/gr_GR: Likewise.
+	* locales/he_IL: Likewise.
+	* locales/hr_HR: Likewise.
+	* locales/hu_HU: Likewise.
+	* locales/is_IS: Likewise.
+	* locales/it_IT: Likewise.
+	* locales/iw_IL: Likewise.
+	* locales/kl_GL: Likewise.
+	* locales/lt_LT: Likewise.
+	* locales/lv_LV: Likewise.
+	* locales/nl_BE: Likewise.
+	* locales/nl_NL: Likewise.
+	* locales/no_NO: Likewise.
+	* locales/pl_PL: Likewise.
+	* locales/pt_BR: Likewise.
+	* locales/pt_PT: Likewise.
+	* locales/ro_RO: Likewise.
+	* locales/ru_RU: Likewise.
+	* locales/sl_SI: Likewise.
+	* locales/sv_FI: Likewise.
+	* locales/sv_SE: Likewise.
+	* locales/tr_TR: Likewise.
+	* locales/zh_CN: Likewise.
+
+1998-04-29  Ulrich Drepper  <drepper@cygnus.com>
+
+	* tst-locale.sh: Add comment for when multi-byte charsets in
+	locales work.
+	* tests/test5.cm: New file.
+	* tests/test5.def: New file.
+	* Makefile (ld-test-names): Add test5.
+
+1998-04-28  Ulrich Drepper  <drepper@cygnus.com>
+
+	* locales/de_DE: Use . as thousands separator and 3;3 groups for
+	LC_NUMERIC.
+
+1998-03-30  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile: Fix test rules from last patch.
+
+1998-03-22  Andreas Jaeger  <aj@arthur.rhein-neckar.de>
+
+	* locales/ru_RU: Abbreviations must end with a consonant.  Fix for
+	Tuesday by Ilya Ovchinnikov <ilya@taspd13a.npi.msu.su>. [PR libc/517]
+
+1998-03-25  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile (distribute): Add tst-locale.sh.
+
+1998-03-24 12:14  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile (distribute): Add SUPPORTED.
+	(install-locales): New rule to install locale dat ausing localedef.
+	* SUPPORTED: New file.  Names all usable locales.
+	Based on a patch by Cristian Gafton <gafton@redhat.com>.
+
+	* locales/gr_GR: Correct collation description.
+	* locales/nl_NL: Correct Charset requirement.
+	* locales/pt_BR: Fix int_curr_symbol.
+	* locales/ru_RU: Fix ctype data.
+	Patches by Cristian Gafton <gafton@redhat.com>.
+
+	* locales/nl_NL: Fix yesexpr/noexpr.
+	* locales/pt_BR: Likewise.
+	* locales/cs_CZ: Likewise.
+	* locales/da_DK: Likewise.
+	* locales/en_AU: Likewise.
+	* locales/en_CA: Likewise.
+	* locales/en_DK: Likewise.
+	* locales/en_DK.com: Likewise.
+	* locales/en_GB: Likewise.
+	* locales/en_NZ: Likewise.
+	* locales/en_US: Likewise.
+	* locales/es_AR: Likewise.
+	* locales/es_BO: Likewise.
+	* locales/es_CL: Likewise.
+	* locales/es_CO: Likewise.
+	* locales/es_DO: Likewise.
+	* locales/es_EC: Likewise.
+	* locales/es_ES: Likewise.
+	* locales/es_GT: Likewise.
+	* locales/es_HN: Likewise.
+	* locales/es_MX: Likewise.
+	* locales/es_PA: Likewise.
+	* locales/es_PE: Likewise.
+	* locales/es_PY: Likewise.
+	* locales/es_SV: Likewise.
+	* locales/es_US: Likewise.
+	* locales/es_UY: Likewise.
+	* locales/es_VE: Likewise.
+	* locales/et_EE: Likewise.
+	* locales/eu_ES: Likewise.
+	* locales/fi_FI: Likewise.
+	* locales/fo_FO: Likewise.
+	* locales/fr_BE: Likewise.
+	* locales/fr_CA: Likewise.
+	* locales/fr_CH: Likewise.
+	* locales/fr_FR: Likewise.
+	* locales/fr_LU: Likewise.
+	* locales/ga_IE: Likewise.
+	* locales/gr_GR: Likewise.
+	* locales/he_IL: Likewise.
+	* locales/hr_HR: Likewise.
+	* locales/hu_HU: Likewise.
+	* locales/is_IS: Likewise.
+	* locales/it_IT: Likewise.
+	* locales/iw_IL: Likewise.
+	* locales/ja_JP: Likewise.
+	* locales/kl_GL: Likewise.
+	* locales/lt_LT: Likewise.
+	* locales/lv_LV: Likewise.
+	* locales/no_NO: Likewise.
+	* locales/pl_PL: Likewise.
+	* locales/pt_PT: Likewise.
+	* locales/ro_RO: Likewise.
+	* locales/ru_RU: Likewise.
+	* locales/sl_SI: Likewise.
+	* locales/sv_SE: Likewise.
+	* locales/tr_TR: Likewise.
+	* locales/zh_CN: Likewise.
+
+1998-03-14  Ulrich Drepper  <drepper@cygnus.com>
+
+	* locales/ru_RU: Correct last patch.
+	Patch by Cristian Gafton <gafton@redhat.com>.
+
+1998-03-11  Ulrich Drepper  <drepper@cygnus.com>
+
+	* locales/de_DE: Use common german data and time format not ISO
+	8601.
+
+1998-03-08  Ulrich Drepper  <drepper@cygnus.com>
+
+	* locales/ru_RU: Correct inconsistencies in mon data.
+	Patch by Alexander V. Lukyanov <lav@alpha.netis.ru>.
+
+1997-12-20  Andreas Schwab  <schwab@issan.informatik.uni-dortmund.de>
+
+	* locales/pl_PL: Fix int_curr_symbol.
+
+1997-10-09 04:56  Ulrich Drepper  <drepper@cygnus.com>
+
+	* locales/is_IS: Update from Debian version.
+
+1997-08-29 03:16  Ulrich Drepper  <drepper@cygnus.com>
+
+	* tst-fmon.c: New file.  strfmon test program.
+	* tst-fmon.sh: New file.  Script to run strfmon test.
+	* fmon-de_DE.exp: New file.  Expected result of strfmon test for de_DE.
+	* fmon-en_US.exp: New file.  Expected result of strfmon test for en_US.
+
+	* locales/cs_CZ: Update from author.
+
+1997-03-17 03:32  Ulrich Drepper  <drepper@cygnus.com>
+
+	* sort-test.sh: Call localedef with additional environment variable
+	I18NPATH to point to not-yet-installed locale data files.
+
+	* locales/POSIX: Updated version from maintainer.
+
+1997-02-15 14:32 15:10 Andreas Jaeger  <aj@arthur.pfalz.de>
+
+	* collate-test.c (main): Change prototype definition to prevent
+	warning.
+
+1997-02-15 17:46  Ulrich Drepper  <drepper@cygnus.com>
+
+	* locales/de_DE: Include real collation data.  It's similar to the
+	en_DK information but the order of small and capital characters is
+	exchanged.
+
+	* collate-test.c: New file.  Test suite for strcoll function.
+	* de_DE.in: Input file for collation test.
+	* da_DK.in: Likewise.
+
+	* xfrm-test.c: New file.  Test suite for strxfrm function.
+
+1996-12-10 02:47  Ulrich Drepper  <drepper@cygnus.com>
+
+	* All charmaps: Fix entries for <quotation-mark>.
+
+1996-10-17 18:57  Ulrich Drepper  <drepper@cygnus.com>
+
+	* Makefile (charmaps): Don't try to install CVS or RCS directory.
+	(locales): Likewise.
+	Reported by Matthias Urlichs.

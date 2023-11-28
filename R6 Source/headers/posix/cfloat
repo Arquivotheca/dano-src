@@ -1,0 +1,7 @@
+#ifndef _CFLOAT
+#define _CFLOAT
+
+#include <float.h>
+
+#endif
+

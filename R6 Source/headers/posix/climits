@@ -1,0 +1,6 @@
+#ifndef _CLIMITS
+#define _CLIMITS
+
+#include <limits.h>
+
+#endif

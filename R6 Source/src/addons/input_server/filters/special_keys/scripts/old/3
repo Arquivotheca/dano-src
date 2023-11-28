@@ -1,0 +1,21 @@
+#!/bin/sh
+# newspaper
+
+#
+# redirector stuff for clipper
+#
+if exists /etc/update/cookie
+	rdattr /etc/update/cookie content_redir CONTENT_REDIR
+	rdattr /etc/update/cookie part_hw APHW_CONTEXT
+	rdattr /etc/update/cookie language R_LANGUAGE
+	rdattr /etc/update/cookie locale R_LOCALE
+	TellBrowser -goto $CONTENT_REDIR?s=bnews&c=$APHW_CONTEXT&i=$R_LANGUAGE&lc=$R_LOCALE
+else
+	TellBrowser -goto http://www.cnn.com/
+fi
+
+
+
+
+
+

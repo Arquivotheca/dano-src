@@ -1,0 +1,28 @@
+#!/bin/sh
+
+ZBEOS=zbeos
+TMP_ZBEOS=/tmp/zbeos
+
+if [ "$1." != "." ]
+then
+	ZBEOS=$1
+fi
+
+if [ ! -f $ZBEOS ]
+then
+	echo Cannot find $ZBEOS
+	exit 1
+fi
+
+OFFSET=`findimages $ZBEOS`
+if [ $? != 0 ]
+then
+	echo Error finding existing images in $ZBEOS
+	exit 1
+fi
+
+dd if=$ZBEOS of=$TMP_ZBEOS bs=$OFFSET count=1
+cp $TMP_ZBEOS $ZBEOS
+rm -f $TMP_ZBEOS
+
+echo Removed images in $ZBEOS

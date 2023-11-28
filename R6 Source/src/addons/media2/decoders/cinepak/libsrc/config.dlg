@@ -1,0 +1,87 @@
+/* ex:set sw=2 ts=8 wm=0:
+ * $Header: u:/rcs/cv/rcs/config.dlg 2.5 1994/11/28 14:09:53 bog Exp $
+
+ * (C) Copyright 1992-1993 SuperMac Technology, Inc.
+ * All rights reserved
+
+ * This source code and any compilation or derivative thereof is the
+ * sole property of SuperMac Technology, Inc. and is provided pursuant
+ * to a Software License Agreement.  This code is the proprietary
+ * information of SuperMac Technology and is confidential in nature.
+ * Its use and dissemination by any party other than SuperMac Technology
+ * is strictly limited by the confidential information provisions of the
+ * Agreement referenced above.
+
+ * $Log: config.dlg $
+ * Revision 2.5  1994/11/28 14:09:53  bog
+ * No accelerators on "OK".
+ * Revision 2.4  1994/05/09  17:25:20  bog
+ * Black & White compression works.
+ * 
+ * Revision 2.3  1993/06/18  15:14:47  geoffs
+ * Made the smac logo into an RLE bitmap
+ * 
+ * Revision 2.2  93/06/17  12:44:34  geoffs
+ * Resized dialog box
+ * 
+ * Revision 2.1  93/06/16  15:55:57  geoffs
+ * Remove unused dialog box definition, minor update to version info stuff
+ * 
+ * Revision 2.0  93/06/01  14:13:17  bog
+ * Version 1.0 Release 1.3.0.1 of 1 June 1993.
+ * 
+ * Revision 1.3  93/04/21  15:46:39  bog
+ * Fix up copyright and disclaimer.
+ * 
+ * Revision 1.2  92/11/11  13:00:11  geoffs
+ * We now use the version resource to display info in dialog boxes
+
+ * Revision 1.1  92/10/28  13:27:08  geoffs
+ * Initial revision
+ */
+
+#include "config.h"
+
+DLGINCLUDE RCDATA DISCARDABLE
+BEGIN
+    "config.h\0"
+END
+
+
+/*
+  The CTEXT strings below are fetched from the version info in iccv.ver
+  and drawn by hand.
+ */
+
+
+SMACLOGO	BITMAP		smac.rle
+
+
+ABOUT DIALOG 6, 18, 240, 120
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "", ID_PRODUCTNAME, 0, 56, 240, 8
+    CTEXT           "", ID_PRODUCTVERSION, 0, 68, 240, 8
+    CTEXT           "", ID_COPYRIGHT, 0, 80, 240, 8
+    PUSHBUTTON      "OK", IDOK, 100, 100, 40, 14
+END
+
+#ifndef	NOBLACKWHITE
+
+CONFIGURE DIALOG 6, 18, 240, 120
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "", ID_PRODUCTNAME, 0, 36, 240, 8
+    CTEXT           "", ID_PRODUCTVERSION, 0, 48, 240, 8
+    CTEXT           "", ID_COPYRIGHT, 0, 60, 240, 8
+    DEFPUSHBUTTON   "OK", IDOK, 196, 80, 40, 14, WS_GROUP
+    PUSHBUTTON      "Cancel", IDCANCEL, 196, 102, 40, 14
+    CONTROL         "Compress to &Color", ID_COLOR, "Button", 
+                    BS_AUTORADIOBUTTON | WS_GROUP, 20, 82, 160, 10
+    CONTROL         "Compress to &Black && White", ID_BLACKANDWHITE, 
+                    "Button", BS_AUTORADIOBUTTON, 20, 104, 160, 10
+END
+
+#endif

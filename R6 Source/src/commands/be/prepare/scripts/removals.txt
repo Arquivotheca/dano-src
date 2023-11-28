@@ -1,0 +1,3 @@
+/boot/home/config/settings/Tracker/tracker_shelf
+/boot/home/config/settings/Deskbar_settings
+/boot/home/config/settings/TrackerSettings

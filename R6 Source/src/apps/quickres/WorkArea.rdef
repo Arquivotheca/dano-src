@@ -1,0 +1,309 @@
+enum {
+	RES_MENU_Debug = 101,
+	RES_mine_Layout = 101
+};
+
+archive BHandler 'HAND' {
+	string be:class = "BHandler";
+	string be:name;
+};
+
+archive BView 'VIEW' : BHandler {
+	override string be:class = "BHandler";
+	uint32 be:flags = B_WILL_DRAW|B_FRAME_EVENTS,
+		B_WILL_DRAW = 0x00004000,
+		B_FRAME_EVENTS = 0x00008000;
+};
+
+archive BMenuItem {
+	string be:class = "BMenuItem";
+	int32 be:label;
+	message be:message = 0;
+};
+
+archive BMenu 'MENU' : BView {
+	array {
+		switch {
+			case BMenuItem : BMenuItem;
+			case BMenu : BMenu;
+		}
+		BMenuItem | BItem be:items
+	};
+};
+
+archive BMenuBar 'MBAR' : BMenu {
+};
+
+resource Menu (RES_MENU_Debug) {
+	be:name = "MyMenu",
+	{
+		BMenuItem {
+			be:label = "Choice 1",
+			be:message = message 'chc1'
+		},
+		BMenuItem {
+			be:label = "Choice 2",
+			be:message = message 'chc2'
+		};
+	};
+};
+
+resource 'mine' (RES_mine_Layout) {
+	archive('xxxx') {
+		int32 be:value = 453;
+		be:another = point{23,53}, point{23,32};
+		be:items = archive {
+			be:label = "This One",
+			be:message = message 'pels',
+		}, archive {
+			be:label = "This One",
+			be:message = message 'pels',
+		};
+	};
+};
+
+
+// -----------------------------------------
+
+type(parameters) { data; }
+
+// ----------------- Internal patterns ------------------------------
+
+		s					: typedef							{ YYACCEPT; }
+							| resource							{ YYACCEPT; }
+							| readheader						{ YYACCEPT; }
+							| incl								{ YYACCEPT; }
+							| ';'								{ YYACCEPT; }
+							| error								{ return 1; }
+							| rEOF								{ return 1; }
+							;
+		
+		/* RESOURCE DECLARATIONS */
+		
+		resource			: RESOURCE resourceparams number '{' datavaluelist '}'
+
+		resourceparams		: '(' number ')'
+							: '(' number ',' string ')'
+							|
+							;
+
+		/* DATA VALUE STRUCTURE */
+		
+		datavaluelist		: datavaluelist ',' datavalueitem
+							| datavalueitem
+							;
+		
+		datavalueitem		: type string '=' value
+							| type value
+							| value
+							;
+		
+		/* TYPE DECLARATIONS */
+		
+		typedef				: TYPEDEF typedefparams IDENT inheritance '{' datatypelist '}'
+							| TYPEDEF typedefparams ARCHIVE ident inheritance '{' fieldtypelist '}'
+							| TYPEDEF typedefparams IDENT IDENT ';'
+							;
+
+		typedefparams		: '(' number ')'
+							|
+							;
+
+		inheritlist			: inheritlist ',' IDENT
+							| IDENT;
+		
+		inheritance			: ':' inheritlist
+							|
+							;
+		
+		/* DATA TYPE STRUCTURE */
+		
+		datatypelist		: datatypelist ';' datatypeitem
+							| datatypeitem
+							;
+		
+		datatypeitem		: type string '=' value
+							| type string
+							| type '=' value
+							| type
+							;
+		
+		/* ARCHIVE TYPE STRUCTURE */
+		
+		archiveparams		: '(' numberorstring ')'
+							| '(' numberorstring ',' numberorstring ')'
+							|
+							;
+
+		fieldtypelist		: fieldtypelist ';' fieldtypeitem
+							| fieldtypeitem
+							;
+							
+		fieldtypeitem		: type string '=' value
+							| type string
+							;
+							
+		/* LOGICAL DATA VALUES */
+		
+		value				: numberconst
+							| stringconst
+							| bufferconst
+							| IDENT
+							;
+								
+		numberorstring		: numberconst
+							| stringconst
+							| IDENT
+							;
+
+		number				: numberconst
+							| IDENT
+							;
+
+		string				: stringconst
+							| IDENT
+							;
+
+		/* BASIC DATA VALUES */
+		
+		numberconst			: e
+							;
+		
+		e					:	'(' e ')'								{ $$ = $2; }
+							|	e '+' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoPlus); }
+							|	e '-' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoMinus); }
+							|	e '*' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoMultiply); }
+							|	e '/' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoDivide); }
+							|	e '%' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoModulus); }
+							|	e SHL e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoSHL); }
+							|	e SHR e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoSHR); }
+							|	e '&' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoBitAnd); }
+							|	e '|' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoBitOr); }
+							|	e '^' e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoXPwrY); }
+							|	'~' e %prec FLIP						{ $$ = (long)RUnaryOp(RE($2), reoFlip); }
+							|	'!' e %prec NOT							{ $$ = (long)RUnaryOp(RE($2), reoNot); }
+							|	'-' e %prec NEGATE						{ $$ = (long)RUnaryOp(RE($2), reoNegate); }
+							|	e AND e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoAnd); }
+							|	e OR e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoOr); }
+							|	e LT e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoLT); }
+							|	e GT e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoGT); }
+							|	e LE e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoLE); }
+							|	e GE e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoGE); }
+							|	e EQ e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoEQ); }
+							|	e NE e									{ $$ = (long)RBinaryOp(RE($1), RE($3), reoNE); }
+							|	NUMBER									{ $$ = (long)RValue($1); }
+							|	IDENT									{ $$ = (long)RIdentifier($1); }
+							|	f
+							;
+
+		bufferconst			:	BUFFER
+							|	bufferconst BUFFER
+							;
+			
+		stringconst			:	STRING
+							|	stringconst STRING
+							|	SHELL '(' STRING ')'					{ $$ = (int)strdup(getenv((char *)$3)); }
+							|	FORMAT '(' fmt ')'						{ $$ = $3; }
+							;
+			
+		fmt					:	STR_CONST ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7, $9); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7, $9, $11); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7, $9, $11, $13); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7, $9, $11, $13, $15); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7, $9, $11, $13, $15, $17); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7, $9, $11, $13, $15, $17, $19); $$ = (int)strdup(b); }
+							|	STR_CONST ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg ',' farg						{ char b[1024]; sprintf(b, (char *)$1, $3, $5, $7, $9, $11, $13, $15, $17, $19, $21); $$ = (int)strdup(b); }
+							;
+			
+		farg				:	STRING
+							|	NUMBER
+							;
+
+// ----------------- Commentary ------------------------------
+
+
+// Definitions of basic types:
+//		TYPEDEF IDENT '{' datalist '}'  (Should this be possible?)
+//		TYPEDEF '(' NUMBER ')' IDENT '{' datalist '}'
+typedef('BPNT') BPoint {
+	float x;
+	float y;
+}
+typedef('RGBC') rgb_color {
+	uint8 red;
+	uint8 green;
+	uint8 blue;
+	uint8 alpha;
+}
+
+// Type aliases:
+//		TYPEDEF '(' NUMBER ')' IDENT IDENT ';'
+//		TYPEDEF IDENT IDENT ';'
+typedef('RGBC') int32 rgb_color;
+
+// Archive type definitions:
+//		TYPEDEF '(' NUMBER ')' ARCHIVE archiveparams IDENT '{' fieldlist '}'
+//		TYPEDEF '(' NUMBER ')' ARCHIVE '(' STRING ')' IDENT '{' fieldlist '}'
+//		TYPEDEF '(' NUMBER ')' ARCHIVE '(' NUMBER ',' STRING ')' IDENT '{' fieldlist '}'
+//		TYPEDEF '(' NUMBER ')' ARCHIVE '(' NUMBER ')' IDENT '{' fieldlist '}'
+//		TYPEDEF '(' NUMBER ')' ARCHIVE IDENT ':' inheritance '{' fieldlist '}'
+//		TYPEDEF '(' NUMBER ')' ARCHIVE '(' STRING ')' IDENT '':' inheritance {' fieldlist '}'
+//		TYPEDEF '(' NUMBER ')' ARCHIVE '(' NUMBER ',' STRING ')' IDENT ':' inheritance '{' fieldlist '}'
+//		TYPEDEF '(' NUMBER ')' ARCHIVE '(' NUMBER ')' IDENT ':' inheritance '{' fieldlist '}'
+//	inheritance		:	inheritance ',' IDENT | IDENT;
+typedef('VIEW') archive BView {
+	int32 be:flags;
+	rgb_color be:high;
+	string be:name;
+	array { BView be:children };
+}
+typedef('VIEW') archive("application/x.vnd.Be.Interface") BView {
+}
+typedef('VIEW') archive('VIEW', "application/x.vnd.Be.Interface") BView {
+}
+typedef('MBAR') archive BMenuBar : BView {
+}
+
+// Typed resource definition:
+//		RESOURCE '(' NUMBER ')' IDENT '{' fieldlist '}'
+//		RESOURCE '(' NUMBER ',' STRING ')' IDENT '{' fieldlist '}'
+resource(0x10) BMenuBar {
+};
+
+// Untyped resource definition:
+//		RESOURCE '(' NUMBER ')' NUMBER '{' fieldlist '}'
+//		RESOURCE '(' NUMBER ',' STRING ')' NUMBER '{' fieldlist '}'
+resource(0x10, "label") 'what' {
+	BPoint{23.2, 12.3};
+};
+
+// Message data declaration:
+//		MESSAGE '(' NUMBER ')' '{' fieldlist '}'
+message('puts');
+message(kReportCode) {
+	int32 arp:request = 30;
+	string arp:why = "Just because";
+}
+
+// Archive data declaration.  Note that the class ID symbol need not
+// exist -- if it doesn't, this is an untyped archive.
+//		ARCHIVE IDENT '{' fieldlist '}'
+//		ARCHIVE '(' STRING ')' IDENT '{' fieldlist '}'
+//		ARCHIVE '(' NUMBER ',' STRING ')' IDENT '{' fieldlist '}'
+//		ARCHIVE '(' NUMBER ')' IDENT '{' fieldlist '}'
+//		ARCHIVE IDENT ':' inheritance '{' fieldlist '}'
+//		ARCHIVE '(' STRING ')' IDENT '':' inheritance {' fieldlist '}'
+//		ARCHIVE '(' NUMBER ',' STRING ')' IDENT ':' inheritance '{' fieldlist '}'
+//		ARCHIVE '(' NUMBER ')' IDENT ':' inheritance '{' fieldlist '}'
+archive('VIEW') BView {
+	be:flags = 0x10;
+	be:high rgb_color{10,10,10,255};
+	be:name = "something";
+};
+
+resource(0x120, "MyView") BView {
+	be:high = rgb_color{128, 128, 128, 255};
+};

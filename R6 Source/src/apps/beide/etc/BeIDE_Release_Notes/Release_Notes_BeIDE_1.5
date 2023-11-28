@@ -1,0 +1,75 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	1.5
+Date:		2/20/98
+Authors:	Brian Stern, Fred Peterson,
+			Burton T. E. Miller, Bernie Estavillo,
+			Ed Swartz
+=============================================
+
+Howdy Be developers.  This is an update for the BeIDE on PPC
+and the introduction of BeIDE for x86.
+
+The names of mwcc and mwld have been changed to mwccppc and 
+mwldppc.  This is to facilitate moving projects between
+BeOS-ppc and BeOS-x86.  The entries in the Targets prefs
+panel will all be updated to the new names when opening
+existing projects.
+
+Read the release notes for the compiler and linker.  The last
+compiler version was 1.8 and the current version is 2.0.1.
+
+============================
+New Features
+============================
+
+*	Stationery files.  Choosing New Project brings up a window that allows you
+	to choose from several stationery projects.  You then can choose the name
+	for and where the new project will be installed.  The template stationery
+	projects live in the 'stationery' folder.  When you create a new project
+	in this way the entire contents of the chosen stationery project's folder
+	is copied to the new folder, including subfolders and links.  You can
+	easily add new stationery projects to this folder or make changes
+	in the existing stationary projects to suit your needs.
+
+*	Right click on a file in the project window brings up a context-sensitive
+	menu that allows compiling the file, viewing the file's path, and other
+	useful things.
+
+*	Added a warning message for files that don't have a maching target in the 
+	Target prefs panel.  Such files are ignored during builds, which may not
+	be what you want.  This warning will appear when a project is opened and
+	if changes are made to the targets prefs panels.
+	
+*	Global optimization prefs panel for both x86 and ppc compiler.
+
+
+==========================
+Bugs Fixed
+==========================
+
+Fixed a bug where the last entry in the Settings window was missing sometimes.
+
+
+==========================
+Known Limitations
+==========================
+
+There is an incompatibility with this compiler
+and some of the headers from the standard C++ library that
+ships on PR2.  Some of those headers won't compile with this new
+compiler.  To fix this requires an update to MSL, and this
+will come later.  For the moment, if you are using those headers
+and they won't compile you are out of luck and need to stick with
+the existing 1.8 compiler.
+
+=====================
+Contacting Metrowerks
+=====================
+
+Please send bug reports for this release to support@metrowerks.com.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

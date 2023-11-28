@@ -1,0 +1,258 @@
+//*****************************************************************************
+//
+//  Writing a graphic add-on...
+//  (see the documentation for a first introduction on the subject).
+//
+//*****************************************************************************
+
+
+WARNING : PLEASE, READ THAT FILE CAREFULLY ONE TIME BEFORE USING THE
+          EXAMPLE FILES S3.CPP AND S3.H. YOU WILL FIND HERE USEFUL
+          GENERAL INFORMATION ON THE CONTENTS OF THIS EXAMPLE.
+
+
+//*****************************************************************************
+
+1 - Introduction
+2 - Features available in this example.
+3 - Features not available in this example.
+4 - Current abilities of this example, for each chips.
+5 - Graphics add-on developper support.
+6 - A big problem : BootRom support.
+7 - The supervga add-on challenge.
+
+//*****************************************************************************
+1 - Introduction
+
+  We don't think there's any standard way to write a graphic
+driver. Even if there's any usual way, we probably don't respect it at
+all. But as what we've seen in X-windows or in a few different PC OS
+was not really looking like a "incredibly bright and clever way to do
+things", we hope that at least our architecture will probably be as
+good as any other.
+
+  In this folder, you will find one example of graphics driver (in the
+BeOS, a graphics drivers is called a "graphics add-on") designed to
+drive graphic card using S3 chips. We choose not to provide you with a
+minimal example (some canvas you will have to complete to get your own
+graphics add-on), but to give you our most complete and complicated
+one (don't be afraid, you will find a source greatly commented, using a
+clear structure). That way, we hope you will be able to extract as
+many usual information as possible to help you build rapidly and
+efficiently graphics add-on supporting others graphics cards.
+
+  
+
+//*****************************************************************************
+2 - Features available in this example.
+
+  The source s3.cpp will provide you with example of most of the
+things you will need to write your own graphic add-on. You'll find :
+
+- One example of a full super-vga configuration procedure.
+- Examples of settings for all the standard vga registers.
+- Three examples of how program the clock generators to get a
+  specified refresh rate.
+- One example of how controlling horizontal and vertical positions and
+  sizes of the display on the screen, using software settings (that's
+  what we call CRT_CONTROL).
+- One example of how implement a deamon to help you debug your stuff.
+  The current deamon is keeping track 
+- One example of a easy and fast way to support multiples calls at the
+  same time, using the "benaphore" as ressource protection.
+- Settings examples for 640x480 to 1024x768 in 8 and 32 bits, for a
+  few standard S3 chips.
+- Examples of standard 2D graphic engine calls for S3 chips.
+- Examples of hardware cursor implementation for S3 chips using DRam,
+  in 8 and 32 bits.
+
+
+
+//*****************************************************************************
+3 - Features not available in this example.
+
+  There's still a few features we're not already using in any of our
+add-ons. That's the only reason they're not used in that example :
+
+- Respect of standard polarity for sync signals : it seems the
+  standard (resolution/refresh rate) of the industry define specific
+  polarity for the sync signals. We're not respecting that for now,
+  but as we have not detected any problem with any multisync
+  monitor, probably it's a just an old compatibility feature from
+  the past.
+- Specific settings of the mystical optimization parameters L,M and N
+  on S3 chips. Those parameters are there to insure maximal
+  performance, but for that you've to set calculate them for each
+  different configuration of resoution, depth, refresh rate or
+  CRT_CONTROL. Now, we're just using some safe but not optimal
+  setting.
+- Current refresh rate range are not dependent of specific abilities
+  of the DAC and the clock generator, but we just use a global
+  reasonably safe one.
+- Resolution higher than 1024x768. There's already two higher
+  resolutions defined by the application server (1280x1024 and
+  1600x1200), but we never implement them for now.
+- 16 bits depth (RGB 5-5-5). This depth is not currently support by
+  the application server, but will be in future release.
+- 24 bits packed mode (RGB 8-8-8). We're not planning to support
+  that depth at all.
+
+
+
+//*****************************************************************************
+4 - Current abilities of this example, for each chips.
+
+  A - Vision 864.
+
+  - 8 bits : 640x480, 800x600, 1024x768, hardware cursor.
+  - 32 bits : 640x480, 800x600, hardware cursor.
+  - Most of the accelerated stuff (except line_arrays).
+  - CRT_CONTROL, refresh rate control.
+  - only one DAC supported (ATT21C498 with ICD2061A as clock generator).
+
+
+  B - Vision 964.
+
+  - 8 bits : 640x480, 800x600, 1024x768.
+  - 32 bits : 640x480, 800x600.
+  - Most of the accelerated stuff (except line_arrays).
+  - refresh rate control.
+  - only one DAC supported (TVP3025).
+
+
+  C - Vision 868 and 968.
+
+  Code has been add to support those chips using exactly the same
+  setting as for the 864 and 964 respectively. No test have been done
+  for now. Probably, they'll need a few adaptation. Identification of
+  those two chips has been disabled. 
+
+
+  D - Trio 32 and Trio 64.
+
+  We've begin tests with Trio 32 in 8 bits, 640x480, with hardware
+  cursor, refresh rate and CRT_CONTROL. Settings are available for
+  others 8 bits mode, but have not been tested properly. Most of
+  those settings comes from 864's with a few adaptations. Trio 64
+  has not been test at all for now. As this is working poorly for
+  now, identification of Trio 32 and Trio 64 are currently disabled.
+
+
+  E - Others recent S3 chips.
+
+  S3 pretends that most of their new chips are register compatible
+  with the Trio family. We've not make any test about that for now.
+
+
+
+//*****************************************************************************
+5 - Graphics add-on developper support.
+
+  If you're interested in developping new graphics add-ons to help
+  the BeBox support more graphics cards, you're welcome to! We'll try
+  to help you as much as possible. So if you need any information,
+  or help to find the good databook, don't hesitate to contact
+  devsupport (you can also try our Web site. More informations about
+  graphics card support will be available in the future).
+
+  And as we have the chance to build a new machine from scratch,
+  we will try to avoid as much as possible of all the bad usual
+  mistakes. If we can avoid you to lost your time developping
+  something already available, or redoing everything from scratch
+  because you're just working on a card using a different DAC,
+  we'll be really happy. So if you're ready to help us keep the
+  graphics add-on stuff of the BeBox as reduce and as simple as
+  possible, please contact devsupport and tell us :
+
+  - what you want to develop (what chip, DAC, ...).
+  - if you want us to keep those information confidentials.
+  - if you're ready to cooperate with others developpers by
+    exchanging source and knowledge.
+  - if you're ready to help to integrated similar chipsets (for
+    example, same chip, different DAC) in one common add-on.
+  - all information you think will be useful for us.
+
+  And if you're really eager to help us keep the place clean, please
+  don't distribute your new add-on before consulting us.
+
+  In advance, thanks for your help.
+ 
+
+
+//*****************************************************************************
+//
+//     PLEASE, DON'T FORGET TO READ THAT PART, THAT'S IMPORTANT
+//
+//*****************************************************************************
+6 - A big problem : BootRom support.
+
+  When you reboot or restart the machine, you first get a nice BeLogo
+  animation. If at that time you keep some key pressed (see user
+  manual), you get a boot selector. Those two things (the BeLogo and
+  the selector) are using screen display far before any add-on have
+  been launched. Usually, on PC machines, such a problem is solved by
+  using the program of the BIOS rom. As the BeBox is not a intel
+  machine, we can't do the same... and that's a real problem.
+
+  Nowadays, the current version of the release 7 bootrom is supporting
+  a few number 9 and cirrus cards. But if in the future you develop a
+  new add-on for a wonderful new PCI graphics card, you'll lost those
+  two abilities (I don't know if loosing this beautiful logo will
+  break your heart, but for sure you will soon miss the selector if
+  you need it...).
+
+  We're working on definitively solving that problem (that's not
+  really easy, but we already have two solutions in mind), but until
+  at least the next release, you'll not have any good solution to
+  solve that problem. So if you desesperatly want at least a temporary
+  solution, contact devsupport. If you provide us a minimal version
+  (640x480, 8 bits, no acceleration) of your driver, we can provide
+  you a specific version of the bootrom integrating your stuff for
+  the release 7.
+
+
+
+//*****************************************************************************
+7 - The supervga add-on challenge.
+
+  To help you developping new add-on, we try to provide a bit of
+  "generic" vga drivers. Its name is "supervga" (that's the only
+  name reserved by the BeOS for its own use) and for now it's
+  probably able to support many cards based on cirrus logic or
+  s3 chips. If you want to help us improve its abilities, you're
+  more than welcome to!
+
+  What supervga is supposed to do is that : taking the card in
+  its reset state (all default modes set, machine just turn on),
+  used all the standard vga registers to get as close as
+  possible of the mode 640x409, 8 bits (640x409 < 256K), and then
+  do the minimal possible numbers of non-standard settings to
+  get as many cards as possible working in that minimal mode.
+
+  If you want to take your chance at improving the abilities of
+  supervga, just ask devsupport and we'll send you the source.
+  Don't forget, the aim is to get new card working by adding
+  the minimal possible numbers of register settings to the current
+  one. If you get any interesting solution, please send it to us !
+
+  In the future, perhaps we will get a intel emulator and use the
+  BIOS to solve that problem, but for now... geeks are alone to
+  fight against the evil non-standard supervga market !
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

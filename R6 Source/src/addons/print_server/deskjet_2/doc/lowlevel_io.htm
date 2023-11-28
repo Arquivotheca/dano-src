@@ -1,0 +1,236 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Low Level&nbsp;
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">I/O Support<o:p>
+</o:p>
+</span></h1>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note:
+      Documentation and code version numbers are designed to be independent of
+      each other, and may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose. Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<p class="MsoNormal">&nbsp;</p>
+<p class="MsoNormal" align="center" style="text-align:center">&nbsp;<o:p>
+</o:p>
+</p>
+<h1 align="center">Low Level I/O Support
+</h1>
+<h2>&nbsp;
+</h2>
+<h2>Introduction&nbsp;<o:p>
+</o:p>
+</h2>
+<p class="pgph1">This section provides information to begin understanding
+low-level I/O support and the Hewlett-Packard Appliance Printing Software Development Kit (SDK).
+The following are topics discussed in this document:&nbsp;</p>
+<blockquote>
+<p class="pgph1" style="margin-top: -10"><a href="#Low-Level I/O Support">Low-Level
+I/O Support</a></p>
+<p class="pgph1" style="margin-top: -10"><a href="#Adding Parallel or USB Hardware">Adding
+Parallel or USB Hardware</a></p>
+<p class="pgph1" style="margin-top: -10"><a href="#USB Documentation Sources">USB
+Documentation Sources</a></p>
+</blockquote>
+<b>
+<h2>&nbsp;</h2>
+<h2><a name="Low-Level I/O Support">Low-Level I/O Support</a></h2>
+</b>
+<p>Creating a customized printer driver for a specific device or platform does
+not necessarily require any detailed knowledge of the underlying I/O (IEEE 1284
+or USB). The printer driver depends on the underlying Operating System (OS) to
+provide basic access to whatever I/O port is connected to the printer.</p>
+<p>One of the first steps in porting the printer driver code is to create the
+derived SystemServices object for a specific device or environment. Once in place, the
+printer driver simply calls the SystemServices object for access to the I/O. If
+other printers are already supported by the printer driver, the necessary
+services that the new OS requires should be readily available.</p>
+<p>If no printing port currently exists for the host system, additional
+work will be required by the developer. The details required to add the necessary I/O
+hardware and I/O driver support are beyond the scope of this SDK, and are not
+included; some basic
+information has been included that should help the developer begin the process.</p>
+<p class="pgph1"><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 10.0pt; mso-bookmark: installation">[Back
+to top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 10.0pt; color: maroon; mso-bookmark: installation"><o:p>
+</o:p>
+</span></p>
+<p class="pgph1"><span style="mso-bookmark:installation">&nbsp;<o:p>
+&nbsp;
+</span></p>
+<b>
+<h2><a name="Adding Parallel or USB Hardware">Adding Parallel or USB Hardware</a></h2>
+</b>
+<p>If third party chipsets are being considered for adding I/O capability,
+remember that not all chipsets are of equal quality. Be sure to choose a reputable vendor
+and always make certain that adequate testing occurs early between the host
+system and as many different peripherals as possible.</p>
+<p>If the host system already has USB support but it has not been used for
+printing, make sure to test the ‘bulk transfer’ capability, which is
+required for printing. (Many USB peripherals (such as mice, keyboards,
+joysticks, etc.) do not use the bulk transfer method and therefore prior testing
+might not have been adequate.) In addition, some older USB controller chipsets
+produce an error when a high-speed device such as a printer or a scanner, and a
+low speed device such as a keyboard or a mouse are used at the same time.
+Hopefully, the low-level I/O drivers will be
+available from either the chip vendor or from your OS vendor. If this is not the
+case, then obtain the necessary industry standards documents
+and implement the I/O driver(s).</p>
+<p class="pgph1"><a href="#top"><span style="font-size: 8.0pt; mso-bidi-font-size: 10.0pt; mso-bookmark: installation">[Back
+to top]</span></a><span style="font-size: 8.0pt; mso-bidi-font-size: 10.0pt; color: maroon; mso-bookmark: installation"><o:p>
+</o:p>
+</span></p>
+<p class="pgph1"><span style="mso-bookmark:installation">&nbsp;<o:p>
+&nbsp;
+</span></p>
+<b>
+<h2><a name="USB Documentation Sources">USB Documentation Sources</a></h2>
+</b>
+<p>Additional documentation on USB may be accessed at <u><a href="http://www.usb.org/developers/docs.html">http://www.usb.org/developers/docs.html</a>
+</u>, in which the official &quot;USB Specification Document&quot; can be found.
+The official &quot;Printer Device Class Document&quot; is located at <font color="#0000FF"><u>http://www.usb.org/developers/devclass_docs.html#approved</u></font>.
+As of this writing, the current &quot;USB Specification&quot; is version 2.0 and
+the &quot;Printer Device Class Document&quot; is 1.082. Implementing USB will
+rely on both of these documents, with cover-to-cover knowledge of the <b>Printer
+Device Class </b>Document, and with reference to the much larger and more
+generic &quot;USB Specification Document&quot; as necessary to implement the USB
+protocol stack.</p>
+<p>&nbsp;</p>
+<b>
+<p class="pgph1"><span style="mso-bookmark:installation">&nbsp;<o:p>
+&nbsp;
+</span></p>
+<h2>Parallel / IEEE 1284-1994 Documentation</h2>
+</b>
+<p>HP printers work off the 1284 IEEE Specifications. No additional
+  specifications beyond these have been added. As such,
+  there is no document describing what features of the 1284 spec are implemented
+  for each Hewlett-Packard printer model. Regardless of price and
+  performance, all Hewlett-Packard DeskJet printers use the same 1284
+capabilities, and <i>do not</i> utilize RLE.&nbsp;In the future ECP/forward mode may be an
+option in the SDK code. (See <a href="glossary.htm#e">Glossary</a>
+for further explanations of these two terms.)&nbsp;Therefore, ECP/forward mode
+requirements should be taken into account when adding 1284 hardware.&nbsp;</p>
+<p>Centronics compatibility mode is required for output to the printer.
+&quot;Nibble&quot; mode is required to retrieve the printer's DeviceID. See <a HREF="http://www.usb.org/">http://www.ieee.org</a> for official
+documentation.</p>
+
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Back to top]</a></span></p>
+
+</body>
+
+</html>

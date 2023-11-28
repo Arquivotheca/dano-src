@@ -1,0 +1,173 @@
+/* ex:set sw=2 ts=8 wm=0:
+ * $Header: u:/rcs/cv/rcs/iccv.rcv 2.14 1995/03/14 08:34:35 bog Exp $
+
+ * (C) Copyright 1992-1995 Radius Inc.
+ * All rights reserved
+
+ * This source code and any compilation or derivative thereof is the
+ * sole property of Radius Inc. and is provided pursuant to a Software
+ * License Agreement.  This code is the proprietary information of
+ * Radius and is confidential in nature.  Its use and dissemination by
+ * any party other than Radius is strictly limited by the confidential
+ * information provisions of the Agreement referenced above.
+
+ * $Log: iccv.rcv $
+ * Revision 2.14  1995/03/14 08:34:35  bog
+ * version.n RCS revision of <major>.<minor> now is used to directly
+ * produce release version 1.<major>.0.<minor>.
+ * Revision 2.13  1995/02/22  12:25:25  bog
+ * Roll to 1.9.REVMAJOR.REVMINOR.
+ * 
+ * Revision 2.12  1994/12/08  10:46:24  bog
+ * Make copyright through 1995.  Change "Radius, Inc." to "Radius Inc.".
+ * 
+ * Revision 2.11  1994/11/28  14:10:46  bog
+ * "Windows 16" and "Windows 32" instead of "Windows" and "Windows NT".
+ * 
+ * Revision 2.10  1994/11/01  09:48:47  bog
+ * Update to Radius.
+ * 
+ * Revision 2.9  1994/11/01  09:32:43  bog
+ * Bump to 1.8.0.xxx.
+ * 
+ * Revision 2.8  1994/05/12  08:17:24  bog
+ * Bump to 1.7.0.x.
+ * 
+ * Revision 2.7  1994/01/31  09:00:38  bog
+ * Copyright should include 1994.
+ * 
+ * Revision 2.6  1993/11/30  14:11:47  geoffs
+ * Added WIN32 ifdefs
+ * 
+ * Revision 2.5  1993/11/29  16:34:13  geoffs
+ * Bumped release # to 1.6.0.xx
+ * 
+ * Revision 2.4  1993/07/24  20:38:24  bog
+ * Instead of "(tm)" use circle R.
+ * 
+ * Revision 2.3  93/07/02  15:34:49  bog
+ * Instead of (TM) use little superscript TM.
+ * 
+ * Revision 2.2  93/06/17  11:26:56  bog
+ * Turn versions with every build.
+ * 
+ * Revision 2.1  93/06/01  15:11:32  bog
+ * Now working on VfW 1.5.
+
+ * Revision 2.0  93/06/01  14:15:49  bog
+ * Version 1.0 Release 1.3.0.1 of 1 June 1993.
+
+ * Revision 1.12  93/05/28  15:41:21  bog
+ * Change to 1.3.0.1 for 1 June release.
+
+ * Revision 1.11  93/05/03  17:42:16  geoffs
+ * Update to 1.3.
+
+ * Revision 1.10  93/04/21  15:49:48  bog
+ * Fix up copyright and disclaimer.
+
+ * Revision 1.9  93/03/12  11:24:52  geoffs
+ * Bump the release #
+
+ * Revision 1.8  93/02/26  15:42:34  geoffs
+ * Revised some strings for consistency
+
+ * Revision 1.7  93/02/26  14:52:13  geoffs
+ * Changed visible strings containing CompactVideo to new name, Cinepak
+
+ * Revision 1.6  93/02/23  10:59:22  geoffs
+ * Update to reflect final release
+
+ * Revision 1.5  93/02/01  08:17:57  geoffs
+ * Bumped copyright years, added pre-release designation
+
+ * Revision 1.4  93/01/28  07:50:27  geoffs
+ * Updated version # for pre-release
+
+ * Revision 1.3  92/11/11  13:00:26  geoffs
+ * We now use the version resource to display info in dialog boxes
+
+ * Revision 1.2  92/11/02  09:53:17  geoffs
+ * Bumped to release 2
+
+ * Revision 1.1  92/10/28  13:27:08  geoffs
+ * Initial revision
+
+ */
+
+#ifndef	WIN32
+#include <ver.h>
+#endif
+
+/*
+  The file version.n gives us REVMAJOR and REVMINOR.  REVMINOR bumps
+  every time we do a build.
+
+  PRODUCTVERSION is the version of the product with which this file
+  ships.  The binary version is in the form
+    PROD_VERSION.PROD_RELEASE.PROD_TURN.PROD_BUILD
+
+  FILEVERSION is the version of this file, in the form
+    FILE_VERSION.FILE_RELEASE.FILE_TURN.FILE_BUILD
+
+  PRERELEASE and DEBUG are booleans that show up in the enquirable
+  flags of the file.  DEBUG comes in from the environment; PRERELEASE
+  gets fiddled here.
+
+  See version.awk for the funny stuff below.
+ */
+
+
+
+
+#ifdef DEBUG
+  #define FVERSIONSTR		"1.10.0.11 (debug)\0"
+  #define FVERSIONFLAGS	VS_FF_DEBUG
+#else
+  #define FVERSIONSTR		"1.10.0.11\0"
+  #define FVERSIONFLAGS	0
+#endif
+
+#define PVERSIONSTR		"1.10.0.0\0"
+
+
+VS_VERSION_INFO VERSIONINFO
+
+FILEVERSION	1,10,0,11
+PRODUCTVERSION	1,10,0,0
+FILEFLAGSMASK   0x0000003FL
+FILEFLAGS       FVERSIONFLAGS
+#ifndef	WIN32
+FILEOS          VOS_DOS_WINDOWS16
+#else
+FILEOS          VOS_NT_WINDOWS32
+#endif
+FILETYPE        VFT_DRV
+FILESUBTYPE     VFT2_DRV_INSTALLABLE
+
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"		/* U.S. English, Windows multilingual */
+    BEGIN
+      VALUE "CompanyName",      "Radius Inc.\0"
+      VALUE "FileDescription",  "Cinepak\256 Codec\0"
+      VALUE "FileVersion",      FVERSIONSTR
+      VALUE "InternalName",     "iccvid\0"
+      VALUE "LegalCopyright",   "Copyright \251 1992-1995 Radius Inc., All Rights Reserved\0"
+      VALUE "LegalTrademarks",	"Cinepak\256 is a trademark of Radius Inc.\0"
+      VALUE "OriginalFilename", "iccvid.drv\0"
+#ifndef	WIN32
+      VALUE "ProductName",      "Cinepak for Windows 16\0"
+#else
+      VALUE "ProductName",      "Cinepak for Windows 32\0"
+#endif
+      VALUE "ProductVersion",   PVERSIONSTR
+    END
+  END
+
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1252
+  END
+END

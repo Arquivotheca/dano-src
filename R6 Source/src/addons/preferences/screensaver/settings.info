@@ -1,0 +1,25 @@
+settings BMessage contents:
+
+- windowframe
+- windowtab (int32: current open tab: 0 = fade, 1 = modules)
+
+- cornernow (0=topleft, clockwise)
+- cornernever (0=topleft, clockwise)
+
+- timeflags (int32: bit0=fade, bit1=standby, bit2=suspend, bit3=off)
+- timefade (seconds: 0 = don't)
+- timestandby (seconds: 0 = don't)
+- timesuspend (seconds: 0 = don't)
+- timeoff (seconds: 0 = don't)
+
+- lockenable (bool)
+- lockdelay (seconds)
+- lockmethod (string: "net" = use network password, "custom" = use custom password)
+- lockpassword (string: crypt'd password)
+
+- modulename (string: empty = internal)
+- modulesettings_<name> (bmessage)
+
+for future use:
+- locksettings (bmessage: settings for default locker)
+- locksettings_<name> (bmessage)

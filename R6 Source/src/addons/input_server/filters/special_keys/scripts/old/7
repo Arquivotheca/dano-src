@@ -1,0 +1,8 @@
+#!/bin/sh
+# Home button
+
+TellBrowser -goto file://$RESOURCES/Home/index.html
+
+
+
+

@@ -1,0 +1,86 @@
+%ifndef __mx31x16_mac__
+%define __mx31x16_mac__
+
+; *** requirements ***
+; 'sign_mask' must be declared as:
+; sign_mask:		db 0x00, 0x00, 0x00, 0x80, 0x00, 0x00, 0x00, 0x80
+;
+; _lo tables have a 0 word after each coefficient word
+; _hi tables have a 0 word before each coefficient word
+
+; mx31x16
+;1	A:		mmxreg#		in/out
+;2	Aw:		mmxreg#		temp
+;3	S:		mmxreg#		sign mask (not precalc'd)
+;4	C:		symbol		16-bit coefficient table: will append _lo and _hi
+;5	[O]:	immediate	offset (scaled by 8)
+;6	[sh]:	immediate	extra bits to shift (def: 0)
+
+%macro mx31x16 			4-6		0,0
+
+	movq	mm%3, mm%1
+	pand	mm%3, [sign_mask]
+	movq	mm%2, mm%1
+	psrlw	mm%2, 1
+	por		mm%2, mm%3
+	pmaddwd	mm%2, [%4_lo +%5 *8]
+	psrad	mm%2, 15
+	pmaddwd	mm%1, [%4_hi +%5 *8]
+	paddd	mm%1, mm%2
+	pslld	mm%1, 1	+%6
+
+%endmacro
+
+; mx31x16_cr
+; (preloaded coefficient multiply)
+;1	A:		mmxreg#		in/out
+;2  Clo:    mmxreg#		lo coefficient reg (will be shifted <<16)
+;3	Aw:		mmxreg#		temp
+;4	S:		mmxreg#		sign mask (not precalc'd)
+;5	[sh]:	immediate	extra bits to shift (def: 0)
+
+%macro mx31x16_cr		4-5		0
+
+	movq	mm%4, mm%1
+	pand	mm%4, [sign_mask]
+	movq	mm%3, mm%1
+	psrlw	mm%3, 1
+	por		mm%3, mm%4
+	pmaddwd	mm%3, mm%2
+	psrad	mm%3, 15
+	psllq	mm%2, 16
+	pmaddwd	mm%1, mm%2
+	paddd	mm%1, mm%3
+	pslld	mm%1, 1	+%5
+
+%endmacro
+
+; mx31x16_load_cr
+;1	Clo		mmxreg#		out
+;2	T0		reg			ptr to coefficient table: form(v 0)
+;3	[O]		imm.		offset (scaled by 4)
+
+%macro mx31x16_load_cr	3-4		0
+
+	movd	mm%1, [%2 +%3 *4]
+	
+%endmacro
+
+; mx31x16_load_cr2
+;1	Clo		mmxreg#		out
+;2	Aw		mmxreg#		temp
+;3	T0		reg			ptr to coefficient table for channel 0: form(v 0)
+;4	T1		reg			ptr to coefficient table for channel 1: form(v 0)
+;5	[O]		imm.		offset (scaled by 4)
+
+%macro mx31x16_load_cr2	4-5		0
+
+	movd	mm%2, [%4 +%5 *4]
+	psllq	mm%2, 32
+	movd	mm%1, [%3 +%5 *4]
+	por		mm%1, mm%2
+	
+%endmacro
+
+
+%endif

@@ -1,0 +1,50 @@
+// MWPlugin Prefix
+
+#if defined(__POWERPC__) || defined(__ARMEB__)	/* FIXME: This should probably use <endian.h> for the right define */
+#define MW_FOUR_CHAR_CODE(x) (x)
+#elif defined(__INTEL__) || defined(__ARMEL__)	/* FIXME: This should probably use <endian.h> for the right define */
+
+#define MW_FOUR_CHAR_CODE(x) (((ulong) ((x) & 0x000000FF)) << 24) \
+							| (((ulong) ((x) & 0x0000FF00)) << 8) \
+							| (((ulong) ((x) & 0x00FF0000)) >> 8) \
+							| (((ulong) ((x) & 0xFF000000)) >> 24)
+#endif
+
+//#define DEBUG 1
+
+#include <Debug.h>
+
+// Don't need everything in Be.h
+#include <AppKit.h>
+#include <InterfaceKit.h>
+#include <KernelKit.h>
+#include <MediaKit.h>
+#include <StorageKit.h>
+#include <SupportKit.h>
+#include <byteorder.h>
+
+#include <string.h>
+
+const long nil = 0L;
+typedef char char64[64];
+
+
+off_t		LinkerSize(bool inShowAlert = false);
+
+#define BUILDINGPPC 1
+
+#if BUILDINGPPC
+#define kLangPrefsType kLanguagePrefs
+#define kWarningPrefsType kWarningPrefs
+#define kGlobalOptsType kGlobalOptsPrefs
+#define kCompilerType kMWCCType
+#define SwapFromHost SwapHostToBig
+#define SwapToHost SwapBigToHost
+#else
+#define kLangPrefsType kLanguagePrefsx86
+#define kWarningPrefsType kWarningsPrefsx86
+#define kGlobalOptsType kGlobalOptsx86
+#define kCompilerType kMWCCx86Type
+#define SwapFromHost SwapHostToLittle
+#define SwapToHost SwapLittleToHost
+#endif

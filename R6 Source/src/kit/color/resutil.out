@@ -1,0 +1,170 @@
+/*********************************************************************/
+/*
+	Contains:	This module contains the resource functions.
+
+	Written by:	The Kodak CMS MS Windows Team
+
+	Copyright:	(C) 1995 by Eastman Kodak Company, all rights reserved.
+
+	Macintosh
+	Change History (most recent first):
+
+	Windows Revision Level:
+		$Workfile$
+		$Logfile$
+		$Revision$
+		$Date$
+		$Author$
+
+	SCCS Revision:
+		@(#)resutil.c	1.5 4/8/96
+	To Do:
+*/
+/*********************************************************************/
+
+
+/**********************************************************************
+ **********************************************************************
+ **********************************************************************
+ *** PROPRIETARY NOTICE:     The  software  information   contained ***
+ *** herein is the  sole property of  Eastman Kodak Company  and is ***
+ *** provided to Eastman Kodak users under license for use on their ***
+ *** designated  equipment  only.  Reproduction of  this matter  in ***
+ *** whole  or in part  is forbidden  without the  express  written ***
+ *** consent of Eastman Kodak Company.                              ***
+ ***                                                                ***
+ *** COPYRIGHT (c) Eastman Kodak Company, 1995                      ***
+ *** As  an unpublished  work pursuant to Title 17 of the United    ***
+ *** States Code.  All rights reserved.                             ***
+ **********************************************************************
+ **********************************************************************
+ **********************************************************************/
+#include "kcms_sys.h"
+#include <string.h>
+
+#if defined(KPWIN) || defined (KPMSMAC)
+
+/*--------------------------------------------------------------------
+ * FUNCTION
+ *	KpGetCString (WIN32 Version)
+ *
+ * DESCRIPTION 
+ * This function retrieves resource specified strings.
+ *
+ * RETURN VALUE
+ * 	If the function succeeds, the return value is KCMS_SUCCESS. If
+ *  the function can't find the string, the return value is
+ *	KCMS_BAD_STR.
+ * 
+ * AUTHOR
+ * sek
+ *
+ * DATE CREATED
+ * March 21, 1995
+ *-------------------------------------------------------------------*/
+
+KpInt32_t KpGetCString (KpModuleId id,
+						KpInt32_t strListId,
+						KpInt32_t index,
+						KpTChar_p theString,
+						KpInt32_t maxSize)
+{
+	KpInt32_t resCode;
+
+	resCode = strListId + index;
+	if (LoadString(id, resCode, theString, maxSize) == 0)
+		return (KCMS_BAD_STR);
+	else
+		return (KCMS_SUCCESS);
+}
+#if !defined (KPMSMAC)
+/*--------------------------------------------------------------------
+ * FUNCTION
+ *	KpGetProductVersion (WIN32 Version)
+ *
+ * DESCRIPTION 
+ * This function returns the version number of the product.
+ *
+ * RETURN VALUE
+ * 	If the function succeeds, the return value is KCMS_SUCCESS. If
+ *  the function fails, the return value is KCMS_FAIL.
+ * 
+ * AUTHOR
+ * pgt and modified by sek
+ *
+ * DATE CREATED
+ * March 21, 1995
+ *-------------------------------------------------------------------*/
+
+KpInt32_t KpGetProductVersion (KpModuleId id,
+								KpChar_p verString,
+								KpInt32_t maxSize)
+{
+
+	char		Name [300];
+	char		*VerData = NULL;
+	KpInt32_t	retVal = KCMS_SUCCESS;
+	DWORD		len;
+	DWORD		VerSize;
+	DWORD		handle;
+	UINT		Size;
+	BOOL		bFlag;
+	VS_FIXEDFILEINFO	FAR *verFixed;
+	UINT		d1, d2, d3, d4;
+
+	if (maxSize){}
+
+/* get module name */
+	len = GetModuleFileName (id, Name, sizeof (Name));
+	if ((0 == len) || (sizeof (Name) <= len))
+		return (KCMS_FAIL);
+
+/* get size of version information */
+	VerSize = GetFileVersionInfoSize (Name, &handle);
+	if (0 == VerSize)
+		return (KCMS_FAIL);
+
+/* allocate the data buffer */
+	VerData = allocBufferPtr (VerSize);
+	if (VerData == NULL)
+		return (KCMS_FAIL);
+
+/* now get the version data */
+	if (!GetFileVersionInfo (Name, handle, VerSize, VerData)) {
+		retVal = KCMS_FAIL;
+		goto GetOut;
+	}
+
+/* get root block */
+	bFlag = VerQueryValue (VerData, "\\", (void FAR * FAR *)&verFixed, &Size);
+	if (!bFlag || (0 == Size)) {
+		retVal = KCMS_FAIL;
+		goto GetOut;
+	}
+
+/* get the numbers */
+	d1 = HIWORD (verFixed->dwProductVersionMS);
+	d2 = LOWORD (verFixed->dwProductVersionMS);
+	d3 = HIWORD (verFixed->dwProductVersionLS);
+	d4 = LOWORD (verFixed->dwProductVersionLS);
+
+/* make a string, no trailing zeros */
+	if (0 != d4)
+		wsprintf (verString, "%d.%d.%d.%d", d1, d2, d3, d4);
+	else if (0 != d3)
+		wsprintf (verString, "%d.%d.%d", d1, d2, d3);
+	else if (0 != d2)
+		wsprintf (verString, "%d.%d", d1, d2);
+	else
+		wsprintf (verString, "%d", d1);
+
+GetOut:
+	if (VerData != NULL)
+		freeBufferPtr (VerData);
+
+	return (retVal);
+
+}
+#endif
+#endif
+ÿ

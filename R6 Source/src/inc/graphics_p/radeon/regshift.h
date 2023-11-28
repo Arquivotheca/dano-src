@@ -1,0 +1,6114 @@
+#if !defined (_rage6_SHIFT_HEADER)
+#define _rage6_SHIFT_HEADER
+/*
+*		rage6_shift.h
+*
+*	 (c) 2000 ATI Technologies Inc.  (unpublished)
+*
+*	 All rights reserved.  This notice is intended as a precaution against
+*	 inadvertent publication and does not imply publication or any waiver
+*	 of confidentiality.  The year included in the foregoing notice is the
+*	 year of creation of the work.
+*
+*/
+
+// GENENB
+#define	GENENB__BLK_IO_BASE__SHIFT                         0x00000000
+
+// MM_INDEX
+#define	MM_INDEX__MM_ADDR__SHIFT                           0x00000000
+#define	MM_INDEX__MM_APER__SHIFT                           0x0000001f
+
+// MM_DATA
+#define	MM_DATA__MM_DATA__SHIFT                            0x00000000
+
+// BUS_CNTL
+#define	BUS_CNTL__BUS_DBL_RESYNC__SHIFT                    0x00000000
+#define	BUS_CNTL__BUS_MSTR_RESET__SHIFT                    0x00000001
+#define	BUS_CNTL__BUS_FLUSH_BUF__SHIFT                     0x00000002
+#define	BUS_CNTL__BUS_STOP_REQ_DIS__SHIFT                  0x00000003
+#define	BUS_CNTL__BUS_READ_COMBINE_EN__SHIFT               0x00000004
+#define	BUS_CNTL__BUS_WRT_COMBINE_EN__SHIFT                0x00000005
+#define	BUS_CNTL__BUS_MASTER_DIS__SHIFT                    0x00000006
+#define	BUS_CNTL__BIOS_ROM_WRT_EN__SHIFT                   0x00000007
+#define	BUS_CNTL__BUS_PREFETCH_MODE__SHIFT                 0x00000008
+#define	BUS_CNTL__BUS_VGA_PREFETCH_EN__SHIFT               0x0000000a
+#define	BUS_CNTL__BUS_SGL_READ_DISABLE__SHIFT              0x0000000b
+#define	BUS_CNTL__BIOS_DIS_ROM__SHIFT                      0x0000000c
+#define	BUS_CNTL__BUS_PCI_READ_RETRY_EN__SHIFT             0x0000000d
+#define	BUS_CNTL__BUS_AGP_AD_STEPPING_EN__SHIFT            0x0000000e
+#define	BUS_CNTL__BUS_PCI_WRT_RETRY_EN__SHIFT              0x0000000f
+#define	BUS_CNTL__BUS_RETRY_WS__SHIFT                      0x00000010
+#define	BUS_CNTL__BUS_MSTR_RD_MULT__SHIFT                  0x00000014
+#define	BUS_CNTL__BUS_MSTR_RD_LINE__SHIFT                  0x00000015
+#define	BUS_CNTL__BUS_SUSPEND__SHIFT                       0x00000016
+#define	BUS_CNTL__LAT_16X__SHIFT                           0x00000017
+#define	BUS_CNTL__BUS_RD_DISCARD_EN__SHIFT                 0x00000018
+#define	BUS_CNTL__ENFRCWRDY__SHIFT                         0x00000019
+#define	BUS_CNTL__BUS_MSTR_WS__SHIFT                       0x0000001a
+#define	BUS_CNTL__BUS_PARKING_DIS__SHIFT                   0x0000001b
+#define	BUS_CNTL__BUS_MSTR_DISCONNECT_EN__SHIFT            0x0000001c
+#define	BUS_CNTL__SERR_EN__SHIFT                           0x0000001d
+#define	BUS_CNTL__BUS_READ_BURST__SHIFT                    0x0000001e
+#define	BUS_CNTL__BUS_RDY_READ_DLY__SHIFT                  0x0000001f
+
+// HI_STAT
+#define	HI_STAT__HI_STAT__SHIFT                            0x00000000
+#define	HI_STAT__AGP_BUSY__SHIFT                           0x00000003
+
+// BUS_CNTL1
+#define	BUS_CNTL1__PMI_IO_DISABLE__SHIFT                   0x00000000
+#define	BUS_CNTL1__PMI_MEM_DISABLE__SHIFT                  0x00000001
+#define	BUS_CNTL1__PMI_BM_DISABLE__SHIFT                   0x00000002
+#define	BUS_CNTL1__PMI_INT_DISABLE__SHIFT                  0x00000003
+#define	BUS_CNTL1__BUS2_STALE_DATA_TIMER__SHIFT            0x00000004
+#define	BUS_CNTL1__BUS2_VGA_REG_COHERENCY_DIS__SHIFT       0x00000008
+#define	BUS_CNTL1__BUS2_VGA_MEM_COHERENCY_DIS__SHIFT       0x00000009
+#define	BUS_CNTL1__BUS2_HDP_REG_COHERENCY_DIS__SHIFT       0x0000000a
+#define	BUS_CNTL1__BUS2_GUI_INITIATOR_COHERENCY_DIS__SHIFT 0x0000000b
+
+// CONFIG_CNTL
+#define	CONFIG_CNTL__APER_REG_ENDIAN__SHIFT                0x00000004
+#define	CONFIG_CNTL__CFG_VGA_RAM_EN__SHIFT                 0x00000008
+#define	CONFIG_CNTL__CFG_VGA_IO_DIS__SHIFT                 0x00000009
+#define	CONFIG_CNTL__CFG_ATI_REV_ID__SHIFT                 0x00000010
+
+// CONFIG_MEMSIZE
+#define	CONFIG_MEMSIZE__CONFIG_MEMSIZE__SHIFT              0x00000018
+
+// CONFIG_APER_0_BASE
+#define	CONFIG_APER_0_BASE__APER_0_BASE__SHIFT             0x00000019
+
+// CONFIG_APER_1_BASE
+#define	CONFIG_APER_1_BASE__APER_1_BASE__SHIFT             0x00000018
+
+// CONFIG_APER_SIZE
+#define	CONFIG_APER_SIZE__APER_SIZE__SHIFT                 0x00000018
+
+// CONFIG_REG_1_BASE
+#define CONFIG_REG_1_BASE__REG_APER_1_SELECT__SHIFT        0x0000000f //m6-c
+#define CONFIG_REG_1_BASE__REG_1_BASE__SHIFT               0x00000010 //m6-c
+
+// CONFIG_REG_APER_SIZE
+#define	CONFIG_REG_APER_SIZE__REG_APER_SIZE__SHIFT         0x00000000
+
+// PAD_AGPINPUT_DELAY
+#define	PAD_AGPINPUT_DELAY__PAD_AGPINPUT_DELAY__SHIFT      0x00000000
+
+// PAD_CTLR_STRENGTH
+#define	PAD_CTLR_STRENGTH__PAD_N_STRENGTH_READ_BACK__SHIFT 0x00000000
+#define	PAD_CTLR_STRENGTH__PAD_P_STRENGTH_READ_BACK__SHIFT 0x00000004
+#define	PAD_CTLR_STRENGTH__PAD_N_MANUAL_STRENGTH__SHIFT    0x00000008
+#define	PAD_CTLR_STRENGTH__PAD_P_MANUAL_STRENGTH__SHIFT    0x0000000c
+#define	PAD_CTLR_STRENGTH__PAD_MANUAL_OVERRIDE__SHIFT      0x00000010
+#define	PAD_CTLR_STRENGTH__PAD_TEST_OUT__SHIFT             0x00000011
+#define	PAD_CTLR_STRENGTH__PAD_DUMMY_OUT__SHIFT            0x00000012
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_DFR__SHIFT            0x00000013
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_SCHMEN__SHIFT         0x00000014
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_DREN__SHIFT           0x00000015
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_SLEW__SHIFT           0x00000016
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_VDIFF__SHIFT          0x00000017
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_DFR_OVERRIDE__SHIFT   0x00000018
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_SCHMEN_OVERRIDE__SHIFT 0x00000019
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_DREN_OVERRIDE__SHIFT  0x0000001a
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_SLEW_OVERRIDE__SHIFT  0x0000001b
+#define	PAD_CTLR_STRENGTH__PAD_HI_IO_VDIFF_OVERRIDE__SHIFT 0x0000001c
+
+// PAD_CTLR_UPDATE
+#define	PAD_CTLR_UPDATE__PAD_UPDATE_RATE__SHIFT            0x00000000
+#define	PAD_CTLR_UPDATE__PAD_SAMPLE_DELAY__SHIFT           0x00000008
+#define	PAD_CTLR_UPDATE__PAD_INC_THRESHOLD__SHIFT          0x00000010
+#define	PAD_CTLR_UPDATE__PAD_DEC_THRESHOLD__SHIFT          0x00000018
+
+// AGP_CNTL
+#define	AGP_CNTL__MAX_IDLE_CLK__SHIFT                      0x00000000
+#define	AGP_CNTL__HOLD_RD_FIFO__SHIFT                      0x00000008
+#define	AGP_CNTL__HOLD_RQ_FIFO__SHIFT                      0x00000009
+#define	AGP_CNTL__EN_2X_STBB__SHIFT                        0x0000000a
+#define	AGP_CNTL__FORCE_FULL_SBA__SHIFT                    0x0000000b
+#define	AGP_CNTL__SBA_DIS__SHIFT                           0x0000000c
+#define	AGP_CNTL__AGP_REV_ID__SHIFT                        0x0000000d
+#define	AGP_CNTL__REG_CRIPPLE_AGP4X__SHIFT                 0x0000000e
+#define	AGP_CNTL__REG_CRIPPLE_AGP2X4X__SHIFT               0x0000000f
+#define	AGP_CNTL__FORCE_INT_VREF__SHIFT                    0x00000010
+#define	AGP_CNTL__PENDING_SLOTS_VAL__SHIFT                 0x00000011
+#define	AGP_CNTL__PENDING_SLOTS_SEL__SHIFT                 0x00000013
+#define	AGP_CNTL__EN_EXTENDED_AD_STB_2X__SHIFT             0x00000014
+#define	AGP_CNTL__DIS_QUEUED_GNT_FIX__SHIFT                0x00000015
+#define	AGP_CNTL__EN_RDATA2X4X_MULTIRESET__SHIFT           0x00000016
+#define	AGP_CNTL__EN_RBFCALM__SHIFT                        0x00000017
+#define	AGP_CNTL__FORCE_EXT_VREF__SHIFT                    0x00000018
+#define	AGP_CNTL__DIS_RBF__SHIFT                           0x00000019
+#define	AGP_CNTL__AGP_MISC__SHIFT                          0x0000001a
+
+// BM_STATUS
+#define	BM_STATUS__BUS_MASTER_STATUS__SHIFT                0x00000000
+
+// VENDOR_ID
+#define	VENDOR_ID__VENDOR_ID__SHIFT                        0x00000000
+
+// DEVICE_ID
+#define	DEVICE_ID__DEVICE_ID__SHIFT                        0x00000000
+
+// COMMAND
+#define	COMMAND__IO_ACCESS_EN__SHIFT                       0x00000000
+#define	COMMAND__MEM_ACCESS_EN__SHIFT                      0x00000001
+#define	COMMAND__BUS_MASTER_EN__SHIFT                      0x00000002
+#define	COMMAND__SPECIAL_CYCLE_EN__SHIFT                   0x00000003
+#define	COMMAND__MEM_WRITE_INVALIDATE_EN__SHIFT            0x00000004
+#define	COMMAND__PAL_SNOOP_EN__SHIFT                       0x00000005
+#define	COMMAND__PARITY_ERROR_EN__SHIFT                    0x00000006
+#define	COMMAND__AD_STEPPING__SHIFT                        0x00000007
+#define	COMMAND__SERR_EN__SHIFT                            0x00000008
+#define	COMMAND__FAST_B2B_EN__SHIFT                        0x00000009
+
+// STATUS
+#define	STATUS__CAP_LIST__SHIFT                            0x00000004
+#define	STATUS__PCI_66_EN__SHIFT                           0x00000005
+#define	STATUS__UDF_EN__SHIFT                              0x00000006
+#define	STATUS__FAST_BACK_CAPABLE__SHIFT                   0x00000007
+#define	STATUS__DEVSEL_TIMING__SHIFT                       0x00000009
+#define	STATUS__SIGNAL_TARGET_ABORT__SHIFT                 0x0000000b
+#define	STATUS__RECEIVED_TARGET_ABORT__SHIFT               0x0000000c
+#define	STATUS__RECEIVED_MASTER_ABORT__SHIFT               0x0000000d
+#define	STATUS__SIGNALED_SYSTEM_ERROR__SHIFT               0x0000000e
+#define	STATUS__PARITY_ERROR_DETECTED__SHIFT               0x0000000f
+
+// REVISION_ID
+#define	REVISION_ID__MINOR_REV_ID__SHIFT                   0x00000000
+#define	REVISION_ID__MAJOR_REV_ID__SHIFT                   0x00000004
+
+// REGPROG_INF
+#define	REGPROG_INF__REG_LEVEL_PROG_INF__SHIFT             0x00000000
+
+// SUB_CLASS
+#define	SUB_CLASS__SUB_CLASS_INF__SHIFT                    0x00000007
+
+// BASE_CODE
+#define	BASE_CODE__BASE_CLASS_CODE__SHIFT                  0x00000000
+
+// CACHE_LINE
+#define	CACHE_LINE__CACHE_LINE_SIZE__SHIFT                 0x00000000
+
+// LATENCY
+#define	LATENCY__LATENCY_TIMER__SHIFT                      0x00000000
+
+// HEADER
+#define	HEADER__HEADER_TYPE__SHIFT                         0x00000000
+#define	HEADER__DEVICE_TYPE__SHIFT                         0x00000007
+
+// BIST
+#define	BIST__BIST_COMP__SHIFT                             0x00000000
+#define	BIST__BIST_STRT__SHIFT                             0x00000006
+#define	BIST__BIST_CAP__SHIFT                              0x00000007
+
+// MEM_BASE
+#define	MEM_BASE__PREFETCH_EN__SHIFT                       0x00000003
+#define	MEM_BASE__MEM_BASE__SHIFT                          0x00000019
+
+// IO_BASE
+#define	IO_BASE__BLOCK_IO_BIT__SHIFT                       0x00000000
+#define	IO_BASE__IO_BASE__SHIFT                            0x00000008
+
+// REG_BASE
+#define REG_BASE__REG_BASE__SHIFT                          0x00000010 //m6-c
+
+// ADAPTER_ID
+#define	ADAPTER_ID__SUBSYSTEM_VENDOR_ID__SHIFT             0x00000000
+#define	ADAPTER_ID__SUBSYSTEM_ID__SHIFT                    0x00000010
+
+// BIOS_ROM
+#define	BIOS_ROM__BIOS_ROM_EN__SHIFT                       0x00000000
+#define	BIOS_ROM__BIOS_BASE_ADDR__SHIFT                    0x00000011
+
+// CAPABILITIES_PTR
+#define	CAPABILITIES_PTR__CAP_PTR__SHIFT                   0x00000000
+
+// INTERRUPT_LINE
+#define	INTERRUPT_LINE__INTERRUPT_LINE__SHIFT              0x00000000
+
+// INTERRUPT_PIN
+#define	INTERRUPT_PIN__INTERRUPT_PIN__SHIFT                0x00000000
+
+// MIN_GRANT
+#define	MIN_GRANT__MIN_GNT__SHIFT                          0x00000000
+
+// MAX_LATENCY
+#define	MAX_LATENCY__MAX_LAT__SHIFT                        0x00000000
+
+// ADAPTER_ID_W
+#define	ADAPTER_ID_W__SUBSYSTEM_VENDOR_ID__SHIFT           0x00000000
+#define	ADAPTER_ID_W__SUBSYSTEM_ID__SHIFT                  0x00000010
+
+// PMI_CAP_ID
+#define	PMI_CAP_ID__PMI_CAP_ID__SHIFT                      0x00000000
+
+// PMI_NXT_CAP_PTR
+#define	PMI_NXT_CAP_PTR__PMI_NXT_CAP_PTR__SHIFT            0x00000000
+
+// PMI_PMC_REG
+#define	PMI_PMC_REG__PMI_VERSION__SHIFT                    0x00000000
+#define	PMI_PMC_REG__PMI_PME_CLOCK__SHIFT                  0x00000003
+#define	PMI_PMC_REG__PMI_DEV_SPECIFIC_INIT__SHIFT          0x00000005
+#define	PMI_PMC_REG__PMI_D1_SUPPORT__SHIFT                 0x00000009
+#define	PMI_PMC_REG__PMI_D2_SUPPORT__SHIFT                 0x0000000a
+#define	PMI_PMC_REG__PMI_PME_SUPPORT__SHIFT                0x0000000b
+
+// PM_STATUS
+#define	PM_STATUS__PMI_POWER_STATE__SHIFT                  0x00000000
+#define	PM_STATUS__PMI_PME_EN__SHIFT                       0x00000008
+#define	PM_STATUS__PMI_DATA_SELECT__SHIFT                  0x00000009
+#define	PM_STATUS__PMI_DATA_SCALE__SHIFT                   0x0000000d
+#define	PM_STATUS__PMI_PME_STATUS__SHIFT                   0x0000000f
+
+// PMI_DATA
+#define	PMI_DATA__PMI_DATA__SHIFT                          0x00000000
+
+// AGP_CAP_ID
+#define	AGP_CAP_ID__CAP_ID__SHIFT                          0x00000000
+#define	AGP_CAP_ID__NEXT_PTR__SHIFT                        0x00000008
+#define	AGP_CAP_ID__AGP_MINOR__SHIFT                       0x00000010
+#define	AGP_CAP_ID__AGP_MAJOR__SHIFT                       0x00000014
+
+// AGP_STATUS
+#define	AGP_STATUS__RATE1X__SHIFT                          0x00000000
+#define	AGP_STATUS__RATE2X__SHIFT                          0x00000001
+#define	AGP_STATUS__RATE4X__SHIFT                          0x00000002
+#define	AGP_STATUS__SBA__SHIFT                             0x00000009
+#define	AGP_STATUS__RQ__SHIFT                              0x00000018
+
+// AGP_COMMAND
+#define	AGP_COMMAND__DATA_RATE__SHIFT                      0x00000000
+#define	AGP_COMMAND__AGP_EN__SHIFT                         0x00000008
+#define	AGP_COMMAND__SBA_EN__SHIFT                         0x00000009
+#define	AGP_COMMAND__RQ_DEPTH__SHIFT                       0x00000018
+
+// AIC_CTRL
+#define	AIC_CTRL__TRANSLATE_EN__SHIFT                      0x00000000
+#define	AIC_CTRL__HW_0_DEBUG__SHIFT                        0x00000001
+#define	AIC_CTRL__HW_1_DEBUG__SHIFT                        0x00000002
+#define	AIC_CTRL__HW_2_DEBUG__SHIFT                        0x00000003
+#define	AIC_CTRL__HW_3_DEBUG__SHIFT                        0x00000004
+#define	AIC_CTRL__HW_4_DEBUG__SHIFT                        0x00000005
+#define	AIC_CTRL__HW_5_DEBUG__SHIFT                        0x00000006
+#define	AIC_CTRL__HW_6_DEBUG__SHIFT                        0x00000007
+#define	AIC_CTRL__HW_7_DEBUG__SHIFT                        0x00000008
+#define	AIC_CTRL__HW_8_DEBUG__SHIFT                        0x00000009
+#define	AIC_CTRL__HW_9_DEBUG__SHIFT                        0x0000000a
+#define	AIC_CTRL__HW_A_DEBUG__SHIFT                        0x0000000b
+#define	AIC_CTRL__HW_B_DEBUG__SHIFT                        0x0000000c
+#define	AIC_CTRL__HW_C_DEBUG__SHIFT                        0x0000000d
+#define	AIC_CTRL__HW_D_DEBUG__SHIFT                        0x0000000e
+#define	AIC_CTRL__HW_E_DEBUG__SHIFT                        0x0000000f
+#define	AIC_CTRL__HW_F_DEBUG__SHIFT                        0x00000010
+#define	AIC_CTRL__HW_10_DEBUG__SHIFT                       0x00000011
+#define	AIC_CTRL__HW_11_DEBUG__SHIFT                       0x00000012
+#define	AIC_CTRL__HW_12_DEBUG__SHIFT                       0x00000013
+#define	AIC_CTRL__HW_13_DEBUG__SHIFT                       0x00000014
+#define	AIC_CTRL__HW_14_DEBUG__SHIFT                       0x00000015
+#define	AIC_CTRL__HW_15_DEBUG__SHIFT                       0x00000016
+#define	AIC_CTRL__HW_16_DEBUG__SHIFT                       0x00000017
+#define	AIC_CTRL__HW_17_DEBUG__SHIFT                       0x00000018
+#define	AIC_CTRL__HW_18_DEBUG__SHIFT                       0x00000019
+#define	AIC_CTRL__HW_19_DEBUG__SHIFT                       0x0000001a
+#define	AIC_CTRL__HW_1A_DEBUG__SHIFT                       0x0000001b
+#define	AIC_CTRL__HW_1B_DEBUG__SHIFT                       0x0000001c
+#define	AIC_CTRL__HW_1C_DEBUG__SHIFT                       0x0000001d
+#define	AIC_CTRL__HW_1D_DEBUG__SHIFT                       0x0000001e
+#define	AIC_CTRL__HW_1E_DEBUG__SHIFT                       0x0000001f
+
+// AIC_STAT
+#define	AIC_STAT__AIC_TLB_VLD__SHIFT                       0x00000000
+#define	AIC_STAT__AIC_STAT1__SHIFT                         0x00000001
+#define	AIC_STAT__AIC_STAT0__SHIFT                         0x00000002
+
+// AIC_PT_BASE
+#define	AIC_PT_BASE__AIC_PT_BASE__SHIFT                    0x0000000c
+
+// AIC_LO_ADDR
+#define	AIC_LO_ADDR__AIC_LO_ADDR__SHIFT                    0x0000000c
+
+// AIC_HI_ADDR
+#define	AIC_HI_ADDR__AIC_HI_ADDR__SHIFT                    0x0000000c
+
+// AIC_TLB_ADDR
+#define	AIC_TLB_ADDR__AIC_TLB_ADDR__SHIFT                  0x0000000c
+
+// AIC_TLB_DATA
+#define	AIC_TLB_DATA__AIC_TLB_DATA__SHIFT                  0x0000000c
+
+// GENMO_WT
+#define	GENMO_WT__GENMO_MONO_ADDRESS_B__SHIFT              0x00000000
+#define	GENMO_WT__VGA_RAM_EN__SHIFT                        0x00000001
+#define	GENMO_WT__VGA_CKSEL__SHIFT                         0x00000002
+#define	GENMO_WT__ODD_EVEN_MD_PGSEL__SHIFT                 0x00000005
+#define	GENMO_WT__VGA_HSYNC_POL__SHIFT                     0x00000006
+#define	GENMO_WT__VGA_VSYNC_POL__SHIFT                     0x00000007
+
+// GENMO_RD
+#define	GENMO_RD__GENMO_MONO_ADDRESS_B__SHIFT              0x00000000
+#define	GENMO_RD__VGA_RAM_EN__SHIFT                        0x00000001
+#define	GENMO_RD__VGA_CKSEL__SHIFT                         0x00000002
+#define	GENMO_RD__ODD_EVEN_MD_PGSEL__SHIFT                 0x00000005
+#define	GENMO_RD__VGA_HSYNC_POL__SHIFT                     0x00000006
+#define	GENMO_RD__VGA_VSYNC_POL__SHIFT                     0x00000007
+
+// DAC_CNTL
+#define	DAC_CNTL__DAC_RANGE_CNTL__SHIFT                    0x00000000
+#define	DAC_CNTL__DAC_BLANKING__SHIFT                      0x00000002
+#define	DAC_CNTL__DAC_CMP_EN__SHIFT                        0x00000003
+#define	DAC_CNTL__DAC_CMP_OUT_R__SHIFT                     0x00000004
+#define	DAC_CNTL__DAC_CMP_OUT_G__SHIFT                     0x00000005
+#define	DAC_CNTL__DAC_CMP_OUT_B__SHIFT                     0x00000006
+#define	DAC_CNTL__DAC_CMP_OUTPUT__SHIFT                    0x00000007
+#define	DAC_CNTL__DAC_8BIT_EN__SHIFT                       0x00000008
+#define	DAC_CNTL__DAC_4BPP_PIX_ORDER__SHIFT                0x00000009
+#define	DAC_CNTL__DAC_TVO_EN__SHIFT                        0x0000000a
+#define	DAC_CNTL__DAC_VGA_ADR_EN__SHIFT                    0x0000000d
+#define	DAC_CNTL__DAC_EXPAND_MODE__SHIFT                   0x0000000e
+#define	DAC_CNTL__DAC_PDWN__SHIFT                          0x0000000f
+#define	DAC_CNTL__CRT_SENSE__MASK                          0x00000010 //m6-a
+#define	DAC_CNTL__CRT_DETECTION_ON__SHIFT                  0x00000011 //m6-a
+#define	DAC_CNTL__DAC_CRC_CONT_EN__SHIFT                   0x00000012
+#define	DAC_CNTL__DAC_CRC_EN__SHIFT                        0x00000013
+#define	DAC_CNTL__DAC_CRC_FIELD__SHIFT                     0x00000014
+#define	DAC_CNTL__DAC_LUT_COUNTER_LIMIT__SHIFT             0x00000015
+#define	DAC_CNTL__DAC_LUT_READ_SEL__SHIFT                  0x00000017
+#define	DAC_CNTL__DAC_MASK__SHIFT                          0x00000018
+
+// CRTC_GEN_CNTL
+#define	CRTC_GEN_CNTL__CRTC_DBL_SCAN_EN__SHIFT             0x00000000
+#define	CRTC_GEN_CNTL__CRTC_INTERLACE_EN__SHIFT            0x00000001
+#define	CRTC_GEN_CNTL__CRTC_C_SYNC_EN__SHIFT               0x00000004
+#define	CRTC_GEN_CNTL__CRTC_PIX_WIDTH__SHIFT               0x00000008
+#define	CRTC_GEN_CNTL__CRTC_CUR_EN__SHIFT                  0x00000010
+#define	CRTC_GEN_CNTL__CRTC_VSTAT_MODE__SHIFT              0x00000011
+#define	CRTC_GEN_CNTL__CRTC_CUR_MODE__SHIFT                0x00000014
+#define	CRTC_GEN_CNTL__CRTC_EXT_DISP_EN__SHIFT             0x00000018
+#define	CRTC_GEN_CNTL__CRTC_EN__SHIFT                      0x00000019
+#define	CRTC_GEN_CNTL__CRTC_DISP_REQ_EN_B__SHIFT           0x0000001a
+
+// MEM_CNTL
+#define	MEM_CNTL__MEM_NUM_CHANNELS__SHIFT                  0x00000000
+#define	MEM_CNTL__MC_USE_B_CH_ONLY__SHIFT                  0x00000001
+#define	MEM_CNTL__DISABLE_AP__SHIFT                        0x00000002
+#define	MEM_CNTL__MEM_BANK_MAPPING_A__SHIFT                0x00000004
+#define	MEM_CNTL__MEM_ADDR_MAPPING_A__SHIFT                0x00000008
+#define	MEM_CNTL__MEM_BANK_MAPPING_B__SHIFT                0x00000014
+#define	MEM_CNTL__MEM_ADDR_MAPPING_B__SHIFT                0x00000018
+
+// EXT_MEM_CNTL
+#define	EXT_MEM_CNTL__MEM_TRP__SHIFT                       0x00000000
+#define	EXT_MEM_CNTL__MEM_TRCD__SHIFT                      0x00000002
+#define	EXT_MEM_CNTL__MEM_TRAS__SHIFT                      0x00000004
+#define	EXT_MEM_CNTL__MEM_TRRD__SHIFT                      0x00000008
+#define	EXT_MEM_CNTL__MEM_TR2W__SHIFT                      0x0000000a
+#define	EXT_MEM_CNTL__MEM_TWR__SHIFT                       0x0000000c
+#define	EXT_MEM_CNTL__MEM_TW2R__SHIFT                      0x0000000e
+#define	EXT_MEM_CNTL__MEM_TR2R__SHIFT                      0x00000010
+#define	EXT_MEM_CNTL__MEM_TWR_MODE__SHIFT                  0x00000012
+#define	EXT_MEM_CNTL__MEM_REFRESH_DIS__SHIFT               0x00000014
+#define	EXT_MEM_CNTL__MEM_REFRESH_RATE__SHIFT              0x00000018
+
+// MC_AGP_LOCATION
+#define	MC_AGP_LOCATION__MC_AGP_START__SHIFT               0x00000000
+#define	MC_AGP_LOCATION__MC_AGP_TOP__SHIFT                 0x00000010
+
+// MEM_IO_CNTL_A0
+#define	MEM_IO_CNTL_A0__MEM_N_CKA0__SHIFT                  0x00000000
+#define	MEM_IO_CNTL_A0__MEM_N_CKA1__SHIFT                  0x00000004
+#define	MEM_IO_CNTL_A0__MEM_N_AA__SHIFT                    0x00000008
+#define	MEM_IO_CNTL_A0__MEM_N_DQMA__SHIFT                  0x0000000c
+#define	MEM_IO_CNTL_A0__MEM_N_DQSA__SHIFT                  0x00000010
+#define	MEM_IO_CNTL_A0__MC_IO_SSTL_ENA__SHIFT              0x00000014
+#define	MEM_IO_CNTL_A0__MEM_SLEW_CKA0__SHIFT               0x00000018
+#define	MEM_IO_CNTL_A0__MEM_SLEW_CKA1__SHIFT               0x00000019
+#define	MEM_IO_CNTL_A0__MEM_SLEW_AA__SHIFT                 0x0000001a
+#define	MEM_IO_CNTL_A0__MEM_SLEW_DQMA__SHIFT               0x0000001b
+#define	MEM_IO_CNTL_A0__MEM_SLEW_DQSA__SHIFT               0x0000001c
+#define	MEM_IO_CNTL_A0__MEM_PREAMP_DAA__SHIFT              0x0000001d
+#define	MEM_IO_CNTL_A0__MEM_PREAMP_DQMA__SHIFT             0x0000001e
+#define	MEM_IO_CNTL_A0__MEM_PREAMP_DQSA__SHIFT             0x0000001f
+
+// MEM_INIT_LATENCY_TIMER
+#define	MEM_INIT_LATENCY_TIMER__MEM_RB0R_INIT_LAT__SHIFT   0x00000000
+#define	MEM_INIT_LATENCY_TIMER__MEM_RB1R_INIT_LAT__SHIFT   0x00000004
+#define	MEM_INIT_LATENCY_TIMER__MEM_PPR_INIT_LAT__SHIFT    0x00000008
+#define	MEM_INIT_LATENCY_TIMER__MEM_DISPR_INIT_LAT__SHIFT  0x0000000c
+#define	MEM_INIT_LATENCY_TIMER__MEM_RB0W_INIT_LAT__SHIFT   0x00000010
+#define	MEM_INIT_LATENCY_TIMER__MEM_RB1W_INIT_LAT__SHIFT   0x00000014
+#define	MEM_INIT_LATENCY_TIMER__MEM_FIXED_INIT_LAT__SHIFT  0x00000018
+#define	MEM_INIT_LATENCY_TIMER__SAME_PAGE_PRIO__SHIFT      0x0000001c
+
+// MEM_SDRAM_MODE_REG
+#define	MEM_SDRAM_MODE_REG__MEM_MODE_REG__SHIFT            0x00000000
+#define	MEM_SDRAM_MODE_REG__MEM_RBS_POSITION_A__SHIFT      0x00000010
+#define	MEM_SDRAM_MODE_REG__MEM_RBS_POSITION_B__SHIFT      0x00000012
+#define	MEM_SDRAM_MODE_REG__MEM_CAS_LATENCY__SHIFT         0x00000014
+#define	MEM_SDRAM_MODE_REG__WR_LAT_EQ_CAS_LAT__SHIFT       0x00000017
+#define	MEM_SDRAM_MODE_REG__MEM_ERST_POSITION_A__SHIFT     0x00000018
+#define	MEM_SDRAM_MODE_REG__MEM_ERST_POSITION_B__SHIFT     0x0000001a
+#define	MEM_SDRAM_MODE_REG__MC_INIT_COMPLETE__SHIFT        0x0000001c
+#define	MEM_SDRAM_MODE_REG__MEM_NON_JEDEC__SHIFT           0x0000001d
+#define	MEM_SDRAM_MODE_REG__MEM_CFG_TYPE__SHIFT            0x0000001e
+#define	MEM_SDRAM_MODE_REG__MEM_SDRAM_RESET__SHIFT         0x0000001f
+
+// AGP_BASE
+#define	AGP_BASE__AGP_BASE_ADDR__SHIFT                     0x00000000
+
+// MEM_IO_CNTL_A1
+#define	MEM_IO_CNTL_A1__MEM_P_CKA0__SHIFT                  0x00000000
+#define	MEM_IO_CNTL_A1__MEM_P_CKA1__SHIFT                  0x00000004
+#define	MEM_IO_CNTL_A1__MEM_P_AA__SHIFT                    0x00000008
+#define	MEM_IO_CNTL_A1__MEM_P_DQMA__SHIFT                  0x0000000c
+#define	MEM_IO_CNTL_A1__MEM_P_DQSA__SHIFT                  0x00000010
+#define	MEM_IO_CNTL_A1__DLL_FB_SLCT_CKA__SHIFT             0x00000014
+#define	MEM_IO_CNTL_A1__CLKA0_ENABLE__SHIFT                0x00000016
+#define	MEM_IO_CNTL_A1__CLKA1_ENABLE__SHIFT                0x00000017
+#define	MEM_IO_CNTL_A1__CLKAFB_ENABLE__SHIFT               0x00000018
+#define	MEM_IO_CNTL_A1__DFR_DQSA__SHIFT                    0x00000019
+#define	MEM_IO_CNTL_A1__DFR_CKA__SHIFT                     0x0000001a
+#define	MEM_IO_CNTL_A1__DFR_DQMA__SHIFT                    0x0000001b
+#define	MEM_IO_CNTL_A1__DQS_DRIVER_SLCT_A0__SHIFT          0x0000001c
+#define	MEM_IO_CNTL_A1__DQS_DRIVER_SLCT_A1__SHIFT          0x0000001d
+#define	MEM_IO_CNTL_A1__DQS_DRIVER_SLCT_A2__SHIFT          0x0000001e
+#define	MEM_IO_CNTL_A1__DQS_DRIVER_SLCT_A3__SHIFT          0x0000001f
+
+// MEM_IO_CNTL_B0
+#define	MEM_IO_CNTL_B0__MEM_N_CKB0__SHIFT                  0x00000000
+#define	MEM_IO_CNTL_B0__MEM_N_CKB1__SHIFT                  0x00000004
+#define	MEM_IO_CNTL_B0__MEM_N_AB__SHIFT                    0x00000008
+#define	MEM_IO_CNTL_B0__MEM_N_DQMB__SHIFT                  0x0000000c
+#define	MEM_IO_CNTL_B0__MEM_N_DQSB__SHIFT                  0x00000010
+#define	MEM_IO_CNTL_B0__MC_IO_SSTL_ENB__SHIFT              0x00000014
+#define	MEM_IO_CNTL_B0__MEM_SLEW_CKB0__SHIFT               0x00000018
+#define	MEM_IO_CNTL_B0__MEM_SLEW_CKB1__SHIFT               0x00000019
+#define	MEM_IO_CNTL_B0__MEM_SLEW_AB__SHIFT                 0x0000001a
+#define	MEM_IO_CNTL_B0__MEM_SLEW_DQMB__SHIFT               0x0000001b
+#define	MEM_IO_CNTL_B0__MEM_SLEW_DQSB__SHIFT               0x0000001c
+#define	MEM_IO_CNTL_B0__MEM_PREAMP_DAB__SHIFT              0x0000001d
+#define	MEM_IO_CNTL_B0__MEM_PREAMP_DQMB__SHIFT             0x0000001e
+#define	MEM_IO_CNTL_B0__MEM_PREAMP_DQSB__SHIFT             0x0000001f
+
+// MEM_IO_CNTL_B1
+#define	MEM_IO_CNTL_B1__MEM_P_CKB0__SHIFT                  0x00000000
+#define	MEM_IO_CNTL_B1__MEM_P_CKB1__SHIFT                  0x00000004
+#define	MEM_IO_CNTL_B1__MEM_P_AB__SHIFT                    0x00000008
+#define	MEM_IO_CNTL_B1__MEM_P_DQMB__SHIFT                  0x0000000c
+#define	MEM_IO_CNTL_B1__MEM_P_DQSB__SHIFT                  0x00000010
+#define	MEM_IO_CNTL_B1__DLL_FB_SLCT_CKB__SHIFT             0x00000014
+#define	MEM_IO_CNTL_B1__CLKB0_ENABLE__SHIFT                0x00000016
+#define	MEM_IO_CNTL_B1__CLKB1_ENABLE__SHIFT                0x00000017
+#define	MEM_IO_CNTL_B1__CLKBFB_ENABLE__SHIFT               0x00000018
+#define	MEM_IO_CNTL_B1__DFR_DQSB__SHIFT                    0x00000019
+#define	MEM_IO_CNTL_B1__DFR_CKB__SHIFT                     0x0000001a
+#define	MEM_IO_CNTL_B1__DFR_DQMB__SHIFT                    0x0000001b
+#define	MEM_IO_CNTL_B1__DQS_DRIVER_SLCT_B0__SHIFT          0x0000001c
+#define	MEM_IO_CNTL_B1__DQS_DRIVER_SLCT_B1__SHIFT          0x0000001d
+#define	MEM_IO_CNTL_B1__DQS_DRIVER_SLCT_B2__SHIFT          0x0000001e
+#define	MEM_IO_CNTL_B1__DQS_DRIVER_SLCT_B3__SHIFT          0x0000001f
+
+// MC_DEBUG
+#define	MC_DEBUG__IGNORE_RW_PENALTY_RB0R__SHIFT            0x00000000
+#define	MC_DEBUG__IGNORE_RW_PENALTY_RB1R__SHIFT            0x00000001
+#define	MC_DEBUG__IGNORE_RW_PENALTY_RB0W__SHIFT            0x00000002
+#define	MC_DEBUG__IGNORE_RW_PENALTY_RB1W__SHIFT            0x00000003
+#define	MC_DEBUG__IGNORE_RW_PENALTY_DISPR__SHIFT           0x00000004
+#define	MC_DEBUG__IGNORE_RW_PENALTY_PPR__SHIFT             0x00000005
+#define	MC_DEBUG__IGNORE_RW_PENALTY_FIXED__SHIFT           0x00000006
+#define	MC_DEBUG__MEM_VIPW_PRIORITY__SHIFT                 0x00000008
+#define	MC_DEBUG__CLKA0_ENABLEb__SHIFT                     0x0000000a
+#define	MC_DEBUG__CLKA1_ENABLEb__SHIFT                     0x0000000b
+#define	MC_DEBUG__CLKB0_ENABLEb__SHIFT                     0x0000000c
+#define	MC_DEBUG__CLKB1_ENABLEb__SHIFT                     0x0000000d
+#define	MC_DEBUG__COHERENCY_FIX_ENABLE__SHIFT              0x0000000e
+#define	MC_DEBUG__MC_DEBUG__SHIFT                          0x0000000f
+
+// MC_STATUS
+#define	MC_STATUS__MEM_PWRUP_COMPL_A__SHIFT                0x00000000
+#define	MC_STATUS__MEM_PWRUP_COMPL_B__SHIFT                0x00000001
+#define	MC_STATUS__MC_IDLE__SHIFT                          0x00000002
+#define	MC_STATUS__SPARE__SHIFT                            0x00000003
+
+// MEM_IO_OE_CNTL
+#define	MEM_IO_OE_CNTL__MEM_DQ_OE_EXTEND_A__SHIFT          0x00000000
+#define	MEM_IO_OE_CNTL__MEM_DQ_OE_POSITION_A__SHIFT        0x00000002
+#define	MEM_IO_OE_CNTL__MEM_QS_OE_EXTEND_A__SHIFT          0x00000004
+#define	MEM_IO_OE_CNTL__MEM_QS_OE_POSITION_A__SHIFT        0x00000006
+#define	MEM_IO_OE_CNTL__MEM_DQ_OE_EXTEND_B__SHIFT          0x00000008
+#define	MEM_IO_OE_CNTL__MEM_DQ_OE_POSITION_B__SHIFT        0x0000000a
+#define	MEM_IO_OE_CNTL__MEM_QS_OE_EXTEND_B__SHIFT          0x0000000c
+#define	MEM_IO_OE_CNTL__MEM_QS_OE_POSITION_B__SHIFT        0x0000000e
+#define	MEM_IO_OE_CNTL__MEM_DYNAMIC_CKE__SHIFT             0x00000010
+#define	MEM_IO_OE_CNTL__MEM_SDRAM_TRI_EN__SHIFT            0x00000011
+
+// MC_FB_LOCATION
+#define	MC_FB_LOCATION__MC_FB_START__SHIFT                 0x00000000
+#define	MC_FB_LOCATION__MC_FB_TOP__SHIFT                   0x00000010
+
+// GRA00
+#define	GRA00__GRPH_SET_RESET0__SHIFT                      0x00000000
+#define	GRA00__GRPH_SET_RESET1__SHIFT                      0x00000001
+#define	GRA00__GRPH_SET_RESET2__SHIFT                      0x00000002
+#define	GRA00__GRPH_SET_RESET3__SHIFT                      0x00000003
+
+// GRA01
+#define	GRA01__GRPH_SET_RESET_ENA0__SHIFT                  0x00000000
+#define	GRA01__GRPH_SET_RESET_ENA1__SHIFT                  0x00000001
+#define	GRA01__GRPH_SET_RESET_ENA2__SHIFT                  0x00000002
+#define	GRA01__GRPH_SET_RESET_ENA3__SHIFT                  0x00000003
+
+// GRA02
+#define	GRA02__GRPH_CCOMP__SHIFT                           0x00000000
+
+// GRA03
+#define	GRA03__GRPH_ROTATE__SHIFT                          0x00000000
+#define	GRA03__GRPH_FN_SEL__SHIFT                          0x00000003
+
+// GRA04
+#define	GRA04__GRPH_RMAP__SHIFT                            0x00000000
+
+// GRA06
+#define	GRA06__GRPH_GRAPHICS__SHIFT                        0x00000000
+#define	GRA06__GRPH_ODDEVEN__SHIFT                         0x00000001
+#define	GRA06__GRPH_ADRSEL__SHIFT                          0x00000002
+
+// GRA07
+#define	GRA07__GRPH_XCARE0__SHIFT                          0x00000000
+#define	GRA07__GRPH_XCARE1__SHIFT                          0x00000001
+#define	GRA07__GRPH_XCARE2__SHIFT                          0x00000002
+#define	GRA07__GRPH_XCARE3__SHIFT                          0x00000003
+
+// GRA08
+#define	GRA08__GRPH_BMSK__SHIFT                            0x00000000
+
+// SEQ02
+#define	SEQ02__SEQ_MAP0_EN__SHIFT                          0x00000000
+#define	SEQ02__SEQ_MAP1_EN__SHIFT                          0x00000001
+#define	SEQ02__SEQ_MAP2_EN__SHIFT                          0x00000002
+#define	SEQ02__SEQ_MAP3_EN__SHIFT                          0x00000003
+
+// SEQ04
+#define	SEQ04__SEQ_256K__SHIFT                             0x00000001
+#define	SEQ04__SEQ_ODDEVEN__SHIFT                          0x00000002
+#define	SEQ04__SEQ_CHAIN__SHIFT                            0x00000003
+
+// CRT1E
+#define	CRT1E__GRPH_DEC_RD1__SHIFT                         0x00000001
+
+// CRT1F
+#define	CRT1F__GRPH_DEC_RD0__SHIFT                         0x00000000
+
+// CRT22
+#define	CRT22__GRPH_LATCH_DATA__SHIFT                      0x00000000
+
+// CRT1E_S
+#define	CRT1E_S__GRPH_DEC_RD1_M__SHIFT                     0x00000001
+
+// CRT1F_S
+#define	CRT1F_S__GRPH_DEC_RD0_M__SHIFT                     0x00000000
+
+// CRT22_S
+#define	CRT22_S__GRPH_LATCH_DATA_M__SHIFT                  0x00000000
+
+// HOST_PATH_CNTL
+#define	HOST_PATH_CNTL__HDP_APER_CNTL__SHIFT               0x00000017
+#define	HOST_PATH_CNTL__HP_LIN_RD_CACHE_DIS__SHIFT         0x00000018
+#define	HOST_PATH_CNTL__HP_RBBM_LOCK_DIS__SHIFT            0x00000019
+#define	HOST_PATH_CNTL__HDP_SOFT_RESET__SHIFT              0x0000001a
+#define	HOST_PATH_CNTL__HDP_WRITE_COMBINER_TIMEOUT__SHIFT  0x0000001c
+#define	HOST_PATH_CNTL__HP_TEST_RST_CNTL__SHIFT            0x0000001f
+
+// MEM_VGA_WP_SEL
+#define	MEM_VGA_WP_SEL__MEM_VGA_WPS0__SHIFT                0x00000000
+#define	MEM_VGA_WP_SEL__MEM_VGA_WPS1__SHIFT                0x00000010
+
+// MEM_VGA_RP_SEL
+#define	MEM_VGA_RP_SEL__MEM_VGA_RPS0__SHIFT                0x00000000
+#define	MEM_VGA_RP_SEL__MEM_VGA_RPS1__SHIFT                0x00000010
+
+// HDP_DEBUG
+#define	HDP_DEBUG__HDP_0_DEBUG__SHIFT                      0x00000000
+#define	HDP_DEBUG__HDP_1_DEBUG__SHIFT                      0x00000001
+#define	HDP_DEBUG__HDP_2_DEBUG__SHIFT                      0x00000002
+#define	HDP_DEBUG__HDP_3_DEBUG__SHIFT                      0x00000003
+#define	HDP_DEBUG__HDP_4_DEBUG__SHIFT                      0x00000004
+#define	HDP_DEBUG__HDP_5_DEBUG__SHIFT                      0x00000005
+#define	HDP_DEBUG__HDP_6_DEBUG__SHIFT                      0x00000006
+#define	HDP_DEBUG__HDP_7_DEBUG__SHIFT                      0x00000007
+
+// SW_SEMAPHORE
+#define	SW_SEMAPHORE__SW_SEMAPHORE__SHIFT                  0x00000000
+
+// SURFACE_CNTL
+#define	SURFACE_CNTL__SURF_TRANSLATION_DIS__SHIFT          0x00000008
+#define	SURFACE_CNTL__NONSURF_AP0_SWP__SHIFT               0x00000014
+#define	SURFACE_CNTL__NONSURF_AP1_SWP__SHIFT               0x00000016
+
+// SURFACE0_LOWER_BOUND
+#define	SURFACE0_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE1_LOWER_BOUND
+#define	SURFACE1_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE2_LOWER_BOUND
+#define	SURFACE2_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE3_LOWER_BOUND
+#define	SURFACE3_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE4_LOWER_BOUND
+#define	SURFACE4_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE5_LOWER_BOUND
+#define	SURFACE5_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE6_LOWER_BOUND
+#define	SURFACE6_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE7_LOWER_BOUND
+#define	SURFACE7_LOWER_BOUND__SURF_LOWER__SHIFT            0x00000000
+
+// SURFACE0_UPPER_BOUND
+#define	SURFACE0_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE1_UPPER_BOUND
+#define	SURFACE1_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE2_UPPER_BOUND
+#define	SURFACE2_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE3_UPPER_BOUND
+#define	SURFACE3_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE4_UPPER_BOUND
+#define	SURFACE4_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE5_UPPER_BOUND
+#define	SURFACE5_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE6_UPPER_BOUND
+#define	SURFACE6_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE7_UPPER_BOUND
+#define	SURFACE7_UPPER_BOUND__SURF_UPPER__SHIFT            0x00000000
+
+// SURFACE0_INFO
+#define	SURFACE0_INFO__SURF0_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE0_INFO__SURF0_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE0_INFO__SURF0_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE0_INFO__SURF0_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE0_INFO__SURF0_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE0_INFO__SURF0_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE1_INFO
+#define	SURFACE1_INFO__SURF1_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE1_INFO__SURF1_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE1_INFO__SURF1_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE1_INFO__SURF1_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE1_INFO__SURF1_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE1_INFO__SURF1_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE2_INFO
+#define	SURFACE2_INFO__SURF2_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE2_INFO__SURF2_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE2_INFO__SURF2_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE2_INFO__SURF2_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE2_INFO__SURF2_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE2_INFO__SURF2_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE3_INFO
+#define	SURFACE3_INFO__SURF3_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE3_INFO__SURF3_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE3_INFO__SURF3_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE3_INFO__SURF3_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE3_INFO__SURF3_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE3_INFO__SURF3_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE4_INFO
+#define	SURFACE4_INFO__SURF4_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE4_INFO__SURF4_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE4_INFO__SURF4_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE4_INFO__SURF4_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE4_INFO__SURF4_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE4_INFO__SURF4_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE5_INFO
+#define	SURFACE5_INFO__SURF5_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE5_INFO__SURF5_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE5_INFO__SURF5_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE5_INFO__SURF5_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE5_INFO__SURF5_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE5_INFO__SURF5_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE6_INFO
+#define	SURFACE6_INFO__SURF6_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE6_INFO__SURF6_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE6_INFO__SURF6_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE6_INFO__SURF6_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE6_INFO__SURF6_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE6_INFO__SURF6_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE7_INFO
+#define	SURFACE7_INFO__SURF7_PITCHSEL__SHIFT               0x00000000
+#define	SURFACE7_INFO__SURF7_TILE_MODE__SHIFT              0x00000010
+#define	SURFACE7_INFO__SURF7_AP0_SWP__SHIFT                0x00000014
+#define	SURFACE7_INFO__SURF7_AP1_SWP__SHIFT                0x00000016
+#define	SURFACE7_INFO__SURF7_WRITE_FLAG__SHIFT             0x00000018
+#define	SURFACE7_INFO__SURF7_READ_FLAG__SHIFT              0x00000019
+
+// SURFACE_ACCESS_FLAGS
+#define	SURFACE_ACCESS_FLAGS__SURF0_WRITE_FLAG__SHIFT      0x00000000
+#define	SURFACE_ACCESS_FLAGS__SURF1_WRITE_FLAG__SHIFT      0x00000001
+#define	SURFACE_ACCESS_FLAGS__SURF2_WRITE_FLAG__SHIFT      0x00000002
+#define	SURFACE_ACCESS_FLAGS__SURF3_WRITE_FLAG__SHIFT      0x00000003
+#define	SURFACE_ACCESS_FLAGS__SURF4_WRITE_FLAG__SHIFT      0x00000004
+#define	SURFACE_ACCESS_FLAGS__SURF5_WRITE_FLAG__SHIFT      0x00000005
+#define	SURFACE_ACCESS_FLAGS__SURF6_WRITE_FLAG__SHIFT      0x00000006
+#define	SURFACE_ACCESS_FLAGS__SURF7_WRITE_FLAG__SHIFT      0x00000007
+#define	SURFACE_ACCESS_FLAGS__NONSURF_WRITE_FLAG__SHIFT    0x00000008
+#define	SURFACE_ACCESS_FLAGS__LINEAR_WRITE_FLAG__SHIFT     0x00000009
+#define	SURFACE_ACCESS_FLAGS__VGA_WRITE_FLAG__SHIFT        0x0000000a
+#define	SURFACE_ACCESS_FLAGS__SURF0_READ_FLAG__SHIFT       0x00000010
+#define	SURFACE_ACCESS_FLAGS__SURF1_READ_FLAG__SHIFT       0x00000011
+#define	SURFACE_ACCESS_FLAGS__SURF2_READ_FLAG__SHIFT       0x00000012
+#define	SURFACE_ACCESS_FLAGS__SURF3_READ_FLAG__SHIFT       0x00000013
+#define	SURFACE_ACCESS_FLAGS__SURF4_READ_FLAG__SHIFT       0x00000014
+#define	SURFACE_ACCESS_FLAGS__SURF5_READ_FLAG__SHIFT       0x00000015
+#define	SURFACE_ACCESS_FLAGS__SURF6_READ_FLAG__SHIFT       0x00000016
+#define	SURFACE_ACCESS_FLAGS__SURF7_READ_FLAG__SHIFT       0x00000017
+#define	SURFACE_ACCESS_FLAGS__NONSURF_READ_FLAG__SHIFT     0x00000018
+#define	SURFACE_ACCESS_FLAGS__LINEAR_READ_FLAG__SHIFT      0x00000019
+#define	SURFACE_ACCESS_FLAGS__VGA_READ_FLAG__SHIFT         0x0000001a
+
+// SURFACE_ACCESS_CLR
+#define	SURFACE_ACCESS_CLR__SURF0_WRITE_FLAG_CLR__SHIFT    0x00000000
+#define	SURFACE_ACCESS_CLR__SURF1_WRITE_FLAG_CLR__SHIFT    0x00000001
+#define	SURFACE_ACCESS_CLR__SURF2_WRITE_FLAG_CLR__SHIFT    0x00000002
+#define	SURFACE_ACCESS_CLR__SURF3_WRITE_FLAG_CLR__SHIFT    0x00000003
+#define	SURFACE_ACCESS_CLR__SURF4_WRITE_FLAG_CLR__SHIFT    0x00000004
+#define	SURFACE_ACCESS_CLR__SURF5_WRITE_FLAG_CLR__SHIFT    0x00000005
+#define	SURFACE_ACCESS_CLR__SURF6_WRITE_FLAG_CLR__SHIFT    0x00000006
+#define	SURFACE_ACCESS_CLR__SURF7_WRITE_FLAG_CLR__SHIFT    0x00000007
+#define	SURFACE_ACCESS_CLR__NONSURF_WRITE_FLAG_CLR__SHIFT  0x00000008
+#define	SURFACE_ACCESS_CLR__LINEAR_WRITE_FLAG_CLR__SHIFT   0x00000009
+#define	SURFACE_ACCESS_CLR__VGA_WRITE_FLAG_CLR__SHIFT      0x0000000a
+#define	SURFACE_ACCESS_CLR__SURF0_READ_FLAG_CLR__SHIFT     0x00000010
+#define	SURFACE_ACCESS_CLR__SURF1_READ_FLAG_CLR__SHIFT     0x00000011
+#define	SURFACE_ACCESS_CLR__SURF2_READ_FLAG_CLR__SHIFT     0x00000012
+#define	SURFACE_ACCESS_CLR__SURF3_READ_FLAG_CLR__SHIFT     0x00000013
+#define	SURFACE_ACCESS_CLR__SURF4_READ_FLAG_CLR__SHIFT     0x00000014
+#define	SURFACE_ACCESS_CLR__SURF5_READ_FLAG_CLR__SHIFT     0x00000015
+#define	SURFACE_ACCESS_CLR__SURF6_READ_FLAG_CLR__SHIFT     0x00000016
+#define	SURFACE_ACCESS_CLR__SURF7_READ_FLAG_CLR__SHIFT     0x00000017
+#define	SURFACE_ACCESS_CLR__NONSURF_READ_FLAG_CLR__SHIFT   0x00000018
+#define	SURFACE_ACCESS_CLR__LINEAR_READ_FLAG_CLR__SHIFT    0x00000019
+#define	SURFACE_ACCESS_CLR__VGA_READ_FLAG_CLR__SHIFT       0x0000001a
+
+// GRPH8_IDX
+#define	GRPH8_IDX__GRPH_IDX__SHIFT                         0x00000000
+
+// GRPH8_DATA
+#define	GRPH8_DATA__GRPH_DATA__SHIFT                       0x00000000
+
+// GRA05
+#define	GRA05__GRPH_WRITE_MODE__SHIFT                      0x00000000
+#define	GRA05__GRPH_READ1__SHIFT                           0x00000003
+#define	GRA05__CGA_ODDEVEN__SHIFT                          0x00000004
+#define	GRA05__GRPH_OES__SHIFT                             0x00000005
+#define	GRA05__GRPH_PACK__SHIFT                            0x00000006
+
+// SEQ8_IDX
+#define	SEQ8_IDX__SEQ_IDX__SHIFT                           0x00000000
+
+// SEQ8_DATA
+#define	SEQ8_DATA__SEQ_DATA__SHIFT                         0x00000000
+
+// CRTC8_IDX
+#define	CRTC8_IDX__VCRTC_IDX__SHIFT                        0x00000000
+
+// CRTC8_DATA
+#define	CRTC8_DATA__VCRTC_DATA__SHIFT                      0x00000000
+
+// CRT14
+#define	CRT14__UNDRLN_LOC__SHIFT                           0x00000000
+#define	CRT14__ADDR_CNT_BY4__SHIFT                         0x00000005
+#define	CRT14__DOUBLE_WORD__SHIFT                          0x00000006
+
+// CRT17
+#define	CRT17__RA0_AS_A13B__SHIFT                          0x00000000
+#define	CRT17__RA1_AS_A14B__SHIFT                          0x00000001
+#define	CRT17__VCOUNT_BY2__SHIFT                           0x00000002
+#define	CRT17__ADDR_CNT_BY2__SHIFT                         0x00000003
+#define	CRT17__WRAP_A15TOA0__SHIFT                         0x00000005
+#define	CRT17__BYTE_MODE__SHIFT                            0x00000006
+#define	CRT17__CRTC_SYNC_EN__SHIFT                         0x00000007
+
+// CRT14_S
+#define	CRT14_S__UNDRLN_LOC_S__SHIFT                       0x00000000
+#define	CRT14_S__ADDR_CNT_BY4_M__SHIFT                     0x00000005
+#define	CRT14_S__DOUBLE_WORD_M__SHIFT                      0x00000006
+
+// CRT17_S
+#define	CRT17_S__RA0_AS_A13B_M__SHIFT                      0x00000000
+#define	CRT17_S__RA1_AS_A14B_M__SHIFT                      0x00000001
+#define	CRT17_S__VCOUNT_BY2_S__SHIFT                       0x00000002
+#define	CRT17_S__ADDR_CNT_BY2_M__SHIFT                     0x00000003
+#define	CRT17_S__WRAP_A15TOA0_M__SHIFT                     0x00000005
+#define	CRT17_S__BYTE_MODE_M__SHIFT                        0x00000006
+#define	CRT17_S__CRTC_SYNC_EN_M__SHIFT                     0x00000007
+
+// GEN_INT_CNTL
+#define	GEN_INT_CNTL__CRTC_VBLANK_MASK__SHIFT              0x00000000
+#define	GEN_INT_CNTL__CRTC_VLINE_MASK__SHIFT               0x00000001
+#define	GEN_INT_CNTL__CRTC_VSYNC_MASK__SHIFT               0x00000002
+#define	GEN_INT_CNTL__SNAPSHOT_MASK__SHIFT                 0x00000003
+#define	GEN_INT_CNTL__FP_DETECT_MASK__SHIFT                0x00000004
+#define	GEN_INT_CNTL__DMA_VIPH0_INT_EN__SHIFT              0x0000000c
+#define	GEN_INT_CNTL__DMA_VIPH1_INT_EN__SHIFT              0x0000000d
+#define	GEN_INT_CNTL__DMA_VIPH2_INT_EN__SHIFT              0x0000000e
+#define	GEN_INT_CNTL__DMA_VIPH3_INT_EN__SHIFT              0x0000000f
+#define	GEN_INT_CNTL__I2C_INT_EN__SHIFT                    0x00000011
+#define	GEN_INT_CNTL__GUI_IDLE_MASK__SHIFT                 0x00000013
+#define	GEN_INT_CNTL__VIPH_INT_EN__SHIFT                   0x00000018
+#define	GEN_INT_CNTL__SW_INT_EN__SHIFT                     0x00000019
+#define	GEN_INT_CNTL__GUIDMA_MASK__SHIFT                   0x0000001e
+#define	GEN_INT_CNTL__VIDDMA_MASK__SHIFT                   0x0000001f
+
+// GEN_INT_STATUS
+#define	GEN_INT_STATUS__CRTC_VBLANK_STAT__SHIFT            0x00000000
+#define	GEN_INT_STATUS__CRTC_VBLANK_STAT_AK__SHIFT         0x00000000
+#define	GEN_INT_STATUS__CRTC_VLINE_STAT__SHIFT             0x00000001
+#define	GEN_INT_STATUS__CRTC_VLINE_STAT_AK__SHIFT          0x00000001
+#define	GEN_INT_STATUS__CRTC_VSYNC_STAT__SHIFT             0x00000002
+#define	GEN_INT_STATUS__CRTC_VSYNC_STAT_AK__SHIFT          0x00000002
+#define	GEN_INT_STATUS__SNAPSHOT_STAT__SHIFT               0x00000003
+#define	GEN_INT_STATUS__SNAPSHOT_STAT_AK__SHIFT            0x00000003
+#define	GEN_INT_STATUS__FP_DETECT_STAT__SHIFT              0x00000004
+#define	GEN_INT_STATUS__FP_DETECT_STAT_AK__SHIFT           0x00000004
+#define	GEN_INT_STATUS__CAP0_INT_ACTIVE__SHIFT             0x00000008
+#define	GEN_INT_STATUS__DMA_VIPH0_INT__SHIFT               0x0000000c
+#define	GEN_INT_STATUS__DMA_VIPH0_INT_AK__SHIFT            0x0000000c
+#define	GEN_INT_STATUS__DMA_VIPH1_INT__SHIFT               0x0000000d
+#define	GEN_INT_STATUS__DMA_VIPH1_INT_AK__SHIFT            0x0000000d
+#define	GEN_INT_STATUS__DMA_VIPH2_INT__SHIFT               0x0000000e
+#define	GEN_INT_STATUS__DMA_VIPH2_INT_AK__SHIFT            0x0000000e
+#define	GEN_INT_STATUS__DMA_VIPH3_INT__SHIFT               0x0000000f
+#define	GEN_INT_STATUS__DMA_VIPH3_INT_AK__SHIFT            0x0000000f
+#define	GEN_INT_STATUS__I2C_INT__SHIFT                     0x00000011
+#define	GEN_INT_STATUS__I2C_INT_AK__SHIFT                  0x00000011
+#define	GEN_INT_STATUS__GUI_IDLE_STAT__SHIFT               0x00000013
+#define	GEN_INT_STATUS__GUI_IDLE_STAT_AK__SHIFT            0x00000013
+#define	GEN_INT_STATUS__VIPH_INT__SHIFT                    0x00000018
+#define	GEN_INT_STATUS__SW_INT__SHIFT                      0x00000019
+#define	GEN_INT_STATUS__SW_INT_AK__SHIFT                   0x00000019
+#define	GEN_INT_STATUS__SW_INT_SET__SHIFT                  0x0000001a
+#define	GEN_INT_STATUS__GUIDMA_STAT__SHIFT                 0x0000001e
+#define	GEN_INT_STATUS__GUIDMA_AK__SHIFT                   0x0000001e
+#define	GEN_INT_STATUS__VIDDMA_STAT__SHIFT                 0x0000001f
+#define	GEN_INT_STATUS__VIDDMA_AK__SHIFT                   0x0000001f
+
+// CRTC_EXT_CNTL
+#define	CRTC_EXT_CNTL__CRTC_VGA_XOVERSCAN__SHIFT           0x00000000
+#define	CRTC_EXT_CNTL__VGA_BLINK_RATE__SHIFT               0x00000001
+#define	CRTC_EXT_CNTL__VGA_ATI_LINEAR__SHIFT               0x00000003
+#define	CRTC_EXT_CNTL__VGA_128KAP_PAGING__SHIFT            0x00000004
+#define	CRTC_EXT_CNTL__VGA_TEXT_132__SHIFT                 0x00000005
+#define	CRTC_EXT_CNTL__VGA_XCRT_CNT_EN__SHIFT              0x00000006
+#define	CRTC_EXT_CNTL__CRTC_HSYNC_DIS__SHIFT               0x00000008
+#define	CRTC_EXT_CNTL__CRTC_VSYNC_DIS__SHIFT               0x00000009
+#define	CRTC_EXT_CNTL__CRTC_DISPLAY_DIS__SHIFT             0x0000000a
+#define	CRTC_EXT_CNTL__CRTC_SYNC_TRISTATE__SHIFT           0x0000000b
+#define	CRTC_EXT_CNTL__CRTC_HSYNC_TRISTATE__SHIFT          0x0000000c
+#define	CRTC_EXT_CNTL__CRTC_VSYNC_TRISTATE__SHIFT          0x0000000d
+#define	CRTC_EXT_CNTL__VGA_CUR_B_TEST__SHIFT               0x00000011
+#define	CRTC_EXT_CNTL__VGA_PACK_DIS__SHIFT                 0x00000012
+#define	CRTC_EXT_CNTL__VGA_MEM_PS_EN__SHIFT                0x00000013
+#define	CRTC_EXT_CNTL__VCRTC_IDX_MASTER__SHIFT             0x00000018
+
+// WAIT_UNTIL
+#define	WAIT_UNTIL__WAIT_CRTC_PFLIP__SHIFT                 0x00000000
+#define	WAIT_UNTIL__WAIT_RE_CRTC_VLINE__SHIFT              0x00000001
+#define	WAIT_UNTIL__WAIT_FE_CRTC_VLINE__SHIFT              0x00000002
+#define	WAIT_UNTIL__WAIT_CRTC_VLINE__SHIFT                 0x00000003
+#define	WAIT_UNTIL__WAIT_DMA_VIPH0_IDLE__SHIFT             0x00000004
+#define	WAIT_UNTIL__WAIT_DMA_VIPH1_IDLE__SHIFT             0x00000005
+#define	WAIT_UNTIL__WAIT_DMA_VIPH2_IDLE__SHIFT             0x00000006
+#define	WAIT_UNTIL__WAIT_DMA_VIPH3_IDLE__SHIFT             0x00000007
+#define	WAIT_UNTIL__WAIT_DMA_VID_IDLE__SHIFT               0x00000008
+#define	WAIT_UNTIL__WAIT_DMA_GUI_IDLE__SHIFT               0x00000009
+#define	WAIT_UNTIL__WAIT_CMDFIFO__SHIFT                    0x0000000a
+#define	WAIT_UNTIL__WAIT_OV0_FLIP__SHIFT                   0x0000000b
+#define	WAIT_UNTIL__WAIT_OV0_SLICEDONE__SHIFT              0x0000000c
+#define	WAIT_UNTIL__WAIT_2D_IDLE__SHIFT                    0x0000000e
+#define	WAIT_UNTIL__WAIT_3D_IDLE__SHIFT                    0x0000000f
+#define	WAIT_UNTIL__WAIT_2D_IDLECLEAN__SHIFT               0x00000010
+#define	WAIT_UNTIL__WAIT_3D_IDLECLEAN__SHIFT               0x00000011
+#define	WAIT_UNTIL__WAIT_HOST_IDLECLEAN__SHIFT             0x00000012
+#define	WAIT_UNTIL__WAIT_EXTERN_SIG__SHIFT                 0x00000013
+#define	WAIT_UNTIL__CMDFIFO_ENTRIES__SHIFT                 0x00000014
+
+// ISYNC_CNTL
+#define	ISYNC_CNTL__ISYNC_ANY2D_IDLE3D__SHIFT              0x00000000
+#define	ISYNC_CNTL__ISYNC_ANY3D_IDLE2D__SHIFT              0x00000001
+#define	ISYNC_CNTL__ISYNC_TRIG2D_IDLE3D__SHIFT             0x00000002
+#define	ISYNC_CNTL__ISYNC_TRIG3D_IDLE2D__SHIFT             0x00000003
+#define	ISYNC_CNTL__ISYNC_WAIT_IDLEGUI__SHIFT              0x00000004
+#define	ISYNC_CNTL__ISYNC_CPSCRATCH_IDLEGUI__SHIFT         0x00000005
+
+// RBBM_GUICNTL
+#define	RBBM_GUICNTL__HOST_DATA_SWAP__SHIFT                0x00000000
+
+// RBBM_STATUS
+#define	RBBM_STATUS__CMDFIFO_AVAIL__SHIFT                  0x00000000
+#define	RBBM_STATUS__HIRQ_ON_RBB__SHIFT                    0x00000008
+#define	RBBM_STATUS__CPRQ_ON_RBB__SHIFT                    0x00000009
+#define	RBBM_STATUS__CFRQ_ON_RBB__SHIFT                    0x0000000a
+#define	RBBM_STATUS__HIRQ_IN_RTBUF__SHIFT                  0x0000000b
+#define	RBBM_STATUS__CPRQ_IN_RTBUF__SHIFT                  0x0000000c
+#define	RBBM_STATUS__CFRQ_IN_RTBUF__SHIFT                  0x0000000d
+#define	RBBM_STATUS__CF_PIPE_BUSY__SHIFT                   0x0000000e
+#define	RBBM_STATUS__ENG_EV_BUSY__SHIFT                    0x0000000f
+#define	RBBM_STATUS__CP_CMDSTRM_BUSY__SHIFT                0x00000010
+#define	RBBM_STATUS__E2_BUSY__SHIFT                        0x00000011
+#define	RBBM_STATUS__RB2D_BUSY__SHIFT                      0x00000012
+#define	RBBM_STATUS__RB3D_BUSY__SHIFT                      0x00000013
+#define	RBBM_STATUS__SE_BUSY__SHIFT                        0x00000014
+#define	RBBM_STATUS__RE_BUSY__SHIFT                        0x00000015
+#define	RBBM_STATUS__TAM_BUSY__SHIFT                       0x00000016
+#define	RBBM_STATUS__TDM_BUSY__SHIFT                       0x00000017
+#define	RBBM_STATUS__PB_BUSY__SHIFT                        0x00000018
+#define	RBBM_STATUS__GUI_ACTIVE__SHIFT                     0x0000001f
+
+// RBBM_CNTL
+#define	RBBM_CNTL__RB_SETTLE__SHIFT                        0x00000000
+#define	RBBM_CNTL__ABORTCLKS_HI__SHIFT                     0x00000004
+#define	RBBM_CNTL__ABORTCLKS_CP__SHIFT                     0x00000008
+#define	RBBM_CNTL__ABORTCLKS_CFIFO__SHIFT                  0x0000000c
+#define	RBBM_CNTL__CPQ_DATA_SWAP__SHIFT                    0x00000011
+#define	RBBM_CNTL__NO_ABORT_IDCT__SHIFT                    0x00000015
+#define	RBBM_CNTL__NO_ABORT_BIOS__SHIFT                    0x00000016
+#define	RBBM_CNTL__NO_ABORT_FB__SHIFT                      0x00000017
+#define	RBBM_CNTL__NO_ABORT_CP__SHIFT                      0x00000018
+#define	RBBM_CNTL__NO_ABORT_HI__SHIFT                      0x00000019
+#define	RBBM_CNTL__NO_ABORT_HDP__SHIFT                     0x0000001a
+#define	RBBM_CNTL__NO_ABORT_MC__SHIFT                      0x0000001b
+#define	RBBM_CNTL__NO_ABORT_AIC__SHIFT                     0x0000001c
+#define	RBBM_CNTL__NO_ABORT_VIP__SHIFT                     0x0000001d
+#define	RBBM_CNTL__NO_ABORT_DISP__SHIFT                    0x0000001e
+#define	RBBM_CNTL__NO_ABORT_CG__SHIFT                      0x0000001f
+
+// RBBM_SOFT_RESET
+#define	RBBM_SOFT_RESET__SOFT_RESET_CP__SHIFT              0x00000000
+#define	RBBM_SOFT_RESET__SOFT_RESET_HI__SHIFT              0x00000001
+#define	RBBM_SOFT_RESET__SOFT_RESET_SE__SHIFT              0x00000002
+#define	RBBM_SOFT_RESET__SOFT_RESET_RE__SHIFT              0x00000003
+#define	RBBM_SOFT_RESET__SOFT_RESET_PP__SHIFT              0x00000004
+#define	RBBM_SOFT_RESET__SOFT_RESET_E2__SHIFT              0x00000005
+#define	RBBM_SOFT_RESET__SOFT_RESET_RB__SHIFT              0x00000006
+#define	RBBM_SOFT_RESET__SOFT_RESET_HDP__SHIFT             0x00000007
+#define	RBBM_SOFT_RESET__SOFT_RESET_MC__SHIFT              0x00000008
+#define	RBBM_SOFT_RESET__SOFT_RESET_AIC__SHIFT             0x00000009
+#define	RBBM_SOFT_RESET__SOFT_RESET_VIP__SHIFT             0x0000000a
+#define	RBBM_SOFT_RESET__SOFT_RESET_DISP__SHIFT            0x0000000b
+#define	RBBM_SOFT_RESET__SOFT_RESET_CG__SHIFT              0x0000000c
+
+// NQWAIT_UNTIL
+#define	NQWAIT_UNTIL__WAIT_GUI_IDLE__SHIFT                 0x00000000
+
+// RBBM_DEBUG
+#define	RBBM_DEBUG__EN_BESWAP__SHIFT                       0x00000000
+#define	RBBM_DEBUG__RBBM_DEBUG__SHIFT                      0x00000001
+#define	RBBM_DEBUG__RBBM_DEBUG_M6__SHIFT                   0x00000000 //m6-a
+
+// RBBM_CMDFIFO_ADDR
+#define	RBBM_CMDFIFO_ADDR__CMDFIFO_ADDR__SHIFT             0x00000000
+
+// RBBM_CMDFIFO_DATAL
+#define	RBBM_CMDFIFO_DATAL__CMDFIFO_DATAL__SHIFT           0x00000000
+
+// RBBM_CMDFIFO_DATAH
+#define	RBBM_CMDFIFO_DATAH__CMDFIFO_DATAH__SHIFT           0x00000000
+
+// RBBM_CMDFIFO_STAT
+#define	RBBM_CMDFIFO_STAT__CMDFIFO_RPTR__SHIFT             0x00000000
+#define	RBBM_CMDFIFO_STAT__CMDFIFO_WPTR__SHIFT             0x00000008
+
+// GENFC_RD
+#define	GENFC_RD__VSYNC_SEL_R__SHIFT                       0x00000003
+
+// GENFC_WT
+#define	GENFC_WT__VSYNC_SEL_W__SHIFT                       0x00000003
+
+// GENS0
+#define	GENS0__SENSE_SWITCH__SHIFT                         0x00000004
+#define	GENS0__CRT_INTR__SHIFT                             0x00000007
+
+// GENS1
+#define	GENS1__NO_DIPLAY__SHIFT                            0x00000000
+#define	GENS1__VGA_VSTATUS__SHIFT                          0x00000003
+#define	GENS1__PIXEL_READ_BACK__SHIFT                      0x00000004
+
+// DAC_DATA
+#define	DAC_DATA__DAC_DATA__SHIFT                          0x00000000
+
+// DAC_MASK
+#define	DAC_MASK__DAC_MASK__SHIFT                          0x00000000
+
+// DAC_R_INDEX
+#define	DAC_R_INDEX__DAC_R_INDEX__SHIFT                    0x00000000
+
+// DAC_W_INDEX
+#define	DAC_W_INDEX__DAC_W_INDEX__SHIFT                    0x00000000
+
+// SEQ00
+#define	SEQ00__SEQ_RST0B__SHIFT                            0x00000000
+#define	SEQ00__SEQ_RST1B__SHIFT                            0x00000001
+
+// SEQ01
+#define	SEQ01__SEQ_DOT8__SHIFT                             0x00000000
+#define	SEQ01__SEQ_SHIFT2__SHIFT                           0x00000002
+#define	SEQ01__SEQ_PCLKBY2__SHIFT                          0x00000003
+#define	SEQ01__SEQ_SHIFT4__SHIFT                           0x00000004
+#define	SEQ01__SEQ_MAXBW__SHIFT                            0x00000005
+
+// SEQ03
+#define	SEQ03__SEQ_FONT_B1__SHIFT                          0x00000000
+#define	SEQ03__SEQ_FONT_B2__SHIFT                          0x00000001
+#define	SEQ03__SEQ_FONT_A1__SHIFT                          0x00000002
+#define	SEQ03__SEQ_FONT_A2__SHIFT                          0x00000003
+#define	SEQ03__SEQ_FONT_B0__SHIFT                          0x00000004
+#define	SEQ03__SEQ_FONT_A0__SHIFT                          0x00000005
+
+// CRT00
+#define	CRT00__H_TOTAL__SHIFT                              0x00000000
+
+// CRT01
+#define	CRT01__H_DISP_END__SHIFT                           0x00000000
+
+// CRT02
+#define	CRT02__H_BLANK_START__SHIFT                        0x00000000
+
+// CRT03
+#define	CRT03__H_BLANK_END__SHIFT                          0x00000000
+#define	CRT03__H_DE_SKEW__SHIFT                            0x00000005
+#define	CRT03__CR10CR11_R_DIS_B__SHIFT                     0x00000007
+
+// CRT04
+#define	CRT04__H_SYNC_START__SHIFT                         0x00000000
+
+// CRT05
+#define	CRT05__H_SYNC_END__SHIFT                           0x00000000
+#define	CRT05__H_SYNC_SKEW__SHIFT                          0x00000005
+#define	CRT05__H_BLANK_END_B5__SHIFT                       0x00000007
+
+// CRT06
+#define	CRT06__V_TOTAL__SHIFT                              0x00000000
+
+// CRT07
+#define	CRT07__V_TOTAL_B8__SHIFT                           0x00000000
+#define	CRT07__V_DISP_END_B8__SHIFT                        0x00000001
+#define	CRT07__V_SYNC_START_B8__SHIFT                      0x00000002
+#define	CRT07__V_BLANK_START_B8__SHIFT                     0x00000003
+#define	CRT07__LINE_CMP_B8__SHIFT                          0x00000004
+#define	CRT07__V_TOTAL_B9__SHIFT                           0x00000005
+#define	CRT07__V_DISP_END_B9__SHIFT                        0x00000006
+#define	CRT07__V_SYNC_START_B9__SHIFT                      0x00000007
+
+// CRT08
+#define	CRT08__ROW_SCAN_START__SHIFT                       0x00000000
+#define	CRT08__BYTE_PAN__SHIFT                             0x00000005
+
+// CRT09
+#define	CRT09__MAX_ROW_SCAN__SHIFT                         0x00000000
+#define	CRT09__V_BLANK_START_B9__SHIFT                     0x00000005
+#define	CRT09__LINE_CMP_B9__SHIFT                          0x00000006
+#define	CRT09__DOUBLE_CHAR_HEIGHT__SHIFT                   0x00000007
+
+// CRT0A
+#define	CRT0A__CURSOR_START__SHIFT                         0x00000000
+#define	CRT0A__CURSOR_DISABLE__SHIFT                       0x00000005
+
+// CRT0B
+#define	CRT0B__CURSOR_END__SHIFT                           0x00000000
+#define	CRT0B__CURSOR_SKEW__SHIFT                          0x00000005
+
+// CRT0C
+#define	CRT0C__DISP_START__SHIFT                           0x00000000
+
+// CRT0D
+#define	CRT0D__DISP_START__SHIFT                           0x00000000
+
+// CRT0E
+#define	CRT0E__CURSOR_LOC_HI__SHIFT                        0x00000000
+
+// CRT0F
+#define	CRT0F__CURSOR_LOC_LO__SHIFT                        0x00000000
+
+// CRT10
+#define	CRT10__V_SYNC_START__SHIFT                         0x00000000
+
+// CRT11
+#define	CRT11__V_SYNC_END__SHIFT                           0x00000000
+#define	CRT11__V_INTR_CLR__SHIFT                           0x00000004
+#define	CRT11__V_INTR_EN__SHIFT                            0x00000005
+#define	CRT11__SEL5_REFRESH_CYC__SHIFT                     0x00000006
+#define	CRT11__C0T7_WR_ONLY__SHIFT                         0x00000007
+
+// CRT12
+#define	CRT12__V_DISP_END__SHIFT                           0x00000000
+
+// CRT13
+#define	CRT13__DISP_PITCH__SHIFT                           0x00000000
+
+// CRT15
+#define	CRT15__V_BLANK_START__SHIFT                        0x00000000
+
+// CRT16
+#define	CRT16__V_BLANK_END__SHIFT                          0x00000000
+
+// CRT18
+#define	CRT18__LINE_CMP__SHIFT                             0x00000000
+
+// CRT00_S
+#define	CRT00_S__H_TOTAL_S__SHIFT                          0x00000000
+
+// CRT01_S
+#define	CRT01_S__H_DISP_END_S__SHIFT                       0x00000000
+
+// CRT02_S
+#define	CRT02_S__H_BLANK_START_S__SHIFT                    0x00000000
+
+// CRT03_S
+#define	CRT03_S__H_BLANK_END_S__SHIFT                      0x00000000
+#define	CRT03_S__H_DE_SKEW_S__SHIFT                        0x00000005
+#define	CRT03_S__CR10CR11_R_DIS_B_M__SHIFT                 0x00000007
+
+// CRT04_S
+#define	CRT04_S__H_SYNC_START_S__SHIFT                     0x00000000
+
+// CRT05_S
+#define	CRT05_S__H_SYNC_END_S__SHIFT                       0x00000000
+#define	CRT05_S__H_SYNC_SKEW_S__SHIFT                      0x00000005
+#define	CRT05_S__H_BLANK_END_B5_S__SHIFT                   0x00000007
+
+// CRT06_S
+#define	CRT06_S__V_TOTAL_S__SHIFT                          0x00000000
+
+// CRT07_S
+#define	CRT07_S__V_TOTAL_B8_S__SHIFT                       0x00000000
+#define	CRT07_S__V_DISP_END_B8_S__SHIFT                    0x00000001
+#define	CRT07_S__V_SYNC_START_B8_S__SHIFT                  0x00000002
+#define	CRT07_S__V_BLANK_START_B8_S__SHIFT                 0x00000003
+#define	CRT07_S__LINE_CMP_B8_M__SHIFT                      0x00000004
+#define	CRT07_S__V_TOTAL_B9_S__SHIFT                       0x00000005
+#define	CRT07_S__V_DISP_END_B9_S__SHIFT                    0x00000006
+#define	CRT07_S__V_SYNC_START_B9_S__SHIFT                  0x00000007
+
+// CRT08_S
+#define	CRT08_S__ROW_SCAN_START_M__SHIFT                   0x00000000
+#define	CRT08_S__BYTE_PAN_M__SHIFT                         0x00000005
+
+// CRT09_S
+#define	CRT09_S__MAX_ROW_SCAN_S__SHIFT                     0x00000000
+#define	CRT09_S__V_BLANK_START_B9_S__SHIFT                 0x00000005
+#define	CRT09_S__LINE_CMP_B9_M__SHIFT                      0x00000006
+#define	CRT09_S__DOUBLE_CHAR_HEIGHT_M__SHIFT               0x00000007
+
+// CRT0A_S
+#define	CRT0A_S__CURSOR_START_S__SHIFT                     0x00000000
+#define	CRT0A_S__CURSOR_DISABLE_M__SHIFT                   0x00000005
+
+// CRT0B_S
+#define	CRT0B_S__CURSOR_END_S__SHIFT                       0x00000000
+#define	CRT0B_S__CURSOR_SKEW_M__SHIFT                      0x00000005
+
+// CRT0C_S
+#define	CRT0C_S__DISP_START_M__SHIFT                       0x00000000
+
+// CRT0D_S
+#define	CRT0D_S__DISP_START_M__SHIFT                       0x00000000
+
+// CRT0E_S
+#define	CRT0E_S__CURSOR_LOC_HI_M__SHIFT                    0x00000000
+
+// CRT0F_S
+#define	CRT0F_S__CURSOR_LOC_LO_M__SHIFT                    0x00000000
+
+// CRT10_S
+#define	CRT10_S__V_SYNC_START_S__SHIFT                     0x00000000
+
+// CRT11_S
+#define	CRT11_S__V_SYNC_END_S__SHIFT                       0x00000000
+#define	CRT11_S__V_INTR_CLR_M__SHIFT                       0x00000004
+#define	CRT11_S__V_INTR_EN_M__SHIFT                        0x00000005
+#define	CRT11_S__SEL5_REFRESH_CYC_M__SHIFT                 0x00000006
+#define	CRT11_S__C0T7_WR_ONLY_M__SHIFT                     0x00000007
+
+// CRT12_S
+#define	CRT12_S__V_DISP_END_S__SHIFT                       0x00000000
+
+// CRT13_S
+#define	CRT13_S__DISP_PITCH_M__SHIFT                       0x00000000
+
+// CRT15_S
+#define	CRT15_S__V_BLANK_START_S__SHIFT                    0x00000000
+
+// CRT16_S
+#define	CRT16_S__V_BLANK_END_S__SHIFT                      0x00000000
+
+// CRT18_S
+#define	CRT18_S__LINE_CMP_M__SHIFT                         0x00000000
+
+// ATTRX
+#define	ATTRX__ATTR_IDX__SHIFT                             0x00000000
+#define	ATTRX__ATTR_PAL_RW_ENB__SHIFT                      0x00000005
+
+// ATTRDW
+#define	ATTRDW__ATTR_DATA__SHIFT                           0x00000000
+
+// ATTRDR
+#define	ATTRDR__ATTR_DATA__SHIFT                           0x00000000
+
+// ATTR00
+#define	ATTR00__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR01
+#define	ATTR01__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR02
+#define	ATTR02__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR03
+#define	ATTR03__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR04
+#define	ATTR04__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR05
+#define	ATTR05__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR06
+#define	ATTR06__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR07
+#define	ATTR07__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR08
+#define	ATTR08__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR09
+#define	ATTR09__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR0A
+#define	ATTR0A__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR0B
+#define	ATTR0B__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR0C
+#define	ATTR0C__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR0D
+#define	ATTR0D__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR0E
+#define	ATTR0E__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR0F
+#define	ATTR0F__ATTR_PAL__SHIFT                            0x00000000
+
+// ATTR10
+#define	ATTR10__ATTR_GRPH_MODE__SHIFT                      0x00000000
+#define	ATTR10__ATTR_MONO_EN__SHIFT                        0x00000001
+#define	ATTR10__ATTR_LGRPH_EN__SHIFT                       0x00000002
+#define	ATTR10__ATTR_BLINK_EN__SHIFT                       0x00000003
+#define	ATTR10__ATTR_PANTOPONLY__SHIFT                     0x00000005
+#define	ATTR10__ATTR_PCLKBY2__SHIFT                        0x00000006
+#define	ATTR10__ATTR_CSEL_EN__SHIFT                        0x00000007
+
+// ATTR11
+#define	ATTR11__ATTR_OVSC__SHIFT                           0x00000000
+
+// ATTR12
+#define	ATTR12__ATTR_MAP_EN__SHIFT                         0x00000000
+#define	ATTR12__ATTR_VSMUX__SHIFT                          0x00000004
+
+// ATTR13
+#define	ATTR13__ATTR_PPAN__SHIFT                           0x00000000
+
+// ATTR14
+#define	ATTR14__ATTR_CSEL1__SHIFT                          0x00000000
+#define	ATTR14__ATTR_CSEL2__SHIFT                          0x00000002
+
+// DISP_TEST_MACRO_RW_WRITE
+#define	DISP_TEST_MACRO_RW_WRITE__TEST_MACRO_RW_WRITE1__SHIFT 0x00000000
+#define	DISP_TEST_MACRO_RW_WRITE__TEST_MACRO_RW_WRITE2__SHIFT 0x0000000e
+
+// DISP_TEST_MACRO_RW_READ
+#define	DISP_TEST_MACRO_RW_READ__TEST_MACRO_RW_READ1__SHIFT 0x00000000
+#define	DISP_TEST_MACRO_RW_READ__TEST_MACRO_RW_READ2__SHIFT 0x00000010
+
+// DISP_TEST_MACRO_RW_DATA
+#define	DISP_TEST_MACRO_RW_DATA__TEST_MACRO_RW_DATA__SHIFT 0x00000000
+
+// DISP_TEST_MACRO_RW_CNTL
+#define	DISP_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_START__SHIFT 0x00000000
+#define	DISP_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_OP__SHIFT   0x00000001
+#define	DISP_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_MODE__SHIFT 0x00000004
+#define	DISP_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_MISMATCH_SEL__SHIFT 0x00000006
+#define	DISP_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_MISMATCH__SHIFT 0x0000000f
+#define	DISP_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_ENABLE__SHIFT 0x00000010
+#define	DISP_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_SCLK_NEG_ENABLE__SHIFT 0x00000011
+
+// CRTC_STATUS
+#define	CRTC_STATUS__CRTC_VBLANK_CUR__SHIFT                0x00000000
+#define	CRTC_STATUS__CRTC_VBLANK_SAVE__SHIFT               0x00000001
+#define	CRTC_STATUS__CRTC_VBLANK_SAVE_CLEAR__SHIFT         0x00000001
+#define	CRTC_STATUS__CRTC_VLINE_SYNC__SHIFT                0x00000002
+#define	CRTC_STATUS__CRTC_FRAME__SHIFT                     0x00000003
+
+// GPIO_VGA_DDC
+#define	GPIO_VGA_DDC__VGA_DCC_DATA_OUTPUT__SHIFT           0x00000000
+#define	GPIO_VGA_DDC__VGA_DDC_CLK_OUTPUT__SHIFT            0x00000001
+#define	GPIO_VGA_DDC__VGA_DDC_DATA_INPUT__SHIFT            0x00000008
+#define	GPIO_VGA_DDC__VGA_DDC_CLK_INPUT__SHIFT             0x00000009
+#define	GPIO_VGA_DDC__VGA_DDC_DATA_OUT_EN__SHIFT           0x00000010
+#define	GPIO_VGA_DDC__VGA_DDC_CLK_OUT_EN__SHIFT            0x00000011
+
+// GPIO_DVI_DDC
+#define	GPIO_DVI_DDC__DVI_DCC_DATA_OUTPUT__SHIFT           0x00000000
+#define	GPIO_DVI_DDC__DVI_DDC_CLK_OUTPUT__SHIFT            0x00000001
+#define	GPIO_DVI_DDC__DVI_DDC_DATA_INPUT__SHIFT            0x00000008
+#define	GPIO_DVI_DDC__DVI_DDC_CLK_INPUT__SHIFT             0x00000009
+#define	GPIO_DVI_DDC__DVI_DDC_DATA_OUT_EN__SHIFT           0x00000010
+#define	GPIO_DVI_DDC__DVI_DDC_CLK_OUT_EN__SHIFT            0x00000011
+
+// GPIO_MONID
+#define	GPIO_MONID__GPIO_MONID_0_OUTPUT__SHIFT             0x00000000
+#define	GPIO_MONID__GPIO_MONID_1_OUTPUT__SHIFT             0x00000001
+#define	GPIO_MONID__GPIO_MONID_0_INPUT__SHIFT              0x00000008
+#define	GPIO_MONID__GPIO_MONID_1_INPUT__SHIFT              0x00000009
+#define	GPIO_MONID__GPIO_MONID_0_OUT_EN__SHIFT             0x00000010
+#define	GPIO_MONID__GPIO_MONID_1_OUT_EN__SHIFT             0x00000011
+
+// PALETTE_INDEX
+#define	PALETTE_INDEX__PALETTE_W_INDEX__SHIFT              0x00000000
+#define	PALETTE_INDEX__PALETTE_R_INDEX__SHIFT              0x00000010
+
+// PALETTE_DATA
+#define	PALETTE_DATA__PALETTE_DATA_B__SHIFT                0x00000000
+#define	PALETTE_DATA__PALETTE_DATA_G__SHIFT                0x00000008
+#define	PALETTE_DATA__PALETTE_DATA_R__SHIFT                0x00000010
+
+// PALETTE_30_DATA
+#define	PALETTE_30_DATA__PALETTE_DATA_B__SHIFT             0x00000000
+#define	PALETTE_30_DATA__PALETTE_DATA_G__SHIFT             0x0000000a
+#define	PALETTE_30_DATA__PALETTE_DATA_R__SHIFT             0x00000014
+
+// CRTC_H_TOTAL_DISP
+#define	CRTC_H_TOTAL_DISP__CRTC_H_TOTAL__SHIFT             0x00000000
+#define	CRTC_H_TOTAL_DISP__CRTC_H_DISP__SHIFT              0x00000010
+
+// CRTC_H_SYNC_STRT_WID
+#define	CRTC_H_SYNC_STRT_WID__CRTC_H_SYNC_STRT_PIX__SHIFT  0x00000000
+#define	CRTC_H_SYNC_STRT_WID__CRTC_H_SYNC_STRT_CHAR__SHIFT 0x00000003
+#define	CRTC_H_SYNC_STRT_WID__CRTC_H_SYNC_WID__SHIFT       0x00000010
+#define	CRTC_H_SYNC_STRT_WID__CRTC_H_SYNC_POL__SHIFT       0x00000017
+#define	CRTC_H_SYNC_STRT_WID__CRTC_H_SYNC_SKEW_TUNE__SHIFT 0x00000018
+#define	CRTC_H_SYNC_STRT_WID__CRTC_H_SYNC_SKEW_TUNE_MODE__SHIFT 0x0000001c
+
+// CRTC_V_TOTAL_DISP
+#define	CRTC_V_TOTAL_DISP__CRTC_V_TOTAL__SHIFT             0x00000000
+#define	CRTC_V_TOTAL_DISP__CRTC_V_DISP__SHIFT              0x00000010
+
+// CRTC_V_SYNC_STRT_WID
+#define	CRTC_V_SYNC_STRT_WID__CRTC_V_SYNC_STRT__SHIFT      0x00000000
+#define	CRTC_V_SYNC_STRT_WID__CRTC_V_SYNC_WID__SHIFT       0x00000010
+#define	CRTC_V_SYNC_STRT_WID__CRTC_V_SYNC_POL__SHIFT       0x00000017
+
+// CRTC_VLINE_CRNT_VLINE
+#define	CRTC_VLINE_CRNT_VLINE__CRTC_VLINE__SHIFT           0x00000000
+#define	CRTC_VLINE_CRNT_VLINE__CRTC_CRNT_VLINE__SHIFT      0x00000010
+
+// CRTC_CRNT_FRAME
+#define	CRTC_CRNT_FRAME__CRTC_CRNT_FRAME__SHIFT            0x00000000
+
+// CRTC_GUI_TRIG_VLINE
+#define	CRTC_GUI_TRIG_VLINE__CRTC_GUI_TRIG_VLINE_START__SHIFT 0x00000000
+#define	CRTC_GUI_TRIG_VLINE__CRTC_GUI_TRIG_VLINE_INV__SHIFT 0x0000000f
+#define	CRTC_GUI_TRIG_VLINE__CRTC_GUI_TRIG_VLINE_END__SHIFT 0x00000010
+#define	CRTC_GUI_TRIG_VLINE__CRTC_GUI_TRIG_VLINE_STALL__SHIFT 0x0000001e
+#define	CRTC_GUI_TRIG_VLINE__CRTC_GUI_TRIG_VLINE__SHIFT    0x0000001f
+
+// CRTC_DEBUG
+#define	CRTC_DEBUG__CRTC_GUI_TRIG_BYPASS_EN__SHIFT         0x00000000
+#define	CRTC_DEBUG__GUI_TRIG_VLINE_BYPASS__SHIFT           0x00000001
+#define	CRTC_DEBUG__GUI_TRIG_OFFSET_BYPASS__SHIFT          0x00000002
+#define	CRTC_DEBUG__GUI_TRIG_PITCH_ADD_BYPASS__SHIFT       0x00000003
+
+// CRTC_OFFSET_RIGHT
+#define	CRTC_OFFSET_RIGHT__CRTC_OFFSET_RIGHT__SHIFT        0x00000000
+#define	CRTC_OFFSET_RIGHT__CRTC_GUI_TRIG_OFFSET__SHIFT     0x0000001e
+#define	CRTC_OFFSET_RIGHT__CRTC_OFFSET_LOCK__SHIFT         0x0000001f
+
+// CRTC_OFFSET
+#define	CRTC_OFFSET__CRTC_OFFSET__SHIFT                    0x00000000
+#define	CRTC_OFFSET__CRTC_GUI_TRIG_OFFSET__SHIFT           0x0000001e
+#define	CRTC_OFFSET__CRTC_OFFSET_LOCK__SHIFT               0x0000001f
+
+// CRTC_OFFSET_CNTL
+#define	CRTC_OFFSET_CNTL__CRTC_TILE_LINE__SHIFT            0x00000000
+#define	CRTC_OFFSET_CNTL__CRTC_TILE_LINE_RIGHT__SHIFT      0x00000004
+#define	CRTC_OFFSET_CNTL__CRTC_TILE_EN_RIGHT__SHIFT        0x0000000e
+#define	CRTC_OFFSET_CNTL__CRTC_TILE_EN__SHIFT              0x0000000f
+#define	CRTC_OFFSET_CNTL__CRTC_OFFSET_FLIP_CNTL__SHIFT     0x00000010
+#define	CRTC_OFFSET_CNTL__CRTC_STEREO_OFFSET_EN__SHIFT     0x00000011
+#define	CRTC_OFFSET_CNTL__CRTC_STEREO_SYNC_EN__SHIFT       0x00000012
+#define	CRTC_OFFSET_CNTL__CRTC_STEREO_SYNC_OUT_EN__SHIFT   0x00000014
+#define	CRTC_OFFSET_CNTL__CRTC_STEREO_SYNC__SHIFT          0x00000015
+#define	CRTC_OFFSET_CNTL__CRTC_GUI_TRIG_OFFSET_LEFT_EN__SHIFT 0x0000001c
+#define	CRTC_OFFSET_CNTL__CRTC_GUI_TRIG_OFFSET_RIGHT_EN__SHIFT 0x0000001d
+#define	CRTC_OFFSET_CNTL__CRTC_GUI_TRIG_OFFSET__SHIFT      0x0000001e
+#define	CRTC_OFFSET_CNTL__CRTC_OFFSET_LOCK__SHIFT          0x0000001f
+
+// CRTC_PITCH
+#define	CRTC_PITCH__CRTC_PITCH__SHIFT                      0x00000000
+#define	CRTC_PITCH__CRTC_PITCH_RIGHT__SHIFT                0x00000010
+
+// OVR_CLR
+#define	OVR_CLR__OVR_CLR_B__SHIFT                          0x00000000
+#define	OVR_CLR__OVR_CLR_G__SHIFT                          0x00000008
+#define	OVR_CLR__OVR_CLR_R__SHIFT                          0x00000010
+
+// OVR_WID_LEFT_RIGHT
+#define	OVR_WID_LEFT_RIGHT__OVR_WID_RIGHT__SHIFT           0x00000000
+#define	OVR_WID_LEFT_RIGHT__OVR_WID_LEFT__SHIFT            0x00000010
+
+// OVR_WID_TOP_BOTTOM
+#define	OVR_WID_TOP_BOTTOM__OVR_WID_BOTTOM__SHIFT          0x00000000
+#define	OVR_WID_TOP_BOTTOM__OVR_WID_TOP__SHIFT             0x00000010
+
+// DISPLAY_BASE_ADDR
+#define	DISPLAY_BASE_ADDR__DISPLAY_BASE_ADDR__SHIFT        0x00000000
+
+// SNAPSHOT_VH_COUNTS
+#define	SNAPSHOT_VH_COUNTS__SNAPSHOT_HCOUNT__SHIFT         0x00000000
+#define	SNAPSHOT_VH_COUNTS__SNAPSHOT_VCOUNT__SHIFT         0x00000010
+
+// SNAPSHOT_F_COUNT
+#define	SNAPSHOT_F_COUNT__SNAPSHOT_F_COUNT__SHIFT          0x00000000
+
+// N_VIF_COUNT
+#define	N_VIF_COUNT__N_VIF_COUNT_VAL__SHIFT                0x00000000
+#define	N_VIF_COUNT__GENLOCK_SOURCE_SEL__SHIFT             0x0000001f
+
+// SNAPSHOT_VIF_COUNT
+#define	SNAPSHOT_VIF_COUNT__LSNAPSHOT_VIF_COUNT__SHIFT     0x00000000
+#define	SNAPSHOT_VIF_COUNT__USNAPSHOT_VIF_COUNT__SHIFT     0x0000000a
+#define	SNAPSHOT_VIF_COUNT__AUTO_SNAPSHOT_TAKEN_RD__SHIFT  0x00000018
+#define	SNAPSHOT_VIF_COUNT__AUTO_SNAPSHOT_TAKEN_WR__SHIFT  0x00000018
+#define	SNAPSHOT_VIF_COUNT__MANUAL_SNAPSHOT_NOW__SHIFT     0x00000019
+
+// FP_CRTC_H_TOTAL_DISP
+#define	FP_CRTC_H_TOTAL_DISP__FP_CRTC_H_TOTAL__SHIFT       0x00000000
+#define	FP_CRTC_H_TOTAL_DISP__FP_CRTC_H_DISP__SHIFT        0x00000010
+
+// FP_CRTC_V_TOTAL_DISP
+#define	FP_CRTC_V_TOTAL_DISP__FP_CRTC_V_TOTAL__SHIFT       0x00000000
+#define	FP_CRTC_V_TOTAL_DISP__FP_CRTC_V_DISP__SHIFT        0x00000010
+
+// CRT_CRTC_H_SYNC_STRT_WID
+#define	CRT_CRTC_H_SYNC_STRT_WID__CRT_CRTC_H_SYNC_STRT_CHAR__SHIFT 0x00000003
+#define	CRT_CRTC_H_SYNC_STRT_WID__CRT_CRTC_H_SYNC_WID__SHIFT 0x00000010
+
+// CRT_CRTC_V_SYNC_STRT_WID
+#define	CRT_CRTC_V_SYNC_STRT_WID__CRT_CRTC_V_SYNC_STRT__SHIFT 0x00000000
+#define	CRT_CRTC_V_SYNC_STRT_WID__CRT_CRTC_V_SYNC_WID__SHIFT 0x00000010
+
+// CUR_OFFSET
+#define	CUR_OFFSET__CUR_OFFSET__SHIFT                      0x00000000
+#define	CUR_OFFSET__CUR_LOCK__SHIFT                        0x0000001f
+
+// CUR_HORZ_VERT_POSN
+#define	CUR_HORZ_VERT_POSN__CUR_VERT_POSN__SHIFT           0x00000000
+#define	CUR_HORZ_VERT_POSN__CUR_HORZ_POSN__SHIFT           0x00000010
+#define	CUR_HORZ_VERT_POSN__CUR_LOCK__SHIFT                0x0000001f
+
+// CUR_HORZ_VERT_OFF
+#define	CUR_HORZ_VERT_OFF__CUR_VERT_OFF__SHIFT             0x00000000
+#define	CUR_HORZ_VERT_OFF__CUR_HORZ_OFF__SHIFT             0x00000010
+#define	CUR_HORZ_VERT_OFF__CUR_LOCK__SHIFT                 0x0000001f
+
+// CUR_CLR0
+#define	CUR_CLR0__CUR_CLR0_B__SHIFT                        0x00000000
+#define	CUR_CLR0__CUR_CLR0_G__SHIFT                        0x00000008
+#define	CUR_CLR0__CUR_CLR0_R__SHIFT                        0x00000010
+
+// CUR_CLR1
+#define	CUR_CLR1__CUR_CLR1_B__SHIFT                        0x00000000
+#define	CUR_CLR1__CUR_CLR1_G__SHIFT                        0x00000008
+#define	CUR_CLR1__CUR_CLR1_R__SHIFT                        0x00000010
+
+// FP_HORZ_VERT_ACTIVE
+#define	FP_HORZ_VERT_ACTIVE__FP_VERT_ACTIVE_SIZE__SHIFT    0x00000000
+#define	FP_HORZ_VERT_ACTIVE__FP_HORZ_ACTIVE_SIZE__SHIFT    0x00000010
+
+// CRTC_MORE_CNTL
+#define	CRTC_MORE_CNTL__CRTC_HORZ_BLANK_MODE_SEL__SHIFT    0x00000000
+#define	CRTC_MORE_CNTL__CRTC_VERT_BLANK_MODE_SEL__SHIFT    0x00000001
+#define	CRTC_MORE_CNTL__CRTC_AUTO_HORZ_CENTER_EN__SHIFT    0x00000002
+#define	CRTC_MORE_CNTL__CRTC_AUTO_VERT_CENTER_EN__SHIFT    0x00000003
+#define	CRTC_MORE_CNTL__CRTC_H_CUTOFF_ACTIVE_EN__SHIFT     0x00000004
+#define	CRTC_MORE_CNTL__CRTC_V_CUTOFF_ACTIVE_EN__SHIFT     0x00000005
+
+// DAC_EXT_CNTL
+#define	DAC_EXT_CNTL__DAC_FORCE_BLANK_OFF_EN__SHIFT        0x00000004
+#define	DAC_EXT_CNTL__DAC_FORCE_DATA_EN__SHIFT             0x00000005
+#define	DAC_EXT_CNTL__DAC_FORCE_DATA_SEL__SHIFT            0x00000006
+#define	DAC_EXT_CNTL__DAC_FORCE_DATA__SHIFT                0x00000008
+
+// FP_GEN_CNTL
+#define	FP_GEN_CNTL__FP_BLANK_EN__SHIFT                    0x00000001
+#define	FP_GEN_CNTL__TMDS_EN__SHIFT                        0x00000002
+#define	FP_GEN_CNTL__PANEL_FORMAT__SHIFT                   0x00000003
+#define	FP_GEN_CNTL__NO_OF_GREY__SHIFT                     0x00000004
+#define	FP_GEN_CNTL__FP_RST_FM__SHIFT                      0x00000006
+#define	FP_GEN_CNTL__FP_EN_TMDS__SHIFT                     0x00000007
+#define	FP_GEN_CNTL__FP_DETECT_SENSE__SHIFT                0x00000008
+#define	FP_GEN_CNTL__FP_DETECT_INT_POL__SHIFT              0x00000009
+#define	FP_GEN_CNTL__FP_DETECT_EN__SHIFT                   0x0000000c
+#define	FP_GEN_CNTL__FP_USE_VGA_HVSYNC__SHIFT              0x0000000e
+#define	FP_GEN_CNTL__FP_USE_VGA_SYNC_POLARITY__SHIFT       0x0000000f
+#define	FP_GEN_CNTL__CRTC_DONT_SHADOW_VPAR__SHIFT          0x00000010
+#define	FP_GEN_CNTL__CRTC_DONT_SHADOW_HEND__SHIFT          0x00000011
+#define	FP_GEN_CNTL__CRTC_USE_SHADOWED_VEND__SHIFT         0x00000012
+#define	FP_GEN_CNTL__CRTC_USE_SHADOWED_ROWCUR__SHIFT       0x00000013
+#define	FP_GEN_CNTL__RMX_HVSYNC_CONTROL_EN__SHIFT          0x00000014
+#define	FP_GEN_CNTL__DFP_SYNC_SEL__SHIFT                   0x00000015
+#define	FP_GEN_CNTL__CRTC_LOCK_8DOT__SHIFT                 0x00000016
+#define	FP_GEN_CNTL__CRT_SYNC_SEL__SHIFT                   0x00000017
+#define	FP_GEN_CNTL__FP_USE_SHADOW_EN__SHIFT               0x00000018
+#define	FP_GEN_CNTL__DONT_RST_CHAREN__SHIFT                0x00000019
+#define	FP_GEN_CNTL__CRT_SYNC_ALT_SEL__SHIFT               0x0000001a
+#define	FP_GEN_CNTL__CRTC_USE_NONSHADOW_HPARAMS_FOR_BLANK__SHIFT 0x0000001b
+#define	FP_GEN_CNTL__CRTC_USE_NONSHADOW_VPARAMS_FOR_BLANK__SHIFT 0x0000001c
+#define	FP_GEN_CNTL__CRTC_VGA_XOVERSCAN_COLOR__SHIFT       0x0000001d
+#define	FP_GEN_CNTL__CRTC_VGA_XOVERSCAN_DIVBY2_EN__SHIFT   0x0000001e
+
+// FP_HORZ_STRETCH
+#define	FP_HORZ_STRETCH__FP_HORZ_STRETCH_RATIO__SHIFT      0x00000000
+#define	FP_HORZ_STRETCH__FP_HORZ_PANEL_SIZE__SHIFT         0x00000010
+#define	FP_HORZ_STRETCH__FP_HORZ_STRETCH_EN__SHIFT         0x00000019
+#define	FP_HORZ_STRETCH__FP_HORZ_STRETCH_MODE__SHIFT       0x0000001a
+#define	FP_HORZ_STRETCH__FP_AUTO_HORZ_RATIO__SHIFT         0x0000001b
+#define	FP_HORZ_STRETCH__FP_LOOP_STRETCH__SHIFT            0x0000001c
+#define	FP_HORZ_STRETCH__RMX_AUTO_RATIO_HORZ_INC__SHIFT    0x0000001f
+
+// FP_VERT_STRETCH
+#define	FP_VERT_STRETCH__FP_VERT_STRETCH_RATIO__SHIFT      0x00000000
+#define	FP_VERT_STRETCH__FP_VERT_PANEL_SIZE__SHIFT         0x0000000c
+#define	FP_VERT_STRETCH__FP_VERT_STRETCH_EN__SHIFT         0x00000019
+#define	FP_VERT_STRETCH__FP_VERT_STRETCH_MODE__SHIFT       0x0000001a
+#define	FP_VERT_STRETCH__FP_AUTO_VERT_RATIO__SHIFT         0x0000001b
+#define	FP_VERT_STRETCH__RMX_AUTO_RATIO_VERT_INC__SHIFT    0x0000001f
+
+// FP_H_SYNC_STRT_WID
+#define	FP_H_SYNC_STRT_WID__FP_H_SYNC_STRT_PIX__SHIFT      0x00000000
+#define	FP_H_SYNC_STRT_WID__FP_H_SYNC_STRT_CHAR__SHIFT     0x00000003
+#define	FP_H_SYNC_STRT_WID__FP_H_SYNC_WID__SHIFT           0x00000010
+#define	FP_H_SYNC_STRT_WID__FP_H_SYNC_POL__SHIFT           0x00000017
+
+// FP_V_SYNC_STRT_WID
+#define	FP_V_SYNC_STRT_WID__FP_V_SYNC_STRT__SHIFT          0x00000000
+#define	FP_V_SYNC_STRT_WID__FP_V_SYNC_WID__SHIFT           0x00000010
+#define	FP_V_SYNC_STRT_WID__FP_V_SYNC_POL__SHIFT           0x00000017
+
+// AUX_WINDOW_HORZ_CNTL
+#define	AUX_WINDOW_HORZ_CNTL__AUX_WIN_HORZ_START__SHIFT    0x00000000
+#define	AUX_WINDOW_HORZ_CNTL__AUX_WIN_HORZ_END__SHIFT      0x0000000c
+#define	AUX_WINDOW_HORZ_CNTL__AUX_WIN_EN__SHIFT            0x00000018
+#define	AUX_WINDOW_HORZ_CNTL__AUX_WIN_OUT_DELAY__SHIFT     0x00000019
+#define	AUX_WINDOW_HORZ_CNTL__RESERVED__SHIFT              0x0000001e
+#define	AUX_WINDOW_HORZ_CNTL__AUX_WIN_LOCK__SHIFT          0x0000001f
+
+// AUX_WINDOW_VERT_CNTL
+#define	AUX_WINDOW_VERT_CNTL__AUX_WIN_VERT_START__SHIFT    0x00000000
+#define	AUX_WINDOW_VERT_CNTL__AUX_WIN_VERT_END__SHIFT      0x00000010
+#define	AUX_WINDOW_VERT_CNTL__AUX_WINDOW_POL__SHIFT        0x0000001e
+#define	AUX_WINDOW_VERT_CNTL__AUX_WIN_LOCK__SHIFT          0x0000001f
+
+// GRPH_BUFFER_CNTL
+#define	GRPH_BUFFER_CNTL__GRPH_START_REQ__SHIFT            0x00000000
+#define	GRPH_BUFFER_CNTL__GRPH_STOP_REQ__SHIFT             0x00000008
+#define	GRPH_BUFFER_CNTL__GRPH_CRITICAL_POINT__SHIFT       0x00000010
+#define	GRPH_BUFFER_CNTL__GRPH_CRITICAL_CNTL__SHIFT        0x0000001c
+#define	GRPH_BUFFER_CNTL__GRPH_BUFFER_SIZE__SHIFT          0x0000001d
+#define	GRPH_BUFFER_CNTL__GRPH_CRITICAL_AT_SOF__SHIFT      0x0000001e
+#define	GRPH_BUFFER_CNTL__GRPH_STOP_CNTL__SHIFT            0x0000001f
+
+// VGA_BUFFER_CNTL
+#define	VGA_BUFFER_CNTL__VGA_START_REQ__SHIFT              0x00000000
+#define	VGA_BUFFER_CNTL__VGA_STOP_REQ__SHIFT               0x00000008
+#define	VGA_BUFFER_CNTL__VGA_CRITICAL_POINT__SHIFT         0x00000010
+
+// OV0_Y_X_START
+#define	OV0_Y_X_START__OV0_X_START__SHIFT                  0x00000000
+#define	OV0_Y_X_START__OV0_Y_START__SHIFT                  0x00000010
+
+// OV0_Y_X_END
+#define	OV0_Y_X_END__OV0_X_END__SHIFT                      0x00000000
+#define	OV0_Y_X_END__OV0_Y_END__SHIFT                      0x00000010
+
+// OV0_PIPELINE_CNTL
+#define	OV0_PIPELINE_CNTL__OV0_DISP_PIPE_DELAY__SHIFT      0x00000000
+
+// OV0_REG_LOAD_CNTL
+#define	OV0_REG_LOAD_CNTL__OV0_LOCK__SHIFT                 0x00000000
+#define	OV0_REG_LOAD_CNTL__OV0_VBLANK_DURING_LOCK__SHIFT   0x00000001
+#define	OV0_REG_LOAD_CNTL__OV0_STALL_GUI_UNTIL_FLIP__SHIFT 0x00000002
+#define	OV0_REG_LOAD_CNTL__OV0_LOCK_READBACK__SHIFT        0x00000003
+#define	OV0_REG_LOAD_CNTL__OV0_FLIP_READBACK__SHIFT        0x00000004
+
+// OV0_SCALE_CNTL
+#define	OV0_SCALE_CNTL__OV0_HORZ_PICK_NEAREST__SHIFT       0x00000002
+#define	OV0_SCALE_CNTL__OV0_VERT_PICK_NEAREST__SHIFT       0x00000003
+#define	OV0_SCALE_CNTL__OV0_SIGNED_UV__SHIFT               0x00000004
+#define	OV0_SCALE_CNTL__OV0_GAMMA_SEL__SHIFT               0x00000005
+#define	OV0_SCALE_CNTL__OV0_SURFACE_FORMAT__SHIFT          0x00000008
+#define	OV0_SCALE_CNTL__OV0_ADAPTIVE_DEINT__SHIFT          0x0000000c
+#define	OV0_SCALE_CNTL__OV0_BURST_PER_PLANE__SHIFT         0x00000010
+#define	OV0_SCALE_CNTL__OV0_DOUBLE_BUFFER_REGS__SHIFT      0x00000018
+#define	OV0_SCALE_CNTL__OV0_BANDWIDTH__SHIFT               0x0000001a
+#define	OV0_SCALE_CNTL__OV0_INT_EMU__SHIFT                 0x0000001d
+#define	OV0_SCALE_CNTL__OV0_OVERLAY_EN__SHIFT              0x0000001e
+#define	OV0_SCALE_CNTL__OV0_SOFT_RESET__SHIFT              0x0000001f
+
+// OV0_V_INC
+#define	OV0_V_INC__OV0_V_INC__SHIFT                        0x00000008
+
+// OV0_P1_V_ACCUM_INIT
+#define	OV0_P1_V_ACCUM_INIT__OV0_P1_MAX_LN_IN_PER_LN_OUT__SHIFT 0x00000000
+#define	OV0_P1_V_ACCUM_INIT__OV0_P1_V_ACCUM_INIT__SHIFT    0x0000000f
+
+// OV0_P23_V_ACCUM_INIT
+#define	OV0_P23_V_ACCUM_INIT__OV0_P23_MAX_LN_IN_PER_LN_OUT__SHIFT 0x00000000
+#define	OV0_P23_V_ACCUM_INIT__OV0_P23_V_ACCUM_INIT__SHIFT  0x0000000f
+
+// OV0_P1_BLANK_LINES_AT_TOP
+#define	OV0_P1_BLANK_LINES_AT_TOP__OV0_P1_BLNK_LN_AT_TOP_M1__SHIFT 0x00000000
+#define	OV0_P1_BLANK_LINES_AT_TOP__OV0_P1_ACTIVE_LINES_M1__SHIFT 0x00000010
+
+// OV0_P23_BLANK_LINES_AT_TOP
+#define	OV0_P23_BLANK_LINES_AT_TOP__OV0_P23_BLNK_LN_AT_TOP_M1__SHIFT 0x00000000
+#define	OV0_P23_BLANK_LINES_AT_TOP__OV0_P23_ACTIVE_LINES_M1__SHIFT 0x00000010
+
+// OV0_BASE_ADDR
+#define	OV0_BASE_ADDR__OV0_BASE_ADDR__SHIFT                0x00000000
+
+// OV0_VID_BUF0_BASE_ADRS
+#define	OV0_VID_BUF0_BASE_ADRS__OV0_VID_BUF_PITCH_SEL__SHIFT 0x00000000
+#define	OV0_VID_BUF0_BASE_ADRS__RESERVED_BIT1__SHIFT       0x00000001
+#define	OV0_VID_BUF0_BASE_ADRS__OV0_VID_BUF_BASE_ADRS__SHIFT 0x00000004
+#define	OV0_VID_BUF0_BASE_ADRS__RESERVED_BIT31_28__SHIFT   0x0000001c
+
+// OV0_VID_BUF1_BASE_ADRS
+#define	OV0_VID_BUF1_BASE_ADRS__OV0_VID_BUF_PITCH_SEL__SHIFT 0x00000000
+#define	OV0_VID_BUF1_BASE_ADRS__RESERVED_BIT1__SHIFT       0x00000001
+#define	OV0_VID_BUF1_BASE_ADRS__OV0_VID_BUF_BASE_ADRS__SHIFT 0x00000004
+#define	OV0_VID_BUF1_BASE_ADRS__RESERVED_BIT31_28__SHIFT   0x0000001c
+
+// OV0_VID_BUF2_BASE_ADRS
+#define	OV0_VID_BUF2_BASE_ADRS__OV0_VID_BUF_PITCH_SEL__SHIFT 0x00000000
+#define	OV0_VID_BUF2_BASE_ADRS__RESERVED_BIT1__SHIFT       0x00000001
+#define	OV0_VID_BUF2_BASE_ADRS__OV0_VID_BUF_BASE_ADRS__SHIFT 0x00000004
+#define	OV0_VID_BUF2_BASE_ADRS__RESERVED_BIT31_28__SHIFT   0x0000001c
+
+// OV0_VID_BUF3_BASE_ADRS
+#define	OV0_VID_BUF3_BASE_ADRS__OV0_VID_BUF_PITCH_SEL__SHIFT 0x00000000
+#define	OV0_VID_BUF3_BASE_ADRS__RESERVED_BIT1__SHIFT       0x00000001
+#define	OV0_VID_BUF3_BASE_ADRS__OV0_VID_BUF_BASE_ADRS__SHIFT 0x00000004
+#define	OV0_VID_BUF3_BASE_ADRS__RESERVED_BIT31_28__SHIFT   0x0000001c
+
+// OV0_VID_BUF4_BASE_ADRS
+#define	OV0_VID_BUF4_BASE_ADRS__OV0_VID_BUF_PITCH_SEL__SHIFT 0x00000000
+#define	OV0_VID_BUF4_BASE_ADRS__RESERVED_BIT1__SHIFT       0x00000001
+#define	OV0_VID_BUF4_BASE_ADRS__OV0_VID_BUF_BASE_ADRS__SHIFT 0x00000004
+#define	OV0_VID_BUF4_BASE_ADRS__RESERVED_BIT31_28__SHIFT   0x0000001c
+
+// OV0_VID_BUF5_BASE_ADRS
+#define	OV0_VID_BUF5_BASE_ADRS__OV0_VID_BUF_PITCH_SEL__SHIFT 0x00000000
+#define	OV0_VID_BUF5_BASE_ADRS__RESERVED_BIT1__SHIFT       0x00000001
+#define	OV0_VID_BUF5_BASE_ADRS__OV0_VID_BUF_BASE_ADRS__SHIFT 0x00000004
+#define	OV0_VID_BUF5_BASE_ADRS__RESERVED_BIT31_28__SHIFT   0x0000001c
+
+// OV0_VID_BUF_PITCH0_VALUE
+#define	OV0_VID_BUF_PITCH0_VALUE__OV0_PITCH_VALUE__SHIFT   0x00000004
+#define	OV0_VID_BUF_PITCH0_VALUE__OV0_PITCH_SKIP_LINES__SHIFT 0x0000001a
+#define	OV0_VID_BUF_PITCH0_VALUE__OV0_PITCH_IN_TILES_LSBS__SHIFT 0x0000001c
+
+// OV0_VID_BUF_PITCH1_VALUE
+#define	OV0_VID_BUF_PITCH1_VALUE__OV0_PITCH_VALUE__SHIFT   0x00000004
+#define	OV0_VID_BUF_PITCH1_VALUE__OV0_PITCH_SKIP_LINES__SHIFT 0x0000001a
+#define	OV0_VID_BUF_PITCH1_VALUE__OV0_PITCH_IN_TILES_LSBS__SHIFT 0x0000001c
+
+// OV0_AUTO_FLIP_CNTRL
+#define	OV0_AUTO_FLIP_CNTRL__OV0_SOFT_BUF_NUM__SHIFT       0x00000000
+#define	OV0_AUTO_FLIP_CNTRL__OV0_SOFT_REPEAT_FIELD__SHIFT  0x00000003
+#define	OV0_AUTO_FLIP_CNTRL__OV0_SOFT_BUF_ODD__SHIFT       0x00000004
+#define	OV0_AUTO_FLIP_CNTRL__OV0_IGNORE_REPEAT_FIELD__SHIFT 0x00000005
+#define	OV0_AUTO_FLIP_CNTRL__OV0_SOFT_EOF_TOGGLE__SHIFT    0x00000006
+#define	OV0_AUTO_FLIP_CNTRL__OV0_VID_PORT_SELECT__SHIFT    0x00000008
+#define	OV0_AUTO_FLIP_CNTRL__OV0_P1_FIRST_LINE_EVEN__SHIFT 0x00000010
+#define	OV0_AUTO_FLIP_CNTRL__OV0_SHIFT_EVEN_DOWN__SHIFT    0x00000012
+#define	OV0_AUTO_FLIP_CNTRL__OV0_SHIFT_ODD_DOWN__SHIFT     0x00000013
+#define	OV0_AUTO_FLIP_CNTRL__OV0_FIELD_POL_SOURCE__SHIFT   0x00000017
+
+// OV0_DEINTERLACE_PATTERN
+#define	OV0_DEINTERLACE_PATTERN__OV0_DEINT_PAT__SHIFT      0x00000000
+#define	OV0_DEINTERLACE_PATTERN__OV0_DEINT_PAT_PNTR__SHIFT 0x00000018
+#define	OV0_DEINTERLACE_PATTERN__OV0_DEINT_PAT_LEN_M1__SHIFT 0x0000001c
+
+// OV0_SUBMIT_HISTORY
+#define	OV0_SUBMIT_HISTORY__OV0_NEXT_BUF_NUM__SHIFT        0x00000000
+#define	OV0_SUBMIT_HISTORY__OV0_NEXT_IS_ODD__SHIFT         0x00000004
+#define	OV0_SUBMIT_HISTORY__OV0_CURR_BUF_NUM__SHIFT        0x00000008
+#define	OV0_SUBMIT_HISTORY__OV0_CURR_IS_ODD__SHIFT         0x0000000c
+#define	OV0_SUBMIT_HISTORY__OV0_PREV_BUF_NUM__SHIFT        0x00000010
+#define	OV0_SUBMIT_HISTORY__OV0_PREV_IS_ODD__SHIFT         0x00000014
+
+// OV0_H_INC
+#define	OV0_H_INC__OV0_P1_H_INC__SHIFT                     0x00000000
+#define	OV0_H_INC__OV0_P23_H_INC__SHIFT                    0x00000010
+
+// OV0_STEP_BY
+#define	OV0_STEP_BY__OV0_P1_H_STEP_BY__SHIFT               0x00000000
+#define	OV0_STEP_BY__OV0_P1_PREDWNSC_RATIO__SHIFT          0x00000004
+#define	OV0_STEP_BY__OV0_P23_H_STEP_BY__SHIFT              0x00000008
+#define	OV0_STEP_BY__OV0_P23_PREDWNSC_RATIO__SHIFT         0x0000000c
+
+// OV0_P1_H_ACCUM_INIT
+#define	OV0_P1_H_ACCUM_INIT__OV0_P1_H_ACCUM_INIT__SHIFT    0x0000000f
+#define	OV0_P1_H_ACCUM_INIT__OV0_PRESHIFT_P1_TO__SHIFT     0x0000001c
+
+// OV0_P23_H_ACCUM_INIT
+#define	OV0_P23_H_ACCUM_INIT__OV0_P23_H_ACCUM_INIT__SHIFT  0x0000000f
+#define	OV0_P23_H_ACCUM_INIT__OV0_PRESHIFT_P23_TO__SHIFT   0x0000001c
+
+// OV0_P1_X_START_END
+#define	OV0_P1_X_START_END__OV0_P1_X_END__SHIFT            0x00000000
+#define	OV0_P1_X_START_END__OV0_P1_X_START__SHIFT          0x00000010
+
+// OV0_P2_X_START_END
+#define	OV0_P2_X_START_END__OV0_P2_X_END__SHIFT            0x00000000
+#define	OV0_P2_X_START_END__OV0_P2_X_START__SHIFT          0x00000010
+
+// OV0_P3_X_START_END
+#define	OV0_P3_X_START_END__OV0_P3_X_END__SHIFT            0x00000000
+#define	OV0_P3_X_START_END__OV0_P3_X_START__SHIFT          0x00000010
+
+// OV0_FILTER_CNTL
+#define	OV0_FILTER_CNTL__OV0_HC_COEF_ON_HORZ_Y__SHIFT      0x00000000
+#define	OV0_FILTER_CNTL__OV0_HC_COEF_ON_HORZ_UV__SHIFT     0x00000001
+#define	OV0_FILTER_CNTL__OV0_HC_COEF_ON_VERT_Y__SHIFT      0x00000002
+#define	OV0_FILTER_CNTL__OV0_HC_COEF_ON_VERT_UV__SHIFT     0x00000003
+
+// OV0_FOUR_TAP_COEF_0
+#define	OV0_FOUR_TAP_COEF_0__OV0_COEF__0TH_TAP__SHIFT      0x00000000
+#define	OV0_FOUR_TAP_COEF_0__OV0_COEF__1ST_TAP__SHIFT      0x00000008
+#define	OV0_FOUR_TAP_COEF_0__OV0_COEF__2ND_TAP__SHIFT      0x00000010
+#define	OV0_FOUR_TAP_COEF_0__OV0_COEF__3RD_TAP__SHIFT      0x00000018
+
+// OV0_FOUR_TAP_COEF_1
+#define	OV0_FOUR_TAP_COEF_1__OV0_COEF__0TH_TAP__SHIFT      0x00000000
+#define	OV0_FOUR_TAP_COEF_1__OV0_COEF__1ST_TAP__SHIFT      0x00000008
+#define	OV0_FOUR_TAP_COEF_1__OV0_COEF__2ND_TAP__SHIFT      0x00000010
+#define	OV0_FOUR_TAP_COEF_1__OV0_COEF__3RD_TAP__SHIFT      0x00000018
+
+// OV0_FOUR_TAP_COEF_2
+#define	OV0_FOUR_TAP_COEF_2__OV0_COEF__0TH_TAP__SHIFT      0x00000000
+#define	OV0_FOUR_TAP_COEF_2__OV0_COEF__1ST_TAP__SHIFT      0x00000008
+#define	OV0_FOUR_TAP_COEF_2__OV0_COEF__2ND_TAP__SHIFT      0x00000010
+#define	OV0_FOUR_TAP_COEF_2__OV0_COEF__3RD_TAP__SHIFT      0x00000018
+
+// OV0_FOUR_TAP_COEF_3
+#define	OV0_FOUR_TAP_COEF_3__OV0_COEF__0TH_TAP__SHIFT      0x00000000
+#define	OV0_FOUR_TAP_COEF_3__OV0_COEF__1ST_TAP__SHIFT      0x00000008
+#define	OV0_FOUR_TAP_COEF_3__OV0_COEF__2ND_TAP__SHIFT      0x00000010
+#define	OV0_FOUR_TAP_COEF_3__OV0_COEF__3RD_TAP__SHIFT      0x00000018
+
+// OV0_FOUR_TAP_COEF_4
+#define	OV0_FOUR_TAP_COEF_4__OV0_COEF__0TH_TAP__SHIFT      0x00000000
+#define	OV0_FOUR_TAP_COEF_4__OV0_COEF__1ST_TAP__SHIFT      0x00000008
+#define	OV0_FOUR_TAP_COEF_4__OV0_COEF__2ND_TAP__SHIFT      0x00000010
+#define	OV0_FOUR_TAP_COEF_4__OV0_COEF__3RD_TAP__SHIFT      0x00000018
+
+// OV0_FLAG_CNTRL
+#define	OV0_FLAG_CNTRL__OV0_HI_PRI_MCREQ__SHIFT            0x00000000
+#define	OV0_FLAG_CNTRL__OV0_HI_PRI_FORCE__SHIFT            0x00000008
+#define	OV0_FLAG_CNTRL__OV0_LUMA_10BIT_EN__SHIFT           0x0000000c
+#define	OV0_FLAG_CNTRL__OV0_CHROMA_10BIT_EN__SHIFT         0x0000000d
+
+// OV0_SLICE_CNTL
+#define	OV0_SLICE_CNTL__OV0_SLICE_LAST_LINE__SHIFT         0x00000000
+#define	OV0_SLICE_CNTL__OV0_SLICEDONE_STAT__SHIFT          0x0000001e
+#define	OV0_SLICE_CNTL__OV0_MPEG_EOF_TOGGLE__SHIFT         0x0000001f
+
+// OV0_VID_KEY_CLR_LOW
+#define	OV0_VID_KEY_CLR_LOW__OV0_VID_KEY_Cb_BLUE_LOW__SHIFT 0x00000000
+#define	OV0_VID_KEY_CLR_LOW__OV0_VID_KEY_Y_GREEN_LOW__SHIFT 0x0000000a
+#define	OV0_VID_KEY_CLR_LOW__OV0_VID_KEY_Cr_RED_LOW__SHIFT 0x00000014
+
+// OV0_VID_KEY_CLR_HIGH
+#define	OV0_VID_KEY_CLR_HIGH__OV0_VID_KEY_Cb_BLUE_HIGH__SHIFT 0x00000000
+#define	OV0_VID_KEY_CLR_HIGH__OV0_VID_KEY_Y_GREEN_HIGH__SHIFT 0x0000000a
+#define	OV0_VID_KEY_CLR_HIGH__OV0_VID_KEY_Cr_RED_HIGH__SHIFT 0x00000014
+
+// OV0_GRPH_KEY_CLR_LOW
+#define	OV0_GRPH_KEY_CLR_LOW__OV0_GRPH_KEY_BLUE_LOW__SHIFT 0x00000000
+#define	OV0_GRPH_KEY_CLR_LOW__OV0_GRPH_KEY_GREEN_LOW__SHIFT 0x00000008
+#define	OV0_GRPH_KEY_CLR_LOW__OV0_GRPH_KEY_RED_LOW__SHIFT  0x00000010
+#define	OV0_GRPH_KEY_CLR_LOW__OV0_GRPH_KEY_ALPHA_LOW__SHIFT 0x00000018
+
+// OV0_GRPH_KEY_CLR_HIGH
+#define	OV0_GRPH_KEY_CLR_HIGH__OV0_GRPH_KEY_BLUE_HIGH__SHIFT 0x00000000
+#define	OV0_GRPH_KEY_CLR_HIGH__OV0_GRPH_KEY_GREEN_HIGH__SHIFT 0x00000008
+#define	OV0_GRPH_KEY_CLR_HIGH__OV0_GRPH_KEY_RED_HIGH__SHIFT 0x00000010
+#define	OV0_GRPH_KEY_CLR_HIGH__OV0_GRPH_KEY_ALPHA_HIGH__SHIFT 0x00000018
+
+// OV0_KEY_CNTL
+#define	OV0_KEY_CNTL__OV0_VIDEO_KEY_FN__SHIFT              0x00000000
+#define	OV0_KEY_CNTL__OV0_GRAPHICS_KEY_FN__SHIFT           0x00000004
+#define	OV0_KEY_CNTL__OV0_CMP_MIX__SHIFT                   0x00000008
+
+// OV0_TEST
+#define	OV0_TEST__OV0_SUBPIC_ONLY__SHIFT                   0x00000003
+#define	OV0_TEST__OV0_SWAP_UV__SHIFT                       0x00000005
+#define	OV0_TEST__OV0_NOROUNDUP__SHIFT                     0x00000006
+#define	OV0_TEST__OV0_ADAPTIVE_DEINT_ADJ__SHIFT            0x0000000c
+
+// SUBPIC_CNTL
+#define	SUBPIC_CNTL__SUBPIC_ON__SHIFT                      0x00000000
+#define	SUBPIC_CNTL__BTN_HLI_ON__SHIFT                     0x00000001
+#define	SUBPIC_CNTL__SP_HORZ_MODE__SHIFT                   0x00000004
+#define	SUBPIC_CNTL__SP_VERT_MODE__SHIFT                   0x00000005
+#define	SUBPIC_CNTL__SP_ODD_FIELD__SHIFT                   0x00000008
+#define	SUBPIC_CNTL__SP_BUF_SELECT__SHIFT                  0x00000009
+#define	SUBPIC_CNTL__SP_NO_R_EDGE_BLEND__SHIFT             0x0000000a
+
+// SUBPIC_DEFCOLCON
+#define	SUBPIC_DEFCOLCON__BKGD_PIX_CON__SHIFT              0x00000000
+#define	SUBPIC_DEFCOLCON__PATT_PIX_CON__SHIFT              0x00000004
+#define	SUBPIC_DEFCOLCON__EMPH_PIX1_CON__SHIFT             0x00000008
+#define	SUBPIC_DEFCOLCON__EMPH_PIX2_CON__SHIFT             0x0000000c
+#define	SUBPIC_DEFCOLCON__BKGD_PIX_CLR__SHIFT              0x00000010
+#define	SUBPIC_DEFCOLCON__PATT_PIX_CLR__SHIFT              0x00000014
+#define	SUBPIC_DEFCOLCON__EMPH_PIX1_CLR__SHIFT             0x00000018
+#define	SUBPIC_DEFCOLCON__EMPH_PIX2_CLR__SHIFT             0x0000001c
+
+// SUBPIC_Y_X_START
+#define	SUBPIC_Y_X_START__SP_START_X__SHIFT                0x00000000
+#define	SUBPIC_Y_X_START__SP_START_Y__SHIFT                0x00000010
+
+// SUBPIC_Y_X_END
+#define	SUBPIC_Y_X_END__SP_END_X__SHIFT                    0x00000000
+#define	SUBPIC_Y_X_END__SP_END_Y__SHIFT                    0x00000010
+
+// SUBPIC_V_INC
+#define	SUBPIC_V_INC__SP_V_INC_FRAC__SHIFT                 0x00000004
+#define	SUBPIC_V_INC__SP_V_INC_INT__SHIFT                  0x00000010
+
+// SUBPIC_H_INC
+#define	SUBPIC_H_INC__SP_H_INC_FRAC__SHIFT                 0x00000004
+#define	SUBPIC_H_INC__SP_H_INC_INT__SHIFT                  0x00000010
+
+// SUBPIC_BUF0_OFFSET
+#define	SUBPIC_BUF0_OFFSET__SUBPIC_OFFSET0__SHIFT          0x00000000
+
+// SUBPIC_BUF1_OFFSET
+#define	SUBPIC_BUF1_OFFSET__SUBPIC_OFFSET1__SHIFT          0x00000000
+
+// SUBPIC_LC0_OFFSET
+#define	SUBPIC_LC0_OFFSET__SUBPIC_LC0_OFFSET__SHIFT        0x00000000
+
+// SUBPIC_LC1_OFFSET
+#define	SUBPIC_LC1_OFFSET__SUBPIC_LC1_OFFSET__SHIFT        0x00000000
+
+// SUBPIC_PITCH
+#define	SUBPIC_PITCH__SUBPIC_BUF_PITCH__SHIFT              0x00000000
+#define	SUBPIC_PITCH__SUBPIC_LC_PITCH__SHIFT               0x00000010
+
+// SUBPIC_BTN_HLI_COLCON
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_BKGD_PIX_CON__SHIFT 0x00000000
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_PATT_PIX_CON__SHIFT 0x00000004
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_EMPH_PIX1_CON__SHIFT 0x00000008
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_EMPH_PIX2_CON__SHIFT 0x0000000c
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_BKGD_PIX_CLR__SHIFT 0x00000010
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_PATT_PIX_CLR__SHIFT 0x00000014
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_EMPH_PIX1_CLR__SHIFT 0x00000018
+#define	SUBPIC_BTN_HLI_COLCON__BTN_HLI_EMPH_PIX2_CLR__SHIFT 0x0000001c
+
+// SUBPIC_BTN_HLI_Y_X_START
+#define	SUBPIC_BTN_HLI_Y_X_START__BTN_HLI_START_X__SHIFT   0x00000000
+#define	SUBPIC_BTN_HLI_Y_X_START__BTN_HLI_START_Y__SHIFT   0x00000010
+
+// SUBPIC_BTN_HLI_Y_X_END
+#define	SUBPIC_BTN_HLI_Y_X_END__BTN_HLI_END_X__SHIFT       0x00000000
+#define	SUBPIC_BTN_HLI_Y_X_END__BTN_HLI_END_Y__SHIFT       0x00000010
+
+// SUBPIC_PALETTE_INDEX
+#define	SUBPIC_PALETTE_INDEX__SP_PAL_ADDR__SHIFT           0x00000000
+
+// SUBPIC_PALETTE_DATA
+#define	SUBPIC_PALETTE_DATA__SP_DATA__SHIFT                0x00000000
+
+// SUBPIC_0_PAL
+#define	SUBPIC_0_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_0_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_0_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_1_PAL
+#define	SUBPIC_1_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_1_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_1_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_2_PAL
+#define	SUBPIC_2_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_2_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_2_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_3_PAL
+#define	SUBPIC_3_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_3_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_3_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_4_PAL
+#define	SUBPIC_4_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_4_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_4_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_5_PAL
+#define	SUBPIC_5_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_5_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_5_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_6_PAL
+#define	SUBPIC_6_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_6_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_6_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_7_PAL
+#define	SUBPIC_7_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_7_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_7_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_8_PAL
+#define	SUBPIC_8_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_8_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_8_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_9_PAL
+#define	SUBPIC_9_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_9_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_9_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_A_PAL
+#define	SUBPIC_A_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_A_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_A_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_B_PAL
+#define	SUBPIC_B_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_B_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_B_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_C_PAL
+#define	SUBPIC_C_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_C_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_C_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_D_PAL
+#define	SUBPIC_D_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_D_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_D_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_E_PAL
+#define	SUBPIC_E_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_E_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_E_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_F_PAL
+#define	SUBPIC_F_PAL__SP_CB__SHIFT                         0x00000000
+#define	SUBPIC_F_PAL__SP_CR__SHIFT                         0x00000008
+#define	SUBPIC_F_PAL__SP_Y__SHIFT                          0x00000010
+
+// SUBPIC_H_ACCUM_INIT
+#define	SUBPIC_H_ACCUM_INIT__SP_H_ACC_INIT_FRAC__SHIFT     0x00000004
+#define	SUBPIC_H_ACCUM_INIT__SP_H_ACC_INIT_INT__SHIFT      0x00000010
+
+// SUBPIC_V_ACCUM_INIT
+#define	SUBPIC_V_ACCUM_INIT__SP_V_ACC_INIT_FRAC__SHIFT     0x00000004
+#define	SUBPIC_V_ACCUM_INIT__SP_V_ACC_INIT_INT__SHIFT      0x00000010
+
+// DISP_MISC_CNTL
+#define	DISP_MISC_CNTL__SOFT_RESET_GRPH_PP__SHIFT          0x00000000
+#define	DISP_MISC_CNTL__SOFT_RESET_SUBPIC_PP__SHIFT        0x00000001
+#define	DISP_MISC_CNTL__SOFT_RESET_OV0_PP__SHIFT           0x00000002
+#define	DISP_MISC_CNTL__SOFT_RESET_GRPH_SCLK__SHIFT        0x00000004
+#define	DISP_MISC_CNTL__SOFT_RESET_SUBPIC_SCLK__SHIFT      0x00000005
+#define	DISP_MISC_CNTL__SOFT_RESET_OV0_SCLK__SHIFT         0x00000006
+#define	DISP_MISC_CNTL__SYNC_STRENGTH__SHIFT               0x00000008
+#define	DISP_MISC_CNTL__PALETTE_MEM_RD_MARGIN__SHIFT       0x00000018
+#define	DISP_MISC_CNTL__RMX_BUF_MEM_RD_MARGIN__SHIFT       0x0000001c
+
+// DAC_MACRO_CNTL
+#define	DAC_MACRO_CNTL__DAC_WHITE_CNTL__SHIFT              0x00000000
+#define	DAC_MACRO_CNTL__DAC_BG_ADJ__SHIFT                  0x00000008
+#define	DAC_MACRO_CNTL__DAC_PDWN_R__SHIFT                  0x00000010
+#define	DAC_MACRO_CNTL__DAC_PDWN_G__SHIFT                  0x00000011
+#define	DAC_MACRO_CNTL__DAC_PDWN_B__SHIFT                  0x00000012
+
+// DISP_PWR_MAN
+#define	DISP_PWR_MAN__DISP_PWR_MAN_D3_CRTC_EN__SHIFT       0x00000000
+#define	DISP_PWR_MAN__DISP_PWR_MAN_DPMS__SHIFT             0x00000008
+#define	DISP_PWR_MAN__DISP_D3_RST__SHIFT                   0x00000010
+#define	DISP_PWR_MAN__DISP_D3_REG_RST__SHIFT               0x00000011
+#define	DISP_PWR_MAN__DISP_D3_GRPH_RST__SHIFT              0x00000012
+#define	DISP_PWR_MAN__DISP_D3_SUBPIC_RST__SHIFT            0x00000013
+#define	DISP_PWR_MAN__DISP_D3_OV0_RST__SHIFT               0x00000014
+#define	DISP_PWR_MAN__DISP_D1D2_GRPH_RST__SHIFT            0x00000015
+#define	DISP_PWR_MAN__DISP_D1D2_SUBPIC_RST__SHIFT          0x00000016
+#define	DISP_PWR_MAN__DISP_D1D2_OV0_RST__SHIFT             0x00000017
+
+// DISP_TEST_DEBUG_CNTL
+#define	DISP_TEST_DEBUG_CNTL__DISP_TEST_DISPENG__SHIFT     0x00000000
+#define	DISP_TEST_DEBUG_CNTL__DISP_TEST_PALETTE__SHIFT     0x00000001
+#define	DISP_TEST_DEBUG_CNTL__DISP_TEST_DAC__SHIFT         0x00000002
+#define	DISP_TEST_DEBUG_CNTL__DISP_TEST_SUBPIC__SHIFT      0x00000003
+#define	DISP_TEST_DEBUG_CNTL__DISP_TEST_OV0SCALE__SHIFT    0x00000004
+#define	DISP_TEST_DEBUG_CNTL__DISP_TEST_CLK__SHIFT         0x00000005
+#define	DISP_TEST_DEBUG_CNTL__DISP_GRPH_UNDERFLOW__SHIFT   0x00000018
+#define	DISP_TEST_DEBUG_CNTL__DISP_GRPH_UNDERFLOW_CLR__SHIFT 0x00000018
+#define	DISP_TEST_DEBUG_CNTL__DISP_CUR_UNDERFLOW__SHIFT    0x00000019
+#define	DISP_TEST_DEBUG_CNTL__DISP_CUR_UNDERFLOW_CLR__SHIFT 0x00000019
+#define	DISP_TEST_DEBUG_CNTL__DISP_OV0_UNDERFLOW__SHIFT    0x0000001a
+#define	DISP_TEST_DEBUG_CNTL__DISP_OV0_UNDERFLOW_CLR__SHIFT 0x0000001a
+#define	DISP_TEST_DEBUG_CNTL__DISP_SUBPIC_UNDERFLOW__SHIFT 0x0000001b
+#define	DISP_TEST_DEBUG_CNTL__DISP_SUBPIC_UNDERFLOW_CLR__SHIFT 0x0000001b
+#define	DISP_TEST_DEBUG_CNTL__DISP_SUBPIC_FORCE_HI_PRI__SHIFT 0x0000001c
+
+// DISP_HW_DEBUG
+#define	DISP_HW_DEBUG__DISP_HW_0_DEBUG__SHIFT              0x00000000
+#define	DISP_HW_DEBUG__DISP_HW_1_DEBUG__SHIFT              0x00000001
+#define	DISP_HW_DEBUG__DISP_HW_2_DEBUG__SHIFT              0x00000002
+#define	DISP_HW_DEBUG__DISP_HW_3_DEBUG__SHIFT              0x00000003
+#define	DISP_HW_DEBUG__DISP_HW_4_DEBUG__SHIFT              0x00000004
+#define	DISP_HW_DEBUG__DISP_HW_5_DEBUG__SHIFT              0x00000005
+#define	DISP_HW_DEBUG__DISP_HW_6_DEBUG__SHIFT              0x00000006
+#define	DISP_HW_DEBUG__DISP_HW_7_DEBUG__SHIFT              0x00000007
+#define	DISP_HW_DEBUG__DISP_HW_8_DEBUG__SHIFT              0x00000008
+#define	DISP_HW_DEBUG__DISP_HW_9_DEBUG__SHIFT              0x00000009
+#define	DISP_HW_DEBUG__DISP_HW_A_DEBUG__SHIFT              0x0000000a
+#define	DISP_HW_DEBUG__DISP_HW_B_DEBUG__SHIFT              0x0000000b
+#define	DISP_HW_DEBUG__DISP_HW_C_DEBUG__SHIFT              0x0000000c
+#define	DISP_HW_DEBUG__DISP_HW_D_DEBUG__SHIFT              0x0000000d
+#define	DISP_HW_DEBUG__DISP_HW_E_DEBUG__SHIFT              0x0000000e
+#define	DISP_HW_DEBUG__DISP_HW_F_DEBUG__SHIFT              0x0000000f
+#define	DISP_HW_DEBUG__DISP_HW_10_DEBUG__SHIFT             0x00000010
+#define	DISP_HW_DEBUG__DISP_HW_11_DEBUG__SHIFT             0x00000011
+#define	DISP_HW_DEBUG__DISP_HW_12_DEBUG__SHIFT             0x00000012
+#define	DISP_HW_DEBUG__DISP_HW_13_DEBUG__SHIFT             0x00000013
+#define	DISP_HW_DEBUG__DISP_HW_14_DEBUG__SHIFT             0x00000014
+#define	DISP_HW_DEBUG__DISP_HW_15_DEBUG__SHIFT             0x00000015
+#define	DISP_HW_DEBUG__DISP_HW_16_DEBUG__SHIFT             0x00000016
+#define	DISP_HW_DEBUG__DISP_HW_17_DEBUG__SHIFT             0x00000017
+#define	DISP_HW_DEBUG__DISP_HW_18_DEBUG__SHIFT             0x00000018
+#define	DISP_HW_DEBUG__DISP_HW_19_DEBUG__SHIFT             0x00000019
+#define	DISP_HW_DEBUG__DISP_HW_1A_DEBUG__SHIFT             0x0000001a
+#define	DISP_HW_DEBUG__DISP_HW_1B_DEBUG__SHIFT             0x0000001b
+#define	DISP_HW_DEBUG__DISP_HW_1C_DEBUG__SHIFT             0x0000001c
+#define	DISP_HW_DEBUG__DISP_HW_1D_DEBUG__SHIFT             0x0000001d
+#define	DISP_HW_DEBUG__DISP_HW_1E_DEBUG__SHIFT             0x0000001e
+#define	DISP_HW_DEBUG__DISP_HW_1F_DEBUG__SHIFT             0x0000001f
+
+// DAC_CRC_SIG1
+#define	DAC_CRC_SIG1__DAC_CRC_SIG_B__SHIFT                 0x00000000
+#define	DAC_CRC_SIG1__DAC_CRC_SIG_G__SHIFT                 0x00000010
+
+// DAC_CRC_SIG2
+#define	DAC_CRC_SIG2__DAC_CRC_SIG_R__SHIFT                 0x00000000
+#define	DAC_CRC_SIG2__DAC_CRC_SIG_C__SHIFT                 0x00000010
+
+// OV0_LIN_TRANS_A
+#define	OV0_LIN_TRANS_A__OV0_LIN_TRANS_Cb_R__SHIFT         0x00000001
+#define	OV0_LIN_TRANS_A__OV0_LIN_TRANS_Y_R__SHIFT          0x00000011
+#define	OV0_LIN_TRANS_A__OV0_LIN_TRANS_Cb_R_M6__SHIFT      0x00000004
+#define	OV0_LIN_TRANS_A__OV0_LIN_TRANS_Y_R_M6__SHIFT       0x00000014
+
+// OV0_LIN_TRANS_B
+#define	OV0_LIN_TRANS_B__OV0_LIN_TRANS_OFF_R__SHIFT        0x00000000
+#define	OV0_LIN_TRANS_B__OV0_LIN_TRANS_Cr_R__SHIFT         0x00000011
+#define	OV0_LIN_TRANS_B__OV0_LIN_TRANS_Cr_R_M6__SHIFT      0x00000014
+
+// OV0_LIN_TRANS_C
+#define	OV0_LIN_TRANS_C__OV0_LIN_TRANS_Cb_G__SHIFT         0x00000001
+#define	OV0_LIN_TRANS_C__OV0_LIN_TRANS_Y_G__SHIFT          0x00000011
+#define	OV0_LIN_TRANS_C__OV0_LIN_TRANS_Cb_G_M6__SHIFT      0x00000004
+#define	OV0_LIN_TRANS_C__OV0_LIN_TRANS_Y_G_M6__SHIFT       0x00000014
+
+// OV0_LIN_TRANS_D
+#define	OV0_LIN_TRANS_D__OV0_LIN_TRANS_OFF_G__SHIFT        0x00000000
+#define	OV0_LIN_TRANS_D__OV0_LIN_TRANS_Cr_G__SHIFT         0x00000011
+#define	OV0_LIN_TRANS_D__OV0_LIN_TRANS_Cr_G_M6__SHIFT      0x00000014
+
+// OV0_LIN_TRANS_E
+#define	OV0_LIN_TRANS_E__OV0_LIN_TRANS_Cb_B__SHIFT         0x00000001
+#define	OV0_LIN_TRANS_E__OV0_LIN_TRANS_Y_B__SHIFT          0x00000011
+#define	OV0_LIN_TRANS_E__OV0_LIN_TRANS_Cb_B_M6__SHIFT      0x00000004
+#define	OV0_LIN_TRANS_E__OV0_LIN_TRANS_Y_B_M6__SHIFT       0x00000014
+
+// OV0_LIN_TRANS_F
+#define	OV0_LIN_TRANS_F__OV0_LIN_TRANS_OFF_B__SHIFT        0x00000000
+#define	OV0_LIN_TRANS_F__OV0_LIN_TRANS_Cr_B__SHIFT         0x00000011
+#define	OV0_LIN_TRANS_F__OV0_LIN_TRANS_Cr_B_M6__SHIFT      0x00000014
+
+// OV0_GAMMA_0_F
+#define	OV0_GAMMA_0_F__OV0_GAMMA_0_F_OFFSET__SHIFT         0x00000000
+#define	OV0_GAMMA_0_F__OV0_GAMMA_0_F_SLOPE__SHIFT          0x00000010
+
+// OV0_GAMMA_10_1F
+#define	OV0_GAMMA_10_1F__OV0_GAMMA_10_1F_OFFSET__SHIFT     0x00000000
+#define	OV0_GAMMA_10_1F__OV0_GAMMA_10_1F_SLOPE__SHIFT      0x00000010
+
+// OV0_GAMMA_20_3F
+#define	OV0_GAMMA_20_3F__OV0_GAMMA_20_3F_OFFSET__SHIFT     0x00000000
+#define	OV0_GAMMA_20_3F__OV0_GAMMA_20_3F_SLOPE__SHIFT      0x00000010
+
+// OV0_GAMMA_40_7F
+#define	OV0_GAMMA_40_7F__OV0_GAMMA_40_7F_OFFSET__SHIFT     0x00000000
+#define	OV0_GAMMA_40_7F__OV0_GAMMA_40_7F_SLOPE__SHIFT      0x00000010
+
+// OV0_GAMMA_380_3BF
+#define	OV0_GAMMA_380_3BF__OV0_GAMMA_380_3BF_OFFSET__SHIFT 0x00000000
+#define	OV0_GAMMA_380_3BF__OV0_GAMMA_380_3BF_SLOPE__SHIFT  0x00000010
+
+// OV0_GAMMA_3C0_3FF
+#define	OV0_GAMMA_3C0_3FF__OV0_GAMMA_3C0_3FF_OFFSET__SHIFT 0x00000000
+#define	OV0_GAMMA_3C0_3FF__OV0_GAMMA_3C0_3FF_SLOPE__SHIFT  0x00000010
+
+// DISP_MERGE_CNTL
+#define	DISP_MERGE_CNTL__DISP_ALPHA_MODE__SHIFT            0x00000000
+#define	DISP_MERGE_CNTL__DISP_ALPHA_INV__SHIFT             0x00000002
+#define	DISP_MERGE_CNTL__DISP_ALPHA_PREMULT__SHIFT         0x00000003
+#define	DISP_MERGE_CNTL__DISP_RGB_OFFSET_EN__SHIFT         0x00000008
+#define	DISP_MERGE_CNTL__DISP_LIN_TRANS_BYPASS__SHIFT      0x00000009
+#define	DISP_MERGE_CNTL__DISP_GRPH_ALPHA__SHIFT            0x00000010
+#define	DISP_MERGE_CNTL__DISP_OV0_ALPHA__SHIFT             0x00000018
+
+// DISP_OUTPUT_CNTL
+#define	DISP_OUTPUT_CNTL__DISP_DAC_SOURCE__SHIFT           0x00000000
+#define	DISP_OUTPUT_CNTL__DISP_TRANS_MATRIX_SEL__SHIFT     0x00000004
+#define	DISP_OUTPUT_CNTL__DISP_RMX_SOURCE__SHIFT           0x00000008
+#define	DISP_OUTPUT_CNTL__DISP_RMX_HTAP_SEL__SHIFT         0x00000009
+#define	DISP_OUTPUT_CNTL__DISP_RMX_DITH_EN__SHIFT          0x0000000a
+#define	DISP_OUTPUT_CNTL__DISP_TV_SOURCE__SHIFT            0x00000010
+#define	DISP_OUTPUT_CNTL__DISP_TV_MODE__SHIFT              0x00000011
+#define	DISP_OUTPUT_CNTL__DISP_TV_YG_DITH_EN__SHIFT        0x00000013
+#define	DISP_OUTPUT_CNTL__DISP_TV_CbB_CrR_DITH_EN__SHIFT   0x00000014
+#define	DISP_OUTPUT_CNTL__DISP_TV_BIT_WIDTH__SHIFT         0x00000015
+#define	DISP_OUTPUT_CNTL__DISP_TV_SYNC_MODE__SHIFT         0x00000016
+#define	DISP_OUTPUT_CNTL__DISP_TV_SYNC_FORCE__SHIFT        0x00000018
+#define	DISP_OUTPUT_CNTL__DISP_TV_SYNC_COLOR__SHIFT        0x00000019
+#define	DISP_OUTPUT_CNTL__DISP_TV_EVEN_FLAG_CNTL__SHIFT    0x0000001b
+#define	DISP_OUTPUT_CNTL__DISP_TV_SYNC_STATUS__SHIFT       0x0000001d
+#define	DISP_OUTPUT_CNTL__DISP_TV_H_DOWNSCALE__SHIFT       0x0000001e
+
+// DISP_LIN_TRANS_GRPH_A
+#define	DISP_LIN_TRANS_GRPH_A__DISP_LIN_TRANS_GRPH_C2__SHIFT 0x00000003
+#define	DISP_LIN_TRANS_GRPH_A__DISP_LIN_TRANS_GRPH_C1__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_GRPH_B
+#define	DISP_LIN_TRANS_GRPH_B__DISP_LIN_TRANS_GRPH_C4__SHIFT 0x00000000
+#define	DISP_LIN_TRANS_GRPH_B__DISP_LIN_TRANS_GRPH_C3__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_GRPH_C
+#define	DISP_LIN_TRANS_GRPH_C__DISP_LIN_TRANS_GRPH_C6__SHIFT 0x00000003
+#define	DISP_LIN_TRANS_GRPH_C__DISP_LIN_TRANS_GRPH_C5__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_GRPH_D
+#define	DISP_LIN_TRANS_GRPH_D__DISP_LIN_TRANS_GRPH_C8__SHIFT 0x00000000
+#define	DISP_LIN_TRANS_GRPH_D__DISP_LIN_TRANS_GRPH_C7__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_GRPH_E
+#define	DISP_LIN_TRANS_GRPH_E__DISP_LIN_TRANS_GRPH_C10__SHIFT 0x00000003
+#define	DISP_LIN_TRANS_GRPH_E__DISP_LIN_TRANS_GRPH_C9__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_GRPH_F
+#define	DISP_LIN_TRANS_GRPH_F__DISP_LIN_TRANS_GRPH_C12__SHIFT 0x00000000
+#define	DISP_LIN_TRANS_GRPH_F__DISP_LIN_TRANS_GRPH_C11__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_VID_A
+#define	DISP_LIN_TRANS_VID_A__DISP_LIN_TRANS_VID_C2__SHIFT 0x00000003
+#define	DISP_LIN_TRANS_VID_A__DISP_LIN_TRANS_VID_C1__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_VID_B
+#define	DISP_LIN_TRANS_VID_B__DISP_LIN_TRANS_VID_C4__SHIFT 0x00000000
+#define	DISP_LIN_TRANS_VID_B__DISP_LIN_TRANS_VID_C3__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_VID_C
+#define	DISP_LIN_TRANS_VID_C__DISP_LIN_TRANS_VID_C6__SHIFT 0x00000003
+#define	DISP_LIN_TRANS_VID_C__DISP_LIN_TRANS_VID_C5__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_VID_D
+#define	DISP_LIN_TRANS_VID_D__DISP_LIN_TRANS_VID_C8__SHIFT 0x00000000
+#define	DISP_LIN_TRANS_VID_D__DISP_LIN_TRANS_VID_C7__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_VID_E
+#define	DISP_LIN_TRANS_VID_E__DISP_LIN_TRANS_VID_C10__SHIFT 0x00000003
+#define	DISP_LIN_TRANS_VID_E__DISP_LIN_TRANS_VID_C9__SHIFT 0x00000013
+
+// DISP_LIN_TRANS_VID_F
+#define	DISP_LIN_TRANS_VID_F__DISP_LIN_TRANS_VID_C12__SHIFT 0x00000000
+#define	DISP_LIN_TRANS_VID_F__DISP_LIN_TRANS_VID_C11__SHIFT 0x00000013
+
+// RMX_HORZ_FILTER_0TAP_COEF
+#define	RMX_HORZ_FILTER_0TAP_COEF__RMX_COEF_0POS_0TAP_HORZ__SHIFT 0x00000000
+#define	RMX_HORZ_FILTER_0TAP_COEF__RMX_COEF_1POS_0TAP_HORZ__SHIFT 0x00000005
+#define	RMX_HORZ_FILTER_0TAP_COEF__RMX_COEF_2POS_0TAP_HORZ__SHIFT 0x0000000a
+#define	RMX_HORZ_FILTER_0TAP_COEF__RMX_COEF_3POS_0TAP_HORZ__SHIFT 0x0000000f
+#define	RMX_HORZ_FILTER_0TAP_COEF__RMX_COEF_4POS_0TAP_HORZ__SHIFT 0x00000014
+
+// RMX_HORZ_FILTER_1TAP_COEF
+#define	RMX_HORZ_FILTER_1TAP_COEF__RMX_COEF_0POS_1TAP_HORZ__SHIFT 0x00000000
+#define	RMX_HORZ_FILTER_1TAP_COEF__RMX_COEF_1POS_1TAP_HORZ__SHIFT 0x00000005
+#define	RMX_HORZ_FILTER_1TAP_COEF__RMX_COEF_2POS_1TAP_HORZ__SHIFT 0x0000000a
+#define	RMX_HORZ_FILTER_1TAP_COEF__RMX_COEF_3POS_1TAP_HORZ__SHIFT 0x0000000f
+#define	RMX_HORZ_FILTER_1TAP_COEF__RMX_COEF_4POS_1TAP_HORZ__SHIFT 0x00000014
+
+// RMX_HORZ_FILTER_2TAP_COEF
+#define	RMX_HORZ_FILTER_2TAP_COEF__RMX_COEF_0POS_2TAP_HORZ__SHIFT 0x00000000
+#define	RMX_HORZ_FILTER_2TAP_COEF__RMX_COEF_1POS_2TAP_HORZ__SHIFT 0x00000005
+#define	RMX_HORZ_FILTER_2TAP_COEF__RMX_COEF_2POS_2TAP_HORZ__SHIFT 0x0000000a
+#define	RMX_HORZ_FILTER_2TAP_COEF__RMX_COEF_3POS_2TAP_HORZ__SHIFT 0x0000000f
+#define	RMX_HORZ_FILTER_2TAP_COEF__RMX_COEF_4POS_2TAP_HORZ__SHIFT 0x00000014
+
+// RMX_HORZ_PHASE
+#define	RMX_HORZ_PHASE__RMX_HORZ_START_PHASE__SHIFT        0x00000000
+#define	RMX_HORZ_PHASE__RMX_VERT_START_PHASE__SHIFT        0x00000010
+
+// DAC_EMBEDDED_SYNC_CNTL
+#define	DAC_EMBEDDED_SYNC_CNTL__DAC_EMBED_SYNC_EN_Y_G__SHIFT 0x00000000
+#define	DAC_EMBEDDED_SYNC_CNTL__DAC_EMBED_SYNC_EN_Cb_B__SHIFT 0x00000001
+#define	DAC_EMBEDDED_SYNC_CNTL__DAC_EMBED_SYNC_EN_Cr_R__SHIFT 0x00000002
+#define	DAC_EMBEDDED_SYNC_CNTL__DAC_TRILEVEL_SYNC_EN__SHIFT 0x00000003
+
+// DAC_BROAD_PULSE
+#define	DAC_BROAD_PULSE__DAC_BROAD_PULSE_START__SHIFT      0x00000000
+#define	DAC_BROAD_PULSE__DAC_BROAD_PULSE_END__SHIFT        0x00000010
+
+// DAC_SKEW_CLKS
+#define	DAC_SKEW_CLKS__DAC_SKEW_CLKS__SHIFT                0x00000000
+
+// DAC_INCR
+#define	DAC_INCR__DAC_INCR_Y_G__SHIFT                      0x00000000
+#define	DAC_INCR__DAC_INCR_CrCb_RB__SHIFT                  0x00000010
+
+// DAC_NEG_SYNC_LEVEL
+#define	DAC_NEG_SYNC_LEVEL__DAC_NEG_SYNC_LEVEL_Y_G__SHIFT  0x00000000
+#define	DAC_NEG_SYNC_LEVEL__DAC_NEG_SYNC_LEVEL_CrCb_RB__SHIFT 0x00000010
+
+// DAC_POS_SYNC_LEVEL
+#define	DAC_POS_SYNC_LEVEL__DAC_POS_SYNC_LEVEL_Y_G__SHIFT  0x00000000
+#define	DAC_POS_SYNC_LEVEL__DAC_POS_SYNC_LEVEL_CrCb_RB__SHIFT 0x00000010
+
+// DAC_BLANK_LEVEL
+#define	DAC_BLANK_LEVEL__DAC_BLANK_LEVEL_Y_G__SHIFT        0x00000000
+#define	DAC_BLANK_LEVEL__DAC_BLANK_LEVEL_CrCb_RB__SHIFT    0x00000010
+
+// CLOCK_CNTL_INDEX
+#define	CLOCK_CNTL_INDEX__PLL_ADDR__SHIFT                  0x00000000
+#define	CLOCK_CNTL_INDEX__PLL_WR_EN__SHIFT                 0x00000007
+#define	CLOCK_CNTL_INDEX__PPLL_DIV_SEL__SHIFT              0x00000008
+
+// CLOCK_CNTL_DATA
+#define	CLOCK_CNTL_DATA__PLL_DATA__SHIFT                   0x00000000
+
+// PPLL_DIV_0
+#define	PPLL_DIV_0__PPLL_FB0_DIV__SHIFT                    0x00000000
+#define	PPLL_DIV_0__PPLL_ATOMIC_UPDATE_W__SHIFT            0x0000000f
+#define	PPLL_DIV_0__PPLL_ATOMIC_UPDATE_R__SHIFT            0x0000000f
+#define	PPLL_DIV_0__PPLL_POST0_DIV__SHIFT                  0x00000010
+
+// PPLL_DIV_1
+#define	PPLL_DIV_1__PPLL_FB1_DIV__SHIFT                    0x00000000
+#define	PPLL_DIV_1__PPLL_ATOMIC_UPDATE_W__SHIFT            0x0000000f
+#define	PPLL_DIV_1__PPLL_ATOMIC_UPDATE_R__SHIFT            0x0000000f
+#define	PPLL_DIV_1__PPLL_POST1_DIV__SHIFT                  0x00000010
+
+// PPLL_DIV_2
+#define	PPLL_DIV_2__PPLL_FB2_DIV__SHIFT                    0x00000000
+#define	PPLL_DIV_2__PPLL_ATOMIC_UPDATE_W__SHIFT            0x0000000f
+#define	PPLL_DIV_2__PPLL_ATOMIC_UPDATE_R__SHIFT            0x0000000f
+#define	PPLL_DIV_2__PPLL_POST2_DIV__SHIFT                  0x00000010
+
+// PPLL_DIV_3
+#define	PPLL_DIV_3__PPLL_FB3_DIV__SHIFT                    0x00000000
+#define	PPLL_DIV_3__PPLL_ATOMIC_UPDATE_W__SHIFT            0x0000000f
+#define	PPLL_DIV_3__PPLL_ATOMIC_UPDATE_R__SHIFT            0x0000000f
+#define	PPLL_DIV_3__PPLL_POST3_DIV__SHIFT                  0x00000010
+
+// VCLK_ECP_CNTL
+#define	VCLK_ECP_CNTL__VCLK_SRC_SEL__SHIFT                 0x00000000
+#define	VCLK_ECP_CNTL__VCLK_INVERT__SHIFT                  0x00000004
+#define	VCLK_ECP_CNTL__ECP_DIV__SHIFT                      0x00000008
+#define	VCLK_ECP_CNTL__BYTE_CLK_POST_DIV__SHIFT            0x00000010
+#define	VCLK_ECP_CNTL__ECP_FORCE_ON__SHIFT                 0x00000012
+#define	VCLK_ECP_CNTL__BYTE_CLK_OUT_EN__SHIFT              0x00000014
+#define	VCLK_ECP_CNTL__BYTE_CLK_SKEW__SHIFT                0x00000018
+
+// HTOTAL_CNTL
+#define	HTOTAL_CNTL__HTOT_PIX_SLIP__SHIFT                  0x00000000
+#define	HTOTAL_CNTL__HTOT_VCLK_SLIP__SHIFT                 0x00000008
+#define	HTOTAL_CNTL__HTOT_PPLL_SLIP__SHIFT                 0x00000010
+#define	HTOTAL_CNTL__HTOT_CNTL_EDGE__SHIFT                 0x00000018
+#define	HTOTAL_CNTL__HTOT_CNTL_VGA_EN__SHIFT               0x0000001c
+
+// PLL_TEST_CNTL
+#define	PLL_TEST_CNTL__TST_SRC_SEL__SHIFT                  0x00000000
+#define	PLL_TEST_CNTL__TST_SRC_INV__SHIFT                  0x00000007
+#define	PLL_TEST_CNTL__TST_DIVIDERS__SHIFT                 0x00000008
+#define	PLL_TEST_CNTL__PLL_MASK_READ_B__SHIFT              0x00000009
+#define	PLL_TEST_CNTL__TESTCLK_MUX_SEL__SHIFT              0x0000000c
+#define	PLL_TEST_CNTL__ANALOG_MON__SHIFT                   0x00000010
+#define	PLL_TEST_CNTL__ANALOG_MON_M6__SHIFT                0x0000000f
+#define	PLL_TEST_CNTL__TEST_COUNT__SHIFT                   0x00000018
+
+// CP_RB_CNTL
+#define	CP_RB_CNTL__RB_BUFSZ__SHIFT                        0x00000000
+#define	CP_RB_CNTL__RB_BLKSZ__SHIFT                        0x00000008
+#define	CP_RB_CNTL__BUF_SWAP__SHIFT                        0x00000010
+#define	CP_RB_CNTL__MAX_FETCH__SHIFT                       0x00000012
+#define	CP_RB_CNTL__RB_NO_UPDATE__SHIFT                    0x0000001b
+
+// CP_RB_BASE
+#define	CP_RB_BASE__RB_BASE__SHIFT                         0x00000002
+
+// CP_RB_RPTR_ADDR
+#define	CP_RB_RPTR_ADDR__RB_RPTR_SWAP__SHIFT               0x00000000
+#define	CP_RB_RPTR_ADDR__RB_RPTR_ADDR__SHIFT               0x00000002
+
+// CP_RB_RPTR
+#define	CP_RB_RPTR__RB_RPTR__SHIFT                         0x00000000
+
+// CP_RB_WPTR
+#define	CP_RB_WPTR__RB_WPTR__SHIFT                         0x00000000
+
+// CP_RB_WPTR_DELAY
+#define	CP_RB_WPTR_DELAY__PRE_WRITE_TIMER__SHIFT           0x00000000
+#define	CP_RB_WPTR_DELAY__PRE_WRITE_LIMIT__SHIFT           0x0000001c
+
+// CP_IB_BASE
+#define	CP_IB_BASE__IB_BASE__SHIFT                         0x00000002
+
+// CP_IB_BUFSZ
+#define	CP_IB_BUFSZ__IB_BUFSZ__SHIFT                       0x00000000
+
+// CP_CSQ_CNTL
+#define	CP_CSQ_CNTL__CSQ_CNT_PRIMARY__SHIFT                0x00000000
+#define	CP_CSQ_CNTL__CSQ_CNT_INDIRECT__SHIFT               0x00000008
+#define	CP_CSQ_CNTL__CSQ_MODE__SHIFT                       0x0000001c
+
+// CP_CSQ_APER_PRIMARY
+#define	CP_CSQ_APER_PRIMARY__CP_CSQ_APER_PRIMARY__SHIFT    0x00000000
+
+// CP_CSQ_APER_INDIRECT
+#define	CP_CSQ_APER_INDIRECT__CP_CSQ_APER_INDIRECT__SHIFT  0x00000000
+
+// CP_ME_CNTL
+#define	CP_ME_CNTL__ME_STAT__SHIFT                         0x00000000
+#define	CP_ME_CNTL__ME_STATMUX__SHIFT                      0x00000010
+#define	CP_ME_CNTL__ME_BUSY__SHIFT                         0x0000001d
+#define	CP_ME_CNTL__ME_MODE__SHIFT                         0x0000001e
+#define	CP_ME_CNTL__ME_STEP__SHIFT                         0x0000001f
+
+// CP_ME_RAM_ADDR
+#define	CP_ME_RAM_ADDR__ME_RAM_ADDR__SHIFT                 0x00000000
+
+// CP_ME_RAM_RADDR
+#define	CP_ME_RAM_RADDR__ME_RAM_RADDR__SHIFT               0x00000000
+
+// CP_ME_RAM_DATAH
+#define	CP_ME_RAM_DATAH__ME_RAM_DATAH__SHIFT               0x00000000
+
+// CP_ME_RAM_DATAL
+#define	CP_ME_RAM_DATAL__ME_RAM_DATAL__SHIFT               0x00000000
+
+// CP_DEBUG
+#define	CP_DEBUG__CP_DEBUG__SHIFT                          0x00000000
+
+// SCRATCH_REG0
+#define	SCRATCH_REG0__SCRATCH_REG0__SHIFT                  0x00000000
+#define	GUI_SCRATCH_REG0__SCRATCH_REG0__SHIFT              0x00000000
+
+// SCRATCH_REG1
+#define	SCRATCH_REG1__SCRATCH_REG1__SHIFT                  0x00000000
+#define	GUI_SCRATCH_REG1__SCRATCH_REG1__SHIFT              0x00000000
+
+// SCRATCH_REG2
+#define	SCRATCH_REG2__SCRATCH_REG2__SHIFT                  0x00000000
+#define	GUI_SCRATCH_REG2__SCRATCH_REG2__SHIFT              0x00000000
+
+// SCRATCH_REG3
+#define	SCRATCH_REG3__SCRATCH_REG3__SHIFT                  0x00000000
+#define	GUI_SCRATCH_REG3__SCRATCH_REG3__SHIFT              0x00000000
+
+// SCRATCH_REG4
+#define	SCRATCH_REG4__SCRATCH_REG4__SHIFT                  0x00000000
+#define	GUI_SCRATCH_REG4__SCRATCH_REG4__SHIFT              0x00000000
+
+// SCRATCH_REG5
+#define	SCRATCH_REG5__SCRATCH_REG5__SHIFT                  0x00000000
+#define	GUI_SCRATCH_REG5__SCRATCH_REG5__SHIFT              0x00000000
+
+// SCRATCH_UMSK
+#define	SCRATCH_UMSK__SCRATCH_UMSK__SHIFT                  0x00000000
+#define	SCRATCH_UMSK__SCRATCH_SWAP__SHIFT                  0x00000010
+
+// SCRATCH_ADDR
+#define	SCRATCH_ADDR__SCRATCH_ADDR__SHIFT                  0x00000005
+
+// DMA_GUI_TABLE_ADDR
+#define	DMA_GUI_TABLE_ADDR__CP_SYNC__SHIFT                 0x00000000
+#define	DMA_GUI_TABLE_ADDR__TABLE_ADDR__SHIFT              0x00000004
+
+// DMA_GUI_SRC_ADDR
+#define	DMA_GUI_SRC_ADDR__SRC_ADDR__SHIFT                  0x00000000
+
+// DMA_GUI_DST_ADDR
+#define	DMA_GUI_DST_ADDR__DST_ADDR__SHIFT                  0x00000000
+
+// DMA_GUI_COMMAND
+#define	DMA_GUI_COMMAND__BYTE_COUNT__SHIFT                 0x00000000
+#define	DMA_GUI_COMMAND__SRC_SWAP__SHIFT                   0x00000016
+#define	DMA_GUI_COMMAND__DST_SWAP__SHIFT                   0x00000018
+#define	DMA_GUI_COMMAND__SAS__SHIFT                        0x0000001a
+#define	DMA_GUI_COMMAND__DAS__SHIFT                        0x0000001b
+#define	DMA_GUI_COMMAND__SAIC__SHIFT                       0x0000001c
+#define	DMA_GUI_COMMAND__DAIC__SHIFT                       0x0000001d
+#define	DMA_GUI_COMMAND__INTDIS__SHIFT                     0x0000001e
+#define	DMA_GUI_COMMAND__EOL__SHIFT                        0x0000001f
+
+// DMA_GUI_STATUS
+#define	DMA_GUI_STATUS__DTAQ_AVAIL__SHIFT                  0x00000000
+#define	DMA_GUI_STATUS__LAST_TABLE_NUM__SHIFT              0x00000008
+#define	DMA_GUI_STATUS__CURRENT_TABLE_NUM__SHIFT           0x0000000c
+#define	DMA_GUI_STATUS__ABORT_EN__SHIFT                    0x00000014
+#define	DMA_GUI_STATUS__ACTIVE__SHIFT                      0x00000015
+#define	DMA_GUI_STATUS__SWAP__SHIFT                        0x00000016
+
+// DMA_GUI_ACT_DSCRPTR
+#define	DMA_GUI_ACT_DSCRPTR__TABLE_ADDR__SHIFT             0x00000004
+
+// DMA_VID_TABLE_ADDR
+#define	DMA_VID_TABLE_ADDR__CP_SYNC__SHIFT                 0x00000000
+#define	DMA_VID_TABLE_ADDR__TABLE_ADDR__SHIFT              0x00000004
+
+// DMA_VID_SRC_ADDR
+#define	DMA_VID_SRC_ADDR__SRC_ADDR__SHIFT                  0x00000000
+
+// DMA_VID_DST_ADDR
+#define	DMA_VID_DST_ADDR__DST_ADDR__SHIFT                  0x00000000
+
+// DMA_VID_COMMAND
+#define	DMA_VID_COMMAND__BYTE_COUNT__SHIFT                 0x00000000
+#define	DMA_VID_COMMAND__SRC_SWAP__SHIFT                   0x00000016
+#define	DMA_VID_COMMAND__DST_SWAP__SHIFT                   0x00000018
+#define	DMA_VID_COMMAND__SAS__SHIFT                        0x0000001a
+#define	DMA_VID_COMMAND__DAS__SHIFT                        0x0000001b
+#define	DMA_VID_COMMAND__SAIC__SHIFT                       0x0000001c
+#define	DMA_VID_COMMAND__DAIC__SHIFT                       0x0000001d
+#define	DMA_VID_COMMAND__INTDIS__SHIFT                     0x0000001e
+#define	DMA_VID_COMMAND__EOL__SHIFT                        0x0000001f
+
+// DMA_VID_STATUS
+#define	DMA_VID_STATUS__DTAQ_AVAIL__SHIFT                  0x00000000
+#define	DMA_VID_STATUS__LAST_TABLE_NUM__SHIFT              0x00000008
+#define	DMA_VID_STATUS__CURRENT_TABLE_NUM__SHIFT           0x0000000c
+#define	DMA_VID_STATUS__ABORT_EN__SHIFT                    0x00000014
+#define	DMA_VID_STATUS__ACTIVE__SHIFT                      0x00000015
+#define	DMA_VID_STATUS__SWAP__SHIFT                        0x00000016
+
+// DMA_VID_ACT_DSCRPTR
+#define	DMA_VID_ACT_DSCRPTR__TABLE_ADDR__SHIFT             0x00000004
+
+// CP_CSQ_ADDR
+#define	CP_CSQ_ADDR__CSQ_ADDR__SHIFT                       0x00000002
+
+// CP_CSQ_DATA
+#define	CP_CSQ_DATA__CSQ_DATA__SHIFT                       0x00000000
+
+// CP_CSQ_STAT
+#define	CP_CSQ_STAT__CSQ_RPTR_PRIMARY__SHIFT               0x00000000
+#define	CP_CSQ_STAT__CSQ_WPTR_PRIMARY__SHIFT               0x00000008
+#define	CP_CSQ_STAT__CSQ_RPTR_INDIRECT__SHIFT              0x00000010
+#define	CP_CSQ_STAT__CSQ_WPTR_INDIRECT__SHIFT              0x00000018
+
+// CP_STAT
+#define	CP_STAT__MRU_BUSY__SHIFT                           0x00000000
+#define	CP_STAT__MWU_BUSY__SHIFT                           0x00000001
+#define	CP_STAT__RSIU_BUSY__SHIFT                          0x00000002
+#define	CP_STAT__RCIU_BUSY__SHIFT                          0x00000003
+#define	CP_STAT__CSF_PRIMARY_BUSY__SHIFT                   0x00000009
+#define	CP_STAT__CSF_INDIRECT_BUSY__SHIFT                  0x0000000a
+#define	CP_STAT__CSQ_PRIMARY_BUSY__SHIFT                   0x0000000b
+#define	CP_STAT__CSQ_INDIRECT_BUSY__SHIFT                  0x0000000c
+#define	CP_STAT__CSI_BUSY__SHIFT                           0x0000000d
+#define	CP_STAT__GUIDMA_BUSY__SHIFT                        0x0000001c
+#define	CP_STAT__VIDDMA_BUSY__SHIFT                        0x0000001d
+#define	CP_STAT__CMDSTRM_BUSY__SHIFT                       0x0000001e
+#define	CP_STAT__CP_BUSY__SHIFT                            0x0000001f
+
+// SE_PORT_DATA0
+#define	SE_PORT_DATA0__DATAPORT0__SHIFT                    0x00000000
+
+// SE_PORT_DATA1
+#define	SE_PORT_DATA1__DATAPORT1__SHIFT                    0x00000000
+
+// SE_PORT_DATA2
+#define	SE_PORT_DATA2__DATAPORT2__SHIFT                    0x00000000
+
+// SE_PORT_DATA3
+#define	SE_PORT_DATA3__DATAPORT3__SHIFT                    0x00000000
+
+// SE_PORT_DATA4
+#define	SE_PORT_DATA4__DATAPORT4__SHIFT                    0x00000000
+
+// SE_PORT_DATA5
+#define	SE_PORT_DATA5__DATAPORT5__SHIFT                    0x00000000
+
+// SE_PORT_DATA6
+#define	SE_PORT_DATA6__DATAPORT6__SHIFT                    0x00000000
+
+// SE_PORT_DATA7
+#define	SE_PORT_DATA7__DATAPORT7__SHIFT                    0x00000000
+
+// SE_PORT_DATA8
+#define	SE_PORT_DATA8__DATAPORT8__SHIFT                    0x00000000
+
+// SE_PORT_DATA9
+#define	SE_PORT_DATA9__DATAPORT9__SHIFT                    0x00000000
+
+// SE_PORT_DATA10
+#define	SE_PORT_DATA10__DATAPORT10__SHIFT                  0x00000000
+
+// SE_PORT_DATA11
+#define	SE_PORT_DATA11__DATAPORT11__SHIFT                  0x00000000
+
+// SE_PORT_DATA12
+#define	SE_PORT_DATA12__DATAPORT12__SHIFT                  0x00000000
+
+// SE_PORT_DATA13
+#define	SE_PORT_DATA13__DATAPORT13__SHIFT                  0x00000000
+
+// SE_PORT_DATA14
+#define	SE_PORT_DATA14__DATAPORT14__SHIFT                  0x00000000
+
+// SE_PORT_DATA15
+#define	SE_PORT_DATA15__DATAPORT15__SHIFT                  0x00000000
+
+// SE_PORT_IDX0
+#define	SE_PORT_IDX0__IDXPORT0__SHIFT                      0x00000000
+
+// SE_PORT_IDX1
+#define	SE_PORT_IDX1__IDXPORT1__SHIFT                      0x00000000
+
+// SE_PORT_IDX2
+#define	SE_PORT_IDX2__IDXPORT2__SHIFT                      0x00000000
+
+// SE_PORT_IDX3
+#define	SE_PORT_IDX3__IDXPORT3__SHIFT                      0x00000000
+
+// SE_PORT_IDX4
+#define	SE_PORT_IDX4__IDXPORT4__SHIFT                      0x00000000
+
+// SE_PORT_IDX5
+#define	SE_PORT_IDX5__IDXPORT5__SHIFT                      0x00000000
+
+// SE_PORT_IDX6
+#define	SE_PORT_IDX6__IDXPORT6__SHIFT                      0x00000000
+
+// SE_PORT_IDX7
+#define	SE_PORT_IDX7__IDXPORT7__SHIFT                      0x00000000
+
+// SE_PORT_IDX8
+#define	SE_PORT_IDX8__IDXPORT8__SHIFT                      0x00000000
+
+// SE_PORT_IDX9
+#define	SE_PORT_IDX9__IDXPORT9__SHIFT                      0x00000000
+
+// SE_PORT_IDX10
+#define	SE_PORT_IDX10__IDXPORT10__SHIFT                    0x00000000
+
+// SE_PORT_IDX11
+#define	SE_PORT_IDX11__IDXPORT11__SHIFT                    0x00000000
+
+// SE_PORT_IDX12
+#define	SE_PORT_IDX12__IDXPORT12__SHIFT                    0x00000000
+
+// SE_PORT_IDX13
+#define	SE_PORT_IDX13__IDXPORT13__SHIFT                    0x00000000
+
+// SE_PORT_IDX14
+#define	SE_PORT_IDX14__IDXPORT14__SHIFT                    0x00000000
+
+// SE_PORT_IDX15
+#define	SE_PORT_IDX15__IDXPORT15__SHIFT                    0x00000000
+
+// SE_VTX_FMT
+#define	SE_VTX_FMT__VTX_W0_PRESENT__SHIFT                  0x00000000
+#define	SE_VTX_FMT__VTX_FPCOLOR_PRESENT__SHIFT             0x00000001
+#define	SE_VTX_FMT__VTX_FPALPHA_PRESENT__SHIFT             0x00000002
+#define	SE_VTX_FMT__VTX_PKCOLOR_PRESENT__SHIFT             0x00000003
+#define	SE_VTX_FMT__VTX_FPSPEC_PRESENT__SHIFT              0x00000004
+#define	SE_VTX_FMT__VTX_FPFOG_PRESENT__SHIFT               0x00000005
+#define	SE_VTX_FMT__VTX_PKSPEC_PRESENT__SHIFT              0x00000006
+#define	SE_VTX_FMT__VTX_ST0_PRESENT__SHIFT                 0x00000007
+#define	SE_VTX_FMT__VTX_ST1_PRESENT__SHIFT                 0x00000008
+#define	SE_VTX_FMT__VTX_Q1_PRESENT__SHIFT                  0x00000009
+#define	SE_VTX_FMT__VTX_ST2_PRESENT__SHIFT                 0x0000000a
+#define	SE_VTX_FMT__VTX_Q2_PRESENT__SHIFT                  0x0000000b
+#define	SE_VTX_FMT__VTX_ST3_PRESENT__SHIFT                 0x0000000c
+#define	SE_VTX_FMT__VTX_Q3_PRESENT__SHIFT                  0x0000000d
+#define	SE_VTX_FMT__VTX_Q0_PRESENT__SHIFT                  0x0000000e
+#define	SE_VTX_FMT__VTX_BLND_WEIGHT_CNT__SHIFT             0x0000000f
+#define	SE_VTX_FMT__VTX_N0_PRESENT__SHIFT                  0x00000012
+#define	SE_VTX_FMT__VTX_XY1_PRESENT__SHIFT                 0x0000001b
+#define	SE_VTX_FMT__VTX_Z1_PRESENT__SHIFT                  0x0000001c
+#define	SE_VTX_FMT__VTX_W1_PRESENT__SHIFT                  0x0000001d
+#define	SE_VTX_FMT__VTX_N1_PRESENT__SHIFT                  0x0000001e
+#define	SE_VTX_FMT__VTX_Z_PRESENT__SHIFT                   0x0000001f
+
+// SE_VF_CNTL
+#define	SE_VF_CNTL__PRIM_TYPE__SHIFT                       0x00000000
+#define	SE_VF_CNTL__PRIM_WALK__SHIFT                       0x00000004
+#define	SE_VF_CNTL__COLOR_ORDER__SHIFT                     0x00000006
+#define	SE_VF_CNTL__EN_MAOS__SHIFT                         0x00000007
+#define	SE_VF_CNTL__VTX_FMT_MODE__SHIFT                    0x00000008
+#define	SE_VF_CNTL__TCL_ENABLE__SHIFT                      0x00000009
+#define	SE_VF_CNTL__NUM_VERTICES__SHIFT                    0x00000010
+
+// SE_CNTL
+#define	SE_CNTL__FFACE_CULL_DIR__SHIFT                     0x00000000
+#define	SE_CNTL__BFACE_CULL_FCN__SHIFT                     0x00000001
+#define	SE_CNTL__FFACE_CULL_FCN__SHIFT                     0x00000003
+#define	SE_CNTL__BADVTX_CULL_DISABLE__SHIFT                0x00000005
+#define	SE_CNTL__FLAT_SHADE_VTX__SHIFT                     0x00000006
+#define	SE_CNTL__DIFFUSE_SHADE_FCN__SHIFT                  0x00000008
+#define	SE_CNTL__ALPHA_SHADE_FCN__SHIFT                    0x0000000a
+#define	SE_CNTL__SPECULAR_SHADE_FCN__SHIFT                 0x0000000c
+#define	SE_CNTL__FOG_SHADE_FCN__SHIFT                      0x0000000e
+#define	SE_CNTL__ZBIAS_EN_POINT__SHIFT                     0x00000010
+#define	SE_CNTL__ZBIAS_EN_LINE__SHIFT                      0x00000011
+#define	SE_CNTL__ZBIAS_EN_TRI__SHIFT                       0x00000012
+#define	SE_CNTL__WIDELINE_EN__SHIFT                        0x00000014
+#define	SE_CNTL__VPORT_XY_XFEN__SHIFT                      0x00000018
+#define	SE_CNTL__VPORT_Z_XFEN__SHIFT                       0x00000019
+#define	SE_CNTL__VTX_PIXCENTER__SHIFT                      0x0000001b
+#define	SE_CNTL__ROUND_MODE__SHIFT                         0x0000001c
+#define	SE_CNTL__ROUND_PRECISION__SHIFT                    0x0000001e
+
+// SE_COORD_FMT
+#define	SE_COORD_FMT__VTX_XY_FMT__SHIFT                    0x00000000
+#define	SE_COORD_FMT__VTX_Z_FMT__SHIFT                     0x00000001
+#define	SE_COORD_FMT__VTX_ST0_NONPARAMETRIC__SHIFT         0x00000008
+#define	SE_COORD_FMT__VTX_ST1_NONPARAMETRIC__SHIFT         0x00000009
+#define	SE_COORD_FMT__VTX_ST2_NONPARAMETRIC__SHIFT         0x0000000a
+#define	SE_COORD_FMT__VTX_ST3_NONPARAMETRIC__SHIFT         0x0000000b
+#define	SE_COORD_FMT__VTX_W0_NORMALIZE__SHIFT              0x0000000c
+#define	SE_COORD_FMT__VTX_W0_FMT__SHIFT                    0x00000010
+#define	SE_COORD_FMT__VTX_ST0_FMT__SHIFT                   0x00000011
+#define	SE_COORD_FMT__VTX_ST1_FMT__SHIFT                   0x00000013
+#define	SE_COORD_FMT__VTX_ST2_FMT__SHIFT                   0x00000015
+#define	SE_COORD_FMT__VTX_ST3_FMT__SHIFT                   0x00000017
+#define	SE_COORD_FMT__TEX1_W_ROUTING__SHIFT                0x0000001a
+
+// SE_VPORT_XSCALE
+#define	SE_VPORT_XSCALE__VPORT_XSCALE__SHIFT               0x00000000
+
+// SE_VPORT_XOFFSET
+#define	SE_VPORT_XOFFSET__VPORT_XOFFSET__SHIFT             0x00000000
+
+// SE_VPORT_YSCALE
+#define	SE_VPORT_YSCALE__VPORT_YSCALE__SHIFT               0x00000000
+
+// SE_VPORT_YOFFSET
+#define	SE_VPORT_YOFFSET__VPORT_YOFFSET__SHIFT             0x00000000
+
+// SE_VPORT_ZSCALE
+#define	SE_VPORT_ZSCALE__VPORT_ZSCALE__SHIFT               0x00000000
+
+// SE_VPORT_ZOFFSET
+#define	SE_VPORT_ZOFFSET__VPORT_ZOFFSET__SHIFT             0x00000000
+
+// SE_ZBIAS_FACTOR
+#define	SE_ZBIAS_FACTOR__ZBIAS_FACTOR__SHIFT               0x00000000
+
+// SE_ZBIAS_CONSTANT
+#define	SE_ZBIAS_CONSTANT__ZBIAS_CONSTANT__SHIFT           0x00000000
+
+// SE_LINE_WIDTH
+#define	SE_LINE_WIDTH__LINE_WIDTH__SHIFT                   0x00000000
+
+// SE_W0_RANGE
+#define	SE_W0_RANGE__W0_RANGE__SHIFT                       0x00000000
+
+// SE_VTX_NUM_ARRAYS
+#define	SE_VTX_NUM_ARRAYS__VTX_NUM_ARRAYS__SHIFT           0x00000000
+#define	SE_VTX_NUM_ARRAYS__VC_PFETCH__SHIFT                0x0000000e
+
+// SE_VTX_AOS_ATTR01
+#define	SE_VTX_AOS_ATTR01__VTX_AOS_COUNT0__SHIFT           0x00000000
+#define	SE_VTX_AOS_ATTR01__VTX_AOS_STRIDE0__SHIFT          0x00000008
+#define	SE_VTX_AOS_ATTR01__VTX_AOS_COUNT1__SHIFT           0x00000010
+#define	SE_VTX_AOS_ATTR01__VTX_AOS_STRIDE1__SHIFT          0x00000018
+
+// SE_VTX_AOS_ADDR0
+#define	SE_VTX_AOS_ADDR0__VTX_AOS_ADDR0__SHIFT             0x00000002
+
+// SE_VTX_AOS_ADDR1
+#define	SE_VTX_AOS_ADDR1__VTX_AOS_ADDR1__SHIFT             0x00000002
+
+// SE_VTX_AOS_ATTR23
+#define	SE_VTX_AOS_ATTR23__VTX_AOS_COUNT2__SHIFT           0x00000000
+#define	SE_VTX_AOS_ATTR23__VTX_AOS_STRIDE2__SHIFT          0x00000008
+#define	SE_VTX_AOS_ATTR23__VTX_AOS_COUNT3__SHIFT           0x00000010
+#define	SE_VTX_AOS_ATTR23__VTX_AOS_STRIDE3__SHIFT          0x00000018
+
+// SE_VTX_AOS_ADDR2
+#define	SE_VTX_AOS_ADDR2__VTX_AOS_ADDR2__SHIFT             0x00000002
+
+// SE_VTX_AOS_ADDR3
+#define	SE_VTX_AOS_ADDR3__VTX_AOS_ADDR3__SHIFT             0x00000002
+
+// SE_VTX_AOS_ATTR45
+#define	SE_VTX_AOS_ATTR45__VTX_AOS_COUNT4__SHIFT           0x00000000
+#define	SE_VTX_AOS_ATTR45__VTX_AOS_STRIDE4__SHIFT          0x00000008
+#define	SE_VTX_AOS_ATTR45__VTX_AOS_COUNT5__SHIFT           0x00000010
+#define	SE_VTX_AOS_ATTR45__VTX_AOS_STRIDE5__SHIFT          0x00000018
+
+// SE_VTX_AOS_ADDR4
+#define	SE_VTX_AOS_ADDR4__VTX_AOS_ADDR4__SHIFT             0x00000002
+
+// SE_VTX_AOS_ADDR5
+#define	SE_VTX_AOS_ADDR5__VTX_AOS_ADDR5__SHIFT             0x00000002
+
+// SE_VTX_AOS_ATTR67
+#define	SE_VTX_AOS_ATTR67__VTX_AOS_COUNT6__SHIFT           0x00000000
+#define	SE_VTX_AOS_ATTR67__VTX_AOS_STRIDE6__SHIFT          0x00000008
+#define	SE_VTX_AOS_ATTR67__VTX_AOS_COUNT7__SHIFT           0x00000010
+#define	SE_VTX_AOS_ATTR67__VTX_AOS_STRIDE7__SHIFT          0x00000018
+
+// SE_VTX_AOS_ADDR6
+#define	SE_VTX_AOS_ADDR6__VTX_AOS_ADDR6__SHIFT             0x00000002
+
+// SE_VTX_AOS_ADDR7
+#define	SE_VTX_AOS_ADDR7__VTX_AOS_ADDR7__SHIFT             0x00000002
+
+// SE_VTX_AOS_ATTR89
+#define	SE_VTX_AOS_ATTR89__VTX_AOS_COUNT8__SHIFT           0x00000000
+#define	SE_VTX_AOS_ATTR89__VTX_AOS_STRIDE8__SHIFT          0x00000008
+#define	SE_VTX_AOS_ATTR89__VTX_AOS_COUNT9__SHIFT           0x00000010
+#define	SE_VTX_AOS_ATTR89__VTX_AOS_STRIDE9__SHIFT          0x00000018
+
+// SE_VTX_AOS_ADDR8
+#define	SE_VTX_AOS_ADDR8__VTX_AOS_ADDR8__SHIFT             0x00000002
+
+// SE_VTX_AOS_ADDR9
+#define	SE_VTX_AOS_ADDR9__VTX_AOS_ADDR9__SHIFT             0x00000002
+
+// SE_VTX_AOS_ATTR1011
+#define	SE_VTX_AOS_ATTR1011__VTX_AOS_COUNT10__SHIFT        0x00000000
+#define	SE_VTX_AOS_ATTR1011__VTX_AOS_STRIDE10__SHIFT       0x00000008
+#define	SE_VTX_AOS_ATTR1011__VTX_AOS_COUNT11__SHIFT        0x00000010
+#define	SE_VTX_AOS_ATTR1011__VTX_AOS_STRIDE11__SHIFT       0x00000018
+
+// SE_VTX_AOS_ADDR10
+#define	SE_VTX_AOS_ADDR10__VTX_AOS_ADDR10__SHIFT           0x00000002
+
+// SE_VTX_AOS_ADDR11
+#define	SE_VTX_AOS_ADDR11__VTX_AOS_ADDR11__SHIFT           0x00000002
+
+// SE_PERF_CNTL
+#define	SE_PERF_CNTL__PERFSEL1__SHIFT                      0x00000000
+#define	SE_PERF_CNTL__CLR_PERF1__SHIFT                     0x00000006
+#define	SE_PERF_CNTL__EN_PERF1__SHIFT                      0x00000007
+#define	SE_PERF_CNTL__PERFSEL2__SHIFT                      0x00000008
+#define	SE_PERF_CNTL__CLR_PERF2__SHIFT                     0x0000000e
+#define	SE_PERF_CNTL__EN_PERF2__SHIFT                      0x0000000f
+
+// SE_PERF_COUNT1
+#define	SE_PERF_COUNT1__PERF_COUNT1__SHIFT                 0x00000000
+
+// SE_PERF_COUNT2
+#define	SE_PERF_COUNT2__PERF_COUNT2__SHIFT                 0x00000000
+
+// SE_DEBUG
+#define	SE_DEBUG__SE_DEBUG__SHIFT                          0x00000000
+
+// SE_CNTL_STATUS
+#define	SE_CNTL_STATUS__VC_SWAP__SHIFT                     0x00000000
+#define	SE_CNTL_STATUS__SINGLESTEP__SHIFT                  0x00000006
+#define	SE_CNTL_STATUS__EN_SINGLESTEP__SHIFT               0x00000007
+#define	SE_CNTL_STATUS__TCL_BYPASS__SHIFT                  0x00000008
+#define	SE_CNTL_STATUS__TCL_BUSY__SHIFT                    0x0000000b
+#define	SE_CNTL_STATUS__BADVTX_DETECTED__SHIFT             0x0000000f
+#define	SE_CNTL_STATUS__PERF_BUSY__SHIFT                   0x00000010
+#define	SE_CNTL_STATUS__MCSE_BUSY__SHIFT                   0x00000011
+#define	SE_CNTL_STATUS__REIU_BUSY__SHIFT                   0x00000012
+#define	SE_CNTL_STATUS__LSUB_BUSY__SHIFT                   0x00000013
+#define	SE_CNTL_STATUS__PSUB_BUSY__SHIFT                   0x00000014
+#define	SE_CNTL_STATUS__LE_BUSY__SHIFT                     0x00000015
+#define	SE_CNTL_STATUS__PE_BUSY__SHIFT                     0x00000016
+#define	SE_CNTL_STATUS__EE_BUSY__SHIFT                     0x00000017
+#define	SE_CNTL_STATUS__VS_BUSY__SHIFT                     0x00000018
+#define	SE_CNTL_STATUS__RE_BUSY__SHIFT                     0x00000019
+#define	SE_CNTL_STATUS__XE_BUSY__SHIFT                     0x0000001a
+#define	SE_CNTL_STATUS__MIU_BUSY__SHIFT                    0x0000001b
+#define	SE_CNTL_STATUS__VC_BUSY__SHIFT                     0x0000001c
+#define	SE_CNTL_STATUS__VF_BUSY__SHIFT                     0x0000001d
+#define	SE_CNTL_STATUS__REGPIPE_BUSY__SHIFT                0x0000001e
+#define	SE_CNTL_STATUS__SE_BUSY__SHIFT                     0x0000001f
+
+// SE_SERE_WCNTL
+#define	SE_SERE_WCNTL__SERE_WA0__SHIFT                     0x00000002
+#define	SE_SERE_WCNTL__SERE_BLKID0__SHIFT                  0x0000000c
+#define	SE_SERE_WCNTL__SERE_VALID0__SHIFT                  0x0000000e
+#define	SE_SERE_WCNTL__SERE_WA1__SHIFT                     0x00000012
+#define	SE_SERE_WCNTL__SERE_VALID1__SHIFT                  0x0000001e
+#define	SE_SERE_WCNTL__SERE_RTS__SHIFT                     0x0000001f
+
+// SE_SERE_WD0_0
+#define	SE_SERE_WD0_0__SERE_WD0_0__SHIFT                   0x00000000
+
+// SE_SERE_WD0_1
+#define	SE_SERE_WD0_1__SERE_WD0_1__SHIFT                   0x00000000
+
+// SE_SERE_WD0_2
+#define	SE_SERE_WD0_2__SERE_WD0_2__SHIFT                   0x00000000
+
+// SE_SERE_WD0_3
+#define	SE_SERE_WD0_3__SERE_WD0_3__SHIFT                   0x00000000
+
+// SE_SERE_WD1_0
+#define	SE_SERE_WD1_0__SERE_WD1_0__SHIFT                   0x00000000
+
+// SE_SERE_WD1_1
+#define	SE_SERE_WD1_1__SERE_WD1_1__SHIFT                   0x00000000
+
+// SE_SERE_WD1_2
+#define	SE_SERE_WD1_2__SERE_WD1_2__SHIFT                   0x00000000
+
+// SE_SERE_WD1_3
+#define	SE_SERE_WD1_3__SERE_WD1_3__SHIFT                   0x00000000
+
+// SE_MC_SRC2_CNTL
+#define	SE_MC_SRC2_CNTL__MC_X2__SHIFT                      0x00000000
+#define	SE_MC_SRC2_CNTL__MC_Y2__SHIFT                      0x00000010
+#define	SE_MC_SRC2_CNTL__MC_SEC_SRC_PITCH_MUL__SHIFT       0x0000001e
+
+// SE_MC_SRC1_CNTL
+#define	SE_MC_SRC1_CNTL__MC_X1__SHIFT                      0x00000000
+#define	SE_MC_SRC1_CNTL__MC_Y1__SHIFT                      0x00000010
+#define	SE_MC_SRC1_CNTL__MC_IDCT_ENB__SHIFT                0x0000001c
+#define	SE_MC_SRC1_CNTL__MC_SEC_TEX_ENB__SHIFT             0x0000001d
+#define	SE_MC_SRC1_CNTL__MC_SRC_PITCH_MUL__SHIFT           0x0000001e
+
+// SE_MC_DST_CNTL
+#define	SE_MC_DST_CNTL__MC_DST_Y__SHIFT                    0x00000000
+#define	SE_MC_DST_CNTL__MC_DST_X__SHIFT                    0x00000010
+#define	SE_MC_DST_CNTL__MC_DST_PITCH_MUL__SHIFT            0x0000001e
+
+// SE_MC_CNTL_START
+#define	SE_MC_CNTL_START__MC_CNTL_SRC_1_INDEX__SHIFT       0x00000000
+#define	SE_MC_CNTL_START__MC_CNTL_DST_OFFSET__SHIFT        0x00000004
+#define	SE_MC_CNTL_START__MC_ALPHA_ENB__SHIFT              0x00000019
+#define	SE_MC_CNTL_START__MC_CNTL_SRC_2_INDEX__SHIFT       0x0000001a
+#define	SE_MC_CNTL_START__MC_CNTL_WIDTH_HEIGHT_SEL__SHIFT  0x0000001d
+
+// SE_MC_BUF_BASE
+#define	SE_MC_BUF_BASE__MC_BUF_BASE__SHIFT                 0x00000018
+
+// SE_TCL_VECTOR_INDX_REG
+#define	SE_TCL_VECTOR_INDX_REG__OCTWORD_OFFSET__SHIFT      0x00000000
+#define	SE_TCL_VECTOR_INDX_REG__OCTWORD_STRIDE__SHIFT      0x00000010
+#define	SE_TCL_VECTOR_INDX_REG__DWORD_COUNT__SHIFT         0x0000001c
+
+// SE_TCL_VECTOR_DATA_REG
+#define	SE_TCL_VECTOR_DATA_REG__DATA_REGISTER__SHIFT       0x00000000
+
+// SE_TCL_SCALAR_INDX_REG
+#define	SE_TCL_SCALAR_INDX_REG__DWORD_OFFSET__SHIFT        0x00000000
+#define	SE_TCL_SCALAR_INDX_REG__DWORD_STRIDE__SHIFT        0x00000010
+
+// SE_TCL_SCALAR_DATA_REG
+#define	SE_TCL_SCALAR_DATA_REG__DATA_REGISTER__SHIFT       0x00000000
+
+// SE_TCL_MATERIAL_EMISSIVE_RED
+#define	SE_TCL_MATERIAL_EMISSIVE_RED__MATERIAL_EMISSIVE_RED__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_EMISSIVE_GREEN
+#define	SE_TCL_MATERIAL_EMISSIVE_GREEN__MATERIAL_EMISSIVE_GREEN__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_EMISSIVE_BLUE
+#define	SE_TCL_MATERIAL_EMISSIVE_BLUE__MATERIAL_EMISSIVE_BLUE__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_EMISSIVE_ALPHA
+#define	SE_TCL_MATERIAL_EMISSIVE_ALPHA__MATERIAL_EMISSIVE_ALPHA__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_AMBIENT_RED
+#define	SE_TCL_MATERIAL_AMBIENT_RED__MATERIAL_AMBIENT_RED__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_AMBIENT_GREEN
+#define	SE_TCL_MATERIAL_AMBIENT_GREEN__MATERIAL_AMBIENT_GREEN__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_AMBIENT_BLUE
+#define	SE_TCL_MATERIAL_AMBIENT_BLUE__MATERIAL_AMBIENT_BLUE__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_AMBIENT_ALPHA
+#define	SE_TCL_MATERIAL_AMBIENT_ALPHA__MATERIAL_AMBIENT_ALPHA__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_DIFFUSE_RED
+#define	SE_TCL_MATERIAL_DIFFUSE_RED__MATERIAL_DIFFUSE_RED__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_DIFFUSE_GREEN
+#define	SE_TCL_MATERIAL_DIFFUSE_GREEN__MATERIAL_DIFFUSE_GREEN__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_DIFFUSE_BLUE
+#define	SE_TCL_MATERIAL_DIFFUSE_BLUE__MATERIAL_DIFFUSE_BLUE__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_DIFFUSE_ALPHA
+#define	SE_TCL_MATERIAL_DIFFUSE_ALPHA__MATERIAL_DIFFUSE_ALPHA__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_SPECULAR_RED
+#define	SE_TCL_MATERIAL_SPECULAR_RED__MATERIAL_SPECULAR_RED__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_SPECULAR_GREEN
+#define	SE_TCL_MATERIAL_SPECULAR_GREEN__MATERIAL_SPECULAR_GREEN__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_SPECULAR_BLUE
+#define	SE_TCL_MATERIAL_SPECULAR_BLUE__MATERIAL_SPECULAR_BLUE__SHIFT 0x00000000
+
+// SE_TCL_MATERIAL_SPECULAR_ALPHA
+#define	SE_TCL_MATERIAL_SPECULAR_ALPHA__MATERIAL_SPECULAR_ALPHA__SHIFT 0x00000000
+
+// SE_TCL_SHININESS
+#define	SE_TCL_SHININESS__SE_TCL_SHININESS__SHIFT          0x00000000
+
+// SE_TCL_OUTPUT_VTX_FMT
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_W0_PRESENT__SHIFT       0x00000000
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_FPCOLOR_PRESENT__SHIFT  0x00000001
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_FPALPHA_PRESENT__SHIFT  0x00000002
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_PKCOLOR_PRESENT__SHIFT  0x00000003
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_FPSPEC_PRESENT__SHIFT   0x00000004
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_FPFOG_PRESENT__SHIFT    0x00000005
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_PKSPEC_PRESENT__SHIFT   0x00000006
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_ST0_PRESENT__SHIFT      0x00000007
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_ST1_PRESENT__SHIFT      0x00000008
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_Q1_PRESENT__SHIFT       0x00000009
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_ST2_PRESENT__SHIFT      0x0000000a
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_Q2_PRESENT__SHIFT       0x0000000b
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_ST3_PRESENT__SHIFT      0x0000000c
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_Q3_PRESENT__SHIFT       0x0000000d
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_Q0_PRESENT__SHIFT       0x0000000e
+#define	SE_TCL_OUTPUT_VTX_FMT__VTX_Z_PRESENT__SHIFT        0x0000001f
+
+// SE_TCL_OUTPUT_VTX_SEL
+#define	SE_TCL_OUTPUT_VTX_SEL__VTX_XYZW_SELECT__SHIFT      0x00000000
+#define	SE_TCL_OUTPUT_VTX_SEL__VTX_PKDIFFUSE_SELECT__SHIFT 0x00000001
+#define	SE_TCL_OUTPUT_VTX_SEL__VTX_PKSPEC_SELECT__SHIFT    0x00000002
+#define	SE_TCL_OUTPUT_VTX_SEL__FORCE_NAN_IF_CCOLOR_NAN__SHIFT 0x00000003
+#define	SE_TCL_OUTPUT_VTX_SEL__FORCE_INORDER_PROC__SHIFT   0x00000004
+#define	SE_TCL_OUTPUT_VTX_SEL__RSVD_1BIT_NUM0__SHIFT       0x00000005
+#define	SE_TCL_OUTPUT_VTX_SEL__RSVD_3BIT_NUM0__SHIFT       0x00000006
+#define	SE_TCL_OUTPUT_VTX_SEL__RSVD_3BIT_NUM1__SHIFT       0x00000009
+#define	SE_TCL_OUTPUT_VTX_SEL__RSVD_4BIT_NUM0__SHIFT       0x0000000c
+#define	SE_TCL_OUTPUT_VTX_SEL__VTX_TEX0_SELECT__SHIFT      0x00000010
+#define	SE_TCL_OUTPUT_VTX_SEL__VTX_TEX1_SELECT__SHIFT      0x00000014
+#define	SE_TCL_OUTPUT_VTX_SEL__VTX_TEX2_SELECT__SHIFT      0x00000018
+#define	SE_TCL_OUTPUT_VTX_SEL__VTX_TEX3_SELECT__SHIFT      0x0000001c
+
+// SE_TCL_MATRIX_SELECT_0
+#define	SE_TCL_MATRIX_SELECT_0__MODELVIEW_MTX_0_SEL__SHIFT 0x00000000
+#define	SE_TCL_MATRIX_SELECT_0__MODELVIEW_MTX_1_SEL__SHIFT 0x00000004
+#define	SE_TCL_MATRIX_SELECT_0__MODELVIEW_MTX_2_SEL__SHIFT 0x00000008
+#define	SE_TCL_MATRIX_SELECT_0__MODELVIEW_MTX_3_SEL__SHIFT 0x0000000c
+#define	SE_TCL_MATRIX_SELECT_0__IT_MODELVIEW_MTX_0_SEL__SHIFT 0x00000010
+#define	SE_TCL_MATRIX_SELECT_0__IT_MODELVIEW_MTX_1_SEL__SHIFT 0x00000014
+#define	SE_TCL_MATRIX_SELECT_0__IT_MODELVIEW_MTX_2_SEL__SHIFT 0x00000018
+#define	SE_TCL_MATRIX_SELECT_0__IT_MODELVIEW_MTX_3_SEL__SHIFT 0x0000001c
+
+// SE_TCL_MATRIX_SELECT_1
+#define	SE_TCL_MATRIX_SELECT_1__MODEL2CLIP_MTX_0_SEL__SHIFT 0x00000000
+#define	SE_TCL_MATRIX_SELECT_1__MODEL2CLIP_MTX_1_SEL__SHIFT 0x00000004
+#define	SE_TCL_MATRIX_SELECT_1__MODEL2CLIP_MTX_2_SEL__SHIFT 0x00000008
+#define	SE_TCL_MATRIX_SELECT_1__MODEL2CLIP_MTX_3_SEL__SHIFT 0x0000000c
+#define	SE_TCL_MATRIX_SELECT_1__TEX_XFORM_MTX_0_SEL__SHIFT 0x00000010
+#define	SE_TCL_MATRIX_SELECT_1__TEX_XFORM_MTX_1_SEL__SHIFT 0x00000014
+#define	SE_TCL_MATRIX_SELECT_1__TEX_XFORM_MTX_2_SEL__SHIFT 0x00000018
+#define	SE_TCL_MATRIX_SELECT_1__TEX_XFORM_MTX_3_SEL__SHIFT 0x0000001c
+
+// SE_TCL_UCP_VERT_BLEND_CTL
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_IN_CLIP_SPACE__SHIFT 0x00000000
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_IN_MODEL_SPACE__SHIFT 0x00000001
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_ENA_0__SHIFT        0x00000002
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_ENA_1__SHIFT        0x00000003
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_ENA_2__SHIFT        0x00000004
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_ENA_3__SHIFT        0x00000005
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_ENA_4__SHIFT        0x00000006
+#define	SE_TCL_UCP_VERT_BLEND_CTL__UCP_ENA_5__SHIFT        0x00000007
+#define	SE_TCL_UCP_VERT_BLEND_CTL__FOG_MODE__SHIFT         0x00000008
+#define	SE_TCL_UCP_VERT_BLEND_CTL__RNG_BASED_FOG__SHIFT    0x0000000a
+#define	SE_TCL_UCP_VERT_BLEND_CTL__TWO_SIDED_LIGHTING_ENA__SHIFT 0x0000000b
+#define	SE_TCL_UCP_VERT_BLEND_CTL__BLEND_OP_CNT__SHIFT     0x0000000c
+#define	SE_TCL_UCP_VERT_BLEND_CTL__USE_ST_BLEND_OP_CNT__SHIFT 0x0000000f
+#define	SE_TCL_UCP_VERT_BLEND_CTL__POSITION_BLEND_OPERATION__SHIFT 0x00000010
+#define	SE_TCL_UCP_VERT_BLEND_CTL__NORMAL_BLEND_OPERATION__SHIFT 0x00000011
+#define	SE_TCL_UCP_VERT_BLEND_CTL__VERTEX_BLEND_SOURCE_0__SHIFT 0x00000012
+#define	SE_TCL_UCP_VERT_BLEND_CTL__VERTEX_BLEND_SOURCE_1__SHIFT 0x00000013
+#define	SE_TCL_UCP_VERT_BLEND_CTL__VERTEX_BLEND_SOURCE_2__SHIFT 0x00000014
+#define	SE_TCL_UCP_VERT_BLEND_CTL__VERTEX_BLEND_SOURCE_3__SHIFT 0x00000015
+#define	SE_TCL_UCP_VERT_BLEND_CTL__BLEND_WEIGHT_MINUS_ONE__SHIFT 0x00000016
+#define	SE_TCL_UCP_VERT_BLEND_CTL__VERT_BLEND_USE_PROJ_MTX__SHIFT 0x00000017
+#define	SE_TCL_UCP_VERT_BLEND_CTL__VERT_BLEND_2_OPTIMIZE__SHIFT 0x00000018
+#define	SE_TCL_UCP_VERT_BLEND_CTL__CULL_EQ_0_ENA__SHIFT    0x00000019
+#define	SE_TCL_UCP_VERT_BLEND_CTL__CULL_METHOD__SHIFT      0x0000001a
+#define	SE_TCL_UCP_VERT_BLEND_CTL__CULLING_FF_DIR__SHIFT   0x0000001c
+#define	SE_TCL_UCP_VERT_BLEND_CTL__CULL_FF_ENA__SHIFT      0x0000001d
+#define	SE_TCL_UCP_VERT_BLEND_CTL__CULL_BF_ENA__SHIFT      0x0000001e
+#define	SE_TCL_UCP_VERT_BLEND_CTL__FORCE_W_TO_ONE__SHIFT   0x0000001f
+
+// SE_TCL_TEXTURE_PROC_CTL
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_ENA_0__SHIFT  0x00000000
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_ENA_1__SHIFT  0x00000001
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_ENA_2__SHIFT  0x00000002
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_ENA_3__SHIFT  0x00000003
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_XFORM_ENA_0__SHIFT    0x00000004
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_XFORM_ENA_1__SHIFT    0x00000005
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_XFORM_ENA_2__SHIFT    0x00000006
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_XFORM_ENA_3__SHIFT    0x00000007
+#define	SE_TCL_TEXTURE_PROC_CTL__RSVD_2BIT_NUM3__SHIFT     0x00000008
+#define	SE_TCL_TEXTURE_PROC_CTL__RSVD_2BIT_NUM4__SHIFT     0x0000000a
+#define	SE_TCL_TEXTURE_PROC_CTL__RSVD_2BIT_NUM5__SHIFT     0x0000000c
+#define	SE_TCL_TEXTURE_PROC_CTL__RSVD_2BIT_NUM6__SHIFT     0x0000000e
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_SRC_0__SHIFT  0x00000010
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_SRC_1__SHIFT  0x00000014
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_SRC_2__SHIFT  0x00000018
+#define	SE_TCL_TEXTURE_PROC_CTL__TEX_CS_PROC_SRC_3__SHIFT  0x0000001c
+
+// SE_TCL_LIGHT_MODEL_CTL
+#define	SE_TCL_LIGHT_MODEL_CTL__LIGHTING_ENA__SHIFT        0x00000000
+#define	SE_TCL_LIGHT_MODEL_CTL__LIGHTING_IN_MODEL__SHIFT   0x00000001
+#define	SE_TCL_LIGHT_MODEL_CTL__LOCAL_VIEWER__SHIFT        0x00000002
+#define	SE_TCL_LIGHT_MODEL_CTL__NORMALIZE_NORMAL__SHIFT    0x00000003
+#define	SE_TCL_LIGHT_MODEL_CTL__RESCALE_NORMAL__SHIFT      0x00000004
+#define	SE_TCL_LIGHT_MODEL_CTL__SPECULAR_ENA__SHIFT        0x00000005
+#define	SE_TCL_LIGHT_MODEL_CTL__DIFFUSE_SPECULAR_COMBINE__SHIFT 0x00000006
+#define	SE_TCL_LIGHT_MODEL_CTL__ALPHA_LIGHTING__SHIFT      0x00000007
+#define	SE_TCL_LIGHT_MODEL_CTL__LOC_LIGHT_W_SCALE_SUB__SHIFT 0x00000008
+#define	SE_TCL_LIGHT_MODEL_CTL__NO_NORMAL_DO_AMB_ONLY__SHIFT 0x00000009
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_1BIT_NUM0__SHIFT   0x0000000a
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_1BIT_NUM1__SHIFT   0x0000000b
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_1BIT_NUM2__SHIFT   0x0000000c
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_1BIT_NUM3__SHIFT   0x0000000d
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_2BIT_NUM0__SHIFT   0x0000000e
+#define	SE_TCL_LIGHT_MODEL_CTL__EMISSIVE_SOURCE__SHIFT     0x00000010
+#define	SE_TCL_LIGHT_MODEL_CTL__AMBIENT_SOURCE__SHIFT      0x00000012
+#define	SE_TCL_LIGHT_MODEL_CTL__DIFFUSE_SOURCE__SHIFT      0x00000014
+#define	SE_TCL_LIGHT_MODEL_CTL__SPECULAR_SOURCE__SHIFT     0x00000016
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_2BIT_NUM1__SHIFT   0x00000018
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_3BIT_NUM0__SHIFT   0x0000001a
+#define	SE_TCL_LIGHT_MODEL_CTL__RSVD_LT_3BIT_NUM1__SHIFT   0x0000001d
+
+// SE_TCL_PER_LIGHT_CTL_0
+#define	SE_TCL_PER_LIGHT_CTL_0__LIGHT_ENA_0__SHIFT         0x00000000
+#define	SE_TCL_PER_LIGHT_CTL_0__AMBIENT_ENA_0__SHIFT       0x00000001
+#define	SE_TCL_PER_LIGHT_CTL_0__SPECULAR_ENA_0__SHIFT      0x00000002
+#define	SE_TCL_PER_LIGHT_CTL_0__LOCAL_LIGHT_0__SHIFT       0x00000003
+#define	SE_TCL_PER_LIGHT_CTL_0__SPOT_ENA_0__SHIFT          0x00000004
+#define	SE_TCL_PER_LIGHT_CTL_0__SPOT_DUAL_CONE_0__SHIFT    0x00000005
+#define	SE_TCL_PER_LIGHT_CTL_0__RNG_ATT_ENA_0__SHIFT       0x00000006
+#define	SE_TCL_PER_LIGHT_CTL_0__RNG_ATT_CONSTANT_ENA_0__SHIFT 0x00000007
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT0_1BIT_NUM0__SHIFT  0x00000008
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT0_1BIT_NUM1__SHIFT  0x00000009
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT0_1BIT_NUM2__SHIFT  0x0000000a
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT0_1BIT_NUM3__SHIFT  0x0000000b
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT0_2BIT_NUM0__SHIFT  0x0000000c
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT0_2BIT_NUM1__SHIFT  0x0000000e
+#define	SE_TCL_PER_LIGHT_CTL_0__LIGHT_ENA_1__SHIFT         0x00000010
+#define	SE_TCL_PER_LIGHT_CTL_0__AMBIENT_ENA_1__SHIFT       0x00000011
+#define	SE_TCL_PER_LIGHT_CTL_0__SPECULAR_ENA_1__SHIFT      0x00000012
+#define	SE_TCL_PER_LIGHT_CTL_0__LOCAL_LIGHT_1__SHIFT       0x00000013
+#define	SE_TCL_PER_LIGHT_CTL_0__SPOT_ENA_1__SHIFT          0x00000014
+#define	SE_TCL_PER_LIGHT_CTL_0__SPOT_DUAL_CONE_1__SHIFT    0x00000015
+#define	SE_TCL_PER_LIGHT_CTL_0__RNG_ATT_ENA_1__SHIFT       0x00000016
+#define	SE_TCL_PER_LIGHT_CTL_0__RNG_ATT_CONSTANT_ENA_1__SHIFT 0x00000017
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT1_1BIT_NUM0__SHIFT  0x00000018
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT1_1BIT_NUM1__SHIFT  0x00000019
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT1_1BIT_NUM2__SHIFT  0x0000001a
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT1_1BIT_NUM3__SHIFT  0x0000001b
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT1_2BIT_NUM0__SHIFT  0x0000001c
+#define	SE_TCL_PER_LIGHT_CTL_0__RSVD_LT1_2BIT_NUM1__SHIFT  0x0000001e
+
+// SE_TCL_PER_LIGHT_CTL_1
+#define	SE_TCL_PER_LIGHT_CTL_1__LIGHT_ENA_2__SHIFT         0x00000000
+#define	SE_TCL_PER_LIGHT_CTL_1__AMBIENT_ENA_2__SHIFT       0x00000001
+#define	SE_TCL_PER_LIGHT_CTL_1__SPECULAR_ENA_2__SHIFT      0x00000002
+#define	SE_TCL_PER_LIGHT_CTL_1__LOCAL_LIGHT_2__SHIFT       0x00000003
+#define	SE_TCL_PER_LIGHT_CTL_1__SPOT_ENA_2__SHIFT          0x00000004
+#define	SE_TCL_PER_LIGHT_CTL_1__SPOT_DUAL_CONE_2__SHIFT    0x00000005
+#define	SE_TCL_PER_LIGHT_CTL_1__RNG_ATT_ENA_2__SHIFT       0x00000006
+#define	SE_TCL_PER_LIGHT_CTL_1__RNG_ATT_CONSTANT_ENA_2__SHIFT 0x00000007
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT2_1BIT_NUM0__SHIFT  0x00000008
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT2_1BIT_NUM1__SHIFT  0x00000009
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT2_1BIT_NUM2__SHIFT  0x0000000a
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT2_1BIT_NUM3__SHIFT  0x0000000b
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT2_2BIT_NUM0__SHIFT  0x0000000c
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT2_2BIT_NUM1__SHIFT  0x0000000e
+#define	SE_TCL_PER_LIGHT_CTL_1__LIGHT_ENA_3__SHIFT         0x00000010
+#define	SE_TCL_PER_LIGHT_CTL_1__AMBIENT_ENA_3__SHIFT       0x00000011
+#define	SE_TCL_PER_LIGHT_CTL_1__SPECULAR_ENA_3__SHIFT      0x00000012
+#define	SE_TCL_PER_LIGHT_CTL_1__LOCAL_LIGHT_3__SHIFT       0x00000013
+#define	SE_TCL_PER_LIGHT_CTL_1__SPOT_ENA_3__SHIFT          0x00000014
+#define	SE_TCL_PER_LIGHT_CTL_1__SPOT_DUAL_CONE_3__SHIFT    0x00000015
+#define	SE_TCL_PER_LIGHT_CTL_1__RNG_ATT_ENA_3__SHIFT       0x00000016
+#define	SE_TCL_PER_LIGHT_CTL_1__RNG_ATT_CONSTANT_ENA_3__SHIFT 0x00000017
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT3_1BIT_NUM0__SHIFT  0x00000018
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT3_1BIT_NUM1__SHIFT  0x00000019
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT3_1BIT_NUM2__SHIFT  0x0000001a
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT3_1BIT_NUM3__SHIFT  0x0000001b
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT3_2BIT_NUM0__SHIFT  0x0000001c
+#define	SE_TCL_PER_LIGHT_CTL_1__RSVD_LT3_2BIT_NUM1__SHIFT  0x0000001e
+
+// SE_TCL_PER_LIGHT_CTL_2
+#define	SE_TCL_PER_LIGHT_CTL_2__LIGHT_ENA_4__SHIFT         0x00000000
+#define	SE_TCL_PER_LIGHT_CTL_2__AMBIENT_ENA_4__SHIFT       0x00000001
+#define	SE_TCL_PER_LIGHT_CTL_2__SPECULAR_ENA_4__SHIFT      0x00000002
+#define	SE_TCL_PER_LIGHT_CTL_2__LOCAL_LIGHT_4__SHIFT       0x00000003
+#define	SE_TCL_PER_LIGHT_CTL_2__SPOT_ENA_4__SHIFT          0x00000004
+#define	SE_TCL_PER_LIGHT_CTL_2__SPOT_DUAL_CONE_4__SHIFT    0x00000005
+#define	SE_TCL_PER_LIGHT_CTL_2__RNG_ATT_ENA_4__SHIFT       0x00000006
+#define	SE_TCL_PER_LIGHT_CTL_2__RNG_ATT_CONSTANT_ENA_4__SHIFT 0x00000007
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT4_1BIT_NUM0__SHIFT  0x00000008
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT4_1BIT_NUM1__SHIFT  0x00000009
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT4_1BIT_NUM2__SHIFT  0x0000000a
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT4_1BIT_NUM3__SHIFT  0x0000000b
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT4_2BIT_NUM0__SHIFT  0x0000000c
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT4_2BIT_NUM1__SHIFT  0x0000000e
+#define	SE_TCL_PER_LIGHT_CTL_2__LIGHT_ENA_5__SHIFT         0x00000010
+#define	SE_TCL_PER_LIGHT_CTL_2__AMBIENT_ENA_5__SHIFT       0x00000011
+#define	SE_TCL_PER_LIGHT_CTL_2__SPECULAR_ENA_5__SHIFT      0x00000012
+#define	SE_TCL_PER_LIGHT_CTL_2__LOCAL_LIGHT_5__SHIFT       0x00000013
+#define	SE_TCL_PER_LIGHT_CTL_2__SPOT_ENA_5__SHIFT          0x00000014
+#define	SE_TCL_PER_LIGHT_CTL_2__SPOT_DUAL_CONE_5__SHIFT    0x00000015
+#define	SE_TCL_PER_LIGHT_CTL_2__RNG_ATT_ENA_5__SHIFT       0x00000016
+#define	SE_TCL_PER_LIGHT_CTL_2__RNG_ATT_CONSTANT_ENA_5__SHIFT 0x00000017
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT5_1BIT_NUM0__SHIFT  0x00000018
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT5_1BIT_NUM1__SHIFT  0x00000019
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT5_1BIT_NUM2__SHIFT  0x0000001a
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT5_1BIT_NUM3__SHIFT  0x0000001b
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT5_2BIT_NUM0__SHIFT  0x0000001c
+#define	SE_TCL_PER_LIGHT_CTL_2__RSVD_LT5_2BIT_NUM1__SHIFT  0x0000001e
+
+// SE_TCL_PER_LIGHT_CTL_3
+#define	SE_TCL_PER_LIGHT_CTL_3__LIGHT_ENA_6__SHIFT         0x00000000
+#define	SE_TCL_PER_LIGHT_CTL_3__AMBIENT_ENA_6__SHIFT       0x00000001
+#define	SE_TCL_PER_LIGHT_CTL_3__SPECULAR_ENA_6__SHIFT      0x00000002
+#define	SE_TCL_PER_LIGHT_CTL_3__LOCAL_LIGHT_6__SHIFT       0x00000003
+#define	SE_TCL_PER_LIGHT_CTL_3__SPOT_ENA_6__SHIFT          0x00000004
+#define	SE_TCL_PER_LIGHT_CTL_3__SPOT_DUAL_CONE_6__SHIFT    0x00000005
+#define	SE_TCL_PER_LIGHT_CTL_3__RNG_ATT_ENA_6__SHIFT       0x00000006
+#define	SE_TCL_PER_LIGHT_CTL_3__RNG_ATT_CONSTANT_ENA_6__SHIFT 0x00000007
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT6_1BIT_NUM0__SHIFT  0x00000008
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT6_1BIT_NUM1__SHIFT  0x00000009
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT6_1BIT_NUM2__SHIFT  0x0000000a
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT6_1BIT_NUM3__SHIFT  0x0000000b
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT6_2BIT_NUM0__SHIFT  0x0000000c
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT6_2BIT_NUM1__SHIFT  0x0000000e
+#define	SE_TCL_PER_LIGHT_CTL_3__LIGHT_ENA_7__SHIFT         0x00000010
+#define	SE_TCL_PER_LIGHT_CTL_3__AMBIENT_ENA_7__SHIFT       0x00000011
+#define	SE_TCL_PER_LIGHT_CTL_3__SPECULAR_ENA_7__SHIFT      0x00000012
+#define	SE_TCL_PER_LIGHT_CTL_3__LOCAL_LIGHT_7__SHIFT       0x00000013
+#define	SE_TCL_PER_LIGHT_CTL_3__SPOT_ENA_7__SHIFT          0x00000014
+#define	SE_TCL_PER_LIGHT_CTL_3__SPOT_DUAL_CONE_7__SHIFT    0x00000015
+#define	SE_TCL_PER_LIGHT_CTL_3__RNG_ATT_ENA_7__SHIFT       0x00000016
+#define	SE_TCL_PER_LIGHT_CTL_3__RNG_ATT_CONSTANT_ENA_7__SHIFT 0x00000017
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT7_1BIT_NUM0__SHIFT  0x00000018
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT7_1BIT_NUM1__SHIFT  0x00000019
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT7_1BIT_NUM2__SHIFT  0x0000001a
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT7_1BIT_NUM3__SHIFT  0x0000001b
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT7_2BIT_NUM0__SHIFT  0x0000001c
+#define	SE_TCL_PER_LIGHT_CTL_3__RSVD_LT7_2BIT_NUM1__SHIFT  0x0000001e
+
+// SE_TCL_DEBUG
+#define	SE_TCL_DEBUG__TCL_DEBUG__SHIFT                     0x00000000
+
+// SE_TCL_PERF_CNTL
+#define	SE_TCL_PERF_CNTL__TCL_PERFSEL1__SHIFT              0x00000000
+#define	SE_TCL_PERF_CNTL__TCL_CLR_PERF1__SHIFT             0x00000006
+#define	SE_TCL_PERF_CNTL__TCL_EN_PERF1__SHIFT              0x00000007
+#define	SE_TCL_PERF_CNTL__TCL_PERFSEL2__SHIFT              0x00000008
+#define	SE_TCL_PERF_CNTL__TCL_CLR_PERF2__SHIFT             0x0000000e
+#define	SE_TCL_PERF_CNTL__TCL_EN_PERF2__SHIFT              0x0000000f
+#define	SE_TCL_PERF_CNTL__TCL_SYNC_SELECT__SHIFT           0x00000010
+#define	SE_TCL_PERF_CNTL__RSVD_PERF_BITS__SHIFT            0x00000012
+
+// SE_TCL_PERF_COUNT1
+#define	SE_TCL_PERF_COUNT1__TCL_PERF_COUNT1__SHIFT         0x00000000
+
+// SE_TCL_PERF_COUNT2
+#define	SE_TCL_PERF_COUNT2__TCL_PERF_COUNT2__SHIFT         0x00000000
+
+// SE_TCL_FPU_LATENCY
+#define	SE_TCL_FPU_LATENCY__VE_ENG_LATENCY__SHIFT          0x00000000
+#define	SE_TCL_FPU_LATENCY__VE_MULT_LATENCY__SHIFT         0x00000005
+#define	SE_TCL_FPU_LATENCY__VE_ACCUM_LATENCY__SHIFT        0x0000000a
+#define	SE_TCL_FPU_LATENCY__SC_ENG_LATENCY__SHIFT          0x0000000f
+#define	SE_TCL_FPU_LATENCY__VE_OUT_LATENCY__SHIFT          0x00000014
+#define	SE_TCL_FPU_LATENCY__SC_MATH_LATENCY__SHIFT         0x00000019
+#define	SE_TCL_FPU_LATENCY__RSVD_LTNCY_2BIT__SHIFT         0x0000001e
+
+// RE_STIPPLE_ADDR
+#define	RE_STIPPLE_ADDR__STIPPLE_ADDR__SHIFT               0x00000000
+
+// RE_STIPPLE_DATA
+#define	RE_STIPPLE_DATA__STIPPLE_DATA__SHIFT               0x00000000
+
+// RE_MISC
+#define	RE_MISC__STIPPLE_X_OFFSET__SHIFT                   0x00000000
+#define	RE_MISC__STIPPLE_Y_OFFSET__SHIFT                   0x00000008
+#define	RE_MISC__STIPPLE_BIT_ORDER__SHIFT                  0x00000010
+
+// RE_SOLID_COLOR
+#define	RE_SOLID_COLOR__SOLID_COLOR__SHIFT                 0x00000000
+
+// RE_WIDTH_HEIGHT
+#define	RE_WIDTH_HEIGHT__WIDTH__SHIFT                      0x00000000
+#define	RE_WIDTH_HEIGHT__HEIGHT__SHIFT                     0x00000010
+
+// RE_TOP_LEFT
+#define	RE_TOP_LEFT__X_LEFT__SHIFT                         0x00000000
+#define	RE_TOP_LEFT__Y_TOP__SHIFT                          0x00000010
+
+// RE_SCISSOR_TL_0
+#define	RE_SCISSOR_TL_0__X_LEFT__SHIFT                     0x00000000
+#define	RE_SCISSOR_TL_0__Y_TOP__SHIFT                      0x00000010
+
+// RE_SCISSOR_BR_0
+#define	RE_SCISSOR_BR_0__X_RIGHT__SHIFT                    0x00000000
+#define	RE_SCISSOR_BR_0__Y_BOTTOM__SHIFT                   0x00000010
+
+// RE_SCISSOR_TL_1
+#define	RE_SCISSOR_TL_1__X_LEFT__SHIFT                     0x00000000
+#define	RE_SCISSOR_TL_1__Y_TOP__SHIFT                      0x00000010
+
+// RE_SCISSOR_BR_1
+#define	RE_SCISSOR_BR_1__X_RIGHT__SHIFT                    0x00000000
+#define	RE_SCISSOR_BR_1__Y_BOTTOM__SHIFT                   0x00000010
+
+// RE_SCISSOR_TL_2
+#define	RE_SCISSOR_TL_2__X_LEFT__SHIFT                     0x00000000
+#define	RE_SCISSOR_TL_2__Y_TOP__SHIFT                      0x00000010
+
+// RE_SCISSOR_BR_2
+#define	RE_SCISSOR_BR_2__X_RIGHT__SHIFT                    0x00000000
+#define	RE_SCISSOR_BR_2__Y_BOTTOM__SHIFT                   0x00000010
+
+// RE_AUX_SCISSOR_CNTL
+#define	RE_AUX_SCISSOR_CNTL__EXCLUSIVE_SCISSOR_0__SHIFT    0x00000018
+#define	RE_AUX_SCISSOR_CNTL__EXCLUSIVE_SCISSOR_1__SHIFT    0x00000019
+#define	RE_AUX_SCISSOR_CNTL__EXCLUSIVE_SCISSOR_2__SHIFT    0x0000001a
+#define	RE_AUX_SCISSOR_CNTL__SCISSOR_ENABLE_0__SHIFT       0x0000001c
+#define	RE_AUX_SCISSOR_CNTL__SCISSOR_ENABLE_1__SHIFT       0x0000001d
+#define	RE_AUX_SCISSOR_CNTL__SCISSOR_ENABLE_2__SHIFT       0x0000001e
+
+// RE_LINE_PATTERN
+#define	RE_LINE_PATTERN__LINE_PATTERN__SHIFT               0x00000000
+#define	RE_LINE_PATTERN__REPEAT_COUNT__SHIFT               0x00000010
+#define	RE_LINE_PATTERN__PATTERN_START__SHIFT              0x00000018
+#define	RE_LINE_PATTERN__PATTERN_BIT_ORDER__SHIFT          0x0000001c
+#define	RE_LINE_PATTERN__AUTO_RESET_ENABLE__SHIFT          0x0000001d
+
+// RE_LINE_STATE
+#define	RE_LINE_STATE__CURRENT_PTR__SHIFT                  0x00000000
+#define	RE_LINE_STATE__CURRENT_COUNT__SHIFT                0x00000008
+
+// RE_PIX_COUNT
+#define	RE_PIX_COUNT__RE_PIX_COUNT__SHIFT                  0x00000000
+
+// RE_PAIR_COUNT
+#define	RE_PAIR_COUNT__RE_PAIR_COUNT__SHIFT                0x00000000
+
+// RE_CYC_COUNT
+#define	RE_CYC_COUNT__RE_CYC_COUNT__SHIFT                  0x00000000
+
+// RE_OUTSIDE
+#define	RE_OUTSIDE__RE_OUTSIDE__SHIFT                      0x00000000
+
+// RE_STALLED
+#define	RE_STALLED__RE_STALLED__SHIFT                      0x00000000
+
+// RE_PERF
+#define	RE_PERF__BLOCK_DISABLE__SHIFT                      0x00000004
+#define	RE_PERF__DUAL_PIXEL_DISABLE__SHIFT                 0x00000005
+#define	RE_PERF__HIEARCHICAL_Z_OVERRIDE__SHIFT             0x00000006
+
+// RE_DEBUG_0
+#define	RE_DEBUG_0__RE_DWORD__SHIFT                        0x00000000
+
+// RE_DEBUG_1
+#define	RE_DEBUG_1__RE_DWORD__SHIFT                        0x00000000
+
+// RE_DEBUG_2
+#define	RE_DEBUG_2__RE_DWORD__SHIFT                        0x00000000
+
+// RE_DEBUG_3
+#define	RE_DEBUG_3__RE_DWORD__SHIFT                        0x00000000
+
+// RE_DEBUG_4
+#define	RE_DEBUG_4__RE_DWORD__SHIFT                        0x00000000
+
+// RE_DEBUG_5
+#define	RE_DEBUG_5__RE_DWORD__SHIFT                        0x00000000
+
+// RE_DEBUG_6
+#define	RE_DEBUG_6__RE_DWORD__SHIFT                        0x00000000
+
+// RE_DEBUG_7
+#define	RE_DEBUG_7__RE_DWORD__SHIFT                        0x00000000
+
+// RE_E2_0
+#define	RE_E2_0__XSTART__SHIFT                             0x00000000
+#define	RE_E2_0__YSTART__SHIFT                             0x0000000c
+#define	RE_E2_0__XEND_LO__SHIFT                            0x00000018
+
+// RE_E2_1
+#define	RE_E2_1__XEND_HI__SHIFT                            0x00000000
+#define	RE_E2_1__YEND__SHIFT                               0x00000004
+#define	RE_E2_1__XDIR__SHIFT                               0x00000010
+#define	RE_E2_1__YDIR__SHIFT                               0x00000011
+#define	RE_E2_1__XMAJ__SHIFT                               0x00000012
+#define	RE_E2_1__XOFFSET__SHIFT                            0x00000013
+#define	RE_E2_1__OPCODE__SHIFT                             0x00000018
+#define	RE_E2_1__SUB_PRIM__SHIFT                           0x0000001b
+#define	RE_E2_1__END_PATTERN__SHIFT                        0x0000001c
+#define	RE_E2_1__DYE2_LO__SHIFT                            0x0000001d
+
+// RE_E2_2
+#define	RE_E2_2__DYE2_HI__SHIFT                            0x00000000
+#define	RE_E2_2__DXE2__SHIFT                               0x0000000e
+#define	RE_E2_2__E2_LO__SHIFT                              0x0000001f
+
+// RE_E2_3
+#define	RE_E2_3__E2_HI__SHIFT                              0x00000000
+
+// RE_E0E1_0
+#define	RE_E0E1_0__DYE1__SHIFT                             0x00000000
+#define	RE_E0E1_0__DXE1_LO__SHIFT                          0x00000011
+
+// RE_E0E1_1
+#define	RE_E0E1_1__DXE1_HI__SHIFT                          0x00000000
+#define	RE_E0E1_1__E1__SHIFT                               0x00000002
+
+// RE_E0E1_2
+#define	RE_E0E1_2__DYE0__SHIFT                             0x00000000
+#define	RE_E0E1_2__DXE0_LO__SHIFT                          0x00000011
+
+// RE_E0E1_3
+#define	RE_E0E1_3__DXE0_HI__SHIFT                          0x00000000
+#define	RE_E0E1_3__E0__SHIFT                               0x00000002
+
+// RE_NULL_PRIM
+
+// RE_Z_MINMAX_0
+#define	RE_Z_MINMAX_0__Z_MINMAX_LO__SHIFT                  0x00000000
+
+// RE_Z_MINMAX_1
+#define	RE_Z_MINMAX_1__Z_MINMAX_HI__SHIFT                  0x00000000
+
+// RE_Z_MINMAX_3
+#define	RE_Z_MINMAX_3__ZEXPO__SHIFT                        0x00000018
+
+// RE_DDA_Z_0
+#define	RE_DDA_Z_0__ZSTART_LO__SHIFT                       0x00000000
+
+// RE_DDA_Z_1
+#define	RE_DDA_Z_1__ZSTART_H__SHIFT                        0x00000000
+#define	RE_DDA_Z_1__DZDX_L__SHIFT                          0x00000009
+
+// RE_DDA_Z_2
+#define	RE_DDA_Z_2__DZDX_H__SHIFT                          0x00000000
+#define	RE_DDA_Z_2__DZDY_L__SHIFT                          0x00000010
+
+// RE_DDA_Z_3
+#define	RE_DDA_Z_3__DZDY_H__SHIFT                          0x00000000
+#define	RE_DDA_Z_3__ZEXPO__SHIFT                           0x00000018
+
+// RE_DDA_RHW_0
+#define	RE_DDA_RHW_0__RHWSTART_LO__SHIFT                   0x00000000
+
+// RE_DDA_RHW_1
+#define	RE_DDA_RHW_1__RHWSTART_H__SHIFT                    0x00000000
+#define	RE_DDA_RHW_1__DRHWDX_L__SHIFT                      0x00000009
+
+// RE_DDA_RHW_2
+#define	RE_DDA_RHW_2__DRHWDX_H__SHIFT                      0x00000000
+#define	RE_DDA_RHW_2__DRHWDY_L__SHIFT                      0x00000010
+
+// RE_DDA_RHW_3
+#define	RE_DDA_RHW_3__DRHWDY_H__SHIFT                      0x00000000
+#define	RE_DDA_RHW_3__RHWEXPO__SHIFT                       0x00000018
+
+// RE_DDA_A_0
+#define	RE_DDA_A_0__ASTART__SHIFT                          0x00000000
+
+// RE_DDA_A_1
+#define	RE_DDA_A_1__DADX__SHIFT                            0x00000000
+
+// RE_DDA_A_2
+#define	RE_DDA_A_2__DADY__SHIFT                            0x00000000
+
+// RE_DDA_R_0
+#define	RE_DDA_R_0__RSTART__SHIFT                          0x00000000
+
+// RE_DDA_R_1
+#define	RE_DDA_R_1__DRDX__SHIFT                            0x00000000
+
+// RE_DDA_R_2
+#define	RE_DDA_R_2__DRDY__SHIFT                            0x00000000
+
+// RE_DDA_G_0
+#define	RE_DDA_G_0__GSTART__SHIFT                          0x00000000
+
+// RE_DDA_G_1
+#define	RE_DDA_G_1__DGDX__SHIFT                            0x00000000
+
+// RE_DDA_G_2
+#define	RE_DDA_G_2__DGDY__SHIFT                            0x00000000
+
+// RE_DDA_B_0
+#define	RE_DDA_B_0__BSTART__SHIFT                          0x00000000
+
+// RE_DDA_B_1
+#define	RE_DDA_B_1__DBDX__SHIFT                            0x00000000
+
+// RE_DDA_B_2
+#define	RE_DDA_B_2__DBDY__SHIFT                            0x00000000
+
+// RE_DDA_SA_0
+#define	RE_DDA_SA_0__SASTART__SHIFT                        0x00000000
+
+// RE_DDA_SA_1
+#define	RE_DDA_SA_1__DSADX__SHIFT                          0x00000000
+
+// RE_DDA_SA_2
+#define	RE_DDA_SA_2__DSADY__SHIFT                          0x00000000
+
+// RE_DDA_SR_0
+#define	RE_DDA_SR_0__SRSTART__SHIFT                        0x00000000
+
+// RE_DDA_SR_1
+#define	RE_DDA_SR_1__DSRDX__SHIFT                          0x00000000
+
+// RE_DDA_SR_2
+#define	RE_DDA_SR_2__DSRDY__SHIFT                          0x00000000
+
+// RE_DDA_SG_0
+#define	RE_DDA_SG_0__SGSTART__SHIFT                        0x00000000
+
+// RE_DDA_SG_1
+#define	RE_DDA_SG_1__DSGDX__SHIFT                          0x00000000
+
+// RE_DDA_SG_2
+#define	RE_DDA_SG_2__DSGDY__SHIFT                          0x00000000
+
+// RE_DDA_SB_0
+#define	RE_DDA_SB_0__SBSTART__SHIFT                        0x00000000
+
+// RE_DDA_SB_1
+#define	RE_DDA_SB_1__DSBDX__SHIFT                          0x00000000
+
+// RE_DDA_SB_2
+#define	RE_DDA_SB_2__DSBDY__SHIFT                          0x00000000
+
+// RE_DDA_S0_0
+#define	RE_DDA_S0_0__S0START_L__SHIFT                      0x00000000
+
+// RE_DDA_S0_1
+#define	RE_DDA_S0_1__S0START_H__SHIFT                      0x00000000
+#define	RE_DDA_S0_1__DS0DX_L__SHIFT                        0x00000009
+
+// RE_DDA_S0_2
+#define	RE_DDA_S0_2__DS0DX_H__SHIFT                        0x00000000
+#define	RE_DDA_S0_2__DS0DY_L__SHIFT                        0x00000010
+
+// RE_DDA_S0_3
+#define	RE_DDA_S0_3__DS0DY_H__SHIFT                        0x00000000
+#define	RE_DDA_S0_3__NON_PARAMETRIC__SHIFT                 0x00000017
+#define	RE_DDA_S0_3__S0EXPO__SHIFT                         0x00000018
+
+// RE_DDA_T0_0
+#define	RE_DDA_T0_0__T0START_L__SHIFT                      0x00000000
+
+// RE_DDA_T0_1
+#define	RE_DDA_T0_1__T0START_H__SHIFT                      0x00000000
+#define	RE_DDA_T0_1__DT0DX_L__SHIFT                        0x00000009
+
+// RE_DDA_T0_2
+#define	RE_DDA_T0_2__DT0DX_H__SHIFT                        0x00000000
+#define	RE_DDA_T0_2__DT0DY_L__SHIFT                        0x00000010
+
+// RE_DDA_T0_3
+#define	RE_DDA_T0_3__DT0DY_H__SHIFT                        0x00000000
+#define	RE_DDA_T0_3__T0EXPO__SHIFT                         0x00000018
+
+// RE_DDA_Q0_0
+#define	RE_DDA_Q0_0__Q0START_L__SHIFT                      0x00000000
+
+// RE_DDA_Q0_1
+#define	RE_DDA_Q0_1__Q0START_H__SHIFT                      0x00000000
+#define	RE_DDA_Q0_1__DQ0DX_L__SHIFT                        0x00000009
+
+// RE_DDA_Q0_2
+#define	RE_DDA_Q0_2__DQ0DX_H__SHIFT                        0x00000000
+#define	RE_DDA_Q0_2__DQ0DY_L__SHIFT                        0x00000010
+
+// RE_DDA_Q0_3
+#define	RE_DDA_Q0_3__DQ0DY_H__SHIFT                        0x00000000
+#define	RE_DDA_Q0_3__Q0EXPO__SHIFT                         0x00000018
+
+// RE_DDA_S1_0
+#define	RE_DDA_S1_0__S1START_L__SHIFT                      0x00000000
+
+// RE_DDA_S1_1
+#define	RE_DDA_S1_1__S1START_H__SHIFT                      0x00000000
+#define	RE_DDA_S1_1__DS1DX_L__SHIFT                        0x00000009
+
+// RE_DDA_S1_2
+#define	RE_DDA_S1_2__DS1DX_H__SHIFT                        0x00000000
+#define	RE_DDA_S1_2__DS1DY_L__SHIFT                        0x00000010
+
+// RE_DDA_S1_3
+#define	RE_DDA_S1_3__DS1DY_H__SHIFT                        0x00000000
+#define	RE_DDA_S1_3__NON_PARAMETRIC__SHIFT                 0x00000017
+#define	RE_DDA_S1_3__S1EXPO__SHIFT                         0x00000018
+
+// RE_DDA_T1_0
+#define	RE_DDA_T1_0__T1START_L__SHIFT                      0x00000000
+
+// RE_DDA_T1_1
+#define	RE_DDA_T1_1__T1START_H__SHIFT                      0x00000000
+#define	RE_DDA_T1_1__DT1DX_L__SHIFT                        0x00000009
+
+// RE_DDA_T1_2
+#define	RE_DDA_T1_2__DT1DX_H__SHIFT                        0x00000000
+#define	RE_DDA_T1_2__DT1DY_L__SHIFT                        0x00000010
+
+// RE_DDA_T1_3
+#define	RE_DDA_T1_3__DT1DY_H__SHIFT                        0x00000000
+#define	RE_DDA_T1_3__T1EXPO__SHIFT                         0x00000018
+
+// RE_DDA_Q1_0
+#define	RE_DDA_Q1_0__Q1START_L__SHIFT                      0x00000000
+
+// RE_DDA_Q1_1
+#define	RE_DDA_Q1_1__Q1START_H__SHIFT                      0x00000000
+#define	RE_DDA_Q1_1__DQ1DX_L__SHIFT                        0x00000009
+
+// RE_DDA_Q1_2
+#define	RE_DDA_Q1_2__DQ1DX_H__SHIFT                        0x00000000
+#define	RE_DDA_Q1_2__DQ1DY_L__SHIFT                        0x00000010
+
+// RE_DDA_Q1_3
+#define	RE_DDA_Q1_3__DQ1DY_H__SHIFT                        0x00000000
+#define	RE_DDA_Q1_3__Q1EXPO__SHIFT                         0x00000018
+
+// RE_DDA_S2_0
+#define	RE_DDA_S2_0__S2START_L__SHIFT                      0x00000000
+
+// RE_DDA_S2_1
+#define	RE_DDA_S2_1__S2START_H__SHIFT                      0x00000000
+#define	RE_DDA_S2_1__DS2DX_L__SHIFT                        0x00000009
+
+// RE_DDA_S2_2
+#define	RE_DDA_S2_2__DS2DX_H__SHIFT                        0x00000000
+#define	RE_DDA_S2_2__DS2DY_L__SHIFT                        0x00000010
+
+// RE_DDA_S2_3
+#define	RE_DDA_S2_3__DS2DY_H__SHIFT                        0x00000000
+#define	RE_DDA_S2_3__NON_PARAMETRIC__SHIFT                 0x00000017
+#define	RE_DDA_S2_3__S2EXPO__SHIFT                         0x00000018
+
+// RE_DDA_T2_0
+#define	RE_DDA_T2_0__T2START_L__SHIFT                      0x00000000
+
+// RE_DDA_T2_1
+#define	RE_DDA_T2_1__T2START_H__SHIFT                      0x00000000
+#define	RE_DDA_T2_1__DT2DX_L__SHIFT                        0x00000009
+
+// RE_DDA_T2_2
+#define	RE_DDA_T2_2__DT2DX_H__SHIFT                        0x00000000
+#define	RE_DDA_T2_2__DT2DY_L__SHIFT                        0x00000010
+
+// RE_DDA_T2_3
+#define	RE_DDA_T2_3__DT2DY_H__SHIFT                        0x00000000
+#define	RE_DDA_T2_3__T2EXPO__SHIFT                         0x00000018
+
+// RE_DDA_Q2_0
+#define	RE_DDA_Q2_0__Q2START_L__SHIFT                      0x00000000
+
+// RE_DDA_Q2_1
+#define	RE_DDA_Q2_1__Q2START_H__SHIFT                      0x00000000
+#define	RE_DDA_Q2_1__DQ2DX_L__SHIFT                        0x00000009
+
+// RE_DDA_Q2_2
+#define	RE_DDA_Q2_2__DQ2DX_H__SHIFT                        0x00000000
+#define	RE_DDA_Q2_2__DQ2DY_L__SHIFT                        0x00000010
+
+// RE_DDA_Q2_3
+#define	RE_DDA_Q2_3__DQ2DY_H__SHIFT                        0x00000000
+#define	RE_DDA_Q2_3__Q2EXPO__SHIFT                         0x00000018
+
+// RE_DDA_S3_0
+#define	RE_DDA_S3_0__S3START_L__SHIFT                      0x00000000
+
+// RE_DDA_S3_1
+#define	RE_DDA_S3_1__S3START_H__SHIFT                      0x00000000
+#define	RE_DDA_S3_1__DS3DX_L__SHIFT                        0x00000009
+
+// RE_DDA_S3_2
+#define	RE_DDA_S3_2__DS3DX_H__SHIFT                        0x00000000
+#define	RE_DDA_S3_2__DS3DY_L__SHIFT                        0x00000010
+
+// RE_DDA_S3_3
+#define	RE_DDA_S3_3__DS3DY_H__SHIFT                        0x00000000
+#define	RE_DDA_S3_3__NON_PARAMETRIC__SHIFT                 0x00000017
+#define	RE_DDA_S3_3__S3EXPO__SHIFT                         0x00000018
+
+// RE_DDA_T3_0
+#define	RE_DDA_T3_0__T3START_L__SHIFT                      0x00000000
+
+// RE_DDA_T3_1
+#define	RE_DDA_T3_1__T3START_H__SHIFT                      0x00000000
+#define	RE_DDA_T3_1__DT3DX_L__SHIFT                        0x00000009
+
+// RE_DDA_T3_2
+#define	RE_DDA_T3_2__DT3DX_H__SHIFT                        0x00000000
+#define	RE_DDA_T3_2__DT3DY_L__SHIFT                        0x00000010
+
+// RE_DDA_T3_3
+#define	RE_DDA_T3_3__DT3DY_H__SHIFT                        0x00000000
+#define	RE_DDA_T3_3__T3EXPO__SHIFT                         0x00000018
+
+// RE_DDA_Q3_0
+#define	RE_DDA_Q3_0__Q3START_L__SHIFT                      0x00000000
+
+// RE_DDA_Q3_1
+#define	RE_DDA_Q3_1__Q3START_H__SHIFT                      0x00000000
+#define	RE_DDA_Q3_1__DQ3DX_L__SHIFT                        0x00000009
+
+// RE_DDA_Q3_2
+#define	RE_DDA_Q3_2__DQ3DX_H__SHIFT                        0x00000000
+#define	RE_DDA_Q3_2__DQ3DY_L__SHIFT                        0x00000010
+
+// RE_DDA_Q3_3
+#define	RE_DDA_Q3_3__DQ3DY_H__SHIFT                        0x00000000
+#define	RE_DDA_Q3_3__Q3EXPO__SHIFT                         0x00000018
+
+// RE_DDA_DS0_0
+#define	RE_DDA_DS0_0__DS0XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS0_1
+#define	RE_DDA_DS0_1__DS0YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS0_2
+#define	RE_DDA_DS0_2__DS0INC__SHIFT                        0x00000000
+
+// RE_DDA_DS0_3
+#define	RE_DDA_DS0_3__DS0EXPO__SHIFT                       0x00000018
+
+// RE_DDA_DT0_0
+#define	RE_DDA_DT0_0__DT0XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT0_1
+#define	RE_DDA_DT0_1__DT0YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT0_2
+#define	RE_DDA_DT0_2__DT0INC__SHIFT                        0x00000000
+
+// RE_DDA_DT0_3
+#define	RE_DDA_DT0_3__DT0EXPO__SHIFT                       0x00000018
+
+// RE_DDA_DS1_0
+#define	RE_DDA_DS1_0__DS1XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS1_1
+#define	RE_DDA_DS1_1__DS1YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS1_2
+#define	RE_DDA_DS1_2__DS1INC__SHIFT                        0x00000000
+
+// RE_DDA_DS1_3
+#define	RE_DDA_DS1_3__DS1EXPO__SHIFT                       0x00000018
+
+// RE_DDA_DT1_0
+#define	RE_DDA_DT1_0__DT1XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT1_1
+#define	RE_DDA_DT1_1__DT1YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT1_2
+#define	RE_DDA_DT1_2__DT1INC__SHIFT                        0x00000000
+
+// RE_DDA_DT1_3
+#define	RE_DDA_DT1_3__DT1EXPO__SHIFT                       0x00000018
+
+// RE_DDA_DS2_0
+#define	RE_DDA_DS2_0__DS2XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS2_1
+#define	RE_DDA_DS2_1__DS2YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS2_2
+#define	RE_DDA_DS2_2__DS2INC__SHIFT                        0x00000000
+
+// RE_DDA_DS2_3
+#define	RE_DDA_DS2_3__DS2EXPO__SHIFT                       0x00000018
+
+// RE_DDA_DT2_0
+#define	RE_DDA_DT2_0__DT2XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT2_1
+#define	RE_DDA_DT2_1__DT2YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT2_2
+#define	RE_DDA_DT2_2__DT2INC__SHIFT                        0x00000000
+
+// RE_DDA_DT2_3
+#define	RE_DDA_DT2_3__DT2EXPO__SHIFT                       0x00000018
+
+// RE_DDA_DS3_0
+#define	RE_DDA_DS3_0__DS3XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS3_1
+#define	RE_DDA_DS3_1__DS3YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DS3_2
+#define	RE_DDA_DS3_2__DS3INC__SHIFT                        0x00000000
+
+// RE_DDA_DS3_3
+#define	RE_DDA_DS3_3__DS3EXPO__SHIFT                       0x00000018
+
+// RE_DDA_DT3_0
+#define	RE_DDA_DT3_0__DT3XSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT3_1
+#define	RE_DDA_DT3_1__DT3YSTART__SHIFT                     0x00000000
+
+// RE_DDA_DT3_2
+#define	RE_DDA_DT3_2__DT3INC__SHIFT                        0x00000000
+
+// RE_DDA_DT3_3
+#define	RE_DDA_DT3_3__DT3EXPO__SHIFT                       0x00000018
+
+// PP_MC_CONTEXT
+#define	PP_MC_CONTEXT__MC_BUF_BASE__SHIFT                  0x00000000
+#define	PP_MC_CONTEXT__SRC1_INDEX__SHIFT                   0x00000008
+#define	PP_MC_CONTEXT__SRC2_INDEX__SHIFT                   0x0000000c
+#define	PP_MC_CONTEXT__MC_FUNC__SHIFT                      0x0000000f
+#define	PP_MC_CONTEXT__DST_PITCH_MUL__SHIFT                0x00000012
+#define	PP_MC_CONTEXT__SRC_2_PITCH_MUL__SHIFT              0x00000014
+#define	PP_MC_CONTEXT__SRC_1_PITCH_MUL__SHIFT              0x00000016
+
+// PP_SRC_OFFSET_0
+#define	PP_SRC_OFFSET_0__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_1
+#define	PP_SRC_OFFSET_1__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_2
+#define	PP_SRC_OFFSET_2__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_3
+#define	PP_SRC_OFFSET_3__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_4
+#define	PP_SRC_OFFSET_4__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_5
+#define	PP_SRC_OFFSET_5__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_6
+#define	PP_SRC_OFFSET_6__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_7
+#define	PP_SRC_OFFSET_7__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_8
+#define	PP_SRC_OFFSET_8__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_9
+#define	PP_SRC_OFFSET_9__MC_OFFSET__SHIFT                  0x00000005
+
+// PP_SRC_OFFSET_10
+#define	PP_SRC_OFFSET_10__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_SRC_OFFSET_11
+#define	PP_SRC_OFFSET_11__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_SRC_OFFSET_12
+#define	PP_SRC_OFFSET_12__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_SRC_OFFSET_13
+#define	PP_SRC_OFFSET_13__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_SRC_OFFSET_14
+#define	PP_SRC_OFFSET_14__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_SRC_OFFSET_15
+#define	PP_SRC_OFFSET_15__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_SRC_OFFSET_16
+#define	PP_SRC_OFFSET_16__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_SRC_OFFSET_17
+#define	PP_SRC_OFFSET_17__MC_OFFSET__SHIFT                 0x00000005
+
+// PP_CNTL
+#define	PP_CNTL__STIPPLE_ENABLE__SHIFT                     0x00000000
+#define	PP_CNTL__SCISSOR_ENABLE__SHIFT                     0x00000001
+#define	PP_CNTL__PATTERN_ENABLE__SHIFT                     0x00000002
+#define	PP_CNTL__SHADOW_ENABLE__SHIFT                      0x00000003
+#define	PP_CNTL__TEX_0_ENABLE__SHIFT                       0x00000004
+#define	PP_CNTL__TEX_1_ENABLE__SHIFT                       0x00000005
+#define	PP_CNTL__TEX_2_ENABLE__SHIFT                       0x00000006
+#define	PP_CNTL__TEX_3_ENABLE__SHIFT                       0x00000007
+#define	PP_CNTL__TEX_BLEND_0_ENABLE__SHIFT                 0x0000000c
+#define	PP_CNTL__TEX_BLEND_1_ENABLE__SHIFT                 0x0000000d
+#define	PP_CNTL__TEX_BLEND_2_ENABLE__SHIFT                 0x0000000e
+#define	PP_CNTL__TEX_BLEND_3_ENABLE__SHIFT                 0x0000000f
+#define	PP_CNTL__PLANAR_YUV_ENABLE__SHIFT                  0x00000014
+#define	PP_CNTL__SPECULAR_ENABLE__SHIFT                    0x00000015
+#define	PP_CNTL__FOG_ENABLE__SHIFT                         0x00000016
+#define	PP_CNTL__ALPHA_TEST_ENABLE__SHIFT                  0x00000017
+#define	PP_CNTL__ANTI_ALIAS_CTL__SHIFT                     0x00000018
+#define	PP_CNTL__BUMP_MAP_ENABLE__SHIFT                    0x0000001a
+#define	PP_CNTL__BUMPED_MAP__SHIFT                         0x0000001b
+#define	PP_CNTL__TEX_3D_ENABLE_0__SHIFT                    0x0000001d
+#define	PP_CNTL__TEX_3D_ENABLE_1__SHIFT                    0x0000001e
+#define	PP_CNTL__MC_ENABLE__SHIFT                          0x0000001f
+
+// PP_TXFILTER_0
+#define	PP_TXFILTER_0__MAG_FILTER__SHIFT                   0x00000000
+#define	PP_TXFILTER_0__MIN_FILTER__SHIFT                   0x00000001
+#define	PP_TXFILTER_0__MAX_ANIS__SHIFT                     0x00000005
+#define	PP_TXFILTER_0__LOD_BIAS__SHIFT                     0x00000008
+#define	PP_TXFILTER_0__MAX_MIP_LEVEL__SHIFT                0x00000010
+#define	PP_TXFILTER_0__YUV_TO_RGB__SHIFT                   0x00000014
+#define	PP_TXFILTER_0__YUV_TEMPERATURE__SHIFT              0x00000015
+#define	PP_TXFILTER_0__WRAPEN_S__SHIFT                     0x00000016
+#define	PP_TXFILTER_0__CLAMP_S__SHIFT                      0x00000017
+#define	PP_TXFILTER_0__WRAPEN_T__SHIFT                     0x0000001a
+#define	PP_TXFILTER_0__CLAMP_T__SHIFT                      0x0000001b
+#define	PP_TXFILTER_0__BORDER_MODE__SHIFT                  0x0000001f
+
+// PP_TXFILTER_1
+#define	PP_TXFILTER_1__MAG_FILTER__SHIFT                   0x00000000
+#define	PP_TXFILTER_1__MIN_FILTER__SHIFT                   0x00000001
+#define	PP_TXFILTER_1__LOD_BIAS__SHIFT                     0x00000008
+#define	PP_TXFILTER_1__MAX_MIP_LEVEL__SHIFT                0x00000010
+#define	PP_TXFILTER_1__WRAPEN_S__SHIFT                     0x00000016
+#define	PP_TXFILTER_1__CLAMP_S__SHIFT                      0x00000017
+#define	PP_TXFILTER_1__WRAPEN_T__SHIFT                     0x0000001a
+#define	PP_TXFILTER_1__CLAMP_T__SHIFT                      0x0000001b
+#define	PP_TXFILTER_1__BORDER_MODE__SHIFT                  0x0000001f
+
+// PP_TXFILTER_2
+#define	PP_TXFILTER_2__MAG_FILTER__SHIFT                   0x00000000
+#define	PP_TXFILTER_2__MIN_FILTER__SHIFT                   0x00000001
+#define	PP_TXFILTER_2__LOD_BIAS__SHIFT                     0x00000008
+#define	PP_TXFILTER_2__MAX_MIP_LEVEL__SHIFT                0x00000010
+#define	PP_TXFILTER_2__WRAPEN_S__SHIFT                     0x00000016
+#define	PP_TXFILTER_2__CLAMP_S__SHIFT                      0x00000017
+#define	PP_TXFILTER_2__WRAPEN_T__SHIFT                     0x0000001a
+#define	PP_TXFILTER_2__CLAMP_T__SHIFT                      0x0000001b
+#define	PP_TXFILTER_2__BORDER_MODE__SHIFT                  0x0000001f
+
+// PP_TXFORMAT_0
+#define	PP_TXFORMAT_0__TXFORMAT__SHIFT                     0x00000000
+#define	PP_TXFORMAT_0__APPLE_YUV__SHIFT                    0x00000005
+#define	PP_TXFORMAT_0__ALPHA_ENABLE__SHIFT                 0x00000006
+#define	PP_TXFORMAT_0__NON_POWER2__SHIFT                   0x00000007
+#define	PP_TXFORMAT_0__TXWIDTH__SHIFT                      0x00000008
+#define	PP_TXFORMAT_0__TXHEIGHT__SHIFT                     0x0000000c
+#define	PP_TXFORMAT_0__FACE_WIDTH_5__SHIFT                 0x00000010
+#define	PP_TXFORMAT_0__FACE_HEIGHT_5__SHIFT                0x00000014
+#define	PP_TXFORMAT_0__ST_ROUTE__SHIFT                     0x00000018
+#define	PP_TXFORMAT_0__ALPHA_MASK_ENABLE__SHIFT            0x0000001c
+#define	PP_TXFORMAT_0__CHROMA_KEY_ENABLE__SHIFT            0x0000001d
+#define	PP_TXFORMAT_0__CUBIC_MAP_ENABLE__SHIFT             0x0000001e
+#define	PP_TXFORMAT_0__PERSPECTIVE_ENABLE__SHIFT           0x0000001f
+
+// PP_TXFORMAT_1
+#define	PP_TXFORMAT_1__TXFORMAT__SHIFT                     0x00000000
+#define	PP_TXFORMAT_1__APPLE_YUV__SHIFT                    0x00000005
+#define	PP_TXFORMAT_1__ALPHA_ENABLE__SHIFT                 0x00000006
+#define	PP_TXFORMAT_1__NON_POWER2__SHIFT                   0x00000007
+#define	PP_TXFORMAT_1__TXWIDTH__SHIFT                      0x00000008
+#define	PP_TXFORMAT_1__TXHEIGHT__SHIFT                     0x0000000c
+#define	PP_TXFORMAT_1__FACE_WIDTH_5__SHIFT                 0x00000010
+#define	PP_TXFORMAT_1__FACE_HEIGHT_5__SHIFT                0x00000014
+#define	PP_TXFORMAT_1__ST_ROUTE__SHIFT                     0x00000018
+#define	PP_TXFORMAT_1__ALPHA_MASK_ENABLE__SHIFT            0x0000001c
+#define	PP_TXFORMAT_1__CHROMA_KEY_ENABLE__SHIFT            0x0000001d
+#define	PP_TXFORMAT_1__CUBIC_MAP_ENABLE__SHIFT             0x0000001e
+#define	PP_TXFORMAT_1__PERSPECTIVE_ENABLE__SHIFT           0x0000001f
+
+// PP_TXFORMAT_2
+#define	PP_TXFORMAT_2__TXFORMAT__SHIFT                     0x00000000
+#define	PP_TXFORMAT_2__APPLE_YUV__SHIFT                    0x00000005
+#define	PP_TXFORMAT_2__ALPHA_ENABLE__SHIFT                 0x00000006
+#define	PP_TXFORMAT_2__NON_POWER2__SHIFT                   0x00000007
+#define	PP_TXFORMAT_2__TXWIDTH__SHIFT                      0x00000008
+#define	PP_TXFORMAT_2__TXHEIGHT__SHIFT                     0x0000000c
+#define	PP_TXFORMAT_2__FACE_WIDTH_5__SHIFT                 0x00000010
+#define	PP_TXFORMAT_2__FACE_HEIGHT_5__SHIFT                0x00000014
+#define	PP_TXFORMAT_2__ST_ROUTE__SHIFT                     0x00000018
+#define	PP_TXFORMAT_2__ALPHA_MASK_ENABLE__SHIFT            0x0000001c
+#define	PP_TXFORMAT_2__CHROMA_KEY_ENABLE__SHIFT            0x0000001d
+#define	PP_TXFORMAT_2__CUBIC_MAP_ENABLE__SHIFT             0x0000001e
+#define	PP_TXFORMAT_2__PERSPECTIVE_ENABLE__SHIFT           0x0000001f
+
+// PP_TXOFFSET_0
+#define	PP_TXOFFSET_0__ENDIAN_SWAP__SHIFT                  0x00000000
+#define	PP_TXOFFSET_0__MACRO_TILE__SHIFT                   0x00000002
+#define	PP_TXOFFSET_0__MICRO_TILE__SHIFT                   0x00000003
+#define	PP_TXOFFSET_0__TXOFFSET__SHIFT                     0x00000005
+
+// PP_TXOFFSET_1
+#define	PP_TXOFFSET_1__ENDIAN_SWAP__SHIFT                  0x00000000
+#define	PP_TXOFFSET_1__MACRO_TILE__SHIFT                   0x00000002
+#define	PP_TXOFFSET_1__MICRO_TILE__SHIFT                   0x00000003
+#define	PP_TXOFFSET_1__TXOFFSET__SHIFT                     0x00000005
+
+// PP_TXOFFSET_2
+#define	PP_TXOFFSET_2__ENDIAN_SWAP__SHIFT                  0x00000000
+#define	PP_TXOFFSET_2__MACRO_TILE__SHIFT                   0x00000002
+#define	PP_TXOFFSET_2__MICRO_TILE__SHIFT                   0x00000003
+#define	PP_TXOFFSET_2__TXOFFSET__SHIFT                     0x00000005
+
+// PP_TEX_SIZE_0
+#define	PP_TEX_SIZE_0__TEX_USIZE__SHIFT                    0x00000000
+#define	PP_TEX_SIZE_0__TEX_VSIZE__SHIFT                    0x00000010
+
+// PP_TEX_SIZE_1
+#define	PP_TEX_SIZE_1__TEX_USIZE__SHIFT                    0x00000000
+#define	PP_TEX_SIZE_1__TEX_VSIZE__SHIFT                    0x00000010
+
+// PP_TEX_SIZE_2
+#define	PP_TEX_SIZE_2__TEX_USIZE__SHIFT                    0x00000000
+#define	PP_TEX_SIZE_2__TEX_VSIZE__SHIFT                    0x00000010
+
+// PP_TXPITCH_0
+#define	PP_TXPITCH_0__TXPITCH__SHIFT                       0x00000005
+
+// PP_TXPITCH_1
+#define	PP_TXPITCH_1__TXPITCH__SHIFT                       0x00000005
+
+// PP_TXPITCH_2
+#define	PP_TXPITCH_2__TXPITCH__SHIFT                       0x00000005
+
+// PP_CUBIC_FACES_0
+#define	PP_CUBIC_FACES_0__FACE_WIDTH_1__SHIFT              0x00000000
+#define	PP_CUBIC_FACES_0__FACE_HEIGHT_1__SHIFT             0x00000004
+#define	PP_CUBIC_FACES_0__FACE_WIDTH_2__SHIFT              0x00000008
+#define	PP_CUBIC_FACES_0__FACE_HEIGHT_2__SHIFT             0x0000000c
+#define	PP_CUBIC_FACES_0__FACE_WIDTH_3__SHIFT              0x00000010
+#define	PP_CUBIC_FACES_0__FACE_HEIGHT_3__SHIFT             0x00000014
+#define	PP_CUBIC_FACES_0__FACE_WIDTH_4__SHIFT              0x00000018
+#define	PP_CUBIC_FACES_0__FACE_HEIGHT_4__SHIFT             0x0000001c
+
+// PP_CUBIC_FACES_1
+#define	PP_CUBIC_FACES_1__FACE_WIDTH_1__SHIFT              0x00000000
+#define	PP_CUBIC_FACES_1__FACE_HEIGHT_1__SHIFT             0x00000004
+#define	PP_CUBIC_FACES_1__FACE_WIDTH_2__SHIFT              0x00000008
+#define	PP_CUBIC_FACES_1__FACE_HEIGHT_2__SHIFT             0x0000000c
+#define	PP_CUBIC_FACES_1__FACE_WIDTH_3__SHIFT              0x00000010
+#define	PP_CUBIC_FACES_1__FACE_HEIGHT_3__SHIFT             0x00000014
+#define	PP_CUBIC_FACES_1__FACE_WIDTH_4__SHIFT              0x00000018
+#define	PP_CUBIC_FACES_1__FACE_HEIGHT_4__SHIFT             0x0000001c
+
+// PP_CUBIC_FACES_2
+#define	PP_CUBIC_FACES_2__FACE_WIDTH_1__SHIFT              0x00000000
+#define	PP_CUBIC_FACES_2__FACE_HEIGHT_1__SHIFT             0x00000004
+#define	PP_CUBIC_FACES_2__FACE_WIDTH_2__SHIFT              0x00000008
+#define	PP_CUBIC_FACES_2__FACE_HEIGHT_2__SHIFT             0x0000000c
+#define	PP_CUBIC_FACES_2__FACE_WIDTH_3__SHIFT              0x00000010
+#define	PP_CUBIC_FACES_2__FACE_HEIGHT_3__SHIFT             0x00000014
+#define	PP_CUBIC_FACES_2__FACE_WIDTH_4__SHIFT              0x00000018
+#define	PP_CUBIC_FACES_2__FACE_HEIGHT_4__SHIFT             0x0000001c
+
+// PP_CUBIC_OFFSET_T0_0
+#define	PP_CUBIC_OFFSET_T0_0__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T0_1
+#define	PP_CUBIC_OFFSET_T0_1__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T0_2
+#define	PP_CUBIC_OFFSET_T0_2__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T0_3
+#define	PP_CUBIC_OFFSET_T0_3__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T0_4
+#define	PP_CUBIC_OFFSET_T0_4__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T1_0
+#define	PP_CUBIC_OFFSET_T1_0__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T1_1
+#define	PP_CUBIC_OFFSET_T1_1__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T1_2
+#define	PP_CUBIC_OFFSET_T1_2__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T1_3
+#define	PP_CUBIC_OFFSET_T1_3__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T1_4
+#define	PP_CUBIC_OFFSET_T1_4__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T2_0
+#define	PP_CUBIC_OFFSET_T2_0__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T2_1
+#define	PP_CUBIC_OFFSET_T2_1__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T2_2
+#define	PP_CUBIC_OFFSET_T2_2__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T2_3
+#define	PP_CUBIC_OFFSET_T2_3__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T2_4
+#define	PP_CUBIC_OFFSET_T2_4__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T3_0
+#define	PP_CUBIC_OFFSET_T3_0__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T3_1
+#define	PP_CUBIC_OFFSET_T3_1__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T3_2
+#define	PP_CUBIC_OFFSET_T3_2__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T3_3
+#define	PP_CUBIC_OFFSET_T3_3__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_CUBIC_OFFSET_T3_4
+#define	PP_CUBIC_OFFSET_T3_4__FACE_OFFSET__SHIFT           0x00000005
+
+// PP_SHADOW_ID
+#define	PP_SHADOW_ID__SHADOW_ID__SHIFT                     0x00000000
+
+// PP_CHROMA_COLOR
+#define	PP_CHROMA_COLOR__CHROMA_COLOR__SHIFT               0x00000000
+
+// PP_CHROMA_MASK
+#define	PP_CHROMA_MASK__CHROMA_MASK__SHIFT                 0x00000000
+
+// PP_BORDER_COLOR_0
+#define	PP_BORDER_COLOR_0__BORD_COLOR__SHIFT               0x00000000
+
+// PP_BORDER_COLOR_1
+#define	PP_BORDER_COLOR_1__BORD_COLOR__SHIFT               0x00000000
+
+// PP_BORDER_COLOR_2
+#define	PP_BORDER_COLOR_2__BORD_COLOR__SHIFT               0x00000000
+
+// PP_MISC
+#define	PP_MISC__REF_ALPHA__SHIFT                          0x00000000
+#define	PP_MISC__ALPHA_TEST_OP__SHIFT                      0x00000008
+#define	PP_MISC__CHROMA_FUNC__SHIFT                        0x00000010
+#define	PP_MISC__CHROMA_KEY_MODE__SHIFT                    0x00000012
+#define	PP_MISC__SHADOW_AUTO_INC__SHIFT                    0x00000014
+#define	PP_MISC__SHADOW_FUNC__SHIFT                        0x00000015
+#define	PP_MISC__SHADOW_PASS__SHIFT                        0x00000016
+#define	PP_MISC__RIGHT_HAND_CUBE__SHIFT                    0x00000018
+
+// PP_TXCBLEND_0
+#define	PP_TXCBLEND_0__COLOR_ARG_A__SHIFT                  0x00000000
+#define	PP_TXCBLEND_0__COLOR_ARG_B__SHIFT                  0x00000005
+#define	PP_TXCBLEND_0__COLOR_ARG_C__SHIFT                  0x0000000a
+#define	PP_TXCBLEND_0__COMP_ARG_A__SHIFT                   0x0000000f
+#define	PP_TXCBLEND_0__COMP_ARG_B__SHIFT                   0x00000010
+#define	PP_TXCBLEND_0__COMP_ARG_C__SHIFT                   0x00000011
+#define	PP_TXCBLEND_0__BLEND_CTL__SHIFT                    0x00000012
+#define	PP_TXCBLEND_0__SCALE_TX__SHIFT                     0x00000015
+#define	PP_TXCBLEND_0__CLAMP_TX__SHIFT                     0x00000017
+#define	PP_TXCBLEND_0__T0_EQ_TCUR__SHIFT                   0x00000018
+#define	PP_TXCBLEND_0__T1_EQ_TCUR__SHIFT                   0x00000019
+#define	PP_TXCBLEND_0__T2_EQ_TCUR__SHIFT                   0x0000001a
+#define	PP_TXCBLEND_0__T3_EQ_TCUR__SHIFT                   0x0000001b
+
+// PP_TXCBLEND_1
+#define	PP_TXCBLEND_1__COLOR_ARG_A__SHIFT                  0x00000000
+#define	PP_TXCBLEND_1__COLOR_ARG_B__SHIFT                  0x00000005
+#define	PP_TXCBLEND_1__COLOR_ARG_C__SHIFT                  0x0000000a
+#define	PP_TXCBLEND_1__COMP_ARG_A__SHIFT                   0x0000000f
+#define	PP_TXCBLEND_1__COMP_ARG_B__SHIFT                   0x00000010
+#define	PP_TXCBLEND_1__COMP_ARG_C__SHIFT                   0x00000011
+#define	PP_TXCBLEND_1__BLEND_CTL__SHIFT                    0x00000012
+#define	PP_TXCBLEND_1__SCALE_TX__SHIFT                     0x00000015
+#define	PP_TXCBLEND_1__CLAMP_TX__SHIFT                     0x00000017
+#define	PP_TXCBLEND_1__T0_EQ_TCUR__SHIFT                   0x00000018
+#define	PP_TXCBLEND_1__T1_EQ_TCUR__SHIFT                   0x00000019
+#define	PP_TXCBLEND_1__T2_EQ_TCUR__SHIFT                   0x0000001a
+#define	PP_TXCBLEND_1__T3_EQ_TCUR__SHIFT                   0x0000001b
+
+// PP_TXCBLEND_2
+#define	PP_TXCBLEND_2__COLOR_ARG_A__SHIFT                  0x00000000
+#define	PP_TXCBLEND_2__COLOR_ARG_B__SHIFT                  0x00000005
+#define	PP_TXCBLEND_2__COLOR_ARG_C__SHIFT                  0x0000000a
+#define	PP_TXCBLEND_2__COMP_ARG_A__SHIFT                   0x0000000f
+#define	PP_TXCBLEND_2__COMP_ARG_B__SHIFT                   0x00000010
+#define	PP_TXCBLEND_2__COMP_ARG_C__SHIFT                   0x00000011
+#define	PP_TXCBLEND_2__BLEND_CTL__SHIFT                    0x00000012
+#define	PP_TXCBLEND_2__SCALE_TX__SHIFT                     0x00000015
+#define	PP_TXCBLEND_2__CLAMP_TX__SHIFT                     0x00000017
+#define	PP_TXCBLEND_2__T0_EQ_TCUR__SHIFT                   0x00000018
+#define	PP_TXCBLEND_2__T1_EQ_TCUR__SHIFT                   0x00000019
+#define	PP_TXCBLEND_2__T2_EQ_TCUR__SHIFT                   0x0000001a
+#define	PP_TXCBLEND_2__T3_EQ_TCUR__SHIFT                   0x0000001b
+
+// PP_TXABLEND_0
+#define	PP_TXABLEND_0__ALPHA_ARG_A__SHIFT                  0x00000000
+#define	PP_TXABLEND_0__ALPHA_ARG_B__SHIFT                  0x00000004
+#define	PP_TXABLEND_0__ALPHA_ARG_C__SHIFT                  0x00000008
+#define	PP_TXABLEND_0__DOT_ALPHA__SHIFT                    0x0000000c
+#define	PP_TXABLEND_0__COMP_ARG_A__SHIFT                   0x0000000f
+#define	PP_TXABLEND_0__COMP_ARG_B__SHIFT                   0x00000010
+#define	PP_TXABLEND_0__COMP_ARG_C__SHIFT                   0x00000011
+#define	PP_TXABLEND_0__BLEND_CTL__SHIFT                    0x00000012
+#define	PP_TXABLEND_0__SCALE_TX__SHIFT                     0x00000015
+#define	PP_TXABLEND_0__CLAMP_TX__SHIFT                     0x00000017
+#define	PP_TXABLEND_0__T0_EQ_TCUR__SHIFT                   0x00000018
+#define	PP_TXABLEND_0__T1_EQ_TCUR__SHIFT                   0x00000019
+#define	PP_TXABLEND_0__T2_EQ_TCUR__SHIFT                   0x0000001a
+#define	PP_TXABLEND_0__T3_EQ_TCUR__SHIFT                   0x0000001b
+
+// PP_TXABLEND_1
+#define	PP_TXABLEND_1__ALPHA_ARG_A__SHIFT                  0x00000000
+#define	PP_TXABLEND_1__ALPHA_ARG_B__SHIFT                  0x00000004
+#define	PP_TXABLEND_1__ALPHA_ARG_C__SHIFT                  0x00000008
+#define	PP_TXABLEND_1__DOT_ALPHA__SHIFT                    0x0000000c
+#define	PP_TXABLEND_1__COMP_ARG_A__SHIFT                   0x0000000f
+#define	PP_TXABLEND_1__COMP_ARG_B__SHIFT                   0x00000010
+#define	PP_TXABLEND_1__COMP_ARG_C__SHIFT                   0x00000011
+#define	PP_TXABLEND_1__BLEND_CTL__SHIFT                    0x00000012
+#define	PP_TXABLEND_1__SCALE_TX__SHIFT                     0x00000015
+#define	PP_TXABLEND_1__CLAMP_TX__SHIFT                     0x00000017
+#define	PP_TXABLEND_1__T0_EQ_TCUR__SHIFT                   0x00000018
+#define	PP_TXABLEND_1__T1_EQ_TCUR__SHIFT                   0x00000019
+#define	PP_TXABLEND_1__T2_EQ_TCUR__SHIFT                   0x0000001a
+#define	PP_TXABLEND_1__T3_EQ_TCUR__SHIFT                   0x0000001b
+
+// PP_TXABLEND_2
+#define	PP_TXABLEND_2__ALPHA_ARG_A__SHIFT                  0x00000000
+#define	PP_TXABLEND_2__ALPHA_ARG_B__SHIFT                  0x00000004
+#define	PP_TXABLEND_2__ALPHA_ARG_C__SHIFT                  0x00000008
+#define	PP_TXABLEND_2__DOT_ALPHA__SHIFT                    0x0000000c
+#define	PP_TXABLEND_2__COMP_ARG_A__SHIFT                   0x0000000f
+#define	PP_TXABLEND_2__COMP_ARG_B__SHIFT                   0x00000010
+#define	PP_TXABLEND_2__COMP_ARG_C__SHIFT                   0x00000011
+#define	PP_TXABLEND_2__BLEND_CTL__SHIFT                    0x00000012
+#define	PP_TXABLEND_2__SCALE_TX__SHIFT                     0x00000015
+#define	PP_TXABLEND_2__CLAMP_TX__SHIFT                     0x00000017
+#define	PP_TXABLEND_2__T0_EQ_TCUR__SHIFT                   0x00000018
+#define	PP_TXABLEND_2__T1_EQ_TCUR__SHIFT                   0x00000019
+#define	PP_TXABLEND_2__T2_EQ_TCUR__SHIFT                   0x0000001a
+#define	PP_TXABLEND_2__T3_EQ_TCUR__SHIFT                   0x0000001b
+
+// PP_TFACTOR_0
+#define	PP_TFACTOR_0__TFACTOR__SHIFT                       0x00000000
+
+// PP_TFACTOR_1
+#define	PP_TFACTOR_1__TFACTOR__SHIFT                       0x00000000
+
+// PP_TFACTOR_2
+#define	PP_TFACTOR_2__TFACTOR__SHIFT                       0x00000000
+
+// PP_ROT_MATRIX_0
+#define	PP_ROT_MATRIX_0__M00_MAN__SHIFT                    0x00000000
+#define	PP_ROT_MATRIX_0__M10_MAN__SHIFT                    0x00000010
+#define	PP_ROT_MATRIX_0__Mx0_EXPO__SHIFT                   0x0000001b
+
+// PP_ROT_MATRIX_1
+#define	PP_ROT_MATRIX_1__M01_MAN__SHIFT                    0x00000000
+#define	PP_ROT_MATRIX_1__M11_MAN__SHIFT                    0x00000010
+#define	PP_ROT_MATRIX_1__Mx1_EXPO__SHIFT                   0x0000001b
+
+// PP_LUM_MATRIX
+#define	PP_LUM_MATRIX__LSCALE__SHIFT                       0x00000000
+#define	PP_LUM_MATRIX__LOFFSET__SHIFT                      0x00000008
+
+// PP_FOG_COLOR
+#define	PP_FOG_COLOR__FOG_COLOR__SHIFT                     0x00000000
+#define	PP_FOG_COLOR__FOG_TABLE__SHIFT                     0x00000018
+#define	PP_FOG_COLOR__FOG_INDEX_SEL__SHIFT                 0x00000019
+
+// PP_FOG_TABLE_INDEX
+#define	PP_FOG_TABLE_INDEX__FOG_INDEX__SHIFT               0x00000000
+
+// PP_FOG_TABLE_DATA
+#define	PP_FOG_TABLE_DATA__FOG_DATA__SHIFT                 0x00000000
+
+// PP_PERF
+#define	PP_PERF__RR_FIFO_SCALE__SHIFT                      0x00000000
+#define	PP_PERF__REQUEST_SCALE__SHIFT                      0x00000002
+#define	PP_PERF__PP_COUNT_CTL__SHIFT                       0x00000004
+
+// PP_TRI_JUICE
+#define	PP_TRI_JUICE__TRI_JUICE__SHIFT                     0x00000000
+
+// PP_PERF_COUNT_0
+#define	PP_PERF_COUNT_0__PP_CACHE_COUNT__SHIFT             0x00000000
+
+// PP_PERF_COUNT_1
+#define	PP_PERF_COUNT_1__PP_CACHE_COUNT__SHIFT             0x00000000
+
+// PP_PERF_COUNT_2
+#define	PP_PERF_COUNT_2__PP_CACHE_COUNT__SHIFT             0x00000000
+
+// PP_TAM_DEBUG_0
+#define	PP_TAM_DEBUG_0__TAM_DWORD__SHIFT                   0x00000000
+
+// PP_TAM_DEBUG_1
+#define	PP_TAM_DEBUG_1__TAM_DWORD__SHIFT                   0x00000000
+
+// PP_TAM_DEBUG_2
+#define	PP_TAM_DEBUG_2__TAM_DWORD__SHIFT                   0x00000000
+
+// PP_TAM_DEBUG_3
+#define	PP_TAM_DEBUG_3__TAM_DWORD__SHIFT                   0x00000000
+
+// PP_TDM_DEBUG_0
+#define	PP_TDM_DEBUG_0__TDM_DWORD__SHIFT                   0x00000000
+
+// PP_TDM_DEBUG_1
+#define	PP_TDM_DEBUG_1__TDM_DWORD__SHIFT                   0x00000000
+
+// PP_TDM_DEBUG_2
+#define	PP_TDM_DEBUG_2__TDM_DWORD__SHIFT                   0x00000000
+
+// PP_TDM_DEBUG_3
+#define	PP_TDM_DEBUG_3__TDM_DWORD__SHIFT                   0x00000000
+
+// PP_PB_DEBUG_0
+#define	PP_PB_DEBUG_0__PB_DWORD__SHIFT                     0x00000000
+
+// PP_PB_DEBUG_1
+#define	PP_PB_DEBUG_1__PB_DWORD__SHIFT                     0x00000000
+
+// PP_PB_DEBUG_2
+#define	PP_PB_DEBUG_2__PB_DWORD__SHIFT                     0x00000000
+
+// PP_PB_DEBUG_3
+#define	PP_PB_DEBUG_3__PB_DWORD__SHIFT                     0x00000000
+
+// RB2D_ROP
+#define	RB2D_ROP__ROP__SHIFT                               0x00000010
+
+// RB2D_CLRCMP_SRC
+#define	RB2D_CLRCMP_SRC__CLRCMP_SRC__SHIFT                 0x00000000
+
+// RB2D_CLRCMP_DST
+#define	RB2D_CLRCMP_DST__CLRCMP_DST__SHIFT                 0x00000000
+
+// RB2D_CLRCMP_FLIPE
+#define	RB2D_CLRCMP_FLIPE__CLRCMP_FLIPE__SHIFT             0x00000000
+
+// RB2D_CLRCMP_CNTL
+#define	RB2D_CLRCMP_CNTL__FCN_SRC__SHIFT                   0x00000000
+#define	RB2D_CLRCMP_CNTL__FCN_DST__SHIFT                   0x00000008
+#define	RB2D_CLRCMP_CNTL__SRC__SHIFT                       0x00000018
+
+// RB2D_CLRCMP_MSK
+#define	RB2D_CLRCMP_MSK__CLRCMP_MSK__SHIFT                 0x00000000
+
+// RB2D_WRITEMASK
+#define	RB2D_WRITEMASK__WRITEMASK__SHIFT                   0x00000000
+
+// RB2D_DATATYPE
+#define	RB2D_DATATYPE__DP_DST_DATATYPE__SHIFT              0x00000000
+#define	RB2D_DATATYPE__DP_BRUSH_DATATYPE__SHIFT            0x00000008
+
+// RB2D_GUI_MASTER_CNTL
+#define	RB2D_GUI_MASTER_CNTL__GMC_BRUSH_DATATYPE__SHIFT    0x00000004
+#define	RB2D_GUI_MASTER_CNTL__GMC_DST_DATATYPE__SHIFT      0x00000008
+#define	RB2D_GUI_MASTER_CNTL__GMC_ROP__SHIFT               0x00000010
+#define	RB2D_GUI_MASTER_CNTL__GMC_CLR_CMP_FCN_DIS__SHIFT   0x0000001c
+#define	RB2D_GUI_MASTER_CNTL__GMC_WR_MSK_DIS__SHIFT        0x0000001e
+
+// RB2D_BRUSHDATA_0
+#define	RB2D_BRUSHDATA_0__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_1
+#define	RB2D_BRUSHDATA_1__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_2
+#define	RB2D_BRUSHDATA_2__BRUSHDATA__SHIFT                 0x00000000
+#define	RB2D_BRUSH_FRGD_CLR__BRUSHDATA__SHIFT              0x00000000
+
+// RB2D_BRUSHDATA_3
+#define	RB2D_BRUSHDATA_3__BRUSHDATA__SHIFT                 0x00000000
+#define	RB2D_BRUSH_BKGD_CLR__BRUSHDATA__SHIFT              0x00000000
+
+// RB2D_BRUSHDATA_4
+#define	RB2D_BRUSHDATA_4__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_5
+#define	RB2D_BRUSHDATA_5__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_6
+#define	RB2D_BRUSHDATA_6__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_7
+#define	RB2D_BRUSHDATA_7__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_8
+#define	RB2D_BRUSHDATA_8__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_9
+#define	RB2D_BRUSHDATA_9__BRUSHDATA__SHIFT                 0x00000000
+
+// RB2D_BRUSHDATA_10
+#define	RB2D_BRUSHDATA_10__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_11
+#define	RB2D_BRUSHDATA_11__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_12
+#define	RB2D_BRUSHDATA_12__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_13
+#define	RB2D_BRUSHDATA_13__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_14
+#define	RB2D_BRUSHDATA_14__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_15
+#define	RB2D_BRUSHDATA_15__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_16
+#define	RB2D_BRUSHDATA_16__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_17
+#define	RB2D_BRUSHDATA_17__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_18
+#define	RB2D_BRUSHDATA_18__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_19
+#define	RB2D_BRUSHDATA_19__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_20
+#define	RB2D_BRUSHDATA_20__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_21
+#define	RB2D_BRUSHDATA_21__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_22
+#define	RB2D_BRUSHDATA_22__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_23
+#define	RB2D_BRUSHDATA_23__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_24
+#define	RB2D_BRUSHDATA_24__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_25
+#define	RB2D_BRUSHDATA_25__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_26
+#define	RB2D_BRUSHDATA_26__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_27
+#define	RB2D_BRUSHDATA_27__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_28
+#define	RB2D_BRUSHDATA_28__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_29
+#define	RB2D_BRUSHDATA_29__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_30
+#define	RB2D_BRUSHDATA_30__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_31
+#define	RB2D_BRUSHDATA_31__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_32
+#define	RB2D_BRUSHDATA_32__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_33
+#define	RB2D_BRUSHDATA_33__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_34
+#define	RB2D_BRUSHDATA_34__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_35
+#define	RB2D_BRUSHDATA_35__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_36
+#define	RB2D_BRUSHDATA_36__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_37
+#define	RB2D_BRUSHDATA_37__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_38
+#define	RB2D_BRUSHDATA_38__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_39
+#define	RB2D_BRUSHDATA_39__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_40
+#define	RB2D_BRUSHDATA_40__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_41
+#define	RB2D_BRUSHDATA_41__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_42
+#define	RB2D_BRUSHDATA_42__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_43
+#define	RB2D_BRUSHDATA_43__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_44
+#define	RB2D_BRUSHDATA_44__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_45
+#define	RB2D_BRUSHDATA_45__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_46
+#define	RB2D_BRUSHDATA_46__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_47
+#define	RB2D_BRUSHDATA_47__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_48
+#define	RB2D_BRUSHDATA_48__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_49
+#define	RB2D_BRUSHDATA_49__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_50
+#define	RB2D_BRUSHDATA_50__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_51
+#define	RB2D_BRUSHDATA_51__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_52
+#define	RB2D_BRUSHDATA_52__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_53
+#define	RB2D_BRUSHDATA_53__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_54
+#define	RB2D_BRUSHDATA_54__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_55
+#define	RB2D_BRUSHDATA_55__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_56
+#define	RB2D_BRUSHDATA_56__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_57
+#define	RB2D_BRUSHDATA_57__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_58
+#define	RB2D_BRUSHDATA_58__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_59
+#define	RB2D_BRUSHDATA_59__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_60
+#define	RB2D_BRUSHDATA_60__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_61
+#define	RB2D_BRUSHDATA_61__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_62
+#define	RB2D_BRUSHDATA_62__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_BRUSHDATA_63
+#define	RB2D_BRUSHDATA_63__BRUSHDATA__SHIFT                0x00000000
+
+// RB2D_DSTCACHE_MODE
+#define	RB2D_DSTCACHE_MODE__DC_BYPASS__SHIFT               0x00000000
+#define	RB2D_DSTCACHE_MODE__DC_LINE_SIZE__SHIFT            0x00000002
+#define	RB2D_DSTCACHE_MODE__DC_AUTOFLUSH_ENABLE__SHIFT     0x00000008
+#define	RB2D_DSTCACHE_MODE__DC_FORCE_RMW__SHIFT            0x00000010
+#define	RB2D_DSTCACHE_MODE__DC_DISABLE_RI_FILL__SHIFT      0x00000018
+#define	RB2D_DSTCACHE_MODE__DC_DISABLE_RI_READ__SHIFT      0x00000019
+
+// RB2D_DSTCACHE_CTLSTAT
+#define	RB2D_DSTCACHE_CTLSTAT__DC_FLUSH__SHIFT             0x00000000
+#define	RB2D_DSTCACHE_CTLSTAT__DC_FREE__SHIFT              0x00000002
+#define	RB2D_DSTCACHE_CTLSTAT__DC_BUSY__SHIFT              0x0000001f
+
+// RB2D_SRC_ENDIAN
+#define	RB2D_SRC_ENDIAN__SRC_ENDIAN__SHIFT                 0x00000000
+
+// RB2D_DST_ENDIAN
+#define	RB2D_DST_ENDIAN__DST_ENDIAN__SHIFT                 0x00000000
+
+// RB2D_PD1_DATA
+#define	RB2D_PD1_DATA__PD1_DATA__SHIFT                     0x00000000
+
+// RB2D_PD1_ADDR
+#define	RB2D_PD1_ADDR__PD1_ADDR__SHIFT                     0x00000000
+
+// RB2D_WRITEBACK_DATA_LO
+#define	RB2D_WRITEBACK_DATA_LO__WRITEBACK_DATA_LO__SHIFT   0x00000000
+
+// RB2D_WRITEBACK_DATA_HI
+#define	RB2D_WRITEBACK_DATA_HI__WRITEBACK_DATA_HI__SHIFT   0x00000000
+
+// RB2D_WRITEBACK_ADDR
+#define	RB2D_WRITEBACK_ADDR__WRITEBACK_ADDR__SHIFT         0x00000003
+
+// RB3D_BLENDCNTL
+#define	RB3D_BLENDCNTL__COMB_FCN__SHIFT                    0x0000000c
+#define	RB3D_BLENDCNTL__SRCBLEND__SHIFT                    0x00000010
+#define	RB3D_BLENDCNTL__DESTBLEND__SHIFT                   0x00000018
+
+// RB3D_DEPTHOFFSET
+#define	RB3D_DEPTHOFFSET__DEPTHOFFSET__SHIFT               0x00000004
+
+// RB3D_DEPTHPITCH
+#define	RB3D_DEPTHPITCH__DEPTHPITCH__SHIFT                 0x00000003
+#define	RB3D_DEPTHPITCH__DEPTHENDIAN__SHIFT                0x00000012
+
+// RB3D_ZSTENCILCNTL
+#define	RB3D_ZSTENCILCNTL__DEPTHFORMAT__SHIFT              0x00000000
+#define	RB3D_ZSTENCILCNTL__ZFUNC__SHIFT                    0x00000004
+#define	RB3D_ZSTENCILCNTL__HIERARCHYENABLE__SHIFT          0x00000008
+#define	RB3D_ZSTENCILCNTL__STENCILFUNC__SHIFT              0x0000000c
+#define	RB3D_ZSTENCILCNTL__STENCILFAIL__SHIFT              0x00000010
+#define	RB3D_ZSTENCILCNTL__STENCILZPASS__SHIFT             0x00000014
+#define	RB3D_ZSTENCILCNTL__STENCILZFAIL__SHIFT             0x00000018
+#define	RB3D_ZSTENCILCNTL__ZCOMPRESSION__SHIFT             0x0000001c
+#define	RB3D_ZSTENCILCNTL__FORCEZDIRTY__SHIFT              0x0000001d
+#define	RB3D_ZSTENCILCNTL__ZWRITEENABLE__SHIFT             0x0000001e
+#define	RB3D_ZSTENCILCNTL__ZDECOMPRESSION__SHIFT           0x0000001f
+
+// RB3D_DEPTHCLEARVALUE
+#define	RB3D_DEPTHCLEARVALUE__DEPTHCLEARVALUE__SHIFT       0x00000000
+
+// RB3D_ZMASKOFFSET
+#define	RB3D_ZMASKOFFSET__ZMASKOFFSET__SHIFT               0x00000001
+
+// RB3D_CNTL
+#define	RB3D_CNTL__ALPHA_BLEND_ENABLE__SHIFT               0x00000000
+#define	RB3D_CNTL__PLANE_MASK_ENABLE__SHIFT                0x00000001
+#define	RB3D_CNTL__DITHER_ENABLE__SHIFT                    0x00000002
+#define	RB3D_CNTL__ROUND_ENABLE__SHIFT                     0x00000003
+#define	RB3D_CNTL__SCALE_DITHER__SHIFT                     0x00000004
+#define	RB3D_CNTL__DITHER_INIT__SHIFT                      0x00000005
+#define	RB3D_CNTL__ROP_ENABLE__SHIFT                       0x00000006
+#define	RB3D_CNTL__STENCIL_ENABLE__SHIFT                   0x00000007
+#define	RB3D_CNTL__Z_ENABLE__SHIFT                         0x00000008
+#define	RB3D_CNTL__DEPTHXY_OFFSET_ENABLE__SHIFT            0x00000009
+#define	RB3D_CNTL__COLORFORMAT__SHIFT                      0x0000000a
+#define	RB3D_CNTL__CLRCMP_FLIPE_ENABLE__SHIFT              0x0000000e
+#define	RB3D_CNTL__ZBLOCK16__SHIFT                         0x0000000f
+
+// RB3D_COLOROFFSET
+#define	RB3D_COLOROFFSET__COLOROFFSET__SHIFT               0x00000004
+
+// RB3D_COLORPITCH
+#define	RB3D_COLORPITCH__COLORPITCH__SHIFT                 0x00000003
+#define	RB3D_COLORPITCH__COLORTILE__SHIFT                  0x00000010
+#define	RB3D_COLORPITCH__COLORMICROTILE__SHIFT             0x00000011
+#define	RB3D_COLORPITCH__COLORENDIAN__SHIFT                0x00000012
+
+// RB3D_DEPTHXY_OFFSET
+#define	RB3D_DEPTHXY_OFFSET__DEPTHX_OFFSET__SHIFT          0x00000000
+#define	RB3D_DEPTHXY_OFFSET__DEPTHY_OFFSET__SHIFT          0x00000010
+
+// RB3D_CLRCMP_FLIPE
+#define	RB3D_CLRCMP_FLIPE__CLRCMP_FLIPE__SHIFT             0x00000000
+
+// RB3D_CLRCMP_CLR
+#define	RB3D_CLRCMP_CLR__CLRCMP_CLR__SHIFT                 0x00000000
+
+// RB3D_CLRCMP_MSK
+#define	RB3D_CLRCMP_MSK__CLRCMP_MSK__SHIFT                 0x00000000
+
+// RB3D_ZMASK_WRINDEX
+#define	RB3D_ZMASK_WRINDEX__ZMASK_WRINDEX__SHIFT           0x00000003
+
+// RB3D_ZMASK_DWORD
+#define	RB3D_ZMASK_DWORD__ZCLEAR0__SHIFT                   0x00000006
+#define	RB3D_ZMASK_DWORD__ZMASK0__SHIFT                    0x0000000e
+#define	RB3D_ZMASK_DWORD__ZCLEAR1__SHIFT                   0x00000016
+#define	RB3D_ZMASK_DWORD__ZMASK1__SHIFT                    0x0000001e
+
+// RB3D_ZMASK_RDINDEX
+#define	RB3D_ZMASK_RDINDEX__ZMASK_RDINDEX__SHIFT           0x00000001
+
+// RB3D_STENCILREFMASK
+#define	RB3D_STENCILREFMASK__STENCILREF__SHIFT             0x00000000
+#define	RB3D_STENCILREFMASK__STENCILMASK__SHIFT            0x00000010
+#define	RB3D_STENCILREFMASK__STENCILWRITEMASK__SHIFT       0x00000018
+
+// RB3D_ROPCNTL
+#define	RB3D_ROPCNTL__ROP__SHIFT                           0x00000008
+
+// RB3D_PLANEMASK
+#define	RB3D_PLANEMASK__PLANEMASK__SHIFT                   0x00000000
+
+// RB3D_ZCACHE_MODE
+#define	RB3D_ZCACHE_MODE__ZC_BYPASS__SHIFT                 0x00000000
+#define	RB3D_ZCACHE_MODE__ZMASK_RAM_RM__SHIFT              0x00000008
+#define	RB3D_ZCACHE_MODE__ZC_DISABLE_RI_FILL__SHIFT        0x00000018
+#define	RB3D_ZCACHE_MODE__ZC_DISABLE_RI_READ__SHIFT        0x00000019
+#define	RB3D_ZCACHE_MODE__DISABLE_DR_L0_RD__SHIFT          0x0000001a
+#define	RB3D_ZCACHE_MODE__DISABLE_DR_L0_WR__SHIFT          0x0000001b
+
+// RB3D_ZCACHE_CTLSTAT
+#define	RB3D_ZCACHE_CTLSTAT__ZC_FLUSH__SHIFT               0x00000000
+#define	RB3D_ZCACHE_CTLSTAT__ZC_FREE__SHIFT                0x00000002
+#define	RB3D_ZCACHE_CTLSTAT__ZC_BUSY__SHIFT                0x0000001f
+
+// RB3D_DSTCACHE_MODE
+#define	RB3D_DSTCACHE_MODE__DC_BYPASS__SHIFT               0x00000000
+#define	RB3D_DSTCACHE_MODE__DC_LINE_SIZE__SHIFT            0x00000002
+#define	RB3D_DSTCACHE_MODE__DC_AUTOFLUSH_ENABLE__SHIFT     0x00000008
+#define	RB3D_DSTCACHE_MODE__DC_FORCE_RMW__SHIFT            0x00000010
+#define	RB3D_DSTCACHE_MODE__DC_DISABLE_RI_FILL__SHIFT      0x00000018
+#define	RB3D_DSTCACHE_MODE__DC_DISABLE_RI_READ__SHIFT      0x00000019
+#define	RB3D_DSTCACHE_MODE__DC_DISABLE_L0_RD__SHIFT        0x0000001a
+#define	RB3D_DSTCACHE_MODE__DC_DISABLE_L0_WR__SHIFT        0x0000001b
+
+// RB3D_DSTCACHE_CTLSTAT
+#define	RB3D_DSTCACHE_CTLSTAT__DC_FLUSH__SHIFT             0x00000000
+#define	RB3D_DSTCACHE_CTLSTAT__DC_FREE__SHIFT              0x00000002
+#define	RB3D_DSTCACHE_CTLSTAT__DC_BUSY__SHIFT              0x0000001f
+
+// RB3D_PD0_DATA
+#define	RB3D_PD0_DATA__DISABLE_RB__SHIFT                   0x00000000
+
+// RB3D_PD1_DATA
+#define	RB3D_PD1_DATA__PD1_DATA__SHIFT                     0x00000000
+
+// RB3D_PD1_ADDR
+#define	RB3D_PD1_ADDR__PD1_ADDR__SHIFT                     0x00000000
+
+// RB3D_WRITEBACK_DATA_LO
+#define	RB3D_WRITEBACK_DATA_LO__WRITEBACK_DATA_LO__SHIFT   0x00000000
+
+// RB3D_WRITEBACK_DATA_HI
+#define	RB3D_WRITEBACK_DATA_HI__WRITEBACK_DATA_HI__SHIFT   0x00000000
+
+// RB3D_WRITEBACK_ADDR
+#define	RB3D_WRITEBACK_ADDR__WRITEBACK_ADDR__SHIFT         0x00000003
+
+// RB3D_ZPASS_DATA
+#define	RB3D_ZPASS_DATA__ZPASS_DATA__SHIFT                 0x00000000
+
+// RB3D_ZPASS_ADDR
+#define	RB3D_ZPASS_ADDR__ZPASS_ADDR__SHIFT                 0x00000002
+
+// DST_OFFSET
+#define	DST_OFFSET__DST_OFFSET__SHIFT                      0x00000000
+
+// DST_PITCH
+#define	DST_PITCH__DST_PITCH__SHIFT                        0x00000000
+
+// DST_TILE
+#define	DST_TILE__DST_TILE__SHIFT                          0x00000000
+
+// DST_PITCH_OFFSET
+#define	DST_PITCH_OFFSET__DST_OFFSET__SHIFT                0x00000000
+#define	DST_PITCH_OFFSET__DST_PITCH__SHIFT                 0x00000016
+#define	DST_PITCH_OFFSET__DST_TILE__SHIFT                  0x0000001e
+
+// DST_X
+#define	DST_X__DST_X__SHIFT                                0x00000000
+
+// DST_Y
+#define	DST_Y__DST_Y__SHIFT                                0x00000000
+
+// DST_X_Y
+#define	DST_X_Y__DST_Y__SHIFT                              0x00000000
+#define	DST_X_Y__DST_X__SHIFT                              0x00000010
+
+// DST_Y_X
+#define	DST_Y_X__DST_X__SHIFT                              0x00000000
+#define	DST_Y_X__DST_Y__SHIFT                              0x00000010
+
+// DST_WIDTH
+#define	DST_WIDTH__DST_WIDTH__SHIFT                        0x00000000
+
+// DST_HEIGHT
+#define	DST_HEIGHT__DST_HEIGHT__SHIFT                      0x00000000
+
+// DST_WIDTH_HEIGHT
+#define	DST_WIDTH_HEIGHT__DST_HEIGHT__SHIFT                0x00000000
+#define	DST_WIDTH_HEIGHT__DST_WIDTH__SHIFT                 0x00000010
+
+// DST_HEIGHT_WIDTH
+#define	DST_HEIGHT_WIDTH__DST_WIDTH__SHIFT                 0x00000000
+#define	DST_HEIGHT_WIDTH__DST_HEIGHT__SHIFT                0x00000010
+
+// DST_HEIGHT_WIDTH_8
+#define	DST_HEIGHT_WIDTH_8__DST_WIDTH__SHIFT               0x00000010
+#define	DST_HEIGHT_WIDTH_8__DST_HEIGHT__SHIFT              0x00000018
+
+// DST_HEIGHT_Y
+#define	DST_HEIGHT_Y__DST_Y__SHIFT                         0x00000000
+#define	DST_HEIGHT_Y__DST_HEIGHT__SHIFT                    0x00000010
+
+// DST_WIDTH_X
+#define	DST_WIDTH_X__DST_X__SHIFT                          0x00000000
+#define	DST_WIDTH_X__DST_WIDTH__SHIFT                      0x00000010
+
+// DST_WIDTH_X_INCY
+#define	DST_WIDTH_X_INCY__DST_X__SHIFT                     0x00000000
+#define	DST_WIDTH_X_INCY__DST_WIDTH__SHIFT                 0x00000010
+
+// DST_LINE_START
+#define	DST_LINE_START__DST_START_X__SHIFT                 0x00000000
+#define	DST_LINE_START__DST_START_Y__SHIFT                 0x00000010
+
+// DST_LINE_END
+#define	DST_LINE_END__DST_END_X__SHIFT                     0x00000000
+#define	DST_LINE_END__DST_END_Y__SHIFT                     0x00000010
+
+// DST_LINE_PATCOUNT
+#define	DST_LINE_PATCOUNT__LINE_PATCOUNT__SHIFT            0x00000000
+
+// DP_DST_ENDIAN
+#define	DP_DST_ENDIAN__DST_ENDIAN__SHIFT                   0x00000000
+
+// BRUSH_Y_X
+#define	BRUSH_Y_X__BRUSH_X__SHIFT                          0x00000000
+#define	BRUSH_Y_X__BRUSH_Y__SHIFT                          0x00000008
+
+// BRUSH_DATA0
+#define	BRUSH_DATA0__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA1
+#define	BRUSH_DATA1__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA2
+#define	BRUSH_DATA2__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA3
+#define	BRUSH_DATA3__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA4
+#define	BRUSH_DATA4__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA5
+#define	BRUSH_DATA5__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA6
+#define	BRUSH_DATA6__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA7
+#define	BRUSH_DATA7__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA8
+#define	BRUSH_DATA8__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA9
+#define	BRUSH_DATA9__BRUSH_DATA__SHIFT                     0x00000000
+
+// BRUSH_DATA10
+#define	BRUSH_DATA10__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA11
+#define	BRUSH_DATA11__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA12
+#define	BRUSH_DATA12__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA13
+#define	BRUSH_DATA13__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA14
+#define	BRUSH_DATA14__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA15
+#define	BRUSH_DATA15__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA16
+#define	BRUSH_DATA16__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA17
+#define	BRUSH_DATA17__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA18
+#define	BRUSH_DATA18__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA19
+#define	BRUSH_DATA19__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA20
+#define	BRUSH_DATA20__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA21
+#define	BRUSH_DATA21__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA22
+#define	BRUSH_DATA22__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA23
+#define	BRUSH_DATA23__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA24
+#define	BRUSH_DATA24__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA25
+#define	BRUSH_DATA25__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA26
+#define	BRUSH_DATA26__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA27
+#define	BRUSH_DATA27__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA28
+#define	BRUSH_DATA28__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA29
+#define	BRUSH_DATA29__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA30
+#define	BRUSH_DATA30__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA31
+#define	BRUSH_DATA31__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA32
+#define	BRUSH_DATA32__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA33
+#define	BRUSH_DATA33__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA34
+#define	BRUSH_DATA34__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA35
+#define	BRUSH_DATA35__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA36
+#define	BRUSH_DATA36__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA37
+#define	BRUSH_DATA37__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA38
+#define	BRUSH_DATA38__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA39
+#define	BRUSH_DATA39__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA40
+#define	BRUSH_DATA40__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA41
+#define	BRUSH_DATA41__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA42
+#define	BRUSH_DATA42__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA43
+#define	BRUSH_DATA43__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA44
+#define	BRUSH_DATA44__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA45
+#define	BRUSH_DATA45__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA46
+#define	BRUSH_DATA46__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA47
+#define	BRUSH_DATA47__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA48
+#define	BRUSH_DATA48__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA49
+#define	BRUSH_DATA49__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA50
+#define	BRUSH_DATA50__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA51
+#define	BRUSH_DATA51__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA52
+#define	BRUSH_DATA52__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA53
+#define	BRUSH_DATA53__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA54
+#define	BRUSH_DATA54__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA55
+#define	BRUSH_DATA55__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA56
+#define	BRUSH_DATA56__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA57
+#define	BRUSH_DATA57__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA58
+#define	BRUSH_DATA58__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA59
+#define	BRUSH_DATA59__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA60
+#define	BRUSH_DATA60__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA61
+#define	BRUSH_DATA61__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA62
+#define	BRUSH_DATA62__BRUSH_DATA__SHIFT                    0x00000000
+
+// BRUSH_DATA63
+#define	BRUSH_DATA63__BRUSH_DATA__SHIFT                    0x00000000
+
+// DP_BRUSH_FRGD_CLR
+#define	DP_BRUSH_FRGD_CLR__DP_BRUSH_FRGD_CLR__SHIFT        0x00000000
+
+// DP_BRUSH_BKGD_CLR
+#define	DP_BRUSH_BKGD_CLR__DP_BRUSH_BKGD_CLR__SHIFT        0x00000000
+
+// SRC_OFFSET
+#define	SRC_OFFSET__SRC_OFFSET__SHIFT                      0x00000000
+
+// SRC_PITCH
+#define	SRC_PITCH__SRC_PITCH__SHIFT                        0x00000000
+
+// SRC_TILE
+#define	SRC_TILE__SRC_TILE__SHIFT                          0x00000000
+
+// SRC_PITCH_OFFSET
+#define	SRC_PITCH_OFFSET__SRC_OFFSET__SHIFT                0x00000000
+#define	SRC_PITCH_OFFSET__SRC_PITCH__SHIFT                 0x00000016
+#define	SRC_PITCH_OFFSET__SRC_TILE__SHIFT                  0x0000001e
+
+// SRC_X
+#define	SRC_X__SRC_X__SHIFT                                0x00000000
+
+// SRC_Y
+#define	SRC_Y__SRC_Y__SHIFT                                0x00000000
+
+// SRC_X_Y
+#define	SRC_X_Y__SRC_Y__SHIFT                              0x00000000
+#define	SRC_X_Y__SRC_X__SHIFT                              0x00000010
+
+// SRC_Y_X
+#define	SRC_Y_X__SRC_X__SHIFT                              0x00000000
+#define	SRC_Y_X__SRC_Y__SHIFT                              0x00000010
+
+// SRC_CLUT_ADDRESS
+#define	SRC_CLUT_ADDRESS__SRC_CLUT_ADDRESS__SHIFT          0x00000000
+
+// SRC_CLUT_DATA
+#define	SRC_CLUT_DATA__SRC_CLUT_DATA__SHIFT                0x00000000
+
+// SRC_CLUT_DATA_RD
+#define	SRC_CLUT_DATA_RD__SRC_CLUT_DATA__SHIFT             0x00000000
+
+// HOST_DATA0
+#define	HOST_DATA0__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA1
+#define	HOST_DATA1__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA2
+#define	HOST_DATA2__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA3
+#define	HOST_DATA3__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA4
+#define	HOST_DATA4__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA5
+#define	HOST_DATA5__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA6
+#define	HOST_DATA6__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA7
+#define	HOST_DATA7__HOST_DATA__SHIFT                       0x00000000
+
+// HOST_DATA_LAST
+#define	HOST_DATA_LAST__HOST_DATA_LAST__SHIFT              0x00000000
+
+// DP_SRC_ENDIAN
+#define	DP_SRC_ENDIAN__SRC_ENDIAN__SHIFT                   0x00000000
+
+// DP_SRC_FRGD_CLR
+#define	DP_SRC_FRGD_CLR__DP_SRC_FRGD_CLR__SHIFT            0x00000000
+
+// DP_SRC_BKGD_CLR
+#define	DP_SRC_BKGD_CLR__DP_SRC_BKGD_CLR__SHIFT            0x00000000
+
+// SC_LEFT
+#define	SC_LEFT__SC_LEFT__SHIFT                            0x00000000
+
+// SC_RIGHT
+#define	SC_RIGHT__SC_RIGHT__SHIFT                          0x00000000
+
+// SC_TOP
+#define	SC_TOP__SC_TOP__SHIFT                              0x00000000
+
+// SC_BOTTOM
+#define	SC_BOTTOM__SC_BOTTOM__SHIFT                        0x00000000
+
+// SRC_SC_RIGHT
+#define	SRC_SC_RIGHT__SC_RIGHT__SHIFT                      0x00000000
+
+// SRC_SC_BOTTOM
+#define	SRC_SC_BOTTOM__SC_BOTTOM__SHIFT                    0x00000000
+
+// DP_CNTL
+#define	DP_CNTL__DST_X_DIR__SHIFT                          0x00000000
+#define	DP_CNTL__DST_Y_DIR__SHIFT                          0x00000001
+#define	DP_CNTL__DST_TILE__SHIFT                           0x00000003
+
+// DP_CNTL_XDIR_YDIR_YMAJOR
+#define	DP_CNTL_XDIR_YDIR_YMAJOR__DST_Y_DIR__SHIFT         0x0000000f
+#define	DP_CNTL_XDIR_YDIR_YMAJOR__DST_X_DIR__SHIFT         0x0000001f
+
+// DP_DATATYPE
+#define	DP_DATATYPE__DP_DST_DATATYPE__SHIFT                0x00000000
+#define	DP_DATATYPE__DP_BRUSH_DATATYPE__SHIFT              0x00000008
+#define	DP_DATATYPE__DP_SRC_DATATYPE__SHIFT                0x00000010
+#define	DP_DATATYPE__DP_BYTE_PIX_ORDER__SHIFT              0x0000001e
+
+// DP_MIX
+#define	DP_MIX__DP_SRC_SOURCE__SHIFT                       0x00000008
+#define	DP_MIX__DP_ROP3__SHIFT                             0x00000010
+
+// DP_WRITE_MSK
+#define	DP_WRITE_MSK__DP_WRITE_MSK__SHIFT                  0x00000000
+
+// DP_XOP
+#define	DP_XOP__XOP_A__SHIFT                               0x00000000
+#define	DP_XOP__XOP_B__SHIFT                               0x00000008
+#define	DP_XOP__XOP_C__SHIFT                               0x00000010
+#define	DP_XOP__XOP_OP__SHIFT                              0x00000018
+
+// CLR_CMP_CLR_SRC
+#define	CLR_CMP_CLR_SRC__CLR_CMP_CLR_SRC__SHIFT            0x00000000
+
+// CLR_CMP_CLR_DST
+#define	CLR_CMP_CLR_DST__CLR_CMP_CLR_DST__SHIFT            0x00000000
+
+// CLR_CMP_CNTL
+#define	CLR_CMP_CNTL__CLR_CMP_FCN_SRC__SHIFT               0x00000000
+#define	CLR_CMP_CNTL__CLR_CMP_FCN_DST__SHIFT               0x00000008
+#define	CLR_CMP_CNTL__CLR_CMP_SRC__SHIFT                   0x00000018
+
+// CLR_CMP_MSK
+#define	CLR_CMP_MSK__CLR_CMP_MSK__SHIFT                    0x00000000
+
+// DSTCACHE_MODE
+#define	DSTCACHE_MODE__DSTCACHE_MODE__SHIFT                0x00000000
+
+// DSTCACHE_CTLSTAT
+#define	DSTCACHE_CTLSTAT__DSTCACHE_CTLSTAT__SHIFT          0x00000000
+
+// DEFAULT_PITCH_OFFSET
+#define	DEFAULT_PITCH_OFFSET__DEFAULT_OFFSET__SHIFT        0x00000000
+#define	DEFAULT_PITCH_OFFSET__DEFAULT_PITCH__SHIFT         0x00000016
+#define	DEFAULT_PITCH_OFFSET__DEFAULT_TILE__SHIFT          0x0000001e
+
+// DEFAULT_SC_BOTTOM_RIGHT
+#define	DEFAULT_SC_BOTTOM_RIGHT__DEFAULT_SC_RIGHT__SHIFT   0x00000000
+#define	DEFAULT_SC_BOTTOM_RIGHT__DEFAULT_SC_BOTTOM__SHIFT  0x00000010
+
+// DP_GUI_MASTER_CNTL
+#define	DP_GUI_MASTER_CNTL__GMC_SRC_PITCH_OFFSET_CNTL__SHIFT 0x00000000
+#define	DP_GUI_MASTER_CNTL__GMC_DST_PITCH_OFFSET_CNTL__SHIFT 0x00000001
+#define	DP_GUI_MASTER_CNTL__GMC_SRC_CLIPPING__SHIFT        0x00000002
+#define	DP_GUI_MASTER_CNTL__GMC_DST_CLIPPING__SHIFT        0x00000003
+#define	DP_GUI_MASTER_CNTL__GMC_BRUSH_DATATYPE__SHIFT      0x00000004
+#define	DP_GUI_MASTER_CNTL__GMC_DST_DATATYPE__SHIFT        0x00000008
+#define	DP_GUI_MASTER_CNTL__GMC_SRC_DATATYPE__SHIFT        0x0000000c
+#define	DP_GUI_MASTER_CNTL__GMC_BYTE_PIX_ORDER__SHIFT      0x0000000e
+#define DP_GUI_MASTER_CNTL__GMC_DEFAULT_SEL__SHIFT         0x0000000f
+#define	DP_GUI_MASTER_CNTL__GMC_ROP3__SHIFT                0x00000010
+#define	DP_GUI_MASTER_CNTL__GMC_DP_SRC_SOURCE__SHIFT       0x00000018
+#define	DP_GUI_MASTER_CNTL__GMC_SRC_DATATYPE2__SHIFT       0x0000001b
+#define	DP_GUI_MASTER_CNTL__GMC_CLR_CMP_FCN_DIS__SHIFT     0x0000001c
+#define	DP_GUI_MASTER_CNTL__GMC_WR_MSK_DIS__SHIFT          0x0000001e
+
+// SC_TOP_LEFT
+#define	SC_TOP_LEFT__SC_LEFT__SHIFT                        0x00000000
+#define	SC_TOP_LEFT__SC_TOP__SHIFT                         0x00000010
+
+// SC_BOTTOM_RIGHT
+#define	SC_BOTTOM_RIGHT__SC_RIGHT__SHIFT                   0x00000000
+#define	SC_BOTTOM_RIGHT__SC_BOTTOM__SHIFT                  0x00000010
+
+// SRC_SC_BOTTOM_RIGHT
+#define	SRC_SC_BOTTOM_RIGHT__SC_RIGHT__SHIFT               0x00000000
+#define	SRC_SC_BOTTOM_RIGHT__SC_BOTTOM__SHIFT              0x00000010
+
+// DEBUG0
+
+// DEBUG1
+
+// DEBUG2
+
+// DEBUG3
+
+// DEBUG4
+
+// DEBUG5
+
+// DEBUG6
+
+// DEBUG7
+
+// DEBUG8
+
+// DEBUG9
+
+// DEBUG10
+
+// DEBUG11
+
+// DEBUG12
+
+// DEBUG13
+
+// DEBUG14
+
+// DEBUG15
+
+// BIOS_0_SCRATCH
+#define	BIOS_0_SCRATCH__BIOS_SCRATCH__SHIFT                0x00000000
+
+// BIOS_1_SCRATCH
+#define	BIOS_1_SCRATCH__BIOS_SCRATCH__SHIFT                0x00000000
+
+// BIOS_2_SCRATCH
+#define	BIOS_2_SCRATCH__BIOS_SCRATCH__SHIFT                0x00000000
+
+// BIOS_3_SCRATCH
+#define	BIOS_3_SCRATCH__BIOS_SCRATCH__SHIFT                0x00000000
+
+// TVOUT_0_SCRATCH
+#define	TVOUT_0_SCRATCH__TVOUT_0_SCRATCH__SHIFT            0x00000000
+
+// TVOUT_1_SCRATCH
+#define	TVOUT_1_SCRATCH__TVOUT_1_SCRATCH__SHIFT            0x00000000
+
+// I2C_CNTL_0
+#define	I2C_CNTL_0__I2C_DONE__SHIFT                        0x00000000
+#define	I2C_CNTL_0__I2C_NACK__SHIFT                        0x00000001
+#define	I2C_CNTL_0__I2C_HALT__SHIFT                        0x00000002
+#define	I2C_CNTL_0__I2C_SOFT_RST__SHIFT                    0x00000005
+#define	I2C_CNTL_0__I2C_DRIVE_EN__SHIFT                    0x00000006
+#define	I2C_CNTL_0__I2C_DRIVE_SEL__SHIFT                   0x00000007
+#define	I2C_CNTL_0__I2C_START__SHIFT                       0x00000008
+#define	I2C_CNTL_0__I2C_STOP__SHIFT                        0x00000009
+#define	I2C_CNTL_0__I2C_RECEIVE__SHIFT                     0x0000000a
+#define	I2C_CNTL_0__I2C_ABORT__SHIFT                       0x0000000b
+#define	I2C_CNTL_0__I2C_GO__SHIFT                          0x0000000c
+#define	I2C_CNTL_0__I2C_PRESCALE__SHIFT                    0x00000010
+
+// I2C_CNTL_1
+#define	I2C_CNTL_1__I2C_DATA_COUNT__SHIFT                  0x00000000
+#define	I2C_CNTL_1__I2C_ADDR_COUNT__SHIFT                  0x00000008
+#define	I2C_CNTL_1__I2C_SEL__SHIFT                         0x00000010
+#define	I2C_CNTL_1__I2C_EN__SHIFT                          0x00000011
+#define	I2C_CNTL_1__I2C_TIME_LIMIT__SHIFT                  0x00000018
+
+// I2C_DATA
+#define	I2C_DATA__I2C_DATA__SHIFT                          0x00000000
+
+// DVI_I2C_CNTL_0
+#define DVI_I2C_CNTL_0__I2C_DONE__SHIFT                     0x00000000 //m6-a
+#define DVI_I2C_CNTL_0__I2C_NACK__SHIFT                     0x00000001 //m6-a
+#define DVI_I2C_CNTL_0__I2C_HALT__SHIFT                     0x00000002 //m6-a
+#define DVI_I2C_CNTL_0__I2C_SOFT_RST__SHIFT                 0x00000005 //m6-a
+#define DVI_I2C_CNTL_0__I2C_DRIVE_EN__SHIFT                 0x00000006 //m6-a
+#define DVI_I2C_CNTL_0__I2C_DRIVE_SEL__SHIFT                0x00000007 //m6-a
+#define DVI_I2C_CNTL_0__I2C_START__SHIFT                    0x00000008 //m6-a
+#define DVI_I2C_CNTL_0__I2C_STOP__SHIFT                     0x00000009 //m6-a
+#define DVI_I2C_CNTL_0__I2C_RECEIVE__SHIFT                  0x0000000a //m6-a
+#define DVI_I2C_CNTL_0__I2C_ABORT__SHIFT                    0x0000000b //m6-a
+#define DVI_I2C_CNTL_0__I2C_GO__SHIFT                       0x0000000c //m6-a
+#define DVI_I2C_CNTL_0__SW_WANTS_TO_USE_DVI_I2C__SHIFT      0x0000000d //m6-a
+#define DVI_I2C_CNTL_0__SW_CAN_USE_DVI_I2C__SHIFT           0x0000000d //m6-a
+#define DVI_I2C_CNTL_0__SW_DONE_USING_DVI_I2C__SHIFT        0x0000000e //m6-a
+#define DVI_I2C_CNTL_0__HW_NEEDS_DVI_I2C__SHIFT             0x0000000e //m6-a
+#define DVI_I2C_CNTL_0__ABORT_HW_DVI_I2C__SHIFT             0x0000000f //m6-a
+#define DVI_I2C_CNTL_0__HW_USING_DVI_I2C__SHIFT             0x0000000f //m6-a
+#define DVI_I2C_CNTL_0__I2C_PRESCALE__SHIFT                 0x00000010 //m6-a
+
+// DVI_I2C_CNTL_1
+#define DVI_I2C_CNTL_1__I2C_DATA_COUNT__SHIFT               0x00000000 //m6-a
+#define DVI_I2C_CNTL_1__I2C_ADDR_COUNT__SHIFT               0x00000008 //m6-a
+#define DVI_I2C_CNTL_1__I2C_SEL__SHIFT                      0x00000010 //m6-a
+#define DVI_I2C_CNTL_1__I2C_EN__SHIFT                       0x00000011 //m6-a
+#define DVI_I2C_CNTL_1__I2C_TIME_LIMIT__SHIFT               0x00000018 //m6-a
+
+// DVI_I2C_DATA
+#define DVI_I2C_DATA__I2C_DATA__SHIFT                       0x00000000 //m6-a
+
+// CONFIG_XSTRAP
+#define	CONFIG_XSTRAP__VGA_DISABLE__SHIFT                  0x00000000
+#define	CONFIG_XSTRAP__ENINTB__SHIFT                       0x00000003
+#define	CONFIG_XSTRAP__AGPSKEW__SHIFT                      0x00000006
+#define	CONFIG_XSTRAP__X1CLK_SKEW__SHIFT                   0x00000008
+#define	CONFIG_XSTRAP__VIP_DEVICE__SHIFT                   0x0000000d
+#define	CONFIG_XSTRAP__ID_DISABLE__SHIFT                   0x0000000e
+#define	CONFIG_XSTRAP__CRIPPLE_PANELb__SHIFT               0x0000000f
+#define	CONFIG_XSTRAP__AP_SIZE__SHIFT                      0x00000010
+#define	CONFIG_XSTRAP__ROMIDCFG__SHIFT                     0x00000014
+#define	CONFIG_XSTRAP__BUSCFG__SHIFT                       0x00000018
+
+// TEST_DEBUG_CNTL
+#define	TEST_DEBUG_CNTL__TEST_DEBUG_OUT_EN__SHIFT          0x00000000
+#define	TEST_DEBUG_CNTL__TEST_DEBUG_IN_EN__SHIFT           0x00000001
+#define	TEST_DEBUG_CNTL__TEST_IDDQ_EN__SHIFT               0x00000002
+#define	TEST_DEBUG_CNTL__TEST_BLOCK_SEL__SHIFT             0x00000008
+#define	TEST_DEBUG_CNTL__TEST_ENABLE__SHIFT                0x0000000f
+#define	TEST_DEBUG_CNTL__TEST_DELAY_IN__SHIFT              0x00000010
+
+// TEST_DEBUG_MUX
+#define	TEST_DEBUG_MUX__TEST_DEBUG_SEL__SHIFT              0x00000000
+#define	TEST_DEBUG_MUX__TEST_CLK0__SHIFT                   0x00000008
+#define	TEST_DEBUG_MUX__TEST_CLK0_INV__SHIFT               0x0000000f
+#define	TEST_DEBUG_MUX__TEST_CLK1__SHIFT                   0x00000010
+#define	TEST_DEBUG_MUX__TEST_CLK1_INV__SHIFT               0x00000017
+
+// TEST_DEBUG_OUT
+#define	TEST_DEBUG_OUT__TEST_DEBUG_OUTR__SHIFT             0x00000000
+
+// VIDEOMUX_CNTL
+#define	VIDEOMUX_CNTL__VIPH_INT_SEL__SHIFT                 0x00000000
+#define	VIDEOMUX_CNTL__ROM_CLK_DIVIDE__SHIFT               0x00000010
+#define	VIDEOMUX_CNTL__STR_ROMCLK__SHIFT                   0x00000015
+#define	VIDEOMUX_CNTL__VIP_INTERNAL_DEBUG_SEL__SHIFT       0x00000016
+
+// VIPPAD_STRENGTH
+#define	VIPPAD_STRENGTH__I2C_STRENGTH__SHIFT               0x00000000
+#define	VIPPAD_STRENGTH__TVDAT_STRENGTH__SHIFT             0x00000008
+#define	VIPPAD_STRENGTH__TVCLK_STRENGTH__SHIFT             0x0000000c
+#define	VIPPAD_STRENGTH__VIPHDAT_STRENGTH__SHIFT           0x00000010
+#define	VIPPAD_STRENGTH__VIPHCLK_STRENGTH__SHIFT           0x00000014
+
+// VIPPAD_MASK
+#define	VIPPAD_MASK__VIPPAD_MASK__SHIFT                    0x00000000
+
+// VIPPAD_A
+#define	VIPPAD_A__VIPPAD_A__SHIFT                          0x00000000
+
+// VIPPAD_EN
+#define	VIPPAD_EN__VIPPAD_EN__SHIFT                        0x00000000
+
+// VIPPAD_Y
+#define	VIPPAD_Y__VIPPAD_Y__SHIFT                          0x00000000
+
+// VIPPAD1_MASK
+#define	VIPPAD1_MASK__VIPPAD1_MASK__SHIFT                  0x00000000
+
+// VIPPAD1_A
+#define	VIPPAD1_A__VIPPAD1_A__SHIFT                        0x00000000
+
+// VIPPAD1_EN
+#define	VIPPAD1_EN__VIPPAD1_EN__SHIFT                      0x00000000
+
+// VIPPAD1_Y
+#define	VIPPAD1_Y__VIPPAD1_Y__SHIFT                        0x00000000
+
+// EXTERN_TRIG_CNTL
+#define	EXTERN_TRIG_CNTL__EXTERN_TRIG_CLR__SHIFT           0x00000000
+#define	EXTERN_TRIG_CNTL__EXTERN_TRIG_READ__SHIFT          0x00000001
+
+// SEPROM_CNTL1
+#define	SEPROM_CNTL1__WRITE_ENABLE__SHIFT                  0x00000000
+#define	SEPROM_CNTL1__WRITE_DISABLE__SHIFT                 0x00000001
+#define	SEPROM_CNTL1__READ_CONFIG__SHIFT                   0x00000002
+#define	SEPROM_CNTL1__WRITE_CONFIG__SHIFT                  0x00000003
+#define	SEPROM_CNTL1__READ_STATUS__SHIFT                   0x00000004
+#define	SEPROM_CNTL1__SECT_TO_SRAM__SHIFT                  0x00000005
+#define	SEPROM_CNTL1__READY_BUSY__SHIFT                    0x00000007
+#define	SEPROM_CNTL1__SEPROM_BUSY__SHIFT                   0x00000008
+#define	SEPROM_CNTL1__BCNT_OVER_WTE_EN__SHIFT              0x00000009
+#define	SEPROM_CNTL1__RB_MASKB__SHIFT                      0x0000000a
+#define	SEPROM_CNTL1__SOFT_RESET__SHIFT                    0x0000000b
+#define	SEPROM_CNTL1__STATE_IDLEb__SHIFT                   0x0000000c
+#define	SEPROM_CNTL1__BYTE_CNT__SHIFT                      0x00000010
+#define	SEPROM_CNTL1__SCK_PRESCALE__SHIFT                  0x00000018
+
+// SEPROM_CNTL2
+#define	SEPROM_CNTL2__WAIT_CYCLE__SHIFT                    0x00000000
+#define	SEPROM_CNTL2__AUTO_ADDR_SAMPLE__SHIFT              0x00000008
+#define	SEPROM_CNTL2__SEC_COMMAND__SHIFT                   0x00000010
+
+// VIP_HW_DEBUG
+#define	VIP_HW_DEBUG__VIP_HW_0_DEBUG__SHIFT                0x00000000
+#define	VIP_HW_DEBUG__VIP_HW_1_DEBUG__SHIFT                0x00000001
+#define	VIP_HW_DEBUG__VIP_HW_2_DEBUG__SHIFT                0x00000002
+#define	VIP_HW_DEBUG__VIP_HW_3_DEBUG__SHIFT                0x00000003
+#define	VIP_HW_DEBUG__VIP_HW_4_DEBUG__SHIFT                0x00000004
+#define	VIP_HW_DEBUG__VIP_HW_5_DEBUG__SHIFT                0x00000005
+#define	VIP_HW_DEBUG__VIP_HW_6_DEBUG__SHIFT                0x00000006
+#define	VIP_HW_DEBUG__VIP_HW_7_DEBUG__SHIFT                0x00000007
+#define	VIP_HW_DEBUG__VIP_HW_8_DEBUG__SHIFT                0x00000008
+#define	VIP_HW_DEBUG__VIP_HW_9_DEBUG__SHIFT                0x00000009
+#define	VIP_HW_DEBUG__VIP_HW_A_DEBUG__SHIFT                0x0000000a
+#define	VIP_HW_DEBUG__VIP_HW_B_DEBUG__SHIFT                0x0000000b
+#define	VIP_HW_DEBUG__VIP_HW_C_DEBUG__SHIFT                0x0000000c
+#define	VIP_HW_DEBUG__VIP_HW_D_DEBUG__SHIFT                0x0000000d
+#define	VIP_HW_DEBUG__VIP_HW_E_DEBUG__SHIFT                0x0000000e
+#define	VIP_HW_DEBUG__VIP_HW_F_DEBUG__SHIFT                0x0000000f
+
+// MEDIA_0_SCRATCH
+#define	MEDIA_0_SCRATCH__MEDIA_0_SCRATCH__SHIFT            0x00000000
+
+// MEDIA_1_SCRATCH
+#define	MEDIA_1_SCRATCH__MEDIA_1_SCRACH__SHIFT             0x00000000
+
+// VID_BUFFER_CONTROL
+#define	VID_BUFFER_CONTROL__CAP0_BUFFER_WATER_MARK__SHIFT  0x00000000
+#define	VID_BUFFER_CONTROL__FULL_BUFFER_EN__SHIFT          0x00000010
+#define	VID_BUFFER_CONTROL__CAP0_ANC_VBI_QUAD_BUF__SHIFT   0x00000011
+#define	VID_BUFFER_CONTROL__VID_BUFFER_RESET__SHIFT        0x00000014
+#define	VID_BUFFER_CONTROL__CAP_SWAP__SHIFT                0x00000015
+#define	VID_BUFFER_CONTROL__CAP0_BUFFER_EMPTY__SHIFT       0x00000018
+
+// CAP_INT_CNTL
+#define	CAP_INT_CNTL__CAP0_BUF0_INT_EN__SHIFT              0x00000000
+#define	CAP_INT_CNTL__CAP0_BUF0_EVEN_INT_EN__SHIFT         0x00000001
+#define	CAP_INT_CNTL__CAP0_BUF1_INT_EN__SHIFT              0x00000002
+#define	CAP_INT_CNTL__CAP0_BUF1_EVEN_INT_EN__SHIFT         0x00000003
+#define	CAP_INT_CNTL__CAP0_VBI0_INT_EN__SHIFT              0x00000004
+#define	CAP_INT_CNTL__CAP0_VBI1_INT_EN__SHIFT              0x00000005
+#define	CAP_INT_CNTL__CAP0_ONESHOT_INT_EN__SHIFT           0x00000006
+#define	CAP_INT_CNTL__CAP0_ANC0_INT_EN__SHIFT              0x00000007
+#define	CAP_INT_CNTL__CAP0_ANC1_INT_EN__SHIFT              0x00000008
+#define	CAP_INT_CNTL__CAP0_VBI2_INT_EN__SHIFT              0x00000009
+#define	CAP_INT_CNTL__CAP0_VBI3_INT_EN__SHIFT              0x0000000a
+#define	CAP_INT_CNTL__CAP0_ANC2_INT_EN__SHIFT              0x0000000b
+#define	CAP_INT_CNTL__CAP0_ANC3_INT_EN__SHIFT              0x0000000c
+
+// CAP_INT_STATUS
+#define	CAP_INT_STATUS__CAP0_BUF0_INT__SHIFT               0x00000000
+#define	CAP_INT_STATUS__CAP0_BUF0_INT_AK__SHIFT            0x00000000
+#define	CAP_INT_STATUS__CAP0_BUF0_EVEN_INT__SHIFT          0x00000001
+#define	CAP_INT_STATUS__CAP0_BUF0_EVEN_INT_AK__SHIFT       0x00000001
+#define	CAP_INT_STATUS__CAP0_BUF1_INT__SHIFT               0x00000002
+#define	CAP_INT_STATUS__CAP0_BUF1_INT_AK__SHIFT            0x00000002
+#define	CAP_INT_STATUS__CAP0_BUF1_EVEN_INT__SHIFT          0x00000003
+#define	CAP_INT_STATUS__CAP0_BUF1_EVEN_INT_AK__SHIFT       0x00000003
+#define	CAP_INT_STATUS__CAP0_VBI0_INT__SHIFT               0x00000004
+#define	CAP_INT_STATUS__CAP0_VBI0_INT_AK__SHIFT            0x00000004
+#define	CAP_INT_STATUS__CAP0_VBI1_INT__SHIFT               0x00000005
+#define	CAP_INT_STATUS__CAP0_VBI1_INT_AK__SHIFT            0x00000005
+#define	CAP_INT_STATUS__CAP0_ONESHOT_INT__SHIFT            0x00000006
+#define	CAP_INT_STATUS__CAP0_ONESHOT_INT_AK__SHIFT         0x00000006
+#define	CAP_INT_STATUS__CAP0_ANC0_INT__SHIFT               0x00000007
+#define	CAP_INT_STATUS__CAP0_ANC0_INT_AK__SHIFT            0x00000007
+#define	CAP_INT_STATUS__CAP0_ANC1_INT__SHIFT               0x00000008
+#define	CAP_INT_STATUS__CAP0_ANC1_INT_AK__SHIFT            0x00000008
+#define	CAP_INT_STATUS__CAP0_VBI2_INT__SHIFT               0x00000009
+#define	CAP_INT_STATUS__CAP0_VBI2_INT_AK__SHIFT            0x00000009
+#define	CAP_INT_STATUS__CAP0_VBI3_INT__SHIFT               0x0000000a
+#define	CAP_INT_STATUS__CAP0_VBI3_INT_AK__SHIFT            0x0000000a
+#define	CAP_INT_STATUS__CAP0_ANC2_INT__SHIFT               0x0000000b
+#define	CAP_INT_STATUS__CAP0_ANC2_INT_AK__SHIFT            0x0000000b
+#define	CAP_INT_STATUS__CAP0_ANC3_INT__SHIFT               0x0000000c
+#define	CAP_INT_STATUS__CAP0_ANC3_INT_AK__SHIFT            0x0000000c
+
+// FCP_CNTL
+#define	FCP_CNTL__FCP0_SRC_SEL__SHIFT                      0x00000000
+
+// CAP0_BUF0_OFFSET
+#define	CAP0_BUF0_OFFSET__CAP_BUF0_OFFSET__SHIFT           0x00000000
+
+// CAP0_BUF1_OFFSET
+#define	CAP0_BUF1_OFFSET__CAP_BUF1_OFFSET__SHIFT           0x00000000
+
+// CAP0_BUF0_EVEN_OFFSET
+#define	CAP0_BUF0_EVEN_OFFSET__CAP_BUF0_EVEN_OFFSET__SHIFT 0x00000000
+
+// CAP0_BUF1_EVEN_OFFSET
+#define	CAP0_BUF1_EVEN_OFFSET__CAP_BUF1_EVEN_OFFSET__SHIFT 0x00000000
+
+// CAP0_BUF_PITCH
+#define	CAP0_BUF_PITCH__CAP_BUF_PITCH__SHIFT               0x00000000
+
+// CAP0_V_WINDOW
+#define	CAP0_V_WINDOW__CAP_V_START__SHIFT                  0x00000000
+#define	CAP0_V_WINDOW__CAP_V_END__SHIFT                    0x00000010
+
+// CAP0_H_WINDOW
+#define	CAP0_H_WINDOW__CAP_H_START__SHIFT                  0x00000000
+#define	CAP0_H_WINDOW__CAP_H_WIDTH__SHIFT                  0x00000010
+
+// CAP0_VBI0_OFFSET
+#define	CAP0_VBI0_OFFSET__CAP_VBI0_OFFSET__SHIFT           0x00000000
+
+// CAP0_VBI1_OFFSET
+#define	CAP0_VBI1_OFFSET__CAP_VBI1_OFFSET__SHIFT           0x00000000
+
+// CAP0_VBI_V_WINDOW
+#define	CAP0_VBI_V_WINDOW__CAP_VBI_V_START__SHIFT          0x00000000
+#define	CAP0_VBI_V_WINDOW__CAP_VBI_V_END__SHIFT            0x00000010
+
+// CAP0_VBI_H_WINDOW
+#define	CAP0_VBI_H_WINDOW__CAP_VBI_H_START__SHIFT          0x00000000
+#define	CAP0_VBI_H_WINDOW__CAP_VBI_H_WIDTH__SHIFT          0x00000010
+
+// CAP0_PORT_MODE_CNTL
+#define	CAP0_PORT_MODE_CNTL__CAP_PORT_WIDTH__SHIFT         0x00000001
+#define	CAP0_PORT_MODE_CNTL__CAP_PORT_BYTE_USED__SHIFT     0x00000002
+
+// CAP0_TRIG_CNTL
+#define	CAP0_TRIG_CNTL__CAP_TRIGGER_R__SHIFT               0x00000000
+#define	CAP0_TRIG_CNTL__CAP_TRIGGER_W__SHIFT               0x00000000
+#define	CAP0_TRIG_CNTL__CAP_EN__SHIFT                      0x00000004
+#define	CAP0_TRIG_CNTL__CAP_VSYNC_CNT__SHIFT               0x00000008
+#define	CAP0_TRIG_CNTL__CAP_VSYNC_CLR__SHIFT               0x00000010
+
+// CAP0_DEBUG
+#define	CAP0_DEBUG__CAP_H_STATUS__SHIFT                    0x00000000
+#define	CAP0_DEBUG__CAP_V_STATUS__SHIFT                    0x00000010
+#define	CAP0_DEBUG__CAP_V_SYNC__SHIFT                      0x0000001c
+
+// CAP0_CONFIG
+#define	CAP0_CONFIG__CAP_INPUT_MODE__SHIFT                 0x00000000
+#define	CAP0_CONFIG__CAP_START_FIELD__SHIFT                0x00000001
+#define	CAP0_CONFIG__CAP_START_BUF_R__SHIFT                0x00000002
+#define	CAP0_CONFIG__CAP_START_BUF_W__SHIFT                0x00000003
+#define	CAP0_CONFIG__CAP_BUF_TYPE__SHIFT                   0x00000004
+#define	CAP0_CONFIG__CAP_ONESHOT_MODE__SHIFT               0x00000006
+#define	CAP0_CONFIG__CAP_BUF_MODE__SHIFT                   0x00000007
+#define	CAP0_CONFIG__CAP_MIRROR_EN__SHIFT                  0x00000009
+#define	CAP0_CONFIG__CAP_ONESHOT_MIRROR_EN__SHIFT          0x0000000a
+#define	CAP0_CONFIG__CAP_VIDEO_SIGNED_UV__SHIFT            0x0000000b
+#define	CAP0_CONFIG__CAP_ANC_DECODE_EN__SHIFT              0x0000000c
+#define	CAP0_CONFIG__CAP_VBI_EN__SHIFT                     0x0000000d
+#define	CAP0_CONFIG__CAP_SOFT_PULL_DOWN_EN__SHIFT          0x0000000e
+#define	CAP0_CONFIG__CAP_VIP_EXTEND_FLAG_EN__SHIFT         0x0000000f
+#define	CAP0_CONFIG__CAP_FAKE_FIELD_EN__SHIFT              0x00000010
+#define	CAP0_CONFIG__CAP_FIELD_START_LINE_DIFF__SHIFT      0x00000011
+#define	CAP0_CONFIG__CAP_HORZ_DOWN__SHIFT                  0x00000013
+#define	CAP0_CONFIG__CAP_VERT_DOWN__SHIFT                  0x00000015
+#define	CAP0_CONFIG__CAP_STREAM_FORMAT__SHIFT              0x00000017
+#define	CAP0_CONFIG__CAP_HDWNS_DEC__SHIFT                  0x0000001a
+#define	CAP0_CONFIG__CAP_VIDEO_IN_FORMAT__SHIFT            0x0000001d
+#define	CAP0_CONFIG__VBI_HORZ_DOWN__SHIFT                  0x0000001e
+
+// CAP0_ANC0_OFFSET
+#define	CAP0_ANC0_OFFSET__CAP_ANC0_OFFSET__SHIFT           0x00000000
+
+// CAP0_ANC1_OFFSET
+#define	CAP0_ANC1_OFFSET__CAP_ANC1_OFFSET__SHIFT           0x00000000
+
+// CAP0_ANC_H_WINDOW
+#define	CAP0_ANC_H_WINDOW__CAP_ANC_WIDTH__SHIFT            0x00000000
+
+// CAP0_VIDEO_SYNC_TEST
+#define	CAP0_VIDEO_SYNC_TEST__CAP_TEST_VID_SOF__SHIFT      0x00000000
+#define	CAP0_VIDEO_SYNC_TEST__CAP_TEST_VID_EOF__SHIFT      0x00000001
+#define	CAP0_VIDEO_SYNC_TEST__CAP_TEST_VID_EOL__SHIFT      0x00000002
+#define	CAP0_VIDEO_SYNC_TEST__CAP_TEST_VID_FIELD__SHIFT    0x00000003
+#define	CAP0_VIDEO_SYNC_TEST__CAP_TEST_SYNC_EN__SHIFT      0x00000005
+
+// CAP0_ONESHOT_BUF_OFFSET
+#define	CAP0_ONESHOT_BUF_OFFSET__CAP_ONESHOT_BUF_OFFSET__SHIFT 0x00000000
+
+// CAP0_BUF_STATUS
+#define	CAP0_BUF_STATUS__CAP_PRE_VID_BUF__SHIFT            0x00000000
+#define	CAP0_BUF_STATUS__CAP_CUR_VID_BUF__SHIFT            0x00000002
+#define	CAP0_BUF_STATUS__CAP_PRE_FIELD__SHIFT              0x00000004
+#define	CAP0_BUF_STATUS__CAP_CUR_FIELD__SHIFT              0x00000005
+#define	CAP0_BUF_STATUS__CAP_PRE_VBI_BUF__SHIFT            0x00000006
+#define	CAP0_BUF_STATUS__CAP_CUR_VBI_BUF__SHIFT            0x00000008
+#define	CAP0_BUF_STATUS__CAP_VBI_BUF_STATUS__SHIFT         0x0000000a
+#define	CAP0_BUF_STATUS__CAP_PRE_ANC_BUF__SHIFT            0x0000000b
+#define	CAP0_BUF_STATUS__CAP_CUR_ANC_BUF__SHIFT            0x0000000d
+#define	CAP0_BUF_STATUS__CAP_ANC_BUF_STATUS__SHIFT         0x0000000f
+#define	CAP0_BUF_STATUS__CAP_ANC_PRE_BUF_CNT__SHIFT        0x00000010
+#define	CAP0_BUF_STATUS__CAP_VIP_INC__SHIFT                0x0000001c
+#define	CAP0_BUF_STATUS__CAP_VIP_PRE_REPEAT_FIELD__SHIFT   0x0000001d
+#define	CAP0_BUF_STATUS__CAP_CAP_BUF_STATUS__SHIFT         0x0000001e
+
+// CAP0_ANC_BUF01_BLOCK_CNT
+#define	CAP0_ANC_BUF01_BLOCK_CNT__CAP0_ANC_BUF0_BLOCK_CNT__SHIFT 0x00000000
+#define	CAP0_ANC_BUF01_BLOCK_CNT__CAP0_ANC_BUF1_BLOCK_CNT__SHIFT 0x00000010
+
+// CAP0_ANC_BUF23_BLOCK_CNT
+#define	CAP0_ANC_BUF23_BLOCK_CNT__CAP0_ANC_BUF2_BLOCK_CNT__SHIFT 0x00000000
+#define	CAP0_ANC_BUF23_BLOCK_CNT__CAP0_ANC_BUF3_BLOCK_CNT__SHIFT 0x00000010
+
+// CAP0_VBI2_OFFSET
+#define	CAP0_VBI2_OFFSET__CAP_VBI2_OFFSET__SHIFT           0x00000000
+
+// CAP0_VBI3_OFFSET
+#define	CAP0_VBI3_OFFSET__CAP_VBI3_OFFSET__SHIFT           0x00000000
+
+// CAP0_ANC2_OFFSET
+#define	CAP0_ANC2_OFFSET__CAP_ANC2_OFFSET__SHIFT           0x00000000
+
+// CAP0_ANC3_OFFSET
+#define	CAP0_ANC3_OFFSET__CAP_ANC3_OFFSET__SHIFT           0x00000000
+
+// DMA_VIPH0_COMMAND
+#define	DMA_VIPH0_COMMAND__BYTE_COUNT__SHIFT               0x00000000
+#define	DMA_VIPH0_COMMAND__SWAP_CONTROL__SHIFT             0x00000018
+#define	DMA_VIPH0_COMMAND__TRANSFER_SOURCE__SHIFT          0x0000001a
+#define	DMA_VIPH0_COMMAND__TRANSFER_DEST__SHIFT            0x0000001b
+#define	DMA_VIPH0_COMMAND__SOURCE_OFFSET_HOLD__SHIFT       0x0000001c
+#define	DMA_VIPH0_COMMAND__DEST_OFFSET_HOLD__SHIFT         0x0000001d
+#define	DMA_VIPH0_COMMAND__INTERRUPT_DIS__SHIFT            0x0000001e
+#define	DMA_VIPH0_COMMAND__END_OF_LIST_STATUS__SHIFT       0x0000001f
+
+// DMA_VIPH1_COMMAND
+#define	DMA_VIPH1_COMMAND__BYTE_COUNT__SHIFT               0x00000000
+#define	DMA_VIPH1_COMMAND__SWAP_CONTROL__SHIFT             0x00000018
+#define	DMA_VIPH1_COMMAND__TRANSFER_SOURCE__SHIFT          0x0000001a
+#define	DMA_VIPH1_COMMAND__TRANSFER_DEST__SHIFT            0x0000001b
+#define	DMA_VIPH1_COMMAND__SOURCE_OFFSET_HOLD__SHIFT       0x0000001c
+#define	DMA_VIPH1_COMMAND__DEST_OFFSET_HOLD__SHIFT         0x0000001d
+#define	DMA_VIPH1_COMMAND__INTERRUPT_DIS__SHIFT            0x0000001e
+#define	DMA_VIPH1_COMMAND__END_OF_LIST_STATUS__SHIFT       0x0000001f
+
+// DMA_VIPH2_COMMAND
+#define	DMA_VIPH2_COMMAND__BYTE_COUNT__SHIFT               0x00000000
+#define	DMA_VIPH2_COMMAND__SWAP_CONTROL__SHIFT             0x00000018
+#define	DMA_VIPH2_COMMAND__TRANSFER_SOURCE__SHIFT          0x0000001a
+#define	DMA_VIPH2_COMMAND__TRANSFER_DEST__SHIFT            0x0000001b
+#define	DMA_VIPH2_COMMAND__SOURCE_OFFSET_HOLD__SHIFT       0x0000001c
+#define	DMA_VIPH2_COMMAND__DEST_OFFSET_HOLD__SHIFT         0x0000001d
+#define	DMA_VIPH2_COMMAND__INTERRUPT_DIS__SHIFT            0x0000001e
+#define	DMA_VIPH2_COMMAND__END_OF_LIST_STATUS__SHIFT       0x0000001f
+
+// DMA_VIPH3_COMMAND
+#define	DMA_VIPH3_COMMAND__BYTE_COUNT__SHIFT               0x00000000
+#define	DMA_VIPH3_COMMAND__SWAP_CONTROL__SHIFT             0x00000018
+#define	DMA_VIPH3_COMMAND__TRANSFER_SOURCE__SHIFT          0x0000001a
+#define	DMA_VIPH3_COMMAND__TRANSFER_DEST__SHIFT            0x0000001b
+#define	DMA_VIPH3_COMMAND__SOURCE_OFFSET_HOLD__SHIFT       0x0000001c
+#define	DMA_VIPH3_COMMAND__DEST_OFFSET_HOLD__SHIFT         0x0000001d
+#define	DMA_VIPH3_COMMAND__INTERRUPT_DIS__SHIFT            0x0000001e
+#define	DMA_VIPH3_COMMAND__END_OF_LIST_STATUS__SHIFT       0x0000001f
+
+// DMA_VIPH_STATUS
+#define	DMA_VIPH_STATUS__DMA_VIPH0_AVAIL__SHIFT            0x00000000
+#define	DMA_VIPH_STATUS__DMA_VIPH1_AVAIL__SHIFT            0x00000004
+#define	DMA_VIPH_STATUS__DMA_VIPH2_AVAIL__SHIFT            0x00000008
+#define	DMA_VIPH_STATUS__DMA_VIPH3_AVAIL__SHIFT            0x0000000c
+#define	DMA_VIPH_STATUS__DMA_VIPH0_CURRENT__SHIFT          0x00000010
+#define	DMA_VIPH_STATUS__DMA_VIPH1_CURRENT__SHIFT          0x00000012
+#define	DMA_VIPH_STATUS__DMA_VIPH2_CURRENT__SHIFT          0x00000014
+#define	DMA_VIPH_STATUS__DMA_VIPH3_CURRENT__SHIFT          0x00000016
+#define	DMA_VIPH_STATUS__DMA_VIPH0_ACTIVE__SHIFT           0x00000018
+#define	DMA_VIPH_STATUS__DMA_VIPH1_ACTIVE__SHIFT           0x00000019
+#define	DMA_VIPH_STATUS__DMA_VIPH2_ACTIVE__SHIFT           0x0000001a
+#define	DMA_VIPH_STATUS__DMA_VIPH3_ACTIVE__SHIFT           0x0000001b
+
+// DMA_VIPH_CHUNK_0
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH3_TABLE_SWAP__SHIFT      0x00000000
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH2_TABLE_SWAP__SHIFT      0x00000002
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH1_TABLE_SWAP__SHIFT      0x00000004
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH0_TABLE_SWAP__SHIFT      0x00000006
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH3_NOCHUNK__SHIFT         0x0000001c
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH2_NOCHUNK__SHIFT         0x0000001d
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH1_NOCHUNK__SHIFT         0x0000001e
+#define	DMA_VIPH_CHUNK_0__DMA_VIPH0_NOCHUNK__SHIFT         0x0000001f
+
+// DMA_VIPH_CHUNK_1_VAL
+#define	DMA_VIPH_CHUNK_1_VAL__DMA_VIP0_CHUNK__SHIFT        0x00000000
+#define	DMA_VIPH_CHUNK_1_VAL__DMA_VIP1_CHUNK__SHIFT        0x00000008
+#define	DMA_VIPH_CHUNK_1_VAL__DMA_VIP2_CHUNK__SHIFT        0x00000010
+#define	DMA_VIPH_CHUNK_1_VAL__DMA_VIP3_CHUNK__SHIFT        0x00000018
+
+// DMA_VIP0_TABLE_ADDR
+#define	DMA_VIP0_TABLE_ADDR__DMA_VIPH_TABLE_ADDR__SHIFT    0x00000000
+
+// DMA_VIP1_TABLE_ADDR
+#define	DMA_VIP1_TABLE_ADDR__DMA_VIPH_TABLE_ADDR__SHIFT    0x00000000
+
+// DMA_VIP2_TABLE_ADDR
+#define	DMA_VIP2_TABLE_ADDR__DMA_VIPH_TABLE_ADDR__SHIFT    0x00000000
+
+// DMA_VIP3_TABLE_ADDR
+#define	DMA_VIP3_TABLE_ADDR__DMA_VIPH_TABLE_ADDR__SHIFT    0x00000000
+
+// DMA_VIPH0_ACTIVE
+#define	DMA_VIPH0_ACTIVE__DMA_VIPH_TABLE_ADDR_ACT__SHIFT   0x00000000
+
+// DMA_VIPH1_ACTIVE
+#define	DMA_VIPH1_ACTIVE__DMA_VIPH_TABLE_ADDR_ACT__SHIFT   0x00000000
+
+// DMA_VIPH2_ACTIVE
+#define	DMA_VIPH2_ACTIVE__DMA_VIPH_TABLE_ADDR_ACT__SHIFT   0x00000000
+
+// DMA_VIPH3_ACTIVE
+#define	DMA_VIPH3_ACTIVE__DMA_VIPH_TABLE_ADDR_ACT__SHIFT   0x00000000
+
+// DMA_VIPH_ABORT
+#define	DMA_VIPH_ABORT__DMA_VIPH0_ABORT_QUE__SHIFT         0x00000000
+#define	DMA_VIPH_ABORT__DMA_VIPH0_ABORT_EN__SHIFT          0x00000003
+#define	DMA_VIPH_ABORT__DMA_VIPH1_ABORT_QUE__SHIFT         0x00000004
+#define	DMA_VIPH_ABORT__DMA_VIPH1_ABORT_EN__SHIFT          0x00000007
+#define	DMA_VIPH_ABORT__DMA_VIPH2_ABORT_QUE__SHIFT         0x00000008
+#define	DMA_VIPH_ABORT__DMA_VIPH2_ABORT_EN__SHIFT          0x0000000b
+#define	DMA_VIPH_ABORT__DMA_VIPH3_ABORT_QUE__SHIFT         0x0000000c
+#define	DMA_VIPH_ABORT__DMA_VIPH3_ABORT_EN__SHIFT          0x0000000f
+#define	DMA_VIPH_ABORT__DMA_VIPH0_RESET__SHIFT             0x00000014
+#define	DMA_VIPH_ABORT__DMA_VIPH1_RESET__SHIFT             0x00000015
+#define	DMA_VIPH_ABORT__DMA_VIPH2_RESET__SHIFT             0x00000016
+#define	DMA_VIPH_ABORT__DMA_VIPH3_RESET__SHIFT             0x00000017
+
+// VIPH_REG_ADDR
+#define	VIPH_REG_ADDR__VIPH_REG_AD__SHIFT                  0x00000000
+
+// VIPH_REG_DATA
+#define	VIPH_REG_DATA__VIPH_REG_DT_R__SHIFT                0x00000000
+#define	VIPH_REG_DATA__VIPH_REG_DT_W__SHIFT                0x00000000
+
+// VIPH_CH0_DATA
+#define	VIPH_CH0_DATA__VIPH_CH0_DT__SHIFT                  0x00000000
+
+// VIPH_CH1_DATA
+#define	VIPH_CH1_DATA__VIPH_CH1_DT__SHIFT                  0x00000000
+
+// VIPH_CH2_DATA
+#define	VIPH_CH2_DATA__VIPH_CH2_DT__SHIFT                  0x00000000
+
+// VIPH_CH3_DATA
+#define	VIPH_CH3_DATA__VIPH_CH3_DT__SHIFT                  0x00000000
+
+// VIPH_CH0_ADDR
+#define	VIPH_CH0_ADDR__VIPH_CH0_AD__SHIFT                  0x00000000
+
+// VIPH_CH1_ADDR
+#define	VIPH_CH1_ADDR__VIPH_CH1_AD__SHIFT                  0x00000000
+
+// VIPH_CH2_ADDR
+#define	VIPH_CH2_ADDR__VIPH_CH2_AD__SHIFT                  0x00000000
+
+// VIPH_CH3_ADDR
+#define	VIPH_CH3_ADDR__VIPH_CH3_AD__SHIFT                  0x00000000
+
+// VIPH_CH0_SBCNT
+#define	VIPH_CH0_SBCNT__VIPH_CH0_SCNT__SHIFT               0x00000000
+
+// VIPH_CH1_SBCNT
+#define	VIPH_CH1_SBCNT__VIPH_CH1_SCNT__SHIFT               0x00000000
+
+// VIPH_CH2_SBCNT
+#define	VIPH_CH2_SBCNT__VIPH_CH2_SCNT__SHIFT               0x00000000
+
+// VIPH_CH3_SBCNT
+#define	VIPH_CH3_SBCNT__VIPH_CH3_SCNT__SHIFT               0x00000000
+
+// VIPH_CH0_ABCNT
+#define	VIPH_CH0_ABCNT__VIPH_CH0_ACNT__SHIFT               0x00000000
+
+// VIPH_CH1_ABCNT
+#define	VIPH_CH1_ABCNT__VIPH_CH1_ACNT__SHIFT               0x00000000
+
+// VIPH_CH2_ABCNT
+#define	VIPH_CH2_ABCNT__VIPH_CH2_ACNT__SHIFT               0x00000000
+
+// VIPH_CH3_ABCNT
+#define	VIPH_CH3_ABCNT__VIPH_CH3_ACNT__SHIFT               0x00000000
+
+// VIPH_CONTROL
+#define	VIPH_CONTROL__VIPH_CLK_SEL__SHIFT                  0x00000000
+#define	VIPH_CONTROL__VIPH_REG_RDY__SHIFT                  0x0000000d
+#define	VIPH_CONTROL__VIPH_MAX_WAIT__SHIFT                 0x00000010
+#define	VIPH_CONTROL__VIPH_DMA_MODE__SHIFT                 0x00000014
+#define	VIPH_CONTROL__VIPH_EN__SHIFT                       0x00000015
+#define	VIPH_CONTROL__VIPH_DV0_WID__SHIFT                  0x00000018
+#define	VIPH_CONTROL__VIPH_DV1_WID__SHIFT                  0x00000019
+#define	VIPH_CONTROL__VIPH_DV2_WID__SHIFT                  0x0000001a
+#define	VIPH_CONTROL__VIPH_DV3_WID__SHIFT                  0x0000001b
+#define	VIPH_CONTROL__VIPH_PWR_DOWN__SHIFT                 0x0000001c
+#define	VIPH_CONTROL__VIPH_PWR_DOWN_AK__SHIFT              0x0000001c
+#define	VIPH_CONTROL__VIPH_VIPCLK_DIS__SHIFT               0x0000001d
+
+// VIPH_DV_LAT
+#define	VIPH_DV_LAT__VIPH_TIME_UNIT__SHIFT                 0x00000000
+#define	VIPH_DV_LAT__VIPH_DV0_LAT__SHIFT                   0x00000010
+#define	VIPH_DV_LAT__VIPH_DV1_LAT__SHIFT                   0x00000014
+#define	VIPH_DV_LAT__VIPH_DV2_LAT__SHIFT                   0x00000018
+#define	VIPH_DV_LAT__VIPH_DV3_LAT__SHIFT                   0x0000001c
+
+// VIPH_DMA_CHUNK
+#define	VIPH_DMA_CHUNK__VIPH_CH0_CHUNK__SHIFT              0x00000000
+#define	VIPH_DMA_CHUNK__VIPH_CH1_CHUNK__SHIFT              0x00000004
+#define	VIPH_DMA_CHUNK__VIPH_CH2_CHUNK__SHIFT              0x00000006
+#define	VIPH_DMA_CHUNK__VIPH_CH3_CHUNK__SHIFT              0x00000008
+#define	VIPH_DMA_CHUNK__VIPH_CH0_ABORT__SHIFT              0x00000010
+#define	VIPH_DMA_CHUNK__VIPH_CH1_ABORT__SHIFT              0x00000011
+#define	VIPH_DMA_CHUNK__VIPH_CH2_ABORT__SHIFT              0x00000012
+#define	VIPH_DMA_CHUNK__VIPH_CH3_ABORT__SHIFT              0x00000013
+
+// VIPH_DV_INT
+#define	VIPH_DV_INT__VIPH_DV0_INT_EN__SHIFT                0x00000000
+#define	VIPH_DV_INT__VIPH_DV1_INT_EN__SHIFT                0x00000001
+#define	VIPH_DV_INT__VIPH_DV2_INT_EN__SHIFT                0x00000002
+#define	VIPH_DV_INT__VIPH_DV3_INT_EN__SHIFT                0x00000003
+#define	VIPH_DV_INT__VIPH_DV0_INT__SHIFT                   0x00000004
+#define	VIPH_DV_INT__VIPH_DV0_AK__SHIFT                    0x00000004
+#define	VIPH_DV_INT__VIPH_DV1_INT__SHIFT                   0x00000005
+#define	VIPH_DV_INT__VIPH_DV1_AK__SHIFT                    0x00000005
+#define	VIPH_DV_INT__VIPH_DV2_INT__SHIFT                   0x00000006
+#define	VIPH_DV_INT__VIPH_DV2_AK__SHIFT                    0x00000006
+#define	VIPH_DV_INT__VIPH_DV3_INT__SHIFT                   0x00000007
+#define	VIPH_DV_INT__VIPH_DV3_AK__SHIFT                    0x00000007
+
+// VIPH_TIMEOUT_STAT
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO0_STAT__SHIFT          0x00000000
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO0_AK__SHIFT            0x00000000
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO1_STAT__SHIFT          0x00000001
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO1_AK__SHIFT            0x00000001
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO2_STAT__SHIFT          0x00000002
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO2_AK__SHIFT            0x00000002
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO3_STAT__SHIFT          0x00000003
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO3_AK__SHIFT            0x00000003
+#define	VIPH_TIMEOUT_STAT__VIPH_REG_STAT__SHIFT            0x00000004
+#define	VIPH_TIMEOUT_STAT__VIPH_REG_AK__SHIFT              0x00000004
+#define	VIPH_TIMEOUT_STAT__VIPH_AUTO_INT_STAT__SHIFT       0x00000005
+#define	VIPH_TIMEOUT_STAT__VIPH_AUTO_INT_AK__SHIFT         0x00000005
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO0_MASK__SHIFT          0x00000008
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO1_MASK__SHIFT          0x00000009
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO2_MASK__SHIFT          0x0000000a
+#define	VIPH_TIMEOUT_STAT__VIPH_FIFO3_MASK__SHIFT          0x0000000b
+#define	VIPH_TIMEOUT_STAT__VIPH_REG_MASK__SHIFT            0x0000000c
+#define	VIPH_TIMEOUT_STAT__VIPH_AUTO_INT_MASK__SHIFT       0x0000000d
+#define	VIPH_TIMEOUT_STAT__VIPH_DV0_INT_MASK__SHIFT        0x00000010
+#define	VIPH_TIMEOUT_STAT__VIPH_DV1_INT_MASK__SHIFT        0x00000011
+#define	VIPH_TIMEOUT_STAT__VIPH_DV2_INT_MASK__SHIFT        0x00000012
+#define	VIPH_TIMEOUT_STAT__VIPH_DV3_INT_MASK__SHIFT        0x00000013
+#define	VIPH_TIMEOUT_STAT__VIPH_INTPIN_EN__SHIFT           0x00000014
+#define	VIPH_TIMEOUT_STAT__VIPH_INTPIN_INT__SHIFT          0x00000015
+#define	VIPH_TIMEOUT_STAT__VIPH_REGR_DIS__SHIFT            0x00000018
+
+// TMDS_CNTL
+#define	TMDS_CNTL__TMDS_CTL0__SHIFT                        0x00000000
+#define	TMDS_CNTL__TMDS_CTL1__SHIFT                        0x00000001
+#define	TMDS_CNTL__TMDS_CTL2__SHIFT                        0x00000002
+#define	TMDS_CNTL__TMDS_CTL3__SHIFT                        0x00000003
+#define	TMDS_CNTL__TMDS_DEBUG_HSYNC__SHIFT                 0x00000004
+#define	TMDS_CNTL__TMDS_DEBUG_VSYNC__SHIFT                 0x00000005
+#define	TMDS_CNTL__TMDS_DEBUG_DE__SHIFT                    0x00000006
+#define	TMDS_CNTL__TMDS_DEBUG_EN__SHIFT                    0x00000007
+#define	TMDS_CNTL__TMDS_CTL_FB_SEL__SHIFT                  0x00000008
+#define	TMDS_CNTL__TMDS_CTL_FB_DEL__SHIFT                  0x0000000a
+#define	TMDS_CNTL__TMDS_CTL3_SEL__SHIFT                    0x0000000c
+#define	TMDS_CNTL__TMDS_SYNC_CHAR_EN__SHIFT                0x00000010
+#define	TMDS_CNTL__TMDS_SYNC_CONT__SHIFT                   0x00000018
+#define	TMDS_CNTL__TMDS_DPCUM_TST__SHIFT                   0x00000019
+#define	TMDS_CNTL__TMDS_DPCUM_IN__SHIFT                    0x0000001a
+#define	TMDS_CNTL__TMDS_CRC_EN__SHIFT                      0x0000001e
+#define	TMDS_CNTL__TMDS_RB_SWITCH_EN__SHIFT                0x0000001f
+
+// TMDS_SYNC_CHAR_SETA
+#define	TMDS_SYNC_CHAR_SETA__TMDS_SYNC_CHAR0__SHIFT        0x00000000
+#define	TMDS_SYNC_CHAR_SETA__TMDS_SYNC_CHAR1__SHIFT        0x00000010
+
+// TMDS_SYNC_CHAR_SETB
+#define	TMDS_SYNC_CHAR_SETB__TMDS_SYNC_CHAR2__SHIFT        0x00000000
+#define	TMDS_SYNC_CHAR_SETB__TMDS_SYNC_CHAR3__SHIFT        0x00000010
+
+// TMDS_CRC
+#define	TMDS_CRC__TMDS_CRCRGB__SHIFT                       0x00000000
+
+// TMDS_TRANSMITTER_CNTL
+#define	TMDS_TRANSMITTER_CNTL__TMDS_PLLEN__SHIFT           0x00000000
+#define	TMDS_TRANSMITTER_CNTL__TMDS_PLLRST__SHIFT          0x00000001
+#define	TMDS_TRANSMITTER_CNTL__TMDS_MODE_SEL__SHIFT        0x00000002
+#define	TMDS_TRANSMITTER_CNTL__TMDS_REGSEL__SHIFT          0x00000004
+#define	TMDS_TRANSMITTER_CNTL__TMDS_HALF_CLK_RST__SHIFT    0x00000006
+#define	TMDS_TRANSMITTER_CNTL__TMDS_RAN_PAT_RST__SHIFT     0x00000007
+#define	TMDS_TRANSMITTER_CNTL__TMDS_TSTPIX__SHIFT          0x00000008
+#define	TMDS_TRANSMITTER_CNTL__TMDS_REG__SHIFT             0x00000012
+#define	TMDS_TRANSMITTER_CNTL__ICHCSEL__SHIFT              0x0000001c
+#define	TMDS_TRANSMITTER_CNTL__ITCLKSEL__SHIFT             0x0000001d
+#define	TMDS_TRANSMITTER_CNTL__TMDS_RAN_PAT_SEL__SHIFT     0x0000001e
+
+// TMDS_PLL_CNTL
+#define	TMDS_PLL_CNTL__TMDS_PLLPCP__SHIFT                  0x00000000
+#define	TMDS_PLL_CNTL__TMDS_PLLPVG__SHIFT                  0x00000003
+#define	TMDS_PLL_CNTL__TMDS_PLLPDC__SHIFT                  0x00000006
+#define	TMDS_PLL_CNTL__TMDS_PLLPVS__SHIFT                  0x00000008
+
+// TMDS_PATTERN_GEN_SEED
+#define	TMDS_PATTERN_GEN_SEED__PATTERN_SEED__SHIFT         0x00000000
+
+// CLK_PWRMGT_CNTL
+#define	CLK_PWRMGT_CNTL__MPLL_PWRMGT_OFF__SHIFT            0x00000000
+#define	CLK_PWRMGT_CNTL__SPLL_PWRMGT_OFF__SHIFT            0x00000001
+#define	CLK_PWRMGT_CNTL__PPLL_PWRMGT_OFF__SHIFT            0x00000002
+#define	CLK_PWRMGT_CNTL__MCLK_TURNOFF__SHIFT               0x00000004
+#define	CLK_PWRMGT_CNTL__SCLK_TURNOFF__SHIFT               0x00000005
+#define	CLK_PWRMGT_CNTL__PCLK_TURNOFF__SHIFT               0x00000006
+#define	CLK_PWRMGT_CNTL__MC_CH_MODE__SHIFT                 0x00000008
+#define	CLK_PWRMGT_CNTL__TEST_MODE__SHIFT                  0x00000009
+#define	CLK_PWRMGT_CNTL__GLOBAL_PMAN_EN__SHIFT             0x0000000a
+#define	CLK_PWRMGT_CNTL__ENGINE_DYNCLK_MODE__SHIFT         0x0000000c
+#define	CLK_PWRMGT_CNTL__MC_BUSY__SHIFT                    0x00000010
+#define	CLK_PWRMGT_CNTL__MC_INT_CNTL__SHIFT                0x00000011
+#define	CLK_PWRMGT_CNTL__MC_SWITCH__SHIFT                  0x00000012
+#define	CLK_PWRMGT_CNTL__DLL_READY__SHIFT                  0x00000013
+#define	CLK_PWRMGT_CNTL__CG_NO1_DEBUG__SHIFT               0x00000018
+
+// PLL_PWRMGT_CNTL
+#define	PLL_PWRMGT_CNTL__MPLL_TURNOFF__SHIFT               0x00000000
+#define	PLL_PWRMGT_CNTL__SPLL_TURNOFF__SHIFT               0x00000001
+#define	PLL_PWRMGT_CNTL__PPLL_TURNOFF__SHIFT               0x00000002
+#define	PLL_PWRMGT_CNTL__CG_NO2_DEBUG__SHIFT               0x00000018
+
+// CLK_PIN_CNTL
+#define	CLK_PIN_CNTL__OSC_EN__SHIFT                        0x00000000
+#define	CLK_PIN_CNTL__XTL_LOW_GAIN__SHIFT                  0x00000002
+
+// PPLL_CNTL
+#define	PPLL_CNTL__PPLL_RESET__SHIFT                       0x00000000
+#define	PPLL_CNTL__PPLL_SLEEP__SHIFT                       0x00000001
+#define	PPLL_CNTL__PPLL_TST_EN__SHIFT                      0x00000002
+#define	PPLL_CNTL__PPLL_REFCLK_SEL__SHIFT                  0x00000004
+#define	PPLL_CNTL__PPLL_FBCLK_SEL__SHIFT                   0x00000005
+#define	PPLL_CNTL__PPLL_TCPOFF__SHIFT                      0x00000006
+#define	PPLL_CNTL__PPLL_TVCOMAX__SHIFT                     0x00000007
+#define	PPLL_CNTL__PPLL_PCP__SHIFT                         0x00000008
+#define	PPLL_CNTL__PPLL_PVG__SHIFT                         0x0000000b
+#define	PPLL_CNTL__PPLL_PDC__SHIFT                         0x0000000e
+#define	PPLL_CNTL__PPLL_ATOMIC_UPDATE_EN__SHIFT            0x00000010
+#define	PPLL_CNTL__PPLL_VGA_ATOMIC_UPDATE_EN__SHIFT        0x00000011
+#define	PPLL_CNTL__PPLL_ATOMIC_UPDATE_SYNC__SHIFT          0x00000012
+
+// PPLL_REF_DIV
+#define	PPLL_REF_DIV__PPLL_REF_DIV__SHIFT                  0x00000000
+#define	PPLL_REF_DIV__PPLL_ATOMIC_UPDATE_W__SHIFT          0x0000000f
+#define	PPLL_REF_DIV__PPLL_ATOMIC_UPDATE_R__SHIFT          0x0000000f
+#define	PPLL_REF_DIV__PPLL_REF_DIV_SRC__SHIFT              0x00000010
+
+// M_SPLL_REF_FB_DIV
+#define	M_SPLL_REF_FB_DIV__M_SPLL_REF_DIV__SHIFT           0x00000000
+#define	M_SPLL_REF_FB_DIV__MPLL_FB_DIV__SHIFT              0x00000008
+#define	M_SPLL_REF_FB_DIV__SPLL_FB_DIV__SHIFT              0x00000010
+#define	M_SPLL_REF_FB_DIV__MPLL_REF_SRC_SEL__SHIFT         0x00000018
+
+// SPLL_CNTL
+#define	SPLL_CNTL__SPLL_SLEEP__SHIFT                       0x00000000
+#define	SPLL_CNTL__SPLL_RESET__SHIFT                       0x00000001
+#define	SPLL_CNTL__SPLL_TST_EN__SHIFT                      0x00000002
+#define	SPLL_CNTL__SPLL_REFCLK_SEL__SHIFT                  0x00000004
+#define	SPLL_CNTL__SPLL_FBCLK_SEL__SHIFT                   0x00000005
+#define	SPLL_CNTL__SPLL_TCPOFF__SHIFT                      0x00000006
+#define	SPLL_CNTL__SPLL_TVCOMAX__SHIFT                     0x00000007
+#define	SPLL_CNTL__SPLL_PCP__SHIFT                         0x00000008
+#define	SPLL_CNTL__SPLL_PVG__SHIFT                         0x0000000b
+#define	SPLL_CNTL__SPLL_PDC__SHIFT                         0x0000000e
+#define	SPLL_CNTL__SPLL_X1_CLK_SKEW__SHIFT                 0x00000010
+#define	SPLL_CNTL__SPLL_X2_CLK_SKEW__SHIFT                 0x00000014
+#define	SPLL_CNTL__SPLL_MODE__SHIFT                        0x00000018
+
+// SCLK_CNTL
+#define	SCLK_CNTL__SCLK_SRC_SEL__SHIFT                     0x00000000
+#define	SCLK_CNTL__TCLK_SRC_SEL__SHIFT                     0x00000008
+#define	SCLK_CNTL__FORCE_CP__SHIFT                         0x00000010
+#define	SCLK_CNTL__FORCE_HDP__SHIFT                        0x00000011
+#define	SCLK_CNTL__FORCE_DISP__SHIFT                       0x00000012
+#define	SCLK_CNTL__FORCE_TOP__SHIFT                        0x00000013
+#define	SCLK_CNTL__FORCE_E2__SHIFT                         0x00000014
+#define	SCLK_CNTL__FORCE_SE__SHIFT                         0x00000015
+#define	SCLK_CNTL__FORCE_IDCT__SHIFT                       0x00000016
+#define	SCLK_CNTL__FORCE_VIP__SHIFT                        0x00000017
+#define	SCLK_CNTL__FORCE_RE__SHIFT                         0x00000018
+#define	SCLK_CNTL__FORCE_PB__SHIFT                         0x00000019
+#define	SCLK_CNTL__FORCE_TAM__SHIFT                        0x0000001a
+#define	SCLK_CNTL__FORCE_TDM__SHIFT                        0x0000001b
+#define	SCLK_CNTL__FORCE_RB__SHIFT                         0x0000001c
+
+// AGP_PLL_CNTL
+#define	AGP_PLL_CNTL__APLL_SLEEP__SHIFT                    0x00000000
+#define	AGP_PLL_CNTL__APLL_RESET__SHIFT                    0x00000001
+#define	AGP_PLL_CNTL__APLL_XSEL__SHIFT                     0x00000002
+#define	AGP_PLL_CNTL__APLL_TST_EN__SHIFT                   0x00000004
+#define	AGP_PLL_CNTL__APLL_TCPOFF__SHIFT                   0x00000005
+#define	AGP_PLL_CNTL__APLL_TVCOMAX__SHIFT                  0x00000006
+#define	AGP_PLL_CNTL__APLL_REF_SKEW__SHIFT                 0x00000007
+#define	AGP_PLL_CNTL__APLL_FB_SKEW__SHIFT                  0x0000000a
+#define	AGP_PLL_CNTL__APLL_X0_CLK_SKEW__SHIFT              0x0000000d
+#define	AGP_PLL_CNTL__APLL_X1_CLK_SKEW__SHIFT              0x00000010
+#define	AGP_PLL_CNTL__APLL_X2_CLK_SKEW__SHIFT              0x00000013
+#define	AGP_PLL_CNTL__APLL_X4_CLK_SKEW__SHIFT              0x00000016
+#define	AGP_PLL_CNTL__APLL_PUMP_GAIN__SHIFT                0x00000019
+#define	AGP_PLL_CNTL__APLL_VCO_GAIN__SHIFT                 0x0000001c
+
+// CG_TEST_MACRO_RW_WRITE
+#define	CG_TEST_MACRO_RW_WRITE__TEST_MACRO_RW_WRITE1__SHIFT 0x00000000
+#define	CG_TEST_MACRO_RW_WRITE__TEST_MACRO_RW_WRITE2__SHIFT 0x0000000e
+
+// CG_TEST_MACRO_RW_READ
+#define	CG_TEST_MACRO_RW_READ__TEST_MACRO_RW_READ1__SHIFT  0x00000000
+#define	CG_TEST_MACRO_RW_READ__TEST_MACRO_RW_READ2__SHIFT  0x00000010
+
+// CG_TEST_MACRO_RW_DATA
+#define	CG_TEST_MACRO_RW_DATA__TEST_MACRO_RW_DATA__SHIFT   0x00000000
+
+// CG_TEST_MACRO_RW_CNTL
+#define	CG_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_START__SHIFT  0x00000000
+#define	CG_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_OP__SHIFT     0x00000001
+#define	CG_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_MODE__SHIFT   0x00000004
+#define	CG_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_MISMATCH_SEL__SHIFT 0x00000006
+#define	CG_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_MISMATCH__SHIFT 0x0000000f
+#define	CG_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_ENABLE__SHIFT 0x00000010
+#define	CG_TEST_MACRO_RW_CNTL__TEST_MACRO_RW_SCLK_NEG_ENABLE__SHIFT 0x00000011
+
+// MPLL_CNTL
+#define	MPLL_CNTL__MPLL_RESET__SHIFT                       0x00000000
+#define	MPLL_CNTL__MPLL_SLEEP__SHIFT                       0x00000001
+#define	MPLL_CNTL__MPLL_TST_EN__SHIFT                      0x00000002
+#define	MPLL_CNTL__MPLL_REFCLK_SEL__SHIFT                  0x00000004
+#define	MPLL_CNTL__MPLL_FBCLK_SEL__SHIFT                   0x00000005
+#define	MPLL_CNTL__MPLL_TCPOFF__SHIFT                      0x00000006
+#define	MPLL_CNTL__MPLL_TVCOMAX__SHIFT                     0x00000007
+#define	MPLL_CNTL__MPLL_PCP__SHIFT                         0x00000008
+#define	MPLL_CNTL__MPLL_PVG__SHIFT                         0x0000000b
+#define	MPLL_CNTL__MPLL_PDC__SHIFT                         0x0000000e
+#define	MPLL_CNTL__MPLL_X1_CLK_SKEW__SHIFT                 0x00000010
+#define	MPLL_CNTL__MPLL_X2_CLK_SKEW__SHIFT                 0x00000014
+#define	MPLL_CNTL__MPLL_MODE__SHIFT                        0x00000018
+
+// MDLL_CKO
+#define	MDLL_CKO__MCKOA_SLEEP__SHIFT                       0x00000000
+#define	MDLL_CKO__MCKOA_RESET__SHIFT                       0x00000001
+#define	MDLL_CKO__MCKOA_RANGE__SHIFT                       0x00000002
+#define	MDLL_CKO__ERSTA_SOUTSEL__SHIFT                     0x00000004
+#define	MDLL_CKO__MCKOA_FB_SEL__SHIFT                      0x00000006
+#define	MDLL_CKO__MCKOA_REF_SKEW__SHIFT                    0x00000008
+#define	MDLL_CKO__MCKOA_FB_SKEW__SHIFT                     0x0000000c
+#define	MDLL_CKO__MCKOA_BP_SEL__SHIFT                      0x0000000f
+#define	MDLL_CKO__MCKOB_SLEEP__SHIFT                       0x00000010
+#define	MDLL_CKO__MCKOB_RESET__SHIFT                       0x00000011
+#define	MDLL_CKO__MCKOB_RANGE__SHIFT                       0x00000012
+#define	MDLL_CKO__ERSTB_SOUTSEL__SHIFT                     0x00000014
+#define	MDLL_CKO__MCKOB_FB_SEL__SHIFT                      0x00000016
+#define	MDLL_CKO__MCKOB_REF_SKEW__SHIFT                    0x00000018
+#define	MDLL_CKO__MCKOB_FB_SKEW__SHIFT                     0x0000001c
+#define	MDLL_CKO__MCKOB_BP_SEL__SHIFT                      0x0000001f
+
+// MDLL_RDCKA
+#define	MDLL_RDCKA__MRDCKA0_SLEEP__SHIFT                   0x00000000
+#define	MDLL_RDCKA__MRDCKA0_RESET__SHIFT                   0x00000001
+#define	MDLL_RDCKA__MRDCKA0_RANGE__SHIFT                   0x00000002
+#define	MDLL_RDCKA__MRDCKA0_REF_SEL__SHIFT                 0x00000004
+#define	MDLL_RDCKA__MRDCKA0_FB_SEL__SHIFT                  0x00000006
+#define	MDLL_RDCKA__MRDCKA0_REF_SKEW__SHIFT                0x00000008
+#define	MDLL_RDCKA__MRDCKA0_SINSEL__SHIFT                  0x0000000b
+#define	MDLL_RDCKA__MRDCKA0_FB_SKEW__SHIFT                 0x0000000c
+#define	MDLL_RDCKA__MRDCKA0_BP_SEL__SHIFT                  0x0000000f
+#define	MDLL_RDCKA__MRDCKA1_SLEEP__SHIFT                   0x00000010
+#define	MDLL_RDCKA__MRDCKA1_RESET__SHIFT                   0x00000011
+#define	MDLL_RDCKA__MRDCKA1_RANGE__SHIFT                   0x00000012
+#define	MDLL_RDCKA__MRDCKA1_REF_SEL__SHIFT                 0x00000014
+#define	MDLL_RDCKA__MRDCKA1_FB_SEL__SHIFT                  0x00000016
+#define	MDLL_RDCKA__MRDCKA1_REF_SKEW__SHIFT                0x00000018
+#define	MDLL_RDCKA__MRDCKA1_SINSEL__SHIFT                  0x0000001b
+#define	MDLL_RDCKA__MRDCKA1_FB_SKEW__SHIFT                 0x0000001c
+#define	MDLL_RDCKA__MRDCKA1_BP_SEL__SHIFT                  0x0000001f
+
+// MDLL_RDCKB
+#define	MDLL_RDCKB__MRDCKB0_SLEEP__SHIFT                   0x00000000
+#define	MDLL_RDCKB__MRDCKB0_RESET__SHIFT                   0x00000001
+#define	MDLL_RDCKB__MRDCKB0_RANGE__SHIFT                   0x00000002
+#define	MDLL_RDCKB__MRDCKB0_REF_SEL__SHIFT                 0x00000004
+#define	MDLL_RDCKB__MRDCKB0_FB_SEL__SHIFT                  0x00000006
+#define	MDLL_RDCKB__MRDCKB0_REF_SKEW__SHIFT                0x00000008
+#define	MDLL_RDCKB__MRDCKB0_SINSEL__SHIFT                  0x0000000b
+#define	MDLL_RDCKB__MRDCKB0_FB_SKEW__SHIFT                 0x0000000c
+#define	MDLL_RDCKB__MRDCKB0_BP_SEL__SHIFT                  0x0000000f
+#define	MDLL_RDCKB__MRDCKB1_SLEEP__SHIFT                   0x00000010
+#define	MDLL_RDCKB__MRDCKB1_RESET__SHIFT                   0x00000011
+#define	MDLL_RDCKB__MRDCKB1_RANGE__SHIFT                   0x00000012
+#define	MDLL_RDCKB__MRDCKB1_REF_SEL__SHIFT                 0x00000014
+#define	MDLL_RDCKB__MRDCKB1_FB_SEL__SHIFT                  0x00000016
+#define	MDLL_RDCKB__MRDCKB1_REF_SKEW__SHIFT                0x00000018
+#define	MDLL_RDCKB__MRDCKB1_SINSEL__SHIFT                  0x0000001b
+#define	MDLL_RDCKB__MRDCKB1_FB_SKEW__SHIFT                 0x0000001c
+#define	MDLL_RDCKB__MRDCKB1_BP_SEL__SHIFT                  0x0000001f
+
+// MCLK_CNTL
+#define	MCLK_CNTL__MCLKA_SRC_SEL__SHIFT                    0x00000000
+#define	MCLK_CNTL__YCLKA_SRC_SEL__SHIFT                    0x00000004
+#define	MCLK_CNTL__MCLKB_SRC_SEL__SHIFT                    0x00000008
+#define	MCLK_CNTL__YCLKB_SRC_SEL__SHIFT                    0x0000000c
+#define	MCLK_CNTL__FORCE_MCLKA__SHIFT                      0x00000010
+#define	MCLK_CNTL__FORCE_MCLKB__SHIFT                      0x00000011
+#define	MCLK_CNTL__FORCE_YCLKA__SHIFT                      0x00000012
+#define	MCLK_CNTL__FORCE_YCLKB__SHIFT                      0x00000013
+#define	MCLK_CNTL__FORCE_MC__SHIFT                         0x00000014
+#define	MCLK_CNTL__FORCE_AIC__SHIFT                        0x00000015
+#define	MCLK_CNTL__MRDCKA0_SOUTSEL__SHIFT                  0x00000018
+#define	MCLK_CNTL__MRDCKA1_SOUTSEL__SHIFT                  0x0000001a
+#define	MCLK_CNTL__MRDCKB0_SOUTSEL__SHIFT                  0x0000001c
+#define	MCLK_CNTL__MRDCKB1_SOUTSEL__SHIFT                  0x0000001e
+
+// IDCT_RUNS
+#define	IDCT_RUNS__IDCT_RUNS_3__SHIFT                      0x00000000
+#define	IDCT_RUNS__IDCT_RUNS_2__SHIFT                      0x00000008
+#define	IDCT_RUNS__IDCT_RUNS_1__SHIFT                      0x00000010
+#define	IDCT_RUNS__IDCT_RUNS_0__SHIFT                      0x00000018
+
+// IDCT_LEVELS
+#define	IDCT_LEVELS__IDCT_LEVEL_HI__SHIFT                  0x00000000
+#define	IDCT_LEVELS__IDCT_LEVEL_LO__SHIFT                  0x00000010
+
+// IDCT_CONTROL
+#define	IDCT_CONTROL__IDCT_CTL_LUMA_RD_FORMAT__SHIFT       0x00000000
+#define	IDCT_CONTROL__IDCT_CTL_CHROMA_RD_FORMAT__SHIFT     0x00000002
+#define	IDCT_CONTROL__IDCT_CTL_SCAN_PATTERN__SHIFT         0x00000004
+#define	IDCT_CONTROL__IDCT_CTL_INTRA__SHIFT                0x00000005
+#define	IDCT_CONTROL__IDCT_CTL_FLUSH__SHIFT                0x00000006
+#define	IDCT_CONTROL__IDCT_CTL_PASSTHRU__SHIFT             0x00000007
+#define	IDCT_CONTROL__IDCT_CTL_SW_RESET__SHIFT             0x00000008
+#define	IDCT_CONTROL__IDCT_CTL_CONSTREQ__SHIFT             0x00000009
+#define	IDCT_CONTROL__IDCT_CTL_SCRAMBLE__SHIFT             0x0000000a
+
+// IDCT_AUTH_CONTROL
+#define	IDCT_AUTH_CONTROL__CONTROL_BITS__SHIFT             0x00000000
+
+// IDCT_AUTH
+#define	IDCT_AUTH__AUTH__SHIFT                             0x00000000
+
+#endif

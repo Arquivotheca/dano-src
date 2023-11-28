@@ -1,0 +1,1059 @@
+Be Inc. BeIDE Release Notes
+
+* If you have a question about the tools or the BeIDE, write to:
+	<cwsupport@be.com> 
+
+* If you find a bug, report it to the Be bug database:
+	<http://www.be.com/developers/bugs/> 
+
+// -----------------------------------------------------------------
+// BeIDE (r4.6) release notes
+// -----------------------------------------------------------------
+
+ENHANCEMENTS (PPC/x86)
+
+* Multiple message windows are now supported.  Each project has an
+"Errors and Warnings" window where all build errors or warnings
+are reported.  This window is persistant much like the old
+Message Window.  However, the results of a batch Find, or of
+Documentation Lookup are put into their own windows.  Each
+additional Find or Documentation Lookup will open a new message
+window.  This supports the ability to find multiple items
+and then navigate between the two sets of results.  The Find
+Results windows are added to the Window menu.  
+
+* Since Find Results windows can add up, remember that you 
+can change File/Close to File/Close All by holding down the 
+option key.  Close All now only closes windows of that type.
+Close All in a message window will close all the message
+windows but not any text windows.
+
+* Multiple Projects can now be opened.  If you open a another
+project the current project will no longer close.  This means
+that all actions and commands must be directed to the project
+associated with the window of focus.  For example, if you have
+two projects open ProjA with a FileA.cpp and ProjB with a FileB.cpp
+and do a Project/Make in FileB.cpp, ProjB will be built.  While
+a Make in FileA.cpp will trigger a build of ProjA.  However, 
+depending on personal preferences, header files are often not
+put into a project.  This means that if you choose Make from
+a header file, it doesn't know what project to Make.  It will build
+the top-most project (the last active project window).  If you 
+often work with multiple projects, you can add the header 
+files to your project and then they have an owning project 
+and target for all actions.
+
+The Find Window has also been enhanced to work with multiple
+projects.  There is an additional popup menu that allows you to
+choose what project should be used for the files in the 
+Multi-File Search list.
+
+Please note:  To support multiple projects, the Plugin API had
+to change.  Obsolete plugins will not be loaded.  You will 
+get a message "Couldn't load the add_on xyz" at startup.
+
+* Multiple Project builds are now supported.  You can add a
+project to another project.  This becomes a "sub-project"
+of a "master-project".  It will be built during the precompile 
+phase of the master-project after any precompiled headers.  
+(This is to allow the same precompiled header to be used in 
+sub-projects if desired.) As the master-project is built,
+each sub-project will be opened and built in turn.
+A sub-project could build a static library that is used
+in the master-project, or it could be used for an add-on,
+or a completely unrelated application.
+
+The sub-project is only built when Project/Make is used.
+Only the master-project and its files are affected by
+any other build command (such as Bring Up to Date).
+For example, to build only the master-project without touching
+the sub-project, choose Bring Up to Date and then Link.
+
+Please note: A sub-project cannot be added to a current project
+without making a small change to the project.  (Newly created 
+projects will have this change automatically.)  To add a sub-project,
+go to the Project Settings window, and select Target.  If you
+don't have any user added targets, you can just select
+Factory Defaults.  Otherwise, you can add a new target for
+projects.
+File Type:	application/x-mw-project
+Extension:	(none)
+Tool name:	(none)
+Flags:		Precompile Stage
+
+* A Find or Documentation Lookup in progress may be cancelled
+either by cmd-., or by closing the Results window if it is
+showing.
+
+* Environmental preferences have now been separated from Project
+Settings.  In addition, environment preferences are no longer
+stored on a project level.  Use Edit/Preferences for setting
+preferences such as font styles, syntax stying, key bindings
+and selection colors.  Use Edit/Project Settings for settings
+that affect the build of the project such as access paths, 
+or compiler and linker options.
+
+Project Settings are stored in the project.  To set up project
+settings that you want to apply to any newly created projects, 
+create or edit a stationery project.
+Environment Preferences are stored on a global basis.  
+(Notice that you can no longer have preferences change based 
+on project.  Projects shared among multiple users will no 
+longer override the individual's preferences.)
+
+Functionality that used to be hidden in the old "Settings" window is
+now spread to the message and text windows themselves. 
+To change the font in the message window or an individual
+text window, or to toggle syntax styling in an individual 
+text window, use the View menu.
+
+// -----------------------------------------------------------------
+
+ENHANCEMENTS (x86)
+
+The -p option is now supported to add profiling code to your
+application.  See Project Settings/x86 Code Generation.
+Enabling profiling will add code to the beginning and end of
+every function.  While running your application, a 
+profile_log.<teamid> will be generated.  Use bprof to view
+the contents of the profile_log.
+
+The optional directory now contains a new add-on: nasmPlugin.
+This supports the use of The Netwide Assembler (NASM)
+in a BeIDE project.
+To use assembly in your project you need to do the following:
+
+1. Install NASM (see http://www.web-sites.co.uk/nasm/)
+2. Copy nasmPlugin to /boot/develop/BeIDE/plugins/Prefs_add_ons/
+3. Create a link in /boot/develop/BeIDE/tools to your nasm tool.
+   (Case is important, the link should be called "nasm".)
+4. Create a new target in Project Settings.
+	Extension:	asm
+	Flags:		compile stage
+	Tool Name:	nasm
+5. Add your .asm file to your project.  NASM will be used to assemble
+the file during the compile stage.
+
+You can also use Project/Preprocess to preprocess the file or
+Project/Disassemble to create a listing file.
+
+// -----------------------------------------------------------------
+
+CHANGES (Plugin API)
+
+Because of the multiple project support, tool add-ons must know what
+project they are dealing with.  For this reason, the Plugin API has
+changed so that all methods take an additional MProject parameter so that
+the add-on can tell what project the action applies to.  
+
+This means that any user written BeIDE tool add-on is now obsolete,
+and must be modified before it will load and work with the BeIDE.
+
+See the /boot/develop/BeIDE/optional/Plugin_API/Plugin_API document 
+for the latest changes and documentation for the new API.
+
+// -----------------------------------------------------------------
+// BeIDE r4.5 release notes
+// -----------------------------------------------------------------
+
+ENHANCEMENTS (PPC/x86)
+
+* Cross development tools are now available to use inside the BeIDE.
+The different BeIDE addons needed are in the directory
+/boot/develop/BeIDE/optional/CrossDevelopment.  See the ReadMe
+file for instructions in their installation and use.
+
+* Object files are now put into a directory named
+"(Objects.projectName)" rather than just in "(Objects)".
+This allows you to have multiple projects in one directory.
+For example, you could have a release and debug version, or a
+PPC and x86 version in the same directory.  (The first time
+the BeIDE opens a project, it will correctly find the
+existing "(Objects)" directory so you will not have a complete
+rebuild because of this change.)
+
+* The files in a group can now be sorted. Select either a file
+in the group, or the group itself, and select Project menu
+"Sort Group".
+
+* Dragging folders to the Find file list will now recursively
+add all text files in that folder and in folders it contains.
+Want to search all of the system headers?  Drag
+/boot/develop/headers to the Find file list box.  (Better
+yet, drag it from the Access Paths preference panel.)
+Save that list as a File Set so that you can easily switch 
+to that set in the future.
+
+* The Build Extras setting of Concurrent Compiles has a new
+option (and default).  The new default is "Same as CPUs".  This
+allows the BeIDE to automatically take advantage of the number
+of processors in your system.
+
+* The Recent Projects menu item has changed to "Open Recent".  It 
+now displays both projects and windows that have been closed.  
+The recent projects and windows lists are persistent.
+
+* Different key binding files now accompany the BeIDE.  Look in
+/boot/develop/BeIDE/optional/KeyBindings.  There are four different
+key bindings that come with the BeIDE, the default settings, one
+based on using the Control key, another based on using the ALT key,
+and an emacs mode keybinding.  To use one of the different 
+key bindings, go to the Settings window and select 
+General/Key Bindings.  Press the "Import..." button and select 
+the key binding that you would like to use.  The main differences 
+in the bindings (except for the emacs binding) are the treatment 
+of the Home/End and PageUp/PageDown keys.  Here are the 
+highlights of the different settings so you can choose the one 
+that you like best.  In addition, you can always modify the 
+key bindings yourself using the General/Key Bindings 
+preference panel.
+
+BeIDE_Key_Bindings.Default:
+Home				scroll view to start of file
+End					scroll view to end of file
+PageUp				scroll view page up
+PageDown			scroll view page down
+Alt+left_arrow		move to start of line
+Alt+right_arrow		move to end of line
+Alt+up_arrow		move to start of file
+Alt+down_arrow		move to end of file
+Option+up_arrow		move to top of page
+Option+down_arrow	move to bottom of page
+Arrow modifiers use Ctrl and Option key.
+
+BeIDE_Key_Bindings.Ctrl:
+Home				move to start of line
+End					move to end of line
+PageUp				move to top of page
+PageDown			move to bottom of page
+Ctrl+Home			move to start of file
+Ctrl+End			move to end of file
+Arrow modifiers use Ctrl key.
+
+BeIDE_Key_Bindings.Alt:
+Home				move to start of line
+End					move to end of line
+PageUp				move to top of page
+PageDown			move to bottom of page
+Alt+Home			move to start of file
+Alt+End				move to end of file
+Arrow modifiers use Alt key.
+
+BeIDE_Key_Bindings.emacs:
+Ctrl+a				move to start of line
+Ctrl+e				move to end of line
+Alt+v				move to top of page
+Ctrl+v				move to bottom of page
+Alt+<				move to start of file
+Alt+>				move to end of file
+
+* Documentation lookup can now be cancelled with Alt-.
+(This key binding can also be changed.  See Settings/
+Key Bindings/Misc : Stop operation.)
+
+* The BeIDE now supports a much larger suite of dragging and dropping.
+While some of these have been supported previously, here is a complete
+list of the different areas and uses of drop & drag support.
+1. Drop folders/files from the Tracker into the Project window.
+2. Drop folders from the Tracker into the Access Paths window.
+3. Drop text clipping files into text windows.
+4. Drop files from the Tracker onto a text window to open that file.
+5. Drop files into the Find file list box to specify files to search.
+6. Drag/Drop colors or fonts from the Syntax Styling preference panel 
+to easily specify colors or fonts of different syntax categories.
+7. Drag sections/files from the Project window to anywhere that
+accepts files. (Dragging a section drags all files in that section.)
+8. Drag folders from the Access Paths window to the Find Window or
+anywhere that accepts files.
+
+The dragging of files from the Project window is especially powerful.
+For example:
+	* Drag sections or files to a Tracker folder to copy that
+	set of files.
+	* Drag files to Terminal windows to use their full path
+	names in some operation.
+	* Drag sections/files to the Find file list box to restrict
+	searching to that set of files.
+
+Dragging folders from the Access Paths preference panel can be
+a easy and powerful way to specify a recursive directory search
+in the Find Window.
+
+* When dragging folders into the project to add all files in that
+folder, a new group will be created (if possible) and all the files
+will be added to that new group.
+
+* Files needing to be compiled are now visually marked.  The mark is
+added when the files are touched, their object code deleted, or
+at the start of the build as all dependencies are checked.
+After compilation, the mark remains if the file contains errors.
+
+* Option-Alt-DownArrow/UpArrow (or Control-Alt-DownArrow/UpArrow)
+will go to the next (or previous) error or message in the message
+window.  This is an easy way to navigate through a set of errors
+or find results.
+
+// -----------------------------------------------------------------
+
+CHANGES (PPC/x86)
+
+// -----------------------------------------------------------------
+
+CHANGES (x86)
+
+* The differences between project and system access paths are now
+correctly handled in the BeIDE.  #includes specified with <...> will
+only be found in the system access paths (unless the 
+"Treat #include <...> as #include "..."." check box is enabled).  
+
+Because of this change, projects which previously built correctly
+might not build because of header files that cannot be found.  Use
+the Settings/Access Paths preferences panel to move access paths
+for files included with "#include <...>" from the project list
+to the system list. (Or enable the "Treat #include <...> 
+as #include "..."." check box.)
+
+// -----------------------------------------------------------------
+// BeIDE r4.1 release notes
+// -----------------------------------------------------------------
+
+ENHANCEMENTS (PPC/x86)
+
+* The BeIDE now supports documentation lookup. From any text window
+Alt-double-click on any word will lookup documentation in the 
+Be Book for that word. In addition, you can use Search/Lookup 
+Documentation from any text window or Edit/Lookup Documentation 
+from the Project Window to type in a keyword to lookup. 
+Every class, function, member function, and section heading in 
+the Be Book is indexed. If one exact match is found, the 
+appropriate location in the Be Book is opened in NetPositive.
+In addition to exact matching, the documentation lookup generalizes
+the keyword and tries to find anything that contains that keyword.
+All multiple or generalized matches are put into the Message Window.
+The Message Window can then be used as a base for browsing through 
+the different related topics. A double-click on a documentation
+entry in the Message Window will open NetPositive on the 
+selected topic.
+
+* The BeIDE now supports external editors. Use the Editor panel
+in the Settings window to specify the external editor you would like
+to use. Once this editor is selected, any double click in the 
+project or message window will open up the selected file in the 
+editor of your choosing. The external editor should be able to 
+respond to line and selection messages so that the proper 
+selection can be made. (Refer to the API documentation section 
+if you are writing your own editor.)  With an external editor 
+selected, you can still open files in the BeIDE editor by doing
+the following:
+1. Dragging a source file to the BeIDE
+2. Using the Open or Open File menus
+3. Choosing Open from Project window popup menu.
+
+* Adding a new file to a project can now be done easily as it
+is being saved by clicking on the "Add to Project" checkbox in
+the save file panel. This checkbox is only visible when a project
+is open and a file is being saved that is not currently part of that
+project.
+
+* A build in progress can be cancelled by pressing Alt-. from
+the Project, Message, or any text window. (Previously Alt-. was
+only recognized when in the Project Window.)  A find in progress 
+can be cancelled by pressing Alt-. from the Find Window.
+
+* Edit/Copy now works from the Project Window. You may select any
+number of files and choose Edit/Copy. The full paths of each file
+selected will be put into the clipboard.
+
+* The Find Window now provides regular expression helpers. In
+the popups to the right of the Find and Replace text boxes, you
+will find a list of common regular expressions that you can use to 
+assist you to build up a search or replace expression. These 
+regular expression helpers are meant to allow you to use the power 
+of regular expressions even if you often forget the syntax. 
+They are not meant as a regular expression tutorial.
+
+// -----------------------------------------------------------------
+
+CHANGES (PPC/x86)
+
+* The BeIDE will now properly quit when the last window is closed.
+
+* The BeIDE is now installed in /boot/develop/BeIDE
+
+* Some menus have changed location to bring them more inline 
+with Be UI guidelines.
+
+* The optional plug-ins are now installed by default during 
+installation. Refer to the PLUGIN DOCUMENTATION section for more
+information on these plugins.
+
+* The Find Window "Recent Strings" popups now allow more strings. 
+Also, the replace "Recent Strings" works more consistently.
+
+* The BeIDE now respects read-only project files. The BeIDE will
+warn you if you attempt to modify a read-only project file. You will
+be given the opportunity to cancel the operation, or to unlock the
+project file and continue with the operation.
+
+* The command line tool makemake is now in the optional directory.
+It now builds makefiles that use the BeOS Generic MakeFile Engine.
+(See /boot/develop/BeIDE/optional/makemake/makemake.readme
+for more information.)
+
+// -----------------------------------------------------------------
+
+PLUGIN DOCUMENTATION (PPC/x86)
+
+Three plugins accompany the BeIDE release. These are installed by
+default and the source is available in the samples directory.
+
+ShellPlugin - run shell scripts during the build of a project
+MWBResPlugin - run mwbres (a resource compiler) during the build of a project
+Commentor - an editor plugin to comment/uncomment blocks of text
+
+To run a shell script during the build:
+Go to the Settings window and select Project/Target
+Add a target with the following attributes:
+	File Extension:	sh
+	Tool Name:		sh
+	Flags:			(pick when you want your script to run)
+	Add a .sh script file to your project.
+You could add scripts to run at all three stages of the build 
+by adding multiple targets with different file extensions and 
+then selecting a different stage for each file extension.
+
+To run mwbres during a build:
+Go to the Settings window and select Project/Target
+Add a target with the following attributes:
+	File Extension:	r
+	Tool Name:		mwbres
+	Flags:			PostLink Stage
+	Add your .r to your project
+After linking, mwbres will be used to compile your .r file
+and merge the resources into your application.
+
+To use the Commentor plugin:
+Select some text and select Add-ons/Commenter. The selected text 
+will have C++ comments added to the beginning of each line in 
+the selection. If you hold down the shift key when selecting the 
+add-on, the "//" at the beginning of each line in the selection 
+will be removed.
+
+// -----------------------------------------------------------------
+
+API DOCUMENTATION (PPC/x86)
+
+This API is applicable to anyone writing or modifying an editor to
+work with the BeIDE.
+
+When the BeIDE attempts to open a file in an external editor, it 
+will send a B_REFS_RECEIVED message to the editor with the 
+following data:
+
+what = B_REFS_RECEIVED
+	refs					entry_ref	the file to open
+	be:line					int32		the line number of the selection
+										(first line in file = 1)
+	be:selection_offset		int32		selection offset 
+										(from beginning of file)
+	be:selection_length		int32		length of selection
+
+Everything except refs is optional. (i.e.: The message
+might only contain an entry_ref.)
+
+The proper way to handle this message is to...
+1. Check if there is be:selection_offset and be:selection_length data. 
+These two data items will always come in a pair. If you find
+the be:selection_offset and be:selection_length, they give
+you an exact amount of text to select. 
+2. If the message does not contain the be:selection_offset
+and be:selection_length pair, check if there is be:line data. 
+That gives you a line to select when the file is opened. 
+3. If there is no be:line data, just handle the message like a 
+normal B_REFS_RECEIVED and just open the file.
+
+// -----------------------------------------------------------------
+
+KNOWN LIMITATIONS (PPC/x86)
+
+* Do not do a Batch Replace-All for more than around 50 files. This
+can cause the BeIDE to crash. If you need to replace in many files,
+break them up into multiple file sets and do the Replace-All for
+each file set.
+
+// -----------------------------------------------------------------
+// BeIDE r4 release notes
+// -----------------------------------------------------------------
+
+CHANGES (PPC/x86)
+
+* The BeIDE no longer crashes when opening files containing 
+characters brought over from the Macintosh.
+
+// -----------------------------------------------------------------
+
+CHANGES (x86)
+
+* The BeIDE now supports the gcc toolset on x86 machines.
+You will need to convert projects when you first bring them up on 
+the new version. The steps to do so are listed below:
+1. Open the existing project
+(While opening, the MessageWindow will report errors about
+"no matching target records" for each file in your project.)
+2. Select Project/Remove Objects
+3. Open the Settings Window
+	Select the "Project/Target" preference panel
+	Select Factory Settings
+	Select Save (and select OK to the dialog)
+This step will set your target to be the new "x86 ELF Project".
+This step also sets up the relationship between file types and the new 
+tools.
+4. Open the Settings Window
+	Select the "Project/x86 ELF Project" preference panel
+	Select Factory Settings
+	Pick the Project Type for your project
+	Type a File Name
+	Select Save (and select OK to the dialog)
+This step updates the File Type to be associated with your 
+built application.
+5. Remove start_dyn.o, init_term_dyn.o, glue-noinit.a from your 
+project list.
+6. Replace all libraries with their new ELF counterparts. 
+For any library in your existing project named libXXX.so.LIB, 
+replace it with libXXX.so from /boot/develop/lib/x86.
+
+// -----------------------------------------------------------------
+
+STATIONERY (x86)
+
+We have created new stationery located in the x86 folder. 
+The old stationery contain libraries that no longer exist in BeOS r4.
+
+// -----------------------------------------------------------------
+
+BETA IMPROVEMENTS (x86)
+
+These improvements are for the gcc toolset plugin made since r4b1:
+1. The compiler will now use the recursive search flag setting in 
+the access paths. (i.e.: The compiler will look in nested directories for include files if the access path has the recursive directory icon in the access path setting panel.)
+2. The gcc options used for building shared libraries have been fixed.
+3. Code and data sizes for compiled objects are properly reported in 
+the project window.
+4. The build no longer stops because of warnings from the assembler.
+5. Many options are now directly supported in the various settings 
+panels.
+6. You can review your full set of compiler/linker options by
+looking in the Other/More Compiler Options or (More Linker Options).
+There is a text box that displays the full set of options that will
+be passed to the compiler/linker.
+7. The Project/Debug menu will run the target with bdb, the
+new x86 debugger. The debugger application is found by looking
+for the signature "application/x-vnd.Be-debugger". To launch
+another debugger instead, use FileTypes to change its signature
+to be "application/x-vnd.Be-debugger".
+8. BeIDE now supports creating static libraries (archives).
+9. Builds in progress may now be safely cancelled.
+10. The BeIDE now works correctly in directories with
+spaces in their name.
+
+// -----------------------------------------------------------------
+
+FAKE PRE-COMPILED HEADER (x86)
+
+The gcc toolset does not support pre-compiled headers as
+Codewarrior does. This creates a problem for developers
+who have depended on pre-compiled headers in the past,
+or who develop on both PPC and x86 and use pre-compiled
+headers on PPC.
+
+The best way to keep your source in sync is to stop using
+pre-compiled headers on PPC and edit your source to include
+the proper headers.
+
+However, if this is not an option for some reason, you can
+mimic the use of a pre-compiled header on x86.
+
+To mimic a pre-compiled header on x86, open the Settings
+window and select Other/More Compiler Options. In the
+edit box, enter:
+
+-include /boot/develop/headers/be/precompiled/BeHeaders.pch++
+
+Close and save the changes. This will force your project
+to recompile.
+
+What this option does is include the file BeHeaders.pch++ in
+all files that are compiled. Notice that you don't get the
+benefit of the speedup of pre-compiled headers so your compile
+times will slow down somewhat, but you can use this option until
+you can modify your sources at a later time.
+
+WARNING! Do not use this option and generate debugging information
+at the same time. Because all the Be headers are included in every
+compile, the size of your object files and application will grow
+dramatically. In addition your compile times will slow to a crawl.
+For example, in compiling the sample BeBounce with debugging 
+information and the fake pre-compiled header, a full build went
+from 14 seconds without the header, to over 1 minute with
+the header. The size of the application grew from 351k to 951k.
+As mentioned above, the compile times and file sizes will grow
+even when not generating debugging information, but the
+differences will be much smaller.
+
+// -----------------------------------------------------------------
+
+GCC OPTIONS (x86)
+
+You will find a complete list of all the gcc options below. 
+You may specify any number of the options that are not available directly through the preference panels by using the setting panels "Other/More Compiler Options" or "Other/More Linker Options". (Please notice that some of these options are not applicable to BeOS applications and can cause incorrect interaction with the BeOS libraries.)
+
+GCC OPTION LIST
+This full set of gcc options was created by the command: 
+gcc -v --help
+
+Usage: gcc [options] file...
+Options:
+  --help                   Display this information
+  -dumpspecs               Display all of the built in spec strings
+  -dumpversion             Display the version of the compiler
+  -dumpmachine             Display the compiler's target processor
+  -print-search-dirs       Display the directories in the compiler's search path
+  -print-libgcc-file-name  Display the name of the compiler's companion library
+  -print-file-name=<lib>   Display the full path to library <lib>
+  -print-prog-name=<prog>  Display the full path to compiler component <prog>
+  -print-multi-directory   Display the root directory for versions of libgcc
+  -print-multi-lib         Display the mapping between command line options and
+                            multiple library search directories
+  -Wa,<options>            Pass comma-separated <options> on to the assembler
+  -Wp,<options>            Pass comma-separated <options> on to the preprocessor
+  -Wl,<options>            Pass comma-separated <options> on to the linker
+  -Xlinker <arg>           Pass <arg> on to the linker
+  -save-temps              Do not delete intermediate files
+  -pipe                    Use pipes rather than intermediate files
+  -specs=<file>            Override builtin specs with the contents of <file>
+  -B <directory>           Add <directory> to the compiler's search paths
+  -b <machine>             Run gcc for target <machine>, if installed
+  -V <version>             Run gcc version number <version>, if installed
+  -v                       Display the programs invoked by the compiler
+  -E                       Preprocess only; do not compile, assemble or link
+  -S                       Compile only; do not assemble or link
+  -c                       Compile and assemble, but do not link
+  -o <file>                Place the output into <file>
+  -x <language>            Specify the language of the following input files
+                            Permissable languages include: c c++ assembler none
+                            'none' means revert to the default behaviour of
+                            guessing the language based on the file's extension
+
+Options starting with -g, -f, -m, -O or -W are automatically passed on to
+the various sub-processes invoked by gcc. In order to pass other options
+on to these processes the -W<letter> options must be used.
+
+Usage: cpp [switches] input output
+Switches:
+  -include <file>           Include the contents of <file> before other files
+  -imacros <file>           Accept definition of marcos in <file>
+  -iprefix <path>           Specify <path> as a prefix for next two options
+  -iwithprefix <dir>        Add <dir> to the end of the system include paths
+  -iwithprefixbefore <dir>  Add <dir> to the end of the main include paths
+  -isystem <dir>            Add <dir> to the start of the system include paths
+  -idirafter <dir>          Add <dir> to the end of the system include paths
+  -I <dir>                  Add <dir> to the end of the main include paths
+  -nostdinc                 Do not search the system include directories
+  -nostdinc++               Do not search the system include directories for C++
+  -o <file>                 Put output into <file>
+  -pedantic                 Issue all warnings demanded by strict ANSI C
+  -traditional              Follow K&R pre-processor behaviour
+  -trigraphs                Support ANSI C trigraphs
+  -lang-c                   Assume that the input sources are in C
+  -lang-c89                 Assume that the input sources are in C89
+  -lang-c++                 Assume that the input sources are in C++
+  -lang-objc                Assume that the input sources are in ObjectiveC
+  -lang-objc++              Assume that the input sources are in ObjectiveC++
+  -lang-asm                 Assume that the input sources are in assembler
+  -lang-chill               Assume that the input sources are in Chill
+  -+                        Allow parsing of C++ style features
+  -w                        Inhibit warning messages
+  -Wtrigraphs               Warn if trigraphs are encountered
+  -Wno-trigraphs            Do not warn about trigraphs
+  -Wcomment{s}              Warn if one comment starts inside another
+  -Wno-comment{s}           Do not warn about comments
+  -Wtraditional             Warn if a macro argument is/would be turned into
+                             a string if -tradtional is specified
+  -Wno-traditional          Do not warn about stringification
+  -Wundef                   Warn if an undefined macro is used by #if
+  -Wno-undef                Do not warn about testing udefined macros
+  -Wimport                  Warn about the use of the #import directive
+  -Wno-import               Do not warn about the use of #import
+  -Werror                   Treat all warnings as errors
+  -Wno-error                Do not treat warnings as errors
+  -Wall                     Enable all preprocessor warnings
+  -M                        Generate make dependencies
+  -MM                       As -M, but ignore system header files
+  -MD                       As -M, but put output in a .d file
+  -MMD                      As -MD, but ignore system header files
+  -MG                       Treat missing header file as generated files
+  -g                        Include #define and #undef directives in the output
+  -D<macro>                 Define a <macro> with string '1' as its value
+  -D<macro>=<val>           Define a <macro> with <val> as its value
+  -A<question> (<answer>)   Assert the <answer> to <question>
+  -U<macro>                 Undefine <macro>
+  -u or -undef              Do not predefine any macros
+  -v                        Display the version number
+  -H                        Print the name of header files as they are used
+  -C                        Do not discard comments
+  -dM                       Display a list of macro definitions active at end
+  -dD                       Preserve macro definitions in output
+  -dN                       As -dD except that only the names are preserved
+  -dI                       Include #include directives in the output
+  -ifoutput                 Describe skipped code blocks in output
+  -P                        Do not generate #line directives
+  -$                        Do not include '$' in identifiers
+  -remap                    Remap file names when including files.
+  -h or --help              Display this information
+
+Usage: cc1 input [switches]
+Switches:
+  -ffixed-<register>      Mark <register> as being unavailable to the compiler
+  -fcall-used-<register>  Mark <register> as being corrupted by function calls
+  -fcall-saved-<register> Mark <register> as being preserved across functions
+  -fprefix-function-name  Add a prefix to all function names
+  -fcheck-memory-usage    Generate code to check every memory access
+  -fstrict-aliasing       Assume strict aliasing rules apply
+  -fargument-noalias-global Assume arguments do not alias each other or globals
+  -fargument-noalias      Assume arguments may alias globals but not each other
+  -fargument-alias        Specify that arguments may alias each other & globals
+  -fstack-check           Insert stack checking code into the program
+  -fpack-struct           Pack structure members together without holes
+  -flive-range-scope      Create scope blocks for debugging live ranges
+  -flive-range-gdb        Use GDB extensions to denote live ranges
+  -flive-range            Enable live range splitting
+  -fregmove               Enables a regoster move optimisation
+  -funaligned-pointers    Assume all pointers might be unaligned
+  -funaligned-struct-hack Assume structure fields may be unaligned
+  -fgnu-linker            Output GNU ld formatted global initialisers
+  -fverbose-asm           Add extra commentry to assembler output
+  -ffunction-sections     place each function into its own section
+  -finhibit-size-directive Do not generate .size directives
+  -fcommon                Do not put unitialised globals in the common section
+  -ffast-math             Improve FP speed by violating ANSI & IEEE rules
+  -fbranch-probabilities  Use profiling information for branch porbabilities
+  -ftest-coverage         Create data files needed by gcov
+  -fprofile-arcs          Insert arc based program profiling code
+  -fasynchronous-exceptions Support asynchronous exceptions
+  -fsjlj-exceptions       Use setjmp/longjmp to handle exceptions
+  -fnew-exceptions        Use the new model for exception handling
+  -fexceptions            Enable exception handling
+  -fpic                   Generate position independent code, if possible
+  -fschedule-insns2       Run two passes of the instruction scheduler
+  -fschedule-insns        Reschedule instructions to avoid pipeline stalls
+  -fpretend-float         Pretend that host and target use the same FP format
+  -frerun-loop-opt        Run the loop optimiser twice
+  -frerun-cse-after-loop  Run CSE pass after loop optimisations
+  -fgcse                  Perform the global common subexpression elimination
+  -fdelayed-branch        Attempt to fill delay slots of branch instructions
+  -freg-struct-return     Return 'short' aggregates in registers
+  -fpcc-struct-return     Return 'short' aggregates in memory, not registers
+  -fcaller-saves          Enable saving registers around function calls
+  -fshared-data           Mark data as shared rather than private
+  -fsyntax-only           Check for syntax errors, then stop
+  -fkeep-static-consts    Emit static const variables even if they are not used
+  -finline                Pay attention to the 'inline' keyword
+  -fkeep-inline-functions Generate code for funcs even if they are fully inlined
+  -finline-functions      Integrate simple functions into their callers
+  -ffunction-cse          Allow function addresses to be held in registers
+  -fforce-addr            Copy memory address constants into regs before using
+  -fforce-mem             Copy memory operands into registers before using
+  -fpeephole              Enable machine specific peephole optimisations
+  -fwritable-strings      Store strings in writable data section
+  -freduce-all-givs       Strength reduce all loop general induction variables
+  -fmove-all-movables     Force all loop invariant computations out of loops
+  -funroll-all-loops      Perofm loop onrolling for all loops
+  -funroll-loops          Perform loop unrolling when interation count is known
+  -fstrength-reduce       Perform strength reduction optimisations
+  -fthread-jumps          Perform jump threading optimisations
+  -fexpensive-optimizations Perform a number of minor, expensive optimisations
+  -fcse-skip-blocks       When running CSE, follow conditional jumps
+  -fcse-follow-jumps      When running CSE, follow jumps to their targets
+  -fomit-frame-pointer    When possible do not generate stack frames
+  -fdefer-pop             Defer popping functions args from stack until later
+  -fvolatile-global       Consider all mem refs to global data to be volatile
+  -fvolatile              Consider all mem refs through pointers as volatile
+  -ffloat-store           Do not store floats in registers
+  -O[number]              Set optimisation level to [number]
+  -Os                     Optimise for space rather than speed
+  -pedantic               Issue warnings needed by strict compliance to ANSI C
+  -pedantic-errors        Like -pedantic except that errors are produced
+  -w                      Suppress warnings
+  -W                      Enable extra warnings
+  -Winline                Warn when an inlined function cannot be inlined
+  -Wuninitialized         Warn about unitialized automatic variables
+  -Wcast-align            Warn about pointer casts which increase alignment
+  -Waggregate-return      Warn about returning structures, unions or arrays
+  -Wswitch                Warn about enumerated switches missing a specific case
+  -Wshadow                Warn when one local variable shadows another
+  -Wunused                Warn when a variable is unused
+  -Wid-clash-<num>        Warn if 2 identifiers have the same first <num> chars
+  -Wlarger-than-<number>  Warn if an object is larger than <number> bytes
+  -p                      Enable function profiling
+  -a                      Enable block profiling
+  -ax                     Enable jump profiling
+  -o <file>               Place output into <file>
+  -G <number>             Put global and static data smaller than <number>
+                           bytes into a special section (on some targets)
+  -gdwarf-2               Enable DWARF-2 debug output
+  -gdwarf+                Generated extended DWARF-1 format debug output
+  -gdwarf                 Generate DWARF-1 format debug output
+  -gstabs+                Generate extended STABS format debug output
+  -gstabs                 Generate STABS format debug output
+  -ggdb                   Generate default extended debug format output
+  -g                      Generate default debug format output
+  -aux-info <file>        Emit declaration info into <file>.X
+  -offset-info <file>     Emit structure member offsets into <file>.s
+  -quiet                  Do not display functions compiled or elapsed time
+  -version                Display the compiler's version
+  -d[letters]             Enable dumps from specific passes of the compiler
+  -dumpbase <file>        Base name to be used for dumps from specific passes
+  -sched-verbose-<number> Set the verbosity level of the scheduler
+  --help                  Display this information
+
+Language specific options:
+  -ansi                   Compile just for ANSI C
+  -fallow-single-precisio Do not promote floats to double if using -traditional
+  -funsigned-bitfields    Make bitfields by unsigned by default
+  -fsigned-char           Make 'char' be signed by default
+  -funsigned-char         Make 'char' be unsigned by default
+  -traditional            Attempt to support traditional K&R style C
+  -fno-asm                Do not recognise the 'asm' keyword
+  -fno-builtin            Do not recognise any built in functions
+  -fhosted                Assume normal C execution environment
+  -ffreestanding          Assume that standard libraries & main might not exist
+  -fcond-mismatch         Allow different types as args of ? operator
+  -fdollars-in-identifier Allow the use of $ inside indentifiers
+  -fno-ident              Ignore #ident directives
+  -fshort-double          Use the same size for double as for float
+  -fshort-enums           Use the smallest fitting integer to hold enums
+  -Wall                   Enable most warning messages
+  -Wbad-function-cast     Warn about casting functions to incompatible types
+  -Wcast-qual             Warn about casts which discard qualifiers
+  -Wchar-subscripts       Warn about subscripts whoes type is 'char'
+  -Wconversion            Warn about possibly confusing type conversions
+  -Wformat                Warn about printf format anomalies
+  -Wimplicit-function-dec Warn about implicit function declarations
+  -Wimplicit-int          Warn when a declaration does not specify a type
+  -Wno-long-long          Do not warn about using 'long long' when -pedantic
+  -Wmain                  Warn about suspicious declarations of main
+  -Wmissing-braces        Warn about possibly missing braces around initialisers
+  -Wmissing-declarations  Warn about global funcs without previous declarations
+  -Wmissing-prototypes    Warn about global funcs without prototypes
+  -Wmultichar             Warn about use of multicharacter literals
+  -Wnested-externs        Warn about externs not at file scope level
+  -Wparentheses           Warn about possible missing parentheses
+  -Wpointer-arith         Warn about function pointer arithmetic
+  -Wredundant-decls       Warn about multiple declarations of the same object
+  -Wsign-compare          Warn about signed/unsigned comparisons
+  -Wunknown-pragmas       Warn about unrecognised pragmas
+  -Wstrict-prototypes     Warn about non-prototyped function decls
+  -Wtraditional           Warn about constructs whoes meaning change in ANSI C
+  -Wwrite-strings         Mark strings as 'const char *'
+
+ Options for Objective C:
+  -gen-decls              Dump decls to a .decl file
+  -fgnu-runtime           Generate code for GNU runtime envrionment
+  -fnext-runtime          Generate code for NeXT runtime environment
+  -Wselector              Warn if a selector has multiple methods
+  -Wno-protocol           Do not warn if inherited methods are unimplemented
+  -print-objc-runtime-inf Generate C header of platform specific features
+
+ Options for C++:
+  -fno-access-control     Do not obey access control semantics
+  -fall-virtual           Make all member functions virtual
+  -falt-external-template Change when template instances are emitted
+  -fcheck-new             Check the return value of new
+  -fconserve-space        Reduce size of object files
+  -fno-default-inline     Do not inline mmeber functions be default
+  -fno-rtti               Do not generate run time type descriptor information
+  -fembedded-cxx          Implement Embedded C++ specification
+  -fno-for-scope          Scope of for-init-statement vars extends outside
+  -fguiding-decls         Implement guiding declarations
+  -fno-gnu-keywords       Do not recognise GNU defined keywords
+  -fhandle-exceptions     Enable exception handling
+  -fhandle-signatures     Handle signature language constructs
+  -fhonor-std             Do not ignore the namespace standard
+  -fhuge-objects          Enable support for huge objects
+  -fno-implement-inlines  Export functions even if they can be inlined
+  -fimplicit-templates    Emit implicit instatiations if needed
+  -flabels-ok             Labels can be used as first class objects
+  -fmemoize-lookups       Enable caching of member function resolutions
+  -fname-mangling-version Set the version of name mangling to use
+  -fnew-abi               Enable experimental ABI changes
+  -fno-nonnull-objects    Do not assume that a reference is always valid
+  -foperator-names        Recognise and/bitand/bitor/compl/not/or/xor
+  -fno-optional-diags     Disable optional diagnostics
+  -frepo                  Enable automatic template instantiation
+  -fsave-memoized         Save cache of member function resolutions
+  -fsquangle              Enable squashed name mangling
+  -fstats                 Display statistics accumulated during compilation
+  -fno-strict-prototype   Do not assume that empty prototype means no args
+  -ftemplate-depth-       Specify maximum template instantiation depth
+  -fthis-is-variable      Make 'this' not be type '* const'
+  -fvtable-thunks         Implement vtables using thunks
+  -fweak                  Emit common-like symbols as weak symbols
+  -fxref                  Emit cross referencing information
+  -Wreturn-type           Warn about inconsistent return types
+  -Woverloaded-virtual    Warn about overloaded virtual function names
+  -Wctor-dtor-privacy     Warn when all ctors/dtors are private
+  -Wnon-virtual-dtor      Warn about non virtual destructors
+  -Wextern-inline         Warn when a function is declared extern, then inline
+  -Wreorder               Warn when the compiler reorders code
+  -Wsynth                 Warn when synthesis behaviour differs from Cfront
+  -Wpmf-conversions       Warn when type converting pointers to member functions
+  -Weffc++                Warn about violations of Effective C++ style rules
+  -Wsign-promo            Warn when overload promotes from unsigned to signed
+  -Wold-style-cast        Warn if a C style cast is used in a program
+
+Target specific options:
+  They exist, but they are not documented.
+
+Usage: /bin/as [option...] [asmfile...]
+Options:
+  -a[sub-option...]     turn on listings
+    Sub-options [default hls]:
+    c   omit false conditionals
+    d   omit debugging directives
+    h   include high-level source
+    l   include assembly
+    m   include macro expansions
+    n   omit forms processing
+    s   include symbols
+    =file set listing file name (must be last sub-option)
+  -D                      produce assembler debugging messages
+  --defsym SYM=VAL        define symbol SYM to given value
+  -f                      skip whitespace and comment preprocessing
+  --gstabs                generate stabs debugging information
+  --help                  show this message and exit
+  -I DIR                  add DIR to search list for .include directives
+  -J                      don't warn about signed overflow
+  -K                      warn when differences altered for long displacements
+  -L,--keep-locals        keep local symbols (e.g. starting with `L')
+  -M,--mri                assemble in MRI compatibility mode
+  --MD FILE               write dependency information in FILE (default none)
+  -nocpp                  ignored
+  -o OBJFILE              name the object-file output OBJFILE (default a.out)
+  -R                      fold data section into text section
+  --statistics            print various measured statistics from execution
+  --strip-local-absolute  strip local absolute symbols
+  --traditional-format    Use same format as native assembler when possible
+  --version               print assembler version number and exit
+  -W                      suppress warnings
+  --itbl INSTTBL          extend instruction set to include instructions
+                          matching the specifications defined in file INSTTBL
+  -w                      ignored
+  -X                      ignored
+  -Z                      generate object file even after errors
+  --listing-lhs-width     set the width in words of the output data column of
+                          the listing
+  --listing-lhs-width2    set the width in words of the continuation lines
+                          of the output data column; ignored if smaller than
+                          the width of the first line
+  --listing-rhs-width     set the max width in characters of the lines from
+                          the source file
+  --listing-cont-lines    set the maximum number of continuation lines used
+                          for the output data column of the listing
+-m                      do long jump
+
+Usage: /bin/ld [options] file...
+Options:
+  -a KEYWORD                  Shared library control for HP/UX compatibility
+  -A ARCH, --architecture ARCH
+                              Set architecture
+  -b TARGET, --format TARGET  Specify target for following input files
+  -c FILE, --mri-script FILE  Read MRI format linker script
+  -d, -dc, -dp                Force common symbols to be defined
+  -e ADDRESS, --entry ADDRESS Set start address
+  -E, --export-dynamic        Export all dynamic symbols
+  -f SHLIB, --auxiliary SHLIB Auxiliary filter for shared object symbol table
+  -F SHLIB, --filter SHLIB    Filter for shared object symbol table
+  -g                          Ignored
+  --gc-sections               Remove unused sections on certain targets
+  --no-gc-sections            (Don't) Remove unused sections on certain targets
+  -G SIZE, --gpsize SIZE      Small data size (if no size, same as --shared)
+  -h FILENAME, -soname FILENAME
+                              Set internal name of shared library
+  -l LIBNAME, --library LIBNAME
+                              Search for library LIBNAME
+  -L DIRECTORY, --library-path DIRECTORY
+                              Add DIRECTORY to library search path
+  -m EMULATION                Set emulation
+  -M, --print-map             Print map file on standard output
+  -n, --nmagic                Do not page align data
+  -N, --omagic                Do not page align data, do not make text readonly
+  -o FILE, --output FILE      Set output file name
+  -O                          Ignored
+  -r, -i, --relocateable      Generate relocateable output
+  -R FILE, --just-symbols FILE
+                              Just link symbols (if directory, same as --rpath)
+  -s, --strip-all             Strip all symbols
+  -S, --strip-debug           Strip debugging symbols
+  -t, --trace                 Trace file opens
+  -T FILE, --script FILE      Read linker script
+  -u SYMBOL, --undefined SYMBOL
+                              Start with undefined reference to SYMBOL
+  -v, --version               Print version information
+  -V                          Print version and emulation information
+  -x, --discard-all           Discard all local symbols
+  -X, --discard-locals        Discard temporary local symbols
+  -y SYMBOL, --trace-symbol SYMBOL
+                              Trace mentions of SYMBOL
+  -Y PATH                     Default search path for Solaris compatibility
+  -z KEYWORD                  Ignored for Solaris compatibility
+  -(, --start-group           Start a group
+  -), --end-group             End a group
+  -assert KEYWORD             Ignored for SunOS compatibility
+  -Bdynamic, -dy, -call_shared
+                              Link against shared libraries
+  -Bstatic, -dn, -non_shared, -static
+                              Do not link against shared libraries
+  -Bsymbolic                  Bind global references locally
+  --cref                      Output cross reference table
+  --defsym SYMBOL=EXPRESSION  Define a symbol
+  --dynamic-linker PROGRAM    Set the dynamic linker to use
+  -EB                         Link big-endian objects
+  -EL                         Link little-endian objects
+  --embedded-relocs           Generate embedded relocs
+  --force-exe-suffix          Force generation of file with .exe suffix
+  --help                      Print option help
+  -Map FILE                   Write a map file
+  --no-keep-memory            Use less memory and more disk I/O
+  --no-undefined              Allow no undefined symbols
+  --no-warn-mismatch          Don't warn about mismatched input files
+  --no-whole-archive          Turn off --whole-archive
+  --noinhibit-exec            Create an output file even if errors occur
+  --oformat TARGET            Specify target of output file
+  -qmagic                     Ignored for Linux compatibility
+  -Qy                         Ignored for SVR4 compatibility
+  --relax                     Relax branches on certain targets
+  --retain-symbols-file FILE  Keep only symbols listed in FILE
+  -rpath PATH                 Set runtime shared library search path
+  -rpath-link PATH            Set link time shared library search path
+  -shared, -Bshareable        Create a shared library
+  --sort-common               Sort common symbols by size
+  --split-by-file             Split output sections for each file
+  --split-by-reloc COUNT      Split output sections every COUNT relocs
+  --stats                     Print memory usage statistics
+  --task-link SYMBOL          Do task level linking
+  --traditional-format        Use same format as native linker
+  -Tbss ADDRESS               Set address of .bss section
+  -Tdata ADDRESS              Set address of .data section
+  -Ttext ADDRESS              Set address of .text section
+  -Ur                         Build global constructor/destructor tables
+  --verbose                   Output lots of information during link
+  --version-script FILE       Read version information script
+  --version-exports-section SYMBOL
+                              Take export symbols list from .exports, using SYMBOL as the version.
+  --warn-common               Warn about duplicate common symbols
+  --warn-constructors         Warn if global constructors/destructors are seen
+  --warn-multiple-gp          Warn if the multiple GP values are used
+  --warn-once                 Warn only once per undefined symbol
+  --warn-section-align        Warn if start of section changes due to alignment
+  --whole-archive             Include all objects from following archives
+  --wrap SYMBOL               Use wrapper functions for SYMBOL

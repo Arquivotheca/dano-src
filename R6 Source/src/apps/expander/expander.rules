@@ -1,0 +1,46 @@
+#
+# This is a table of mime type, extension and action patterns loaded by the
+# Expand-O-Matic GUI tool for listing and extracting archive files.
+#
+# If you want to add additional rules, copy this file and rename
+# it "expander.rules".
+#
+# The format of the file is simple:
+#
+#	- The first field is the mime type for the archive
+#   - The second field is the file name extension of the archive type.
+#   - The third field is a command that will list the contents of the archive.  
+#   - The last field is a command that will extract the contents of the archive.  
+#
+#
+# Here is an example of a rule:
+#
+#	This rule states that the mime type is for zip files with extension zip.
+#
+#	"application/zip"	.zip          	"unzip -l %s"               "unzip -n %s"
+#
+#	If the first argument is empty then the type will be matched with the extension
+#	provided.
+#
+#   ""					.tar.gz   		"zcat %s | tar tvf -"      "zcat %s | tar xvf -"
+#
+# 	This rule says that files ending in ".tar.gz" can be listed
+# 	using the command "zcat %s | tar tvf -" (where the %s is
+# 	replaced with the file name) and the file can be extracted
+# 	with "zcat %s | tar xvf -".  The quotes are necessary
+# 	around the commands.
+#
+#
+# 	Other examples are (which happen to be built into the app):
+#
+#	""									.tar.gz       "zcat %s | tar -tvf -"        "zcat %s | tar -xvf -"
+#	""									.tar.Z        "zcat %s | tar -tvf -"        "zcat %s | tar -xvf -"
+#	""									.tgz          "zcat %s | tar -tvf -"        "zcat %s | tar -xvf -"
+#	"application/x-tar"					.tar          "tar -tvf %s"                 "tar -xf %s" 
+#	"application/x-gzip"				.gz           "echo %s | sed 's/.gz$//g'"   "gunzip %s" 
+#	"application/zip"					.zip          "unzip -l %s"                 "unzip -o %s"
+#	"application/x-zip-compressed"		.zip          "unzip -l %s"                 "unzip -o %s"
+#
+# 	Defaults are built in for gzip'ed tar files and .zip (Info-Zip)
+# 	files.
+#

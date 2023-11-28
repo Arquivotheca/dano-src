@@ -1,0 +1,25 @@
+Basic Strategy for use of the File Caching scheme in BeIDE.
+
+The FindHeader callback now includes a FileHandle struct in the 
+reply block.  This struct allows the client app to obtain a copy
+of the contents of the file from a shared memory area.
+
+Because the shared memory area can be accessed asyncronously from
+multiple instances of the compiler, and since files may be purged,
+from the area, a use count is maintained by the IDE.  Each 
+FileHandle returned to the compiler is valid only until the next 
+FindHeader callback is made or until the Status callback is made for
+the last header requested.  Also, the area is cloned read-only
+so the compiler must make a copy of the text in the area if it needs
+to modify the text or keep it around for longer than a single 
+FindHeader callback.
+
+The text in the area will be null terminated.
+
+The precompiled header should also be requested this way.
+
+The FindHeader request may not be able to place the file in the
+area, for lack of space for instance.  In that case the id member of
+the FileHandle will be -1.  In that case the filepath will still
+be valid if the file was found.  The compiler should read the file
+from disk in this case.

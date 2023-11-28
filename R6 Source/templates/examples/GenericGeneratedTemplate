@@ -1,0 +1,30 @@
+# Makefile using GenericGeneratedTemplate.mk
+# Copyright (c) 2000-2001; Be, Inc. All Rights Reserved.
+
+# TARGET_NAME - the name of the installed created file (can not be empty)
+TARGET_NAME := FOO
+
+# MY_RULE - the name of the rule to use -- Remember the rule won't have
+#  it's variables expanded when it's defined. Rules should be defined in
+#  Macros.mk and end in _RULE. (can not be empty)
+MY_RULE := FOO_RULE
+
+# MY_DEPS - the list of fully qualified items to depend upon
+# MY_DEPS :=
+
+# SRC_DIR - the path of the root of your application source tree. (Preferably
+#           relative to your source tree's base.) (can not be empty)
+# NOTE: Either SRC_DIR or MY_INSTALL_DIR need to be defined. The target
+#  will be in the OBJ_DIR if MY_INSTALL_DIR is undefined.
+SRC_DIR :=
+
+# MY_INSTALL_DIR - the absolute destination directory -- should be an
+#  INSTALL_ constant. (defaults to OBJ_DIR) If it defaults to the OBJ_DIR
+#  it's treated as a build item and not an installed item. (It's attached
+#  to the build vs. install rules.)
+# NOTE: Either SRC_DIR or MY_INSTALL_DIR need to be defined. The target
+#  will be in the OBJ_DIR if MY_INSTALL_DIR is undefined.
+MY_INSTALL_DIR :=
+
+include $(SDIR_TEMPLATES)/GenericGeneratedTemplate.mk
+

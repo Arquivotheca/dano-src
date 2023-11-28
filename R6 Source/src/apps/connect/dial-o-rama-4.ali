@@ -1,0 +1,15 @@
+@				$1\r
+OK.*@				ATDT$2\r
+@@@@@@@@@@@			\r
+NO DIAL TONE.*@			AT\r
+BUSY.*@				AT\r
+NO CARRIER.*@			AT\r
+CONNECT.*@			\r
+assword:.*@			\r
+ogin:				$3\r
+@@@@@@@@@@@			\r
+OK.*@				ATH0\r
+@@@@@@@@@@@			+++
+OK.*@				EXIT
+@@@@@@@@@@@@@@@@@@@@@@@		EXIT
+assword:.*@			$4\r

@@ -1,0 +1,11 @@
+
+
+if [ -z "$1" ]; then
+   echo usage: ezmount servername sharename username password 
+else 
+	mkdir /ezmount
+	/boot/beos/bin/cifsmount \\\\$1\\$2 $3 $4 /ezmount
+	sleep 2     # let things settle down a bit and then continue
+	/boot/beos/system/Tracker /ezmount
+fi
+

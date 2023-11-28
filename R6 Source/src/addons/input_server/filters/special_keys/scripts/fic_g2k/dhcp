@@ -1,0 +1,27 @@
+#!/bin/sh
+# connect ethernet
+
+	# Disable autodial
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pa0!"
+	
+	# Bring PPP Down
+	/bin/sndcmd "application/x-vnd.Be-NETS" -a "Pdn!"
+	
+	# Make a kooky sound
+	/bin/beep PowerDown
+
+	# Wait for sound
+	sleep 1
+
+	# Hangup connection
+	sleep 3
+	/bin/netcontrol hangup
+
+	# Sound
+	/bin/beep PowerUp	
+	
+	# force update
+	/bin/sndcmd "application/x-vnd.Be-UPDT" update
+
+  	# connect
+	/bin/netcontrol dhcp

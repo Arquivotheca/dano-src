@@ -1,0 +1,5 @@
+#ifndef _CSTRING
+#define _CSTRING
+
+#include <string.h>
+#endif

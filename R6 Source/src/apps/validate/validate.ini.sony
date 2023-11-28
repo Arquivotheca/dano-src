@@ -1,0 +1,88 @@
+# The 'validate' program is designed to use in a factory production
+# environment to validate hardware coming off an assembly line, after
+# BeIA has been installed on the hardware.
+# This file controls which tests are run, and some options for the tests.
+# Some options are commented out because they should only be set if you
+# want to override the defaults.
+
+# Lines beginning with a hash mark (#) and blank lines are ignored.
+# Leading whitespace IS NOT ALLOWED.
+
+# Specify test order by semicolon list of entries
+#testorder=keyboard;netron.testmouse;external_sound;netron.testmicrophone;sound;netron.agvibration;modem;ethernet;netron.testusb;netron.testmemorystick;netron.testbuttons;netron.testemail;netron.teststandby
+testorder=keyboard;netron.testmouse;external_sound;netron.testmicrophone;sound;modem;ethernet;netron.testusb;netron.testmemorystick;netron.testbuttons;netron.testemail;netron.teststandby
+
+# Turn off specific tests by un-commenting the line
+#keyboard=ignore
+#sound=ignore
+#sound.left=ignore
+#sound.right=ignore
+#sound.phase=ignore
+#external_sound=ignore
+#modem=ignore
+#ethernet=ignore
+
+# Sony doesn't want the default mouse, fileread, or filewrite by default
+mouse=ignore
+fileread=ignore
+filewrite=ignore
+
+# Control for end of test.
+# Uncomment if you want the acceptance notice at the end of all tests to
+# go away after the time (specified in microseconds)
+#validate.oktimeout=5000000
+# Uncomment if you want to automatically prepare machine when all tests pass
+#validate.autoprepare=1
+# Uncomment if you want to skip the alert after prepare/quit.
+# (Sony gets an alert in final preparation, so skip this alert)
+validate.endalert=0
+
+# Configure the keyboard test 
+# (if a key to test isn't specified, a random key is used)
+# (to specify "special keys" use their ASCII value in decimal: space = 32, Enter = 10)
+keyboard.keys=32
+
+# Configure the sound test
+#sound.left.filename=SonyTestFile07.mp3
+sound.left.filename=1_5_khz2s.mp3
+#sound.right.filename=SonyTestFile07.mp3
+sound.right.filename=one_khz1s.mp3
+#sound.phase.filename=SonyTestFile07.mp3
+external_sound.filename=SonyTestFile07.mp3
+
+# Configure the modem test
+# Validate will wait for "OK" after the modem.init string; it can be empty
+#modem.init=ATZ
+modem.number=535
+modem.device=/dev/ports/tri_modem
+
+# Configure the ethernet test
+# Ethernet address of the server running testsrv.c (available for Linux or BeOS)
+# Note that the machine itself will use DHCP to get an address, so there
+# needs to be enough DHCP leases for all machines that get tested during
+# any 2-hour period (because of the way DHCP leases expire).
+#ethernet.server_address=10.113.215.130
+
+# Turn off Sony specific tests
+#netron.testmouse=ignore
+#netron.testusb=ignore
+#netron.testmemorystick=ignore
+#netron.testmicrophone=ignore
+#netron.testbuttons=ignore
+#netron.testemail=ignore
+#netron.teststandby=ignore
+#netron.agvibration=ignore
+
+# Configure Sony mouse button test
+# passonany=1 will allow any button/scroll to pass the test
+# comment out line to require each button/scroll to be pressed
+netron.testmouse.passonany=1
+# change mask (in decimal) for testing only certain mouse buttons
+#netron.testmouse.buttons=15
+
+# Configure Sony AG Vibration test
+netron.agvibration.filename=SonyTestFile07.mp3
+
+# Configure Sony front button test
+# change mask (in decimal) for testing only certain front panel buttons
+#netron.testbuttons.buttons=31

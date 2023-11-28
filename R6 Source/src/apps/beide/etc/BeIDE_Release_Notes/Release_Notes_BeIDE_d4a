@@ -1,0 +1,76 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	d4a
+Date:		7/8/96
+Author:		Brian Stern, Jon Watte, Mark Anderson
+=============================================
+
+Greetings Be developers.  This interim release of BeIDE for BeOS 1.1d7.1 
+has several new features and includes new command line tools.
+
+============================
+New Features in This Version
+============================
+
+¥	Find Definition - If you option-double click on a function name or
+	file scope static variable name, the definition of the function or 
+	variable will be selected.  The information for this feature is 
+	generated when files are compiled; it is stored in the project file;
+	and it is removed when the Remove Objects menu item is chosen.
+	
+	You may also initiate this search from the 'Find Definition' window
+	which appears when Find Definition is chosen from the Search Menu.
+	Holding down the shift key when choosing the Search menu will change 
+	Find Definition to Go Back.  Go Back will return the selection
+	to the location current when the last Find Definition was initiated.
+
+¥	Tile, Stack, Vertical Tile - These menu items reorder source windows
+	in the current workspace.
+
+¥	Info Panel in Message window - Three icons appear at the top of the
+	Message window.  Clicking in the checkboxes next to these icons
+	will show or hide the errors, warnings, or info messages.
+ 
+¥	Compilation progress checkmark - A blue checkmark appears next to
+	a source file that is being compiled.  The checkmark appears when
+	the file starts compiling and disappears when the file completes
+	compiling.  For those of you familiar with the Mac IDE this behavior
+	is different from how the checkmark behaves in the Mac IDE project
+	window.
+	
+¥	Option key held down at launch - Holding down the option key
+	while BeIDE is launching will reset all database entries to
+	factory defaults.  This includes all settings made in the Settings
+	Window as well as settings for the Find and Message windows.  It
+	does not include font settings for individual source files.
+	 
+¥	Command option '-' - Command '-' is Remove objects.  Remove objects
+	deletes all .o files and deletes the browse data used for the
+	Find definition feature.  Command option '-' also deletes all
+	of the include file dependency info for each source file.
+
+
+==========================
+Bugs Fixed in This Version
+==========================
+
+Fixed a bug related to guarding of include directories with parentheses.
+Fixed a bug related to tabs and truetype fonts in source windows.
+Fixed a bug related to failing to save and restore the selection 
+when closing and reopening source files.
+Fixed a bug where files opened before a project was opened couldn't
+be added to the project.
+Fixed a possible deadlock with the Find window.
+Fixed a bug when doing batch finds with files not in newline format.
+
+=====================
+Contacting Metrowerks
+=====================
+
+For bug reports, technical questions and suggestions, please send them to 
+mptp@metrowerks.com.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

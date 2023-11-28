@@ -1,0 +1,16 @@
+0x200000 javascript suspend done
+0x200001 javascript email done
+0x200002 javascript media done
+0x200003 javascript home done
+0x200004 volume_up done
+0x200005 volume_down done
+0x200100 javascript screen_off done
+0x200101 javascript screen_suspend done
+0x200102 javascript screen_on done
+0x210000 javascript web_key1 done
+0x210001 javascript web_key2 done
+0x210002 javascript web_key3 done
+0x210003 javascript web_key4 done
+0x210004 javascript web_key5 done
+0x210005 javascript web_key6 done
+0x210006 javascript web_key7 done

@@ -1,0 +1,424 @@
+<html>
+<head>
+<title>NetPositive Plug-in API Specification</title>
+</head>
+<body bgcolor=#dddddd>
+<center>
+<h1>NetPositive Plug-in API Specification</h1>
+<i>
+Version 1 (July 31, 1999)<br>
+Copyright 1999 Be Incorporated
+</i>
+</center>
+
+<hr>
+<h2><font color=#994400><center>Table of Contents</center></font></h2>
+<ul>
+	<li><a href="#Introduction">Introduction</a>
+	<li><a href="#NPPlugins">NetPositive plug-ins</a>
+	<li><a href="#FileFormat">Plug-in file format</a>
+	<li><a href="#PIWideFunctions">Plug-in-wide functions</a><ul>
+		<li><a href="#BrowserToPluginMsg">Browser -&gt; plug-in messages</a><ul>
+			<li><a href="#B_NETPOSITIVE_GET_PLUGIN_INFO">B_NETPOSITIVE_GET_PLUGIN_INFO</a>
+			<li><a href="#B_NETPOSITIVE_GET_PLUGIN_PREFERENCES">B_NETPOSITIVE_GET_PLUGIN_PREFERENCES</a>
+			<li><a href="#B_NETPOSITIVE_SET_PLUGIN_PREFERENCES">B_NETPOSITIVE_SET_PLUGIN_PREFERENCES</a>
+		</ul>
+		<li><a href="#PluginToBrowserMsg">Plug-in -&gt; browser messages</a><ul>
+			<li><a href="#B_NETPOSITIVE_TERMINATE_PLUGIN">B_NETPOSITIVE_TERMINATE_PLUGIN</a>
+		</ul>
+	</ul>
+	<li><a href="#DataTypePlugins">DataType plug-ins</a><ul>
+		<li><a href="#DataTypeTips">Tips for writing DataType plug-ins</a>
+		<li><a href="#EmbeddingDataTypes">Embedding DataType plug-ins</a>
+		<li><a href="#DataTypeBrowserToInstanceMsg">Browser -&gt; instance messages</a><ul>
+			<li><a href="#B_NETPOSTIIVE_INIT_INSTANCE">B_NETPOSTIIVE_INIT_INSTANCE</a>
+			<li><a href="#B_NETPOSITIVE_TERMINATE_INSTANCE">B_NETPOSITIVE_TERMINATE_INSTANCE</a>
+		</ul>
+		<li><a href="#DataTypeInstanceToBrowserMsg">Instance -&gt; browser messages</a><ul>
+			<li><a href="#B_NETPOSITIVE_OPEN_URL">B_NETPOSITIVE_OPEN_URL</a>
+			<li><a href="#B_NETPOSITIVE_STATUS_MESSAGE">B_NETPOSITIVE_STATUS_MESSAGE</a>
+			<li><a href="#B_NETPOSITIVE_TERMINATE_INSTANCE">B_NETPOSITIVE_TERMINATE_INSTANCE</a>
+		</ul>
+	</ul>
+	<li><a href="#URLApprovalPlugins">URLApproval plug-ins</a><ul>
+		<li><a href="#B_NETPOSITIVE_APPROVE_URL">B_NETPOSITIVE_APPROVE_URL</a>
+	</ul>
+	<li><a href="#HTMLFilterPlugins">HTMLFilter plug-ins</a><ul>
+		<li><a href="#B_NETPOSITIVE_FILTER_HTML">B_NETPOSITIVE_FILTER_HTML</a>
+	</ul>
+	<li><a href="#DataTypes">Auxilliary classes and data types</a><ul>
+		<li><a href="#BNetPositiveStreamIO">BNetPositiveStreamIO class</a>
+	</ul>
+</ul>
+
+<hr>
+<a name="Introduction">
+<h2><font color=#994400><center>Introduction</center></font></h2>
+Web browser plug-ins were originally conceived as a way of allowing Web browsers to seamlessly handle types of data that they weren't natively designed for, such as multimedia, interactive animations, and the like.  In the early days of the Web, there was an explosion of plug-ins, as companies raced to catch the burgeoning WWW hype by writing all sorts of plug-in applications whose interface  could be embedded into an HTML page.<p>
+
+However, the strategy of writing custom plug-ins to do specific tasks soon lost favor, partly because users were unwilling to hunt down and install dozens of plug-ins to do basic web browsing, and partly because the advent of Java, JavaScript, and DHML made "normal" web pages more powerful and custom plug-ins less necessary.<p>
+
+Today, plug-ins fulfill their original role: providing integrated access to a handful of important data types that browsers don't natively support.  The important ones are RealAudio/RealVideo, QuickTime, and Shockwave/Flash.  The fact that this list is small does not belie the importance of these data types; rather, support for them is critically important for a good web browsing experience.<p>
+
+This API specification makes frequent reference to the Netscape plug-in API, mostly to point out the similarities and differences for those developers who are familiar with plug-ins on other browsers and want to make a quick transition to the NetPositive model.  Knowledge of the Netscape API is not essential to understanding NetPositive plug-ins, so detailed Netscape API information is not included here.  If you're interested in learning more about Netscape plug-ins, look in the developer section of their website for more information.
+
+
+<hr>
+<a name="NPPlugins">
+<h2><font color=#994400><center>NetPositive plug-ins</center></font></h2>
+The primary goal of the NetPositive plug-in API is to provide the functionality that will allow plug-ins similar to other platforms to be brought to the BeOS and NetPositive.  However, with the NetPositive plug-in API, Be has a chance to expand the role of plug-ins to encompass other sorts of web-related functions that aren't served by a data viewer paradigm.  These funcitons include (parental) content and access controls, content filtering and manipulation, and the ability to customize the browser by bypassing some of its component parts.  Most of these new sorts of functions aren't part of the present plug-in API, but are planned for the future.<p>
+
+The plug-in API for NetPositive follows a design philosophy that differs from the one that guided the Netscape API, which is the standard for all browsers on all different platforms.  This is both a blessing and a curse.  The Netscape API includes many functions designed to shield the plug-in API from the vagaries of the platform it runs on.  This makes it easier to write plug-ins with less platform-dependent code, and is necessary on some platforms because their native API's are hostile to the concept of having different regions of a window under control of different programs.<p>
+
+What this means is that the Netscape API has a UI event and messaging model that is more or less common across all platforms that support the API.  It also has a set of functions and callbacks that allow for services such as memory management, acquisition of data from the network, and the like.  However, it doesn't attempt to eliminate the need for platform-specific code; in particular, there is no abstract drawing model, requiring plug-ins to still use platform-specific code to do a lot of their work.<p>
+
+Since the BeOS API's are much more modern than other platforms, it is possible to design a plug-in API with much less fuss.  A NetPositive data-viewing plug-in simply instantiates a self-sufficient BView subclass which can do its own drawing and handle its own events using the same BeOS Kit API's that other applications use.  Plug-ins have full access to the system, and do so directly instead of going through a NetPositive abstraction layer.  NetPositive will provide services to plug-ins, such as the fetching of data from the network, where it makes sense to do so.  These communications all take place through a BMessenger/BMessage API, with no direct C++ function calls.<p>
+
+While this approach makes it slightly more difficult to port plug-ins from other platforms to work with NetPositive under the BeOS, this disadvantage is made up by the fact that it is vastly easier to retrofit other BeOS applications (particularly those that can function as replicants) to work as plug-ins, because the set of new API requirements is kept to a minimum.  The fact that all communications between browser and plug-in happen through BMessages and not through direct C++ function calls makes everything work better in a multithreaded, multiprocessor environment, and provides maximum flexibility to expand the API in the future without worrying about breaking existing code.<p>
+
+In particular, the NetPositive plug-in API has few requirements that force the plug-in to even be running in NetPositive's team, aside from the fact that current BeOS limitations require the plug-in's BView to share NetPositive's address space.  In the future, plug-ins may live in their own protected memory space, which will protect the browser if a buggy plug-in crashes.<p>
+
+A single plug-in can support multiple plug-in types and multiple data types.  The browser queries the plug-in soon after it is initialized to determine what its capabilities are.<p>
+
+This API specification and many of the names of entities within refer to NetPositive.  This is not to say that the API is specific to NetPositive and cannot be implemented in other browsers.  Rather, Be hopes that the other browser implementors on the platform will adapt as much of the API as possible to give browser plug-ins on the BeOS as wide an audience as possible.<p>
+
+Enough introduction.  On to the details.
+
+<font color=red>Provide a means for a plug-in to create an HTML stream and feed it to the page and have it display the HTML.</font><p>
+
+<font color=red>Allow plug-ins to just open their own windows at launch.  Allow them to add toolbars to NetPositive's window, too.  Make the URLView a plug-in and make it replaceable.</font><p>
+
+<hr>
+<a name="FileFormat">
+<h2><font color=#994400><center>Plug-in file format</center></font></h2>
+
+NetPositive plug-ins must be in the form of executable image files that export the following two functions:<p>
+
+<pre>
+        extern "C" BMessenger *InitBrowserPlugin(BMessage *browserInfo);
+        extern "C" void        TerminateBrowserPlugin(BMessenger *pluginInstance);
+</pre>
+
+Depending on what types of plug-in instances are supported, additional functions may need to be exported to actually instantiate the plug-in instances.
+
+Your plug-in's <tt>InitBrowserPlugin</tt> function should perform any initialization required of the plug-in as a whole that is not related to a specific instance of the plug-in in a page.  It can use this call to set up any data structures that are shared by all instances of a plug-in.  It should return a persistent BMessenger object that the browser can use to communicate with the plug-in as long as it is loaded to ask it to create instances of the plug-in or perform other tasks.<p>
+
+This BMessenger object is NetPositive's sole point of contact with the plug-in as a whole.  It is also enables the plug-in to be able to identify the team that loaded the plug-in.  This is not an issue at present, because the plug-in is loaded into the browser's team, but if in the future plug-ins run in their own address spaces, and if a running plug-in can service more than one browser team at once, this BMessenger will be used to determine which team is initializing or terminating plug-in services.  This function will be called shortly after NetPositive detects the plug-in, usually during application startup.<p>
+
+NetPositive passes in a BMessage which contains information about itself that may be of interest to the plug-in.  The message has the following fields:<p>
+
+<ul>
+	<li>BrowserVersionString (string) - Returns the version string sent to HTTP servers with every HTTP request.  This returns the true browser string and ignores browser spoofing preferences.
+	<li>PluginAPIVersion (integer)
+	<li>BrowserMessenger (BMessenger)
+</ul>
+
+<font color=red>Talk about negotiation of API versions.  NetPositive will fail if the plug-in gives it an API version it can't support.  If the plug-in sends a version number back to NetPositive that is less than its current
+version, it will revert as much as possible to the old way of doing things.  Plug-ins should do the same with NetPositive.  Nonetheless, plug-ins should ignore parameters in messages they don't understand.</font><p>
+
+The BMessenger that NetPositive passes in is important.  This is the plug-in's contact with the browser application as a whole.  If the browser needs to make a request of the browser, it can do so by sending messages to this messenger.  This is different from the BMessenger that a plug-in instance can use to communicate with the window it is loaded in; this BMessenger is not tied to a window, but to the browser's team<p>
+
+The browser will call <tt>TerminateBrowserPlugin</tt> when it is finished with all instances of a plug-in.  It will not be called unless all instances of the plug-in have been freed.  This call must free any memory or system resources still in use by the plug-in; it is important that plug-ins not leak anything, or the stability and footprint of the browser will be adversely affected.  This function will generally be called before NetPositive shuts down.<p>
+
+Other than being an executable exporting these two functions, there is nothing else that earmarks a file as being a browser plug-in; for example, a particular MIME type is not required.  This will allow you to have a BeOS application image that can also be invoked as a browser plug-in.<p>
+
+Plug-ins are installed in the B_USER_SETTINGS_DIRECTORY/NetPositive/Plug-ins/ directory; you can either place the executable image there or a symbolic link to the image located somewhere else.  When NetPositive launches, it scans this directory for files meeting its plug-in criteria, loads and initializes them, and queries them to determine their capabilities.  NetPositive node monitors the Plug-ins directory to allow plug-ins to be added and removed dynamically while the application is still running.<p>
+
+
+<hr>
+<a name="PIWideFunctions">
+<h2><font color=#994400><center>Plug-in-wide functions</center></font></h2>
+
+Once a plug-in is initialized via the <tt>InitBrowserPlugin</tt> function call, all of NetPositive's communications with the plug-in as a whole take the form of BMessages passed to the BMessenger that <tt>InitBrowserPlugin</tt> returns.  Following is a list of the messages that NetPositive can send to the plug-in.  The message constants for each of these messages can be found in &lt;NetPositive.h&gt;.<p>
+
+
+<hr width=25%>
+<a name="#BrowserToPluginMsg">
+<h3><center><font color=#880000>Browser -&gt; plug-in messages<font></center></h3>
+
+<a name="B_NETPOSITIVE_GET_PLUGIN_INFO">
+<h4><font color=#000066>B_NETPOSITIVE_GET_PLUGIN_INFO</font></h4>
+<ul>
+	<li><b><i>description:</i></b> Used by the browser to query the plug-in about its name, version number, and general capabilities.  Using this call, the browser can determine what the plug-in can support, and gets enough information to ask the plug-in to create instances.  Since the response to this message is rather complex, and since it isn't likely to change dynamically, you might wish to pre-create it and archive it into a resource rather than generate it on-the-fly.
+	<li><b><i>what:</i></b> B_NETPOSITIVE_GET_PLUGIN_INFO
+	<li><b><i>fields:</i></b> <ul>
+		<li><i>none</i>
+	</ul>
+	<li><b><i>response required?:</i></b> <i>yes</i> <ul>
+		<li><b><i>what:</i></b> B_NETPOSITIVE_GET_PLUGIN_INFO
+		<li><b><i>fields:</i></b> <ul>
+			<li>PluginName (string)
+			<li>PluginVersion (string)
+			<li>PluginAPISupported (integer)
+			<li>PluginAboutPage (string.  A complete HTML page)
+			<li>DataTypePlugins (array of BMessages) <ul>
+				<li><b><i>what:</i></b> B_NETPOSITIVE_DATATYPE_PLUGIN
+				<li><b><i>fields:</i></b> <ul>
+					<li><b><i>MIME type:</i></b> Array of string
+					<li><b><i>Filename extension:</i></b> Array of string
+					<li><b><i>Type description:</i></b> Array of string
+					<li>ViewArchive (BMessage).  This contains the archived BView subclass that provides the plug-in's visual representation on the page.  NetPositive will instantiate the instance's BView from the BMessage using the same mechanism used to instantiate replicants; this will require you to export the proper function in your plug-in executable image.  If you plug-in is an application which also supports replicants, you may want to include information in the view archive that will let the view know that it is being instantiated as a browser plug-in as opposed to a replicant archive.
+				</ul>
+			</ul>
+			<li>HTMLFilterPlugins (array of BMessages) <ul>
+				<li><b><i>what:</i></b> B_NETPOSITIVE_HTMLFILTER_PLUGIN
+				<li><b><i>fields:</i></b> <ul>
+					<li><i>none</i>
+				</ul>
+			</ul>
+			<li>URLApprovalPlugins (array of BMessages) <ul>
+				<li><b><i>what:</i></b> B_NETPOSITIVE_URLAPPROVAL_PLUGIN
+				<li><b><i>fields:</i></b> <ul>
+					<li><i>none</i>
+				</ul>
+			</ul>
+		</ul>
+	</ul>
+</ul>
+
+
+<a name="B_NETPOSITIVE_GET_PLUGIN_PREFERENCES">
+<h4><font color=#000066>B_NETPOSITIVE_GET_PLUGIN_PREFERENCES</font></h4>
+
+<ul>
+	<li><b><i>what:</i></b> B_NETPOSITIVE_GET_PLUGIN_PREFERENCES
+	<li><b><i>fields:</i></b> <ul>
+		<li><i>none</i>
+	</ul>
+	<li><b><i>response required?:</i></b> <i>yes</i> <ul>
+		<li><b><i>what:</i></b> B_NETPOSITIVE_GET_PLUGIN_PREFERENCES
+		<li><b><i>fields:</i></b> <ul>
+			<li>PluginPrefsPage (string.  A complete HTML page)  To set preferences, the page must include a form whose action is "netpositive:SetPluginPrefs<pluginName>".  NetPositive will encode the form data in the normal URL encoding and will submit it to the plugin using the <a href="#B_NETPOSITIVE_SET_PLUGIN_PREFERENCES">B_NETPOSITIVE_SET_PLUGIN_PREFERENCES</a> message. Make sure that the form controls are populated with the current preference settings.  <font color=red>We need a way to allow images in this page.  Hmm.</font>
+		</ul>
+	</ul>
+</ul>
+
+<a name="B_NETPOSITIVE_SET_PLUGIN_PREFERENCES">
+<h4><font color=#000066>B_NETPOSITIVE_SET_PLUGIN_PREFERENCES</font></h4>
+If your plugin wishes to have preferences that are accessible from the browser, you can set up an HTML preferences page and let NetPositive know about it via the PluginPrefsPage field in your response to <a href="#B_NETPOSITIVE_GET_PLUGIN_INFO">B_NETPOSITIVE_GET_PLUGIN_INFO</a> message.  The user can access the preferences by navigating to the netpositive:plugins page and following the link from that page to the preferences page to your plug-in.  This will bring up the HTML page that your plug-in supplies.  If the user submits the form, the form data will be packaged up and encoded in the usual way, and sent to your plug-in through this message.<p>
+
+If your plug-in can also function as a standalone application, there may be some question as to whether or not the plug-in preferences are the same as the application prefs, or are a super- or sub-set, or are separate.  You'll have to answer this question yourself in the way that best makes sense for your particular plug-in.
+
+<ul>
+	<li><b><i>what:</i></b> B_NETPOSITIVE_SET_PLUGIN_PREFERENCES
+	<li><b><i>fields:</i></b> <ul>
+		<li><i>data</i> - The application/x-www-form-urlencoded form data.
+	</ul>
+	<li><b><i>response required?:</i></b> <i>no</i>
+</ul>	
+
+<hr width=25%>
+<a name="PluginToBrowserMsg">
+<h3><center><font color=#880000>Plug-in -&gt; browser messages</font></center></h3>
+
+<a name="B_NETPOSITIVE_TERMINATE_PLUGIN">
+<h4><font color=#000066>B_NETPOSITIVE_TERMINATE_PLUGIN</font></h4>
+<ul>
+	<li><b><i>description:</i></b> Used by the plug-in to ask the browser to immediately dispose of all active instances of the plug-in, and to terminate and unload it.  The browser is free to ignore this request.
+	<li><b><i>what:</i></b> B_NETPOSITIVE_TERMINATE_PLUGIN
+	<li><b><i>fields:</i></b> <ul>
+		<li><i>none</i>
+	</ul>
+	<li><b><i>response required?:</i></b> <i>no</i>
+</ul>
+
+<hr>
+<a name="DataTypePlugins">
+<h2><font color=#994400><center>DataType plug-ins</center></font></h2>
+DataType plug-ins are the NetPositive equivalent of "normal" browser plug-ins.  They are instantiated via an &lt;EMBED&gt; tag in a page and are called upon to display a specific kind of data specified by MIME type in the tag.  They do their work in a rectangular portion of the page (through a BView) and last as long as the page lasts.<p>
+
+Since a DataType plug-in is instantiated as a BView subclass, that means that your plug-in is pretty self-sufficient in terms of receiving UI events and drawing its contents.  Also, your plug-in has full access to the BeOS kits for any sort of system access necessary to do its work.<p>
+
+Your plug-in should not make any assumptions about what its parent view or operating environment is.  In particular, don't assume that your plug-in is instantiated inside a browser window; it's possible that the HTML page is being viewed inside a NetPositive replicant which is itself instantiated in some other application's window.<p>
+
+NetPositive will provide your browser with a BMessenger object and a suite of messages for communication with the browser; use this messenger for these communication tasks, rather than trying to send BMessages to your view's parent window or to the browser application itself.<p>
+
+The BMessenger that the browser gives your plug-in instance is not the same BMessenger that is given to your plug-in as a whole; do not send instance messages to the browser messenger and vice-versa.  The messenger given to your instance represents the page that the instance is loaded in; if you have multiple instances loaded, each will have its own messenger (which may be different across instances depending on whether the instances are in different pages or not).  The messenger given to your plug-in as a whole represents the entire browser and is not tied to a specific window.<p>
+
+Since your DataType plug-in exists as a BView inside NetPositive's browser window, there are some good programming practices that you should follow to keep the browser as fast and responsive as possible.  These hints apply not only to browser plug-ins, but to BeOS programs in general.<p>
+
+If you're familiar with the Netscape plugin API, you'll know that Netscape differentiates between "windowed" and "windowless" plug-ins.  A windowed plug-in is one that owns its own operating-system-dependent equivalent of a BeOS BView, which receives its own events and is largely self-sufficent.  A windowless plug-in shares a view with the browser window, and is less self-sufficient -- Netscape's API includes functionality to handle the passing of operating system events to windowless plug-ins.  The main advantage of a windowless plug-in is to allow plug-ins to be "transparent", meaning that they can draw only those parts of their content areas that they want to, leaving the browser to fill the rest in with the page background.  This allows plug-ins to have the appearance of non-rectangluar or non-contiguous boundaries.<p>
+
+NetPositive does not make a distinction between windowed and windowless plug-ins in its API; all plug-ins have their own BView and are self-sufficient when it comes to drawing and processing events, making them akin to windowed plug-ins.  To support the background-drawing facilities of windowless Netscape plug-ins, NetPositive will in the future set the B_DRAW_ON_CHILDREN flag of the parent view, which will effectively draw the page background on all parts of plug-in views not drawn by the plug-ins themselves.  (This sort of functionality is not possible on other platforms, which is why windowless plug-ins were invented).  For this reason, it is important that your plug-in erase its content rectangle to some color if it does not want the page background drawn there; while B_DRAW_ON_CHILDREN is not currently set and the operating system will erase the content rectangle for you before your BView::Draw method is called, this will change in the future.<p>
+
+Your plug-in BView subclass should not depend on ever being attached to a window (which means that AttachedToWindow() and DetachedFromWindow() will never be called, and that Window() will always return NULL).  This is because an HTML page is free to make a plug-in hidden (through use of the HIDDEN attribute in the EMBED tag).  For hidden plug-ins, NetPositive creates the plug-in's BView but does not attach it to the window.<p>
+
+Your plug-in should not rely on the Pulse() mechanism to receive regular pulse notifications from the app_server.  This is because your plug-in isn't really free to set the pulse rate or turn the pulse mechanism on or off only for itself; this mechanism operates on a whole-window basis, and NetPositive already uses it for purposes of its own.  If your plug-in needs to receive regular pulse events, you should probably spawn a separate pulse thread to send regular messages to your view.<p>
+
+If your DataTye plug-in understands a data format that might potentially appear in standalone files as well as embedded in Web pages, it would be a good idea if your plug-in also acted as a regular application that could be used as a standalone viewer for files of that type.  Netscape and Internet Explorer have the capability to use plug-ins to use plug-ins to show standalone files by instantiating the plug-in full-sized in a separate window; NetPositive does not do this.  If you try to open a file in NetPositive that it doesn't understand, it will ask the OS to find the normal handler application for the file type and launch that application instead.<p>
+
+DataType plug-ins are given a mechanism to store small amounts of arbitrary data in the browser's page history.  Each instance, before it is destroyed, can give this data to the browser in the form of a BMessage.  If the user returns to the page via the back/forward buttons, then the data is given back to the instances when they are created.  If there are multiple plug-in instances on a single page, each one gets separate storage, and NetPositive is careful to give the proper data back to the proper instances.<p>
+
+This mechanism is intended to allow plug-ins to have the same persistence of state that other parts of the HTML page enjoy when the user uses the Back button to go back to a previously visited page: the page is scrolled to the position it was last in, form fields are populated with their previous values, etc.  If you have a plug-in that displays a movie, for example, you could remember the last frame that the movie was playing when the user left the page, and pick up where you left off when the user returns.<p>
+
+This mechanism is not intended for long-term persistent storage; this data is not stored in NetPositive's cache or anywhere on disk.  It only works for going back/forward, the way that scroll position and form data do for normal HTML pages now.<p>
+
+<font color=red>What do you do about pages that specify windowed plug-ins?  You can't launch the application, because you can't pass the tag parameters along.</font><p>
+
+<font color=red>Talk about how the view gets sized and when during creation</font><p>
+
+
+<hr width=25%>
+<a name="DataTypeTips">
+<h3><center><font color=#880000>Tips for writing good DataType plug-ins</font></center></h3>
+It is important that your plug-in avoid doing computationally-intensive work when its BView's parent BWindow is locked.  While the window is locked, it is unresponsive to user input and cannot redraw itself as necessary.  The window can become locked if your view explictly calls <tt>BView::Window()-&gt;Lock()</tt>.  The window is also locked for you before your <tt>MessageReceived()</tt>, <tt>Draw</tt>, <tt>MouseUp</tt>/<tt>MouseDown</tt>/<tt>MouseMoved</tt>, <tt>KeyUp</tt>/<tt>KeyDown</tt>, <tt>Pulse</tt>, <tt>FrameMoved</tt>/<tt>FrameResized</tt>, and other callback virtual functions are invoked.  If at all possible, try to prevent doing CPU-intensive work in these functions, and move it into a separate thread.  It's a little more difficult, but there's a big payoff because the browser will feel much quicker and more responsive, qualities users expect of all BeOS applications.<p>
+
+
+<hr width=25%>
+<a name="EmbeddingDataTypes">
+<h3><center><font color=#880000>Embedding DataType plug-ins</font></center></h3>
+<font color=red>Talk about the Embed and Object tags</font><p>
+<font color=red>Talk about the location field of the tag and how to auto-download and install plug-ins</font><p>
+
+NetPositive communicates with your instance by sending BMessages to the BView, which will be caught in your override of <tt>BView::MessageReceived</tt>.
+
+
+<hr width=25%>
+<a name="DataTypeBrowserToInstanceMsg">
+<h3><center><font color=#880000>Browser -&gt; instance messages</font></center></h3>
+
+<a name="B_NETPOSTIIVE_INIT_INSTANCE">
+<h4><font color=#000066>B_NETPOSTIIVE_INIT_INSTANCE</font></h4>
+	<li><b><i>description:</i></b> This message is sent to the plug-in instance shortly after it has been created and attached to the parent BView.  It supplies the instance with the parameters provided in the &lt;EMBED&gt; tag that brought it to life, and gives the instance an opportunity to perform whatever initialization is necessary for it to do its work.
+	<li><b><i>what:</i></b> B_NETPOSTIIVE_INIT_INSTANCE
+	<li><b><i>fields:</i></b> <ul>
+		<li>Parameters (BMessage) <ul>
+			<li>Attribute (Array of string)
+			<li>Value (Array of string)
+		</ul>
+		<li>BrowserMessenger (BMessenger) - A BMessenger that represents the context which this plug-in instance is living in.  The instance can make instance-specific requests of the browser by sending messages to this BMessenger.
+		<li>InstanceData (BMessage) - The instance-specific data that was passed to NetPositive by the plug-in instance at the same URL on this page the last time it was viewed.  This data comes from the page history.  If this page isn't loaded from the history, or if your instance did not supply any data to be stored, this field will not be present.
+	</ul>
+	<li><b><i>response required?:</i></b> <i>no</i>
+</ul>
+
+
+<a name="B_NETPOSITIVE_TERMINATE_INSTANCE">
+<h4><font color=#000066>B_NETPOSITIVE_TERMINATE_INSTANCE</font></h4>
+<ul>
+	<li><b><i>description:</i></b> This message is sent to the plug-in shortly before it is to be removed from the parent view and destroyed.  It exists to give the plug-in advanced notice, if the plug-in needs it, that it is about to be put to death. <font color=red>Mention that it needs to return a response or delete the message quickly and not block.</font>
+	<li><b><i>what:</i></b> B_NETPOSITIVE_TERMINATE_INSTANCE
+	<li><b><i>fields:</i></b> <ul>
+	</ul>
+	<li><b><i>response required?:</i></b> <i>optional</i><ul>
+		<li><b><i>what:</i></b> B_NETPOSITIVE_TERMINATE_INSTANCE
+		<li><b><i>fields:</i></b> <ul>
+			<li>InstanceData (BMessage) - If you wish to store data to be given back to the instance on this page at the same URL if the user returns to this page, supply a BMessage containing that data here.
+	</ul>
+</ul>
+
+
+<hr width=25%>
+<a name="DataTypeInstanceToBrowserMsg">
+<h3><center><font color=#880000>Instance -&gt; browser messages</font></center></h3>
+
+<a name="B_NETPOSITIVE_OPEN_URL">
+<h4><font color=#000066>B_NETPOSITIVE_OPEN_URL</font></h4>
+This is the same B_NETPOSITIVE_OPEN_URL that you can send to the NetPositive application or to replicant views.  Plug-ins will be interested in some of the extra capabilities of this message.<p>
+
+<font color=red>We need a way of streaming to disk, and not returning until we're done, etc.</font><p>
+<font color=red>We need a way for the plugin (or 3rd party app) to send raw HTML to the browser for display</font><p>
+<ul>
+	<li><b><i>what:</i></b> B_NETPOSITIVE_OPEN_URL
+	<li><b><i>fields:</i></b><ul>
+		<li><b><i>Target</i></b> (String)
+		<li><b><i>PostData</i></b> (String) - application/x-www-urlencoded
+		<li><b><i>ReturnStream</i></b> (Bool) - True to return 
+	</ul>
+	<li><b><i>response required?:</i><b> Yes.  NetPositive will send a reply to the message when it is finished loading.  You are free to ignore this if you want.<ul>
+		<li><b><i>what:</i></b> B_NETPOSITIVE_OPEN_URL
+		<li><b><i>fields</i></b><ul>
+			<li><b><i>url</i></b> (String)<ul>
+				<li><font color=blue>~or~</font>
+			</ul>
+			<li><b><i>error</i></b> (int32) - <font color=red>Say something here</font>
+			<li><b><i>streamArchive</i></b> (BMessage) - An archived NetPositiveStreamIO.  Instantiate() it to create your stream.
+		</ul>
+	</ul>
+</ul>
+<font color=red>Mention that non-HTTP, non-form uploading is not supported</font><br>
+
+<a name="B_NETPOSITIVE_STATUS_MESSAGE">
+<h4><font color=#000066>B_NETPOSITIVE_STATUS_MESSAGE</font></h4>
+<font color=red>Say something about this.  Talk about persistence of the message.</font>
+<ul>
+	<li><b><i>what:</i></b> B_NETPOSITIVE_STATUS_MESSAGE
+	<li><b><i>fields:</i></b> <ul>
+		<li>Message (String) - The message to be displayed in the status area.
+	</ul>
+	<li><b><i>response required?:</i></b> <i>no</i>
+</ul>
+
+<hr>
+<a name="URLApprovalPlugins">
+<h2><font color=#994400><center>URLApproval plug-ins</center></font></h2>
+URLApproval plug-ins provide a means of adding third-party partental content control facilities to NetPositive.  This is done with a plug-in through which NetPositive sends all URL's (not only URL's for pages, but for images and auxilliary files) before it attempts to load them.  Parental filters that rely on preventing access to objectionable sites based on a list of prohibited URL's can easily hook into this mechanism to do their work.  This approach could be combined with an HTMLFilter plug-in to scan individual pages for objectionable content, if the page URL is okayed by the URLApproval plug-in.<p>
+
+It is important to note that there is at present no real means to prevent a BeOS-knowledgeable child from simply uninstalling the plug-in to disable the parental filter controls.  This seriously limits the confidence that parents can have in any filters they install.  This situation will improve when multiuser secure support is added to the BeOS; under that scenario, a parent could set up an account for a child that does not provide sufficient access to the Netpositive plug-ins folder to permit children to disable filtering plug-ins.<p>
+
+If more than one URLApproval filter is installed, NetPositive will route URL requests through them in series.  There is no guaranteed order in which the filters will be called.<p>
+
+In the meantime, though, the existing parental control support should provide a useful if limited tool to implementors of such software.
+
+<hr width=25%>
+<a name="#BrowserToPluginMsg">
+<h3><center><font color=#880000>Browser -&gt; plug-in messages<font></center></h3>
+
+<a name="B_NETPOSITIVE_APPROVE_URL">
+<h4><font color=#000066>B_NETPOSITIVE_APPROVE_URL</font></h4>
+<ul>
+	<li><b><i>what:</i></b> B_NETPOSITIVE_APPROVE_URL
+	<li><b><i>fields:</i></b> <ul>
+		<li><i>url</i> (String) - The fully-qualified URL.
+	</ul>
+	<li><b><i>response required?:</i></b> <i>yes</i><ul>
+		<li><b><i>what:</i></b> B_NETPOSITIVE_APPROVE_URL
+		<li><b><i>fields:</i></b> <ul>
+			<li><i>url</i> (String) - The fully-qualified, approved URL.  If you wish to reject the URL entirely, return en empty string.  If you wish, you can modify the URL to point to another page (such as an error page, etc.)
+		</ul>
+	</ul>
+</ul>
+
+<hr>
+<a name="HTMLFilterPlugins">
+<h2><font color=#994400><center>HTMLFilter plug-ins</center></font></h2>
+HTMLFilter plug-ins intercept all raw HTML before it is passed on to NetPositive's HTML parsing and rendering code.  These plug-ins can modify the HTML stream to perform a variety of functions, such as parental content filtering, reformatting for special-purpose displays, filtering of banner advertisements, special searching and indexing, and more.<p>
+
+If you are interested in writing an HTMLFilter plug-in to do parental content filtering, please read the note about plug-ins and security in the section on <a href="#URLApprovalPlugins">URLApproval plug-ins</a>.<p>
+
+<font color=red>Please say something about determining content-length.</font><p>
+
+<font color=red>Please talk more about doing parental content filters.  Talk about buffering up the whole page to look for objectionable content, how to reject the whole page (substitute an error page for the HTML).  Talk about passing through content as quickly as possible to keep incremental display working.</font>
+
+<hr width=25%>
+<a name="#BrowserToPluginMsg">
+<h3><center><font color=#880000>Browser -&gt; plug-in messages<font></center></h3>
+
+<a name="B_NETPOSITIVE_FILTER_HTML">
+<h4><font color=#000066>B_NETPOSITIVE_FILTER_HTML</font></h4>
+<ul>
+	<li><b><i>what:</i></b> B_NETPOSITIVE_FILTER_HTML
+	<li><b><i>fields:</i></b> <ul>
+		<li><i>url</i> (String) - The fully-qualified URL of the HTML stream to be filtered
+		<li><i>HTMLStream</i> (BNetPositiveStreamIO) - The HTML stream.
+	</ul>
+	<li><b><i>response required?:</i></b> <i>yes</i><ul>
+		<li><b><i>what:</i></b> B_NETPOSITIVE_FILTER_HTML
+		<li><b><i>fields:</i></b> <ul>
+			<li><i>HTMLStream</i> (BNetPositiveStreamIO) - The filtered HTML output stream.
+		</ul>
+	</ul>
+</ul>
+
+
+
+<hr>
+<a name="DataTypes">
+<h2><font color=#994400><center>Auxilliary classes and data types</center></font></h2>
+
+<hr width=25%>
+<a name="BNetPositiveStreamIO">
+<h3><center><font color=#880000>BNetPositiveStreamIO class</font></center></h3>
+<font color=red>Account for the fact that the plug-in may be in a different address space.  Figure out how to pass these through messages.  Refrence count them and make the destructor private.</font>
+</body>
+</html>

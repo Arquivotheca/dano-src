@@ -1,0 +1,122 @@
+Lecture:
+
+mkimghdr is a nifty utility that allows you to create a file
+that looks like this:
+
+#define vcrimg_width 226
+#define vcrimg_height 38
+#define vcrimg_cspace B_COLOR_8_BIT
+#define vcrimg_bytesperpixel 1
+
+unsigned char img_bits[] = {
+0x11,0x11,0x11,0x11,0x11,0x11,0x11,0x11,...
+
+
+This information in turn can be used like this:
+
+
+	// Load the background image
+	BRect tempRect(0, 0, vcrimg_width-1, vcrimg_height-1);
+	fImage = new BBitmap(tempRect, vcrimg_cspace);
+	for (int row=0; row < vcrimg_height; row++)
+	{
+		int bitsoffset = row*vcrimg_bytesperpixel*vcrimg_width;
+		int bytesperrow = vcrimg_bytesperpixel*vcrimg_width;
+		int bitmapoffset = row*fImage->BytesPerRow();
+		fImage->SetBits((char*)vcrimg_bits+bitsoffset, bytesperrow, bitmapoffset, vcrimg_cspace);
+	}
+
+This is what is referred to as an embedded image.  It is
+distinguished from other images in that it is incorporated into
+the program as compiled code rather than as a resource or a
+separate file.
+
+Embedded images are typically used on UI elements that will never 
+change and are relatively small.  One example might be a 
+specialized set of characters that represent the numbers from 
+1 to 10.  You don't want to include a special font, and you don't
+want them exposed in a resource file, so you create embedded
+images for them.
+
+Embedded images have their place.  The preferred method of
+image inclusion is to utilize resource files instead.  Embedded
+images should only be used after careful consideration and to 
+good benefit.
+
+Purpose:
+
+The purpose of the mkimghdr program is to allow you to quickly and
+easily create a header file that contains the necessary structure
+of a embedded image.  It utilizes a dynamically loaded image 
+codec library that allows you to turn an image from any format 
+into a embedded image.  This current version utilizes the add-ons
+for the Rraster program which are included in the Advanced Access
+version of the BeOS.  The same technique could be used with 
+any dynamic image library such as Datatypes.
+
+The code is fairly straightforward and easy to follow if you 
+are so inclined.  The file mkimghdr_main.cpp utilizes a function
+call in the ArgvReceived method CreateRasterImage().  This
+function is specific to the Rraster set of codecs.  You can
+replace this call with anything you wish that generates images.
+Then, the writeHeader() function call is used to turn the image
+information into the embedded image.  Again, this call can be
+replaced to match whatever mechanism you use to generate the image
+in the first place.
+
+Instructions:
+
+The easiest thing to do is place the mkimghdr program into
+a convenient location like the apps directory, or perhaps 
+/boot/bin.  Either one will do as long as it is in your $PATH.
+
+Usage:
+
+mkimghdr imagefile > headerfile.h
+
+imagefile
+
+	can be any format of image that you have a codec for.
+You can check in your /boot/system/add-ons/rraster directory and
+see what codecs are available.  The ones that shipped with the 
+AA release were Targa and GIF.  You will get more in a newer
+release, but these are fairly common formats.
+
+You can also give an alternative tag to go along with the file.
+If you you a form such as:
+
+mkimghdr imagefile atag > headerfile.h
+
+Then, each of the #define variables will be prepended with what
+you put in the tag parameter.  If you don't specify a tag, then 
+a default tag of "img_" will be used.
+
+Notes:
+
+The mechanism of using embedded images is not necessarily a good
+way to go.  It's advantage is that it's relatively easy to use,
+images can be created from any format, and you don't have to 
+worry about how resources are dealt with.  Another advantage might
+be that it allows you to hide images in your files with a 
+decreased likelyhood that someone will steal your images for
+unauthorized usage.
+
+There are a couple of disadvantages.  
+
+1)  Using embedded images such as these does not allow you to 
+change the images at run-time. If you store images in resource 
+files, then you can alter them at any time without having to 
+re-compile the program, you lose this capability with embedded 
+images.
+
+2)  Depending on the compiler, you may not be able to compile a 
+particular program because the image structure created is simply
+too large.  The current Metrowerks compiler runs out of memory 
+when trying to compile one of these embedded images that is
+640x480 8-bit.
+
+Because of these limitations, embedded images may not be the 
+right thing for you.  They aren't an absolute evil to be avoided
+at all costs, but they do have their disadvantages.  The only real
+advantages are their ease of use for small quick images, and their
+relative security.

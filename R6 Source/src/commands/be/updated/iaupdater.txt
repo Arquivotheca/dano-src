@@ -1,0 +1,237 @@
+BeIA Updater Configuration and Use
+
+Abstract
+The BeIA Updater provides the means to remotely update and maintain the software on a Be internet appliance. This document describes the procedures for configuring and using the updater.
+
+TOC
+1. Introduction
+2. Updater Overview
+	2.1 Updater and Scripts
+	2.2 Support Utilities
+3. The Update Daemon
+4. Uber Update Script
+5. Update Script
+	5.1 Interdependent Updates
+		5.1.1 Interdependent Update Environment Variables
+	5.2 One-Shot Updates
+		5.2.1 One-Shot Update Environment Variables
+6. Do Update Script
+	6.1 Update Script Parameters
+7. Do Upgrade Script
+	7.1 Update Script Parameters
+8. Update Configuration Script
+9. Update URL file
+10. MicroShell (ush)
+11. DSA Signatures
+	11.1 dsasig Utility Functions
+	11.2 DSA Signature Updater Files
+12. Configuration, Testing, and Customizing
+
+1. Introduction
+It will be desireable to update the software stored on Be IAs from time-to-time. This may include upgrades to major system components as well as any vendor specific data stored on the device. The updater must be able retrieve different update packages based on the locale and language selected by the user. The updater must be able to deal with interdependencies of update packages as well as stand-alone updates such as data files containing updated local html documents. When possible, updates should remain transparent to the user requiring no intervention. 
+
+Transparency will not be achievable for all updates. Some updates will be too large for available memory while the browser is running. Others may include system components which could render the device unbootable if interrupted at a critical moment. Updates of system software components will require a restart as well. The above scenarios require some level of user interaction. It should make clear to the user damage may result if the upgrade process is interrupted during the critical stage of the update.
+
+2. Updater Overview
+At the core of the update utility is the Update Daemon, "updated," which is responsible for executing the "Uber Update Script." The "Uber Update Script" is a "MicroShell" (ush) script which retrieves the latest ( locale and language specific ) version of the "Update Script" over the Internet and executes it. The "Update Script" encapsulates the logic for dealing with interdependent upgrades as well as one-shot updates. If the "Update Script" determines an update is necessary, it will download and install the appropriate update package either by invoking one of the "canned" updater scripts or by furnishing its own update script.
+
+The supporting utilities provide the means to create and initialize a RAM disk, retrieve files via HTTP or FTP protocol over the Internet, authenticate update scripts and packages via digital signatures, decompress and install updates to flash, interact with the user, and perform file management activities. To use the updater, it is not necessary to interact directly with the support utilities, unless you wish write your own updater script; the "canned" updater scripts should be adequate for most needs.
+
+2.1 Updater and Scripts
+- The Update Daemon ( /bin/updated ): Responsible for executing the Uber Update Script on a regular basis.
+- Uber Update Script ( /etc/update/updt ): Responsible for downloading the latest Update Script and executing it.
+- Update Script ( /etc/update/updatescript ): Downloadable script responsible for version control logic.
+- Do Update Script ( /etc/update/doupdate ): Canned "transparent" update script. Suitable for small ( <1MB ) non-system-critical updates.
+- Do Upgrade Script ( /etc/update/doupgrade ): Canned "interactive" update script for performing system-critical updates.
+- Updater URL File ( /etc/update/update_url ): Used to store the URL of the update packages to use.
+
+2.2 Support Utilities
+- MicroShell ( /bin/sh ): Script interpreter.
+- sndcmd ( /bin/sndcmd ): Sends messages to others apps and waits for reply.
+- RAM Disk Driver ( /dev/disk/virtual/ram/0 ): The RAM disk device driver.
+- setvolumesize ( /bin/setvolumesize ): Allocates and frees memory needed by the RAM disk.
+- mkcfs ( /bin/mkcfs ): Initializes compressed file system on the RAM disk.
+- mount and unmount ( /bin/mount /bin/unmount ): Mount and unmout the RAM disk.
+- wget ( /bin/wget ): Utility used to retrieve files via HTTP or FTP over the Internet.
+- unzip ( /bin/unzip ): File integrity check and decompression.
+- addattr ( /bin/addattr ): Used to store file attributes on non-volatile storage device ( flash ).
+- dsasig ( /bin/dsasig ): DSA digital signature app.
+
+3. The Update Daemon
+The Update Daemon is responsible for executing the "Uber Update Script." It is aware of the state of the network connection and will not execute the script if the network is down. It will execute the script immediately after the network comes up for the first time at which point it starts a timer. The timer will cause the script to be executed on a periodic basis as long as the network connection remains established. The time interval is 15 minutes if the last update failed ( as reported by the exit code of the update script ) or 4 hours if the last update was successful.
+
+4. Uber Update Script
+This script is responsible for downloading the latest "Update Script" and executing it. First, it calls the "doupdate" script to download the latest "Update Script" from the location specified in the updater URL file.  Then it tests for the presence of "/etc/update/updatescript" and executes if present. 
+
+5. Update Script
+This "Server Side" script is downloaded each time the "Uber Update Script" is executed. It contains the logic for determining what steps are necessary to bring the client's machine up-to-date. 
+
+5.1 Interdependent Updates
+Incremental updates of system software components need a mechanism to resolve interdependencies. The Update Script defines a list of incremental upgrade paths for the most recent revisions and a fallback "full upgrade" for any undefined revisions. For example, if the current revision is "4", an incremental update might be defined for revisions 2->3 and 3->4. If the client had neither revision 2 or 3, it would fallback to downloading a full upgrade, which would include all components. This avoids having to define an upgrade path from all possible revisions.
+
+Interdependent updates always execute in interactive mode because they will typically be too large to download while the browser is running and they may contain system-software components. If the update is installed successfully, the machine will be restarted when complete.
+
+5.1.1 Interdependent Update Environment Variables
+An interdependent will be triggered if the value of REVISION does not match the value of CUR_REVISION. The update script will compare the value of REVISION to a list of possible update packages to determine which is appropriate and set the value of NEXT_REVISION to the revision of the selected package. If the update is successful, the value of REVISION will be set to NEXT_REVISION to avoid installing the update a second time.
+
+- REVISION: The revision currently installed on this machine. This is loaded from the file /etc/update/revision.
+- CUR_REVISION: The most up-to-date revision currently available. This is defined in the Update Script.
+- NEXT_REVISION: The revision selected by the script to upgrade to.
+
+5.2 One-Shot Updates
+One shot updates are used primarily to update data files such as local html and images. One-shot updates are always "transparent" and should not exceed 1MB or include any system-critical components. They are not allowed to have dependencies on previous one-shot updates, however they can depend on the current system software revision being up-to-date because they will not be executed unless all interdependent updates have completed successfully.
+
+5.2.1 One-Shot Update Environment Variables
+A one-shot update will be triggered if the value of UPDT_IDENT does not match the value of CUR_IDENT. If the one-shot update is successful, UPDT_IDENT will be set to the value of CUR_IDENT to prevent it from installing the update a second time. Identifiers values are strings which needs to be unique for each one-shot update. The initial identifier is "0".
+
+Suggestion: Use the "dsasig" utility to create a check-sum of the update and use the check-sum as the package identifier. See section 11.2
+
+- UPDT_IDENT: The identifier of the currently installed One-Shot update. This is defined in the Update Script.
+- CUR_IDENT: The identifier of the latest available update. This is defined in the Update Script.
+
+6. Do Update Script
+This is a canned script which can be used to perform a "transparent" update. It takes three parameters: UPDATE_PACKAGE, UPDATE_TARGET, and UPDATE_KEY. It returns 0 on success and 1 on failure. This script will setup a 1MB RAM disk, attempt to download the package to the RAM disk, verify the package signature with UPDATE_KEY , unzip the resource to the target directory, and tear-down the RAM disk when complete. The memory used for the RAM disk will be the unused portion of the video frame buffer, thus avoiding contention for memory with the browser.
+
+6.1 Update Script Parameters
+The following are passes as environment variables to the" doupdate" script.
+- UPDATE_PACKAGE: This specifies what resource you wish to retrieve.
+- UPDATE_TARGET: This is the destination directory into which the update package will be unzipped.
+- UPDATE_KEY: This is the public key used to verify the package. The path of the key used will be "/etc/update/keys/$UPDATE_KEY.pub".
+
+7. Do Upgrade Script
+This canned script will attempt to perform a major upgrade. This type of update should be used sparingly because it is quite disruptive to the user. It is the same as the Update Script in section 6.0, with the exception of it being suited to larger system-critical upgrades. When executed, it will display a dialog box asking the user if they wish to install the upgrade at this time. The user will be presented with the options: "upgrade now" and "defer." If the user should choose to "defer," they will be queried every 15 minutes until they consent to the upgrade. This script will shutdown the browser to free as much RAM as possible. This RAM is needed for the construction of a large RAM disk. During the upgrade, a window will show the status of the upgrade to indicate progress and warn the user when it is unsafe to interrupt the the process. When complete, the machine will reboot on success or restart the browser on failure.
+
+The messages displayed by the alert and status window are defined in "custom/resources/(languange)/Alerts/doupgrade.txt".
+The template for the alert is "custom/resources/(languange)/Alerts/alert2.html".
+The template for the status window is "custom/resources/(languange)/Alerts/upgradeinfo.html".
+
+7.1 Update Script Parameters
+The following are passes as environment variables to the update script.
+- UPDATE_PACKAGE: This specifies what resource you wish to retrieve.
+- UPDATE_TARGET: This is the destination directory into which the update package will be unzipped.
+- UPDATE_KEY: This is the public key used to verify the package. The path of the key used will be "/etc/update/keys/$UPDATE_KEY.pub".
+- UPDATE_SIZE: The size of the RAM disk in megabytes.
+
+8. Update Configuration Script
+This script is under construction.
+
+Note: To use this script, you will need to mount the flash partition on a desktop computer running BeOS.
+
+9. Updater URL File
+This file ( /etc/update/update_url ) is used to store the URL of the server from which update packages are retrieved.  It must be modified on the client image before any clients are shipped, and in each upgrade.
+
+10. MicroShell (ush)
+ush is the lightweight command processor used to interpret the updater scripts.
+
+Each line (max 4096 bytes) is read and tokenized: environment variables prefixed with '$' are expanded, backslash and doublequote quoting work much like a real shell would.
+
+Tokens starting with '#' indicate that the remainder of the line is a comment.
+
+Each line is considered to be a statment which may be either an expression or part of an if clause (each "if", "else", and/or "fi" must be on its own line).
+
+	if grep crashed /var/log/syslog
+		alert "The system crashed." "Okay"
+	fi
+
+If statements may be nested (to a depth of 128, after which bad stuff will likely happen).
+
+The expression evaluator will attempt to find a builtin command (listed below) . Should that fail, the path is searched for a matching command (unless the  command has a '/' in its name -- in which case a full path is assumed).
+
+Builtins
+---
+read <var> - read one line into an env var
+cd <path> - change current directory
+pwd - print current directory
+echo ... - echo arguments to stdout
+setenv <var> <value> - $var=value
+run <path> - execute a process
+spawn <path> - run a background process
+eq <var> <value> - true if $var==value
+neq <var> <value> - true if $var!=value
+not <expr> - invert the return code
+exit [<value>] - exit this script
+source <path> - run a script
+true
+false
+exists <path> - true if path exists
+isdir <path> - true if path is a directory
+isfile <path> - true if path is a plain file
+waitfor <name> - wait until a thread appears
+sleep <seconds> - pause for a while
+chmod <mode> <path> - change the mode bits
+env - print the environment
+kill <signal> <pid>|<name> - send a signal
+rm <path> ... - remove object(s)
+rmdir <path> - remove a directory
+mkdir <path> - make a new directory
+sync - sync the file system
+rescan <driver> - republish a driver
+mv <source> <dest> - move something
+ls [-l] [<path>] - list files
+help - print this list
+attr <path> ... - print attributes of object(s)
+rdattr <path> <attr> <var> - load attribute into env var
+
+11. DSA Signatures
+A digital signature allows a receiver to verify a document originated from a trusted sender without having been tampered with. The DSA signature app is used to verify the digital signature of downloaded files. This will prevent the updater from executing a script or installing a package originating from an unauthorized source.
+
+Digital signatures work by using a pair of cryptographic keys: a private key and a public key. The private key is required to sign the document and the public key is required to verify the document. It is not possible to derive the value of the private key by knowing the value of the public key.
+
+In addition to the public key and the private key, DSA requires a common set of parameters to operate. The parameters may be shared by more than a single public/private key pair an may be made public without risking the security of the algorithm.  To simplify signature management, all keys should use the same set of parameters.
+
+11.1 dsasig Utility Functions
+In addition to document verification, the "dsasig" utility is used for creating new DSA parameters, generating new key pairs, and signing documents.
+
+-- Message Digests with SHA1
+usage: dsasig sha1 <file>
+This calculates and prints the 160 bit SHA1 message digest of a file. It could used to create a unique value for the CUR_IDENT variable used by the One-shot update mechanism.
+
+-- Creating new DSA Parameters
+usage: dsasig mkparams <key_length> <output_file>
+This will generate a new set of DSA parameters of the specified key length and write them to "output_file." The key length should probably be set to 1024. This function will take a significant amount of time to execute.
+
+-- Creating a New Public/Private Key Pair
+usage: dsasig mkkey <params_file> <key_name>
+This function generates a new private/public key pair using the specified DSA parameters file. You will be asked for a password to use when the private key is used to sign a document. This password is used to encrypt the private key; this provides some protection against the private key falling into the wrong hands. Don't loose this password because you will not be able to sign documents without it. The sample private key is encrypted with the following password: B80ACE4C3F8F0D
+
+Two files will be created: "key_name.priv" and "key_name.pub".
+
+* key_name.priv: This contains the encrypted DSA private key. This file is required to sign documents and should be protected from unauthorized access.
+* key_name.pub: This contains the DSA public key in ascii format. This file is required to verify documents signed with the private key. It can be made public without risk of compromising the private key.
+
+Note: The other functions which use the generated keys refer to the key file without the extension: verifying a document with the public key "mykey.pub" would refer to the key as just "mykey".
+
+-- Signing a Document
+usage: dsasig sign <params_file> <key> <target>
+This function is used to sign a document. To sign a document:
+
+* The SHA1 message digest is calculated for the specified "target" file.
+* The user is prompted for the private key password and the private key is decrypted. There is no way to check if the user entered the correct password at this point.
+* The message digest is encrypted with the private key.
+* The encrypted message digest is decrypted with the public key and compared with the original message digest: if they don't match, the program exits with an error because the generated signature is not valid. This would occur if the wrong password had been entered.
+* The encrypted message digest is appended to the end of the target file: this is the signature.
+
+Note: The public key and private key must be in the same directory for a document to be signed. The public key is used to test the validity of the generated signature before appending it to the file.
+
+-- Verifying a Document
+usage: dsasig verify <params_file> <key> <target>
+This function is used to verify a signed document.
+
+* The end of the document is scanned for a DSA signature.
+* The SHA1 message digest is calculated for the specified "target" file; the signature portion of the document is omitted from this calculation.
+* The signature is decrypted using the specified public key.
+* If the decrypted signature does not match the message digest, the document is a forgery and the program exits with an error.
+* If the decrypted signature matches the message digest, the document is authentic. The signature is stripped from the target file and the program exits with success.
+
+11.2 DSA Signature Updater Files
+The following files are needed by the updater for signatures to work:
+- DSA Parameters ( /etc/update/keys/params ): DSA parameters used by all keys
+- Master Public Key ( /etc/update/keys/master.pub ): This key is used to verify all update scripts and packages.
+- Maser Private Key ( not included on device - master.priv ): This key is used to sign documents.
+
+12.Configuration, Testing, and Customizing
+* Before the device is shipped, the updater needs to be configured with the correct updater URL parameters and a new set of DSA keys should be created. See sections 8 and 11 respectively. The strings in "/custom/resources/(languange)/Alerts/doupgrade.txt" should be modified/localized. The html dialog ( "custom/resources/(languange)/Alerts/alert2.html" ) and update progress page ( "custom/resources/(languange)/Alerts/upgradeinfo.html" ) should be customized as needed. 
+* A machine should be configured as a web server to serve up the "updatescript" and any archives it references.  See section 5 and the sample "updatescript."
+* The sample "updatescript" should be modified to suit your update needs. See section 5 and the sample "updatescript."
+* The "updatescript" and update packages should be zipped, signed (section 11), and uploaded to the web server.
+* The configured device should now automatically download, verify, and execute your "updatescript."

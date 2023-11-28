@@ -1,0 +1,78 @@
+Address   Size      Name    Subname  Module
+
+80001000 00000032 .text    $         Comment.o(_perform_edit)
+80001032 00000117 .text    $         Comment.o(?AddComments@@YAJPAVMTextAddOn@@@Z)
+80001149 000000fd .text    $         Comment.o(?RemoveComments@@YAJPAVMTextAddOn@@@Z)
+80001246 0000000b .text    $         init_term_dyn.o(__init_routine_)
+80001251 0000000b .text    $         init_term_dyn.o(__term_routine_)
+8000125c 00000006 .text    $         libroot.so(??2@YAPAXK@Z)
+80001262 00000006 .text    $         libroot.so(??3@YAXPAX@Z)
+80001268 00000009 .text    $         runinit.o(__GLUEarea_for_)
+80001271 00000009 .text    $         runinit.o(__GLUE_get_area_info_)
+8000127a 0000004a .text    $         runinit.o(__Runinit)
+800012c4 00000008 .text    $         runinit.o(__DllMainCRTStartup@12)
+800012cc 0000002e .text    $         global_destructor_chain.o(___destroy_global_chain)
+800012fa 00000000 .text    $         cinit.o
+800012fa 0000000c .text    $         CPlusGlue.o(_DTORCALL_COMPLETE)
+80002000 00000000 .bss     $         cinit.o
+80002000 00000004 .bss               
+80003000 00000008 .exc     $BBB      Comment.o
+80003008 00000008 .exc     $BBB      Comment.o
+80003010 00000008 .exc     $BBB      Comment.o
+80003018 00000008 .exc     $BBB      init_term_dyn.o
+80003020 00000008 .exc     $BBB      init_term_dyn.o
+80003028 00000008 .exc     $BBB      runinit.o
+80003030 00000008 .exc     $BBB      runinit.o
+80003038 00000008 .exc     $BBB      runinit.o
+80003040 00000008 .exc     $BBB      runinit.o
+80003048 00000008 .exc     $BBB      global_destructor_chain.o
+80003050 00000008 .exc     $BBB      CPlusGlue.o
+80004000 0000001c .rdata             
+80005000 00000020 .data    $         start_dyn.o
+80005020 00000000 .data    $         cinit.o
+80006000 00000014 .idata   $2        libbe.so
+80006014 00000014 .idata   $2        libroot.so
+80006028 00000014 .idata   $3        libroot.so
+8000603c 00000004 .idata   $4        libbe.so
+80006040 00000004 .idata   $4        libbe.so
+80006044 00000004 .idata   $4        libroot.so
+80006048 00000004 .idata   $4        libroot.so
+8000604c 00000004 .idata   $4        libroot.so
+80006050 00000004 .idata   $5        libbe.so(__imp_?modifiers@@YAKXZ)
+80006054 00000004 .idata   $5        libbe.so
+80006058 00000004 .idata   $5        libroot.so(__imp_??2@YAPAXK@Z)
+8000605c 00000004 .idata   $5        libroot.so(__imp_??3@YAXPAX@Z)
+80006060 00000004 .idata   $5        libroot.so
+80006064 00000015 .idata   $6        libbe.so
+8000607a 00000009 .idata   $6        libbe.so
+80006084 00000010 .idata   $6        libroot.so
+80006094 00000010 .idata   $6        libroot.so
+800060a4 0000000b .idata   $6        libroot.so
+
+Public symbols
+
+Address  Name                             Module
+
+00000000 _main                            common
+80000000 ___xc_a                          cinit.o
+80000004 ___xc_z                          cinit.o
+80001000 _perform_edit                    Comment.o
+80001032 ?AddComments@@YAJPAVMTextAddOn@@@Z Comment.o
+80001149 ?RemoveComments@@YAJPAVMTextAddOn@@@Z Comment.o
+80001246 __init_routine_                  init_term_dyn.o
+80001251 __term_routine_                  init_term_dyn.o
+8000125c ??2@YAPAXK@Z                     libroot.so
+80001262 ??3@YAXPAX@Z                     libroot.so
+8000127a __Runinit                        runinit.o
+800012c4 __DllMainCRTStartup@12           runinit.o
+800012cc ___destroy_global_chain          global_destructor_chain.o
+800012fa _DTORCALL_COMPLETE               CPlusGlue.o
+80002000 ___global_destructor_chain       common
+80006000 libbe_IMPORT_DESCRIPTOR          libbe.so
+80006014 libroot_IMPORT_DESCRIPTOR        libroot.so
+80006028 NULL_IMPORT_DESCRIPTOR           libroot.so
+80006050 __imp_?modifiers@@YAKXZ          libbe.so
+80006054 libbe_NULL_THUNK_DATA           libbe.so
+80006058 __imp_??2@YAPAXK@Z               libroot.so
+8000605c __imp_??3@YAXPAX@Z               libroot.so
+80006060 libroot_NULL_THUNK_DATA         libroot.so

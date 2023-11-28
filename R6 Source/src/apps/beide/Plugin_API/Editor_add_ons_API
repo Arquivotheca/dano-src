@@ -1,0 +1,116 @@
+=============================================
+BeIDE Editor add_ons API
+=============================================
+
+Version:	1.1
+Date:		10/28/96
+Authors:	Brian Stern, Jon Watte
+=============================================
+
+This api consists of a proxy class, MTextAddOn, that forwards
+function calls to the actual BView subclass that is present in
+source windows in BeIDE.  Use of a proxy class allows changes in the
+implementation of BeIDE source windows without requiring
+changes in the Editor add_ons.  MTextAddOn doesn't inherit
+from BView.  Add_ons written prior to release of this api
+will not be compatible with it without some changes.
+
+Editor add_ons are installed in develop/plugins/Editor_add_ons.
+They are loaded when BeIDE launches and are available from the 
+Add-ons menu in source windows.
+
+The add-on must export a function with the following prototype:
+
+extern "C" long perform_edit(MTextAddOn* inAddOn);
+
+When chosen from the Add-ons menu this function is called with a 
+pointer to an MTextAddOn object that will forward editing functions
+to the view.  Don't cache the MTextAddOn* as it may not exist longer
+than the perform_edit function call.
+
+See the accompanying project for the Commenter editor add_on.
+
+
+=============================================
+Function Reference
+=============================================
+
+-- MTextAddOn
+
+	MTextAddOn(
+		MIDETextView&	inTextView);
+	virtual		~MTextAddOn();
+
+The constructor and destructor are not accessible from the add-on.  Don't
+attempt to create one of these objects and don't attempt to delete the
+object that is passed in to the perform_edit function.
+
+-- Text
+
+	virtual	const char*			Text();
+
+	Returns a pointer to the text in the view.  Don't modify this text
+	in any way.  The pointer is only valid until the next non-const
+	member function is called.
+
+-- TextLength
+
+	virtual	long				TextLength() const;
+	
+	Returns the length of the text in the view.
+
+-- GetSelection
+
+	virtual	void				GetSelection(
+									int32* start, 
+									int32* end) const;
+	
+	Returns the start and end of the selection by reference.
+
+-- Select
+
+	virtual	void				Select(
+									int32 newStart, 
+									int32 newEnd);
+	
+	Sets the selection.
+
+-- Delete
+
+	virtual void				Delete();
+	
+	Removes the text in the current selection.
+
+-- Insert
+
+	virtual void				Insert(
+									const char* inText);
+	virtual void				Insert(
+									const char* text, 
+									int32 length);
+
+	Inserts text at the current selection.
+
+-- Window
+
+	virtual	BWindow*			Window();
+
+	Returns a pointer to the BWindow object that the view resides in.  You
+	might use this to get the name of the window.
+
+-- RecordRef
+
+	virtual status_t			GetRef(
+									entry_ref&	outRef)
+	
+	returns the entry_ref of the file that is displayed by this window.  
+	Will return BE_OK if there were no errors.
+	
+-- IsEditable
+
+	virtual bool				IsEditable();
+	
+	returns true if the file can be edited.  returns false if the
+	file is on a read-only device or the file is marked as non-writable
+	by the file permissions.
+

@@ -1,0 +1,368 @@
+dexDir;
+			leafName.SetTo( dataPath.Leaf() );
+			leafName.Append( kExact );
+			indexPath.Append( leafName.String() );
+			gExactWords[gDictCount] = new Words( dataPath.Path(), indexPath.Path(), false );
+			gDictCount++;
+		}
+	}
+}
+
+//--------------------------------------------------------------------
+
+void TMailApp::RefsReceived(BMessage *msg)
+{
+	bool		have_names = false;
+	BString		names;
+	char		type[B_FILE_NAME_LENGTH];
+	int32		item = 0;
+	BFile		file;
+	TMailWindow	*window;
+	entry_ref	ref;
+
+	//
+	// If a tracker window opened me, get a messenger from it.
+	//
+	if (msg->HasMessenger("TrackerViewToken")) {
+		trackerMessenger = new BMessenger;
+		msg->FindMessenger("TrackerViewToken", trackerMessenger);
+	}
+	
+	while (msg->HasRef("refs", item)) {
+		msg->FindRef("refs", item++, &ref);
+		if (window = FindWindow(ref))
+			window->Activate(true);
+		else {
+			file.SetTo(&ref, O_RDONLY);
+			if (file.InitCheck() == B_NO_ERROR) {
+				BNodeInfo	node(&file);
+				node.GetType(type);
+				if (!strcmp(type, B_MAIL_TYPE)) {
+					window = NewWindow(&ref, NULL, false, trackerMessenger);
+					window->Show();
+				} else if(!strcmp(type, "application/x-person")) {
+					
+					/* see if it has an Email address */
+					BString name;
+					BString email;
+					attr_info	info;
+					char *attrib;
+
+					if (file.GetAttrInfo("META:email", &info) == B_NO_ERROR) {
+						attrib = (char *) malloc(sizeof(info.size));
+						file.ReadAttr("META:email", B_STRING_TYPE, 0, attrib, info.size);
+						email << attrib;
+						free(attrib);
+					
+					/* we got something... */	
+					if (email.Length() > 0) {
+							/* see if we can get a username as well */
+							if(file.GetAttrInfo("META:name", &info) == B_NO_ERROR) {
+								attrib = (char *) malloc(sizeof(info.size));
+								file.ReadAttr("META:name", B_STRING_TYPE, 0, attrib, info.size);
+								name << "\"" << attrib << "\" ";
+								email.Prepend("<");
+								email.Append(">");
+								free(attrib);
+							}
+							
+							if (names.Length() == 0) {
+								names << name << email;
+							} else {
+								names << ", " << name << email;
+							}
+							have_names = true;
+							email.SetTo("");
+							name.SetTo("");
+						}
+
+					}
+				}
+				else if( strcmp(type, kDraftType) == 0 )
+				{
+					window = NewWindow();
+					
+					// If it's a draft message, open it
+					window->OpenMessage(&ref);
+					window->Show();
+				}
+			} /* end of else(file.InitCheck() == B_NO_ERROR */
+		}
+	}
+
+	if (have_names) {
+		window = NewWindow(NULL, names.String());
+		window->Show();
+	}
+}
+
+//--------------------------------------------------------------------
+
+TMailWindow* TMailApp::FindWindow(const entry_ref &ref)
+{
+	int32		index = 0;
+	TMailWindow	*window;
+
+	while (window = (TMailWindow*) WindowAt(index++)) {
+		if (window->FindView("m_header") && 
+		  window->GetMailFile() != NULL && 
+		  *window->GetMailFile() == ref)
+		{
+			return window;
+		}
+	}
+
+	return NULL;
+}
+
+//--------------------------------------------------------------------
+
+void TMailApp::ClearPrintSettings()
+{
+	delete print_settings;
+	print_settings = NULL;
+}
+
+//--------------------------------------------------------------------
+
+void TMailApp::FontChange()
+{
+	int32		index = 0;
+	BMessage	msg;
+	BWindow		*window;
+	
+	msg.what = CHANGE_FONT;
+	msg.AddPointer("font", &fFont);
+
+	for (;;) {
+		window = WindowAt(index++);
+		if (!window)
+			break;
+
+		window->PostMessage(&msg);
+	}
+}
+
+//--------------------------------------------------------------------
+
+TMailWindow* TMailApp::NewWindow(const entry_ref *ref, const char *to, bool resend,	BMessenger* msng)
+{
+	char			*str1;
+	char			*str2;
+	char			*title = NULL;
+	BFile			file;
+	BPoint			win_pos;
+	BRect			r;
+	TMailWindow		*window;
+	attr_info		info;
+	
+	BScreen screen(B_MAIN_SCREEN_ID);
+	BRect screen_frame = screen.Frame();
+	
+	if ((mail_window.Width()) && (mail_window.Height()))
+		r = mail_window;
+	else
+		r.Set(6, TITLE_BAR_HEIGHT, 6 + WIND_WIDTH, TITLE_BAR_HEIGHT + WIND_HEIGHT);
+	
+	r.OffsetBy(fWindowCount * 20, fWindowCount * 20);
+	
+	if ((r.left - 6) < screen_frame.left)
+		r.OffsetTo(screen_frame.left + 8, r.top);
+		
+	if ((r.left + 20) > screen_frame.right)
+		r.OffsetTo(6, r.top);
+		
+	if ((r.top - 26) < screen_frame.top)
+		r.OffsetTo(r.left, screen_frame.top + 26);
+		
+	if ((r.top + 20) > screen_frame.bottom)
+		r.OffsetTo(r.left, TITLE_BAR_HEIGHT);
+		
+	if (r.Width() < WIND_WIDTH)
+		r.right = r.left + WIND_WIDTH;
+		
+	fWindowCount++;
+
+	if (!resend && ref) {
+		file.SetTo(ref, O_RDONLY);
+		if (file.InitCheck() == B_NO_ERROR) {
+			if (file.GetAttrInfo(B_MAIL_ATTR_NAME, &info) == B_NO_ERROR) {
+				str1 = (char *)malloc(info.size);
+				file.ReadAttr(B_MAIL_ATTR_NAME, B_STRING_TYPE, 0, str1, 
+			 	  info.size);
+				if (file.GetAttrInfo(B_MAIL_ATTR_SUBJECT, &info) == B_NO_ERROR){
+					str2 = (char *)malloc(info.size);
+					file.ReadAttr(B_MAIL_ATTR_SUBJECT, B_STRING_TYPE, 0, str2, 
+					  info.size);
+					title = (char *)malloc(strlen(str1) + strlen(str2) + 3);
+					sprintf(title, "%s->%s", str1, str2);
+					free(str1);
+					free(str2);
+				}
+				else
+					title = str1;
+			}
+		}
+	}
+	if (!title) {
+		title = (char *)malloc(strlen("BeMail") + 1);
+		sprintf(title, "BeMail");
+	}
+	
+	window = new TMailWindow(r, title, ref, to, &fFont, resend, msng);
+	fWindowList.AddItem( window );
+	free(title);
+	return window;
+}
+
+
+//====================================================================
+
+// static list for tracking of Windows
+BList	TMailWindow::sWindowList;
+
+TMailWindow::TMailWindow(BRect rect, const char *title, const entry_ref *ref, const char *to,
+						 const BFont *font, bool resending, BMessenger *msng)
+			:BWindow(rect, title, B_DOCUMENT_WINDOW, 0),
+			trackerMessenger(msng),
+			fEnclosuresView(NULL),
+			fSigAdded(false),
+			fReplying(false),
+			fResending(resending),
+			fSent(false),
+			fDraft(false),
+			fPanel(NULL),
+			fZoom(rect),
+			fFieldState(0),
+			fSendButton(NULL),
+			fSaveButton(NULL),
+			fPrintButton(NULL),
+			fSigButton(NULL),
+			fChanged(false)
+{
+	bool		done = false;
+	bool		canResend = true;
+	char		str[256];
+	char		status[272];
+	char		*header;
+	char		*list;
+	char		*recipients;
+	int32		index = 0;
+	int32		index1;
+	int32		len;
+	uint32		message;
+	float		height;
+	BMenu		*menu;
+	BMenu		*sub_menu;
+	BMenuBar	*menu_bar;
+	BMenuItem	*item;
+	BMessage	*msg;
+	BRect		r;
+	attr_info	info;
+
+	if (ref) {
+		fRef = new entry_ref(*ref);
+		fFile = new BFile(fRef, O_RDONLY);
+		fIncoming = true;
+	}
+	else {
+		fRef = NULL;
+		fFile = NULL;
+		fIncoming = false;
+	}
+
+	r.Set(0, 0, RIGHT_BOUNDARY, 15);
+	
+	// Create real menu bar
+	fMenuBar = menu_bar = new BMenuBar(r, "");
+
+	//
+	//	File Menu
+	//
+	menu = new BMenu("File");
+
+	msg = new BMessage(M_NEW);
+	msg->AddInt32("type", M_NEW);
+	menu->AddItem(item = new BMenuItem("New Mail Message", msg, 'N'));
+	item->SetTarget(be_app);
+	
+	QueryMenu *qmenu;
+	qmenu = new QueryMenu( "Open Draft", false );
+	qmenu->SetTargetForItems( be_app );
+	
+	// Make sure file type is indexed
+	fs_create_index( dev_for_path( "/boot" ), "MAIL:draft", B_INT32_TYPE, 0 );
+	qmenu->SetPredicate( "MAIL:draft==1" );
+	menu->AddItem( qmenu );
+	
+	menu->AddSeparatorItem();
+
+	if ((!resending) && (fIncoming)) {
+		sub_menu = new BMenu("Close");
+		if (fFile->GetAttrInfo(B_MAIL_ATTR_STATUS, &info) == B_NO_ERROR)
+			fFile->ReadAttr(B_MAIL_ATTR_STATUS, B_STRING_TYPE, 0, str, info.size);
+		else
+			str[0] = 0;
+		
+		//if( (strcmp(str, "Pending")==0)||(strcmp(str, "Sent")==0) )
+		//	canResend = true;
+		if (!strcmp(str, "New")) {
+			sub_menu->AddItem(item = new BMenuItem("Leave as 'New'",
+							new BMessage(M_CLOSE_SAME), 'W', B_SHIFT_KEY));
+			sub_menu->AddItem(item = new BMenuItem("Set to 'Read'",
+							new BMessage(M_CLOSE_READ), 'W'));
+			message = M_CLOSE_READ;
+		}
+		else {
+			if (strlen(str))
+				sprintf(status, "Leave as '%s'", str);
+			else
+				sprintf(status, "Leave same");
+			sub_menu->AddItem(item = new BMenuItem(status,
+							new BMessage(M_CLOSE_SAME), 'W'));
+			message = M_CLOSE_SAME;
+			AddShortcut('W', B_COMMAND_KEY | B_SHIFT_KEY, new BMessage(
+			  M_CLOSE_SAME));
+		}
+		sub_menu->AddItem(new BMenuItem("Set to 'Saved'",
+							new BMessage(M_CLOSE_SAVED), 'W', B_CONTROL_KEY));
+		sub_menu->AddItem(new BMenuItem(new TMenu("Set to"B_UTF8_ELLIPSIS, 
+		  INDEX_STATUS, M_STATUS), new BMessage(M_CLOSE_CUSTOM)));
+		menu->AddItem(sub_menu);
+
+		sub_menu->AddItem(new BMenuItem("Move to Trash", new BMessage(
+		  M_DELETE), 'T', B_CONTROL_KEY));
+		AddShortcut('T', B_SHIFT_KEY | B_COMMAND_KEY, new BMessage(
+		  M_DELETE_NEXT));	
+	}
+	else
+	{
+		menu->AddItem(fSendLater = new BMenuItem("Save as Draft",
+			new BMessage(M_SAVE_AS_DRAFT), 'S'));
+		menu->AddItem(new BMenuItem("Close",
+			new BMessage(B_CLOSE_REQUESTED), 'W'));
+	}
+
+	menu->AddSeparatorItem();
+	menu->AddItem(fPrint = new BMenuItem("Page Setup"B_UTF8_ELLIPSIS,
+								new BMessage(M_PRINT_SETUP)));
+	menu->AddItem(fPrint = new BMenuItem("Print"B_UTF8_ELLIPSIS,
+								new BMessage(M_PRINT), 'P'));
+	menu->AddSeparatorItem();
+	menu->AddItem(item = new BMenuItem("About BeMail"B_UTF8_ELLIPSIS,
+								new BMessage(B_ABOUT_REQUESTED)));
+	item->SetTarget(be_app);
+	menu->AddSeparatorItem();
+	menu->AddItem(item = new BMenuItem("Quit",
+								new BMessage(B_QUIT_REQUESTED), 'Q'));
+	item->SetTarget(be_app);
+	menu_bar->AddItem(menu);
+
+	//
+	//	Edit Menu
+	//
+	menu = new BMenu("Edit");
+	menu->AddItem(fUndo = new BMenuItem("Undo", new BMessage(B_UNDO), 'Z'));
+	fUndo->SetTarget(NULL, this);
+	menu->AddSeparatorItem();
+	m

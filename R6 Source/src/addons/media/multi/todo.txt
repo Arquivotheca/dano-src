@@ -1,0 +1,70 @@
+1) When a connection mutes or disconnects, the layla is not 
+stopped, which results in the last buffer getting played over 
+and over, since it's not cleared. The solution needs to found 
+and debugged.
+NOTE - part of this is disabling the channel which is a borken
+at the moment.  I've emailed Matt.  The code is there to do this
+when it works.  In the mean time, I will add code to write zeros
+to playback buffers on disconnect.
+DONE, but again, the Echo driver hangs, Matt is looking at it.
+
+2) There was badness in connection and format negotiation 
+that made MediaRecorder and SoundPlayer not successfully 
+connect. Much of that is fixed. However, I had to hack the 
+buffer size negotiation because it was screwed up and I 
+couldn't figure out how you expected it to work. Needs a 
+real fix.
+DONE
+
+3) Still need to validate that the channels past the channel 
+hooked up to are also available for the what.id == 0 case.
+DONE
+
+4) Parameter web!!
+DONE
+
+5) Be more flexible about sample rate and data formats; right 
+now only 48 kHz/32-bit int works. If a format specifies a sample 
+rate, it should be used. If a format specifies int16 or float, some 
+data conversion might happen, too.
+NOTE - 5 will be taken care of by parameters from 4.
+DONE
+
+6) Making it an add-on.
+DONE
+
+7) Making the addon_server correctly recognize and save it 
+for default input/output and debug that code.
+DONE
+
+8) Make it use buffer time stamps and debug that code.
+DONE
+
+9) Fix it so it cares about performance time starts/stops.
+DONE
+
+10) Fix it so it cares about other time sources.
+NOTE - it will stamp/play buffers at the right time, but it does not adjust
+the CVSR to compensate for drift yet.
+
+11) Fix STOP_IMMEDIATELY to actually do it (I hacked it to 
+stop "soon" but that's not good enough)
+DONE, but ForceStop is broken in the Echo driver, Matt is looking at it.
+
+12) Extrapolate back to buffer boundary from frame count and played_real_time
+DONE
+
+13) Make it agree on a connection format with the mixer.
+DONE
+
+14) Add ability to choose channel to hookup to in media prefs
+
+15) Test the heck out of it
+
+16) Optimized buffer lacing
+
+17) SetOutputBuffers in the cases where it makes sense (possibly)
+
+18) Full parameter web
+
+

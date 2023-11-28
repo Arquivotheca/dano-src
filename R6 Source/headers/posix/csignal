@@ -1,0 +1,7 @@
+#ifndef _CSIGNAL
+#define _CSIGNAL
+
+#include <signal.h>
+
+#endif
+

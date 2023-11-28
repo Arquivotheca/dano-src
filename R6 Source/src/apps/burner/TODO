@@ -1,0 +1,62 @@
+Burner TODO list: (in no particular order)
+
+- a better way of selecting a device/showing available devices should be implemented.
+
+- status of the selected device (disc in drive, size of disc, ready to burn, etc)
+  should be shown in the lower left corner of the window.
+
+- the project should be set to dirty when any of the attributes of a track change.
+
+- Need some way to set default silent pregap between tracks, and on a track by track
+  basis.  Perhaps a "silence before track" box in the text control panel?
+
+- EditWidget needs to support changing the pre-gap
+
+- current play position should be shown on edit widget
+
+- support for multiple projects open at once should be fixed.
+
+- preview should be disabled if no sound output is available
+
+- a barber pole display (or something similar) should be shown when files are loading.
+
+- start/end and fade in/fade out controls should move to an integer number of seconds.
+
+- resource file should have an icon for Burner project files.
+
+- the stop/skip/etc buttons should work better while the preview is paused.
+
+- skip buttons need their own art.
+
+- Projects specified on the command line should be loaded in BurnerApp::ArgvReceived().
+
+- EditWidget should take fade in/out into account when constraining start/end.  Right
+  now you can move the fade out control to before the start control by moving the start
+  or end slider
+
+- EditWidget should special case drawing of the brackets when the start and end are
+  close to each other to avoid the weird glitches that happen now.
+
+- EditWidget needs to respond to keyboard input
+
+- EditWidget drawing glitches should be fixed.
+
+- Loading a project that points to files that have moved should be fixed.  A file panel
+  asking the user to find the missing file should be popped up.  Even nicer would be
+  to start a query with the leaf name of the missing file and ask the user if any
+  of the results are desired file, and then show the file panel if not.
+
+- the list view focus row doesn't change when the selection changes programmatically,
+  and that results in it looking weird -- to fix it there needs to be support in
+  BColumnListView to either make the focus row  change after programmatically changing
+  the selection, or more generally, support for setting the focus row.
+
+- text entry boxes for start, end, etc, should perhaps be in MM:SS format?
+
+- CDDrivers should live in add-ons, not compiled into the app.  We should publish
+  the driver interface so other people can add support for different drives.
+
+- Support for adding data tracks from raw devices needs to be implemented
+
+- After all other items are done, the code should be grep'ped for XXX: comments
+  to make sure nothing else is missing

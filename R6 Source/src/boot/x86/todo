@@ -1,0 +1,15 @@
+Things to do:
+
+	o	More reporting of error conditions to user, i.e. if unable to load
+		a driver
+	o	Make bt_bfs more robust
+	o	Command line passing of arguments to the kernel
+	o	Test double indirect blocks
+	o	Test booting from raw parititon
+	o	Test clamping of reads to end of partition
+	o	Clean up bt_filelist.c
+	o	Clean up kernel-side handling of boot variables
+	o	Integrate kernel settings
+
+	o	Improve memory usage
+	o	Run through dmalloc

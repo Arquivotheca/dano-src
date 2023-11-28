@@ -1,0 +1,208 @@
+#
+# app makefile
+#
+# Copyright (C) 1998 Be Inc.  All Rights Reserved
+#
+
+SHELL		:= /bin/sh
+
+#######
+include $(BUILDHOME)/buildprefs/make.pre
+#######
+
+ifeq ($(CPU), i586)
+CC	= gcc -c
+CFLAGS	= -fno-pic -O3
+#CFLAGS += -Wa,-a=$*.s
+CFLAGS += -Wall -W -Wno-multichar -Wp,-Wall
+ifeq ($(USER),jbq)
+CFLAGS += -Werror
+endif
+#CFLAGS += -fomit-frame-pointer
+CFLAGS += -ffast-math
+#CFLAGS += -march=pentiumpro -mcpu=pentiumpro
+LD	= gcc
+LDAPPFLAGS = -lbe -Xlinker -soname=_APP_
+LDLIBFLAGS = -lbe -nostart -Xlinker -soname=$@
+LDADDONFLAGS = -lbe -ldevice -nostart
+DEP = gcc -M
+endif
+
+ifeq ($(CPU), ppc)
+CC	= mwcc -c
+CFLAGS = -O7 -pragma "export on"
+#CFLAGS	= -fno-pic -O3
+#CFLAGS += -Wa,-a=$*.s
+#CFLAGS += -Wall -W -Wno-multichar -Wp,-Wall -Werror
+#CFLAGS += -fomit-frame-pointer
+#CFLAGS += -ffast-math
+#CFLAGS += -march=pentiumpro -mcpu=pentiumpro
+LD	= mwld -nodefaults -L$(LIB) -export pragma $(LIB)/glue-noinit.a $(LIB)/init_term_dyn.o
+LDAPPFLAGS = -lbe -lroot $(LIB)/start_dyn.o
+LDLIBFLAGS = -G -lbe -lroot -nomain
+LDADDONFLAGS = -G -lbe -lroot -nomain
+DEP = mwcc -make
+LIB = /boot/develop/lib/ppc
+endif
+
+APPBINARY := Inputs
+
+ADDONBINARIES := myaddon TestAddOn KeyboardAddOn MouseAddOn KeymapAddOn
+ifeq ($(CPU), i586)
+ADDONBINARIES += JoystickAddOn
+endif
+
+LIBBINARIES := libPP.so
+
+BINARIES := $(APPBINARY) $(ADDONBINARIES) $(LIBBINARIES)
+
+BINHELPERS := AddMyResource AddTestResource AddKeyboardResource AddAppResource AddAppInfo AddMouseResource AddJoystickResource
+
+ifeq ($(USER),jbq)
+SOURCES := $(shell ls -1 *.cpp)
+else
+SOURCES := \
+	AddAppInfo.cpp \
+	AddAppResource.cpp \
+	AddJoystickResource.cpp \
+	AddKeyboardResource.cpp \
+	AddMouseResource.cpp \
+	AddMyResource.cpp \
+	AddResourceHelpers.cpp \
+	AddTestResource.cpp \
+	Empty.cpp \
+	Helpers.cpp \
+	JoystickAddOn.cpp \
+	KeyboardAddOn.cpp \
+	ListAddOns.cpp \
+	MouseAddOn.cpp \
+	MouseView.cpp \
+	PPAddOn.cpp \
+	PrefsApp.cpp \
+	TestAddOn.cpp \
+	myaddon.cpp
+endif
+
+DEPENDS := $(addsuffix .d,$(basename $(SOURCES)))
+
+.PHONY : default clean depend localinstall install
+
+.DELETE_ON_ERROR : $(BINARIES)
+
+ifeq ($(USER),jbq)
+default : $(BINARIES)
+else
+default : install
+endif
+
+depend : $(DEPENDS)
+
+clean :
+ifeq ($(USER),jbq)
+	@echo cleaning
+	@rm -f $(BINARIES) $(BINHELPERS) *.o *.s *.d *.tmp
+else
+	rm -f $(BINARIES) $(BINHELPERS) *.o *.s *.d *.tmp
+endif
+
+localinstall : $(BINARIES)
+	su --command="cp -f $(APPBINARY) /boot/beos/preferences"
+	su --command="ln -sf /boot/beos/preferences/$(APPBINARY) /boot/preferences"
+	ln -sf /boot/beos/preferences/$(APPBINARY) /boot/home/config/be/Preferences/
+	su --command="cp -f $(LIBBINARIES) /boot/beos/system/lib"
+	su --command="mkdir -p /boot/beos/system/add-ons/preferences/inputs"
+	su --command="cp -f $(ADDONBINARIES) /boot/beos/system/add-ons/preferences/inputs/"
+	su --command="mimeset /boot/beos/preferences/$(APPBINARY)"
+
+install : $(BINARIES)
+	cp -f $(APPBINARY) $(INSTALL_PREFERENCES)
+	ln -sf /boot/beos/preferences/$(APPBINARY) $(INSTALL_DIR)/preferences/
+	cp -f $(LIBBINARIES) $(INSTALL_LIBS)
+	mkdir -p $(INSTALL_ADD_ONS)/preferences/inputs
+	cp -f $(ADDONBINARIES) $(INSTALL_ADD_ONS)/preferences/inputs/
+	mimeset $(INSTALL_PREFERENCES)/$(APPBINARY)
+
+$(APPBINARY) :
+ifeq ($(USER),jbq)
+	@echo linking $@
+	@$(LD) $(LDAPPFLAGS) $(filter %.o %.so,$^) -o $@
+else
+	$(LD) $(LDAPPFLAGS) $(filter %.o %.so,$^) -o $@
+endif
+	@$(foreach cmd,$(filter-out %.o %.so,$^),echo using $(cmd) with $@ && $(cmd) $@ &&) echo -n
+
+$(LIBBINARIES) :
+ifeq ($(USER),jbq)
+	@echo linking $@
+	@$(LD) $(LDLIBFLAGS) $^ -o $@
+else
+	$(LD) $(LDLIBFLAGS) $^ -o $@
+endif
+
+$(ADDONBINARIES) :
+ifeq ($(USER),jbq)
+	@echo linking $@
+	@$(LD) $(LDADDONFLAGS) $(filter %.o %.so,$^) -o $@ $(APPBINARY)
+else
+	$(LD) $(LDADDONFLAGS) $(filter %.o %.so,$^) -o $@ $(APPBINARY)
+endif
+	@$(foreach cmd,$(filter-out %.o %.so $(APPBINARY),$^),echo using $(cmd) with $@ && $(cmd) $@ &&) echo -n
+
+% : %.o
+ifeq ($(USER),jbq)
+	@echo linking $@
+	@$(LD) $(LDAPPFLAGS) $^ -o $@
+else
+	$(LD) $(LDAPPFLAGS) $^ -o $@
+endif
+
+%.o : %.cpp
+ifeq ($(USER),jbq)
+	@echo compiling $@
+	@$(CC) $< $(CFLAGS) $(INCLUDES) -o $@
+else
+	$(CC) $< $(CFLAGS) $(INCLUDES) -o $@
+endif
+
+%.d : %.cpp
+	@echo generating dependencies for $<
+	@$(DEP) $(INCLUDES) $< > $@
+	@echo -e 'yf.t:a \033pad\033ZZ' | vi $@ >/dev/null 2>/dev/null
+
+#app objects
+$(APPBINARY) : Empty.o libPP.so AddAppResource AddAppInfo
+
+#lib objects
+libPP.so : PrefsApp.o Helpers.o ListAddOns.o
+
+#add-ons objects
+myaddon : myaddon.o PPAddOn.o AddMyResource libPP.so $(APPBINARY)
+
+TestAddOn : TestAddOn.o PPAddOn.o AddTestResource libPP.so $(APPBINARY)
+
+MouseAddOn : MouseAddOn.o MouseView.o PPAddOn.o AddMouseResource libPP.so $(APPBINARY)
+
+KeyboardAddOn : KeyboardAddOn.o PPAddOn.o AddKeyboardResource libPP.so $(APPBINARY)
+
+KeymapAddOn : KeymapAddOn.o KeymapLayout.o PPAddOn.o libPP.so $(APPBINARY)
+
+JoystickAddOn : JoystickAddOn.o PPAddOn.o AddJoystickResource libPP.so $(APPBINARY)
+
+#helpers objects
+#AddAppResource : AddAppResource.o AddResourceHelpers.o
+
+#AddMyResource : AddMyResource.o AddResourceHelpers.o
+
+AddTestResource : AddTestResource.o AddResourceHelpers.o
+
+AddKeyboardResource : AddKeyboardResource.o AddResourceHelpers.o
+
+AddJoystickResource : AddJoystickResource.o AddResourceHelpers.o
+
+AddMouseResource : AddMouseResource.o AddResourceHelpers.o
+
+ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(MAKECMDGOALS),depend)
+include $(DEPENDS)
+endif
+endif

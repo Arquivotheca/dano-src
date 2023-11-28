@@ -1,0 +1,25 @@
+#!/bin/sh
+
+action=$1
+device=$2
+
+LAUNCH="/system/Tracker"
+
+case "${action:?}" in
+'start')
+	$LAUNCH /bin/serial_route 
+	alert "PCMCIA Serial Online ($2)" "Okay" &
+	;;
+'stop')
+	kill serial_route
+	alert "PCMCIA Serial Offline ($2)" "Okay" &
+	;;
+'restart')
+	kill serial_route
+	sleep 2
+	$LAUNCH /etc/pcmcia/serial_route 
+	alert "PCMCIA Serial Restarted ($2)" "Okay" &
+	;;
+esac
+
+exit 0

@@ -1,0 +1,218 @@
+# Makefile for fonts
+# early prototype, 2000-06-19, jbq
+
+SRC_DIR:=headers
+SOURCE:=add-ons
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/add-ons
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=app
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/app
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=be_apps
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/be_apps
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=bone
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/bone
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=controls
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/controls
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=devel
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/devel
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=device
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/device
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=drivers
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/drivers
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=experimental
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/experimental
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=game
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/game
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=interface
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/interface
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=kernel
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/kernel
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=mail
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/mail
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=media
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/media
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=midi
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/midi
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=midi2
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/midi2
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=net
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/net
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=opengl
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/opengl
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=openssl
+MY_INSTALL_DIR:=$(INSTALL_DEV_OPENSSL_HEADERS)
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=pcsc
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/pcsc
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=posix
+MY_INSTALL_DIR:=$(INSTALL_DEV_POSIX_HEADERS)
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=print
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/print
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=reseditor
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/reseditor
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=resparser
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/resparser
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=settings
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/settings
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=storage
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/storage
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=support
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/support
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=translation
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/translation
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=www
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/www
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+SOURCE:=xml
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)/xml
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataDirTemplate.mk
+
+SRC_DIR:=headers
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)
+FILES:= \
+	AppKit.h \
+	Be.h \
+	BeBuild.h \
+	DeviceKit.h \
+	GameKit.h \
+	InterfaceKit.h \
+	KernelKit.h \
+	MailKit.h \
+	MediaKit.h \
+	MidiKit.h \
+	NetKit.h \
+	NetworkKit.h \
+	OpenGLKit.h \
+	StorageKit.h \
+	SupportKit.h \
+	TranslationKit.h
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataTemplate.mk
+
+TARGET_NAME := ProductFeatures.h
+MY_RULE := PRODUCT_FEATURES_H_RULE
+SRC_DIR :=
+MY_DEPS := $(SDIR_CONFIG)/Macros.mk $(wildcard $(SDIR_SPEC)/*.spec)
+MY_INSTALL_DIR:=$(INSTALL_DEV_BE_HEADERS)
+include $(SDIR_TEMPLATES)/GenericGeneratedTemplate.mk
+
+SOURCE := Deskbar.h
+SRC_DIR:=headers/interface
+TARGET := $(INSTALL_DEV_BE_HEADERS)/be_apps/Deskbar/$(SOURCE)
+PERMISSIONS := $(PERMS_SYSTEM_DATA)
+include $(SDIR_TEMPLATES)/DataFileTemplate.mk
+

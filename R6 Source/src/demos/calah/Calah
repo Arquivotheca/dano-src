@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# The Game of Calah
+
+SHELL=/bin/sh export SHELL
+
+cd /boot/beos/etc/calah &&
+feedback "calah | engine -g"

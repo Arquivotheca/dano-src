@@ -1,0 +1,105 @@
+Cross Development using the BeIDE
+ 
+// --------------------------------------------------------------
+// x86 -> PPC
+// --------------------------------------------------------------
+
+1. Install the tools, headers, and libraries for cross development
+by moving develop_ppc.zip to the /boot/develop/tools directory. 
+Once in the /boot/develop/tools directory, unzip develop_ppc.zip.  
+This will create a develop_ppc directory with bin, headers, and 
+lib subdirectories.
+
+2. Once the tools are installed, copy the addon:
+	mv /boot/develop/BeIDE/optional/CrossDevelopment/MWPrefsPlugin \
+		/boot/develop/BeIDE/plugins/Prefs_add_ons/MWPrefsPlugin
+
+3. Create a link for the MetroWerks tools.  Use the
+lines below to create the correct links:
+	cd /boot/develop/BeIDE/tools
+	ln -s /boot/develop/tools/develop_ppc/bin/mwccppc mwccppc
+	ln -s /boot/develop/tools/develop_ppc/bin/mwldppc mwldppc
+	ln -s /boot/develop/tools/develop_ppc/bin/mwdisppc mwdisppc
+
+(These links assume that the MetroWerks tools were installed in
+/boot/develop/tools/develop_ppc/bin.)
+
+4. Use the ppc_BeApp stationery as a starting point for a ppc 
+project.  As an alternative, you can copy an existing
+ppc project over and use that as a base.  (But see the
+comment below regarding access paths.)
+
+It is much easier to start from the ppc_BeApp stationery.
+If you start from an x86 project, you will need to modify your
+Access Paths and Targets settings.  (These are correctly set
+for the ppc_BeApp stationery.)  If you want to modify an
+x86 project to build for ppc, go to the Settings window
+and choose Access Paths.  Remove all of the System access paths
+and add new ones:
+	/boot/develop/tools/develop_ppc/headers/be (recursive)
+	/boot/develop/tools/develop_ppc/headers/cpp
+	/boot/develop/tools/develop_ppc/headers/posix
+	/boot/develop/tools/develop_ppc/lib
+Now choose Target.  Change the target to "BeOS PowerPC C/C++".
+Once that is done, iterate through all the file types and change
+the tool names: gcc -> mwccppc and gcc_link -> mwldppc.
+Once you save your changes, the options list will switch and you
+can go through the different compiler/linker options you want
+for mwccppc.
+
+5. The precompiled header "BeHeaders" has not been built for the
+cross development toolset.  If you would like to use a precompiled
+BeHeaders, the following steps will create it:
+	a. Create a new project using the ppc_BeApp stationery
+	b. Add 
+	/boot/develop/tools/develop_ppc/headers/be/precompiled/BeHeaders.pch++
+	to this new project.
+	c. Select BeHeaders.pch++ and select the menu Project/Precompile
+BeHeaders will then be created in the correct location for other 
+projects to use.
+
+// --------------------------------------------------------------
+// PPC -> x86
+// --------------------------------------------------------------
+
+1. Install the GNUPro tools as described in "Cross Tools for x86 
+BeOS Development" by Fred Fish.  Be Newsletter, vol III, issue 17,
+April 28, 1999.
+http://www.be.com/aboutbe/benewsletter/volume_III/Issue17.html
+
+2. Once the GNUPro tools are installed, copy the addon:
+	mv /boot/develop/BeIDE/optional/CrossDevelopment/gccPlugin \
+		/boot/develop/BeIDE/plugins/Prefs_add_ons/gccPlugin
+
+3. Create a link for the compiler and linker.  Use the
+lines below to create the correct links:
+	cd /boot/develop/BeIDE/tools
+	ln -s /boot/develop/tools/gnupro/bin/i586-beos-gcc gcc
+	ln -s /boot/develop/tools/gnupro/bin/i586-beos-gcc gcc_link
+
+(These links assume that the GNUPro tools were installed in
+/boot/develop/tools.  Also notice that both gcc and gcc_link
+are links to the gcc compiler itself.)
+
+4. Use the x86_BeApp stationery as a starting point for an x86 
+project.  As an alternative, you can copy an existing
+x86 project over and use that as a base.  (But see the
+comment below regarding access paths.)
+
+It is much easier to start from the x86_BeApp stationery.
+If you start from a PPC project, you will need to modify your
+Access Paths and Targets settings.  (These are correctly set
+for the x86_BeApp stationery.)  If you want to modify a
+PPC project to build for x86, go to the Settings window
+and choose Access Paths.  Remove all of the System access paths
+and add new ones:
+	/boot/develop/tools/gnupro/i586-beos/include/be (recursive)
+	/boot/develop/tools/gnupro/i586-beos/include/cpp
+	/boot/develop/tools/gnupro/i586-beos/include/posix
+	/boot/develop/tools/gnupro/i586-beos/lib
+Now choose Target.  Change the target to "BeOS x86 ELF C/C++".
+Once that is done, iterate through all the file types and change
+the tool names: mwcc -> gcc and mwld -> gcc_link.
+Once you save your changes, the options list will switch and you
+can go through the different compiler/linker options you want
+for gcc.  

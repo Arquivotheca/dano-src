@@ -1,0 +1,225 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,5,3
+ PRODUCTVERSION 1,0,5,3
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x9L
+#else
+ FILEFLAGS 0x8L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "Comments", "Canopus software DV codec\0"
+            VALUE "CompanyName", "CANOPUS\0"
+            VALUE "FileDescription", "Canopus Software DV Codec\0"
+            VALUE "FileVersion", "1, 0, 5, 3\0"
+            VALUE "InternalName", "CSCCDVC\0"
+            VALUE "LegalCopyright", "Copyright (C) 1997, 98 CANOPUS Co.,Ltd. All rights reserved.\0"
+            VALUE "LegalTrademarks", "CANOPUS legal trademarks\0"
+            VALUE "OriginalFilename", "CSCCDVC.DLL\0"
+            VALUE "PrivateBuild", "1997\0"
+            VALUE "ProductName", "Canopus software engine\0"
+            VALUE "ProductVersion", "1, 0, 5, 3\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 162
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONFIG DIALOG DISCARDABLE  0, 0, 186, 169
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DVｺｰﾃﾞｯｸ設定"
+FONT 9, "ＭＳ Ｐゴシック"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,33,148,50,14
+    PUSHBUTTON      "ｷｬﾝｾﾙ",IDCANCEL,101,148,50,14
+    CONTROL         "ﾌﾞﾛｯｸなし高画質 表示ﾊﾞｯﾌｧ使用 最低速 (&B)",IDC_QUALITY1,
+                    "Button",BS_AUTORADIOBUTTON,18,26,149,10
+    CONTROL         "高画質 (&H)",IDC_QUALITY2,"Button",BS_AUTORADIOBUTTON,
+                    18,41,59,10
+    CONTROL         "低画質 (&M)",IDC_QUALITY3,"Button",BS_AUTORADIOBUTTON,
+                    18,56,56,10
+    CONTROL         "最低画質.ｽﾋﾟｰﾄﾞ最高速 (&L)",IDC_QUALITY4,"Button",
+                    BS_AUTORADIOBUTTON,18,71,115,10
+    GROUPBOX        "ﾃﾞｺｰﾄﾞ画質",IDC_STATIC,7,7,172,88
+    GROUPBOX        "色変換",IDC_STATIC,7,104,172,32
+    CONTROL         "YUV<->RGB変換を150%でクリップする(&E) ",
+                    IDC_RANGE_COMPRESS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    18,117,158,11
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_NAME                "Motion JPEG"
+    IDS_DESCRIPTION         "Motion JPEG"
+END
+
+#endif    // 日本語 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 英語 (ｱﾒﾘｶ) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_CONFIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 164
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 115
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONFIG DIALOG DISCARDABLE  0, 0, 171, 122
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DV Codec Setting"
+FONT 9, "Arial"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,28,105,50,10
+    PUSHBUTTON      "Cancel",IDCANCEL,92,105,50,10
+    CONTROL         "Hi-Quality(Use &Buffering)",IDC_QUALITY1,"Button",
+                    BS_AUTORADIOBUTTON,19,21,97,8
+    CONTROL         "&Hi-Quality",IDC_QUALITY2,"Button",BS_AUTORADIOBUTTON,
+                    19,31,49,8
+    CONTROL         "&Middle-quality",IDC_QUALITY3,"Button",
+                    BS_AUTORADIOBUTTON,19,41,58,8
+    CONTROL         "&Low-quality",IDC_QUALITY4,"Button",BS_AUTORADIOBUTTON,
+                    19,51,53,8
+    GROUPBOX        "Decode Quality",IDC_STATIC,7,7,157,59
+    GROUPBOX        "-YUV and RGB Conversions",IDC_STATIC,7,69,157,27
+    CONTROL         "&Expand RGB range to 150%",IDC_RANGE_COMPRESS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,20,81,134,8
+END
+
+#endif    // 英語 (ｱﾒﾘｶ) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

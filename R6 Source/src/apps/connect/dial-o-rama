@@ -1,0 +1,21 @@
+
+
+# Synopsis:
+#	dial-o-rama [ modem-init [ telno [ login [ password ] ] ] ]
+# Description:
+#	Dial the Hayes modem.  The first blank or missing arg determines
+#	which 'ali' script will be invoked.
+# Example:
+#	dial-o-rama ATE1Q0X4 999 joe xyzzy
+
+if [ "$1" = "" ]; then
+	:
+elif [ "$2" = "" ]; then
+	ali $0-1.ali "$1"
+elif [ "$3" = "" ]; then
+	ali $0-2.ali "$1" "$2"
+elif [ "$4" = "" ]; then
+	ali $0-3.ali "$1" "$2" "$3"
+else
+	ali $0-4.ali "$1" "$2" "$3" "$4"
+fi

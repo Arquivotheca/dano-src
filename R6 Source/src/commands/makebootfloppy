@@ -1,0 +1,107 @@
+#!/bin/sh
+
+syntax() {
+	echo "Syntax: makebootfloppy [-cd] [-base directory] [-preserve]"
+	echo "-cd       : Creates a boot floppy capable of booting to a CD."
+	echo "            If not specified, the boot floppy will only be able to boot"
+	echo "            systems from hard drives."
+	echo "-base     : Specifies the base directory of the system you wish to make"
+	echo "            a boot floppy from. Defaults to /boot"
+	echo "-preserve : Leaves a copy of the floppy image in /tmp (only valid when"
+	echo "            used with the -cd option)."
+	exit 1
+}
+
+BASE=/boot
+CD=0
+PRESERVE=0
+IMAGE=/dev/disk/floppy/raw
+
+while [ "x$1" != "x" ] ; do
+	if [ "$1" = "-help" ] ; then
+		syntax
+	elif [ "$1" = "-cd" ] ; then
+		CD=1
+	elif [ "$1" = "-preserve" ] ; then
+		PRESERVE=1
+	elif [ "$1" = "-image" ] ; then
+		shift
+		IMAGE=$1
+		CD=1
+		if [ "x$1" = "x" ] ; then
+			echo "-image requires an argument."
+			syntax
+		fi
+	elif [ "$1" = "-base" ] ; then
+		shift
+		BASE=$1
+		if [ "x$1" = "x" ] || [ ! -d $BASE ] ; then
+			echo "-base requires a directory argument."
+			syntax
+		fi
+	else
+		echo "Invalid option: $1"
+		syntax
+	fi
+	shift
+done
+
+if [ $CD = 1 ] ; then
+	rm -f /tmp/boot.tgz /tmp/boot.img
+
+	echo Creating boot image...
+
+	cd $BASE
+	tar chfz /tmp/boot.tgz \
+		beos/system/kernel_intel \
+		beos/system/kernel_intel.patch \
+		beos/system/add-ons/kernel/file_systems/bfs \
+		beos/system/add-ons/kernel/drivers/dev/disk \
+		beos/system/add-ons/kernel/bus_managers/{ide,scsi} \
+		beos/system/add-ons/kernel/busses/{ide,scsi} \
+		> /dev/null
+	cd -
+	if [ $? != 0 ] ; then
+		echo Error creating boot floppy
+		exit 1
+	fi
+
+	dd if=/dev/zero of=/tmp/boot.img bs=1k count=1440
+	if [ $? != 0 ] ; then
+		echo Error creating boot floppy
+		exit 1
+	fi
+	dd if=$BASE/beos/system/zbeos of=/tmp/boot.img conv=notrunc
+	dd if=/tmp/boot.tgz of=/tmp/boot.img bs=128k seek=1 conv=notrunc
+
+	echo Writing boot image to floppy...
+	dd if=/tmp/boot.img of=$IMAGE bs=72k
+	_retval=$?
+
+	if [ $PRESERVE = 0 ] ; then
+		rm -f /tmp/boot.tgz /tmp/boot.img
+	fi
+
+	if [ $_retval != 0 ] ; then
+		echo Error creating boot floppy
+		exit 1
+	fi
+else
+	echo Writing boot loader...
+	dd if=$BASE/beos/system/zbeos of=/dev/disk/floppy/raw bs=18k
+	if [ $? != 0 ] ; then
+		echo Error creating boot floppy
+		exit 1
+	fi
+
+	echo Erasing old boot drivers from the floppy...
+	dd if=/dev/zero of=/dev/disk/floppy/raw bs=512 conv=notrunc seek=256 count=1
+	if [ $? != 0 ] ; then
+		echo Error creating boot floppy
+		exit 1
+	fi
+fi
+
+echo Done!
+
+exit 0

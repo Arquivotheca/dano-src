@@ -1,0 +1,67 @@
+# Makefile template 
+# you may edit the original in
+#	~/config/settings/Eddie/TemplateMakefile
+
+# (To edit the template now, place the cursor inside the path and press Alt-D)
+# This template works with the generic makefile in
+#	/boot/develop/etc/makefile-engine
+# and is a subset of
+#	/boot/develop/etc/makefile
+
+# you may add stuff here 
+
+
+# name of your binary
+NAME= Installer
+
+# type of binary (one of APP, SHARED, STATIC, DRIVER)
+TYPE= APP
+
+# @src->@ 
+
+ORIGIN := /boot/develop/be/exp/src/apps/installer/ 
+
+installer_src := \
+	Engine.cpp \
+	IApp.cpp \
+	IView.cpp \
+	IWindow.cpp \
+	InternalGlue.cpp \
+	LegalMessage.cpp \
+	OptionCheckBox.cpp \
+	OptionalPackage.cpp \
+	Options.cpp \
+	PaneSwitch.cpp \
+	ProgressBar.cpp \
+	flag_data.cpp \
+#
+
+resources_rsrc := \
+	Installer.rsrc \
+#
+
+SRCS := \
+	$(installer_src) \
+#
+
+RSRCS := \
+	$(resources_rsrc) \
+#
+
+# @<-src@ 
+
+# list the libraries your binary needs to link against
+# (lbe, ltracker, etc.)
+LIBS= be 
+
+DEFINES= _STANDALONE_INSTALLER_BUILD_=1
+
+#	specify special warning levels
+#	if unspecified default warnings will be used
+#	NONE = supress all warnings
+#	ALL = enable all warnings
+WARNINGS = ALL
+
+# DEBUGGER=TRUE
+
+include $(BUILDHOME)/etc/makefile-engine

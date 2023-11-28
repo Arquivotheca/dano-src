@@ -1,0 +1,351 @@
+# This file was automatically generated - do not modify.
+# Use the makemake script instead.
+
+#---Project Settings-----------------
+NAME=Camera
+TYPE=APP
+SRCS=src/BmpUtils.cpp src/Camera.cpp src/CameraView.cpp src/PhotoPC.cpp src/PictureList.cpp src/ProgressWnd.cpp src/TPreferences.cpp src/SerialPort.cpp
+RSRCS=camera
+LIBS=be device tracker translation
+LIBPATHS=
+INCPATHS=
+WARNINGS=ALL
+DEFINES=
+OPTIMIZE=FULL
+SYMBOLS=FALSE
+DEBUGGER=FALSE
+
+## Generic Makefile Rules ---------------------------
+
+# This is the generic core of the makefile.
+# It handles switching lots of options, and is mostly the
+# sample makefile from Be DTS.
+
+#	determine wheather running on x86 or ppc
+MACHINE=$(shell uname -m)
+ifeq ($(MACHINE), BePC)
+	CPU = x86
+else
+	CPU = ppc
+endif
+
+#	set the directory where object files and binaries will be created
+	OBJ_DIR		:= obj.$(CPU)
+#	set the directory app binary will be created (MOC)
+	OUTPUT_DIR		:= output.$(CPU)
+
+# 	specify that the binary should be created in the object directory
+	#TARGET		:= $(OBJ_DIR)/$(NAME)
+# 	specify that the binary should be created in the output directory (MOC)
+	TARGET		:= $(OUTPUT_DIR)/$(NAME)
+
+#	specify the mimeset tool
+	MIMESET		:= mimeset
+
+# specify the tools for adding and removing resources
+	XRES		= xres
+
+# 	SETTING: define debug symbols if desired
+ifeq ($(SYMBOLS), TRUE)
+	CFLAGS += -g
+endif
+
+
+# 	platform specific settings
+
+#	x86 Settings
+ifeq ($(CPU), x86)
+#	set the compiler and compiler flags
+	CC		=	gcc
+
+#	SETTING: set the CFLAGS for each binary type	
+	ifeq ($(TYPE), DRIVER)
+		CFLAGS	+= -no-fpic
+	else
+		CFLAGS +=
+	endif
+
+#	SETTING: set the proper optimization level
+	ifeq ($(OPTIMIZE), FULL)
+		OPTIMIZER	= -O3 -funroll-loops
+	else
+	ifeq ($(OPTIMIZE), SOME)
+		OPTIMIZER	= -O1
+	else
+	ifeq ($(OPTIMIZE), NONE)
+		OPTIMIZER	= -O0
+	else
+#		OPTIMIZE not set so set to full
+		OPTIMIZER	= -O3 -funroll-loops
+	endif
+	endif
+	endif
+
+#	SETTING: set proper debugger flags
+	ifeq ($(DEBUGGER), TRUE)
+		DEBUG = -g
+		OPTIMIZER = -O0
+	endif
+
+	CFLAGS += $(OPTIMIZER) $(DEBUG)
+	
+#	SETTING: set warning level
+	ifeq ($(WARNINGS), ALL)
+		CFLAGS += -Wall -Wno-multichar -Wno-ctor-dtor-privacy
+	else
+	ifeq ($(WARNINGS), NONE)
+		CFLAGS += -w
+	endif
+	endif
+
+#	set the linker and linker flags
+	LD			= gcc
+	LDFLAGS		+= $(DEBUG)
+
+#	SETTING: set linker flags for each binary type
+	ifeq ($(TYPE), APP)
+		LDFLAGS += -Xlinker -soname=_APP_
+	else
+	ifeq ($(TYPE), SHARED)
+		LDFLAGS += -nostart -Xlinker -soname=$(NAME)
+	else
+	ifeq ($(TYPE), DRIVER)
+		LDFLAGS += -nostdlib  /boot/develop/lib/x86/_KERNEL_
+	endif 
+	endif 
+	endif 
+
+# 	SETTING: define debug symbols if desired
+	ifeq ($(DEBUG), )
+		ifneq ($(SYMBOLS), TRUE)
+			LDFLAGS += -s
+		endif
+	endif
+
+else
+
+#	ppc Settings
+ifeq ($(CPU), ppc)
+#	set the compiler and compiler flags
+	CC		=	mwcc
+	CFLAGS	+=	
+
+#	SETTING: set the proper optimization level
+	ifeq ($(OPTIMIZE), FULL)
+		OPTIMIZER	= -O7
+	else
+	ifeq ($(OPTIMIZE), SOME)
+		OPTIMIZER	= -O3
+	else
+	ifeq ($(OPTIMIZE), NONE)
+		OPTIMIZER	=
+	else
+#		OPTIMIZE not set so set to full
+		OPTIMIZER	= -O7
+	endif
+	endif
+	endif
+	
+
+	CFLAGS += $(OPTIMIZER)
+
+#	SETTING: set warning level
+	ifeq ($(WARNINGS), ALL)
+		CFLAGS += -w all
+	else
+	ifeq ($(WARNINGS), NONE)
+		CFLAGS += -w 0
+	endif
+	endif
+
+	# clear the standard environment variable
+	# now there are no standard libraries to link against
+	BELIBFILES=
+
+#	set the linker and linker flags
+	LD			= mwldppc
+
+#	SETTING: set linker flags for each binary type
+	ifeq ($(TYPE), APP)
+		LDFLAGS += 
+	else
+	ifeq ($(TYPE), SHARED)
+		LDFLAGS += 	-xms 
+	endif
+	endif
+
+	ifeq ($(TYPE), DRIVER)
+		LDFLAGS += -nodefaults \
+					-export all \
+					-G \
+					/boot/develop/lib/ppc/glue-noinit.a \
+					/boot/develop/lib/ppc/_KERNEL_
+	else
+		LDFLAGS +=	-export pragma \
+					-init _init_routine_ \
+					-term _term_routine_ \
+					-lroot \
+					/boot/develop/lib/ppc/glue-noinit.a \
+					/boot/develop/lib/ppc/init_term_dyn.o \
+					/boot/develop/lib/ppc/start_dyn.o 
+	endif			
+	
+	
+#	SETTING: output symbols in an xMAP file
+	ifeq ($(SYMBOLS), TRUE)
+		LDFLAGS += -map $(TARGET).xMAP
+	endif
+
+#	SETTING: output debugging info to a .SYM file
+	ifeq ($(DEBUGGER), TRUE)
+		LDFLAGS += -g -osym $(TARGET).SYM
+	endif
+
+endif
+endif
+
+
+# psuedo-function for converting a list of source files in SRCS variable
+# to a corresponding list of object files in $(OBJ_DIR)/xxx.o
+# The "function" strips off the src file suffix (.ccp or .c or whatever)
+# and then strips of the directory name, leaving just the root file name.
+# It then appends the .o suffix and prepends the $(OBJ_DIR)/ path
+define SRCS_LIST_TO_OBJS
+	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(foreach file, $(SRCS), \
+	$(basename $(notdir $(file))))))
+endef
+
+OBJS = $(SRCS_LIST_TO_OBJS)
+
+# create a unique list of paths to our sourcefiles
+SRC_PATHS += $(sort $(foreach file, $(SRCS), $(dir $(file))))
+
+# add source paths to VPATH if not already present
+VPATH :=
+VPATH += $(addprefix :, $(subst  ,:, $(filter-out $($(subst, :, ,$(VPATH))), $(SRC_PATHS))))
+
+# add source paths and include paths to INLCUDES if not already present
+INCLUDES = $(foreach path, $(INCPATHS) $(SRC_PATHS), $(addprefix -I, $(path)))
+
+
+# SETTING: add the -L prefix to all library paths to search
+LINK_PATHS = $(foreach path, $(LIBPATHS) $(SRC_PATHS) , \
+	$(addprefix -L, $(path)))
+
+# SETTING: add the -l prefix to all libs to be linked against
+LINK_LIBS = $(foreach lib, $(LIBS), $(addprefix -l, $(lib)))
+
+# add to the linker flags 
+LDFLAGS += $(LINK_PATHS) $(LINK_LIBS)
+
+#	SETTING: add the defines to the compiler flags
+CFLAGS += $(foreach define, $(DEFINES), $(addprefix -D, $(define)))
+
+#	SETTING: use the archive tools if building a static library
+#	otherwise use the linker
+ifeq ($(TYPE), STATIC)
+	BUILD_LINE = ar -cru $(NAME) $(OBJS)
+else
+	BUILD_LINE = $(LD) -o $@ $(OBJS) $(LDFLAGS)
+endif
+
+#	create the resource instruction
+	RSRCS_TO_USE :=	$(addsuffix _$(CPU).rsrc, $(RSRCS))
+	ifeq ($(RSRCS), )
+		DO_RSRCS :=
+	else
+		DO_RSRCS := $(XRES) -o $(TARGET) $(RSRCS_TO_USE)
+	endif
+
+#	create a 'strip' instruction to remove symbols (MOC)
+	ifeq ($(SYMBOLS), TRUE)
+		STRIP_SYMBOLS :=
+	else
+		ifeq ($(TYPE), APP)
+			STRIP_SYMBOLS := strip $(TARGET)
+		else
+			STRIP_SYMBOLS :=
+		endif
+	endif
+
+#	define the actual work to be done	
+default: $(TARGET)
+
+# added strip and output_dir (MOC)
+$(TARGET):	$(OBJ_DIR) $(OUTPUT_DIR) $(OBJS) $(RSRCS_TO_USE)
+		#:# linking...
+		$(BUILD_LINE)
+		$(STRIP_SYMBOLS)
+		$(DO_RSRCS)
+		$(MIMESET) -f $@
+		#:# done!
+
+
+#	rule to create the object file directory if needed
+$(OBJ_DIR)::
+	@[ -d $(OBJ_DIR) ] || mkdir $(OBJ_DIR) > /dev/null 2>&1
+#	rule to create the output file directory if needed (MOC)
+$(OUTPUT_DIR)::
+	@[ -d $(OUTPUT_DIR) ] || mkdir $(OUTPUT_DIR) > /dev/null 2>&1
+
+# (MOC) I turned off these automatic dependencies. Instead, these
+# lines are generated by the makemake script specifically for each
+# source file. That way, header dependencies can be accounted for.
+#$(OBJ_DIR)/%.o : %.c
+#	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+#$(OBJ_DIR)/%.o : %.cpp
+#	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+#$(OBJ_DIR)/%.o : %.cp
+#	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+#$(OBJ_DIR)/%.o : %.C
+#	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+#$(OBJ_DIR)/%.o : %.CC
+#	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+#$(OBJ_DIR)/%.o : %.CPP
+#	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+
+
+#	empty rule. Things that depend on this rule will always get triggered
+FORCE:
+
+#	The generic clean command. Delete everything in the object folder.
+clean :: FORCE
+	-rm -rf $(OBJ_DIR)
+
+#	remove just the application from the object folder
+rmapp ::
+	-rm -f $(TARGET)
+
+#---Source Dependencies-----------------
+$(OBJ_DIR)/BmpUtils.o: src/BmpUtils.cpp src/BmpUtils.h
+	#:# src/BmpUtils.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/Camera.o: src/Camera.cpp src/appconfig.h src/TPreferences.h \
+ src/BmpUtils.h src/CameraView.h src/PictureList.h src/CameraStrings.h \
+ src/PhotoPC.h
+	#:# src/Camera.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/CameraView.o: src/CameraView.cpp src/appconfig.h src/TPreferences.h \
+ src/CameraView.h src/PictureList.h src/CameraStrings.h
+	#:# src/CameraView.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/PhotoPC.o: src/PhotoPC.cpp src/PhotoPC.h src/ProgressWnd.h \
+ src/BmpUtils.h src/CameraStrings.h
+	#:# src/PhotoPC.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/PictureList.o: src/PictureList.cpp src/appconfig.h src/TPreferences.h \
+ src/PictureList.h src/CameraStrings.h src/thumb.h
+	#:# src/PictureList.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/ProgressWnd.o: src/ProgressWnd.cpp src/ProgressWnd.h src/appconfig.h \
+ src/TPreferences.h src/CameraStrings.h
+	#:# src/ProgressWnd.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/TPreferences.o: src/TPreferences.cpp src/TPreferences.h
+	#:# src/TPreferences.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/SerialPort.o: src/SerialPort.cpp \
+ /boot/develop/headers/posix/sys/termio.h \
+ /boot/develop/headers/be/device/SerialPort.h
+	#:# src/SerialPort.cpp
+	$(CC) $(INCLUDES) $(CFLAGS) -c $< -o $@

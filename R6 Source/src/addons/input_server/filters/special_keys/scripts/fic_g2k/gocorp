@@ -1,0 +1,4 @@
+#!/bin/sh
+# Goto FIC corporate site
+
+TellBrowser -goto http://www.fica.com

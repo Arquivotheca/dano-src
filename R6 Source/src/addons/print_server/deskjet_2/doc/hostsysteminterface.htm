@@ -1,0 +1,621 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft FrontPage 4.0">
+<TITLE>Hewlett-Packard Appliance Printing Development Kit</TITLE>
+<META NAME="ProgId" CONTENT="FrontPage.Editor.Document">
+<META NAME="Template" CONTENT="C:\Program Files\Microsoft Office\Office\html.dot">
+</HEAD>
+<BODY stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size: 36.0pt; mso-bidi-font-size: 12.0pt; color: blue; text-shadow: auto">Host
+System Interface</span><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">&nbsp;
+</span></h1>
+<p align="center" style="text-align:center">&nbsp;</p>
+<P ALIGN="CENTER">&nbsp;<o:p> </o:p></P>
+<!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]--><span style="mso-ignore:vglayout;position: relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><IMG SRC="sdkintro.gif" WIDTH=331 HEIGHT=248></span><!--[if gte vml 1]></o:wrapblock><![endif]--><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="28%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="10%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="11%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="71%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note:
+      Documentation and code version numbers are designed to be independent of
+      each other, and may not agree.)</td>
+  </tr>
+</table>
+
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>Notice<o:p> </o:p></P>
+<P>The information contained in this document is subject to change without notice.</P>
+<P>Hewlett-Packard makes no warranty of any kind with regard to this material, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose. Hewlett-Packard shall not be liable for errors contained herein or for incidental or consequential damages in connection with the furnishing, performance, or use of this material.</P>
+<P>All SDK documentation included in this list, received with the Hewlett-Packard Appliance Printing Software Development Kit, or received at a later date as a result of communication with any Hewlett-Packard employee regarding the Hewlett-Packard Appliance Printing Software Development Kit, is Hewlett-Packard "confidential" information.</P>
+<P>Licensee shall not export or re-export the Hewlett-Packard documentation, or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</P>
+<P>Licensee shall assure that all Hewlett-Packard Software and all documentation based on Hewlett-Packard Documentation include the following notice:</P>
+<P>"Copyright &copy; [<U>year</U>]</P>
+<P ALIGN="CENTER">Hewlett-Packard Company.</P>
+<P ALIGN="CENTER">All Rights Reserved."</P>
+<P ALIGN="CENTER">Hewlett-Packard Documentation has been developed entirely at private expense and is provided as "Commercial Computer Software" or "restricted computer software." Use, duplication or disclosure by the US Government or a US Government subcontractor is subject to the restrictions set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph (c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000 Hanover Street, Palo Alto, California 94304.</P>
+<P>Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">&atilde;</span> 2000</P>
+<P>Hewlett-Packard Company.</P>
+<P>All rights reserved.</P>
+<P>&nbsp;</P>
+<P><o:p></o:p></P>
+<H1 ALIGN="CENTER">Host System Interface</H1>
+<H2>&nbsp;</H2>
+<H2><A NAME="top">Introduction</A></H2>
+<P>The Hewlett-Packard Appliance Printing Software Development Kit (SDK) enables system developers to produce a minimal, yet flexible, user-interactive printer driver. Developers are free to create a minimum number of user-interactive commands, or create additional commands by migrating driver error/status codes into Graphic User Interfaces (GUIs) and messages.</P>
+<P>The following sections enumerate the use of user commands and interfaces within the printer driver.</P>
+<BLOCKQUOTE><A HREF="#userinterfaces">User Interfaces &amp; Guidelines</A></BLOCKQUOTE><DIR>
+
+<BLOCKQUOTE><A HREF="#warningserrors">Warnings and Errors</A></BLOCKQUOTE>
+<BLOCKQUOTE><A HREF="#displayprinterstatus">DisplayPrinterS<span style="mso-bookmark:_Hlt476041385">t</span>atus</A></BLOCKQUOTE>
+<BLOCKQUOTE><A HREF="#htmlhelp">HTML Help System</A></BLOCKQUOTE>
+<BLOCKQUOTE><A HREF="#memoryreqs">Memory Requirements</A></BLOCKQUOTE>
+<BLOCKQUOTE><A HREF="#hostsysinterface">Abstract Class "System Services" To Be Implemented By Host System Interface</A></BLOCKQUOTE>
+<BLOCKQUOTE><A HREF="#1284">Parallel 1284 Versus USB</A></BLOCKQUOTE>
+<BLOCKQUOTE><A HREF="#Plug">Plug &amp; Play Versus Uni-Directional</A></BLOCKQUOTE></DIR>
+
+<P>&nbsp;<o:p> </o:p><o:p></o:p></P>
+<H2><A NAME="userinterfaces">User </A>Interfaces &amp; Guidelines</H2>
+<P>Drivers built from the SDK core code provide simple printing solutions that do not require extended responses from end users. Developers determine their own number and complexity of GUIs to be presented by their product to the user.</P>
+<P>There are a few basic concepts that are necessary to understand in order to instantiate the user interface for a print solution. The simplest concept is to have only one print button (or GUI) allowing the user to initiate a print job. Developers have the option of increasing printer/user interaction by creating a second GUI for example, which the user could use to determine the CurrentMode or other print job options. These other options include:&nbsp;</P>
+
+<UL>
+<LI>Print Area </LI>
+<LI>Margins </LI>
+<LI>Rendering and Formatting Options (e.g. eliminate solid backgrounds and invert font colors, send text only)&nbsp; </LI>
+<LI>Duplex Printing </LI>
+<LI>Output Tray Selection </LI>
+<LI>Printer Maintenance Functions (e.g. clean pen) </LI></UL>
+
+<P>The following two lists are strongly recommended GUIs and optional GUIs. These lists are recommendations only, and should be modified to meet the needs of the host system and end user.</P>
+<B><P>Strongly Recommended<o:p> </o:p></P>
+
+<UL>
+<LI>Error Dialogue<o:p> </B>- Errors that occur at the printing level are reflected to the user in an easily understandable manner.<span style="font:7.0pt &quot;Times New Roman&quot;">&nbsp;</span> </LI>
+<B><LI>Printing Progress<o:p> </B>- The user visually sees the status of their print job.</o:p> </LI>
+<B><LI>Printer-Model Selection (for Uni-di)<o:p> </B>- In cases where Bi-directional communication is not available, the user should be prompted to select their printer from a supported printer list.</o:p> </LI>
+<B><LI>Driver Version<o:p> </B>- Allows the user to find out what Hewlett-Packard print driver version is being used.</o:p> </LI>
+<B><LI>Printer Maintenance Functionality<o:p></B>&nbsp; - Some functionality for printer maintenance should be incorporated. Future maintenance functionality will continue to be added to future SDK releases.</o:p> </LI></UL>
+
+<B><P>Optional<o:p> </o:p></P>
+
+<UL>
+<LI>Printmode Selection</B> (including dialogue for mode mismatch)<o:p> - Allows users </o:p>to choose print modes such as print quality, grayscale, etc. </LI>
+<B><LI>Font Selection &amp; Formatting</B> (e.g. for email)<o:p> - Developers may want to give end users a minimal selection of fonts, or the ability to eliminate backgrounds or invert font colors when printing.</o:p> </LI>
+<LI><span style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 7.0pt">&nbsp;</span><B>Models Supported In Driver<o:p> </B>- Allows developers to show users which DeskJet models are supported by the particular print driver.</o:p> </LI>
+<B><LI>Paper size<o:p> -</B> Allows the user to choose the paper size (letter vs. legal).</o:p> </LI>
+<B><LI>Margins<o:p> - </B>Allows users to alter the margins for a print job.</o:p> </LI>
+<B><LI>Retrieve Image Data At Higher Resolution</B> (to match capabilities of the printmode)<o:p> - This feature is recommended for devices that may use low-resolution displays such as televisions.</o:p> </LI></UL>
+
+<P>&nbsp;<span style="font-size:8.0pt;mso-bidi-font-size:12.0pt; color:maroon"><A HREF="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k to top]</A><o:p> </o:p></span></P>
+<P>&nbsp; </P>
+<H2>Warnings &amp; Errors, DisplayPrinterStatus, &amp; HTML Help System: </H2>
+<P>The following three sections are all used to communicate with the end user to solve any problems that may be occurring: </P>
+<H2>&nbsp;</H2>
+<H3><A NAME="warningserrors">Warnings </A>&amp; Errors:</H3>
+<P>The SDK has a series of warning and error codes that are used to indicate success or failure of methods. For a complete list, refer to the <A HREF="api.htm">API Appendix</A>.</P>
+<P>Warnings (represented by a value less than zero): </P>
+<P>A <I>warning</I> is code that has completely executed, but is notifying the user that a print concern exists. Example: A user has chosen grayscale print mode, but a color pen is installed. A warning is issued to the user, telling them that this is an inefficient use of the pen, that the printed product will not look like they expect it to, but the printer will print with it anyway unless given further direction. At this point, a dialogue box can be sent to the user via a GUI button confirming that they really want to use this setting.</P>
+<P>Errors (represented by a value greater than zero): </P>
+<P>An <I>error</I> is code that has not completely executed, and is notifying the user that action must be taken. An error is a dialogue with the user that the process did not execute, and the user must take action. Example: When a paper jam occurs during printing, a GUI should be sent to the user indicating that action(s) must be taken before the print job can continue.<span style="color:red"></o:p> </span></P>
+<span style="font-size:8.0pt;mso-bidi-font-size:12.0pt; color:maroon"><A HREF="#top">[Back to top]</A></span> 
+<H2>&nbsp;</H2>
+<H3><A NAME="displayprinterstatus">DisplayPrinterStatus</A>:</H3>
+<P>The method DisplayPrinterStatus is used by the driver to communicate the printer state to the host system and ultimately the end user. The Driver uses DisplayPrinterStatus to inform the host of any error conditions, which the host environment then handles appropriately.</P>
+<P>For example, if the printer has a mechanical error, the printer flags that an error has occurred. The driver stops sending data to the printer and calls DisplayPrinterStatus. The host then flashes a GUI conveying the error to the user. The DisplayPrinterStatus method is implemented in the derived host SystemServices class.</P>
+<P>DisplayPrinterStatus values can either be recoverable or non-recoverable, and/or display the current status of the print job. The developer should keep this in mind when creating GUIs, and be sure to include a Cancel or OK button if necessary.&nbsp;Some display printer status values are conditions that the user can easily correct and allow the print job to continue.The following is an example of this:</P>
+<P>A user submitting a print job incurs an error condition because there is no paper in the paper input tray.The hosting environment should be prompted with a display printer status value of DISPLAY_OUT_OF_PAPER and accordingly prompt the user with a GUI explaining the error condition, and how to resolve it.If the user puts paper into the input tray and hits the resume button on the printer, the display printer status value will be changed and the print job can continue normally.</P>
+<P>For recoverable error conditions such as this, the hosting environment will need to continue looping around to check the display printer status value, giving the flexibility of the error condition being resolved on the printer.</P>
+<P>The following list of printer statuses describes the condition, whether it’s recoverable or not, and where appropriate, sample text to use in the GUI.</P>
+<TABLE CELLSPACING=0 BORDER=0 WIDTH=651>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=48>
+<P>DISPLAY_PRINTING</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=48>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=48>
+<span style="font-weight:normal">Currently printing<o:p> - this is a flag that says the job is currently printing. </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">N/A </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=25><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight:normal"><I>"Currently Printing."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21>
+<P>DISPLAY_PRINTING_COMPLETE</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Printing complete<o:p>. </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">N/A<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=28><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=28>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=28>
+<span style="font-weight:normal"><I>"Printing Complete."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21>
+<P>DISPLAY_PRINTING_CANCELED</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Printing canceled.</span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">N/A </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=26><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=26>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=26>
+<span style="font-weight:normal"><I>"Printing Canceled."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=64>
+<P>DISPLAY_OFFLINE</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=64>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=64>
+<span style="font-weight:normal">Printing is currently offline; some Hewlett-Packard printers go offline to flag that an error has occurred.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">N/A<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=66><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=66>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=66>
+<span style="font-weight:normal"><I>"Your printer has gone offline due to an error. Cancel the job, check the printer, and try again."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21>
+<P>DISPLAY_BUSY</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Printer is busy. </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">N/A<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=23><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=23>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=23>
+<span style="font-weight:normal"><I>"Printer Busy."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=20>
+<P>DISPLAY_OUT_OF_PAPER</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=20>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=20>
+<span style="font-weight:normal">Printer is out of paper.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=61><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job or loads more paper and presses the resume button.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=66><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=66>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=66>
+<span style="font-weight:normal"><I>"The printer is out of paper. Insert paper into the paper tray, and push the resume button on the printer."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=24>
+<P>DISPLAY_TOP_COVER_OPEN<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=24>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=24>
+<span style="font-weight:normal">Printer top cover is open.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=58><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=58>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=58>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job or loads more paper and presses the resume button.&nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=41><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=41>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=41>
+<span style="font-weight:normal"><I>"The top cover of your printer is open. Close the top cover to resume printing."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=61>
+<P>DISPLAY_ERROR_TRAP<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Printer mechanism error, this is a non-recoverable error which usually requires intervention by the user.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<P>No<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=62><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=62>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=62>
+<span style="font-weight:normal"><I>"The printer is in an error condition. Cancel the job, check your printer, and try to print again."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=25>
+<P>DISPLAY_NO_PRINTER_FOUND</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=25>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight:normal">No printer found.<o:p> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=61><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job. or if there is a printer attached, powers the printer on and presses the resume button. <o:p></span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=102><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=102>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=102>
+<span style="font-weight:normal"><I>"No printer was found. Check to make sure your printer is connected properly and that the power is on. Then push the resume button on the printer to continue printing."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=43>
+<P>DISPLAY_NO_PEN_DJ400<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=43>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=43>
+<span style="font-weight:normal">No pen found in the Hewlett-Packard DJ400 series printer.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=59><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=59>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=59>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job, or inserts a pen and presses the resume button.<o:p> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=80><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=80>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=80>
+<span style="font-weight:normal"><I>"The print cartridge is either missing or installed incorrectly. Check the printer cartridge and push the resume button on the printer."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=45>
+<P>DISPLAY_NO_PEN_DJ600<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=45>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=45>
+<span style="font-weight:normal">No pen found in the Hewlett-Packard DJ600 series printer.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=54><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=54>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=54>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job, or inserts a pen and presses the resume button.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=79><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=79>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=79>
+<span style="font-weight:normal"><I>"The print cartridge is either missing or installed incorrectly. Check the printer cartridge and push the resume button on the printer."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=43>
+<P>DISPLAY_NO_COLOR_PEN<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=43>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=43>
+<span style="font-weight:normal">No color pen found on Hewlett-Packard DJ 2 pen products.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=60><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=60>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=60>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job, or inserts a pen and presses the resume button.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=81><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=81>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=81>
+<span style="font-weight:normal"><I>"The color print cartridge is either missing or installed incorrectly. Check the printer cartridge and push the resume button on the printer."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=42>
+<P>DISPLAY_NO_BLACK_PEN<span style="font-weight:normal"> <o:p></span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=42>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=42>
+<span style="font-weight:normal">No black pen found on Hewlett-Packard DJ 2 pen products.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=61><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=61>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job, or inserts a pen and presses the resume button.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=82><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=82>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=82>
+<span style="font-weight:normal"><I>"The black print cartridge is either missing or installed incorrectly. Check the printer cartridge and push the resume button on the printer."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=43>
+<P>DISPLAY_NO_PENS<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=43>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=43>
+<span style="font-weight:normal">Both pens are missing from Hewlett-Packard DJ 2 pen products.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=60><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=60>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=60>
+<span style="font-weight:normal">Yes, depending on if the user cancels the job, or inserts a pen and presses the resume button.<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=80><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=80>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=80>
+<span style="font-weight:normal"><I>"The print cartridges are either missing or installed incorrectly. Check the printer cartridges and push the resume button on the printer."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=41>
+<P>DISPLAY_PHOTO_PEN_WARN<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=41>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=41>
+<span style="font-weight:normal">Indicates photo pen in a printer that cannot make use of it.&nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=25><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=25>
+<P>No<span style="font-weight:normal"><o:p> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=62><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=62>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=62>
+<span style="font-weight:normal"><I>"Photo print cartridges are not supported. Cancel the print job and insert the correct print cartridges."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=25>
+<P>DISPLAY_PRINTER_NOT_SUPPORTED<span style="font-weight:normal"><o:p> &nbsp; </span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight:normal">Printer not supported by driver<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<P>No<span style="font-weight:normal"> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=25><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight:normal"><I>"This printer is not supported."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=26>
+<P>DISPLAY_COMM_PROBLEM&nbsp; <span style="font-weight:normal"></span></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=26>
+<span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=26>
+<span style="font-weight:normal">Communication problem with printer<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">No<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=25><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=25>
+<span style="font-weight:normal"><I>"Cannot communicate with the printer."</I> </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21>
+<P>DISPLAY_CANT_ID_PRINTER</TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<P><span style="font-weight:normal">Condition:&nbsp;&nbsp; </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Cannot id printer<o:p> &nbsp; </span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=21><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">Recoverable: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=21>
+<span style="font-weight:normal">No<o:p> </o:p></span></TD>
+</TR>
+<TR><TD WIDTH="43%" VALIGN="MIDDLE" HEIGHT=26><P></P></TD>
+<TD WIDTH="14%" VALIGN="MIDDLE" HEIGHT=26>
+<span style="font-weight: normal">Example Text</span><span style="font-weight:normal">: </span></TD>
+<TD WIDTH="42%" VALIGN="MIDDLE" HEIGHT=26>
+<span style="font-weight:normal"><I>"Cannot properly identify the printer."</I> </span></TD>
+</TR>
+</TABLE>
+
+<P>A second button may also be added to a GUI providing users access to an html help support system. Refer to the following <A HREF="#htmlhelp">HTML Help System</A> for more information.</P>
+<P><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt; color:maroon"><A HREF="#top">[Back to top]</A></span></P>
+<P>&nbsp;<o:p> </o:p></P>
+<H3><A NAME="htmlhelp">HTML </A>Help System</H3>
+<P>Print Drivers derived from this SDK can further help end users solve printer related problems/issues through a html based help system provided over the web by HP. These html pages can describe in detail to a user how to resolve issues with there printing experience. The also provide answers to questions about printing in general on appliance type devices. Access to these pages is made via a URL call to a Perl script hosted on a HP server called "errorparse.cgi". Parameters are placed at the end of the URL in a format as shown below allowing the Perl script to decide which pages should be sent to the calling client. </P>
+<P>Refer to the table in htmlerrtble.xls to determine which values correlate with what errors and Refspec.html located in the html help directory for more detailed information about the HTML help system.</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <A HREF="http://www.hp.com/embed/hpapdk_help">http://www.hp.com/embed/hpapdk_help</A>?errorcode=5&amp;printermodel=5&amp;language=en-US&amp;systemID=0</P>
+<P>In the URL above is an example of a device trying to print to a DJ690 that has an out of paper error condition. The page that would be returned by a call to this URL is an "out of paper error" web page in English for a DJ690 running under the generic systemID number that will provide text and graphics showing the user how to solve the error condition. </P>
+<P>This URL should be built in the glue code of a hosting device, where access can be made to the errorcode and printermodel parameters. The values for the errorcode and printermodel parameters can be queried or passed up from the HP print driver. Developers do not have to worry about what combinations are being used because the hosting environment only needs to pass these values along with the language and systemID parameters.</P>
+<P>The language parameter is a combination of the language code and country code separated by a dash as specified by ISO 639:1988, and ISO 3166-1. If the Perl script does not recognize the language code combination, it will be set by default to en-US.</P>
+<P>The systemID parameter gives Hewlett-Packard the flexibility to provide different sets of html help pages to different print solutions in the future. Developers should set the systemID to 0 to properly access the html help system. These help pages are generic enough to be associated with most any supported Hewlett-Packard DeskJet printer printing from an appliance type device.</P>
+<P>A combination of parameters not matching any of the combinations recognized by the Perl script will be redirected to the top index page of the html tree. This top-level index page provides entry points to all Hewlett-Packard DeskJet models supported by the help pages.</P>
+<P><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt; color:maroon"><A HREF="#top">[Back to top]</A></span></P>
+<P>&nbsp;<o:p> </o:p></P>
+<H2>Abstract Class "System Services" To Be Implemented By <A NAME="hostsysinterface">Host </A>System Interface</H2>
+<P>The SDK requires access to certain basic services that can only be provided by the hosting environment such as memory management and input/output. The SystemServices object is used to obtain and encapsulate these services and other utilities that the Printer Driver uses to process print jobs, such as InitDeviceComm, DisplayPrinterStatus, ReadDeviceID, and GetStatusInfo.&nbsp;</P>
+<P>System Services: System Services is an abstract base class that requires implementation of various routines by the host environment in order to compile. In most cases, this implementation is straight-forward. For example, implementing the required AllocMem function should just require mapping it to "malloc" or some equivalent; however, the host system also has the opportunity to allocate all driver memory in a single block up front (in the constructor) and then use AllocMem calls to dole out pieces from this block.</P>
+<P>Instantiation of a SystemServices object is the first step in the driver calling sequence, and must occur before either PrintContext or Job can be instantiated.</P>
+<B><P>InitDeviceComm: </B>InitDeviceComm is a method included in the base class whose function is to ensure that communication can be established with the printer, and the printer can be identified. InitDeviceComm must be called from the <I>derivative</I> SystemServices constructor. All other system-specific initialization should be done in the derivative SystemServices constructor as well. An example would be setting the seed for random number generation (i.e. implementation of the GetRandomNumber method).</P>
+<B><P>DisplayPrinterStatus: </B>DisplayPrinterStatus is a method implemented in the derivative class that allows communication of the driver status (errors, conditions requiring user intervention, etc.,) to user interfaces provided by the host. For more information, refer to <A HREF="#displayprinterstatus">DisplayPrinterStatus</A>.</P>
+<B><P>ReadDeviceID: </B>ReadDeviceID is a method implemented in the derivative class for retrieving the raw DeviceID string from the printer. ReadDeviceID is dependent on the type of communications protocol used, (1284, USB, or other methods.) If access to the printer's DeviceID is not possible due to I/O issues on the host system, have this function return BAD_DEVICE_ID to allow proper operation of the printer driver's error handling system.</P>
+<B><P>GetStatusInfo: </B>GetStatusInfo is a method implemented in the derivative class for retrieving the centronics status byte from the printer. Since this "status byte" is a fundamental element of parallel I/O and is emulated in USB, this byte should be available in most systems. If this byte is <U>not</U> available, simply return FALSE from GetStatusInfo to ensure proper operation of the printer driver's error handling system.&nbsp;</P>
+<H2>&nbsp;</H2>
+<H2>Parallel <A NAME="BM1284">1284</A> versus USB</H2>
+<P><o:p>If USB will be the print solution I/O method, the printer driver must be informed by setting the flag IOMode.bUSB to TRUE in the constructor of the derivative SystemServices class. The drivers produced by the Hewlett-Packard Print Driver SDK require this information due to I/O and error handling differences between USB and parallel/1284 connectivity.. </P>
+<P><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt; color:maroon"><A HREF="#top">[Back to top]</A><o:p> &nbsp; </span></P>
+<P>&nbsp;</P>
+<H2><A NAME="Plug">Plug</A> &amp; Play versus Uni–Directional</H2>
+<P>Hewlett-Packard strongly recommends using bi-directional communication (bi-di) instead of uni-directional communication (uni-di) when implementing print solutions with this SDK. Bi-directional communication provides complete communication between the user and the printer, and enables plug and play capability, which provides seamless identification and use of Hewlett-Packard DeskJet printers without any input from the user.</P>
+<P>If a uni-directional I/O method is the only option, the driver can still be used although the user will not have the advantage of the printer-to-host system communication for troubleshooting. In this situation, the host system will need to prompt the user to report the model they will be printing to <I>before</I> initiating a print job. The hosting system is responsible for storing this printer model to prevent further prompting from the user again.</P>
+<P>In normal bi-directional communication, Initdevicecomm tries to establish contact with the printer when the SystemServices class is created. If successful, the model number is saved for later use. When the PrintContext is created, the pointer for the SystemServices class will be used to check if the model number has been previously saved. If it was, bi-directional communication has been achieved.&nbsp;</P>
+<P>It is also possible for PrintContext to be created when no model has been saved. The host system should always call PrinterSelected( ) to see if a printer has been selected after the PrintContext is created. A return value of TRUE will occur if bi-di communication is operational and the printer's model has been established. If it appears that no device has been selected (FALSE), then the user should be prompted to enter the model number, and SelectDevice should be called in order to pass on the appropriate model number.</P>
+<P>The first possibility is when no status can be read at all from the centronics port, such as in a spooling case. The developer knows that the solution will be a true uni-directional I/O and should leave out InitDeviceComm from the derived SystemServices class. The second possibility is when the hosting system would still have access to the centronics register. If the hosting environment has access to the centronics port, the register can be passed to GetStatusInfo, allowing the driver to process the status. </P>
+<P>There are four different path in the communication model: (<I>DevID</I> indicates access to the printer's deviceID string, and <I>Status</I> indicates access to the centronics status byte.) No DevID/No Status, No DevID/Yes Status, Yes DevID/No Status, and Yes DevID/Yes Status. The InitDeviceComm method looks at the return values of ReadDeviceID and GetStatusInfo, and sets the error handling functionality appropriately. </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P>&nbsp; </P>
+<P><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt; color:maroon"><A HREF="#top">[Back to top]</A><o:p> &nbsp; </span></o:p></P></BODY>
+</HTML>

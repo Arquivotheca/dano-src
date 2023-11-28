@@ -1,0 +1,12 @@
+# stripres
+TARGET_NAME:=stripres
+SYSTEM_LIBS:= libroot.so
+MY_INCLUDES:=-I$(BUILDHOME)/src/inc/os_p
+SRCS:=$(TARGET_NAME).c
+RESOURCE_FORK:=
+LINK_DIRS:=
+MY_INSTALL_DIR:=$(INSTALL_BIN)
+SRC_DIR:=src/commands/$(TARGET_NAME)
+MY_CFLAGS:=
+
+include $(SDIR_TEMPLATES)/AppTemplate.mk

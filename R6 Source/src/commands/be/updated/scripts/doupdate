@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Purpose: Retrieve and install a small (<1MB) non-system-critical update which
+# the user does not need to be aware of.
+#
+# UPDATE_PACKAGE	The package name given to the redirector
+# UPDATE_TARGET		The target directory for unzip
+# UPDATE_KEY		The public key to use when validating the file
+# UPDATE_TEMP		The path of the temp file
+
+setenv EXIT_VALUE 1
+
+setenv RESULT $?
+
+#/*** Get the URL for the package ***/
+source /etc/update/update_url
+		
+if wget -t1 -c -O$UPDATE_TEMP $UPDATE_URL
+	if dsasig verify /etc/update/keys/params /etc/update/keys/$UPDATE_KEY $UPDATE_TEMP
+		if unzip -qq -u -o $UPDATE_TEMP -d $UPDATE_TARGET
+			setenv EXIT_VALUE 0
+		fi
+	fi
+	rm $UPDATE_TEMP
+fi
+	
+exit $EXIT_VALUE

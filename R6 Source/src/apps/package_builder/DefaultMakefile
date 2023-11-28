@@ -1,0 +1,149 @@
+########################################################################
+# File:      Makefile
+# Creator:   Matt Bogosian <mbogosian@usa.net>
+# Copyright: (c)1998, Matt Bogosian. All rights reserved.
+# Description: Makefile for project.
+# ID:        $Id: //depot/main/exp/mattb/skeleton/Makefile#5$
+# Conventions:
+#     Macros - all uppercase letters with referencing done by
+#         parenthises.
+#         (E.G., $(MYMACRO)).
+#     Shell variables - referencing done by braces.
+#         (E.G., ${HOME}).
+########################################################################
+
+
+########################################################################
+# Common Build Macros
+########################################################################
+
+CFLAGS			+= -c $(INC_DIRS)
+LDFLAGS			+= $(LIB_DIRS) -lbe -lcrap
+
+INC_DIRS		+= \
+	-I$${HOME}/config/$(INC)
+
+LIB_DIRS		+= \
+	-L$${HOME}/config/$(LIB)
+
+INC				= include
+LIB				= lib
+OBJ				= obj
+
+RWX_PERMS		= 700
+RW_PERMS		= 600
+
+SRC_FILES		= \
+	TApplication.cpp \
+	TMain.cpp \
+	TView.cpp \
+	TWindow.cpp
+
+
+########################################################################
+# Platform-Specific Build Macros
+########################################################################
+
+ifneq ($(shell uname -m), BePC)
+
+CC				= mwcc
+LD				= mwld
+CFLAGS			+= -w on -O4
+LDFLAGS			+= -map $(TARGET).xMAP
+
+INC_DIRS		+= \
+	
+
+LIB_DIRS		+= \
+	
+
+else
+
+CC				= gcc
+LD				= gcc
+CFLAGS			+= -Wall -Wno-multichar -Wno-ctor-dtor-privacy -O3
+LDFLAGS			+= 
+
+INC_DIRS		+= \
+	
+
+LIB_DIRS		+= \
+	
+
+endif
+
+
+########################################################################
+# Build Functions
+########################################################################
+
+define SRC_FILES_TO_OBJS
+    $(addprefix $(OBJ)/, $(addsuffix .o, $(foreach file, $(SRC_FILES), $(basename $(notdir $(file))))))
+endef
+
+
+########################################################################
+# Applications/Libraries
+########################################################################
+
+TARGET			= project
+
+
+########################################################################
+# Objects
+########################################################################
+
+OBJS		= $(SRC_FILES_TO_OBJS)
+
+
+########################################################################
+# Dependencies
+########################################################################
+
+all : $(OBJ) $(TARGET)
+
+clean : 
+	-rm -f $(TARGET) $(TARGET).xMAP $(OBJS) *.tmp
+	-rm -fr $(OBJ)
+
+$(TARGET) : $(OBJS) $(TARGET).rsrc ${HOME}/config/$(LIB)/libcrap.a
+	$(LD) -o $@ $(OBJS) $(LDFLAGS)
+	-xres -o $@ $(TARGET).rsrc
+	-mimeset -all -F $@
+	@-chmod $(RWX_PERMS) $@ 2>/dev/null
+	@-if [ -f $(TARGET).xMAP ] ; then \
+		chmod $(RW_PERMS) $(TARGET).xMAP 2>/dev/null ; \
+	fi
+
+$(OBJ) : 
+	@-if [ ! -d $@ ] ; then \
+		mkdir -p $@ ; \
+		chmod $(RWX_PERMS) $@ 2>/dev/null ; \
+	fi
+
+
+########################################################################
+# Header Dependencies
+########################################################################
+
+$(OBJ)/TApplication.o \
+$(OBJ)/TMain.o : TApplication.h
+
+$(OBJ)/TMain.o : TMain.h
+
+$(OBJ)/TView.o \
+$(OBJ)/TWindow.o : TView.h
+
+$(OBJ)/TApplication.o \
+$(OBJ)/TWindow.o : TWindow.h
+
+
+########################################################################
+# Object Dependencies
+########################################################################
+
+$(OBJ)/%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ)/%.o : %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@

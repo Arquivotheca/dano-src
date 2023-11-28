@@ -1,0 +1,8 @@
+# Use libio by default.
+test $stdio = default && stdio=libio
+
+# Compile to be reentrant.
+DEFINES="$DEFINES -D_LIBC_REENTRANT"
+
+# We don't build in the elf subdir but we need it.
+test -d elf || mkdir elf

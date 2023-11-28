@@ -1,0 +1,17 @@
+# Makefile
+
+SOURCE:=BJPrinter
+SRC_DIR:=src/addons/print_server/canon
+TARGET:= $(INSTALL_ADD_ONS)/Print/$(SOURCE)
+ELF_FILES+=$(TARGET)
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+MY_DEPS:=$(MAKEFILE_LEAFNAME)
+include $(SDIR_TEMPLATES)/DataFileTemplate.mk
+
+SOURCE:=BJclib
+SRC_DIR:=src/addons/print_server/canon
+TARGET:= $(INSTALL_LIBS)/$(SOURCE)
+ELF_FILES+=$(TARGET)
+PERMISSIONS:=$(PERMS_SYSTEM_DATA)
+MY_DEPS:=$(MAKEFILE_LEAFNAME)
+include $(SDIR_TEMPLATES)/DataFileTemplate.mk

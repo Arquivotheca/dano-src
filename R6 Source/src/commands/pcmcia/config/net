@@ -1,0 +1,22 @@
+#!/bin/sh
+
+action=$1
+device=$2
+
+case "${action:?}" in
+'start')
+	. /boot/beos/system/boot/Netscript < /dev/null > /dev/null 2>&1
+	alert "PCMCIA NetCard Online ($2)" "Okay" < /dev/null > /dev/null 2>&1 &
+	;;
+'stop')
+	quit application/x-vnd.Be-NETS
+	quit application/x-vnd.Be-dhcpc
+	alert "PCMCIA NetCard Offline ($2)" "Okay" < /dev/null > /dev/null 2>&1 &
+	;;
+'restart')
+	quit application/x-vnd.Be-NETS
+	quit application/x-vnd.Be-dhcpc
+	. /boot/beos/system/boot/Netscript < /dev/null > /dev/null 2>&1
+	alert "PCMCIA NetCard Restarted ($2)" "Okay" < /dev/null > /dev/null 2>&1 &
+	;;
+esac

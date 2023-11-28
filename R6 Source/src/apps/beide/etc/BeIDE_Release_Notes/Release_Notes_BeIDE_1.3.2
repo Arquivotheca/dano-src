@@ -1,0 +1,108 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	1.3.2
+Date:		6/27/97
+Authors:	Brian Stern, Jon Watte, Mark Anderson
+			Burton T. E. Miller, Bernie Estavillo 
+=============================================
+
+Greetings Be developers.  This is an update of the BeIDE release
+versions found on the DR3 CodeWarrior for Be CD and the AA BEOS CD.
+It has relatively few new features.  It does have a number of bug 
+fixes and performance improvements over the releases on
+our CD and the BeOS CD.
+
+You may notice that Be has modified their folder layout and that BeIDE 
+and the other Metrowerks products are now in /boot/apps/Metrowerks,
+with the system headers and libraries living in /boot/develop.  Because
+of this many of the access paths in your existing projects will be invalic.
+BeIDE will update the access paths in existing projects when opening
+them for the first time.  If you have problems with files not being found
+or with BeIDE reporting access paths not being found please inspect your
+access paths prefs panel closely.  Note that 'access path not found'
+errors reported when BeIDE launches may refer to the New Project access
+path settings or to a project that you have double-clicked.
+
+============================
+New Features
+============================
+
+*	Faster opening and saving of projects.
+
+*	Faster searching for files.
+		  
+*	Includes MWBResPlugin, which didn't make it onto the CD.  (Only for the 
+	version on the CW4BeCD.)
+
+*	Stampsound plays in the about box.
+
+*	Smart zoom behavior for text, project and message windows.
+
+*	Printing is now enabled.
+
+*	Correctly deals with circular symlinks in the access paths.
+
+*	Double-clicking of non-text, non-executable files in the project will
+	launch the preferred app for that file.  This is useful now for
+	resource files created by FileTypes, and hopefully for IconWorld and others
+	in the future.
+
+*	Outline hiliting is implemented in text windows along with a grey hilite color.  
+	You can have any hilite color you like, as long as it's grey.  The 
+	ability to select a hilite color will appear in a future version.
+
+*	Added code to sync the file system when saving both text and project files.
+	This should stave off some reported problems of corrupted text files if the 
+	OS crashes shortly after a build. 
+
+==========================
+Bugs Fixed
+==========================
+
+Some deadlocks on the windowlist semaphore have been fixed.  This problem
+was noticed mostly on PowerMac and PowerComputing machines (i.e., uniprocessor
+machines).  If you see this again please let us know and send a ps.
+
+Fixed a problem with use of command-arrow keys in text windows.
+
+Fixed a typo with the default paths {beide}/headers/libraries -> {beide}/libraries.
+
+Fixed a bug where changes in the Linker prefs panels were ignored until the project
+was closed and reopened.
+
+Fixed a bug that caused 'duplicate code' link warnings for .h files in a project.
+
+Fixed a crash seen after adding about a hundred files to a project.
+
+Improved the mechanism for setting the icons for executables.  You should just
+need to add a rsrc file to your project that has the correct resources built
+by IconWorld and FileTypes.
+
+Fixed a crashing bug in the find window seen sometimes when closing projects.
+
+Fixed a number of problems related to the message window with many messages in it.
+These fixes should also improve times of removing messages from the message window.
+
+==========================
+Known Limitations
+==========================
+
+It's possible that this may be fixed by the time you read this but there is a problem
+with the apparent appearance of temp files in the same folder as project or text
+files when those files are saved.  You may see files named something like mwtmp45 and
+your project or text files will appear to disappear from their locations.  Closing
+and reopening these folders in the Tracker restores the correct names for these files.
+This is cosmetic only and there is no loss of data.
+
+=====================
+Contacting Metrowerks
+=====================
+
+For bug reports, technical questions and suggestions, please send them to 
+devsupport@be.com for problems with the limited BeIDE, and 
+support@metrowerks.com for problems with the full version.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

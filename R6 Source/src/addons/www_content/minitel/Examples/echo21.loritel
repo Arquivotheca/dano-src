@@ -1,0 +1,64 @@
+
+00
+01
+          Teletel
+          norme
+          ASCII
+_______________________________________
+
+              |F/mn TTC|serveur|telecom
+          ____|________|_______|_______
+              |        |       |
+          t1  |  0,13  |       | 0,13
+          _____________________________
+
+          tarif reduit du telephone
+_______________________________________
+
+code
+du service:............................
+
+_______________________________________
+
+Copr.                          <Envoi >
+83 DGT                     fin <Cx/Fin>
+code
+du service:ECHO21!QLECHO21                       RN                           0001communication Betablie:1}
+
+
+
+%  THIS IS ECHO; PLEASE ENTER YOUR CODE
+
+
+%/
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+##########################################[?{00
+WLCe service ne peut pasXLvous rBepondre.QL00LIB 00 00                           QL01
+          Teletel
+          norme
+          ASCII
+_______________________________________
+
+              |F/mn TTC|serveur|telecom
+          ____|________|_______|_______
+              |        |       |
+          t1  |  0,13  |       | 0,13
+          _____________________________
+
+          tarif reduit du telephone
+_______________________________________
+
+code
+du service:............................
+
+_____________________I__________________
+
+Copr.                          <Envoi >
+83 DGT                     fin <Cx/Fin>
+code
+du service:0000Fin de communication.AeH QL?
+NO CARRIER

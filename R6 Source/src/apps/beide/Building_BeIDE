@@ -1,0 +1,74 @@
+BeIDE Build Instructions
+
+Brian Stern 02/26/98
+=================================================================
+
+
+All of the projects and code for building BeIDE and its plugins
+are in a single directory with subdirectories.
+
+There is a project for a debug version of BeIDE-ppc at the top
+level of the tree (BeIDE.proj) and this is the project that
+is used for development.  There is a project for the release
+version in NonDebugProject_f, which has optimizations turned
+on and DEBUG off.
+
+The various plugins (mwbres, mwprefsplugin, mwprefspluginx86)
+have a single project, used for both development and release.
+
+There are x86 versions of all the projects in subdirectories.
+
+There are a couple of shell scripts that use tell to automate 
+final builds (buildall_ppc, buildall_x86).
+
+Otherwise there's not much to it.
+
+Future Directions
+=================================================================
+
+For the next development cycle I was planning on adding
+the capability to have more than one project open at the same time.
+To get this to work there are some UI changes that need to be made.
+The most important is to have multiple Settings windows,
+one for each open project and one for the IDE-specific settings (i.e.,
+those settings not stored in the project).  There are a number
+of places in the code where there is an fProject data member.  These
+will need to become a list of open projects of course.  The Settings
+window is designed with the idea that there will only ever be one of them
+so there will likely be many changes in how it works.  The applyto
+popup will need to be removed.  This popup causes some confusion
+currently because it updates itself automatically when projects open
+and close, when the Settings window opens, and when you choose an item in
+the listview in the Settings window if that item doesn't apply to the 
+current applied-to target.  This auto setting causes some confusion
+so it will be good when there are multiple Settings windows.
+
+Another feature to be added in the near term is support for external
+editors.  This won't be hard because all opening of text files
+is bottlenecked through a single function in the app subclass.  It
+will be basically a matter of setting up a UI for choosing the 
+external editor and then sending it the appropriate message to 
+open the text file.  There also needs to be a way to specify the 
+selection in the file as part of the message sent to the external editor.
+
+Related to the above, the IDE should have its scripting architecture
+changed to use the BeOS scripting architecture.  This shouldn't be
+hard.  The current architecture predates the BeOS scripting architecture
+but is similar to it.  
+
+Another feature to be added at some point is multiple message windows.
+There should be a new message window for each discrete task (like a single
+make, or a single batch find, or the info messages that appear 
+when the app starts up or a project opens if there are problems like 
+missing access path).  These message windows would disappear once
+closed.
+
+In most ways BeIDE was designed to mirror the Mac CodeWarrior IDE, in 
+functionality if not always with exactly the UI.  The main difference
+was that I didn't want any modal windows.  (There's one, can you
+find it?)  It is always a good idea to look at the current version
+of the Mac IDE and see what features exist and what the UI design 
+is before implementing similar features in BeIDE.
+
+
+Brian  }:-{)}

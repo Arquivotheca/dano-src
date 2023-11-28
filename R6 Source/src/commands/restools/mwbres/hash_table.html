@@ -1,0 +1,88 @@
+ 
+ <HTML><HEAD><TITLE>Class hash_table </TITLE></HEAD> 
+ <BODY BACKGROUND="../tile.gif"> 
+ <H2>hash_table Class</H2> 
+ <HR><H3>Class Documentation</H3><P> 
+  
+  By using or copying this Software, Licensee agrees to abide by the 
+  intellectual property laws, and all other applicable laws of the 
+  U.S., and the terms of this license. 
+  Template based bucket hashing class.  Hashes on input string. 
+  The template &ltType&gt defines the type of the constructed bucket for 
+  each entry. 
+  Requirements on &ltType&gt: 
+         void set_key(char *key): initializes text key in &ltType&gt 
+         int test_key(char *key): returns strcmp(key,x) where x is 
+                                  internal pointer to text string 
+         &ltType&gt constructor assumed to require no arguments 
+  Defines functions: 
+         hash_look(key): look up "key" in the hash table 
+         dump(): dump the entries in the hash table (assumes that &lt&lt 
+                 is defined for the instantiated &ltType&gt. 
+ <P><HR><H3>Class Declaration</H3><P><PRE> 
+  
+ class hash_table { 
+      
+ public: 
+      
+     Type *hash_look() {return NULL;}; 
+      
+     Type *hash_look(char *text) { 
+ 	int key; 
+ 	int i; 
+ 	Type *wk; 
+ 	 
+ 	key = 0; 
+ 	for (i = 0; i&ltstrlen(text); i++) { 
+ 	    key = ((key &lt&lt 1 ) + text[i]) % ht_size; 
+ 	}; 
+ 	 
+ 	for (wk=ht[key].first(); 
+ 	     wk!=NULL && wk-&gttest_key(text); 
+ 	     wk=ht[key].successor(wk)) {}; 
+ 	 
+ 	if (wk == NULL) { 
+ 	    wk = new Type(); 
+ 	    wk-&gtset_key(text); 
+ 	    ht[key].append(wk); 
+ 	}; 
+ 	 
+ 	return wk; 
+     }; 
+      
+      
+      
+     void dump() { 
+ 	int i; 
+ 	Type *wk; 
+ 	for (i=0; i&ltht_size; i++) { 
+ 	    if (ht[i].num_elements() != 0) { 
+ 		cout &lt&lt "ht[" &lt&lt i &lt&lt "] ="; 
+ 		for (wk=ht[i].first(); wk!=NULL; wk=ht[i].successor(wk)) { 
+ 		    cout &lt&lt " "; 
+ //		    cout &lt&lt wk; 
+ 		}; 
+ 		cout &lt&lt "\n"; 
+ 	    }; 
+ 	};       
+     }; 
+      
+      
+     hash_table(int table_size = 4093) : ht_size(table_size) { 
+ //	int i; 
+ //	for (i=0; i&ltht_size; i++) {ht[i] = new dl_list&ltType&gt;}; 
+ 	ht = new dl_list&ltType&gt[ht_size]; 
+     }; 
+      
+     virtual ~hash_table() { 
+ //	delete [] ht; 
+     }; 
+      
+ private: 
+     const int ht_size; 
+     dl_list&ltType&gt *ht; 
+      
+ }; 
+ </PRE>
+<BR><BR>Back to <A HREF="../ADMAIN.html">Main</A>.
+<HR><ADDRESS>MTL Systems, Inc.</ADDRESS></BODY></HTML>

@@ -1,0 +1,27 @@
+
+/boot/apps/Metrowerks/BeIDE&
+
+echo "building x86 executables"
+
+cd /boot/home/BeIDE_0212
+
+echo "building BeIDE"
+tell BeIDE receive 'refs:["/boot/home/BeIDE_0212/x86Project_f/NonDebugProject/BeIDEx86.proj"]'
+tell BeIDE Make "target: project" 
+echo "just made BeIDEx86"
+
+echo "building MWPrefsPlugin"
+tell BeIDE receive 'refs:["/boot/home/BeIDE_0212/MWPlugin/x86hosted/MWPlugin.proj"]'
+tell BeIDE Make "target: project" 
+echo "just made MWPrefsPlugin"
+
+echo "building MWPrefsPluginx86"
+tell BeIDE receive 'refs:["/boot/home/BeIDE_0212/MWPluginx86/x86hosted/MWPluginx86.proj"]'
+tell BeIDE Make "target: project" 
+echo "just made MWPrefsPluginx86"
+
+
+mkdir build_results_x86
+mv /boot/home/BeIDE_0212/x86Project_f/NonDebugProject/BeIDE build_results_x86
+mv /boot/home/BeIDE_0212/MWPlugin/x86hosted/MWPrefsPlugin build_results_x86
+mv /boot/home/BeIDE_0212/MWPluginx86/x86hosted/MWPrefsPluginx86 build_results_x86

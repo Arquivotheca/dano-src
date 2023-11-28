@@ -1,0 +1,186 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	1.0
+Date:		8/21/96
+Authors:	Brian Stern, Jon Watte, Mark Anderson
+=============================================
+
+Greetings Be developers.  This release of BeIDE is for 
+BeOS DR8.  It includes new command line tools, including
+a disassemble tool, and many new features.
+
+Some of the default options for mwcc have changed.  See the tools
+documents for more info.
+
+============================
+New Features
+============================
+
+¥	New appearance for the Settings window - scrolling list of the prefs
+	panels.
+
+¥	Target prefs panel - This panel allows you to associate various kinds
+	of files with tools so that those tools will process the files during
+	the make process.  Each line in the target list specifies a file type
+	and/or file extension, a stage of make, whether the file can contain
+	resources, and the name of a tool.
+	
+	When a file is added to a project its file type and extension are used 
+	to associate it with a target.  The file's type and extension are 
+	compared to the list of targets.  If a target has both a file type 
+	and an extension both must match exactly.  If a target has no 
+	file type then it matches all file types and if it has no extension 
+	then it matches all extensions.  For example there is a target 
+	for .rsrc files that has no file type and an extension of rsrc.  
+	Any file with the extension 'rsrc' will match this target, 
+	regardless of file type.
+	
+	There are four stages of Make: precompile, compile, link, and postlink.
+	These are represented by the numbers 1, 2, 3, and 4 respectively in
+	the target list, and can be specifies for any target by using the 
+	'Flags' popup menu.  If a target runs at the precompile stage it 
+	will be executed by its target tool before all files that run 
+	at later stages.  Files are started executing from top to bottom 
+	in the project window.  If a target has the 'Ignored by Make' flag 
+	set then it will not contribute in any way to the make process. 
+	This allows files like .doc and .h files to be added to a project 
+	for easy access.
+	
+	The 'has resources' flag indicates that these files may contain 
+	resources that should be copied to the executable.  This happens 
+	during the postlink stage.
+	
+	The toolname is of course the tool that processes the file at the
+	specified make stage.
+	
+	You may add new targets to the target list or change the ones that are
+	present.  For example if you wanted all files with the extension 'cpp'
+	to be compiled by mwcc regardless of their file type you could remove
+	the file type from that target record.
+	
+	¥Important¥ BeIDE doesn't copy resources in the way that it has in 
+	previous versions.  For a project to have its resources copied to 
+	the executable,  files of extension 'rsrc' must be added to the project.
+	Your applications won't get their appi or icons if you don't add
+	your .rsrc files to the project.
+	
+	In this release of BeIDE the only tools that are supported by the
+	targetting mechanism are mwcc and mwld.  In the next release there
+	will be support for other command line tools.  
+
+¥	Find Definition - If you option-double click on a function name or
+	file scope static variable name, the definition of the function or 
+	variable will be selected.  The information for this feature is 
+	generated when files are compiled, it is stored in the project file,
+	and it is removed when the Remove Objects menu item is chosen.
+	
+	You may also initiate this search from the 'Find Definition' window
+	which appears when Find Definition is chosen from the Search Menu.
+	Holding down the shift key when choosing the Search menu will change 
+	Find Definition to Go Back.  Go Back will return the selection
+	to the location current when the last Find Definition was initiated.
+
+¥	Tile, Stack, Vertical Tile - These menu items reorder source windows
+	in the current workspace.
+
+¥	Info Panel in Message window - Three icons appear at the top of the
+	Message window.  Clicking in the checkboxes next to these icons
+	will show or hide the errors, warnings, or info messages.
+ 
+¥	Compilation progress checkmark - A checkmark appears next to
+	a source file that is being compiled.  The checkmark appears when
+	the file starts compiling and disappears when the file completes
+	compiling.  For those of you familiar with the Mac IDE this behavior
+	is different from how the checkmark behaves in the Mac IDE project
+	window.
+	
+¥	Option key held down at launch - Holding down the option key
+	while BeIDE is launching will reset all database entries to
+	factory defaults.  This includes all settings made in the Settings
+	Window as well as settings for the Find and Message windows.  It
+	does not include font settings for individual source files.
+	 
+¥	Command option '-' - Command '-' is Remove objects.  Remove objects
+	deletes all .o files and deletes the browse data used for the
+	Find definition feature.  Command option '-' also deletes all
+	of the include file dependency info for each source file.
+
+¥	All commands that are described here or in the documentation
+	that use the option key will also work with the left control
+	key (cmd-opt-S, cmd-opt-w, option-double-click and others).
+
+¥	When creating a new project libdll.a and libbe.so are 
+	automatically added to the project. 
+
+¥	Can now print text documents.
+
+¥	Check syntax and disassemble commands for source files.  Check syntax
+	checks for compile errors but doesn't produce an object file.  You can
+	check syntax on a file that isn't part of the currently open project,
+	but a project must be open.  Dissasemble displays a disassembled
+	version of the source file in a second window.  see the new 
+	'PPC Disassembler' prefs panel for options in the display of the
+	disassembly.
+
+¥	Recent projects menu item - Shows a list of projects opened since
+	BeIDE was launched.  Choose one to open it.  
+
+¥	The project format has changed for this release.  When an old project
+	is opened it is automatically converted to the new format.  The new
+	format is not backwards compatible with previous formats.  In addition
+	several changes are automatically made to old projects.  The RTTI
+	and Exceptions options are turned on.  These should be turned on for
+	C++ projects and won't affect C projects.    Any files called libpos.so 
+	are changed to libbe.so.  The library file libpos.so no longer exists
+	and the functions that were in that file are now found in libbe.so.
+
+¥	New projects now have libbe.so and libdll.a added to them.
+
+==========================
+Bugs Fixed in This Version
+==========================
+
+Fixed a bug related to guarding of include directories with parentheses.
+Fixed a bug related to tabs and truetype fonts in source windows.
+Fixed a bug related to failing to save and restore the selection 
+when closing and reopening source files.
+Fixed a bug where files opened before a project was opened couldn't
+be added to the project.
+Fixed a possible deadlock with the Find window.
+Fixed a bug when doing batch finds with files not in newline format.
+
+==========================
+Random Notes
+==========================
+
+Be has compiled libbe.so with RTTI on and exceptions on.  You will want
+to turn on RTTI and most likely exceptions as well in the Language
+prefs panel.  Look at ClassInfo.h for more info.
+
+The format of the project file has changed in this release and is not
+backwards compatible with previous releases.  When you open a project
+for the first time it will be automatically converted.  For large projects
+this may take some seconds.
+
+==========================
+Known Limitations
+==========================
+
+Sometimes when dragging a file into the project window the cursor doesn't
+reappear after the file is dropped.  If you click the mouse somewhere
+in the project window or other windows it will reapper.
+Don't save the targets prefs panel for a project while it is compiling.
+Support for tools other than mwcc and mwld in the target prefs panel
+isn't complete.
+
+=====================
+Contacting Metrowerks
+=====================
+
+For bug reports, technical questions and suggestions, please send them to 
+support@metrowerks.com or devsupport@be.com.
+
+--------------------------------------------------------------------------
+Metrowerks Corporation

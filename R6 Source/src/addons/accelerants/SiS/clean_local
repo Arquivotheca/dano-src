@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm -f /boot/beos/system/add-ons/accelerants/sis*.accelerant
+rm -f /boot/beos/system/add-ons/kernel/drivers/bin/sis*

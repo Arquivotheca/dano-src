@@ -1,0 +1,14 @@
+- don't reload image when applying to multiple workspaces (artificial workspace switch)
+- complete preview thumbnail in the image file panel
+- make the file open panel startout in a predifined directory with images (we'll have to decide which it would be, for now it can be home/SampleMedia/images)
+-async controls
+-re-structure SetupWin.cpp
+-cache loaded images (requires node monitor)
+- 'default' setting for a folder should remove attribute
+- check settings.ApplyTo error codes
+- should the changed settings be reloaded at all?
+- node monitor on folders and default folder, to load settings if they change? what to do if changes have been made and settings on disk change?
+- filter UTF8 extended chars in x, y boxes
+- load default folder settings when "default" is selected in normal folders, and show them
+- first pulse after .5 seconds, other pulses after .1 second: display brush painting animation
+- node monitor for the visible image

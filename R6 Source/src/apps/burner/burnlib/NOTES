@@ -1,0 +1,19 @@
+
+Drive               Bus  WriteTest Comments
+------------------- ---- --------- ----------------
+Plextor PX-412C     SCSI Pass
+Plextor PX-R820T    SCSI ?
+Yamaha CRD200t      SCSI ?
+Yamaha CRD400t      SCSI Pass
+Yamaha CRW2260      SCSI ?
+Yamaha CRW2261      SCSI ?
+Yamaha CRW4260      SCSI ?
+Yamaha CRW4416      SCSI ?
+Matshita CW-7502    SCSI ?         aka Panasonic CW-7502
+Matshita CW-7582    SCSI ?         aka Panasonic CW-7582
+Sony CDU-948S       SCSI Fail      not MMC compliant
+Sony CDU-928S       EIDE Fail      no DAO support
+Yamaha CRW2216      EIDE Pass
+HP CD-Writer+ 8110  EIDE Pass
+Memorex CRW-1622    EIDE Fail      need mode 3 support
+Mitsumi CR-4801TE   EIDE Pass

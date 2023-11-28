@@ -1,0 +1,23 @@
+MNewProjectWindow.o : \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Main/MNewProjectWindow.cpp \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Main/Headers/MNewProjectWindow.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Utilities/Headers/CString.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Utilities/Headers/MList.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Interface/Headers/MTriangleListView.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Interface/Headers/MDLOGListView.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Message_Window/Headers/MListView.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Preferences/Headers/MTriangleList.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Interface/Headers/MKeyFilter.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/KeyBindings/headers/MKeyBindingManager.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Headers/IDEConstants.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Headers/IDEMessages.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Main/Headers/MainMenus.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Utilities/Headers/Utils.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/hilitecolor/MHiliteColor.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Utilities/Headers/MFileUtils.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Preferences/Headers/MAccessPathsView.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Preferences/Headers/MPreferencesWindow.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Preferences/Headers/MPreferencesView.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/Plugin_API/MWPreferences/PlugInPreferences.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Preferences/Headers/MPrefsStruct.h \
+ /Development/Development/BeOS/R6\ Source/src/apps/beide/IDE.f/Utilities/Headers/MLocker.h

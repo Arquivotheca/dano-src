@@ -1,0 +1,1446 @@
+
+<H1>Description Of The game_audio Driver API For BeOS And BeIA.&br;
+<DATE>2000-08-17</DATE>&br;
+<EMAIL>media2000@be.com</EMAIL>
+
+
+<H2>Introduction
+
+<P>This document describes how to map the capabilities of some piece of 
+audio input/output hardware to the game_audio API found in the header 
+file game_audio.h. This document is mostly of interest to audio device 
+driver developers, as applications need not (and should not) talk 
+directly to this API. Instead, high-level components such as BSoundPlayer, 
+BGameSound or the appropriate Media Kit Node will talk to the driver 
+through this API.
+
+<LH>There are three classes of sound cards targeted by game_audio:
+
+<LI ITEM="Class I">This class uses a single bus master or DMA stream per 
+direction (in/out) and does not perform scatter/gather.&br;
+The ISA SoundBlaster and the PCI S3 SonicVibes are examples of this design.
+
+<LI ITEM="Class II">This class uses a single bus master or DMA stream per codec 
+per direction (with multiple codecs supported) and performs 
+scatter/gather.&br;
+The Intel i810 and Cyrix 5530 are examples of this design.
+
+<LI ITEM="Class III">This class allows either multiple bus masters or multiplexed 
+streams through a single bus master, and often performs scatter/gather in 
+addition to mixing streams into the actual codec output.&br;
+The Aureal Vortex and the SoundBlaster Live! are examples of this design.
+
+<P>The fourth class of devices, which have a large number of actual input 
+and output codecs, but no more streams than codecs, is better served by 
+the multi_audio API. The multi_audio API is aimed at semi-professional and 
+professional audio devices used in the recording industry and 
+elsewhere; the game_audio API described in this document is aimed at typical 
+home-computer or motherboard devices.
+
+
+<P>Cards of class I typically need to copy input data into a cyclic 
+"ping-ponging" DMA buffer for playback, unless the buffer allocated by the
+client is suitable for playing directly out of. Data is copied from the 
+buffer into the playback buffer as space becomes available. Since 
+there is only one stream (in each direction) only one team can use the 
+device at a time in any one direction, but other teams could still 
+open the device to control the mixer, or to push data in the other 
+direction. Note that devices of this class may not be able to start and stop 
+with any precision. 
+
+<P>Cards of class II typically place input data in a linked list and keep feeding 
+their scatter/gather engine as previous sections are completed. Because 
+get_physical_address() is not callable at interrupt time, this linked 
+list needs to already contain virtual->physical mapping information, available
+inside the ioctl() handler for the buffer-set request and/or buffer allocation request.
+These cards can also have multiple streams going, destined for different output
+codecs; different teams (openers) may work with different streams. A device of this
+class typically is sample accurate in its start and stop functions.
+
+<P>Cards of class III are the most advanced, and need to keep a linked 
+list or other dynamic structure which references the running data buffers for 
+each input stream. Input streams are allocated/deallocated, 
+as required, by the host. These devices are quite likely to be opened 
+from multiple teams, all targeting the same output codec using the 
+stream allocation functionality. Care should be taken to clean up the 
+streams (and only those streams) allocated by a specific team when that 
+team goes away. The kernel lets the driver know when a team goes away by
+calling the close() and free() hooks for any file descriptor (cookie) the
+team left open. Warning: because semaphores and ports are owned by whichever
+team created them (or caused the driver to create them) the driver should
+use set_sem_owner() and set_port_owner() to gift all such resources to the
+team B_SYSTEM_TEAM_ID, and manage these resources itself. This is a rule in
+general for BeOS/BeIA drivers, but bears repeating in this context.
+
+
+<P>No matter what the class of the card, every card is likely to have at 
+least two "mixers" as defined in this API; one for input signals, and 
+one for output signals.
+
+<P>If you think about a typical mixer control 
+panel, each "page" in that panel (with related level controls) would be 
+one "mixer" inside the game_audio driver API. Likewise, a device is 
+likely to have at least one input (ADC) codec and one output (DAC) 
+codec. Even if these functions are implemented in the same circuit on 
+the hardware, they should be published as separate functions inside the 
+API. The API provides flags to tell a user of the hardware if, for 
+instance, the input and output frame rates or sample formats must be 
+the same. The game_audio API could, possibly, be used for simplex 
+cards, except that care has not been taken to ensure that the API 
+sufficiently describes that case.
+
+<P>Also worthy of note is play/stop and DMA behavior: although there are 
+differences in implementation (and possibly system load) between the 
+device classes, two devices of different class (but having the same 
+capabilities) should behave identically; it is the intention of this 
+document to specifies all behavior unambiguously. If you find a case that 
+requires clarification, please e-mail media2000@be.com, your favourite 
+DTS engineer or a Media Team member with your comments.
+
+<H2>Recommendations
+
+<P>While these recommendations are not requirements, following them will
+often improve the compatibility and performance of your driver.
+
+<P>It is recommended that drivers for hardware supporting only one stream
+per codec use the stream page_frame_count rather than the codec chunk_frame_count
+to determine when to generate interrupts. This will improve the timing accuracy
+of releasing the stream semaphore.
+
+<P>It is recommended that drivers that support a large number of streams
+(say, 8 or more) use either an interrupt based on the codec's frame count
+(programmed as once every chunk_frame_count frames played through the codec) or
+a timer interrupt based on the approximate rate of play through the codec, and
+poll and service all currently running streams (by releasing the stream
+semaphore and/or updating timing information, for example) during each of these
+interrupts. Programming one interrupt per playing stream can quickly overwhelm
+the system with interrupts to the point where performance degrades significantly.
+
+<H2>game_audio Devices
+
+<LH>A game_audio device must publish in /dev/audio/game/&lt;chipname&gt;/&lt;ordinal&gt;
+where:
+
+<LI ITEM="&lt;chipname&gt;">is a short name/nickname for the chip in question, 
+such as "vortex2" or "xpress".
+
+<LI ITEM="&lt;ordinal&gt;">starts at 1 for the first found device, and count up linearly if
+more than one supported 
+device is found.
+
+<P>A game_audio device must support multiple openers for 
+both read and write. Any streams and buffers allocated through a 
+specific open "cookie" (as returned by the dev_open() request) must 
+be immediately stopped when the cookie is closed; any outstanding 
+blocking I/O requests must be terminated. When the cookie is freed, 
+all allocated streams and buffers for that cookie must be 
+deallocated. The stream semaphore for streams deallocated in response
+to a dev_free() hook must be deleted.
+
+<P>Once a client has opened the device, it will communicate with the 
+driver using ioctl(), using selector opcodes which are documented below. 
+There is currently no use made of read() or write(); The driver shall
+return 
+an error from those hooks. A device may optionally disallow operations 
+on buffers and streams not allocated through the cookie they are 
+performed on.
+
+<P>If a game_audio driver wishes to enforce read/write permissions on file 
+descriptors (cookies), the driver should disallow operations named SET, 
+OPEN or CLOSE (and the GAME_RUN_STREAMS operation) unless the file 
+descriptor was opened with one of the writing modes.
+
+<P>The device must de-allocate all buffers allocated through a cookie 
+when that cookie is freed. It must close all streams opened through 
+that cookie when the cookie is closed. A close() call on a cookie may, 
+conceptually, call through to the GAME_CLOSE_STREAM function 
+for all streams currently open through that cookie.
+
+
+<P>A general rule for the caller of this API is to first clear out the 
+entire request structure to 0, and then fill in only the fields that 
+are of interest. Always set the "info_size" member to the size of the 
+structure (as you see it); doing so ensures proper versioning of the API. 
+A device may refuse a request if the info_size is improperly filled 
+(that is, too small for any supported version, or zero). A device must return 
+the size it actually recognized in this field upon return; in this way, 
+the caller can detect if the device implements an older version of the 
+API and decide on appropriate action.
+
+<P>Some structures cannot use the info_size variable-size feature for 
+future expansion, because arrays of these structures are used in the interface. 
+"Reserved" or "future use" fields have pre-emptively been added to 
+these structures; these reserved fields should not be used or touched 
+by a driver which doesn't know about them. A client preparing such a 
+structure to pass into the driver must completely zero out the entire 
+structure (including reserved fields) before starting to fill it in.
+
+<P>The API guarantees that the address of all data structures will always 
+be, at a minimum, 32-bit aligned (lower two bits of the address of the 
+start of any data structure are always 0). Structure members follow 
+platform alignment, which means natural alignment for members &lt;= 32 
+bits, and 32 bit alignment for larger members, on the x86 platform.
+
+
+<LH>DACs, ADCs, mixers, controls, streams and buffers are all identified 
+using the same name space. Macros are provided which:
+
+<LI>Turn an ordinal count (0, 1, ...) into an ID for a specific kind of entity 
+(GAME_MAKE_MIXER_ID(o) etc).
+
+<LI>Get the ordinal back from the ID (GAME_MIXER_ORDINAL(i) etc). 
+
+<LI>Test whether an ID refers to a specific kind of entity (GAME_IS_MIXER(i)).
+
+<P>No 
+connection should be assumed between entities of different kinds that 
+have the same ordinal (i e buffer 0 may not have anything to do with 
+DAC 0, and ADC 1 probably has little to do with mixer 1). For the cases 
+where association knowledge is useful to the client application, the 
+game_audio API provides fields for the driver to return this 
+information. It is assumed that ADCs, DACs and mixers are numbered 
+starting at 0.
+
+<LH>The BeOS driver rules apply:
+
+<LI>Don't share data between interrupt 
+handlers and user calls without protecting it with a spinlock if necessary.
+
+<LI>Don't call forbidden functions with interrupts disabled or while 
+holding a spinlock.
+
+<LI>Don't touch unlocked memory from an interrupt 
+handler or DMA engine.
+
+<P>It is beyond the scope of this document to document the BeOS/BeIA kernel
+programming environment.
+
+
+
+<H2>Control Code Reference
+
+
+<H3>GAME_GET_INFO <LH>struct game_get_info
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_info) as seen by the client app.&br;
+on output, contains sizeof(game_get_info) as seen by the driver.
+<LI ITEM="name">
+on output, contains a 0-terminated C string no longer than 31 
+characters with the manufacturer's model name for the device.
+<LI ITEM="vendor">
+on output, contains a 0-terminated C string no longer than 31 
+characters with the device manufacturer's name.
+<LI ITEM="ordinal">
+on output, contains the linear ordinal number (starting at 0) of this 
+device among devices served by the same driver.
+<LI ITEM="version">
+on output, contains the version of the driver in BCD format (0xMmUb -- 
+Major, Minor, Update, Build)
+<LI ITEM="dac_count">
+on output, contains the number of output codecs available on the 
+hardware.
+<LI ITEM="adc_count">
+on output, contains the number of input codecs available on the 
+hardware.
+<LI ITEM="mixer_count">
+on output, contains the number of mixers available on the hardware.
+
+
+<H3>GAME_GET_CODEC_INFOS <LH>game_get_codec_infos
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_codec_infos) as seen by the client app.&br;
+on output, contains sizeof(game_get_codec_infos) as seen by the driver.
+<LI ITEM="info">
+on input, points to at least "sizeof(game_codec_info) * in_request_count" 
+bytes of writable memory. The codec_id field of game_codec_info determines 
+for which DAC or ADC information is requested.&br;
+on output, this memory contains information for the requested DAC(s) and ADC(s). 
+If information is requested for a DAC or ADC ID which does not identify a 
+legal DAC or ADC, the codec_id field for that entry is set to GAME_NO_ID.
+<LI ITEM="in_request_count">
+on input, contains the number of game_codec_info structures which are 
+requested from the driver (and which the caller supplies space for).
+<LI ITEM="out_actual_count">
+on output, contains the number of game_codec_info structures which were 
+actually returned. This may differ from in_request_count if bad 
+DAC IDs were requested.
+<P>When either a DAC or ADC can be operated on or referred to, the word "codec"
+will be used to refer to either one of them.
+
+<LH>struct game_codec_info
+<LI ITEM="codec_id">
+on input, contains the ID of the codec for which information is requested.&br;
+on output, contains the same ID, or GAME_NO_ID if the requested codec ID 
+was illegal.
+<LI ITEM="linked_codec_id">
+on output, contains the ID of an ADC which is "linked" to this codec 
+(such as being implemented in the same AC97 codec chip), or GAME_NO_ID 
+for no link.
+<LI ITEM="linked_mixer_id">
+on output, contains the ID of a mixer which is "linked" to this codec, 
+such as the input mixer/mux controls for the codec.
+<LI ITEM="max_stream_count">
+on output, contains the maximum number of streams allocatable for this 
+codec. For class I and II devices, this value will always be 1.
+<LI ITEM="cur_stream_count">
+on output, contains the number of streams currently allocated for this 
+codec. This is mostly for informational purposes, as the count may have 
+changed once the client gets around to try and allocate a new stream.
+<LI ITEM="min_chunk_frame_count">
+on output, contains the minimum chunk size this device is capable of 
+competently handling, in frames. The chunk size determines precision in 
+timing information, interrupt rates, and other performance 
+characteristics of the device. Attempting to double-buffer output by queuing 
+buffers smaller than this, or using page sizes smaller than this in 
+PING_PONG mode may result in inaccurate timing information or poorly timed
+releases of the stream semaphore.&br;
+As an example, for class 1 devices, the large cyclic
+buffer will typically be a multiple of the chunk size in length, and an
+interrupt will be generated for every chunk of frames, in response to which
+the buffer can be filled with more data.
+<LI ITEM="chunk_frame_count_increment">
+on output, contains an increment above min_chunk_frame_count; the 
+device can handle chunk sizes that are 
+(min_chunk_frame_count+N*chunk_frame_count_increment) frames in size, 
+for integer N values. Alternately, chunk_frame_count_increment can be set to the 
+special value -1, which means that chunk sizes should be powers of two for 
+best results.
+<LI ITEM="max_chunk_frame_count">
+on output, contains the maximum chunk frame count possible for this codec.
+<LI ITEM="cur_chunk_frame_count">
+on output, contains the current chunk frame count in effect for the codec.
+<LI ITEM="name">
+on output, contains a user-readable name for referring to this codec as a 
+0-terminated C string, no longer than 31 characters.
+<LI ITEM="frame_rates">
+on output, contains a bit mask union of the supported frame rates for 
+this codec. The bits are defined as B_SR_44100 etc in &lt;audio_base.h&gt;.
+<LI ITEM="cvsr_min">
+on output, contains the minimum acceptable value for CVSR (continuously 
+variable sample rate) if the B_SR_CVSR bit is set in frame_rates.
+<LI ITEM="cvsr_max">
+on output, contains the maximum acceptable value for CVSR if the 
+B_SR_CVSR bits is set in frame_rates.
+<LI ITEM="formats">
+on output, contains a bit mask union of the acceptable sample formats 
+for this codec. The bits are defined as B_FMT_16_BIT etc in 
+&lt;audio_base.h&gt;.
+<LI ITEM="designations">
+on output, contains a bit mask of the channel designations available 
+for this codec. The bits are defined as B_CHANNEL_LEFT etc in 
+&lt;audio_base.h&gt;.
+<LI ITEM="channel_counts">
+on output, contains a bit mask of possible channel counts for this 
+codec. Each possible channel count is masked as (1 &lt;&lt; (ch_count-1)) so 
+that mono is 0x1, stereo is 0x2, quad is 0x8 etc.
+<LI ITEM="cur_frame_rate">
+on output, contains the current frame rate in effect for the codec, as 
+defined by bits in &lt;audio_base.h&gt;.
+<LI ITEM="cur_cvsr">
+on output, always contains the current frame rate in effect for the codec 
+as measured in Hz.
+<LI ITEM="cur_format">
+on output, contains the current sample format in effect for the codec, as 
+defined by bits in &lt;audio_base.h&gt;.
+<LI ITEM="cur_channel_count">
+on output, contains a linear channel count currently in effect for this 
+codec. (i e Quad would be 4 and Stereo would be 2).
+<LI ITEM="cur_lantecy">
+on output, contains the converter (hardware) latency counted in frames for
+streams opened on the codec. If multiple streams have varying latency (because
+of sample rate conversion, for example) then the latency of the stream with
+the lowest latency is reported. Note that this latency ONLY includes the
+hardware codec conversion latency, and possibly some FIFO latency; basically
+it measures the time from which a RUN_STREAMS request starts a stream to when
+the first frame of that stream hits the line-out (or speakers, or whatever the
+output is). Or, for the input case, it analogously measures how long the input
+converters take to deliver data from that it's captured.
+<LI ITEM="_future_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="stream_capabilities">
+on output, contains information about the capabilities of streams allocated
+on this codec, coalesced as a "game_stream_capabilities" struct.
+
+<LH>struct game_stream_capabilities
+<LI ITEM="capabilities">
+on output, contains the union of game_codec_info_stream_flags which best 
+describes the capabilities of streams allocated for this codec. The actual min
+and max values for streams can be found by calling GAME_GET_STREAM_CAPABILITIES.
+<LI ITEM="GAME_STREAMS_HAVE_VOLUME"> streams can have their own gain control.
+<LI ITEM="GAME_STREAMS_HAVE_PAN"> streams can have their own pan control.
+<LI ITEM="GAME_STREAMS_HAVE_FRAME_RATE"> streams can have their own frame rate, 
+and are converted to the codec's frame rate in hardware.
+<LI ITEM="GAME_STREAMS_HAVE_FORMAT"> streams can have a different sample format 
+than the codec's format.
+<LI ITEM="GAME_STREAMS_HAVE_CHANNEL_COUNT"> streams can have a different channel 
+count than the codec. (i e streams can be either mono or stereo for a stereo codec).
+<LI ITEM="GAME_STREAMS_ALWAYS_MONO"> streams for this codec are required to be mono 
+streams, even if the codec has a different number of channels.
+<LI ITEM="GAME_STREAM_TIMING_CHUNKY"> the implementation of looping buffers
+does not DMA straight out of the buffer; instead, it transfers chunks of samples at
+opportune times (interrupts, kernel thread, etc) using some other mechanism (such
+as format conversion into another buffer, or using programmed I/O). The implication
+is that the time stamp given by GAME_GET_TIMING indicates where the next sample
+will be transferred; trying to interpolate the play pointer forward from this point
+based on the current time versus the time of the previous time stamp will not yield
+reliable results.
+<LI ITEM="GAME_STREAM_LARGE_BUFFERS"> the implementation can (efficiently) handle
+buffers that are larger than 64 kB. If this flag is not set, trying to allocate a
+buffer larger than 64 kB is likely to fail.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="frame_rates">
+on output, contains a union of the bit masks for frame rates that streams can run
+at for the specified codec (B_SR_CVSR, B_SR_44100 etc).
+<LI ITEM="cvsr_min">
+on output, contains the minimum CVSR value (continuously variable sample rate) if
+the streams support the B_SR_CVSR rate.
+<LI ITEM="cvsr_max">
+on output, contains the maximum CVSR value (continuously variable sample rate) if
+the streams support the B_SR_CVSR rate.
+<LI ITEM="formats">
+on output, contains a union of the bit masks for data formats that streams can run
+at for the specified codec (B_FMT_16BIT, B_FMT_8BIT_U etc).
+<LI ITEM="designations">
+on output, contains a union of the bit masks for designations that streams can run
+at for the specified codec (B_CHANNEL_REARLEFT etc).
+<LI ITEM="channel_counts">
+on output, contains a union of the bit masks for the various channel counts supported
+by streams for the specified codec. For mono, the bit mask is (1&lt;&lt;(1-1)) == 0x1. For
+stereo, the bit mask is (1&lt;&lt;(2-1)) == 0x2. For 5.1 (six channels) the bit mask is
+(1&lt;&lt;(6-1)) == 0x20.
+<LI ITEM="volume_mapping">
+on output, contains a union of game_stream_volume_mapping bit 
+flags describing the action of the volume control.
+<LI ITEM="GAME_VOLUME_IN_DB"> the volume maps to some number of dB of 
+gain/attennuation per step.
+<LI ITEM="GAME_VOLUME_MULTIPLIER"> the volume maps to a linear multiplier factor.
+<LI ITEM="GAME_VOLUME_MIN_VALUE_IS_MUTE"> the bottom value of the volume serves as 
+"mute".
+<LI ITEM="min_volume">
+on output, contains the absolute minimum value the volume control can 
+take.
+<LI ITEM="max_volume">
+on output, contains the absolute maximum value the volume control can 
+take.
+<LI ITEM="normal_point">
+on output, contains the absolute value for the volume where it is 
+considered "nominal" (minimum change to source signal).
+<LI ITEM="min_volume_db">
+on output, contains the dB gain change of the volume at the absolute 
+minimum value (or, the value one above it if the minimum value is 
+"mute").
+<LI ITEM="max_volume_db">
+on output, contains the dB gain change of the volume at the absolute 
+maximum value.
+<LI ITEM="_reserved_2">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<H3>GAME_SET_CODEC_FORMATS
+<P>Change the format used by the codec indicated (a DAC or ADC specified
+by ID). Changing the format while a stream is running may affect the stream
+right away, or may take effect whenever that stream (or another stream) is
+later started on that codec.
+<LH>game_set_codec_formats
+<LI ITEM="info_size">
+on input, contains sizeof(game_set_codec_formats) as seen by the client.&br;
+on output, contains sizeof(game_set_codec_formats) as seen by the 
+device.
+<LI ITEM="formats">
+on input, points to an array of in_request_count elements of size 
+sizeof(game_codec_format) which instruct the device to set parameters 
+for the specified ADCs and DACs.
+<LI ITEM="out_actual_count">
+on output, contains the count of codecs whose parameters were actually 
+changed.
+
+<LH>struct game_codec_format
+<LI ITEM="codec">
+on input, contains the ID of the ADC or DAC to set parameters for.&br;
+on output, contains GAME_NO_ID if the ID supplied was invalid.
+<LI ITEM="flags">
+on input, contains a union of game_codec_format_flags identifying which 
+parameters to change for this codec. If "flags" is 0, no 
+parameter is changed.
+<LI ITEM="GAME_CODEC_FAIL_IF_DESTRUCTIVE"> if making a change would cause 
+allocated streams to become invalid, or cause some other codec, which is 
+not intended to be changed as part of the same request, and which has streams
+allocated on it, to change its format, 
+return B_MEDIA_BAD_FORMAT if this bit is set. Else do the change anyway.
+<LI ITEM="GAME_CODEC_CLOSEST_OK"> if some specific parameter value is not 
+precisely obtainable, change the value to as good a match as 
+possible.
+<LI ITEM="GAME_CODEC_SET_CHANNELS"> "channels" is valid
+<LI ITEM="GAME_CODEC_SET_CHUNK_FRAME_COUNT"> "chunk_frame_count" is valid
+<LI ITEM="GAME_CODEC_SET_FORMAT"> "format" is valid
+<LI ITEM="GAME_CODEC_SET_FRAME_RATE"> "frame_rate" is valid
+<LI ITEM="_reserved_1">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="channels">
+on input, specifies a new channel count to apply to the codec (if the 
+flags say to do it).
+<LI ITEM="chunk_frame_count">
+on input, specifies a new frame count chunk size to apply to the codec 
+(if the flags say to do it).
+<LI ITEM="format">
+on input, specifies a new format (as bits defined in &lt;audio_base.h&gt;) to 
+apply to the codec (if the flags say to do it).
+<LI ITEM="frame_rate">
+on input, specifies a new frame rate to apply to the codec (if the 
+flags say to do it).
+<LI ITEM="cvsr">
+on input, specifies a new frame rate to apply to the codec, if 
+frame_rate contains B_SR_CVSR and the flags say to change frame rate.
+<LI ITEM="out_status">
+on output, contains an error code if some requested value could not be 
+changed, or 0 (B_OK) if all is well.
+<LI ITEM="_reserved_2">
+on input, should be set to 0.&br;
+on output, should be untouched.
+
+
+<H3>GAME_GET_MIXER_INFOS <LH>game_get_mixer_infos
+<LI ITEM="info_size">
+on input, should contain sizeof(game_get_mixer_infos) as seen by the 
+client.&br;
+on output, should contain sizeof(game_get_mixer_infos) as seen by the 
+driver.
+<LI ITEM="game_mixer_info">
+on input, points to a wriable area of memory at least 
+"sizeof(game_mixer_info)*in_request_count" bytes in size. the mixer_id 
+field of each game_mixer_info element specifies for which mixer 
+information is requested.&br;
+on output, this memory contains information about requested mixers.
+<LI ITEM="in_request_count">
+on input, contains the number of mixers for which a request is being 
+made.
+<LI ITEM="out_actual_count">
+on output, contains the number of mixers for which information was 
+actually returned.
+
+<LH>struct game_mixer_info
+<LI ITEM="mixer_id">
+on input, contains the mixer ID for which information is requested.&br;
+on output, contains GAME_NO_ID if the supplied ID was invalid.
+<LI ITEM="linked_codec_id">
+on output, contains the codec ID of a specific codec for which this mixer is 
+applicable, or -1 for "none" or "multiple" (in which case a reverse 
+search from codec IDs to mixer ID has to be done by the client).
+<LI ITEM="name">
+on output, contains a user-readable lable for this mixer as a 
+0-terminated C string, no longer than 31 characters.
+<LI ITEM="control_count">
+on output, contains the number of controls implemented by this mixer.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+
+
+<H3>GAME_GET_MIXER_CONTROLS <LH>game_get_mixer_controls
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_mixer_controls) as seen by the 
+client.&br;
+on output, contains sizeof(game_get_mixer_controls) as seen by the 
+driver.
+<LI ITEM="mixer_id">
+on input, contains the ID of the mixer for which the controls are 
+requested.
+<LI ITEM="from_ordinal">
+on input, contains the ordinal of the first controls for the specified 
+mixer, for which information is requested.
+<LI ITEM="control">
+on input, points to writable memory at least 
+"sizeof(game_mixer_control)*in_request_count" bytes in size.&br;
+on output, this memory contains information about requested controls.
+<LI ITEM="in_request_count">
+on input, contains the number of controls for which information is 
+requested (information is returned for controls ordinal "from_ordinal" 
+through "from_ordinal+in_request_count-1", or fewer if not available).
+<LI ITEM="out_actual_count">
+on output, contains the number of controls for which information was 
+returned.
+
+<LH>struct game_mixer_control
+<LI ITEM="control_id">
+on output, contains the ID for the specific control. Control IDs are 
+unique across a device.
+<LI ITEM="mixer_id">
+on output, contains the ID of the mixer to which this control belongs.
+<LI ITEM="type">
+on output, contains the type of control this control refers to, as a 
+value from game_mixer_control_type.
+<LI ITEM="GAME_MIXER_CONTROL_IS_UNKNOWN"> some unknown kind of control. Avoid 
+using this value.
+<LI ITEM="GAME_MIXER_CONTROL_IS_LEVEL"> the control is a "level" and uses "level" 
+semantics as specified below. Think of this as anything that uses a slider
+control in a mixer UI.
+<LI ITEM="GAME_MIXER_CONTROL_IS_MUX"> the control is a "mux" and uses "mux" 
+semantics as specified below. Think of this as anything that uses a pop-up
+menu control in a mixer UI.
+<LI ITEM="GAME_MIXER_CONTROL_IS_ENABLE"> the control is an "enable" and uses 
+"enable" semantics as specified below. Think of this as anything that uses
+a check-box control in a mixer UI.
+<LI ITEM="flags">
+on output, contains special flags modifying the layout/display of this 
+control, from game_mixer_control_flags.&br;
+<NOTE>While layout of controls in a window is up to the client application,
+it is useful for the driver writer to visualize how this is done to provide
+good information to the client. See the note below on mixer layout suggestions.</NOTE>
+<LI ITEM="GAME_MIXER_CONTROL_ADVANCED"> this control should not be shown by 
+default; it requires user action to access (good for hiding "power 
+user" settings).
+<LI ITEM="GAME_MIXER_CONTROL_AUXILIARY"> this control should not be laid out in 
+the main channel strip array; it should go in some alternate layout 
+area.
+<LI ITEM="parent_id">
+on output, contains the control ID of a control, belonging to the same 
+mixer, which should be considered "parent" of this control. Contains GAME_NO_ID 
+if this control has no parent.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+
+
+<H3>GAME_GET_MIXER_LEVEL_INFO <LH>game_get_mixer_level_info
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_mixer_level_info) as seen by the 
+client.&br;
+on output, contains sizeof(game_get_mixer_level_info) as seen by the 
+driver.
+<LI ITEM="control_id">
+on input, specifies the mixer control for which information is 
+requested.&br;
+on output, contains GAME_NO_ID if the specified control is not a level.
+<LI ITEM="mixer_id">
+on output, contains the mixer ID of the mixer to which this level 
+control belongs.
+<LI ITEM="label">
+on output, contains a user-readable label for this control as a 
+0-terminated C string, no longer than 31 characters.
+<LI ITEM="flags">
+on output, contains a union of game_mixer_level_info_flags bits 
+specifying behavior of this level control.
+<LI ITEM="GAME_LEVEL_HAS_MUTE"> the game_mixer_level_value_flags of this level can 
+set the MUTE bit to totally mute the level control.
+<LI ITEM="GAME_LEVEL_VALUE_IN_DB"> gain values applied by this control are in dB 
+(as opposed to a linear multiplier).
+<LI ITEM="GAME_LEVEL_HAS_DISP_VALUES"> if set, the disp_values and string are 
+specified and can be used.
+<LI ITEM="GAME_LEVEL_ZERO_MEANS_NEGATIVE_INFINITY"> if set, the lowest value 
+("min_value") means negative infinity gain; in effect a mute function 
+without remembering the pre-muted level setting.
+<LI ITEM="GAME_LEVEL_IS_PAN"> if set, this level control implements a panning 
+function.
+<LI ITEM="GAME_LEVEL_IS_EQ"> if set, this level control implements an EQ function.
+<LI ITEM="min_value">
+on output, contains the minimum absolute value this control can take.
+<LI ITEM="max_value">
+on output, contains the maximum absolute value this control can take. 
+max_value is always strictly &gt;= min_value (in abolute terms).
+<LI ITEM="normal_value">
+on output, contains the "nominal" value for this control, where it will 
+have the least effect on the signal. This corresponds to 0 dB 
+gain/attennuation, 0 dB equalization, etc.
+<LI ITEM="min_value_disp">
+on output, contains the displayed value for the absolute value 
+"min_value". See note on "layout".
+<LI ITEM="max_value_disp">
+on output, contains the displayed value for the absolute value 
+"max_value".
+<LI ITEM="disp_format">
+on output, contains a 0-terminated C string no longer than 31 
+characters. The client can generate a user-readable, current value 
+string for the control by using the current value (compared to 
+min_value and max_value) and interpolate linearly between 
+min_value_disp and max_value_disp. That interpolated value, as a float, 
+is passed to sprintf() with "disp_format" as the format argument, to 
+produce the display message. The format should not require an output 
+buffer larger than 63 characters plus 0-termination (in reality, any
+string over approximately 12 characters/digits long might be clipped in the UI).
+<LI ITEM="type">
+on output, contains the type of this level control as chosen among the 
+enum game_mixer_level_info_type. A given level may have at most one 
+type. The same type MAY be re-used on different levels, even if that 
+level is uncorrelated with the first. Note that the enum names may 
+contain "AC97"; that means that if the level corresponds to that 
+register in an AC97 codec you should use that particular enum value; 
+however, you are free to use these values for mostly-equivalent 
+functions of other mixers. In this way, an appliaction can find 
+particular level controls such as "master" or "CD" or "modem" programmatically.
+<LI ITEM="value_count">
+on output, contains the number of values which are significant for this level.
+For example, if the level is a stereo level, this would contain 2; if it is a
+5.1 volume control, it would contain 6. The minimum legal value is 1 (for a
+control with only one "parallel" value) and the maximum legal value is 6
+(bounded by the "values" field of struct game_mixer_level_value).
+
+
+<H3>GAME_GET_MIXER_MUX_INFO <LH>game_get_mixer_mux_info
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_mixer_mux_info) as seen by the 
+client.&br;
+on output, contains sizeof(game_get_mixer_mux_info) as seen by the 
+driver.
+<LI ITEM="control_id">
+on input, specifies the mixer control for which information is 
+requested.&br;
+on output, contains GAME_NO_ID if the specified control is not a mux.
+<LI ITEM="mixer_id">
+on output, contains the mixer ID of the mixer to which this mux control 
+belongs.
+<LI ITEM="label">
+on output, contains a user-readable label for this control as a 
+0-terminated C string, no longer than 31 characters.
+<LI ITEM="flags">
+on output, contains a union of game_mixer_mux_info_flags bits 
+specifying behavior of this mux control.
+<LI ITEM="GAME_MUX_ALLOWS_MULTIPLE_VALUES"> if set, this mux can have a number of 
+bits set, and can be implemented in UI using a multi-select popup menu or 
+list view. If cleared, only one bit can be set at a time, and a
+single-select popup menu, or array of radio buttons, would be appropriate.
+<LI ITEM="normal_mask">
+on output, contains the nominal value for the mux (a bit mask of all 
+checked items, with bit value 0x1 representing the first item).
+<LI ITEM="in_request_count">
+on input, contains the number of available game_mux_item slots in 
+"items".
+<LI ITEM="out_actual_count">
+on output, if in_request_count is 0, contains the number of actual 
+game_mux_items are available; if in_request_count is >0, contains the 
+number of game_mux_items returned.
+<LI ITEM="items">
+on input, points to at least "in_request_count*sizeof(game_mux_item)" 
+bytes of writable memory.&br;
+on output, this memory contains information about available mux items.
+<LI ITEM="type">
+on output, contains the type of this mux (or 0 for no particular type). 
+The type is taken from the enumeration game_mixer_mux_info_type, in the same 
+fashion as "type" for level_info is taken from 
+game_mixer_level_info_type.
+
+<LH>struct game_mux_item
+<LI ITEM="mask">
+on output, contains the actual bit mask that this item adds to the 
+value of the mux when selected.
+<LI ITEM="control">
+on output, contains the parent mux control ID of this item.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="name">
+contains a user-readable name for this selection item, no longer than 
+31 characters, stored as a 0-terminated C string.
+
+
+<H3>GAME_GET_MIXER_ENABLE_INFO <LH>game_get_mixer_enable_info
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_mixer_enable_info) as seen by the 
+client.&br;
+on output, contains sizeof(game_get_mixer_enable_info) as seen by the 
+driver.
+<LI ITEM="control_id">
+on input, contains the ID of the enable control for which information 
+is requested.&br;
+on output, contains GAME_NO_ID if the requested control ID is not an 
+enable control.
+<LI ITEM="mixer_id">
+on output, contains the mixer ID for the mixer to which the requested 
+control belongs.
+<LI ITEM="label">
+on output, contains a user readable 0-terminated C string no longer 
+than 31 characters, which can be used to label this control in a user 
+interface.
+<LI ITEM="normal">
+on output, contains the nominal value of this control (GAME_ENABLE_OFF 
+or GAME_ENABLE_ON).
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="type">
+on output, contains the type of this control, as taken from enum
+game_mixer_level_info_type, or 0. See the "type" description for
+game_get_mixer_level_info for more information.
+<LI ITEM="enabled_label">
+on output, contains a user readable 0-terminated C string no longer 
+than 23 characters which can be used to represent the "enabled" state 
+of this control.
+<LI ITEM="disabled_label">
+on output, contains a user readable 0-terminated C string no longer 
+than 23 characters which can be used to represent the "disabled" state 
+of this control.
+<NOTE>One possible UI representation of an ENABLE control is a checkbox
+which is just labeled using the "label" field. Another is a pop-up menu
+which is labeled using "label" and has two menu items, taken from the
+"enabled_label" and "disabled_label" fields.</NOTE>
+
+
+<H3>GAME_GET_MIXER_CONTROL_VALUES <LH>game_get_mixer_control_values
+<LI ITEM="info_size">
+on input, contains sizeof(game_mixer_get_control_values) as seen by the 
+client.&br;
+on output, contains sizeof(game_mixer_get_control_values) as seen by 
+the driver.
+<LI ITEM="mixer_id">
+on input, contains the mixer ID for which control values are to be gotten.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="in_request_count">
+on input, contains the number of game_mixer_control_value structures 
+pointed at by "values". The size of these structures is fixed.
+<LI ITEM="out_actual_count">
+on output, contains the number of game_mixer_control_value structures 
+which actually contains valid data.
+<LI ITEM="values">
+on input, points to at least 
+"in_request_count*sizeof(game_mixer_control_value)" bytes of writable 
+memory.&br;
+on output, this memory contains the values of the requested mixer 
+controls.
+
+<LH>struct game_mixer_control_value
+<LI ITEM="control">
+on input, contains the control ID of a control for which a value 
+reading is requested.&br;
+on output, contains GAME_NO_ID if the requested control ID is invalid.
+<LI ITEM="mixer_id">
+on output, contains the mixer ID of the mixer to which this level belongs. 
+<LI ITEM="type">
+on output, contains the control kind of the requested control (level, mux or enable).
+<LI ITEM="u">
+on output, contains the value of the requested control in the 
+appropriate union member. In C++, this union is nameless and you refer 
+to the union members directly by name.
+
+<LH>struct game_mixer_level_value
+<LI ITEM="values">
+contains between 1 and 6 values representing the value for each channel of the
+level control in question. See game_mixer_level_info::value_count for finding
+out (or announcing) how many of these values are relevant.
+<LI ITEM="value_count">
+on output, contains the number of values for this level control.
+<LI ITEM="flags">
+contains GAME_LEVEL_IS_MUTED if the level in question is muted. See
+game_mixer_level_info::flags for finding out whether this bit is meaningful.
+
+<LH>struct game_mixer_mux_value
+<LI ITEM="mask">
+contains a bit mask of the specific mux items which are selected for the
+specified mux control. This bit mask is arrived at by OR-ing together the
+game_mux_item::mask values of all selected items (or the only selected item
+if the MUX disallows multiple selection).
+
+<LH>struct game_mixer_enable_value
+<LI ITEM="enabled">
+contains TRUE if the enable control specified is in its ON state.
+
+
+<H3>GAME_SET_MIXER_CONTROL_VALUES <LH>game_set_mixer_control_values
+<LI ITEM="info_size">
+on input, contains sizeof(game_set_mixer_control_values) as seen by the 
+client.&br;
+on output, contains sizeof(game_set_mixer_control_values) as seen by 
+the driver.
+<LI ITEM="mixer_id">
+on input, contains the mixer ID for which control values are to be set.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="in_request_count">
+on input, contains the number of values requested to be set in "values".
+<LI ITEM="out_actual_count">
+on output, contains the number of requested value changes which 
+were valid.
+<LI ITEM="values">
+on input, points to in_request_count (number of) game_mixer_control_value 
+structures specifying requested value changes.
+
+<LH>struct game_mixer_control_value
+<LI ITEM="control">
+on input, contains the control ID of the control for which a value 
+change is requested.&br;
+on output, contains GAME_NO_ID if either the supplied ID was for an invalid 
+control or the supplied control kind did not match the actual kind 
+of the control.
+<LI ITEM="kind">
+on input, contains the control kind for the control for which a value 
+change is requested.
+<LI ITEM="u">
+on input, contains the value to which the requested control is to be 
+set. In C++, this union is nameless and each member is addressed 
+directly by name.
+
+
+<H3>GAME_OPEN_STREAM <LH>game_open_stream
+<LI ITEM="info_size">
+on input, contains sizeof(game_open_stream) as seen by the client.&br;
+on output, contains sizeof(game_open_stream) as seen by the driver.
+<LI ITEM="codec_id">
+on input, contains the ADC or DAC ID of the codec for which this stream 
+is to be opened (created).
+<LI ITEM="request">
+on input, contains a union of game_open_stream_request flags with 
+specific requirements for the stream to be opened.
+<LI ITEM="GAME_STREAM_VOLUME"> the stream requires volume change ability.
+<LI ITEM="GAME_STREAM_PAN"> the stream requires panning-change ability.
+<LI ITEM="GAME_STREAM_FR"> the stream requires frame-rate-change ability.
+<LI ITEM="GAME_STREAM_FORMAT"> the stream requires sample-format-change ability.
+<LI ITEM="GAME_STREAM_CHANNEL_COUNT"> the stream requires channel-count-change 
+ability.
+If some specific value is not set, the value in effect for the codec 
+itself is used.
+<LI ITEM="stream_sem">
+on input, contains the sem_id of a valid semaphore which becomes the 
+"stream semaphore" for this stream, or contains a negative number 
+(invalid semaphore ID) in which case this stream has no stream 
+semaphore.
+<LI ITEM="frame_rate">
+on input, contains the requested frame rate in bit values of the stream 
+(if requested).&br;
+on output, contains the actual frame rate in bit values of the returned 
+stream.
+<LI ITEM="cvsr_rate">
+on input, contains the actual requested frame rate in Hz if B_SR_CVSR 
+is set.&br;
+on output, always contains the actual frame rate of the returned stream.
+<LI ITEM="format">
+on input, contains the requested sample format of the stream (if 
+requested).&br;
+on output, contains the actual sample format of the stream.
+<LI ITEM="designations">
+on input, contains the requested designations for the channels of the 
+stream.&br;
+on output, contains the actual designations for the channels of the 
+stream.
+<LI ITEM="channel_count">
+on input, contains the requested channel_count for the stream (if 
+requested).&br;
+on output, contains the actual channel_count for the stream.
+<LI ITEM="out_stream_id">
+on output, contains the stream ID for the created stream, or GAME_NO_ID 
+if the stream could not be created.
+
+
+<H3>GAME_GET_TIMING <LH>game_get_timing
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_timing) as seen by the client.&br;
+on output, contains sizeof(game_get_timing) as seen by the 
+driver.
+<LI ITEM="flags">
+on input, contains options for the timing getting request.
+<LI ITEM="GAME_ACQUIRE_STREAM_SEM">
+if set, acquire the stream semaphore for the stream in question before
+returning its last good timing measurement. This feature is intended to
+cut down on system call overhead if you need to both acquire the stream
+semaphore and call game_get_timing(). Only valid if "source" identifies
+a stream with a valid stream semaphore.
+<LI ITEM="timeout_at">
+on input, contains a system_time() value at which to time-out the
+stream semaphore acquisition operation; only valid if GAME_ACQUIRE_STREAM_SEM
+is set.
+<LI ITEM="source">
+on input, contains the stream ID of a stream for which timing 
+information is requested, or a DAC or ADC ID of a codec for which timing
+information is requested.&br;
+on output, contains GAME_NO_ID if the stream or codec requested was invalid.
+<LI ITEM="state">
+on output, contains the state of the stream at the time of the request.
+<LI ITEM="GAME_STREAM_STOPPED"> the stream was stopped.
+<LI ITEM="GAME_STREAM_RUNNING"> the stream was running.
+<LI ITEM="timing">
+on output, contains the last good measurement of timing information for 
+the stream or codec.
+
+<LH>struct game_stream_timing
+<LI ITEM="cur_frame_rate">
+on output, contains the frame rate at which the stream is running 
+(which may vary from the requested frame rate, if the driver detects 
+drift bewteen system_time() and the nominal hardware frame rate).
+<LI ITEM="frames_played">
+on output, contains the number of frames played at the point in time 
+specified by "at_time" since start of the stream.
+<LI ITEM="at_time">
+on output, contains the system_time() at which this reading was taken.
+
+<P>Timing information for a codec is linearly progressing;
+it starts at 0 frames played at some time no earlier than system boot, and
+progresses ever-increasingly while data is playing. Whether timing for a
+codec progresses when no data is being played on any stream is undefined.
+Drivers are recommended to update the internal timing information used to
+generate timing information for a codec at least every chunk_frame_count
+frames played through the codec.
+
+<H3>GAME_GET_STREAM_CONTROLS <LH>game_get_stream_controls
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_stream_controls) as seen by the 
+client.&br;
+on output, contains sizeof(game_get_stream_controls) as seen by the 
+driver.
+<LI ITEM="in_request_count">
+on input, contains the number of stream control value requests pointed 
+at by "controls".
+<LI ITEM="out_actual_count">
+on output, contains the number of valid control requests.
+<LI ITEM="controls">
+on input, points to at least 
+"sizeof(game_stream_controls)*in_request_count" byte of writable memory.&br;
+on output, the memory contains information about the requested stream 
+controls.
+
+<LH>struct game_stream_controls
+<LI ITEM="stream">
+on input, contains the stream ID for which control values are requested.&br;
+on output, contains GAME_NO_ID if the supplied stream ID was invalid.
+<LI ITEM="caps">
+on output, contains a bit mask of the capabilities for run-time control 
+the stream has (volume, frame rate, etc).
+<LI ITEM="volume">
+on output, contains the absolute value of the volume control for this 
+stream.
+<LI ITEM="lr_pan">
+on output, contains the absolute value of the left-right pan control 
+for this stream, where -32767 means far-left and 32767 means far-right.
+<LI ITEM="fb_pan">
+on output, contains the absolute value of the front-back pan control 
+for this stream, where -32767 means far-front and 32767 means far-back.
+<LI ITEM="_reserved_1">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="frame_rate">
+on output, contains the actual frame rate at which data is being played 
+through the stream.
+
+
+<H3>GAME_SET_STREAM_CONTROLS <LH>game_set_stream_controls
+<LI ITEM="info_size">
+on input, contains sizeof(game_set_stream_controls) as seen by the 
+client.&br;
+on output, contains sizeof(game_set_stream_controls) as seen by the 
+driver.
+<LI ITEM="in_request_count">
+on input, contains the number of stream control value change requests 
+pointed at by "controls".
+<LI ITEM="out_actual_count">
+on output, contains the number of valid control change requests.
+<LI ITEM="ramp_time">
+on input, contains the number of microseconds (suggested to the driver) 
+during which it can gradually implement the changes (if supported).&br;
+on output, contains the actual duration before the changes (which is 0 
+for "instant").
+
+<LH>struct game_stream_controls
+<LI ITEM="stream">
+on input, contains the stream ID for which control values are requested.&br;
+on output, contains GAME_NO_ID if the supplied stream ID was invalid.
+<LI ITEM="caps">
+on input, contains a bit mask of the controls which are to be changed 
+(volume, pan, etc). If 0, no controls should be changed.
+<LI ITEM="volume">
+on input, contains the absolute value for the volume control for this 
+stream.
+<LI ITEM="lr_pan">
+on input, contains the absolute value for the left-right pan control 
+for this stream, where -32767 means far-left and 32767 means far-right.
+<LI ITEM="fb_pan">
+on input, contains the absolute value for the front-back pan control 
+for this stream, where -32767 means far-front and 32767 means far-back.
+<LI ITEM="_reserved_1">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="frame_rate">
+on input, contains the actual frame rate at which data should be played 
+through the stream.
+
+
+<H3>GAME_SET_STREAM_BUFFER <LH>game_set_stream_buffer
+<LI ITEM="info_size">
+on input, contains sizeof(game_set_stream_buffer) as seen by the 
+client.&br;
+on output, contains sizeof(game_set_stream_buffer) as seen by the 
+driver.
+<LI ITEM="stream">
+on input, contains the stream ID for which to set the buffer. The 
+direction of the data transfer is dependent on the direction of the 
+stream (duh!). If the buffer is bound to some other stream, the buffer 
+is not set and an error is returned.
+<LI ITEM="flags">
+on input, contains a union of game_set_stream_data_flags bits 
+specifying actions related to this request.
+<LI ITEM="GAME_BUFFER_PING_PONG"> the stream semaphore should be released for 
+every page_frame_count frames that have played.
+<LI ITEM="buffer">
+on input, the previously allocated buffer ID of the buffer containing
+the data to be played (or into which to record data).
+<LI ITEM="frame_count">contains the number of frames that are valid within
+the buffer, starting at the base of the buffer. Note that this may be smaller
+than the total size of the buffer. If GAME_BUFFER_PING_PONG is set, this must
+be an integer multiple of page_frame_count.
+<LI ITEM="page_frame_count">If GAME_BUFFER_PING_PONG is set, contains the size
+of a "page" in frames. For each "page" of frames played, the driver will
+release the stream semaphore. The precision of this release (i e when in
+real time it happens) is guaranteed to be no worse than the chunk_frame_count
+in effect for the codec that the stream the buffer is set on is allocated on,
+divided by the sampling rate in effect for that codec.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+
+<P>This call is used before a stream is started to associate a specific
+buffer with the stream. When the stream is started, it will start playing
+data out of this buffer, from start to finish, and repeat until stopped.
+For every page_frame_count frames that are played out of the buffer, the
+stream semaphore (if any) will be released, if the GAME_BUFFER_PING_PONG
+flag is set.
+<P>A driver may reject page_frame_counts that are smaller than 64 frames.
+
+<H3>GAME_RUN_STREAMS <LH>game_run_streams
+<LI ITEM="info_size">
+on input, contains sizeof(game_run_streams) as seen by the client.&br;
+on output, contains sizeof(game_run_streams) as seen by the driver.
+<LI ITEM="in_stream_count">
+on input, contains the number of game_run_stream requests pointed at by 
+"streams".
+<LI ITEM="out_actual_count">
+on output, contains the actual number of valid requests.
+<LI ITEM="streams">
+on input, points to in_stream_count (number of) game_run_stream requests.
+
+<LH>struct game_run_stream
+<LI ITEM="stream">
+on input, contains the ID of the stream to change run state for. It is 
+not an error to start a stream that is already running, or 
+stopped. It is not an error to stop a stream that is stopped or
+running.
+<LI ITEM="state">
+on input, the state into which to put the stream (RUNNING or 
+STOPPED).
+<LI ITEM="out_timing">
+on output, an estimate of the stream timing at which point the change will take effect.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<P>For a stop operation, the driver should flush all pending data. The 
+timing counter(s) should be reset to 0 no later than the next time the 
+stream is started. The stop call should not return until the stream is 
+no longer playing data.
+
+
+<H3>GAME_CLOSE_STREAM <LH>game_close_stream
+<LI ITEM="info_size">
+on input, contains sizeof(game_close_stream) as seen by the client.&br;
+on output, contains sizeof(game_close_stream) as seen by the driver.
+<LI ITEM="stream">
+on input, contains the stream ID of the stream which to close.&br;
+on output, contains GAME_NO_ID if the stream ID was not valid.
+<LI ITEM="flags">
+on input, contains game_close_stream_flags for how to handle the close 
+request.
+<LI ITEM="GAME_CLOSE_DELETE_SEM_WHEN_DONE"> if set, the driver should delete the 
+stream semaphore once the stream has stopped, closed and become invalid.
+<P>The stream should be marked as closed, and resources deallocated. Any 
+subsequent operations attempted on this stream should fail with an 
+error. If there is a currently playing buffer, the stream should be immediately
+stopped. Any buffers bound to the stream should be deallocated once the stream is
+deallocated.
+
+
+<H3>GAME_OPEN_STREAM_BUFFERS <LH>game_open_stream_buffers
+<LI ITEM="info_size">
+on input, contains sizeof(game_open_stream_buffer) as seen by the 
+client.&br;
+on output, contains sizeof(game_open_stream_buffer) as seen by the 
+driver.
+<LI ITEM="in_request_count">
+on input, contains the number of elements pointed at by "buffers".
+<LI ITEM="out_actual_count">
+on output, contains the actual number of buffers allocated.
+<LI ITEM="buffers">
+on input, points to in_request_count (number of) game_open_stream_buffer 
+structures describing the characteristics of the buffers to allocate.
+
+<LH>game_open_stream_buffer
+<LI ITEM="stream">
+on input, contains the stream ID of a valid stream with which to 
+associate this buffer. When the stream is closed, the (driver-side) 
+buffer must be automatically deleted along with it. Alternately, contains
+GAME_NO_ID if the buffer is to exist regardless of any specific stream.
+Such a buffer is playable on any stream.&br;
+on output, contains GAME_NO_ID if the requested stream ID was invalid.
+<LI ITEM="flags">
+on input, contains GAME_BUFFER_LOOPING if this buffer is intended to be used
+as a looping buffer, else contains 0. If GAME_BUFFER_LOOPING, "stream" should
+be the ID of an actual stream on which this buffer is to be used.
+<LI ITEM="byte_size">
+on input, specifies the size of the buffer in bytes (there is no way 
+of knowing the format of the data beforehand and it may change 
+between uses of the buffer).
+<LI ITEM="out_status">
+on output, contains B_OK if the buffer was successfully allocated, or 
+some negative error code describing why this particular buffer request 
+could not be fulfilled.
+<LI ITEM="area">
+on output, specifies the area_id of an area containing the allocated 
+buffer.
+<LI ITEM="offset">
+on output, specifies the offset within the "area" at which the buffer 
+starts, which will not typically be 0. Any single area may contain more
+than one buffer, as long as the buffers do not overlap within that area.
+<LI ITEM="buffer">
+on output, contains the buffer ID of the newly created/allocated 
+buffer, or GAME_NO_ID if the buffer could not be created.
+<LI ITEM="_reserved_2">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="_reserved_3">
+on input, should be set to 0.&br;
+on output, should be untouched.
+
+<P>Some hardware has limitations on the allowed size of buffers. A
+driver is allowed to reject requests to allocate buffers larger than
+64 kB if there is a hardware limitation justifying such a rejection.
+
+<H3>GAME_CLOSE_STREAM_BUFFERS <LH>game_close_stream_buffers
+<LI ITEM="info_size">
+on input, contains sizeof(game_close_stream_buffer) as seen by the 
+client.&br;
+on output, contains sizeof(game_close_stream_buffer) as seen by the 
+driver.
+<LI ITEM="in_request_count">
+on input, contains the number of game_close_stream_buffer structures 
+pointed at by "buffers".
+<LI ITEM="out_actual_count">
+on output, contains the number of buffers actually deallocated.
+<LI ITEM="buffers">
+on input, points to an array of in_request_count (number of) 
+game_close_stream_buffer structures describing the buffers to close.
+
+<LH>game_close_stream_buffer
+<LI ITEM="buffer">
+on input, contains the buffer ID of the buffer to close.&br;
+on output, contains GAME_NO_ID if the buffer ID was invalid.
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="out_result">
+on output, should be set to B_OK, or a negative error code describing 
+why the buffer couldn't be de-allocated (typically EINVAL for no such 
+buffer, or EBUSY for buffer currently in use).
+<P>If the buffer is currently set in some stream, an error should be 
+returned and the buffer not closed.
+
+<H3>GAME_GET_DEVICE_STATE <LH>game_get_device_state
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_device_state) as seen by the client.&br;
+on output, contains sizeof(game_get_device_state) as seen by the driver.
+<LI ITEM="in_avail_size">
+on input, specifies how much writable memory is available and pointed to by 
+"data". A useful method for a client is to first call GAME_GET_DEVICE_STATE
+with 0 for in_avail_size to find out how much to allocate; allocate that much and 
+call it again with the actual size and non-NULL "data".
+<LI ITEM="out_version">
+on output, contains a version number (which the client is requested to 
+save along with the actual data and provide to a future call to 
+GAME_SET_DEVICE_STATE). The meaning of "out_version" is opaque to the 
+client.
+<LI ITEM="data">
+on input, points to at least in_avail_size bytes of writable data into 
+which the driver can save the state of the device (mostly mixer and 
+codec set-up) for later restoring (after a system re-boot for instance).&br;
+on output, pointed-at memory contains a snapshot of current device 
+settings in a device-specific opaque format. Pointed-at data is only 
+valid when out_actual_size is less than or equal to in_avail_size.
+<LI ITEM="out_actual_size">
+on output, tells client how much memory is needed by driver. If bigger 
+than in_avail_size, data pointed to by "data" is not valid save 
+information.
+
+
+<H3>GAME_SET_DEVICE_STATE <LH>game_set_device_state
+<LI ITEM="info_size">
+on input, contains sizeof(game_set_device_state) as seen by the client.&br;
+on output, contains sizeof(game_set_device_state) as seen by the driver.
+<LI ITEM="in_avail_size">
+on input, contains the size of the pointed-to block of data, which is a 
+copy of data previously retrieved from GAME_GET_DEVICE_STATE. If 
+in_avail_size is 0 and "data" is NULL, the device is requested to 
+re-set to a default state.
+<LI ITEM="in_version">
+on input, contains the value of "out_version" from the call to 
+GAME_GET_DEVICE_STATE that produced the data, a copy of which is 
+pointed at by "data".
+<LI ITEM="data">
+on input, contains a copy of data previously returned by a call to 
+GAME_GET_DEVICE_STATE. If NULL, the device is asked to re-set its 
+set-up to a default "sane" state.
+
+
+<H3>GAME_GET_INTERFACE_INFO <LH>game_get_interface_info
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_interface_info) as seen by the 
+client.&br;
+on output, contains sizeof(game_get_interface_info) as seen by the 
+driver.
+<LI ITEM="fourcc">
+on input, contains a fourcc-code which specifies a specific interface, 
+information about the implementation of which is requested. 
+<LI ITEM="_reserved_">
+on input, should be set to 0.&br;
+on output, should be untouched.
+<LI ITEM="request_size">
+on input, how much data is pointed at by "data" for returning 
+interface-specific information to the client.
+<LI ITEM="actual_size">
+on output, how much data is available as information about the 
+interface, the first "request_size" bytes of which are put where "data" 
+points to.
+<LI ITEM="data">
+on input, points to at least "request_size" bytes of writable memory.&br;
+on output, contains interface-specific information about the interface 
+specified by "fourcc".
+<LI ITEM="out_name">
+on output, contains a user-readable 0-terminated C string naming the 
+interface implementation for the fourcc code specified.
+<LI ITEM="first_opcode">
+on output, contains the base ioctl() value used to implement the 
+interface. The interface specification should specify ioctl() values 
+relative to this base, rather than absolute values, and the client uses 
+this base to adjust values at run-time. This is so that interfaces can 
+be specified independently of each other.
+<LI ITEM="last_opcode">
+on output, contains the ioctl() value of the last implemented interface opcode.
+
+
+<H3>GAME_GET_INTERFACES <LH>game_get_interfaces
+<LI ITEM="info_size">
+on input, contains sizeof(game_get_interfaces) as seen by the client.&br;
+on output, contains sizeof(game_get_interfaces) as seen by the driver.
+<LI ITEM="request_count">
+on input, contains the number of empty fourcc values pointed to by 
+"interfaces".
+<LI ITEM="actual_count">
+on output, contains the actual number of interfaces implemented by the 
+driver (if request_count is 0) or which were returned to the client (if 
+request_count is > 0).
+<LI ITEM="interfaces">
+on input, points at at least "request_count" empty fourcc values which are 
+writable by the driver.
+out output, contains "min(actual_count, request_count)" fourcc codes of 
+implemented interfaces. Information about these can be had by using 
+GAME_GET_INTERFACE_INFO.
+
+
+
+<H2>Mixer Layout Suggestions
+
+
+<P>When defining the mixer controls, it is useful to assume some 
+characteristics of the layout engine used in the client application. A 
+simplistic layout engine that takes information (as provided by the 
+driver) for all controls for a specific mixer, and outputs a view with 
+sliders, checkboxes and popup menus, could work something as described 
+here.
+
+<P>First, the engine finds all controls which are not parented (their 
+"parent_id" field is GAME_NO_ID) and are not ADVANCED or AUXILIARY. 
+These controls are then laid out horizontally in ordinal order 
+(left-to-right). Each of these controls will constitute the "master control" 
+of a "channel strip"
+
+<P>Second, for each channel strip, the engine finds all controls that has 
+that channel strips "master control" as parents (and looks for 
+children recursively in a depth-first search) and adds all controls thus 
+found below the "master control" for that strip.
+
+<P>Third, the layout engine makes room below the horizontal band of 
+channel strips for all controls marked as AUXILIARY and not ADVANCED, 
+and puts those controls, again in ordinal order, in that space.
+
+<P>Last, the engine provides some UI element to enable ADVANCED controls. 
+When ADVANCED controls are on, the layout is re-done, ignoring all "not 
+ADVANCED" conditions above.
+
+<NOTE>When laying out sliders, for controls that support min_value_disp 
+and max_value_disp, the applicaly may choose to "flip" direction of a 
+slider if min_value_disp > max_value_disp. This could happen where a 
+mixer control is "attenuation" such that an absolute value of 0 means 
+no attenuation, and 63 means 96 dB attenuation (which is -96 dB gain). 
+The convention is that drivers always publish these sliders in terms of 
+"gain" so that the application puts the largest value_disp (not 
+absolute value) at the top or at the right of the slider.</NOTE>
+
+<P>Another question is which controls to publish, and where to put them.
+The simple answer is: "all of them". As an example, consider a typical
+AC97 stereo codec implementation. The mixer in this codec has a number
+of analog inputs (Line in, Mic in, Aux in, Phone in, PC Speaker in, etc),
+a few "digital" inputs (PCM out, FM out, etc). These all get summed with
+level/mute into two or three outputs: Main out, Line out and Mono out.
+There is also a separate "record select" function, a "record gain" level
+and a "+20 dB Mic boost" function. Most codecs also have some "3D sound"
+effect.
+
+<P>To make the layout work well, you have to take all of these functions
+and classify them as to control type (level, mux or enable) and also as
+to whether they are normal or "advanced", and also whether they are part
+of a "channel strip" or "auxiliary" controls. Last, you have to decide
+whether these controls should be split in more than one mixer, which will
+be represented as more than one "tab" or "window" in the controlling
+applications UI.
+
+<P>In the case of the AC97 codec, it would make sense to split the controls
+as follows:
+<LH>Recording mixer
+<LI ITEM="Record Gain">GAME_MIXER_CONTROL_IS_LEVEL, this is a "regular"
+control (not auxiliary, not advanced).
+<LI ITEM="Record Selector">GAME_MIXER_CONTROL_IS_MUX, this is an "auxiliary"
+control (because it doesn't lend itself to being a "channel strip" part) but
+it is not "advanced".
+<LI ITEM="+20 dB Mic Boost">GAME_MIXER_CONTROL_IS_ENABLE, because this
+control has only "on" and "off" states.
+<LH>Playback Mixer
+<LI ITEM="Main Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. Put this
+control first, because it is the most commonly used control. It is neither
+"advanced" nor "auxiliary".
+<LI ITEM="Headphones Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. Also
+known as "true line-level out" on some codecs. This control
+is not often used, and should be given the "advanced" designation.
+<LI ITEM="Mono Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. This control
+is not often used, and should be given the "advanced" designation.
+<LI ITEM="PCM Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute.
+<LI ITEM="FM Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. BeOS does not
+make use of FM synthesis, so this control, being mostly unused, should be
+designated "advanced".
+<LI ITEM="CD Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute.
+<LI ITEM="Mic Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute.
+<LI ITEM="Line Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute.
+<LI ITEM="Phone Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. This is often
+used for modem listen-through, and thus should definitely not be labeled
+"advanced" because you might want to get to it quickly.
+<LI ITEM="Aux Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. This may be
+labelled "advanced" if you wish.
+<LI ITEM="Video Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. This may be
+labelled "advanced" if you wish.
+<LI ITEM="PC Beep Volume">GAME_MIXER_CONTROL_IS_LEVEL, with a mute. This seldom-
+used control should definitely be labeled "advanced".
+<LI ITEM="3D Effect">GAME_MIXER_CONTROL_IS_ENABLE, because it has an on/off
+function. This is an "advanced" control. It is also an "auxiliary" control
+because it's not a "channel strip" function.
+<LI ITEM="3D Depth">GAME_MIXER_CONTROL_IS_LEVEL. Typically this control only
+has 4 settings, but they go from "less" to "more" so this is a level rather than
+a mux. This is certainly an "advanced" and "auxiliary" control.
+
+<P>While this simple example is a suggestion, it should serve well as a
+description of how the system (and user) will expect the mixer to behave, and
+deviations should be for good reasons (such as hardware capability differences).
+For instance, a good ground rule is that actual gain/attennuation controls make
+for good channel strip candidates, whereas other controls will typically be
+auxiliary controls. Whether they are "advanced" or not is orthogonal to the
+regular/auxiliary issue.
+
+<P>Also note that "FM Volume" is not an AC97 specified mixer value, but rather
+something which might be implemented in a specific sound card; it is added to
+the example to make the point that the physical location of the control in
+question in the hardware not necessarily has anything to do with the logical
+location in the mixer description.

@@ -1,0 +1,19 @@
+
+<?xml version="1.0"?>
+<binder-object>
+        <object name="application">
+                <object name="map_master">
+                        <string name="admin_panel_url">http://apps2.be.com/~adam/admin/index.html?navigtab=map&amp;versionID=</string>
+                        <string name="pq_hostname">db1.be.com</string>
+                        <string name="pq_database">valhallatest</string>
+                        <string name="pq_user">adam</string>
+                        <string name="pq_password">adam</string>
+                        <string name="flash_device">/dev/disk/ide/ata/2/master/0/raw</string>
+                        <string name="recovery_size">512000</string>
+                        <string name="dsaparams_location">beos/etc/update/keys/params</string>
+                        <string name="dsakey_location">beos/etc/update/keys/master</string>
+                        <string name="binder_progress">beos.binder.service.updater</string>
+                        <string name="version_tag">beos/etc/update/version_id</string>
+                </object>
+        </object>
+</binder-object> 

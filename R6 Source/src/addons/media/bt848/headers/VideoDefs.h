@@ -1,0 +1,75 @@
+/*
+	
+	VideoDefs.h
+	
+	Copyright 1997-8 Be Incorporated, All Rights Reserved.
+	
+*/
+
+#ifndef _VIDEO_DEFS_H
+#define _VIDEO_DEFS_H
+
+#define B_NTSC_FRAME_RATE		29.97
+#define B_PAL_FRAME_RATE		25.00
+#define B_NTSC_FIELD_RATE		59.94
+#define B_PAL_FIELD_RATE		50.00
+
+#define B_NTSC_SQUARE_H_MAX		640
+#define B_NTSC_SQUARE_V_MAX		480
+#define B_NTSC_RECT_H_MAX		720
+#define B_NTSC_RECT_V_MAX		480
+
+#define B_PAL_SQUARE_H_MAX		768
+#define B_PAL_SQUARE_V_MAX		576
+#define B_PAL_RECT_H_MAX		720
+#define B_PAL_RECT_V_MAX		576
+
+#define B_VIDEO_H_MAX			B_PAL_RECT_H_MAX
+#define B_VIDEO_V_MAX			B_PAL_RECT_V_MAX
+
+#define	B_NTSC_VBI_SAMPLES		1600
+#define B_PAL_VBI_SAMPLES		2000
+		
+typedef enum
+{
+	B_UNDEFINED_VIDEO_FORMAT = 0,
+	B_NTSC_M,
+	B_NTSC_J,	
+	B_PAL_BDGHI,
+	B_PAL_M	,
+	B_PAL_N	,
+	B_SECAM,
+} video_format;
+
+typedef enum
+{
+	B_VIDEO_F1_ONLY = 0,
+	B_VIDEO_F2_ONLY,
+	B_VIDEO_BOTH_FIELDS
+} video_field_specifier;
+
+#define B_VIDEO_EVEN_FIELD		B_VIDEO_F1
+#define B_VIDEO_ODD_FIELD		B_VIDEO_F2
+
+typedef enum
+{
+	B_UNDEFINED_LOCALE = 0,
+	B_AUSTRALIA_PAL_AIR,
+	B_BRAZIL_PAL_AIR,
+	B_CHINA_PAL_AIR,
+	B_EUROPE_PAL_AIR,
+	B_EUROPE_PAL_CABLE,
+	B_FRANCE_SECAM_AIR,
+	B_FRANCE_SECAM_CABLE,
+	B_GREAT_BRITAIN_PAL_AIR,
+	B_GREAT_BRITAIN_PAL_CABLE,
+	B_JAPAN_NTSC_AIR,
+	B_JAPAN_NTSC_CABLE,
+	B_US_NTSC_AIR,
+	B_US_NTSC_CABLE_IRC,
+	B_US_NTSC_CABLE_HRC,
+	B_FM_RADIO,
+	B_CUSTOM
+} tuner_locale;
+
+#endif

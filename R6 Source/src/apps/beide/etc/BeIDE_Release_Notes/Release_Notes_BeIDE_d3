@@ -1,0 +1,139 @@
+=============================================
+Metrowerks BeIDE Release Notes 
+=============================================
+
+Version:	d3
+Date:		6/3/96
+Author:		Brian Stern, Jon Watte, Mark Anderson
+=============================================
+
+Greetings Be developers.  This interim release of BeIDE for BeOS 1.1d7 
+has several new features primarily related to the Find Window.
+
+Please see the Be User Guide for more information on how to use BeIDE 
+and also see the documentation files for the command line tools.
+
+============================
+New Features in This Version
+============================
+
+¥	Multifile Find - The Find window has been expanded and includes
+	additional controls in the lower half that allow you to find and/or
+	replace strings in multiple files. The triangle control at the 
+	left of the window shows or hides these new controls.  The
+	picture button at the left of the window, showing one or two 
+	document icons, turns on or off multifile searching.  Controls related
+	to multifile searching are disabled if multifile searching is off.
+	
+	If a project is open, turning on multifile searching will enable
+	several checkboxes (Sources, System Headers, and Project Headers).  
+	Checking one or more of these checkboxes will add the specified
+	files to the list of files to be searched.  You may also search
+	files that aren't in the project by dragging them into the file list
+	or by using the other file panel that appears when the 'Others' button
+	is clicked.
+
+	You may cancel a multifile find in progress by hitting cmd-. while the 
+	Find window is frontmost.
+
+	You may save file sets for later use.  To save a file set add the files
+	that you wish to the file list and choose 'Save this file set' from
+	the file sets popup menu.  Enter a name in the window that appears,
+	choose whether the file set should be available at all times (global) or
+	only when this project is open (specific to this project), and hit
+	'Save'.  The file set will then appear in the File Sets menu and
+	choosing it will add those files to the file list.  To remove a file
+	set, hold down option or control and choose the file set name from
+	the File Sets menu.  The text 'Remove a File Set' will be enabled in
+	the menu.
+
+	The 'Stop at EOF' checkbox applies when doing a multifile 'find next'.
+	With this option off finding proceeds as if all the files in the file
+	list were one long file; if the find string isn't found in the file 
+	searched, then the next (or previous) file will be searched.  With
+	this option on searching will stop at the end of the file being searched.
+	To proceed to the next file choose 'Search in Next File' from the Search
+	menu in a source window.
+
+¥	Reverse find menu items - If the shift key is held down while opening
+	the Search menu in a source file the names of several of the menu items
+	change so that they work in reverse.
+	
+	Find Next 				- Find Previous
+	Find in Next File 		- Find in Previous File
+	Enter Find String 		- Enter Replace String
+	Find Selection			- Find Previous Selection
+	Replace & Find			- Replace & Find Previous
+
+¥	Tab and return keys in the Find Window - You may enter a tab character
+	or return character in the Find or Replace strings boxes by holding
+	down the option key at the same time.  You could always paste in
+	these characters.
+	
+¥	Access paths - If a file is added to a project and that file
+	isn't in any of the existing access paths an access path will be 
+	automatically added to the project.  You should verify that this
+	access path has the properties that you want.
+
+¥	Type ahead selection of files in the project window - With the project
+	window frontmost type the name of a file or group that is visible 
+	in the window and it will be selected.
+
+¥	Editor Add-ons - Support for add-ons that appear in an Add-ons menu in
+	source windows and which can modify source files has been added.
+	Add-ons are shared libraries that export a function of the following
+	prototype:
+	
+	#pragma export on
+	extern "C" {
+        long perform_edit(BTextView *view);
+	}
+	#pragma export reset
+
+	Editor add-ons must reside in a folder named '(Editor add-ons)' that
+	is found in the same folder as BeIDE.
+	
+	See the Commenter Add-on sample project for an example of how to
+	write an Editor add-on that adds or removes C++ style comments to
+	selected lines of code.
+
+¥	Can now access a number of commands that don't exist in the
+	menus for various windows - Can open the Find window from the 
+	Project window; can Make, Bring Up to Date, Link if the Find window
+	or Message Window are in front; etc.
+
+¥	Improved error reporting for errors occurring during finds using
+	regular expressions.
+
+¥	Cosmetic changes to the project window and several other windows.  
+
+¥	Cancelling of compiles - Hitting cmd-. during a compile will cancel
+	the compiles still waiting to start.  The info view will read 'Cancelling'
+	until the compiles in progress are done.  (This feature exists in 
+	version d2 but was inadvertently left out of the release notes.) 
+
+==========================
+Bugs Fixed in This Version
+==========================
+
+Find selection now works correctly.
+Can now add source files to projects if the source files were opened
+before the project.
+
+
+================================
+Known Bugs and Incompatibilities
+================================
+
+There is usually a pause when a project file is opened during which time
+the response in the project window is slow.
+
+=====================
+Contacting Metrowerks
+=====================
+
+For bug reports, technical questions and suggestions, please send them to 
+devsupport@be.com or support@metrowerks.com.
+
+--------------------------------------------------------------------------------
+Metrowerks Corporation

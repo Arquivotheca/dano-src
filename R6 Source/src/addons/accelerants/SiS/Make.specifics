@@ -1,0 +1,23 @@
+all:
+	make -f Make.sis5598
+	make -f Make.sis6326
+	make -f Make.sis620
+	make -f Make.sis630
+	
+clean::
+	make clean -f Make.sis5598
+	make clean -f Make.sis6326
+	make clean -f Make.sis620
+	make clean -f Make.sis630
+
+install::
+	make install -f Make.sis5598
+	make install -f Make.sis6326
+	make install -f Make.sis620
+	make install -f Make.sis630
+
+localinstall::
+	make localinstall -f Make.sis5598
+	make localinstall -f Make.sis6326
+	make localinstall -f Make.sis620
+	make localinstall -f Make.sis630

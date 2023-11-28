@@ -1,0 +1,6 @@
+#ifndef _CTIME
+#define _CTIME
+
+#include <time.h>
+
+#endif

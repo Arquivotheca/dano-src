@@ -1,0 +1,78 @@
+MicroShell (ush)
+----------------
+
+This sorry excuse for a command processor uses a pretty dumb line-based parser.
+Each line (max 4096 bytes) is read and tokenized:  environment variables prefixed
+with '$' are expanded, backslash and doublequote quoting work much like a real 
+shell would.
+
+Tokens starting with '#' indicate that the remainder of the line is a comment.
+
+Each line is considered to be a statment which may be either an expression or
+part of an if clause (each "if", "else", and/or "fi" must be on its own line).
+
+	if grep crashed /var/log/syslog
+		alert "The system crashed." "Okay"
+	fi
+
+One simple looping construct is provided:
+
+	while true
+		echo repeating forever
+		sleep 1
+	wend
+
+If statements may be nested (to a depth of 128, after which bad stuff will
+likely happen).
+
+The expression evaluator will attempt to find a builtin command (listed below) .
+Should that fail, the path is searched for a matching command (unless the 
+command has a '/' in its name -- in which case a full path is assumed).
+
+Lines with only one token that happens to contain an '=' are treated
+as environment variable assignment (eg: foo=bar).
+
+Builtins
+--------
+
+echo <params>					- Display params to stdout
+setenv <var> <value>			- Set an environment variable
+eq <var> <value>				- returns true if variable == value
+neq <var> <value>				- returns false if variable == value
+isneg <var> <value>				- returns true if variable < 0
+not <expression>				- returns opposite of expression
+exit [ <code> ]					- what you'd expect
+run <expression>				- execute a program 
+spawn <expression>				- execute it in the background
+true							- returns true
+false							- returns false
+source <file>					- executes script instructions in <file>
+isfile <path>					- true if this is a file
+isdir <path>					- true if this is a directory
+exists <path>					- true if this path exists
+waitfor <threadname>			- wait for the named thread to appear
+cd <dir>						- change directory
+pwd								- print directory
+sleep <n>						- wait n seconds
+read <varname>
+chmod <mode> <path> ...
+env
+kill <signal> <process>
+rm <path> ...
+rmdir <path> ...
+mkdir <path>
+sync
+date
+rescan <driver>
+mv <source> <dest>
+ls
+help
+attr <path> 
+rdattr <path> <attr> <var>
+putserialnumber <var> 			- Set var to SMBIOS system serial number,
+									(SMBIOS structure type 1/System Information, string number @offset 0x07)
+putbiosvendor <var> 			- Set var to SMBIOS bios vendor
+putbiosversion <var> 			- Set var to SMBIOS bios version
+putbiosdate <var> 				- Set var to SMBIOS bios release date
+mountcfs <Dir> <Dev>			- Mount a cfs disk.  Will create the directory if necessary.
+filecat <path> <string> 	- concatenates string to end of file specified by path

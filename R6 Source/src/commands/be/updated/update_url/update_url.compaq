@@ -1,0 +1,12 @@
+#!/bin/sh
+# UPDATE_PACKAGE	In: The package identifier
+# UPDATE_URL		Out: The URL of the package
+#
+# This is the Compaq specific script for retrieving the URL for a specified update package.
+# It is "sourced" from the scripts "doupdate" and "doupgrade."
+# This script creates a Compaq Redirector query to retrieve the specified package by using the
+# redirector parameters in the "beia-redirect" config file.
+
+#/* Load redirector parameters */
+source /boot/home/config/settings/beia-redirect
+setenv UPDATE_URL $CONTENT_REDIR?s=$UPDATE_PACKAGE&i=$R_LANGUAGE&c=$APHW_CONTEXT&lc=$R_LOCALE

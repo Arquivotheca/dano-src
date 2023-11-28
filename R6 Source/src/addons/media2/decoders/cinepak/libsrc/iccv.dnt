@@ -1,0 +1,29 @@
+; ex:set sw=2 ts=8 wm=0:
+; $Header: u:/rcs/cv/rcs/iccv.dnt 1.2 1994/11/28 14:10:44 bog Exp $
+
+; (C) Copyright 1992-1993 SuperMac Technology, Inc.
+; All rights reserved
+
+; This source code and any compilation or derivative thereof is the sole
+; property of SuperMac Technology, Inc. and is provided pursuant to a
+; Software License Agreement.  This code is the proprietary information
+; of SuperMac Technology and is confidential in nature.  Its use and
+; dissemination by any party other than SuperMac Technology is strictly
+; limited by the confidential information provisions of the Agreement
+; referenced above.
+
+; $Log: iccv.dnt $
+; Revision 1.2  1994/11/28 14:10:44  bog
+; "Radius" instead of "SuperMatch".
+; Revision 1.1  1993/07/02  16:46:27  geoffs
+; Initial revision
+;
+
+LIBRARY		ICCVID
+
+DESCRIPTION     'VIDC.CVID:Radius Cinepak Codec'
+
+HEAPSIZE        128
+
+EXPORTS
+	DriverProc

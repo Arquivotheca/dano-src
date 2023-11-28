@@ -1,0 +1,68 @@
+Instructions for replacing the boot images
+
+You configure the boot images by editing the file named 'configuration'.
+This file contains lines of the following form:
+
+type    arg1   arg2    ...
+
+The valid types are: resolution, palette, on, wipe, and background. They are
+described in detail at the end. There must be a palette. There may be at most
+one on image and one wipe image. Multiple background images may be specified.
+
+After you have properly edited the configuration file, run the replaceimages
+script with the path to the zbeos whose images you wish to replace.  The final
+size of zbeos can be no larger than about 63k.
+
+You can strip the image entirely from zbeos by running the stripimage script
+with the path to zbeos as an argument. Note: the replaceimages script cannot
+operate on a stripped zbeos.
+---
+CONFIGURATION FILE SYNTAX
+
+resolution
+----------
+Syntax:
+resolution     x-resolution    y-resolution   bits-per-pixel
+
+Example:
+resolution     1024            768            16
+
+Description:
+This 'type' specifies the initial VESA 2 resolution to start in. If this
+'type' doesn't appear in the configuration file or if the specified resolution
+is unavailable at boot time, the boot loader will default to 640x480x4.
+Valid values for the bits per pixel argument are: 8, 15, 16, 32.
+
+palette
+-------
+Syntax:
+palette     filename
+
+Example:
+palette     custom.pal
+
+Description:
+This specifies the file to use as the palette for the images appearing on
+the boot screen. The file should contain RGB data for at most 256 colors.
+If necessary, the boot loader will match each palette entry to the nearest
+color in the app server palette.
+
+on, wipe, background
+--------------------
+Syntax:
+on           width     height    x     y     filename
+wipe         width     height    x     y     filename
+background   width     height    x     y     filename
+
+Example:
+background   32        76        102   200   icons.raw
+
+Description:
+These specify the various images that are drawn onto the screen. The 'on'
+image should contain a strip with 7 enabled boot icons. 1/7th of this
+image (split horizontally) is drawn periodically during the boot process.
+The wipe image is wiped onto the screen during the initial boot process.
+The background image is faded onto the screen and appears behind the other
+images. The x and y coordinates are proportionally adjusted is the screen
+resolution is altered from the default, although the image is not scaled
+to match.  All images must be saved one byte per pixel, in the palette given.

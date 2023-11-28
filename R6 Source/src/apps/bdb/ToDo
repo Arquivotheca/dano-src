@@ -1,0 +1,260 @@
+K = needs kernel/debug API work
+* = done
+
+sort global variables
+
+Stack crawls
+	Through -fomit-frame-pointer code
+	From arbitrary addresses (i.e. no ebp)
+
+* Support remote debugging
+	* improve mechanism for locating source files when the DWARF info doesn't
+	match what's on the debugger machine.  suggestion: allow the user to "re-parent"
+	the source tree; maybe establish a suitable symlink at the root level? [used env var]
+
+* Support Dwarf-2 spec where sibling attributes are optional
+
+* Move bdb into main build tree
+
+performance
+	global variables constantly redrawn every 2 seconds.
+		This can slow the window display time and make it unusable.
+		Put this refresh display into a separate thread.
+	scroll bar pumping
+	two draws on a breakpoint (top of file, location in file)
+
+memory viewer
+	Add a "constant refresh" option to the memory viewer
+	It will refresh at each debugger stop
+	AreaWatch/HeapWatch type functionality
+
+expression evaluation
+	Expression window
+	support casts/view as in expression
+	Be able to do string compares in conditionals.
+	Be able to use thread ID/thread name in conditionals
+
+breakpoints
+	breakpoint actions (tracepoints, etc.)
+		- action scripts attached to break/watchpoints?
+	conditional breakpoint
+	thread specific breakpoints
+	counted breakpoints
+	class level breakpoints/tracepoints
+		- break/trace any time a class member gets called
+	breakpoint sets (turn on/off an entire set of breakpoints)
+	template breakpoints
+		- break on all instance
+		- break on a specific instance, use popup to choose
+
+more "automatic" breakpoints support
+	Stop on thread creation - (B_STOP_NEW_THREADS, nub_stop_new_threads_msg)
+*	Stop on image load - (set breakpoint on something in load_add_on/unload_add_on?)
+		(stop on image load is very useful for setting breakpoints in the add-on)
+
+* inlines do not show up in stack crawl - bad dwarf?
+
+variables
+	Dynamic cast for selected type (or all types in view)
+	(Must have a base class for it to work)
+	Show actual type of object via RTTI
+
+watchpoints:
+*	better entry
+*	watchpoint window
+*		deleting watchpoints
+		editing watchpoints
+*	better alert when watchpoint hit
+	byte/short - only watchpoints
+	conditional watchpoints
+		Come up with shortcuts that set a conditional breakpoint to stop when a 
+			certain member function is called for a certain instance of a class.
+		include or exclude a thread
+	watchpoint actions
+	smart watchpoints
+		watch a word inside a block that gets moved by realloc - watchpoint follows the block
+K	watchpoints on an area (entire object, array ,etc.) - need kernel support
+K	Trap-on-read watchpoints - need kernel support
+
+Be Specific Support
+	Support showing known Be types in their real form
+		entry_ref, BString, rgb_color, BRect, BPoint, ...
+	let addons add their own "known types"
+	
+For conditional breakpoints and watchpoints, be able to specify that a 
+	certain function must/must not be in the call stack
+
+* special handling of the first line of a function
+*	breaks step out
+
+add support for easy stepping into a specific function that has function calls as arguments
+	b(a(13)) - I want to step into b and not have to step into a first (probably hard with dwarf)
+
+K optionally suspend all threads when stopped
+  (I believe this support is available in the debug server though)
+  
+show return value of a function
+
+show runtime type, polymorfic type display of objects
+	add code that does the eqivalent of a dynamic cast on a given object pointer
+	make this optional
+
+better memory dump
+*	allow re-entering any address
+	expression evaluation - evaluate on entry x evaluate after every step
+
+tooltips display variable values
+
+* right-click on variable shows context menu of types
+
+calculator window - evaluates an expression, shows binary, hex, decimal
+	maybe an option of the expression window
+
+specify array size on individual arrays
+
+Message window
+	shows all the watchpoint messages, the debugger messages, etc.
+
+Add Stop (as in stop thread) to the menus.
+
+Support new strace API
+	(strace sends debugging message when you are about to
+	execute a syscall instruction.  This makes it easy to
+	say, stop on next "read" system call, "ioctl", etc.)
+
+K	Trace through syscalls
+
+* stepping through code without debugging info - show assembly
+*	(write a subclass of DSymFile to support assembly ?)
+*	turning on assembly in files with code could anotate the assembly with the code
+	mixed source/assembly view
+	Allow stepping through mixed source/assembly
+	Step designated/all threads
+	show external functions in assembly
+		The debugger server allows you to show external functions
+		because of the following in disasm:
+		if (state->flags & B_DISASM_FLAG_DEBUG_SERVER_PRIVATE) {
+			cookie = d->tmr;
+			if (	(state->instr == instr_call) &&
+					(d->got_address != NULL) &&
+					(d->read_word(d->thr, (void *)addr, &val) == B_OK) &&
+					((val & 0xffff) == 0xa3ff) &&
+					(d->read_word(d->thr, (void *)(addr+2), &val) == B_OK) &&
+					(d->read_word(d->thr, (void *)((uint32)d->got_address + val), 
+							&val) == B_OK)) {
+				state->symbol_address = addr = val;
+			}
+		}
+		Should we figure out how to support this in disasm for bdb?  
+		(Or do it ourselves)
+		(ie: Create an function at that location that is x bytes long)
+
+
+fallback to internal symbols in a stack crawl if dwarf is missing
+
+make bdb a general team debugger
+
+* attach bdb to a crashed application
+
+release a semaphore
+	add unified calls to BLocker, etc. that allow the debugger to unlock
+	instrument kit classes for semaphore debugging, deadlock detection
+	use addons for most of the above to ensure addon api is rich
+	
+shortcuts
+*	Menu item (Alt-T) to bring up team window
+	Menu item (Alt-E) to open file in editor (double-click on the file name)
+	switch to next window
+
+fix up function popup
+	handle namespaces, #pragma mark
+
+sort source files by container (libbe, tracker)
+
+improve UI
+	consider using less windows (eliminate team window or parts of it)
+	make the lists not flicker as much
+	don't leave dirt around
+	remember splitter bar positions
+	improve settings window
+	data-display layout a la ddd?
+	separate expression windows, not just a pane in the thread windows
+
+improve the find window
+
+.dbg file info needs to get updated after a change in the app
+	could store more context to allow re-synching a breakpoint location after code changed
+
+startup
+	specify environment variables
+	specify command line options
+
+configurable syntax coloring color
+
+Teams window
+	show more info window like tsac -- shows memory usage, CPU utilization per thread, etc.
+	make outline list based - include threads too
+	thread lists - show why blocked (semaphore, like ps)
+	
+Metrowerks Zone Ranger-like memory browsing and map
+
+consider supporting stabs
+
+dwarf problems
+	find all problems, get Cygnus to fix them
+	no variables when stepping through inlines
+	bad out of scope info
+	* find out why there are empty slots on the stack crawl
+		ie: Set a breakpoint in bdb itself in dwarf::entry::size
+		right above it are two empty slots (both inlines)
+		Do inlines cause the problem?  Why don't we get their names?
+		[The problem is pseudo-frames, such as inline expansions or calls
+		to asm functions, which do not set up an ebp frame]
+
+external tool support
+	profiling
+	leakchecking
+	* malloc debug integration
+K		use the kernel API to call the profiler, leakchecker, malloc debugger directly
+	better addon support (should be able to write a quick&dirty addon to debug a specific problem)
+
+console/debugger shell for gdb-like command entry
+	addon support
+	simple scripting to allow dumping memory, setting breakpoints, etc.
+
+messaging api to talk to editors
+	set breakpoint
+	get list of breakpoints
+	run, step ...
+	evaluate expression
+	get stack
+
+* global variables not fully implemented
+*	can't change a value
+*	can't use a global in memory dump
+
+K call a function in the target
+	in debugger nub set up a play area, spawn thread
+	virtuals will be tough
+	- may be necessary for supporting RTTI in bdb
+
+K Save state
+	should save stackcrawls from all open windows
+	optionaly should do where is on every thread
+
+Core dump/core file facilities.
+
+Add kit class support to tie into bdb - bdb oriented equivalents of PrintToStream, etc.
+
+K Passing signal information to debugger
+
+break on exit
+
+* break on exception thrown
+	conditional, etc. like normal breakpoints
+
+K break on thread creation
+
+K Fix problems with debug API (in some cases apps/debugger cannot get killed, etc.)
+
+Support multiple monitors (debugger on secondary monitor, a la CodeView?)

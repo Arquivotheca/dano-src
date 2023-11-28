@@ -1,0 +1,14 @@
+rm apps/Orb
+rm apps/Keyboard
+rm apps/MessageCenter
+
+rm bin/kdbg
+rm system/drivers/kdebug
+rm system/lib/libpos.so
+rm system/lib/libpos.so.xMAP
+
+rm develop/libraries/libbe.so
+rm develop/libraries/libpos.so
+rm develop/headers/be/kernel/joystick.h
+rm develop/projects/Driver/Skel.exp
+rm "develop/Release Notes BeIDE d2"

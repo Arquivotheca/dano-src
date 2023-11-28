@@ -1,0 +1,231 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Hewlett-Packard Appliance Printing Development Kit</title>
+</head>
+
+<body stylesrc="intro.htm" background="../images/HPwmark.jpg" bgproperties="fixed">
+
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">Hewlett-Packard Appliance Printing Software Development Kit<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt">&nbsp;<o:p>
+</o:p>
+</span></h1>
+<h1 align="center" style="text-align:center"><span style="font-size: 36.0pt; mso-bidi-font-size: 12.0pt; color: blue; text-shadow: auto">Debugging
+</span><span style="font-size:36.0pt;
+mso-bidi-font-size:12.0pt;color:blue;text-shadow:auto">the Printer Driver<o:p>
+</o:p>
+</span></h1>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1><!--[if gte vml 1]><o:wrapblock><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+  o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+  stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s1027" type="#_x0000_t75" style='position:absolute;
+  margin-left:-9pt;margin-top:40.2pt;width:248.4pt;height:186.35pt;z-index:2;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text'>
+  <v:textbox style='mso-next-textbox:#_x0000_s1027'/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed"
+  ProgID="MS_ClipArt_Gallery.5" ShapeID="_x0000_s1027" DrawAspect="Content"
+  ObjectID="_1013328650">
+ </o:OLEObject>
+ <![endif]><![endif]-->
+<span style="mso-ignore:vglayout;position:
+ relative;z-index:0;left:-12px;top:54px;width:331px;height:302px"><img src="sdkintro.gif" v:shapes="_x0000_s1027" width="331" height="248"></span><!--[if gte vml 1]></o:wrapblock><![endif]-->
+<br clear="all" style="page-break-before:always">
+<!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1026" type="#_x0000_t75"
+  style='position:absolute;margin-left:18pt;margin-top:34.1pt;width:400.5pt;
+  height:75.75pt;z-index:1;mso-position-horizontal-relative:text;
+  mso-position-vertical-relative:text' o:allowincell="f">
+  <w:wrap type="topAndBottom"/>
+ </v:shape><![endif]-->
+</h1>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" bordercolor="#0000FF" bordercolordark="#000080">
+  <tr>
+    <td width="13%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Version</b></td>
+    <td width="12%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Date</b></td>
+    <td width="50%" bordercolor="#0000FF" bordercolordark="#0000FF"><b>Comments</b></td>
+  </tr>
+  <tr>
+    <td width="1%" bordercolor="#0000FF" bordercolordark="#0000FF">2.0.0</td>
+    <td width="1%" bordercolor="#0000FF" bordercolordark="#0000FF">11.29.00</td>
+    <td width="93%" bordercolor="#0000FF" bordercolordark="#0000FF">Version
+      2.0.0 documentation reflects code changes from code Version 1.1.0. (Note: Documentation
+      and code version numbers are designed to be independent of each other, and
+      may not agree.)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p class="MsoNormal"><b style="mso-bidi-font-weight:normal">Notice<o:p>
+</o:p>
+</b></p>
+<p class="MsoNormal">The information contained in this document is subject to
+change without notice.</p>
+<p class="MsoNormal">Hewlett-Packard makes no warranty of any kind with regard
+to this material, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.<span style="mso-spacerun:
+yes">&nbsp; </span>Hewlett-Packard shall not be liable for errors contained
+herein or for incidental or consequential damages in connection with the
+furnishing, performance, or use of this material.</p>
+<p class="MsoNormal">All SDK documentation included in this list, received with
+the Hewlett-Packard Appliance Printing Software Development Kit, or received at a
+later date as a result of communication with any Hewlett-Packard employee
+regarding the Hewlett-Packard Appliance Printing Software Development Kit, is
+Hewlett-Packard &quot;confidential&quot; information.</p>
+<p><font SIZE="3">Licensee shall not export or re-export the Hewlett-Packard documentation,
+or copies or variations thereof. Licensee may use Hewlett-Packard documentation only to
+develop Licensee Printer Drivers for exclusive use only on Hewlett-Packard printers.</font></p>
+<p><font SIZE="3">Licensee shall assure that all Hewlett-Packard Software and all
+documentation based on Hewlett-Packard Documentation include the following notice:</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">&quot;Copyright © [<u>year</u>]</font></p>
+<p ALIGN="center" style="margin-bottom: -16"><font SIZE="3">Hewlett-Packard
+Company.</font></p>
+<p ALIGN="center" style="margin-bottom: 0"><font SIZE="3">All Rights
+Reserved.&quot;</font></p>
+<p class="MsoNormal">Hewlett-Packard Documentation has been developed entirely at private
+expense and is provided as &quot;Commercial Computer Software&quot; or
+&quot;restricted computer software.&quot; Use, duplication or disclosure by the
+US Government or a US Government subcontractor is subject to the restrictions
+set forth in subparagraph (c) (1) (ii) of the Rights in Technical Data and
+Computer Software clauses in DFARS 252.227-7013 or as set forth in subparagraph
+(c) (1) and (2) of the Commercial Computer Software-Restricted Rights clauses in
+FAR 52.227-19, as applicable. The Contractor is Hewlett-Packard Company, 3000
+Hanover Street, Palo Alto, California 94304.</p>
+<p class="MsoNormal" style="margin-bottom: -16">Copyright <span style="mso-char-type: symbol; mso-symbol-font-family: Symbol; font-family: Symbol; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">ã</span>
+ 2000</p>
+<p class="MsoNormal" style="margin-bottom: -16">Hewlett-Packard Company.</p>
+<p class="MsoNormal">All rights reserved.</p>
+<p class="MsoNormal">&nbsp;<o:p>
+</o:p>
+</p>
+<h1 align="center">Debugging the Printer Driver</h1>
+<h2>&nbsp;</h2>
+<h2>Introduction</h2>
+<p class="Pgph1">Hewlett-Packard has learned through experience that it can be
+very difficult to disentangle pieces of a printing system from other
+applications and operating system items such as user-interface, memory management,
+network access, rendering of images and document formatting. As a result,
+finding the cause of undesirable behavior or output often leads a developer through all
+these areas.</p>
+<p class="Pgph1">In contrast to this complexity, the core code
+delivered in the Hewlett-Packard Appliance Printing Software Development Kit (SDK) is functionally very simple: it can only take graphical (and in some cases text)
+data and relay it to a printer in the native format of that printer, reporting
+the status of this communication back to the calling code. This functional
+limitation does have an advantage in that the interface to the core code can be
+very well-defined and the internal behavior easily understood.&nbsp;</p>
+<p class="Pgph1"> Given a specific
+set of inputs to the API, Hewlett-Packard (HP) has created a script that can easily determine whether the
+behavior of the core code is as expected or not, and consequently whether any problems
+should be sought elsewhere. In addition, it is often possible to
+determine the mistake in the upstream code just by looking at the calling
+sequence or data.</p>
+<p class="Pgph1" style="margin-bottom:0in;margin-bottom:.0001pt">The
+following topics describe how to use this script to debug and communicate with
+Hewlett-Packard.</p>
+<p class="Pgph1" style="margin-bottom: -16"><a href="#debugging">Debugging
+A Driver With Scripts</a></p>
+<p class="Pgph1"><a href="#recording">Recording <span style="mso-bookmark:_Hlt476018361">A</span>
+Script</a></p>
+<h2>&nbsp;</h2>
+<h2><a name="debugging">Debugging </a>A Driver With Scripts</h2>
+<p class="Pgph1">The SDK has been instrumented so that when a debug flag
+(build define “CAPTURE” is set, all API calls along with their data are recorded in what
+Hewlett-Packard calls a script. From this script, a large class of problems can be
+immediately found that would
+otherwise potentially take a very long time to debug.</p>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Ba<span style="mso-bookmark:_Hlt476018363">c</span>k
+to top]</a><o:p>
+</o:p>
+</span></p>
+<h2>&nbsp;</h2>
+<h2><a name="recording">Recording </a>a Script</h2>
+<p>Developers can utilize the script recording device in order to communicate
+with Hewlett-Packard when debugging, problem solving, or quality testing.</p>
+<ol>
+  <li>
+    <p class="Pgph1">The first step in producing a script is to decide on the
+mechanism for storing it, and the format to be used. The easiest way to produce
+    a script is to write the data to a file on local storage using standard “fopen/fwrite”
+commands. If such storage is available, the code included in the SDK will be
+sufficient. The data can be written in either binary or ASCII form;
+the binary form will produce smaller files and run faster.</li>
+</ol>
+<blockquote>
+<p class="Pgph1">Hewlett-Packard has encountered some systems where a storage
+disk is not available and the only means of capturing data is to use printf commands that are sent to a terminal window. In this case the base-class
+scripting code has to be overridden (in the derivative SystemServices class).
+The code can be copied as is from the base-class routines, replacing
+every file-writing call (fwrite<i style="mso-bidi-font-style:normal">,
+</i>fputc, etc.) with a display call (printf),
+and avoiding the fopen/fclose
+calls in the methods OpenDebugStreamR and CloseDebugStreamR.
+In order to capture the data from the terminal window, the ASCII format must be
+used. (This is why the ASCII option has been provided.) Thus the code
+that needs to be overridden is in the AsciiScripter subclass of Scripter, found in the file
+script.cpp.</p>
+</blockquote>
+<ol>
+  <li value="2">
+    <p class="Pgph1" style="margin-bottom: 16">The second step is for the calling code to invoke the
+    SystemServices
+methods InitScript<b style="mso-bidi-font-weight:normal">
+</b>and EndScript. InitScript, as usual,<b style="mso-bidi-font-weight:
+normal"> </b>should be called after the SystemServices object is constructed and before any
+other API calls are made. InitScript
+takes two parameters: the name of the script file to be created on disk (ignored
+in the diskless implementation), and a flag that is TRUE
+if ASCII format is to be used. EndScript
+should be called after everything else has finished and been cleaned up, except
+of course for destruction of the SystemServices object. Both these calls should be conditionally
+compiled into the calling code, so that they only occur in debug builds. (See
+next paragraph.)</li>
+  <li>
+    <p class="Pgph1" style="margin-bottom: 16">The final step is to compile all the code with the symbol
+    CAPTURE
+defined, and with the files in the “debug” subdirectory included in the
+build. Note that CAPTURE
+should <b style="mso-bidi-font-weight:normal">not</b> be defined in any
+production builds, as performance will be severely degraded.</li>
+  <li>
+    <p class="Pgph1">Run the test print-job and send the resulting file (one per
+job – managing the files as you see fit through passing in different
+filenames, or copying the result to a different filename after each run,) to Hewlett-Packard.
+    See the emailing instructions in the <a href="Testing.htm">Testing</a>
+    document.</li>
+</ol>
+<p class="Pgph1"><span style="font-size:8.0pt;mso-bidi-font-size:12.0pt;
+color:maroon"><a href="#top">[Back to top]</a></span></p>
+
+</body>
+
+</html>

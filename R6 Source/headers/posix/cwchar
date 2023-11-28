@@ -1,0 +1,7 @@
+#ifndef _CWCHAR
+
+#define _CWCHAR
+
+#include <wchar.h>
+
+#endif

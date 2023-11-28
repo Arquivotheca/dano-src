@@ -1,0 +1,33 @@
+
+ifeq ($(OLD_MAKE_SYSTEM),1)
+THIS_LIB	:= root
+include $(BUILDHOME)/buildprefs/make.kits.pre
+objdir = $(MY_PREFIX)/src/kit/glibc
+
+else
+include $(BUILDHOME)/config/InstallTree.mk
+INSTALL_DIR:=$(INSTALL_BASE)
+endif
+
+prefix = $(INSTALL_DIR)
+includedir = $(INSTALL_HEADERS)/posix
+includes += \
+	-I$(GCCHOME)/include \
+	-I$(BUILDHOME)/headers/kernel \
+	-I$(BUILDHOME)/headers/support -I$(BUILDHOME)/headers/storage \
+	-I$(BUILDHOME)/headers \
+	-I$(BUILDHOME)/headers/media
+
+# EXP uses INSTALL_ETC, IAD uses the $(subst ...)
+datadir = $(subst $(INSTALL_DIR),/boot,$(INSTALL_ETC))
+# datadir = $(INSTALL_ETC)
+bindir = $(INSTALL_DIR)/beos/bin
+sbindir = $(bindir)
+no_deps=t
+build-shared=no
+build-profile=no
+build-bounded=no
+build-static=yes
+stdio = libio
+build-pic-default = yes
+

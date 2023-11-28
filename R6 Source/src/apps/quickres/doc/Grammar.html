@@ -1,0 +1,237 @@
+<html>
+<head>
+<title>Resource Definition Language</title>
+</head>
+
+<body bgcolor="#FFFFFF">
+
+<font face=HELVETICA>
+<h1>Resource Definition Language</h1>
+
+<p>BeOS resources can be expressed as ASCII text using the resource
+definition language.  This language is modelled somewhat after mwbres and
+rez on the Macintosh.  It doesn't currently support the conditional
+constructs and types of rez, but does support free-form data definition as
+in mwbres.  In addition, it includes a rigid typing system,
+and native understanding of flattened BMessages and common Be data types
+such as BRect, BPoint, and rgb_color.</p>
+
+<h2>Basic Syntax</h2>
+
+<p>The basic syntax of a source file is one or more <em>resource definition</em>
+lines.  A resource definition looks like:</p>
+
+<blockquote><pre>
+resource( <em>id</em> [, <em>name</em>] ) <strong>data</strong> ;
+</pre></blockquote>
+
+<p>The <em>id</em> field is required and supplies the id number of the
+resource.  You can optionally give a name for this resource entry with
+the <em>name</em> field; alternatively, you can define a symbolic value
+for the id, which will implicitly supply a name if one isn't specified:</p>
+
+<blockquote><pre>
+enum {
+	R_SymbolName = 1
+};
+
+resource(R_SymbolName) <strong>data</strong> ;
+</pre></blockquote>
+
+<p>The <bold>data</bold> component can be either a basic or compound
+value.  In addition, all data in a resource file is strongly
+typed in two ways -- it has a physical type, which defines the ways
+it can be used; and a type code, which provides a variation on the
+physical type.</p>
+
+<h2>Basic Values</h2>
+
+<p>The basic physical types you can use are integers (123 or 'abcd'),
+reals (1.0), strings ("string") and buffers ($"aabbccddeeff").  In
+addition, booleans are available as a variation of integers with the
+pre-defined keywords "true" and "false".  In other words, the basic data types you
+can directly express as values are:</p>
+
+<table border=1>
+<tr><th> Physical Type <th> Type Code <th> Representation <th> C Type </tr>
+<tr><td> integer <td> B_BOOL_TYPE <td> <code>true</code> or <code>false</code> <td> bool </tr>
+<tr><td> integer <td> B_INT32_TYPE <td> N or <code>'</code>CCCC<code>'</code> <td> int32 </tr>
+<tr><td> real <td> B_FLOAT_TYPE <td> N<code>.</code>[N][<code>+-</code><code>e</code>N] <td> float </tr>
+<tr><td> string <td> B_STRING_TYPE <td> <code>"</code>C*<code>"</code> <td> char*, BString </tr>
+<tr><td> buffer <td> B_RAW_TYPE <td> <code>$"</code>[0-9a-f]*<code>"</code> <td> void* </tr>
+</table>
+
+<p>When defining a resource, the type code of its data component also implicitly
+defines the type of the resource.  Thus, to create a B_STRING_TYPE resource
+containing the text "String Resource", you simply write:</p>
+
+<blockquote><pre>
+resource(1) "String Resource";
+</pre></blockquote>
+
+<p>Other types of data can be created by performing a <em>type cast</em>.
+Type casts look in some ways similar to C -- they are expressed as
+a known type enclosed in parenthesis, such as <code>(int32)</code>.
+Each of these types are actually a combination of a physical type and
+a type code.  For example <code>int32</code> is an integer with type
+code B_INT32_TYPE.  The type code specifies exactly how the physical
+type will be expressed, in this case as a 4-byte signed integer.</p>
+
+<p>The types that the resource parser understand are:</p>
+
+<table border=1>
+<tr><th> Type <th> Physical Type <th> Type Code <th> Description </tr>
+<tr><td> bool <td> integer <td> B_BOOL_TYPE <td> 1-byte boolean </tr>
+<tr><td> int8 <td> integer <td> B_INT8_TYPE <td> 1-byte signed integer </tr>
+<tr><td> uint8 <td> integer <td> B_UINT8_TYPE <td> 1-byte unsigned integer </tr>
+<tr><td> int16 <td> integer <td> B_INT16_TYPE <td> 2-byte signed integer </tr>
+<tr><td> uint16 <td> integer <td> B_UINT16_TYPE <td> 2-byte unsigned integer </tr>
+<tr><td> int32 <td> integer <td> B_INT32_TYPE <td> 4-byte signed integer </tr>
+<tr><td> uint32 <td> integer <td> B_UINT32_TYPE <td> 4-byte unsigned integer </tr>
+<tr><td> int64 <td> integer <td> B_INT64_TYPE <td> 8-byte signed integer </tr>
+<tr><td> uint64 <td> integer <td> B_UINT64_TYPE <td> 8-byte unsigned integer </tr>
+<tr><td> ssize_t <td> integer <td> B_SSIZE_T_TYPE <td> signed status/size (4 bytes on x86/ppc)</tr>
+<tr><td> size_t <td> integer <td> B_SIZE_T_TYPE <td> unsigned size (4 bytes on x86/ppc) </tr>
+<tr><td> off_t <td> integer <td> B_OFF_T_TYPE <td> file offset (8 bytes on x86/ppc) </tr>
+<tr><td> time_t <td> integer <td> B_TIME_TYPE <td> 4 byte time value </tr>
+<tr><td> float <td> real <td> B_FLOAT_TYPE <td> 4 byte floating point </tr>
+<tr><td> double <td> real <td> B_DOUBLE_TYPE <td> 8 byte floating point </tr>
+<tr><td> string <td> string <td> B_STRING_TYPE <td>  \0-terminated UTF-8 string </tr>
+<tr><td> buffer <td> buffer <td> B_RAW_TYPE <td> untyped stream of bytes </tr>
+</table>
+
+<p>As an example, you can create a resource containing the number 200 expressed
+as a signed 64 bit integer using:</p>
+
+<blockquote><pre>
+resource(1) (int64)200;
+</pre></blockquote>
+
+<p>For types that are not built in, you can perform a <em>type code cast</em>.
+This looks similar to a type cast, but only changes the type code associated
+with the targetted value.  A type code is expressed as <code>#'</code>N, where N
+is any integer value.</p>
+
+<blockquote><pre>
+resource(1) (#'aaaa')200;
+resource(2) (#200)"String";
+resource(2) (#'ICON')$"001122334455";
+</pre></blockquote>
+
+<p>The first line creates a new resource of type 'aaaa' whose data is a
+4 byte integer with the value 200.  The second creates a resource with type
+code 200 whose data is the given \0-terminated string.  The third line creates
+an 'ICON' resource with the given hex data.</p>
+
+<p>You can combine type casts and type code casts to get whatever data you
+need:</p>
+
+<blockquote><pre>
+resource(1) (#'aaaa')(uint64)200;
+</pre></blockquote>
+
+<p>That same resource can be expressed as short-hand with the type code
+and type identifier in the same cast:</p>
+
+<blockquote><pre>
+resource(1) (#'aaaa' uint64)200;
+</pre></blockquote>
+
+<h2>Compound Values</h2>
+
+<p>The data component can also be supplied as a collection of other
+data values.  You create compound data by placing a list of the data
+values in the collection inside of braces:</p>
+
+<blockquote><pre>
+resource( <em>id</em> [, <em>name</em>] ) [ <em>type-code</em> ] <em>compound-type</em> {
+    [ [ <em>type</em> ] <em>name</em> = ] <strong>data</strong> [, [ <em>type</em> <em>name</em> = ] <strong>data</strong> ] ...
+};
+</pre></blockquote>
+
+<p>How this list of data values is stored as a byte stream in the
+resource is
+determined by the <em>compound-type</em>.  There are two major compound types:
+arrays simply concatenate their data one after the other, while messages
+store the data in named fields in a BMessage, flattening that message to
+create the final byte stream.</p>
+
+<p>Compound values are strictly typed, just like basic values.  The default
+type code of an array is B_RAW_TYPE, and of a message is B_MESSAGE_TYPE.  You
+can change the type code of the created compound value by specifing it before
+the value, using the same syntax as a type code cast.  For example, here is
+a compound value with the type and structure of an rgb_color:</p>
+
+<blockquote><pre>
+resource(1) #'RGBC' array {
+    (uint8)0x00,    // red
+    (uint8)0x00,    // green
+    (uint8)0x00,    // blue
+    (uint8)0xff     // alpha
+};
+</pre></blockquote>
+
+<p>Each data value in the compound type may have a name assigned to it -- the
+name is optional for raw arrays but required for messages.  A name is either
+a standard C identifier (<code>[a-zA-Z_][a-zA-Z_0-9]*</code>) or a string or
+symbol containing a string.  When used in a message, these names are the fields
+under which the data is stored; when used in a plain array, the names are
+ignored.</p>
+
+<p>As with resource data, the type code used to store data into a message is
+implicitly defined by the value's type.  Optionally, you can explicitly
+specify the type of a field prior to the field's name as type identifier /
+type code pair.</p>
+
+<blockquote><pre>
+resource(1) message('blah') {
+	int8 "small integer" = 1,
+	"integer" = 2,
+	"large integer" = (int64)3,
+	"string" = "some text"
+};
+</pre></blockquote>
+
+<p>This produces a flattened BMessage as if you had programmatically done:</p>
+
+<blockquote><pre>
+BMessage msg('blah');
+msg.AddInt8("small integer", 1);
+msg.AddInt32("integer", 2);
+msg.AddInt64("large integer", 3);
+msg.AddString("string", "some text");
+</pre></blockquote>
+
+<p>Like basic values, there are a number of built-in array types that you
+can use.  These types result in data like a normal array, but define the
+structure of that array for you, so that any errors made in the data
+specification will be caught.  They also associate a name with each entry
+in the array, so that you can specify the values in a different order than
+they will be placed in the resulting data.</p>
+
+<p>The built-in array types are:</p>
+
+<table border=1>
+<tr><th> Type <th> C Type <th> Type Code <th> Description </tr>
+<tr><td> point <td> BPoint <td> B_POINT_TYPE <td> float x, y; </tr>
+<tr><td> rect <td> BRect <td> B_RECT_TYPE <td> float left, top, right, bottom; </tr>
+<tr><td> rgb_color <td> rgb_color <td> B_RGB_COLOR_TYPE <td> uint8 red, green, blue, alpha; </tr>
+</table>
+
+<p>To use these pre-defined arrays, you supply the array type in the
+<em>compound-type</em> field, and specify data values that match the
+type.  For example, to create a BRect structure:</p>
+
+<blockquote><pre>
+resource(1) rect { 0.0, 0.0, 31.0, 31.0 };
+</pre></blockquote>
+
+<p>And here is an example of using the entry names instead of order to fill
+in the data:</p>
+
+<blockquote><pre>
+resource(1) point { y=5.0, x=1.0 };
+</pre></blockquote>
+
+</body>
+</html>
